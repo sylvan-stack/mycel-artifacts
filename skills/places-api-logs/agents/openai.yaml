@@ -1,0 +1,3 @@
+interface:
+  display_name: "Places API Logs"
+  short_description: "Investigate Reservble Syrve integration logs"
