@@ -55,7 +55,7 @@ options, and the questions only humans can answer.
    `spike-open-questions.md`, `spike-code-map.md`):
    - **current behavior vs requirement matrix** (the load-bearing section);
    - affected components across repos, each with a
-     [Source Ref](../../arbol_deprecated_v1/GLOSSARY.md#source-ref);
+     [Source Ref](../../arbol/GLOSSARY.md#source-ref);
    - options with trade-offs and rough effort;
    - open questions with proposed owners/routing.
 4. **Update, don't duplicate.** Updating an existing `spike.md` beats writing a

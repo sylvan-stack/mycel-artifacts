@@ -5,9 +5,9 @@ role: authored
 
 ## Why it exists
 
-Runs a [Blueprint](../../arbol_deprecated_v1/GLOSSARY.md#blueprint) — instructions + typed
+Runs a [Blueprint](../../arbol/GLOSSARY.md#blueprint) — instructions + typed
 input/output parameters — as a non-deterministic **function**: it binds
-inputs, composes the agent prompt, runs a [Delegate](../../arbol_deprecated_v1/GLOSSARY.md#delegate)
+inputs, composes the agent prompt, runs a [Delegate](../../arbol/GLOSSARY.md#delegate)
 via [`infer`](infer.md), and extracts the declared outputs + `done_when`. It
 owns the *function abstraction* only; session mechanics (recipe pinning,
 permission broker, chat history) belong to `infer`. Standalone PyInstaller CLI, no daemon; it invokes `infer` through the executable/JSON contract rather than importing Infer internals.

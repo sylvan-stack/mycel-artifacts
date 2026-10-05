@@ -10,10 +10,10 @@ default-recipe: jira-agent
 
 The one command that turns a Jira key into a **ticket workspace** — everything
 needed to start real work: the mirrored raw ticket, a clean statement,
-verifiable [Objectives](../../arbol_deprecated_v1/GLOSSARY.md#objectives), curated Jira/Confluence
+verifiable [Objectives](../../arbol/GLOSSARY.md#objectives), curated Jira/Confluence
 context, an optional subtask split, a codebase scout, and a deep-research
 brief-driven artifact. The first [Blueprint
-Chain](../../arbol_deprecated_v1/GLOSSARY.md#blueprint-chain): deterministic Python composing Tool
+Chain](../../arbol/GLOSSARY.md#blueprint-chain): deterministic Python composing Tool
 calls, Blueprint runs, and inline `infer` lambdas — an unmet `done_when`
 ABORTS the chain (the guarantee a chain adds over instructions).
 
@@ -30,7 +30,7 @@ python3 ~/Artifacts/mycel/chains/start-new-ticket.py <DEMO-KEY> --repo <repo>
 
 ## Cells
 
-Seven [Cells](../../arbol_deprecated_v1/GLOSSARY.md#cell) build the workspace in order (each
+Seven [Cells](../../arbol/GLOSSARY.md#cell) build the workspace in order (each
 writes into `~/Artifacts/jira/<KEY>-<slug>/`, shown below as `{ws}`); `--until N`
 stops after Cell N and the run stays resumable. Kinds — *Tool*: deterministic
 code; *Blueprint*: a named Blueprint run gated by `done_when`; *lambda*: an

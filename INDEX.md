@@ -5,14 +5,14 @@
 > `mycel`, its own git repo): everything about **how to work**. The product it
 > documents — architecture, plans, glossary — is one corpus over in
 > [`~/Artifacts/arbol_deprecated_v1/`](../arbol_deprecated_v1/INDEX.md). Shared vocabulary:
-> [GLOSSARY](../arbol_deprecated_v1/GLOSSARY.md).
+> [GLOSSARY](../arbol/GLOSSARY.md).
 
 Everything here passes the **VS Code Test**: usable without Arbol installed.
 
 ## Chapters
 
 ### `operations/` — Mycel Operations: frontend-agnostic process descriptions
-What must happen, in Mycel vocabulary — the invariant behind every invocation surface (Arbol RPCs, CLI agents, the [Blueprint](../arbol_deprecated_v1/GLOSSARY.md#blueprint) engine).
+What must happen, in Mycel vocabulary — the invariant behind every invocation surface (Arbol RPCs, CLI agents, the [Blueprint](../arbol/GLOSSARY.md#blueprint) engine).
 - [`OVERVIEW.md`](./operations/OVERVIEW.md) — the readable one-page summary of all operations (for humans; agents use the Hub).
 - [`external-mirrors.md`](./operations/external-mirrors.md) — Jira/Confluence/GitLab → local mirror corpus: fetch on events, mirror class, closure rule.
 - [`ticket-workflow.md`](./operations/ticket-workflow.md) — the Jira+git ticket workflow, read whole: prep and subtask phases, transition policy, worktree-model hold/switch.
@@ -43,7 +43,7 @@ What must happen, in Mycel vocabulary — the invariant behind every invocation 
 - [`places-api-logs.md`](./operations/places-api-logs.md) — Reservble Syrve production-log access and investigation through read-only SFTP.
 - `archive/` — heartwood snapshots of superseded engines.
 
-### `blueprints/` — executable agent-work definitions ([Blueprints](../arbol_deprecated_v1/GLOSSARY.md#blueprint))
+### `blueprints/` — executable agent-work definitions ([Blueprints](../arbol/GLOSSARY.md#blueprint))
 Typed contract in frontmatter + agent instructions in the body; run detached via `blueprint run <name>` or by any agent manually.
 - [`deep-research.md`](./blueprints/deep-research.md) — level-4 research producing/updating ref-carrying artifacts (topic mode or ticket-workspace mode).
 - [`code-review.md`](./blueprints/code-review.md) / [`implementation-plan.md`](./blueprints/implementation-plan.md) / [`spike-doc.md`](./blueprints/spike-doc.md) — the daily composites.
@@ -52,12 +52,12 @@ Typed contract in frontmatter + agent instructions in the body; run detached via
 
 ### `chains/` — Blueprint Chains: scripts AND their runbooks, side by side
 Each `<name>.py` has its runbook `<name>.md` next to it (runbook-near-file rule); shared plumbing is `chainlib.py` (process log, resume, parallel, nesting — [../arbol_deprecated_v1/plans/blueprints.md](../arbol_deprecated_v1/plans/blueprints.md) "Chain plumbing"). Scripts aren't indexed (`*.md` only); same-folder-same-name proximity is the link.
-- [`start-new-ticket.md`](./chains/start-new-ticket.md) — Jira key → full ticket workspace (7 [Cells](../arbol_deprecated_v1/GLOSSARY.md#cell) incl. code scout + deep research).
+- [`start-new-ticket.md`](./chains/start-new-ticket.md) — Jira key → full ticket workspace (7 [Cells](../arbol/GLOSSARY.md#cell) incl. code scout + deep research).
 - [`prepare-ticket.md`](./chains/prepare-ticket.md) — preparation only: fetch, format, objectives, jira context; no research. Duplicates Cells on purpose.
 - [`code-review.md`](./chains/code-review.md) — MR URL → verified review (8 Cells): mirrors → coverage contract → review-diff with a code-enforced coverage gate → fresh-context verify-findings → publish to the ticket workspace (`code-review-<datetime>.md`: [BLOCKING] markers, clickable file:line, evidence per point).
 
 ### `tools/` — technical manuals for the client-agnostic CLIs
-One [Runbook](../arbol_deprecated_v1/GLOSSARY.md#runbook) per [Tool](../arbol_deprecated_v1/GLOSSARY.md#tool); Arbol-only tools (arbol-cli, deployment) keep theirs in the [Arbol corpus](../arbol_deprecated_v1/tools/).
+One [Runbook](../arbol/GLOSSARY.md#runbook) per [Tool](../arbol/GLOSSARY.md#tool); Arbol-only tools (arbol-cli, deployment) keep theirs in the [Arbol corpus](../arbol_deprecated_v1/tools/).
 - [`mycel.md`](./tools/mycel.md) — knowledge CLI: search, sync, embed, wt, raptor, secrets, mirror.
 - [`infer.md`](./tools/infer.md) — the agent-session substrate (recipe-pinned, brokered, recorded).
 - [`blueprint.md`](./tools/blueprint.md) — run a Blueprint as a typed function (a Delegate via infer).

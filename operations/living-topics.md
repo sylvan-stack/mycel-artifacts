@@ -3,10 +3,10 @@ role: authored
 ---
 # Guide: Living Topics — continuity across Chat Sessions
 
-How to work a [Living Topic](../../arbol_deprecated_v1/GLOSSARY.md#living-topic): a durable,
+How to work a [Living Topic](../../arbol/GLOSSARY.md#living-topic): a durable,
 evolving context hub for a subject that returns in different forms over months.
 This guide is authoritative for the topic folder contract, how a new
-[Chat Session](../../arbol_deprecated_v1/GLOSSARY.md#chat-session) picks an existing topic up,
+[Chat Session](../../arbol/GLOSSARY.md#chat-session) picks an existing topic up,
 what gets written back during the session, and the wrap-up. The definition and
 boundaries of the term live in the glossary; this guide is only the process.
 
@@ -19,7 +19,7 @@ A Living Topic exists on two surfaces with strictly separated jobs:
 
 1. **The topic record** — the Entity itself (kind `living_topic`, id
    `liv-…`), managed on the `Seqoya[Living Topics]` page: title, description,
-   and [Entity Edges](../../arbol_deprecated_v1/GLOSSARY.md#entity-edge) to Chat Sessions,
+   and [Entity Edges](../../arbol/GLOSSARY.md#entity-edge) to Chat Sessions,
    Artifacts, tickets, Grafts, and messages. The **description is display
    text only** — one or two sentences so the UI card explains itself. It is
    never working context: agents must not read it for facts or write findings
@@ -64,7 +64,7 @@ number of repositories.
    familiar, search Living Topics first (Entity Search, tag `liv`, or the
    Seqoya list). Continuing an existing topic beats re-deriving context.
 2. **Hydrate via a Chat Note, not a bare entity chip.** A chip is only a
-   pointer; a [Chat Note](../../arbol_deprecated_v1/GLOSSARY.md#chat-note) is durable and is
+   pointer; a [Chat Note](../../arbol/GLOSSARY.md#chat-note) is durable and is
    included whenever a later Turn is composed, so the instructions survive the
    whole session. The note carries the topic chip *plus* the reading order and
    write-back rules — instantiate the template below (the Seqoya **Chat**
@@ -171,9 +171,9 @@ covers only the other Entities.
 ## Anti-patterns
 
 - **Topic as task tracker** — completable work is a
-  [Graft](../../arbol_deprecated_v1/GLOSSARY.md#graft); a topic is never "done".
+  [Graft](../../arbol/GLOSSARY.md#graft); a topic is never "done".
 - **Topic as current focus** — that is a
-  [Spotlight](../../arbol_deprecated_v1/GLOSSARY.md#spotlight).
+  [Spotlight](../../arbol/GLOSSARY.md#spotlight).
 - **Topic as per-ticket folder** — ticket deliverables stay in
   `~/Artifacts/<repo>/tickets/<KEY>/`; the topic links to them.
 - **Description as summary** — description is UI display text; facts live in

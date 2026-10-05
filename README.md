@@ -31,7 +31,7 @@ current projects. These historical routes do not imply installed skills.
 | give an agent provider-specific code-search and source-reading rules | [Claude guide](operations/claude-source-investigation.md) · [Codex guide](operations/codex-source-investigation.md) |
 | an answer to "how/where/why" about a codebase | [operations/code-research.md](operations/code-research.md) (level 3) |
 | scout a codebase for ticket objectives | [scout-codebase](blueprints/scout-codebase.md) — shallow reconnaissance, not verified conclusions |
-| durable multi-angle task context (an artifact) | [deep-research](blueprints/deep-research.md) — a [Blueprint](../arbol_deprecated_v1/GLOSSARY.md#blueprint) |
+| durable multi-angle task context (an artifact) | [deep-research](blueprints/deep-research.md) — a [Blueprint](../arbol/GLOSSARY.md#blueprint) |
 | start, resume, or hand off troubleshooting for a difficult implementation or bug-fix issue | [operations/troubleshooting.md](operations/troubleshooting.md) — persistent sessions, findings, failed directions, and a copyable continuation prompt |
 | start or continue an in-depth review of a large pull request: find its next issues, review new commits, verify the author's fixes, weigh the author's replies | [operations/pr-deep-review.md](operations/pr-deep-review.md) — state file per pull request, ranked areas, verified findings queued for the human reviewer; never posts. Named run limits: [operations/stints.md](operations/stints.md) |
 | continue a recurring subject in a new Chat Session (Living Topic) | [operations/living-topics.md](operations/living-topics.md) — topic folder + Chat Note hydration + incremental write-back |
@@ -52,7 +52,7 @@ current projects. These historical routes do not imply installed skills.
 | integrate authored artifacts, code, and tests “according to Mycel” | [operations/authored-work-integration.md](operations/authored-work-integration.md) — coverage → ingest → edges → Detection → embeddings → verify |
 | user message mentions **iPad Dashboard** or invokes **/ipad**: verify the incoming mailbox identity and return a correlated reply | [operations/ipad-dashboard.md](operations/ipad-dashboard.md) — mention loads guidance, not execution authority |
 | create, update, or install Mycel Skills for native Codex CLI and Claude Code CLI | [operations/create-skill.md](operations/create-skill.md) |
-| what a term means | [../arbol_deprecated_v1/GLOSSARY.md](../arbol_deprecated_v1/GLOSSARY.md) |
+| what a term means | [../arbol/GLOSSARY.md](../arbol/GLOSSARY.md) |
 | the full catalog | [INDEX.md](INDEX.md) (operations) · [../arbol_deprecated_v1/INDEX.md](../arbol_deprecated_v1/INDEX.md) (product) |
 
 *Rows are task shapes, never individual documents — if this table outgrows

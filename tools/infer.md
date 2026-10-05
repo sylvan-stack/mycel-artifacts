@@ -7,8 +7,8 @@ role: authored
 
 The one primitive that runs an agent **session** — a recipe-pinned,
 permission-brokered claude conversation — and records its chat history. It is
-role-blind: the same tool runs a [Lead](../../arbol_deprecated_v1/GLOSSARY.md#lead) or a
-[Delegate](../../arbol_deprecated_v1/GLOSSARY.md#delegate). [Blueprints](../../arbol_deprecated_v1/GLOSSARY.md#blueprint)
+role-blind: the same tool runs a [Lead](../../arbol/GLOSSARY.md#lead) or a
+[Delegate](../../arbol/GLOSSARY.md#delegate). [Blueprints](../../arbol/GLOSSARY.md#blueprint)
 run through it; Arbol runs Leads/Delegates through it; `mycel raptor` will use
 it for completions. No daemon. It is installed as a standalone PyInstaller executable in `~/bin`.
 
@@ -25,7 +25,7 @@ infer sessions [--limit N]                 # recent sessions (chat-history recor
 infer show <session-id> [--transcript]     # metadata / full transcript
 ```
 
-- **Recipe** = a [Brain Recipe](../../arbol_deprecated_v1/GLOSSARY.md#brain-recipe) from
+- **Recipe** = a [Brain Recipe](../../arbol/GLOSSARY.md#brain-recipe) from
   `~/.infer/config.toml` (model + provider) — **or an ad-hoc descriptor**
   `model:thinking` (e.g. `fable:xhigh`, `haiku:low`; full form
   `ip:model:thinking`) when no configured recipe fits: bare model words

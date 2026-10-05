@@ -58,7 +58,7 @@ where, in what order, behind which toggle, tested how.
    only what `research.md` did not already cover.
 4. **Write the plan** to `{ticket_dir}/plan.md` per the
    [authoring guide](../operations/source-refs-authoring.md), every claim
-   carrying a [Source Ref](../../arbol_deprecated_v1/GLOSSARY.md#source-ref):
+   carrying a [Source Ref](../../arbol/GLOSSARY.md#source-ref):
    - scope & non-goals (from the objectives/ticket, stated back);
    - approach + ordered changes, each naming files/symbols;
    - **Feature-toggle strategy** (toggle key, what's gated, old path

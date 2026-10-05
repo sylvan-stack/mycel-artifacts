@@ -51,7 +51,7 @@ pages, GitLab merge requests** — becomes local, searchable corpus. Live since
 4. **Retrieve**: `mycel search "…" --repo jira-mirror` (or
    `confluence-mirror` / `gitlab-mirror`). Curated derivatives belong in the
    processed layer (`~/Artifacts/jira/…`, authored class) and ref their
-   mirror files — [Detection](../../arbol_deprecated_v1/GLOSSARY.md#detection) then flags the
+   mirror files — [Detection](../../arbol/GLOSSARY.md#detection) then flags the
    derived doc when a refresh changes the ticket underneath it.
 
 `mycel mirror refresh [surface] [--older-than-min N]` re-fetches stale

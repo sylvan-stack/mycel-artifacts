@@ -21,7 +21,7 @@ corpus coverage
 → verify retrieval and reverse context
 ```
 
-The unit is the [Chunk](../../arbol_deprecated_v1/GLOSSARY.md#chunk), not merely a file. Edges
+The unit is the [Chunk](../../arbol/GLOSSARY.md#chunk), not merely a file. Edges
 must follow actual claims and consistency obligations; never connect chunks only
 because they were edited in the same task.
 
