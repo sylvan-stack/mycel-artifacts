@@ -9,7 +9,7 @@ The **rigorous, detached** review of an MR — what the manual
 [code-review Blueprint](../blueprints/code-review.md) instructs, this chain
 **guarantees**: a coverage gate checked in code against the real merge-base
 diff (not the reviewer's self-report), and an adversarial verification pass in
-a **fresh [Chat Session](../../arbol_deprecated_v1/GLOSSARY.md#chat-session)** — the verifier
+a **fresh [Chat Session](../../arbol/GLOSSARY.md#chat-session)** — the verifier
 is never the context that produced the findings, so plausible-but-wrong
 findings die before they reach a developer. The manual Blueprint stays the
 interactive path (review-with-dialogue in the current session); this chain is
@@ -64,7 +64,7 @@ branch worktree, a plain-words summary, and code evidence; free-form extras
 
 ## Cells
 
-Eight [Cells](../../arbol_deprecated_v1/GLOSSARY.md#cell); `--until N` stops after Cell N.
+Eight [Cells](../../arbol/GLOSSARY.md#cell); `--until N` stops after Cell N.
 
 1. **MR mirror** — *Tool* `mycel mirror fetch gitlab <url>`. The chain then
    parses repo / source & target branch / ticket key from the mirror

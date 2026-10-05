@@ -21,7 +21,7 @@ same processes. A common integration is a thin Claude Code Skill that routes to
 the corresponding process artifact here.
 
 A Mycel Operation specifies **what should happen and why**, without depending on
-a particular tool or invocation surface. A [Runbook](../../arbol_deprecated_v1/GLOSSARY.md#runbook)
+a particular tool or invocation surface. A [Runbook](../../arbol/GLOSSARY.md#runbook)
 is different: it is the technical manual for **how to use a particular tool**.
 A tool may implement all or part of a process, so a process guide may link to
 its runbook for commands and parameters, but must not absorb the runbook's

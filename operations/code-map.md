@@ -4,13 +4,13 @@ role: authored
 # Guide: Code Map
 
 A **mechanical, per-repo overview artifact** — `generated/code-map.md` in the
-repo's [Artifact Corpus](../../arbol_deprecated_v1/GLOSSARY.md#artifact-corpus) — rebuilt from
-[Chunks](../../arbol_deprecated_v1/GLOSSARY.md#chunk) alone (paths + symbols + kinds the corpus
+repo's [Artifact Corpus](../../arbol/GLOSSARY.md#artifact-corpus) — rebuilt from
+[Chunks](../../arbol/GLOSSARY.md#chunk) alone (paths + symbols + kinds the corpus
 already holds): no LLM, no interlock concerns, milliseconds to produce.
 
 ## The process
 
-1. Any [Sync Pass](../../arbol_deprecated_v1/GLOSSARY.md#sync-pass) that changed a repo's code
+1. Any [Sync Pass](../../arbol/GLOSSARY.md#sync-pass) that changed a repo's code
    corpus regenerates its map — atomic write only when content actually
    changed; a failure warns and never blocks sync.
 2. The map's directory sections list each file's classes and methods (capped
@@ -23,9 +23,9 @@ already holds): no LLM, no interlock concerns, milliseconds to produce.
 
 ## Why `generated: true`
 
-Regenerated-not-maintained: exempt from [Detection](../../arbol_deprecated_v1/GLOSSARY.md#detection)
+Regenerated-not-maintained: exempt from [Detection](../../arbol/GLOSSARY.md#detection)
 (drift against a document that rewrites itself is noise) and from
-[RAPTOR](../../arbol_deprecated_v1/GLOSSARY.md#raptor-tree) clustering — searchable, never stale.
+[RAPTOR](../../arbol/GLOSSARY.md#raptor-tree) clustering — searchable, never stale.
 
 <!-- sources:
 mycel:mycel/knowledge/code_map.py#write_map

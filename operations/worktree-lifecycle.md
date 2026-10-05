@@ -14,12 +14,12 @@ is the invariant.
 ## The process
 
 1. **A worktree exists** for the branch inside the repo's
-   [Worktree Container](../../arbol_deprecated_v1/GLOSSARY.md#worktree-container)
+   [Worktree Container](../../arbol/GLOSSARY.md#worktree-container)
    (`~/repo/<repo>/<branch>/`). However it was created — `mycel wt add`
    (daemon-less; owns git worktree + overlay + Env-Keeper seeding + `--mr`
    fetch + `open`), raw git, or the IDE — the system's invariant is:
    *worktree in a container ⇔ its
-   [Branch Overlay](../../arbol_deprecated_v1/GLOSSARY.md#branch-overlay) exists*. The Sync Pass
+   [Branch Overlay](../../arbol/GLOSSARY.md#branch-overlay) exists*. The Sync Pass
    auto-registers discovered worktrees and auto-drops overlays whose worktree
    vanished.
 2. **Overlay ingest**: the branch's delta vs the local `master` merge-base
@@ -32,7 +32,7 @@ is the invariant.
    Automatic passes never embed overlays — a pathological diff (dirty worktree,
    stale base) would otherwise silently burn hours of embedding compute. When
    embedded, overlay chunks use the **base repo's**
-   [Embedder Profile](../../arbol_deprecated_v1/GLOSSARY.md#embedder-profile) — the
+   [Embedder Profile](../../arbol/GLOSSARY.md#embedder-profile) — the
    base-repo interlock is inherited, never
    re-decided. Un-embedded overlay chunks still serve BM25/exact search; only
    dense (semantic) recall needs the embed.
@@ -99,6 +99,6 @@ The Sync Pass marks overlays whose branch is merged into master; they show as
 "merged — droppable" (Repos page, `wt list`). Dropping removes overlay rows
 and the worktree together; overlays are ephemeral by design — recreatable in
 minutes, never referenced by edges, exempt from
-[Detection](../../arbol_deprecated_v1/GLOSSARY.md#detection)/[RAPTOR](../../arbol_deprecated_v1/GLOSSARY.md#raptor-tree)
+[Detection](../../arbol/GLOSSARY.md#detection)/[RAPTOR](../../arbol/GLOSSARY.md#raptor-tree)
 (a *proposed future*, the mirror-image of
-[Heartwood](../../arbol_deprecated_v1/GLOSSARY.md#heartwood)).
+[Heartwood](../../arbol/GLOSSARY.md#heartwood)).

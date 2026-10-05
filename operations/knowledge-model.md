@@ -4,10 +4,10 @@ role: authored
 # Knowledge Model — declarations, roles, edges, freshness
 
 The value reference for Mycel's knowledge graph: every in-band declaration a
-document can carry, every stored value a [Chunk](../../arbol_deprecated_v1/GLOSSARY.md#chunk)
-or [Derivation](../../arbol_deprecated_v1/GLOSSARY.md#derivation) can take, and how they
-combine into [Detection](../../arbol_deprecated_v1/GLOSSARY.md#detection) and
-[Drifts](../../arbol_deprecated_v1/GLOSSARY.md#drift). The [GLOSSARY](../../arbol_deprecated_v1/GLOSSARY.md)
+document can carry, every stored value a [Chunk](../../arbol/GLOSSARY.md#chunk)
+or [Derivation](../../arbol/GLOSSARY.md#derivation) can take, and how they
+combine into [Detection](../../arbol/GLOSSARY.md#detection) and
+[Drifts](../../arbol/GLOSSARY.md#drift). The [GLOSSARY](../../arbol/GLOSSARY.md)
 defines each term once; this page is the *system* view — all possible values,
 their defaults, and the transitions between them. Every claim here cites the
 implementing code.
@@ -39,9 +39,9 @@ Arbol's doc views render all frontmatter as a metadata strip).
 | Declaration | Values | Effect on ingest |
 |---|---|---|
 | `role:` | `authored` \| `derived` | Default role for the document's chunks. **Any other value is ignored** — `role: blueprint` is a *document class* for the renderer/engine, not a chunk role; a blueprint's chunks default `unclassified`. |
-| `status: heartwood` | + optional `implemented:` / `outdated:` time pins | Time-frozen record: never marked stale, open Drifts auto-closed, excluded from RAPTOR clustering; still ingested and searchable ([Heartwood](../../arbol_deprecated_v1/GLOSSARY.md#heartwood)). |
+| `status: heartwood` | + optional `implemented:` / `outdated:` time pins | Time-frozen record: never marked stale, open Drifts auto-closed, excluded from RAPTOR clustering; still ingested and searchable ([Heartwood](../../arbol/GLOSSARY.md#heartwood)). |
 | `generated:` | `true` / `1` / `yes` | Regenerated-not-maintained (e.g. the [Code Map](code-map.md)): same exemptions as heartwood — Detection and RAPTOR skip it. |
-| `sources:` | YAML list, or comma-separated scalar | Document-wide governors: materialized as `declared` edges on the document's **first chunk** (the [Detection-parent trick](../../arbol_deprecated_v1/GLOSSARY.md#source-ref) — e.g. `ticket.md` answering to its jira mirror). |
+| `sources:` | YAML list, or comma-separated scalar | Document-wide governors: materialized as `declared` edges on the document's **first chunk** (the [Detection-parent trick](../../arbol/GLOSSARY.md#source-ref) — e.g. `ticket.md` answering to its jira mirror). |
 
 <!-- sources:
 mycel:mycel/knowledge/chunker.py
@@ -74,11 +74,11 @@ mycel:mycel/knowledge/store.py
 
 | Field | Values | Meaning |
 |---|---|---|
-| `role` | `authored` | Nothing governs it — it may govern others, or stand [Free-standing](../../arbol_deprecated_v1/GLOSSARY.md#free-standing). |
+| `role` | `authored` | Nothing governs it — it may govern others, or stand [Free-standing](../../arbol/GLOSSARY.md#free-standing). |
 | | `derived` | At least one Derivation points at it; freshness is tracked against its parents. |
 | | `unclassified` | A leather bag hasn't decided (docs-only state — a section may be an original decision or a restatement; unknowable without judgment). |
 | `state` | `present` \| `orphaned` | Whether the last ingest still found it (documents carry the same pair). |
-| `last_status` | `unchanged` \| `edited` \| `renamed` \| `new` \| `orphaned` | The identity decision of the last ingest pass ([Identity Reconciliation](../../arbol_deprecated_v1/GLOSSARY.md#identity-reconciliation)); document-level log adds `doc_new` / `doc_renamed` / `doc_orphaned`. |
+| `last_status` | `unchanged` \| `edited` \| `renamed` \| `new` \| `orphaned` | The identity decision of the last ingest pass ([Identity Reconciliation](../../arbol/GLOSSARY.md#identity-reconciliation)); document-level log adds `doc_new` / `doc_renamed` / `doc_orphaned`. |
 | `origin` | `doc` \| `code` \| `summary` | Which corpus/process produced it. |
 | `tier` | `0` = leaf, `1+` = summary tier | RAPTOR level — distinct from `level`, the markdown heading depth. |
 | `stale` + `stale_because` | boolean + reason text | Set by Detection (below). |
@@ -139,7 +139,7 @@ Heartwood and generated chunks are **never** marked stale — their truth is
 indexed to a past moment or regenerated wholesale, so "changed since" is a
 category error; any open Drift on them is auto-closed.
 
-A [Drift](../../arbol_deprecated_v1/GLOSSARY.md#drift) is the *work item* opened for a
+A [Drift](../../arbol/GLOSSARY.md#drift) is the *work item* opened for a
 stale chunk: `status` `open` → `closed`, one open Drift per chunk, recording
 **every** contributing source (`kn_drift_sources`), not just the first.
 Stale is the adjective; Drift is the assignment.
@@ -150,7 +150,7 @@ mycel:mycel/knowledge/store.py
 
 ## Not a Derivation: References
 
-A [Reference](../../arbol_deprecated_v1/GLOSSARY.md#reference) is a mere locator (a link, a
+A [Reference](../../arbol/GLOSSARY.md#reference) is a mere locator (a link, a
 "see also") — its only integrity question is *does it still resolve*, checked
 cheaply without hashes or models. Using a term's **meaning** is the thing
 that warrants a Derivation instead: meaning-dependencies are checked by

@@ -79,7 +79,7 @@ future sessions and retrieval bridges build on instead of rediscovering.
 
 - Lead with a summary a task-executor can act on without reading the rest.
 - One section per angle, each claim carrying [Source
-  Refs](../../arbol_deprecated_v1/GLOSSARY.md#source-ref) — refs point at **files** (optionally
+  Refs](../../arbol/GLOSSARY.md#source-ref) — refs point at **files** (optionally
   `#Symbol`); directory refs resolve to no edges.
 - An **Open questions** section listing what was not established and why.
 

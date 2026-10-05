@@ -5,7 +5,7 @@ role: authored
 
 **Read this file before creating or changing any artifact in `skills/`.**
 This directory is the source of truth for the native Codex CLI and Claude Code CLI adapters of
-[Mycel Skills](../../arbol_deprecated_v1/GLOSSARY.md#mycel-skill). Mycel Skills are
+[Mycel Skills](../../arbol/GLOSSARY.md#mycel-skill). Mycel Skills are
 provider-agnostic; these files are provider-specific discovery and dispatch
 surfaces, not the home of process truth. Follow the
 [creation guide](../operations/create-skill.md) when adding one.

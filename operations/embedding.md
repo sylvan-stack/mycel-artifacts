@@ -3,16 +3,16 @@ role: authored
 ---
 # Guide: Embedding
 
-How [Mycel](../../arbol_deprecated_v1/GLOSSARY.md#mycel) turns chunks into vectors — the rules that
+How [Mycel](../../arbol/GLOSSARY.md#mycel) turns chunks into vectors — the rules that
 keep it correct, and the habits that keep retrieval getting smarter. This is
 the write side; the read side is [Code Retrieval Guide](retrieval.md).
 
 ## The model
 
 - **One profile per repo, inherited by overlays.** [Worktree
-  Containers](../../arbol_deprecated_v1/GLOSSARY.md#worktree-container) use `local` (on-device
+  Containers](../../arbol/GLOSSARY.md#worktree-container) use `local` (on-device
   Qwen3) — their source is structurally unable to reach an external API; personal
-  repos may use Voyage. A [Branch Overlay](../../arbol_deprecated_v1/GLOSSARY.md#branch-overlay) always embeds
+  repos may use Voyage. A [Branch Overlay](../../arbol/GLOSSARY.md#branch-overlay) always embeds
   with its base repo's profile.
 - **Chunks embed with an identity header** (`path — symbol (kind)` for code,
   `path › heading` for docs): the path and symbol carry meaning the body often
@@ -52,13 +52,13 @@ mycel:mycel/knowledge/local_embedder.py
 
 - **Jargon the code never spells out** → an entry in
   `~/Artifacts/<repo>/GLOSSARY.md` with [Source
-  Refs](../../arbol_deprecated_v1/GLOSSARY.md#source-ref) to the implementing code. One code
+  Refs](../../arbol/GLOSSARY.md#source-ref) to the implementing code. One code
   glossary took jargon retrieval from 3/6 to 6/6; glossaries for the code repos
   took a 10-query jargon set from mostly-miss to 9/10 @3. Refs must point at
   **files** (optionally `#Symbol`) — directory refs resolve to no edges.
 - **Expensive research synthesis** → persist per the
   [authoring guide](source-refs-authoring.md); **update existing
   docs rather than adding siblings** (repairs drift, keeps the corpus curated).
-- **Superseded documents** → [Heartwood](../../arbol_deprecated_v1/GLOSSARY.md#heartwood)
+- **Superseded documents** → [Heartwood](../../arbol/GLOSSARY.md#heartwood)
   (`status: heartwood` + pins): searchable record, exempt from Detection,
   badged against masquerading as current truth.

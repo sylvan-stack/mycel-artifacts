@@ -124,7 +124,7 @@ mycel confluence update <id-or-url> (--body MD | --body-file F) [--title T] [--f
   exception to mirror one-way-ness — operations/external-mirrors.md):
   markdown converts to storage XHTML (`--format storage` passes through raw),
   and every write immediately re-fetches the page's mirror.
-- **pull** advances the `master` branch of a [Worktree Container](../../arbol_deprecated_v1/GLOSSARY.md#worktree-containers)
+- **pull** advances the `master` branch of a [Worktree Container](../../arbol/GLOSSARY.md#worktree-containers)
   (pass the repo name): `git fetch origin` then a
   **fast-forward-only** merge in the `master/` worktree — never a force, so a
   diverged master is reported, not overwritten (master is clean corpus source).

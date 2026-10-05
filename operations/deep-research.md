@@ -10,7 +10,7 @@ for it when the deliverable is an *artifact* (not a chat answer) and the scope
 is a *task*, not a question.
 
 **Defined by the [deep-research Blueprint](../blueprints/deep-research.md)** —
-the first [Blueprint](../../arbol_deprecated_v1/GLOSSARY.md#blueprint): inputs/outputs, process, and
+the first [Blueprint](../../arbol/GLOSSARY.md#blueprint): inputs/outputs, process, and
 quality bar live there. Single source — this doc is only the research
 ladder's entry point.
 
@@ -19,7 +19,7 @@ ladder's entry point.
 Run detached via `blueprint run deep-research --input k=v` — or **manually**: an agent
 reads the Blueprint, binds the inputs, follows its Process, and self-checks
 `done_when`. The automated engine — and the plan → execute → verify
-[Blueprint Chain](../../arbol_deprecated_v1/GLOSSARY.md#blueprint-chain) that will gate quality —
+[Blueprint Chain](../../arbol/GLOSSARY.md#blueprint-chain) that will gate quality —
 is designed in [plans/blueprints.md](../../arbol_deprecated_v1/plans/blueprints.md) and parked with
 [plans/deep-research-engine](../../arbol_deprecated_v1/plans/deep-research-engine.md). The Cursor-era
 engine remains archived: [snapshot](archive/deep-research-cursor-era.md).

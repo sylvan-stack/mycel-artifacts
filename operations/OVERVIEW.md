@@ -11,9 +11,9 @@ One page to (re)load the whole mental model. Each section is two sentences of
 
 - **[Embedding](embedding.md)** — chunks become vectors with an identity
   header (path + symbol first), one [Embedder
-  Profile](../../arbol_deprecated_v1/GLOSSARY.md#embedder-profile) per repo. The interlock is
+  Profile](../../arbol/GLOSSARY.md#embedder-profile) per repo. The interlock is
   structural: Core-Repo and mirror text embeds on-device (the [Embedding
-  Provider](../../arbol_deprecated_v1/GLOSSARY.md#embedding-provider) app), never via an external
+  Provider](../../arbol/GLOSSARY.md#embedding-provider) app), never via an external
   API.
 - **[External Mirrors](external-mirrors.md)** — Jira tickets, Confluence
   pages, and GitLab MRs fetched *on events* into
@@ -51,7 +51,7 @@ One page to (re)load the whole mental model. Each section is two sentences of
 - **[Research levels](code-research-levels.md)** — `better-grep` (exact +
   meaning tail) → [code-research](code-research.md) (question → cited answer)
   → [deep research](deep-research.md) (task → durable artifact, defined by
-  the first [Blueprint](../../arbol_deprecated_v1/GLOSSARY.md#blueprint)).
+  the first [Blueprint](../../arbol/GLOSSARY.md#blueprint)).
 
 ## Difficult implementation and bug-fix work
 
@@ -114,15 +114,15 @@ One page to (re)load the whole mental model. Each section is two sentences of
   prep → subtasks → worktree-per-branch → MRs → transitions, with its
   [lookup companion](ticket-workflow-reference.md) for IDs, payloads, and
   conventions. The prepare-ticket / start-new-ticket chains build the
-  [Ticket Workspace](../../arbol_deprecated_v1/GLOSSARY.md#ticket-workspace) it works in.
+  [Ticket Workspace](../../arbol/GLOSSARY.md#ticket-workspace) it works in.
 
 ## How it compounds
 
 Retrieval gets smarter through documents, not tuning: jargon the code never
-spells out earns a [GLOSSARY](../../arbol_deprecated_v1/GLOSSARY.md#source-ref) bridge entry;
+spells out earns a [GLOSSARY](../../arbol/GLOSSARY.md#source-ref) bridge entry;
 research worth keeping is persisted with Source Refs and update-don't-
-duplicate; superseded truth freezes as [Heartwood](../../arbol_deprecated_v1/GLOSSARY.md#heartwood);
-mirrors bring the outside world in. [Detection](../../arbol_deprecated_v1/GLOSSARY.md#detection)
+duplicate; superseded truth freezes as [Heartwood](../../arbol/GLOSSARY.md#heartwood);
+mirrors bring the outside world in. [Detection](../../arbol/GLOSSARY.md#detection)
 watches every edge so drift surfaces instead of rotting. The machinery behind
 all of this — every declaration, role, edge kind, and staleness reason, with
 its exact semantics — is enumerated in the
@@ -137,7 +137,7 @@ the completion provider for RAPTOR generation.
 
 ## Mycel Skill dispatchers
 
-[Mycel Skills](../../arbol_deprecated_v1/GLOSSARY.md#mycel-skill) are provider-agnostic
+[Mycel Skills](../../arbol/GLOSSARY.md#mycel-skill) are provider-agnostic
 activation contracts implemented by thin provider adapters. Follow the
 [creation guide](create-skill.md) to add every available adapter from one shared
 trigger contract; native Codex CLI and Claude Code CLI are supported. Universe

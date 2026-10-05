@@ -9,7 +9,7 @@ default-recipe: jira-agent
 ## Why it exists
 
 The **preparation slice without the research**: mirrored raw ticket →
-formatted `ticket.md` → verifiable [Objectives](../../arbol_deprecated_v1/GLOSSARY.md#objectives) →
+formatted `ticket.md` → verifiable [Objectives](../../arbol/GLOSSARY.md#objectives) →
 curated `jira-context.md`, then stop. For the times the ticket should be
 understood and its context curated, but the codebase work (scout, deep
 research) is deferred — or never wanted. Deliberately **duplicates** steps
@@ -29,7 +29,7 @@ python3 ~/Artifacts/mycel/chains/prepare-ticket.py <DEMO-KEY>
 
 ## Cells
 
-Four [Cells](../../arbol_deprecated_v1/GLOSSARY.md#cell) — the same first four
+Four [Cells](../../arbol/GLOSSARY.md#cell) — the same first four
 [start-new-ticket](start-new-ticket.md) runs, minus scout and research (each
 writes into `~/Artifacts/jira/<KEY>-<slug>/`, shown as `{ws}`). No `--repo` —
 preparation never touches code; `--until N` stops after Cell N, resumable.
