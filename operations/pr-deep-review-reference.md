@@ -228,8 +228,10 @@ do next. Name any minimum the last run did not reach.>
   with the reason, `dropped`, `accepted-wontfix`, `minor-noted`.
 - **More** links `BRIEF.md`, `state.json` and the repository's reviews
   contract. For Linear-backed reviews, also link the readable artifact index
-  and readable evidence sections; retain document/section IDs and source
-  hashes in `linear-mirror.json` for incremental sync.
+  and readable evidence sections. Link shared knowledge to its repository
+  project and cross-repository conventions to their team home. Retain parent
+  scopes, document/section IDs and source hashes in the repository document
+  registry, referenced by `linear-mirror.json` for incremental sync.
 
 ### Finding card
 

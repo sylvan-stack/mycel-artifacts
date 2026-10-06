@@ -44,9 +44,8 @@ context on internal Mycel terminology.
 - Separate process from lookup material when needed: `<topic>.md` contains the
   read-whole guide; `<topic>-reference.md` contains IDs, payloads, tables,
   syntax, and examples consulted on demand.
-- Product architecture, plans, and glossary definitions belong in
-  `~/Artifacts/arbol_deprecated_v1/`, not here. Tool command manuals belong in `../tools/`;
-  executable contracts in `../blueprints/`; orchestration in `../chains/`;
+- Product specifications and glossary definitions belong in the Arbol corpus
+  (`~/Artifacts/arbol/`), not here. Tool command manuals belong in `../tools/`;
   trigger-only dispatchers in `../skills/`.
 - Superseded implementation truth moves to `archive/` with Heartwood metadata;
   it is never silently deleted or left looking current.
@@ -110,8 +109,8 @@ the generator; do not hand-edit generated output.
   govern the whole document. Prefer file or symbol refs that resolve; directory
   refs do not create useful edges.
 - Link laterally rather than copy policy. Relative links inside this folder are
-  preferred; use `../blueprints/`, `../chains/`, `../tools/`, and
-  `../../arbol_deprecated_v1/` for neighboring corpora.
+  preferred; use `../tools/` and `../skills/` for neighboring chapters and
+  `../../arbol/` for the Arbol corpus.
 - When code changes invalidate the process, update the guide in the same
   change. If the old behavior remains historically useful, freeze it as
   Heartwood and link to the living replacement prominently.

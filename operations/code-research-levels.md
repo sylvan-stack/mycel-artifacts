@@ -45,7 +45,7 @@ explain the hit*. When grep returns 0 (vocabulary gap) or 500 (needle in a
 haystack), the tail is what rescues you.
 
 <!-- sources:
-Arbol:cli/arbol_cli/better_grep.py
+mycel:mycel/better_grep.py
 -->
 
 - Repo scope inferred from path operands / CWD (working copies and mirrors both
@@ -75,20 +75,19 @@ cited answer, and persist the synthesis if it was expensive and reusable.
 
 ## Level 3 — deep-research
 
-Long-running background research that **produces or updates a research
-artifact** in `~/Artifacts/<repo>/research/` with Source Refs — task-context
-building, multi-angle coverage of everything a task might touch. See
-[deep-research](deep-research.md) for the contract and current engine status
-(the Cursor-era engine is snapshotted in `archive/`; its successor is being
-rebuilt — until it exists, run level 2 per angle and persist manually).
+Long-running research that **produces or updates a research artifact** in
+`~/Artifacts/<repo>/research/` with Source Refs — task-context building,
+multi-angle coverage of everything a task might touch. See
+[deep-research](deep-research.md) for the inputs, the process and the quality
+bar.
 
 ## Escalation examples
 
-- "where is `getCurrentLoginData` used" → **better-grep** (its grep head
+- "where is `parseConfig` used" → **better-grep** (its grep head
   enumerates every call site exactly; the tail flags any indirection).
-- "where do we send the session reminder" → **better-grep** ("reminder" may not
-  be the code's word — the tail finds reality-check via the glossary).
-- "how does MFA renewal decide?" → **code-research** (synthesis across
+- "where do we send the reminder email" → **better-grep** ("reminder" may not
+  be the code's word — the tail finds the code's own term via the glossary).
+- "how does token renewal decide?" → **code-research** (synthesis across
   service + events + config).
-- "I'm picking up DEMO-XXXXX about session limits, build me context" →
+- "I'm picking up the work on upload limits, build me context" →
   **deep-research** (coverage + artifact).

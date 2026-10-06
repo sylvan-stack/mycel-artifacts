@@ -7,48 +7,38 @@ role: authored
 
 The daemon-less knowledge tool: one process per job, direct to Postgres,
 query embeddings via the configured embedding provider. It is how any agent
-searches the corpus, keeps it fresh, manages worktree overlays, and mirrors
-external surfaces. Settings live in **`~/.mycel/config.toml`** (repositories,
-database, embedding, and mirror settings). Brain Recipes are owned separately
-by Infer in **`~/.infer/config.toml`**. Mycel may read another product's
-databases and logs as data, but it never depends on that product's code or
-instructions.
+searches the corpus and keeps it fresh. Settings live in
+**`~/.mycel/config.toml`** (repositories, organizations, database and
+embedding settings). Brain Recipes are owned separately by Infer in
+**`~/.infer/config.toml`**. Mycel may read another product's databases and
+logs as data, but it never depends on that product's code or instructions.
+
+This runbook describes the Mycel 1 executable installed as `mycel`. Its
+`--help` also lists `wt`, `pull`, `mirror`, `jira`, `confluence` and
+`secrets`: they belong to retired worktree and external-mirror workflows, are
+not part of any current procedure and are not documented here.
 
 ## Use
 
 ```
-mycel search "<query>" [--k N] [--repo R] [--overlay BRANCH] [--only code|docs] [--no-fresh]
+mycel search "<query>" [--k N] [--repo R] [--path P] [--overlay BRANCH] [--only code|docs] [--no-fresh]
 mycel better-grep [grep flags] PATTERN [PATH...]   # also installed as `better-grep`
-mycel sync [--no-embed]        # one mechanical Sync Pass, then exit
-mycel embed [--overlay REPO@BRANCH]... [--include-overlays]
-                               # embed pending base-repo chunks; overlays only
-                               # via --overlay (scoped) or --include-overlays
-mycel pull <repo> [--no-sync] [--no-embed]   # FF master for a container repo, then ingest
-mycel status [--repo R]        # index freshness: pending embeds, last sync, stale counts
-mycel activity [--k N] [--repo R] [--kind K]   # recent sync/embed/overlay/raptor/pull feed
+mycel sync [--no-embed]        # one Sync Pass over every enabled repository, then exit
+mycel embed                    # embed every pending chunk, then exit
+mycel status [--repo R]        # index freshness: documents, chunks, stale counts, embed counters
+mycel activity [--k N] [--repo R] [--kind K]   # recent sync/embed/overlay/raptor feed
 mycel drifts [--repo R]        # Detection findings: docs whose cited code changed
 mycel derive '<child-ref>' '<source-ref>'  # assert source governs derived code/doc/test chunk
-mycel overlay add|list|refresh|drop [repo] [branch] [--worktree PATH] [--embed]
-mycel wt add|list|refresh|drop|open [repo] [branch]   # worktree + overlay together
-mycel wt add <repo> --mr <iid>       # fetch a GitLab MR head into a worktree (needs glab)
-mycel wt drop <repo> <branch> --force # discard local changes in the worktree
-mycel wt open [repo] <branch-fragment>  # fuzzy-open a worktree in VS Code
-mycel repos [list] [--root PATH] [--organization NAME]     # repos under ~/repo + mycel-enabled/container/worktrees
-mycel raptor status|plan|regen|build [--recipe NAME] [--repo R]   # default recipe: raptor-agent;
+mycel overlay add|list|refresh|drop [repo] [branch] [--worktree PATH] [--no-embed]
+mycel repos [list] [--root PATH] [--organization NAME]     # repos under ~/repo + mycel-enabled flag
+mycel raptor status|plan|regen|build [--recipe NAME] [--repo R] [--regen]   # default recipe: raptor-agent;
                                # recipe is resolved by the independent `infer` executable;
                                # no Arbol daemon or provider fallback is used
-mycel secrets set|is-set|list|delete <name>          # write-only: no get, ever
-mycel mirror fetch <jira|confluence|gitlab> <ref> [--closure] [--depth N] [--max-pages N]
-mycel mirror tree confluence <space-key | page-id | url> [--max-pages N]
-mycel mirror refresh [surface] [--older-than-min N]
-mycel jira get <key> [--expand changelog] | search '<jql>' [--max N] | comments <key>
-mycel jira create '<fields-json>' | update <key> '<body-json>' | comment <key> '<text>'
-mycel jira transitions <key> [--expand transitions.fields] | transition <key> <id> ['<fields-json>']
-mycel jira insight '<iql>' [--schema ID] [--max N]
-mycel confluence create --space KEY --title T (--body MD | --body-file F) [--parent REF] [--format markdown|storage]
-mycel confluence update <id-or-url> (--body MD | --body-file F) [--title T] [--format markdown|storage]
 ```
 
+- **Name the repository.** `search` defaults to the repository containing the
+  CWD and falls back to `Arbol`; `status`, `drifts` and `raptor` default to
+  `Arbol` outright. Pass `--repo` whenever another repository is meant.
 - **Search contract.** CLI and Arbol's resident RPC call the same shared
   retrieval service and return schema version 1: `{schema_version, transport,
   repo, overlay, results, dense, bm25, freshness}`. Arbol prefers RPC and falls
@@ -61,24 +51,20 @@ mycel confluence update <id-or-url> (--body MD | --body-file F) [--title T] [--f
   only when they clearly beat the best code hit (≤2, never INDEX/README).
   `--only` narrows. **Fresh-on-read**: `search` mtime-scans the repo
   (milliseconds, early-exit) and auto-syncs the delta when the source changed;
-  `--no-fresh` skips.
-- **wt** owns the full worktree + Branch Overlay lifecycle, daemon-less: `add`
-  creates the git worktree (attaches a local ref; fetches from origin if the
-  branch is remote-only), seeds the repo's Env Keepers, and ingests the
-  overlay — **embedding is on-demand**: chunks stay pending until
-  `mycel embed --overlay <repo>@<branch>` or the Elma status bar's
-  "Embed N chunks"; `--mr <iid>` fetches a GitLab MR head into a worktree (via
-  `glab`); `list` joins on-disk worktrees with overlay state
-  (chunks/embedded/pending/merged, `droppable` when merged);
-  `open <fragment>` fuzzy-opens a worktree in VS Code;
-  `refresh` re-diffs; `drop` removes overlay + worktree together (dirty guard,
-  `--force` to discard). This is the sole home for the worktree lifecycle — it
-  is pure git/filesystem/overlay work with no Arbol daemon, so it lives in
-  `mycel`; it has no daemon or host-application dependency.
+  `--no-fresh` skips, and so does `--only docs`. That pass is local and
+  scoped to the searched repository: it refreshes no remotes and embeds
+  nothing, so new or edited chunks stay pending until an embed runs.
+- **sync** is the all-repository pass. It refreshes the remotes of code
+  corpora, ingests every enabled repository, rewrites their code maps and,
+  unless `--no-embed` is given, embeds every pending chunk of every enabled
+  repository. Check `mycel status` for the pending count before running it
+  without `--no-embed`. To bring one repository up to date, search in it.
+- **overlay** is the Branch Overlay registry for a worktree that already
+  exists. It runs no git: `add` and `refresh` ingest the worktree's
+  difference from its base repository as `repo@branch`, `list` shows the
+  registrations and `drop` removes one.
 - **repos** lists repos under `~/repo` (`--root` overrides) with each repo's
-  mycel-enabled flag, embedder profile, whether it is a Worktree Container (and
-  its worktrees), and whether it has an Artifact Corpus — the daemon-less twin
-  of the mycel-client `repos.list` RPC (the Seqoya/Elma UIs still use the RPC).
+  mycel-enabled flag, embedder profile, and whether it has an Artifact Corpus.
 - **Organizations** are configured in `~/.mycel/config.toml`. Compatible
   settings editors use the same file. For example:
 
@@ -103,40 +89,15 @@ mycel confluence update <id-or-url> (--body MD | --body-file F) [--title T] [--f
   member's `[repos."<name>"]` entry and opt in separately; paths are inferred.
   Other commands retain their individual-repository scope.
 
-- **secrets** are write-only (PATs for the mirrors); no read path ever exists.
-- **mirror** fetches Jira tickets / Confluence pages / GitLab MRs into
-  `~/Artifacts/mirrors/<surface>/` (local-profile corpus; company text never
-  leaves the machine). `--closure` follows a ticket's linked pages/issues.
-  Jira tickets also write the complete raw payload (`<KEY>.json`); both Jira
-  and Confluence auto-download image attachments (`mirrors/<surface>/<ref>/`,
-  ≤15 MB each, idempotent) — listed in the `.md`'s `## Attachments` for
-  agents to READ. Confluence `--depth N` mirrors a page's descendants too
-  (section fetch, capped by `--max-pages`, default 100).
-- **mirror tree** writes a Confluence space's page tree — titles, links,
-  hierarchy, NO content — to `mirrors/confluence/trees/<KEY>[-<root>].md`;
-  metadata-only (~1 request per 100 pages), so it is cheap at any space size.
-  A page ref instead of a space key renders just that subtree.
-- **jira** is the full Jira Data Center surface: reads
-  (get/search/comments/transitions/insight) and actions
-  (create/update/comment/transition). PAT from the Keychain (`jira-pat`);
-  a write on an already-mirrored ticket re-fetches its mirror.
-- **confluence create/update** complete the write surface (the agreed
-  exception to mirror one-way-ness — operations/external-mirrors.md):
-  markdown converts to storage XHTML (`--format storage` passes through raw),
-  and every write immediately re-fetches the page's mirror.
-- **pull** advances the `master` branch of a [Worktree Container](../../arbol/GLOSSARY.md#worktree-containers)
-  (pass the repo name): `git fetch origin` then a
-  **fast-forward-only** merge in the `master/` worktree — never a force, so a
-  diverged master is reported, not overwritten (master is clean corpus source).
-  After a successful pull it runs one Sync Pass to ingest+embed the new code
-  (`--no-sync` = git only, rely on fresh-on-read; `--no-embed` = chunk now, embed
-  later). Skips the sync when no master advanced. Exit 1 only if every target
-  failed to pull.
+- **raptor** `regen` and `build` read their two prompt files from
+  `system-instructions/` in this corpus (`raptor-summary.md` and
+  `raptor-request.md.tmpl`); the `MYCEL_SYSTEM_INSTRUCTIONS` environment
+  variable names another folder. A missing or empty file stops the run with
+  an error.
 - **activity** reads the `kn_activity` feed — one row per completed
-  sync/embed/overlay/raptor/pull, written by the shared library so daemon and
+  sync/embed/overlay/raptor run, written by the shared library so daemon and
   CLI runs alike appear (actor column says which). No-op passes are never
-  logged (fresh-on-read runs one on nearly every search). The same feed renders
-  on Seqoya Lab's Dashboard as "Recent activity".
+  logged (fresh-on-read runs one on nearly every search).
 - A disabled repo (config `enabled = false`) ingests AND embeds nothing — the
   pause switch.
 
@@ -216,8 +177,9 @@ run `mycel sync --no-embed >/dev/null 2>&1 &` on commit/checkout/session-start.
 
 <!-- sources:
 mycel:mycel/cli.py
+mycel:mycel/retrieval.py
+mycel:mycel/syncpass.py#run_pass
+mycel:mycel/syncpass.py#run_repo_pass
 mycel:mycel/knowledge/embedder.py#code_search
-mycel:mycel/mirror.py
-mycel:mycel/jira_actions.py
-mycel:mycel/confluence_write.py
+mycel:mycel/knowledge/raptor.py
 -->

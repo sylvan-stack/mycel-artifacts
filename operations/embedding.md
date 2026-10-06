@@ -9,14 +9,15 @@ the write side; the read side is [Code Retrieval Guide](retrieval.md).
 
 ## The model
 
-- **One profile per repo, inherited by overlays.** [Worktree
-  Containers](../../arbol/GLOSSARY.md#worktree-container) use `local` (on-device
-  Qwen3) — their source is structurally unable to reach an external API; personal
-  repos may use Voyage. A [Branch Overlay](../../arbol/GLOSSARY.md#branch-overlay) always embeds
+- **One profile per repo, inherited by overlays.** A repository's profile is
+  set in `~/.mycel/config.toml`: `voyage` (external API) or `local` (on-device
+  Qwen3). The profile is the interlock — chunks of a `local`-profile
+  repository are structurally unable to reach an external API. A
+  [Branch Overlay](../../arbol/GLOSSARY.md#branch-overlay) always embeds
   with its base repo's profile.
 - **Chunks embed with an identity header** (`path — symbol (kind)` for code,
   `path › heading` for docs): the path and symbol carry meaning the body often
-  lacks (`reality-check-processor.service.ts` says "reality check" even when
+  lacks (`invoice-export.service.ts` says "invoice export" even when
   the code never does). Headers sit first, so token-window truncation drops
   the tail, never the identity.
 - **Queries embed with the repo's profile model** — vectors from different
@@ -25,11 +26,10 @@ the write side; the read side is [Code Retrieval Guide](retrieval.md).
 - **Overlays embed on demand only.** Automatic passes (sync watcher, post-pull,
   post-ingest) embed base repos and skip every `repo@branch` namespace — a
   pathological overlay diff (dirty worktree, stale base) once queued 51k bogus
-  chunks and pinned the embedder for hours. The debt is explicit: `mycel wt
-  list` shows per-overlay `pending`, `mycel status` shows `pending_overlays`,
-  and the spend is a deliberate act — `mycel embed --overlay <repo>@<branch>`
-  (or the Elma status bar's "Embed N chunks"). Un-embedded overlay chunks still
-  hit via BM25/exact match; only dense recall waits for the embed.
+  chunks and pinned the embedder for hours. The spend is a deliberate act:
+  overlay chunks stay pending until an embed is scoped to that overlay.
+  Un-embedded overlay chunks still hit via BM25/exact match; only dense
+  recall waits for the embed.
 
 <!-- sources:
 mycel:mycel/knowledge/embedder.py#_embed_text

@@ -13,21 +13,22 @@ need re-verification.
 ---
 role: derived
 sources:
-  - mycel:tickets/DEMO-XXXXX-context.md
+  - <repo>:research/issue-1234-snapshot.md
 ---
-# Limit cooldown research — DEMO-XXXXX
+# Upload retry research
 
-## How cooldown works today
+## How retry works today
 
-The cooldown is enforced in the limit resolver…
+Retries are scheduled by the upload queue…
 
 <!-- sources:
-arbol:daemons/core/arbol_core/db/entity_catalog.py#EntityCatalog.repos
-arbol:daemons/core/arbol_core/artifact_reconciler.py
+<repo>:src/upload/queue.py#UploadQueue.schedule
+<repo>:src/upload/retry_policy.py
 -->
 ```
 
-- Frontmatter `sources:` names document-wide governors such as a ticket mirror.
+- Frontmatter `sources:` names document-wide governors such as the snapshot
+  of the issue or page the document answers to.
   Use 1–3 refs and `role: derived` when the whole document answers to them.
 - A section-level `<!-- sources: -->` block carries one
   `repo:path[#symbol-or-heading]` per line. Ingest attaches those edges to that
@@ -46,8 +47,9 @@ arbol:daemons/core/arbol_core/artifact_reconciler.py
 4. **The file is truth.** Removing a ref removes its edge on the next ingest.
    Unresolved refs remain visible and are retried; fix the ref rather than
    deleting a valid claim to silence the warning.
-5. **Snapshot external truth first.** Mirror remote Jira, Confluence, or GitLab
-   state into the artifact corpus and derive from that time-pinned snapshot.
+5. **Snapshot external truth first.** Copy remote state — an issue, a page, a
+   pull request — into the artifact corpus and derive from that time-pinned
+   snapshot.
 
 ## Resolution examples
 
