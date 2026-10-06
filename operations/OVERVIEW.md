@@ -19,8 +19,7 @@ One page to (re)load the whole mental model. Each section is two sentences of
   (`generated/code-map.md`) rebuilt from chunks on every code-changing sync:
   no LLM, gives overview queries a landing place and every file a
   `documented_in` pointer.
-- **Sync** — one mechanical pass (docs refresh → code ingest → overlays →
-  embed delta): Arbol's mycel client runs it on file events (Mycel itself has
+- **Sync** — one mechanical pass (docs refresh → code ingest → embed delta): Arbol's mycel client runs it on file events (Mycel itself has
   no daemon); `mycel sync` runs it as a per-task command; `mycel search` runs
   the delta automatically when the source changed (fresh-on-read).
 - **[Authored-work integration](authored-work-integration.md)** — a change is
@@ -75,8 +74,8 @@ the completion provider for RAPTOR generation.
 [Mycel Skills](../../arbol/GLOSSARY.md#mycel-skill) are provider-agnostic
 activation contracts implemented by thin provider adapters. Follow the
 [creation guide](create-skill.md) to add every available adapter from one shared
-trigger contract; native Codex CLI and Claude Code CLI are supported. Universe
-is deprecated. Both CLIs link to canonical sources; explicit-only invocation
+trigger contract; native Codex CLI and Claude Code CLI are supported.
+Both CLIs link to canonical sources; explicit-only invocation
 policy is represented in each provider's supported metadata.
 
 Distinct task shapes have thin skills

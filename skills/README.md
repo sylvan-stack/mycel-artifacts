@@ -26,8 +26,7 @@ surfaces, not the home of process truth. Follow the
 The shared `SKILL.md` uses portable frontmatter. Provider-specific differences
 live only where needed: `agents/openai.yaml` for Codex metadata and
 `skills/providers/claude/<name>/SKILL.md` for Claude-only frontmatter. Keep
-those thin adapters aligned with the shared activation contract. Universe is
-deprecated.
+those thin adapters aligned with the shared activation contract.
 
 ## Required format
 

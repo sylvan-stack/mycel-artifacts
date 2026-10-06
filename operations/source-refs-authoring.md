@@ -55,9 +55,9 @@ Retries are scheduled by the upload queue…
 
 | Ref | Resolves to |
 |---|---|
-| `arbol:daemons/core/arbol_core/x.service.ts#Service.logout` | one method chunk |
-| `arbol:daemons/core/arbol_core/x.service.ts#Service` | class header and method family |
-| `arbol:daemons/core/arbol_core/x.service.ts` | code document/file |
+| `<repo>:src/session/service.py#Service.logout` | one method chunk |
+| `<repo>:src/session/service.py#Service` | class header and method family |
+| `<repo>:src/session/service.py` | code document/file |
 | `mycel:operations/knowledge-model.md#Derivation edges` | artifact section |
 
 Cross-repository refs are valid when the target repository is enabled. A Source

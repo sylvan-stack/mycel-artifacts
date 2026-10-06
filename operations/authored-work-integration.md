@@ -70,7 +70,7 @@ that derive from an authoritative Artifact section, assert the edge with stable
 natural refs:
 
 ```bash
-mycel derive   'Arbol:tests/unit/test_example.py#test_behavior'   'Arbol:architecture/example.md#Acceptance Contract'
+mycel derive '<repo>:tests/unit/test_example.py#test_behavior' '<repo>:architecture/example.md#Acceptance Contract'
 ```
 
 The first argument is the **derived child**; the second is the **governing

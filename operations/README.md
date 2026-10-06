@@ -6,7 +6,7 @@ role: authored
 **Read this file before creating or changing any artifact in `operations/` or
 its subfolders.** These artifacts define tool-agnostic process truth: what must
 happen regardless of whether the process is invoked through an agent Skill,
-Blueprint, Chain, CLI, RPC, UI, or by a human.
+CLI, RPC, UI, or by a human.
 
 - **Dependency direction:** Mycel must not depend on Arbol code or instructions. Never import, invoke, or prescribe Arbol code, repository scripts, `arbol-cli`, or an Arbol artifact as a required procedure. Mycel may read Arbol-owned databases, logs, and other data as inputs; data access is not a code/instructions dependency. Keep Mycel code and required process truth in Mycel.
 

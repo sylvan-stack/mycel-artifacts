@@ -6,7 +6,7 @@ description: >-
   release-note drafting" and "Add a Mycel Skill that activates when I ask to
   triage flaky tests". Follow the Mycel Skill creation operation and apply
   both native Codex CLI and Claude Code CLI provider sections. Do NOT activate for creating
-  a Claude-only or personal skill, merely adding an Operation, Blueprint, Chain, or Tool.
+  a Claude-only or personal skill, or for merely adding a guide or Tool manual.
 ---
 
 Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route

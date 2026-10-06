@@ -38,7 +38,7 @@ Arbol's doc views render all frontmatter as a metadata strip).
 
 | Declaration | Values | Effect on ingest |
 |---|---|---|
-| `role:` | `authored` \| `derived` | Default role for the document's chunks. **Any other value is ignored** — `role: blueprint` is a *document class* for the renderer/engine, not a chunk role; a blueprint's chunks default `unclassified`. |
+| `role:` | `authored` \| `derived` | Default role for the document's chunks. **Any other value is ignored** and the chunks default `unclassified`. |
 | `status: heartwood` | + optional `implemented:` / `outdated:` time pins | Time-frozen record: never marked stale, open Drifts auto-closed, excluded from RAPTOR clustering; still ingested and searchable ([Heartwood](../../arbol/GLOSSARY.md#heartwood)). |
 | `generated:` | `true` / `1` / `yes` | Regenerated-not-maintained (e.g. the [Code Map](code-map.md)): same exemptions as heartwood — Detection and RAPTOR skip it. |
 | `sources:` | YAML list, or comma-separated scalar | Document-wide governors: materialized as `declared` edges on the document's **first chunk** (the [Detection-parent trick](../../arbol/GLOSSARY.md#source-ref) — e.g. a research document answering to the snapshot it summarises). |

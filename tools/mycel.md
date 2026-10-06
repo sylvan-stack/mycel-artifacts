@@ -14,21 +14,20 @@ embedding settings). Brain Recipes are owned separately by Infer in
 logs as data, but it never depends on that product's code or instructions.
 
 This runbook describes the Mycel 1 executable installed as `mycel`.
-Subcommands that its `--help` lists and this runbook omits belong to retired
-workflows; they are not part of any current procedure.
+Subcommands and flags that its `--help` lists and this runbook omits belong
+to retired workflows; they are not part of any current procedure.
 
 ## Use
 
 ```
-mycel search "<query>" [--k N] [--repo R] [--path P] [--overlay BRANCH] [--only code|docs] [--no-fresh]
+mycel search "<query>" [--k N] [--repo R] [--path P] [--only code|docs] [--no-fresh]
 mycel better-grep [grep flags] PATTERN [PATH...]   # also installed as `better-grep`
 mycel sync [--no-embed]        # one Sync Pass over every enabled repository, then exit
 mycel embed                    # embed every pending chunk, then exit
 mycel status [--repo R]        # index freshness: documents, chunks, stale counts, embed counters
-mycel activity [--k N] [--repo R] [--kind K]   # recent sync/embed/overlay/raptor feed
+mycel activity [--k N] [--repo R] [--kind K]   # recent sync/embed/raptor feed
 mycel drifts [--repo R]        # Detection findings: docs whose cited code changed
 mycel derive '<child-ref>' '<source-ref>'  # assert source governs derived code/doc/test chunk
-mycel overlay add|list|refresh|drop [repo] [branch] [--worktree PATH] [--no-embed]
 mycel repos [list] [--root PATH] [--organization NAME]     # repos under ~/repo + mycel-enabled flag
 mycel raptor status|plan|regen|build [--recipe NAME] [--repo R] [--regen]   # default recipe: raptor-agent;
                                # recipe is resolved by the independent `infer` executable;
@@ -58,10 +57,6 @@ mycel raptor status|plan|regen|build [--recipe NAME] [--repo R] [--regen]   # de
   unless `--no-embed` is given, embeds every pending chunk of every enabled
   repository. Check `mycel status` for the pending count before running it
   without `--no-embed`. To bring one repository up to date, search in it.
-- **overlay** is the Branch Overlay registry for a worktree that already
-  exists. It runs no git: `add` and `refresh` ingest the worktree's
-  difference from its base repository as `repo@branch`, `list` shows the
-  registrations and `drop` removes one.
 - **repos** lists repos under `~/repo` (`--root` overrides) with each repo's
   mycel-enabled flag, embedder profile, and whether it has an Artifact Corpus.
 - **Organizations** are configured in `~/.mycel/config.toml`. Compatible
@@ -83,8 +78,7 @@ mycel raptor status|plan|regen|build [--recipe NAME] [--repo R] [--regen]   # de
   under `~/repos` and relocated paths. `mycel search --repo "Euro Office" "<query>"` searches each member
   corpus and returns `{schema_version: 2, organization, transport,
   repositories}` with a complete search payload per member. `--k` applies per
-  member; an organization-wide overlay is rejected because overlays belong to
-  individual repos. Membership alone does not enable indexing: configure each
+  member. Membership alone does not enable indexing: configure each
   member's `[repos."<name>"]` entry and opt in separately; paths are inferred.
   Other commands retain their individual-repository scope.
 
@@ -94,7 +88,7 @@ mycel raptor status|plan|regen|build [--recipe NAME] [--repo R] [--regen]   # de
   variable names another folder. A missing or empty file stops the run with
   an error.
 - **activity** reads the `kn_activity` feed — one row per completed
-  sync/embed/overlay/raptor run, written by the shared library so daemon and
+  sync/embed/raptor run, written by the shared library so daemon and
   CLI runs alike appear (actor column says which). No-op passes are never
   logged (fresh-on-read runs one on nearly every search).
 - A disabled repo (config `enabled = false`) ingests AND embeds nothing — the
@@ -127,7 +121,7 @@ the path relative to that repository's configured corpus, rather than the
 organization's container directory.
 
 The shared `mycel.locations.RepositoryLocations` resolver reads current file
-settings and discovers direct Git checkouts / worktree containers through the
+settings and discovers direct Git checkouts through the
 existing Organizations catalog. Its location precedence is:
 
 1. The historical Arbol environment override (`ARBOL_KN_CORPUS` or
@@ -142,7 +136,7 @@ existing Organizations catalog. Its location precedence is:
 
 Sync, generated code maps, search-result files, browser/editor operations and
 repository listings share this resolver. CWD scope uses the longest matching
-configured code/artifact root and preserves worktree overlays. New organization
+configured code/artifact root. New organization
 checkouts acquire a corpus location without a per-repository path entry;
 membership does not enable indexing. Existing flat corpora can be retained
 through explicit repository overrides without moving their contents.
@@ -171,7 +165,7 @@ mycel:mycel/repo_identity.py#canonical_repo
 -->
 
 **Keeping the index warm without a daemon** (optional — fresh-on-read already
-guarantees correctness): per-worktree git hooks and/or a Claude Code hook that
+guarantees correctness): git hooks and/or a Claude Code hook that
 run `mycel sync --no-embed >/dev/null 2>&1 &` on commit/checkout/session-start.
 
 <!-- sources:

@@ -5,7 +5,6 @@ role: authored
 
 A Mycel Skill is one provider-independent activation contract backed by a
 portable process and exposed to **native Codex CLI and Claude Code CLI**.
-Universe is deprecated; do not create Universe adapters or use its runtime.
 
 ## Canonical source
 

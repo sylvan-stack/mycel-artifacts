@@ -34,9 +34,8 @@ It is grep *plus* recall, in one call:
   code *and* corpus documents, plus **RAPTOR** summaries where they exist,
   `⇐ via` attribution); `── mycel: documented in ──` — glossary/research
   sections citing those hits, with ⚠ stale / heartwood trust flags.
-  *(RAPTOR summaries are generated per-repo on request — today only the `Arbol`
-  repo has them; run `mycel raptor` on a repo to enable summary recall there.
-  Corpus-doc recall — code-map, glossary, research — works everywhere now.)*
+  *(RAPTOR summaries exist only for repositories where `mycel raptor` has been
+  run. Corpus-doc recall — code-map, glossary, research — works everywhere.)*
 
 The win is **recall, not precision**: a literal match is already maximally
 precise, so better-grep can't be "more exact" than grep — what it adds is the
@@ -48,8 +47,7 @@ haystack), the tail is what rescues you.
 mycel:mycel/better_grep.py
 -->
 
-- Repo scope inferred from path operands / CWD (working copies and mirrors both
-  recognized); `ARBOL_REPO` overrides.
+- Repo scope inferred from path operands / CWD; `ARBOL_REPO` overrides.
 
 **When to drop to plain `grep`:** only when you deliberately want *no* semantic
 tail — an automated script parsing stdout, a tight enumeration loop, or when
@@ -58,11 +56,8 @@ exactly that (pure grep, tail suppressed) without leaving the tool. In an
 interactive or agent session there is essentially never a reason to prefer
 bare grep.
 
-(Reviewed 2026-07-08: better-grep promoted from "level 2, when vocabulary is
-uncertain" to "level 1, the default" — it dominates grep for interactive use;
-the old ladder mis-framed them as an exact-vs-fuzzy pair. Same day, the tail
-went daemon-less: it shells out to `mycel search --no-fresh` per invocation —
-no socket, no daemon; it works with Arbol fully stopped.)
+The tail needs no daemon: it shells out to `mycel search --no-fresh` per
+invocation — no socket, and it works with Arbol fully stopped.
 
 ## Level 2 — code-research
 

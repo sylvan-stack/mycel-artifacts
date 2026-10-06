@@ -59,9 +59,7 @@ both routes.
 
 Each result may carry `via` (the doc section that delivered it) and
 `documented_in` (doc sections whose Source Refs cite this code — the recorded
-WHY, stale-flagged). Searches from inside a worktree see the repo **as that
-branch sees it** — [Branch Overlay](../../arbol/GLOSSARY.md#branch-overlay) shadowing
-applies before any ranking.
+WHY, stale-flagged).
 
 ## Numbers that justify the shape
 

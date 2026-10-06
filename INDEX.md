@@ -30,7 +30,7 @@ What must happen, in Mycel vocabulary — the invariant behind every invocation 
 
 ### `tools/` — technical manuals for the client-agnostic CLIs
 One [Runbook](../arbol/GLOSSARY.md#runbook) per [Tool](../arbol/GLOSSARY.md#tool).
-- [`mycel.md`](./tools/mycel.md) — knowledge CLI: search, sync, embed, status, drifts, derive, overlay, repos, raptor; repository corpus binding.
+- [`mycel.md`](./tools/mycel.md) — knowledge CLI: search, sync, embed, status, drifts, derive, repos, raptor; repository corpus binding.
 
 ### `system-instructions/` — prompt files the `mycel` executable reads
 Not process guides: `mycel raptor regen|build` loads both files from this folder and stops with an error when either is missing or empty.
@@ -38,7 +38,7 @@ Not process guides: `mycel raptor regen|build` loads both files from this folder
 - [`raptor-request.md.tmpl`](./system-instructions/raptor-request.md.tmpl) — the request template; `$sections` receives the clustered sections.
 
 ### `skills/` — Mycel Skill provider adapters
-Shared activation contracts and thin Hub dispatchers for native Codex CLI and Claude Code CLI. Canonical sources are linked into `~/.agents/skills/` (Codex) and `~/.claude/skills/` (Claude). Universe is deprecated. See [authoring rules](skills/README.md) and the [creation guide](operations/create-skill.md).
+Shared activation contracts and thin Hub dispatchers for native Codex CLI and Claude Code CLI. Canonical sources are linked into `~/.agents/skills/` (Codex) and `~/.claude/skills/` (Claude). See [authoring rules](skills/README.md) and the [creation guide](operations/create-skill.md).
 
 - [`authored-work-integration`](./skills/authored-work-integration/SKILL.md)
 - [`code-research`](./skills/code-research/SKILL.md)
