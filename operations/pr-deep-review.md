@@ -391,9 +391,20 @@ No links to local artifacts, which the author cannot open.
 ## Readable artifacts in Linear
 
 For a review tracked in Linear, keep full readable copies of its authored
-artifacts with the issue after closing a run and after material edits to
-its dossiers, drafts or presentation. The agent prepares; the reviewer posts.
+artifacts in the appropriate canonical home after closing a run and after
+material artifact edits. The agent prepares; the reviewer posts.
 
+- Choose the parent by scope: issue for its brief, findings, reproducers,
+  candidate-specific studies and run reports; repository project for reusable
+  architecture, contracts, build guidance and knowledge; team for conventions
+  shared across repositories. Search for existing projects and documents first.
+  A citation to one PR does not make a general artifact issue-specific. Preserve
+  pinned commits and scope; do not promote candidate claims to merged behavior.
+- Reuse the same document ID when changing its parent or title. Keep a
+  repository-level document registry and let review manifests reference it.
+  Link to canonical shared documents from issue summaries rather than copying
+  them. Maintain a team guide, repository knowledge index and review index;
+  use clear topic titles and reserve PR prefixes for PR-specific material.
 - Mirror the full reviewer page, brief, dossiers, run reports and relevant
   linked knowledge as native Linear documents. Preserve evidence, scope
   caveats, pinned commits, neutral drafts and marked source excerpts.

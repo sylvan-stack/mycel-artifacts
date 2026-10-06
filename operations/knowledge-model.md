@@ -41,7 +41,7 @@ Arbol's doc views render all frontmatter as a metadata strip).
 | `role:` | `authored` \| `derived` | Default role for the document's chunks. **Any other value is ignored** — `role: blueprint` is a *document class* for the renderer/engine, not a chunk role; a blueprint's chunks default `unclassified`. |
 | `status: heartwood` | + optional `implemented:` / `outdated:` time pins | Time-frozen record: never marked stale, open Drifts auto-closed, excluded from RAPTOR clustering; still ingested and searchable ([Heartwood](../../arbol/GLOSSARY.md#heartwood)). |
 | `generated:` | `true` / `1` / `yes` | Regenerated-not-maintained (e.g. the [Code Map](code-map.md)): same exemptions as heartwood — Detection and RAPTOR skip it. |
-| `sources:` | YAML list, or comma-separated scalar | Document-wide governors: materialized as `declared` edges on the document's **first chunk** (the [Detection-parent trick](../../arbol/GLOSSARY.md#source-ref) — e.g. `ticket.md` answering to its jira mirror). |
+| `sources:` | YAML list, or comma-separated scalar | Document-wide governors: materialized as `declared` edges on the document's **first chunk** (the [Detection-parent trick](../../arbol/GLOSSARY.md#source-ref) — e.g. a research document answering to the snapshot it summarises). |
 
 <!-- sources:
 mycel:mycel/knowledge/chunker.py
@@ -161,14 +161,15 @@ just link it) or "the target changed and my claim may now be wrong"
 
 ## Worked example
 
-`tools/better-grep.md` is `role: authored` and its *Why it exists* section
-carries `<!-- sources: Arbol:cli/arbol_cli/better_grep.py -->`:
+`operations/code-map.md` is `role: authored` and its last section, *Why
+`generated: true`*, carries a `<!-- sources: … -->` block citing
+`mycel:mycel/knowledge/code_map.py#write_map`:
 
-- Ingest: that section's chunk gets a `declared`/`review` edge from the code
-  file's chunk, `hash_at_gen` pinned, and its role flips to `derived`; the
-  runbook's other sections stay `authored` per the frontmatter.
-- `better_grep.py` changes → Detection: the section goes
-  `stale: source changed since generation (…)` → a Drift opens naming the file.
-- An agent re-reads tool + section, repairs the prose (or confirms it),
+- Ingest: that section's chunk gets a `declared`/`review` edge from the
+  function's chunk, `hash_at_gen` pinned, and its role flips to `derived`; the
+  guide's other sections stay `authored` per the frontmatter.
+- `write_map` changes → Detection: the section goes
+  `stale: source changed since generation (…)` → a Drift opens naming the source.
+- An agent re-reads code + section, repairs the prose (or confirms it),
   commits; the next ingest re-pins `hash_at_gen`; the Drift closes.
-- Nobody regenerates the runbook from the code — `review`, not `auto`.
+- Nobody regenerates the guide from the code — `review`, not `auto`.

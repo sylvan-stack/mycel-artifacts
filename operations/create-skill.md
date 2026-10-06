@@ -53,8 +53,8 @@ Link `~/.claude/skills/<name>` to the same canonical directory. Explicit invocat
 uses `/<name>`. When Claude requires different frontmatter, keep only that thin
 adapter at `skills/providers/claude/<name>/SKILL.md` and link Claude to it;
 the shared activation intent and Hub route must match the main adapter.
-For example, `turn-test` preserves `disable-model-invocation: true` in its
-Claude adapter and the matching Codex policy in `agents/openai.yaml`.
+An explicit-only skill, for example, carries `disable-model-invocation: true`
+in its Claude adapter and the matching Codex policy in `agents/openai.yaml`.
 
 ## Install and validate
 
@@ -63,7 +63,7 @@ Claude adapter and the matching Codex policy in `agents/openai.yaml`.
 2. Validate YAML, folder/name agreement, concise trigger descriptions, two
    positive examples, neighboring negative boundaries, and Hub-only bodies.
 3. Verify every Hub route reaches an existing current process. Do not make
-   deprecated runtime tools or worktree lifecycle commands an active route.
+   deprecated runtime tools an active route.
 4. Check both provider symlinks resolve to their canonical source. Check
    invocation policy parity when an adapter has provider-specific metadata.
 5. Update [INDEX.md](../INDEX.md); add a Hub route only for a new task shape.

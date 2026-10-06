@@ -17,7 +17,7 @@ already holds): no LLM, no interlock concerns, milliseconds to produce.
    at 8 names per file), and every section carries **file-level Source Refs**
    to the files it describes.
 3. Normal ingestion then embeds it like any document — so overview-shaped
-   queries ("what services exist in the limit domain") finally have a chunk
+   queries ("what services exist in the billing domain") finally have a chunk
    to land on, and every code file gains a `documented_in` pointer back to
    its map section.
 

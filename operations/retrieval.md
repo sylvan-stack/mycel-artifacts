@@ -24,7 +24,7 @@ dropped.
 
 ## The route decision
 
-A single-token query (`RealityCheckProcessor`) is **identifier-shaped**:
+A single-token query (`UploadProcessor`) is **identifier-shaped**:
 dense cosine and BM25 fuse by balanced RRF — exact-token evidence deserves
 equal weight. Anything phrase-like is a **natural-language question**: raw
 cosine is the authority, and BM25 only appends a rescue tail (exact-token
@@ -44,7 +44,7 @@ prose matches the question, edges deliver the code. This is why
 
 ## Noise down-weights
 
-Two file families lexically mirror feature prose ("should renew MFA when…")
+Two file families lexically mirror feature prose ("should retry the upload when…")
 and would otherwise outrank the implementation they shadow:
 
 - **tests** (`.spec.`/`.test.`/`__tests__`/`test_*.py`) — down-weighted on

@@ -17,7 +17,7 @@ surfaces, not the home of process truth. Follow the
 - One directory per Skill: `skills/<kebab-case-name>/SKILL.md`.
 - The directory name and frontmatter `name` must match exactly.
 - Keep one `SKILL.md` unless the runtime genuinely requires supporting files.
-  Do not place operation manuals, copied Blueprints, or durable research here.
+  Do not place operation manuals or durable research here.
 - A Skill that routes into this corpus lives here and is symlinked into
   `~/.agents/skills/` (Codex) and `~/.claude/skills/` (Claude). Genuinely
   personal Skills stay outside this corpus. Do not duplicate Codex discovery
@@ -26,8 +26,8 @@ surfaces, not the home of process truth. Follow the
 The shared `SKILL.md` uses portable frontmatter. Provider-specific differences
 live only where needed: `agents/openai.yaml` for Codex metadata and
 `skills/providers/claude/<name>/SKILL.md` for Claude-only frontmatter. Keep
-those thin adapters aligned with the shared activation contract. `turn-test`
-is explicit-only in both providers. Universe is deprecated.
+those thin adapters aligned with the shared activation contract. Universe is
+deprecated.
 
 ## Required format
 
@@ -39,7 +39,7 @@ description: Trigger-focused activation instructions with outcome/scope,
 ---
 
 Start at the Instructions Hub `~/Artifacts/mycel/README.md`; follow the routed
-Operation, Blueprint, Chain runbook, or Tool manual at its canonical path.
+guide or Tool manual at its canonical path.
 ```
 
 Frontmatter rules:
@@ -55,9 +55,8 @@ Frontmatter rules:
 ## Body rules
 
 - Keep the adapter body to a pointer to the Instructions Hub:
-  `~/Artifacts/mycel/README.md`. The durable process belongs in `operations/`,
-  executable contracts in `blueprints/`, orchestration and runbooks in
-  `chains/`, and CLI details in `tools/`.
+  `~/Artifacts/mycel/README.md`. The durable process belongs in `operations/`
+  and CLI details in `tools/`.
 - Do not put commands, copied policies, invocation details, or reporting rules
   in the adapter. The Hub and its routed document own those details.
 - If the Instructions Hub is missing, stop and tell the user rather than
