@@ -57,7 +57,7 @@ interactive or agent session there is essentially never a reason to prefer
 bare grep.
 
 The tail needs no daemon: it shells out to `mycel search --no-fresh` per
-invocation — no socket, and it works with Arbol fully stopped.
+invocation.
 
 ## Level 2 — code-research
 

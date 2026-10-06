@@ -6,7 +6,7 @@ role: authored
 *(Human-readable tour of everything below: [operations/OVERVIEW.md](operations/OVERVIEW.md).)*
 
 The **one address every consumer needs to know**: Claude Code and native Codex CLI skills,
-agents, Arbol's own Chat Sessions, and humans all start here. Consumers point
+agents, and humans all start here. Consumers point
 at this file and never change; documents move freely underneath because only
 this router tracks where they live.
 

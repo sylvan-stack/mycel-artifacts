@@ -9,10 +9,8 @@ the write side; the read side is [Code Retrieval Guide](retrieval.md).
 
 ## The model
 
-- **One profile per repo.** A repository's profile is set in
-  `~/.mycel/config.toml`: `voyage` (external API) or `local` (on-device
-  Qwen3). The profile is the interlock — chunks of a `local`-profile
-  repository are structurally unable to reach an external API.
+- **One profile per repo**, set in `~/.mycel/config.toml`. Every repository
+  uses `voyage` today.
 - **Chunks embed with an identity header** (`path — symbol (kind)` for code,
   `path › heading` for docs): the path and symbol carry meaning the body often
   lacks (`invoice-export.service.ts` says "invoice export" even when
@@ -24,20 +22,17 @@ the write side; the read side is [Code Retrieval Guide](retrieval.md).
 
 <!-- sources:
 mycel:mycel/knowledge/embedder.py#_embed_text
-mycel:mycel/knowledge/local_embedder.py
 -->
 
 ## The iron rules
 
 1. **Clear vectors only after the new code is live.** A model swap or
-   embed-input change re-embedded before deploy lets the OLD daemon overwrite
-   new vectors with old semantics (the mxbai→Qwen3 race). Deploy first, clear
+   embed-input change re-embedded before the new executable is installed lets
+   the old one overwrite new vectors with old semantics. Install first, clear
    second, backfill third.
 2. **A backfill is interruptible.** Shutdown aborts the loop cooperatively
    within seconds; pending chunks resume on the next Sync Pass. Never fear
    restarting mid-embed.
-3. **Pace on this machine**: ~6–8k chunks/hour (8 ORT threads, P-cores). Size
-   re-embeds accordingly; whole-corpus changes are overnight jobs.
 
 ## The compounding habits
 

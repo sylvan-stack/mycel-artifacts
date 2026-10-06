@@ -12,12 +12,12 @@ Everything here passes the **VS Code Test**: usable without Arbol installed.
 ## Chapters
 
 ### `operations/` — Mycel Operations: frontend-agnostic process descriptions
-What must happen, in Mycel vocabulary — the invariant behind every invocation surface (skills, CLI agents, Arbol RPCs).
+What must happen, in Mycel vocabulary — the invariant behind every invocation surface (skills, CLI agents, humans).
 - [`OVERVIEW.md`](./operations/OVERVIEW.md) — the readable one-page summary of all operations (for humans; agents use the Hub).
 - [`code-research-levels.md`](./operations/code-research-levels.md) — better-grep → code-research → deep-research: which tool when.
 - [`code-research.md`](./operations/code-research.md) — the level-2 loop. Skills are thin dispatchers pointing here.
 - [`deep-research.md`](./operations/deep-research.md) — the level-3 process: inputs, angles, output contract, quality bar.
-- [`embedding.md`](./operations/embedding.md) — profiles/interlock, the identity-header recipe, iron rules, compounding habits.
+- [`embedding.md`](./operations/embedding.md) — profiles, the identity-header recipe, iron rules, compounding habits.
 - [`retrieval.md`](./operations/retrieval.md) — the read path: route decision, doc bridge, noise down-weights, via/documented_in annotations.
 - [`code-map.md`](./operations/code-map.md) — the mechanical per-repo overview artifact and its `generated: true` semantics.
 - [`knowledge-model.md`](./operations/knowledge-model.md) — the value reference: in-band declarations (`role:` / `status: heartwood` / `generated:` / `sources:`), chunk roles/states, Derivation kinds/policies, Detection reasons, Drift lifecycle.

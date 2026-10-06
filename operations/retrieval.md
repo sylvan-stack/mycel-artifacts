@@ -6,7 +6,7 @@ role: authored
 How [Mycel](../../arbol/GLOSSARY.md#mycel) answers a code query — the **read path**.
 [Embedding](embedding.md) is the write side; this is what happens between a
 query and its ranked results, identical for every invocation surface
-(`code-search` RPC/CLI, the [better-grep](../../arbol/GLOSSARY.md#better-grep) tail,
+(the `mycel search` CLI, the [better-grep](../../arbol/GLOSSARY.md#better-grep) tail,
 agents in a [code-research](code-research.md) loop).
 
 ## The substrate

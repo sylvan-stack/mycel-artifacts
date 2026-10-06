@@ -6,7 +6,7 @@ role: authored
 ## Why it exists
 
 The daemon-less knowledge tool: one process per job, direct to Postgres,
-query embeddings via the configured embedding provider. It is how any agent
+query embeddings via the repository's embedder profile. It is how any agent
 searches the corpus and keeps it fresh. Settings live in
 **`~/.mycel/config.toml`** (repositories, organizations, database and
 embedding settings). Brain Recipes are owned separately by Infer in
@@ -30,17 +30,16 @@ mycel drifts [--repo R]        # Detection findings: docs whose cited code chang
 mycel derive '<child-ref>' '<source-ref>'  # assert source governs derived code/doc/test chunk
 mycel repos [list] [--root PATH] [--organization NAME]     # repos under ~/repo + mycel-enabled flag
 mycel raptor status|plan|regen|build [--recipe NAME] [--repo R] [--regen]   # default recipe: raptor-agent;
-                               # recipe is resolved by the independent `infer` executable;
-                               # no Arbol daemon or provider fallback is used
+                               # recipe is resolved by the independent `infer` executable
 ```
 
 - **Name the repository.** `search` defaults to the repository containing the
   CWD and falls back to `Arbol`; `status`, `drifts` and `raptor` default to
   `Arbol` outright. Pass `--repo` whenever another repository is meant.
-- **Search contract.** CLI and Arbol's resident RPC call the same shared
-  retrieval service and return schema version 1: `{schema_version, transport,
-  repo, overlay, results, dense, bm25, freshness}`. Arbol prefers RPC and falls
-  back to this independently usable CLI; Mycel itself never depends on Arbol.
+- **Search contract.** A search prints one JSON object, schema version 2:
+  `{schema_version, transport, repo, overlay, results, dense, bm25, timings,
+  freshness}`. `dense` and `bm25` count the hits of each arm; `dense` is 0
+  for a repository whose chunks are not embedded yet.
 - **derive** records an asserted Derivation using stable Source Refs rather
   than database chunk IDs. The first argument is the derived child
   (`repo:path#symbol` or `#Heading`); the second is its governor. It runs
@@ -88,9 +87,8 @@ mycel raptor status|plan|regen|build [--recipe NAME] [--repo R] [--regen]   # de
   variable names another folder. A missing or empty file stops the run with
   an error.
 - **activity** reads the `kn_activity` feed — one row per completed
-  sync/embed/raptor run, written by the shared library so daemon and
-  CLI runs alike appear (actor column says which). No-op passes are never
-  logged (fresh-on-read runs one on nearly every search).
+  sync/embed/raptor run. No-op passes are never logged (fresh-on-read runs
+  one on nearly every search).
 - A disabled repo (config `enabled = false`) ingests AND embeds nothing — the
   pause switch.
 

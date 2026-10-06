@@ -33,8 +33,7 @@ remove the ref and the chunk drops back. So read `role: authored` as
 ## In-band declarations (document frontmatter)
 
 Parsed from the leading `---` block. Ingest recognizes exactly these; every
-other frontmatter key is inert for the graph (surfaces may still display it —
-Arbol's doc views render all frontmatter as a metadata strip).
+other frontmatter key is inert for the graph.
 
 | Declaration | Values | Effect on ingest |
 |---|---|---|
@@ -51,8 +50,7 @@ mycel:mycel/knowledge/chunker.py
 
 One HTML comment per section, one ref per line (single-line form works too).
 Invisible in a rendered document by design — provenance must not pollute
-reading (Arbol's doc views strip comments and offer a Sources toggle that
-reveals them as chips, in place). Ingest materializes each into a `declared`
+reading. Ingest materializes each into a `declared`
 Derivation attached to **that section's chunk**.
 
 Ref grammar is the chunk **natural key**, never a ULID: `repo:path#symbol`
@@ -62,7 +60,7 @@ what deserves a ref: **an edge follows a claim, not attention** — cite what a
 section says something about, never everything that was merely read.
 
 A ref that fails to resolve is recorded **loudly** on the chunk
-(`meta.unresolved_sources`, visible in the Chunks Viewer), retried on later
+(`meta.unresolved_sources`), retried on later
 passes, never silently dropped. The file is the truth: removing a ref removes
 its edge on the next ingest.
 
@@ -113,7 +111,7 @@ which is what makes "changed since" answerable.
 | `kind` | Created by | `policy` | Meaning |
 |---|---|---|---|
 | `declared` | In-file Source Refs at ingest | `review` | The file's own provenance claims. Synced exactly to the file — ingest never touches edges of other kinds. |
-| `asserted` | RPC (a leather bag or agent asserting "this governs that") | `review` | Judgment recorded outside the file. |
+| `asserted` | `mycel derive` (a person or agent asserting "this governs that") | `review` | Judgment recorded outside the file. |
 | `generated` | RAPTOR summarization | `auto` | The summary was mechanically produced from its children. |
 
 `policy` states what a stale child needs: `review` = a person/agent must

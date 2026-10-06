@@ -99,7 +99,7 @@ Before reporting completion, verify all of the following:
 1. semantic search finds the new Artifact, implementation, and tests;
 2. exact symbol search finds named contracts and scenarios;
 3. implementation/test results expose their governing Artifact through reverse
-   context (`documented_in` or lineage in the Chunks Viewer);
+   context (`documented_in`);
 4. Detection reports no unexplained stale dependent;
 5. changed chunks have embeddings, unless embedding was deliberately deferred
    and reported.

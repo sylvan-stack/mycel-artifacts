@@ -6,7 +6,7 @@ role: authored
 A **mechanical, per-repo overview artifact** — `generated/code-map.md` in the
 repo's [Artifact Corpus](../../arbol/GLOSSARY.md#artifact-corpus) — rebuilt from
 [Chunks](../../arbol/GLOSSARY.md#chunk) alone (paths + symbols + kinds the corpus
-already holds): no LLM, no interlock concerns, milliseconds to produce.
+already holds): no LLM, milliseconds to produce.
 
 ## The process
 

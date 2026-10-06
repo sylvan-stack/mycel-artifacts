@@ -11,17 +11,16 @@ One page to (re)load the whole mental model. Each section is two sentences of
 
 - **[Embedding](embedding.md)** — chunks become vectors with an identity
   header (path + symbol first), one [Embedder
-  Profile](../../arbol/GLOSSARY.md#embedder-profile) per repo. The profile is
-  the interlock: a repository on the `local` profile embeds on-device (the
-  [Embedding Provider](../../arbol/GLOSSARY.md#embedding-provider) app),
-  never via an external API.
+  Profile](../../arbol/GLOSSARY.md#embedder-profile) per repo.
 - **[Code Map](code-map.md)** — a mechanical per-repo overview
   (`generated/code-map.md`) rebuilt from chunks on every code-changing sync:
   no LLM, gives overview queries a landing place and every file a
   `documented_in` pointer.
-- **Sync** — one mechanical pass (docs refresh → code ingest → embed delta): Arbol's mycel client runs it on file events (Mycel itself has
-  no daemon); `mycel sync` runs it as a per-task command; `mycel search` runs
-  the delta automatically when the source changed (fresh-on-read).
+- **Sync** — one mechanical pass (docs refresh → code ingest → embed delta).
+  Mycel has no daemon: `mycel sync` runs the pass as a per-task command over
+  every enabled repository, and `mycel search` runs the delta for the
+  searched repository when its source changed (fresh-on-read), without
+  embedding.
 - **[Authored-work integration](authored-work-integration.md)** — a change is
   “according to Mycel” only after artifacts, code, and tests are in enabled
   corpora, ingested as chunks, connected by real authority/coupling edges,
@@ -64,10 +63,9 @@ its exact semantics — is enumerated in the
 
 ## Where each piece runs
 
-Mycel is **per-task CLI first** (`mycel …` — works in VS Code with zero
-daemons; the severance acceptance test proves it). Arbol adds the
-conveniences: the resident watcher, Seqoya Lab as the settings window, and
-the completion provider for RAPTOR generation.
+Mycel is a **per-task CLI** (`mycel …`): one process per job and no daemon.
+Its settings live in `~/.mycel/config.toml`, and RAPTOR generation calls the
+independent `infer` executable.
 
 ## Mycel Skill dispatchers
 
