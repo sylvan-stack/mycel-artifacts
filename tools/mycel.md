@@ -13,10 +13,9 @@ embedding settings). Brain Recipes are owned separately by Infer in
 **`~/.infer/config.toml`**. Mycel may read another product's databases and
 logs as data, but it never depends on that product's code or instructions.
 
-This runbook describes the Mycel 1 executable installed as `mycel`. Its
-`--help` also lists `wt`, `pull`, `mirror`, `jira`, `confluence` and
-`secrets`: they belong to retired worktree and external-mirror workflows, are
-not part of any current procedure and are not documented here.
+This runbook describes the Mycel 1 executable installed as `mycel`.
+Subcommands that its `--help` lists and this runbook omits belong to retired
+workflows; they are not part of any current procedure.
 
 ## Use
 
