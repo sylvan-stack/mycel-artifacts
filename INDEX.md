@@ -11,6 +11,21 @@ Everything here passes the **VS Code Test**: usable without Arbol installed.
 
 ## Chapters
 
+### `specs/` — what Mycel 2 does
+The specifications of the rewrite, written from what version 1 did. Start at the chapter's [README](./specs/README.md), which also states their conventions.
+- [`00-overview-and-legacy-map.md`](./specs/00-overview-and-legacy-map.md) (MYC-0) — what Mycel is for, what it leaves to others, its form, the rules of its command line, and where each part of the version 1 code went.
+- [`01-corpora-and-ingest.md`](./specs/01-corpora-and-ingest.md) (MYC-1) — repositories and their two corpora, the scan, splitting documents and code into chunks, identity, the pass, status, removing a repository.
+- [`02-provenance-and-freshness.md`](./specs/02-provenance-and-freshness.md) (MYC-2) — what a document declares, Source Refs and how they resolve, edges, roles, staleness and its reasons, becoming fresh again.
+- [`03-embedding.md`](./specs/03-embedding.md) (MYC-3) — the model, the text that is embedded, which chunks are pending, the embed operation, failures, counts, the key.
+- [`04-retrieval.md`](./specs/04-retrieval.md) (MYC-4) — the scope of a search, its two arms and two routes, the bridge from documents to code, documents among results, the reply, freshness on read.
+
+### `research/` — evidence the specifications rest on
+- [`v1-inventory-ingest-and-graph.md`](./research/v1-inventory-ingest-and-graph.md) — what the version 1 source does for the scan, chunking, identity, Source Refs, edges and detection, with Source Refs into the deprecated repository.
+- [`v1-inventory-embedding-and-retrieval.md`](./research/v1-inventory-embedding-and-retrieval.md) — the same for embedding, the two indexes, the search algorithm, the reply and the grep replacement.
+- [`v1-inventory-sync-settings-commands.md`](./research/v1-inventory-sync-settings-commands.md) — the same for the sync pass, the remote refresh, settings, the store's address, repository scope, every command and the summaries.
+- [`v1-observations-2026-10.md`](./research/v1-observations-2026-10.md) — what the installed version 1 was seen doing on 6 and 7 October 2026.
+- [`v1-probes-2026-10-07/`](./research/v1-probes-2026-10-07/README.md) — the scripts behind the inventory statements that were run and not only read.
+
 ### `operations/` — Mycel Operations: frontend-agnostic process descriptions
 What must happen, in Mycel vocabulary — the invariant behind every invocation surface (skills, CLI agents, humans).
 - [`OVERVIEW.md`](./operations/OVERVIEW.md) — the readable one-page summary of all operations (for humans; agents use the Hub).

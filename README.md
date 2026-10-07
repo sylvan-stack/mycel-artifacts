@@ -11,7 +11,8 @@ at this file and never change; documents move freely underneath because only
 this router tracks where they live.
 
 Everything about **how to work** lives in this corpus (`~/Artifacts/mycel/`):
-operations, tool runbooks and skills. The **product** — Arbol's
+operations, tool runbooks and skills. It also holds the specifications of
+Mycel 2 and the research they rest on. The **product** — Arbol's
 specifications and the shared glossary — lives one corpus over in
 `~/Artifacts/arbol/` ([its catalog](../arbol/INDEX.md)).
 
@@ -30,6 +31,8 @@ at `~/Artifacts/mycel_deprecated_v1/`.
 | durable multi-angle task context (an artifact) | [operations/deep-research.md](operations/deep-research.md) (level 3) |
 | start or continue an in-depth review of a large pull request: find its next issues, review new commits, verify the author's fixes, weigh the author's replies | [operations/pr-deep-review.md](operations/pr-deep-review.md) — state file per pull request, ranked areas, verified findings queued for the human reviewer; never posts. Named run limits: [operations/stints.md](operations/stints.md) |
 | Mycel CLI syntax, flags, defaults | [tools/mycel.md](tools/mycel.md) |
+| what Mycel 2 must do: its function, requirements and open decisions | [specs/README.md](specs/README.md) |
+| what Mycel 1 actually did, with the place in its source | the inventories listed in [specs/README.md](specs/README.md) |
 | how retrieval ranks / why a result won | [operations/retrieval.md](operations/retrieval.md) |
 | administer Mycel indexing, freshness, embeddings, or configuration | [tools/mycel.md](tools/mycel.md) · [operations/embedding.md](operations/embedding.md) |
 | integrate authored artifacts, code, and tests “according to Mycel” | [operations/authored-work-integration.md](operations/authored-work-integration.md) — coverage → ingest → edges → Detection → embeddings → verify |
@@ -43,7 +46,7 @@ one screen, a family is missing; add a family, not rows.*
 ## Rules that bite
 
 - **Dependency direction:** Mycel must not depend on Arbol code or instructions. Never import, invoke, or prescribe Arbol code, repository scripts, `arbol-cli`, or an Arbol artifact as a required procedure. Mycel may read Arbol-owned databases, logs, and other data as inputs; data access is not a code/instructions dependency. Keep Mycel code and required process truth in Mycel.
-- **Before creating or changing an artifact, read the README in its destination folder.** The category READMEs in `operations/` and `skills/` are the authoring contracts for format, placement, validation, and catalog updates. Their rules apply to descendants too (for example each `skills/<name>/` directory).
+- **Before creating or changing an artifact, read the README in its destination folder.** The category READMEs in `operations/`, `skills/` and `specs/` are the authoring contracts for format, placement, validation, and catalog updates. Their rules apply to descendants too (for example each `skills/<name>/` directory).
 - **Retrieval is repo-scoped by CWD.** Each repository has its own corpus, and
   this folder is the corpus of repo `mycel` (how to work). From another
   repository's checkout use `mycel search --repo mycel "…"` to search it — or
