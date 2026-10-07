@@ -50,3 +50,9 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 
 The active catalog contains 8 Mycel skills for both providers. Personal and
 third-party skills remain outside this catalog.
+
+## Conventions
+
+- Every artifact goes into a chapter folder, never directly into the corpus root. `README.md`, `INDEX.md` and a `GLOSSARY.md` are the exceptions.
+- List a chapter here when it is created.
+- Tasks are tracked in Linear, not in this corpus: project [Mycel](https://linear.app/sylvan-stack/project/mycel-01b43a09de20) in the Sylvan Stack workspace. Specifications are copied there as documents; `.linear.json` maps each file to its copy. The files here are the originals.
