@@ -17,10 +17,11 @@ One page to (re)load the whole mental model. Each section is two sentences of
   no LLM, gives overview queries a landing place and every file a
   `documented_in` pointer.
 - **Sync** — one mechanical pass (docs refresh → code ingest → embed delta).
-  Mycel has no daemon: `mycel sync` runs the pass as a per-task command over
-  every enabled repository, and `mycel search` runs the delta for the
-  searched repository when its source changed (fresh-on-read), without
-  embedding.
+  Mycel has no daemon: `mycel search` runs the delta for the searched
+  repository when its source changed (fresh-on-read), without embedding.
+  `mycel sync` runs the pass over every enabled repository and first resets
+  configured checkouts to their remote; read the runbook's warning before
+  using it.
 - **[Authored-work integration](authored-work-integration.md)** — a change is
   “according to Mycel” only after artifacts, code, and tests are in enabled
   corpora, ingested as chunks, connected by real authority/coupling edges,

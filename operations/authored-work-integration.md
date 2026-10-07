@@ -38,16 +38,26 @@ relevant output is outside all configured corpora.
 
 ## 2. Ingest and chunk
 
-Run:
+Search in the repository that holds the work:
 
 ```bash
-mycel sync
+mycel search --repo <repo> "<a phrase from the new work>"
 ```
 
-The Sync Pass ingests Artifact sections and code/test symbols, runs Detection,
-and embeds the delta unless `--no-embed` was explicitly requested. Use
-`mycel status --repo <repo>` to confirm there is no unexplained pending embed
-work.
+Before it answers, a search ingests whatever changed in that repository:
+Artifact sections and code/test symbols, followed by Detection. It embeds
+nothing. Then embed:
+
+```bash
+mycel embed
+```
+
+`mycel embed` covers the pending chunks of every enabled repository; the
+pending number in `mycel status --repo <repo>` is that total.
+
+Do not use `mycel sync` for this. It covers every enabled repository and
+resets configured checkouts to their remote's default branch; see the warning
+in the [runbook](../tools/mycel.md).
 
 A file existing on disk is not enough. Verify that retrieval can find the new
 section or symbol by its meaning and, where useful, by its exact identifier.
@@ -85,8 +95,9 @@ same contract.
 ## 4. Detect and embed
 
 `mycel derive` runs Detection after asserting an edge. After all source and child
-edits are final, run `mycel sync` again so content hashes, declarations,
-staleness, and embeddings all describe the completed work.
+edits are final, search in the repository and embed once more so content
+hashes, declarations, staleness, and embeddings all describe the completed
+work.
 
 A new edge should be fresh. If it is immediately stale, the source or child
 changed after reconciliation; re-check conformance before reasserting it. Never

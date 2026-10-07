@@ -22,7 +22,7 @@ to retired workflows; they are not part of any current procedure.
 ```
 mycel search "<query>" [--k N] [--repo R] [--path P] [--only code|docs] [--no-fresh]
 mycel better-grep [grep flags] PATTERN [PATH...]   # also installed as `better-grep`
-mycel sync [--no-embed]        # one Sync Pass over every enabled repository, then exit
+mycel sync [--no-embed]        # every enabled repository; RESETS CHECKOUTS, read the warning below
 mycel embed                    # embed every pending chunk, then exit
 mycel status [--repo R]        # index freshness: documents, chunks, stale counts, embed counters
 mycel activity [--k N] [--repo R] [--kind K]   # recent sync/embed/raptor feed
@@ -51,11 +51,17 @@ mycel raptor status|plan|regen|build [--recipe NAME] [--repo R] [--regen]   # de
   `--no-fresh` skips, and so does `--only docs`. That pass is local and
   scoped to the searched repository: it refreshes no remotes and embeds
   nothing, so new or edited chunks stay pending until an embed runs.
-- **sync** is the all-repository pass. It refreshes the remotes of code
-  corpora, ingests every enabled repository, rewrites their code maps and,
-  unless `--no-embed` is given, embeds every pending chunk of every enabled
-  repository. Check `mycel status` for the pending count before running it
-  without `--no-embed`. To bring one repository up to date, search in it.
+- **sync changes checkouts. Do not run it where work is in progress.** It
+  is the all-repository pass. For every enabled repository that has an
+  explicit `code_root`, an `origin` remote and no uncommitted or untracked
+  files, it runs `git fetch origin <default branch>` and then
+  `git reset --hard FETCH_HEAD` in that folder, whatever branch is checked
+  out. Commits that are not on the remote's default branch are dropped from
+  the branch; uncommitted changes are the only thing that stops it. It then
+  ingests every enabled repository, rewrites their code maps and, unless
+  `--no-embed` is given, embeds every pending chunk of every enabled
+  repository. To bring one repository up to date, search in it: that pass
+  runs no git command that changes anything.
 - **repos** lists repos under `~/repo` (`--root` overrides) with each repo's
   mycel-enabled flag, embedder profile, and whether it has an Artifact Corpus.
 - **Organizations** are configured in `~/.mycel/config.toml`. Compatible
@@ -161,10 +167,6 @@ mycel:mycel/scope.py#resolve
 mycel:mycel/organizations.py#members
 mycel:mycel/repo_identity.py#canonical_repo
 -->
-
-**Keeping the index warm without a daemon** (optional — fresh-on-read already
-guarantees correctness): git hooks and/or a Claude Code hook that
-run `mycel sync --no-embed >/dev/null 2>&1 &` on commit/checkout/session-start.
 
 <!-- sources:
 mycel:mycel/cli.py
