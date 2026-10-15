@@ -1,7 +1,7 @@
 ---
 role: authored
 ---
-# Version 1 as installed: observations of 6 and 7 October 2026
+# Version 1 as installed: observations of 6 to 8 October 2026
 
 What the installed Mycel 1 did on the owner's machine while its corpus was being cleaned up. The three inventories beside this file say what the source does; this file says what was seen running. Every item names the day it was seen. It is evidence for the [specifications](../specs/README.md).
 
@@ -52,6 +52,10 @@ Chunks by repository on 7 October, read from the index:
 ## Checkouts
 
 - 7 October: the history of one working checkout that was configured as a code corpus showed 61 resets to the tip of its remote's default branch between 30 September and 1 October, about one every eleven minutes while Arbol 1's resident service ran its passes. None of them moved the branch, because nothing local was ahead of the remote at the time. The source says why they happened: a full pass fetches the default branch and resets the checkout to it whenever the checkout has no uncommitted or untracked files, whatever branch is checked out.
+
+## The settings file
+
+- 8 October: the owner's `~/.mycel/config.toml`, written for version 1, held `profile` in 11 of its 35 repository entries, one `[providers]` table and `url` in two organizations. It held no `[database]` table. The keys were counted without printing a value.
 
 ## Files the program reads from this corpus
 

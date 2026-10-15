@@ -27,7 +27,7 @@ Regenerated-not-maintained: exempt from [Detection](../../arbol/GLOSSARY.md#dete
 (drift against a document that rewrites itself is noise) and from
 [RAPTOR](../../arbol/GLOSSARY.md#raptor-tree) clustering — searchable, never stale.
 
-<!-- sources:
-mycel:mycel/knowledge/code_map.py#write_map
-mycel:mycel/knowledge/code_map.py#build_markdown
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py#write_map`
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py#build_markdown`

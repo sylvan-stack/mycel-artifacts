@@ -60,12 +60,18 @@ Retries are scheduled by the upload queue…
 | `<repo>:src/session/service.py` | code document/file |
 | `mycel:operations/knowledge-model.md#Derivation edges` | artifact section |
 
-Cross-repository refs are valid when the target repository is enabled. A Source
-Ref is provenance, not an instruction to execute target-repository code.
+Every Source Ref must target a repository registered in Mycel and currently
+enabled, including a reference within the same repository. Unregistered or
+disabled target repositories are visible reference faults, not outside-reference
+exceptions. A valid ref whose target is not yet found stays visible and is retried.
+Deprecated repositories are not indexed. Cite their frozen files as ordinary
+historical evidence links or locators, outside frontmatter `sources:` and
+`<!-- sources: -->` blocks. A Source Ref is provenance, not an instruction to
+execute target-repository code.
 
 See [knowledge-model.md](knowledge-model.md) for edge direction, role/state
 semantics, Detection, and Drift behavior.
 
-<!-- sources:
-mycel:mycel/knowledge/store.py
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py`

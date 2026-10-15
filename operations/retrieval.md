@@ -66,8 +66,8 @@ WHY, stale-flagged).
 Bridge research: prod queries 15/22 → 19/22 @3, code jargon 3/6 → 6/6.
 Down-weights + code glossaries: 19/20 @3 across the code repos.
 
-<!-- sources:
-mycel:mycel/knowledge/embedder.py#code_search
-mycel:mycel/knowledge/embedder.py#_bridge_expand
-mycel:mycel/knowledge/code_chunker.py
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_bridge_expand`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py`

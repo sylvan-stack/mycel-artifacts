@@ -1,0 +1,295 @@
+---
+role: authored
+spec: MYC-13
+status: accepted
+---
+# Mycel · 13 Checks and the evaluation set
+
+A requirement counts as met only when a check proves it (MYC-0.11), and a constant of the ranking changes only with a measurement before and after (MYC-4.25). This specification fixes which checks run on every build and which only when asked for, what the automatic checks use in place of the owner's store and of the embedding service, and what the evaluation set is: where it is kept, what a query in it says, how it is run and what the report holds. It matters because version 1 had ten test files of which none ran a pass, a search, an embed or the ranking, and the numbers of its ranking came from research that is not in its repository.
+
+It follows the conventions of the [specifications chapter](README.md#conventions), which name the four kinds of check: unit, store, eval and live.
+
+## Scope
+
+Covered: the checks of every build, the store a check works on, the stand-in for the embedding service, the live check, the evaluation set, the command that runs it and its report.
+
+Not covered: what each requirement asks for; how a Mycel Build is made, numbered and marked as working ([MYC-15](15-distribution-and-replacement.md)); the rules of the ranking that the evaluation set measures ([MYC-4](04-retrieval.md)).
+
+## Behaviour
+
+### The checks of every build
+
+Observed in version 1: the tests were run by hand. Ten files covered the settings, which repository a directory belongs to, the store's address and the names of commands. Installing a new program checked that both programs printed their help and their version, and ran one grep with the tail switched off. The repository's own description named an automatic check run that the repository did not contain.
+
+Proposed: a Build of Mycel is marked as working only when every automatic check has passed (MYC-15). For Mycel these are all checks of the kinds `unit` and `store`. Checks of the kinds `eval` and `live` are run when somebody asks for them and are never part of an automatic Build gate. Retrieval evaluation needs an index with vectors; live embedding and provider qualification spend quota. Packaged relocation and offline-launch checks required by MYC-15 are automatic alongside unit/store checks: they prove that the immutable Build runs without the source checkout, system Python, downloads or Arbol. A failed required check marks the Build failed and records its reason.
+
+MYC-0.11 holds for every specification in this chapter, MYC-0 through MYC-16. The owner accepted MYC-0 through MYC-16 on 8 October 2026, including the final MYC-14 classification/reviewer/lifecycle proposals. Acceptance authorizes implementation; it is not evidence that software has passed its checks or models have completed qualification. Each check names the requirements it proves by their identifiers, and the cell *Verified by* of a requirement names its check once the check exists.
+
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:Makefile`
+- `mycel_deprecated_v1:README.md`
+- `mycel_deprecated_v1:tests/test_cli_metadata.py#test_mycel_version`
+
+### The store of a check
+
+Observed in version 1: no test worked on a store. An environment variable could point the program at a separate schema of the same database; the inventories name no test that used it.
+
+Decided: a `store` check never works on the owner's store ([MYC-D36](#decisions)). The check run makes a database of its own for each check, under a name that begins with `mycel_check_`, in the database server that the owner's settings name. The address of that server is the one thing the check run takes from the owner's file. It writes a settings file for the run, names it with `MYCEL_CONFIG` ([MYC-5](05-settings.md#the-file)), makes the structure with `mycel init`, and removes the database when the check is over. A check refuses to run on a database whose name does not begin that way. The check run needs permission to create temporary databases on that server.
+
+The files a check works on are fictional repositories that it makes in a folder of its own. Among them is a git checkout with a second branch and a stash, so that reading the locations of MYC-1 is checked on real git data.
+
+Include checkout `README.md` and `docs/` Markdown, an overlapping-root alias of the same file, and different files with the same relative path under different roots. Verify document origin, heading chunks, one identity per physical file/location, root-aware search/read replies and visible ambiguous Source Refs (MYC-1.32, MYC-1.33, MYC-2.5, MYC-2.6, MYC-4.23, MYC-11.7).
+
+Dependency checks include a fictional Glossary section governing a contract that governs an unchanged Driver chunk. Editing or removing the Glossary source must change the Driver's stale reasons in both ordinary and code-only searches, without adding dependency-only documents to code results or rewriting the Driver. Also check source restoration, unrelated repositories, invalid refs and incomplete checks caused by time limits or busy repositories (MYC-2.18, MYC-2.24, MYC-4.14, MYC-4.18, MYC-4.19, MYC-11.6).
+
+When the database server cannot be reached, the `store` checks fail and the Build is `failed`. The MYC-15 Build record names the check that stopped it.
+
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/database.py#connect`
+
+### The stand-in for the embedding service
+
+Observed in version 1: no test embedded anything, with the service or without it.
+
+Proposed: the checks of every build never contact the embedding service. A stand-in takes its place.
+
+| The stand-in | Why |
+|---|---|
+| gives the same vector for the same text, and nearer vectors for texts that share words | A check of the ranking then has an order to check |
+| keeps the limits of the real service: texts per request, tokens per text and per request | The plans and batches of MYC-3.18 are checked against them |
+| can be told to fail in each way MYC-3 names: no network, a time limit, a rate limit, a server error, a request rejected for its content | Retries and the search for the part at fault are checked (MYC-3.8, MYC-3.9) |
+| counts what it was sent | A check can say that nothing was sent twice, and nothing of a disabled repository (MYC-3.13) |
+
+The stand-in belongs to the checks. A Build as it is installed has no setting, option or variable that changes the address of the embedding service.
+
+### The live check
+
+Proposed: one check of the kind `live`, run when asked for. With the owner's key it embeds one short fixed text and one fixed query, and checks four things: the key is accepted; the model the settings name exists; a vector has the number of dimensions the settings name; and the exact submitted-string token count is the input-text token usage the service reports. This count excludes the provider-added input-type prompt; the conservative planning count includes that prompt and is checked locally against caps under MYC-3.18. Both counts and provider usage appear separately in the live report. The record of the run names the Build, the model and the date.
+
+Jev classification and smarter-model review are checked with stand-ins in the automatic suite. Use a controlled clock to verify the configured debounce (default 300 seconds), exact file/change guards, fallback observation times, future timestamps, immediate stale visibility, low-confidence and insufficient-evidence routing, bounded retries, missing configuration, timeout/malformed responses and rejection of obsolete results. MYC-16 fixtures verify exact baseline/current/dependant/context bytes and canonical hashes, family membership, deleted sources, per-version branch pins, protected in-flight evidence and pruning 1,001 closed bundles while an older live pin remains. Classification may close exact-input semantic work but must never repin or clear MYC-D12 staleness. An explicitly deleted current source is a valid tombstone input if all pinned/dependant/context evidence remains; missing required baseline or context is a separate unresolved no-call case. Search/read/ingest never make Jev/reviewer calls; dry-runs make no service calls. Paid Jev or LLM calls never enter automatic unit/store checks. The on-demand drift evaluation below measures the selected routing profile and relative reviewer quality; its report is required before claiming provider qualification.
+
+
+The reviewer boundary is exercised through real executable stand-ins using the production subprocess launcher. Fixtures cover absolute/tilde paths, literal argv and missing/nonexecutable files; stdin LF/EOF, exact canonical hash and transmitted byte cap; fixed environment with parent credential sentinels, unrelated descriptor closure, empty private cwd and opaque citations; full governor/ancestor selections; simultaneous pipe pressure; BOM/duplicate-key/nonfinite/unknown-member/trailing-text rejection; wrong identity/hash/revision/locator and usage booleans; success with exit 1, typed failure with exit 0 and valid JSON followed by a hang; typed transient retry delays and one-provider-call-per-attempt accounting; stdout/stderr overflow, SIGINT, timeouts, descendants that ignore TERM, group reaping and directory cleanup; helper/config changes requiring a new adapter revision and an executable change before application. Dry-run never executes a revision probe. These checks make no real model calls and never read real provider credentials.
+
+### The evaluation set
+
+Observed in version 1: there was none. The design record asked for one: questions with the chunks each should find, and the share that is found among the first results. The factors, margins and limits of the ranking were set without it.
+
+Decided 8 October 2026: each repository can have an evaluation set ([MYC-D35](#decisions)). It is one file in the repository's document folder, named by the setting `evaluation` of that repository, so it is kept and versioned with the documents it asks about. It is not a document itself and is not ingested.
+
+The UTF-8 TOML file has two independent optional sections: `[[query]]` for retrieval and `[[drift]]` for dependency classification. An optional `schema_version` must be 1; absence means 1 for existing retrieval sets. Unknown fields, malformed TOML, non-string text, empty retrieval text/expectations or duplicate drift IDs are `invalid_input` with file and field/line detail before any call. An empty selected section is valid and returns an empty report with undefined shares represented as null. A query says what was asked and which chunks answer it, by their places in the form of a Source Ref:
+
+```toml
+[[query]]
+text = "how does renewal decide"
+expect = ["cellar:src/auth/session.py#renew", "cellar:docs/auth.md#Renewal"]
+
+[[query]]
+text = "RetryPolicy"
+expect = ["cellar:src/net/retry.py#RetryPolicy"]
+only = "code"
+```
+
+Each retrieval expectation must resolve to exactly one eligible chunk through MYC-16 in the read/result role; a class name means its header chunk, as for `mycel read`, not a dependency family. File/family selections, malformed or ambiguous refs and missing/ineligible chunks are reported as faults of the set. Duplicate expectations that resolve to the same chunk count once. `only` may be `code` or `docs`; absence selects the ordinary combined search. A query with any expectation fault is excluded from all recall denominators, so a partially broken set never improves its score by dropping only the difficult expectation.
+
+A drift case is a versioned fixture with the exact text a dependency decision concerns, rather than a live reference that silently changes underneath the labels:
+
+```toml
+[[drift]]
+id = "permission-negation"
+before = "Requests may retry after denial."
+current = "Requests must not retry after denial."
+dependant = "A denied request retries once."
+expect = "needs_review"
+critical = ["negation", "permission"]
+
+[[drift]]
+id = "source-deleted"
+before = "RetryPolicy permits three attempts."
+source_state = "deleted"
+dependant = "Three retries are allowed."
+expect = "needs_review"
+critical = ["deletion"]
+```
+
+`id`, `before`, `dependant` and `expect` are required strings. `source_state` is `present` by default and requires a `current` string (empty text is valid); `deleted` requires `current` to be absent. Optional `context` is an ordered string array. Optional `unavailable` is a unique array of `baseline`, `dependant` or `context`; the harness deliberately withholds that required retained evidence to test the unresolved no-call path, and such a case must expect `unresolved`. `expect` is `still_supported`, `needs_review`, `insufficient_evidence` or `unresolved`. Optional `unchanged = true` marks a labelled `still_supported` unchanged/cosmetic case and is invalid with another expected label. Optional `critical` labels are `negation`, `operator`, `permission` and `deletion`; critical cases expect `needs_review` unless required evidence is deliberately unavailable, in which case they expect `unresolved`. A deleted current source with complete required evidence participates in semantic classification using explicit absence; it is not fabricated empty text. A missing-baseline/context case stays unresolved and causes no semantic API call. The harness wraps these exact fixture strings in the same MYC-16 canonical evidence/protocol used by classification; it never changes live pins or reads a newer source in place of the fixture.
+
+A good set grows from real use: a question somebody asked and the chunks that answered it, or a reviewed dependency pair and its labelled outcome. A person or an agent adds cases and records the label evidence with the versioned file. Labels are evaluation ground truth, never owner verification records.
+
+### Running it
+
+Proposed: `mycel evaluate --kind retrieval` (the default) runs every query of the selected repository's set as `mycel search` would, with ten results and without freshness checking. It writes nothing: no ingest, vectors, activity, pins or model-result cache. Required query vectors are computed first by normal search rules, then all retrievals and expectation resolution use one consistent read-only index snapshot and frozen effective settings. The report names the index generation, a fingerprint of relevant chunk versions/vectors/eligibility, evaluation-file hash and query-vector hash. Before/after comparisons are valid only when these inputs match; a changed index requires rerunning both Builds.
+
+The report gives each expected chunk's position, or its absence, and recall at 3 and at 10: found expected chunks divided by all expected chunks of valid queries. It reports both shares overall and by MYC-4 route. A zero denominator is null, not zero or a fabricated perfect score. Faulted queries remain visible with their faults and are excluded. Wording-only searches are counted; a report with any such query does not establish semantic-ranking quality. The report retains the returned top-ten places for diagnosis.
+
+`mycel evaluate --kind drift` runs the drift fixtures through deterministic stand-ins and the real local routing/evidence/lifecycle code, without paid calls or store writes. It validates the suite and pipeline behavior; it does not qualify Jev or a reviewer. Add `--live` explicitly to send eligible complete-evidence fixtures to the pinned Jev model and configured review command. `--live` is valid only with `--kind drift`; unavailable keys/reviewer configuration are reported as a qualification failure, not substituted by the agent's model. Calls obey MYC-14 concurrency, per-stage time, retry and input limits. The fixture runner processes the whole selected set in bounded candidate batches; it is not silently limited to the production default of 100 candidates. Each batch observes the MYC-14 invocation deadline, and stopped/unprocessed cases make qualification inconclusive. SIGINT terminates reviewer process groups and cancels outstanding requests without persisting partial evaluation state. Unavailable-evidence fixtures remain local unresolved no-call checks; a deletion tombstone with complete baseline/dependant/context is a valid semantic case.
+
+A live report records every Jev probability/confidence and tentative judgement, escalation reason, reviewer judgement and exact returned provider/model, final outcome, expected label, request hash, input bytes, elapsed time, attempts and available usage/cost. Unknown usage or cost remains null; Mycel does not infer prices or pretend a measurement occurred. Pipeline identity includes protocol, exact `jev-1.13.0` model, `mycel-dependency-v1` question, Choice ordering, effective confidence floor/routing revision, reviewer command hash, immutable adapter revision, instruction/environment versions and actual provider/model. Different identities are separate evaluations. A reviewer that changes identity within a run makes qualification fail.
+
+Initial provider qualification requires at least 200 distinct labelled pairs, including at least 50 critical-change and 50 unchanged/cosmetic cases. Critical labels cover negation, operator, permission and deletion. There must be zero incorrectly suppressed critical work: no critical case labelled `needs_review` or `unresolved` may finish as `still_supported`; unavailable-evidence cases must stay unresolved without paid calls. The configured reviewer must be evaluated on at least one routed, adjudicated case; on that common routed subset it must have no more critical misses and no more wrong labels than Jev alone, and improve either wrong-label count or insufficient/unresolved count. Otherwise the report is not qualified, including when there are no comparative cases. Duplicate semantic fixtures (same before/current/dependant/context/availability state, excluding ID and label metadata) count only once toward qualification coverage; rerunning them is still useful for variability diagnostics. The report also gives aggregate error/false-positive rates, routing frequency, latency and reported cost; these diagnostics do not replace the critical-case and relative-quality gates. This is a finite-corpus release check, never a claim that a confidence score guarantees correctness. A retuned confidence profile needs a new versioned report; no evaluation modifies the configured threshold automatically.
+
+Builds are kept side by side by MYC-15, so a ranking measurement before and after is two runs over matching index/file/query-vector inputs. Changes to ranking or grouping constants require both reports (MYC-4.25, MYC-D20), kept with the change record. A provider/routing change likewise records the exact old and new pipeline identity and qualification reports. The CLI returns reports to its caller; retaining them in an authored review or Build record is an explicit caller action, not an evaluation side effect.
+
+**Historical evidence (unindexed):**
+
+- `arbol_deprecated_v1:research/RETRIEVAL-RESEARCH.md#12. Validation`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
+
+## Requirements
+
+| ID | Mycel must… | Origin | Verified by |
+|---|---|---|---|
+| MYC-13.1 | run every check of the kinds `unit` and `store` on each build, and let a Build count as working only when all of them passed | New | unit |
+| MYC-13.2 | keep checks of the kinds `eval` and `live` out of the build and run them only when asked | New | unit |
+| MYC-13.3 | name in every check the requirements it proves, by their identifiers | New | unit |
+| MYC-13.4 | run a `store` check on a database made for it, whose name begins with `mycel_check_`, with a settings file of its own, and remove the database afterwards | New | store |
+| MYC-13.5 | refuse to run a `store` check on a database whose name does not begin with `mycel_check_` | New | store |
+| MYC-13.6 | check the reading of branches and stashes on a git checkout the check makes for itself | New | store |
+| MYC-13.7 | contact the embedding service in no check of a build, and use a stand-in that gives the same vector for the same text, keeps the service's limits, can fail in each way MYC-3 names, and counts what it was sent | New | unit |
+| MYC-13.8 | have, in a Build as installed, no setting, option or variable that changes the address of the embedding service | New | unit |
+| MYC-13.9 | check on request, with the owner's key, that the key is accepted, that the model exists, that a vector has the dimensions the settings name, and that the pinned tokenizer's exact submitted-string count matches provider-reported input-text usage, recording the larger conservative planning count separately | New | live |
+| MYC-13.10 | read one configured per-repository evaluation file with separate optional retrieval-query and drift-fixture sections, validating their versioned schema before any call | New | unit |
+| MYC-13.11 | run retrieval evaluation as searches with ten results over one read-only index snapshot, without freshness checking or writes, and run drift evaluation only for the explicitly selected kind | New | store |
+| MYC-13.12 | report for each expected place the position at which it came or that it did not, and recall at 3 and at 10 over all expected places, in total and for each route | New | store |
+| MYC-13.13 | report an expected place that the index does not hold as a fault of the set, and leave it out of the shares | New | store |
+| MYC-13.14 | name in the report the Build, the embedding model, the version of the search reply and the number of queries that were answered by wording alone | New | store |
+| MYC-13.15 | have an automated check for every requirement of MYC-0 through MYC-16 before that requirement counts as implemented, distinguishing complete/reviewed specifications from executed runtime and provider acceptance | Changed | unit |
+| MYC-13.16 | automatically check MYC-15 packaged relocation and offline launch, with no source checkout, system Python, downloads or Arbol dependency | New | unit |
+| MYC-13.17 | validate exact retrieval expectations and exclude faulted queries from recall; return null for a zero denominator and record file/index/query-vector fingerprints for comparisons | New | store |
+| MYC-13.18 | test MYC-14 and MYC-16 with deterministic classifiers, controlled clocks and exact evidence, including obsolete results, missing review configuration, protected history and separation from freshness | New | store |
+| MYC-13.19 | make paid drift evaluation opt-in with `--kind drift --live`, retain exact pipeline/provider identities in its reply, and report errors, routing, latency and known usage/cost without invented measurements | New | live |
+| MYC-13.20 | qualify a provider profile only against the stated critical-case and relative-reviewer gates, require new reports for retuning, and never let evaluation change pins, freshness or settings | New | eval |
+| MYC-13.21 | exercise the real reviewer subprocess boundary with executable stand-ins, strict JSON/exit and environment fixtures, cancellation/cleanup, bounded retries and command/revision cache guards without real credentials or paid calls | New | unit |
+
+## Interface
+
+Proposed. The command line follows the rules of [MYC-0](00-overview-and-legacy-map.md#the-command-line).
+
+```sh
+mycel evaluate --repo cellar                  # retrieval, default working Build
+mycel -v a3 evaluate --repo cellar            # same frozen inputs, earlier Build
+mycel evaluate --repo cellar --kind drift    # stand-ins; no paid calls
+mycel evaluate --repo cellar --kind drift --live # explicit provider qualification
+```
+
+The command takes one repository, not an organization. A missing configured evaluation file is `settings`; an unreadable file is `io`; malformed contents are `invalid_input`. An empty selected section returns normally. Drift reports are successful replies even when `qualified` is false; transport failures and case faults are visible per case rather than reported as support.
+
+```ts
+type EvaluationReport = RetrievalEvaluationReport | DriftEvaluationReport;
+
+interface RetrievalEvaluationReport {
+  kind: "retrieval";
+  evaluationSchema: 1;
+  repository: string;
+  file: string;
+  fileHash: string;
+  build: string;                       // MYC-15 build number
+  model: string;
+  searchReply: number;
+  indexGeneration: string;
+  indexFingerprint: string;
+  queryVectorsHash: string;
+  queries: number;
+  byWordingAlone: number;
+  faultsOfTheSet: number;
+  recall: { at3: number | null; at10: number | null };
+  byRoute: {
+    identifier: { queries: number; at3: number | null; at10: number | null };
+    question: { queries: number; at3: number | null; at10: number | null };
+  };
+  results: Array<{
+    text: string;
+    route: "identifier" | "question";
+    included: boolean;                 // false if any expectation is faulty
+    returned: Place[];
+    expected: Array<{
+      place: string;
+      resolved?: Place;
+      position?: number;
+      fault?: "not_in_index" | "malformed" | "ambiguous" | "ineligible" | "not_one_chunk";
+    }>;
+  }>;
+}
+
+interface DriftEvaluationReport {
+  kind: "drift";
+  evaluationSchema: 1;
+  repository: string;
+  file: string;
+  fileHash: string;
+  build: string;
+  live: boolean;
+  pipeline: {
+    protocol: 1;
+    model: string;                      // exact configured versioned Jev ID, default jev-1.13.0
+    questionVersion: "mycel-dependency-v1";
+    choiceOrder: string[];
+    policyRevision: string;
+    confidenceFloor: number;
+    reviewCommandHash?: string;           // MYC-14 canonical ReviewCommandIdentity SHA-256
+    reviewRevision?: string;
+    reviewInstructionVersion?: string;
+    reviewEnvironmentVersion?: string;
+    reviewer?: { provider: string; model: string };
+  };
+  cases: number;
+  distinctCases: number;
+  criticalCases: number;
+  criticalMisses: number;              // labelled critical work incorrectly suppressed as supported
+  unchangedCases: number;
+  routedCases: number;
+  jevUnresolvedOnRouted: number;
+  reviewerUnresolvedOnRouted: number;
+  jevCriticalMissesOnRouted: number;
+  reviewerCriticalMissesOnRouted: number;
+  jevErrorsOnRouted: number;
+  reviewerErrorsOnRouted: number;
+  errorRate: number | null;
+  falsePositiveRate: number | null;    // needs_review among labelled still_supported cases
+  elapsedMs: number;
+  usage: unknown | null;
+  cost: { amount: number; currency: string } | null;
+  qualified: boolean;                 // always false without live provider evaluation
+  qualificationFailures: string[];
+  results: Array<{
+    id: string;
+    expect: "still_supported" | "needs_review" | "insufficient_evidence" | "unresolved";
+    actual: string;                    // categorical outcome, unresolved or explicit error
+    inputHash: string;
+    jev?: { judgement: string; probabilities: Record<string, number>; confidence: number };
+    review?: { provider: string; model: string; judgement: string };
+    escalation?: string;
+    correct: boolean;
+    critical: string[];
+    attempts: number;
+    elapsedMs: number;
+    usage: unknown | null;
+    cost: { amount: number; currency: string } | null;
+    error?: { code: string; message: string };
+  }>;
+}
+```
+
+## Known problems in version 1
+
+- **The main paths had no test.** No test ran a pass, a search, an embed, the ranking or the summariser.
+- **Nothing measured the ranking.** Its factors, margins and limits came from research that is not in the repository, and no set of questions told whether a change made a search better or worse.
+- **The check on installing proved little.** Help, version and one grep without its tail.
+- **The description named a check run that did not exist.** The file it pointed to was not in the repository.
+- **The tools for testing and for packaging were not declared.** They were installed by hand.
+
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:Makefile`
+- `mycel_deprecated_v1:README.md`
+- `mycel_deprecated_v1:pyproject.toml`
+- `arbol_deprecated_v1:research/RETRIEVAL-RESEARCH.md#12. Validation`
+
+## Decisions
+
+| ID | Question | Proposed default | Outcome |
+|---|---|---|---|
+| MYC-D35 | Where is the evaluation set kept, and who writes it? | The evaluation set is a list of questions with the chunks each should find; it measures whether a change makes search better or worse. One file for each repository, in its document folder, named in that repository's settings. It is versioned with the documents it asks about, and a person or an agent adds a query whenever a real question was answered well or badly. The other choice is one set for all repositories in the Mycel corpus: one place to look, but its queries would name chunks of repositories that change without it | Decided 8 October 2026 by the owner: resolved; one configured evaluation file per repository in its document folder, versioned with its documents. A person or an agent adds real questions and the chunks that should answer them |
+| MYC-D36 | Which store do the automatic checks work on? | The automatic checks are the tests that run on every build. They work on a database the check run makes for itself in the same database server as the owner's store, under a name that begins with `mycel_check_`, removed after each check. The owner's own database is never opened by a check. This needs the right to create databases on that server. The other choice is a database server started only for the checks; it keeps the checks away from the owner's server altogether, at the price of something that starts and stops servers on every build | Decided 8 October 2026 by the owner: resolved; automatic store checks create and remove their own `mycel_check_` databases on the configured server and never open the owner's actual database |

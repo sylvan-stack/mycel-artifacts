@@ -17,9 +17,41 @@ specifications and the shared glossary — lives one corpus over in
 `~/Artifacts/arbol/` ([its catalog](../arbol/INDEX.md)).
 
 The engine guides and the `mycel` runbook describe Mycel 1, the executable
-installed today. Mycel 2 is a rewrite with no implementation yet. The complete
+installed today. Mycel 2 has a local Python CLI foundation in progress. Strict settings,
+repository resolution/listing, private credentials, offline embedding plans and
+lossless parser preparation, explicit private-store init and store diagnostics
+are implemented. Complete scoped `ingest` now publishes disk, local branches
+and stashes with dependency reconciliation, Detection and collection; explicit
+`--embed` adds embedding. Entry-only activity reads expose recorded identity
+decisions. Exact `confirm` and read-only `verifications` now compose guarded
+pin renewal, record-owned evidence, current applicability and retained history;
+store format 2 keeps history across old-version collection. Configured
+disposable-store acceptance covers the implemented surfaces; general activity
+history, stale/status, search replies and full installed release qualification
+remain pending. Its current guides are `tools/mycel-2.md`,
+`tools/mycel-2-checks.md`, `tools/mycel-2-settings.md`,
+`tools/mycel-2-embedding.md`, `tools/mycel-2-parsing.md` and
+`tools/mycel-2-store.md`, `tools/mycel-2-capture.md`,
+`tools/mycel-2-evidence.md`, `tools/mycel-2-identity.md`,
+`tools/mycel-2-pin-observation.md`, `tools/mycel-2-reconciliation.md` and
+`tools/mycel-2-relations.md`. The evaluation file validator and offline snapshot harness are described in `tools/mycel-2-evaluation.md`; normal search and Drift adapters remain pending. The complete
 Mycel 1 corpus, including the chapters that were not carried over, is frozen
 at `~/Artifacts/mycel_deprecated_v1/`.
+
+`tools/mycel-2-retrieval.md` describes current-disk wording and meaning
+candidates, configured shared selections, separate organization-member lists
+and internal deterministic ranking with exact disk-owned document bridges.
+Internal recursive freshness checks the exact explicit upstream closure under one existing invocation deadline; public search replies retain their task owner.
+
+`tools/mycel-2-drifts.md` describes internal exact-pair Drift work, categorical
+results, reason-level closure and independently retained evidence. Public
+classification, canonical requests and provider adapters retain their task owners.
+`tools/mycel-2-classification.md` describes canonical complete classification
+evidence, reviewer command identity, quiet-period observations and fresh
+stage/application/cache guards. `tools/mycel-2-jev.md` describes the internal
+bounded Jev attempt, strict pinned-model/confidence validation and complete
+review handoff; the reviewer process, public execution and live qualification
+remain pending.
 
 ## Route by need
 
@@ -30,6 +62,9 @@ at `~/Artifacts/mycel_deprecated_v1/`.
 | an answer to "how/where/why" about a codebase | [operations/code-research.md](operations/code-research.md) (level 2) |
 | durable multi-angle task context (an artifact) | [operations/deep-research.md](operations/deep-research.md) (level 3) |
 | start or continue an in-depth review of a large pull request: find its next issues, review new commits, verify the author's fixes, weigh the author's replies | [operations/pr-deep-review.md](operations/pr-deep-review.md) — state file per pull request, ranked areas, verified findings queued for the human reviewer; never posts. Named run limits: [operations/stints.md](operations/stints.md) |
+| go through the owner's unresolved comments in Linear: make the change a comment recommends, answer what it asks, or only list them | [operations/linear-resolve.md](operations/linear-resolve.md) — reads every open thread of the Sylvan Stack workspace, changes the original then its Linear copy, and settles each comment with the user in the session; posts `Resolved. Resolution: …` in Linear only after the user says `Resolved` |
+| list the open questions and pending decisions that wait for the owner in Linear, so they can be answered in the session and not by commenting in Linear | [operations/linear-open-questions.md](operations/linear-open-questions.md) — collects the open rows of the specifications' Decisions tables, the issues that ask the owner to decide and the questions agents asked in comments, gives one numbered list in the session, and writes each answer the user gives there to the place its question is recorded in |
+| make what needs the owner's attention now easy to find in Linear, then organize project navigation | [operations/linear-organize.md](operations/linear-organize.md) — publish a prominent attention entry with individual open questions, pending decisions, reviews, and next actions; then remove obsolete shortcuts |
 | Mycel CLI syntax, flags, defaults | [tools/mycel.md](tools/mycel.md) |
 | what Mycel 2 must do: its function, requirements and open decisions | [specs/README.md](specs/README.md) |
 | what Mycel 1 actually did, with the place in its source | the inventories listed in [specs/README.md](specs/README.md) |

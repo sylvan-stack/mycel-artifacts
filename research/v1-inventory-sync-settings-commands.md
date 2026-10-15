@@ -1,45 +1,47 @@
 ---
 role: derived
-sources:
-  - mycel_deprecated_v1:mycel/syncpass.py
-  - mycel_deprecated_v1:mycel/knowledge/store.py
-  - mycel_deprecated_v1:mycel/knowledge/embedder.py
-  - mycel_deprecated_v1:mycel/retrieval.py
-  - mycel_deprecated_v1:mycel/cli.py
-  - mycel_deprecated_v1:tests/test_command_executor.py
-  - mycel_deprecated_v1:mycel/command_executor.py
-  - mycel_deprecated_v1:mycel/knowledge/code_map.py
-  - mycel_deprecated_v1:mycel/knowledge/raptor.py
-  - mycel_deprecated_v1:mycel/config.py
-  - mycel_deprecated_v1:mycel/knowledge/local_embedder.py
-  - mycel_deprecated_v1:mycel/organizations.py
-  - mycel_deprecated_v1:tests/test_config_ownership.py
-  - mycel_deprecated_v1:tests/test_organizations.py
-  - mycel_deprecated_v1:mycel/database.py
-  - mycel_deprecated_v1:mycel/repo_identity.py
-  - mycel_deprecated_v1:tests/test_database_connection_file.py
-  - mycel_deprecated_v1:mycel/scope.py
-  - mycel_deprecated_v1:mycel/locations.py
-  - mycel_deprecated_v1:tests/test_repository_locations.py
-  - mycel_deprecated_v1:mycel/better_grep.py
-  - mycel_deprecated_v1:tests/test_cli_metadata.py
-  - mycel_deprecated_v1:tests/test_worktree_cli.py
-  - mycel_deprecated_v1:mycel/knowledge/clustering.py
-  - mycel_deprecated_v1:mycel/completion_client.py
-  - mycel_deprecated_v1:mycel/knowledge/chunker.py
-  - mycel_deprecated_v1:tests/test_completion_routing.py
-  - mycel_deprecated_v1:pyproject.toml
-  - mycel_deprecated_v1:Makefile
-  - mycel_deprecated_v1:README.md
-  - mycel_deprecated_v1:mycel.spec
-  - mycel_deprecated_v1:better-grep.spec
-  - mycel_deprecated_v1:mycel_entry.py
-  - mycel_deprecated_v1:better_grep_entry.py
-  - mycel_deprecated_v1:mycel/__main__.py
 ---
 # v1 Mycel inventory: the sync pass, settings, repository scope, commands and summaries
 
-What Mycel version 1 does, read from the deprecated source on 7 October 2026. It is evidence for the [specifications](../specs/README.md), not a description of Mycel 2. Source Refs name the deprecated repository as `mycel_deprecated_v1:`; that repository is not indexed, so they are locators for a reader and do not become edges.
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/syncpass.py`
+- `mycel_deprecated_v1:mycel/knowledge/store.py`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py`
+- `mycel_deprecated_v1:mycel/retrieval.py`
+- `mycel_deprecated_v1:mycel/cli.py`
+- `mycel_deprecated_v1:tests/test_command_executor.py`
+- `mycel_deprecated_v1:mycel/command_executor.py`
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py`
+- `mycel_deprecated_v1:mycel/config.py`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py`
+- `mycel_deprecated_v1:mycel/organizations.py`
+- `mycel_deprecated_v1:tests/test_config_ownership.py`
+- `mycel_deprecated_v1:tests/test_organizations.py`
+- `mycel_deprecated_v1:mycel/database.py`
+- `mycel_deprecated_v1:mycel/repo_identity.py`
+- `mycel_deprecated_v1:tests/test_database_connection_file.py`
+- `mycel_deprecated_v1:mycel/scope.py`
+- `mycel_deprecated_v1:mycel/locations.py`
+- `mycel_deprecated_v1:tests/test_repository_locations.py`
+- `mycel_deprecated_v1:mycel/better_grep.py`
+- `mycel_deprecated_v1:tests/test_cli_metadata.py`
+- `mycel_deprecated_v1:tests/test_worktree_cli.py`
+- `mycel_deprecated_v1:mycel/knowledge/clustering.py`
+- `mycel_deprecated_v1:mycel/completion_client.py`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py`
+- `mycel_deprecated_v1:tests/test_completion_routing.py`
+- `mycel_deprecated_v1:pyproject.toml`
+- `mycel_deprecated_v1:Makefile`
+- `mycel_deprecated_v1:README.md`
+- `mycel_deprecated_v1:mycel.spec`
+- `mycel_deprecated_v1:better-grep.spec`
+- `mycel_deprecated_v1:mycel_entry.py`
+- `mycel_deprecated_v1:better_grep_entry.py`
+- `mycel_deprecated_v1:mycel/__main__.py`
+
+What Mycel version 1 does, read from the deprecated source on 7 October 2026. It is evidence for the [specifications](../specs/README.md), not a description of Mycel 2. Historical evidence locators name the frozen source as `mycel_deprecated_v1:`. They are ordinary citations outside Source Ref declarations, because deprecated repositories are not indexed and Source Refs may target only enabled repositories.
 
 Source: `~/repos/sylvan-stack/mycel_deprecated_v1`, commit `b3125d0`, working tree clean.
 
@@ -143,26 +145,26 @@ The second element is the pending-embedding count of step 8. The pass itself emb
 
 Identical in both: configuration seed and apply, the `last_sync_ms` column check, the documents refresh including the database-wide `detect()`, code ingest, the `last_sync_ms` stamp, the pending count formula, the activity rule.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/syncpass.py#run_pass
-mycel_deprecated_v1:mycel/syncpass.py#run_repo_pass
-mycel_deprecated_v1:mycel/syncpass.py#_run_coalesced
-mycel_deprecated_v1:mycel/syncpass.py#_repo_lock_key
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
-mycel_deprecated_v1:mycel/syncpass.py#_ensure_last_sync_col
-mycel_deprecated_v1:mycel/syncpass.py#is_container
-mycel_deprecated_v1:mycel/syncpass.py#list_worktrees
-mycel_deprecated_v1:mycel/syncpass.py#corpus_worktree
-mycel_deprecated_v1:mycel/knowledge/store.py#refresh
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code
-mycel_deprecated_v1:mycel/knowledge/store.py#detect
-mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags
-mycel_deprecated_v1:mycel/knowledge/embedder.py#pending_count
-mycel_deprecated_v1:mycel/retrieval.py#search
-mycel_deprecated_v1:mycel/cli.py#_cmd_sync
-mycel_deprecated_v1:tests/test_command_executor.py#test_sync_pass_never_swallows_overlay_cleanup_debt
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/syncpass.py#run_pass`
+- `mycel_deprecated_v1:mycel/syncpass.py#run_repo_pass`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_coalesced`
+- `mycel_deprecated_v1:mycel/syncpass.py#_repo_lock_key`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
+- `mycel_deprecated_v1:mycel/syncpass.py#_ensure_last_sync_col`
+- `mycel_deprecated_v1:mycel/syncpass.py#is_container`
+- `mycel_deprecated_v1:mycel/syncpass.py#list_worktrees`
+- `mycel_deprecated_v1:mycel/syncpass.py#corpus_worktree`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#refresh`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#detect`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#pending_count`
+- `mycel_deprecated_v1:mycel/retrieval.py#search`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_sync`
+- `mycel_deprecated_v1:tests/test_command_executor.py#test_sync_pass_never_swallows_overlay_cleanup_debt`
 
 ---
 
@@ -215,16 +217,16 @@ After command 5 succeeds the function returns `None`.
 - `git --git-dir <container>/.bare worktree list --porcelain` (syncpass.py:46-48).
 - Inside `store.ingest_overlay`, for each overlay worktree: `git -C <wt> merge-base master HEAD`, `git -C <wt> diff --name-status -M <merge-base>`, `git -C <wt> ls-files --others --exclude-standard`, `git -C <wt> merge-base --is-ancestor HEAD master` (store.py:956-1000).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/syncpass.py#refresh_mirror
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
-mycel_deprecated_v1:mycel/syncpass.py#list_worktrees
-mycel_deprecated_v1:mycel/command_executor.py#run
-mycel_deprecated_v1:mycel/command_executor.py#raise_if_unsettled
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_overlay
-mycel_deprecated_v1:tests/test_command_executor.py#test_settled_git_failure_remains_best_effort
-mycel_deprecated_v1:tests/test_command_executor.py#test_cleanup_uncertainty_escapes_best_effort_and_completion_fallbacks
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/syncpass.py#refresh_mirror`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
+- `mycel_deprecated_v1:mycel/syncpass.py#list_worktrees`
+- `mycel_deprecated_v1:mycel/command_executor.py#run`
+- `mycel_deprecated_v1:mycel/command_executor.py#raise_if_unsettled`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_overlay`
+- `mycel_deprecated_v1:tests/test_command_executor.py#test_settled_git_failure_remains_best_effort`
+- `mycel_deprecated_v1:tests/test_command_executor.py#test_cleanup_uncertainty_escapes_best_effort_and_completion_fallbacks`
 
 ---
 
@@ -263,14 +265,14 @@ The only caller, `retrieval.search`, passes no deadline (retrieval.py:152), and 
 
 `retrieval.search(..., freshness=True)` checks the base repository of the request and, unless the search is code-only or the base repository is `mycel`, also the repository named `mycel` (retrieval.py:143-148). A stale repository gets `run_repo_pass(conn, repo, refresh_remotes=False)` (retrieval.py:157-158). `mycel search --only docs` and `better-grep` never run this check (cli.py:52-56; better_grep.py:73).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/syncpass.py#repo_stale
-mycel_deprecated_v1:mycel/syncpass.py#newer_than
-mycel_deprecated_v1:mycel/syncpass.py#_ensure_last_sync_col
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
-mycel_deprecated_v1:mycel/retrieval.py#search
-mycel_deprecated_v1:mycel/knowledge/store.py#now_ms
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/syncpass.py#repo_stale`
+- `mycel_deprecated_v1:mycel/syncpass.py#newer_than`
+- `mycel_deprecated_v1:mycel/syncpass.py#_ensure_last_sync_col`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
+- `mycel_deprecated_v1:mycel/retrieval.py#search`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#now_ms`
 
 ---
 
@@ -340,20 +342,20 @@ The `status` dict passed by the caller is mutated in place:
 
 The pass logs through `logging.getLogger("mycel")` (syncpass.py:25). No code in the command line configures logging. Inferred from the Python standard library default: warnings reach stderr as bare text; `info` lines (`"mycel config applied: ..."`, `"code map regenerated: ..."`, overlay messages) are discarded.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
-mycel_deprecated_v1:mycel/knowledge/code_map.py#build_markdown
-mycel_deprecated_v1:mycel/knowledge/code_map.py#write_map
-mycel_deprecated_v1:mycel/knowledge/store.py#log_activity
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest
-mycel_deprecated_v1:mycel/knowledge/store.py#refresh
-mycel_deprecated_v1:mycel/knowledge/store.py#detect
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_overlay
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending
-mycel_deprecated_v1:mycel/knowledge/raptor.py#build_tree
-mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale
-mycel_deprecated_v1:mycel/config.py#ensure_seeded
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py#build_markdown`
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py#write_map`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#log_activity`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#refresh`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#detect`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_overlay`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#build_tree`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale`
+- `mycel_deprecated_v1:mycel/config.py#ensure_seeded`
 
 ---
 
@@ -451,26 +453,26 @@ In the non-retired code the only writer is `ensure_seeded` (config.py:158-162): 
 
 The file header and module docstring state that any editor, any agent, or "Seqoya Lab" may edit the file (config.py:5-7, 29-33). No such external writer is in this repository.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/config.py#path
-mycel_deprecated_v1:mycel/config.py#load
-mycel_deprecated_v1:mycel/config.py#dumps
-mycel_deprecated_v1:mycel/config.py#write
-mycel_deprecated_v1:mycel/config.py#generate_from_db
-mycel_deprecated_v1:mycel/config.py#apply
-mycel_deprecated_v1:mycel/config.py#ensure_seeded
-mycel_deprecated_v1:mycel/config.py#load_apply
-mycel_deprecated_v1:mycel/config.py#provider_embedder_url
-mycel_deprecated_v1:mycel/config.py#database_dsn
-mycel_deprecated_v1:mycel/knowledge/store.py#set_repo_flags
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#provider_url
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#model_dir
-mycel_deprecated_v1:mycel/organizations.py#configured
-mycel_deprecated_v1:mycel/cli.py#_connect_with_config
-mycel_deprecated_v1:mycel/cli.py#_export_dsn
-mycel_deprecated_v1:tests/test_config_ownership.py#test_mycel_config_does_not_serialize_infer_recipes
-mycel_deprecated_v1:tests/test_organizations.py#test_config_roundtrip_preserves_organizations
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/config.py#path`
+- `mycel_deprecated_v1:mycel/config.py#load`
+- `mycel_deprecated_v1:mycel/config.py#dumps`
+- `mycel_deprecated_v1:mycel/config.py#write`
+- `mycel_deprecated_v1:mycel/config.py#generate_from_db`
+- `mycel_deprecated_v1:mycel/config.py#apply`
+- `mycel_deprecated_v1:mycel/config.py#ensure_seeded`
+- `mycel_deprecated_v1:mycel/config.py#load_apply`
+- `mycel_deprecated_v1:mycel/config.py#provider_embedder_url`
+- `mycel_deprecated_v1:mycel/config.py#database_dsn`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#set_repo_flags`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#provider_url`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#model_dir`
+- `mycel_deprecated_v1:mycel/organizations.py#configured`
+- `mycel_deprecated_v1:mycel/cli.py#_connect_with_config`
+- `mycel_deprecated_v1:mycel/cli.py#_export_dsn`
+- `mycel_deprecated_v1:tests/test_config_ownership.py#test_mycel_config_does_not_serialize_infer_recipes`
+- `mycel_deprecated_v1:tests/test_organizations.py#test_config_roundtrip_preserves_organizations`
 
 ---
 
@@ -528,20 +530,20 @@ Schema statements outside that block:
 
 Tables are unqualified `kn_*` names and live in whatever schema the connection's `search_path` selects (store.py:4-6).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/database.py#dsn
-mycel_deprecated_v1:mycel/database.py#configured_dsn
-mycel_deprecated_v1:mycel/database.py#private_dsn
-mycel_deprecated_v1:mycel/database.py#connect
-mycel_deprecated_v1:mycel/config.py#database_dsn
-mycel_deprecated_v1:mycel/cli.py#_export_dsn
-mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema
-mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags
-mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index
-mycel_deprecated_v1:mycel/repo_identity.py#migrate_arbol
-mycel_deprecated_v1:tests/test_database_connection_file.py#test_invalid_private_configuration_never_falls_back
-mycel_deprecated_v1:tests/test_database_connection_file.py#test_explicit_pinned_environment_selects_connection_before_legacy_dsn
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/database.py#dsn`
+- `mycel_deprecated_v1:mycel/database.py#configured_dsn`
+- `mycel_deprecated_v1:mycel/database.py#private_dsn`
+- `mycel_deprecated_v1:mycel/database.py#connect`
+- `mycel_deprecated_v1:mycel/config.py#database_dsn`
+- `mycel_deprecated_v1:mycel/cli.py#_export_dsn`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index`
+- `mycel_deprecated_v1:mycel/repo_identity.py#migrate_arbol`
+- `mycel_deprecated_v1:tests/test_database_connection_file.py#test_invalid_private_configuration_never_falls_back`
+- `mycel_deprecated_v1:tests/test_database_connection_file.py#test_explicit_pinned_environment_selects_connection_before_legacy_dsn`
 
 ---
 
@@ -623,33 +625,33 @@ Overlay branch, `_branch(path, container, env_overlay)` (scope.py:65-76):
 | `mycel` | shared artifact repository added to every unified search | embedder.py:383; retrieval.py:147-148 |
 | `'arbol'` row with `code_subdirs` `daemons, drivers, renderer/apps, cli, tests` | seeded by the schema DDL | store.py:134-143 |
 
-<!-- sources:
-mycel_deprecated_v1:mycel/repo_identity.py#canonical_repo
-mycel_deprecated_v1:mycel/repo_identity.py#canonical_repos
-mycel_deprecated_v1:mycel/repo_identity.py#migrate_arbol
-mycel_deprecated_v1:mycel/scope.py#resolve
-mycel_deprecated_v1:mycel/scope.py#_legacy_scope
-mycel_deprecated_v1:mycel/scope.py#_branch
-mycel_deprecated_v1:mycel/scope.py#_roots
-mycel_deprecated_v1:mycel/locations.py#RepositoryLocations
-mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.scope_bindings
-mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.settings
-mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.organization
-mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.code_root
-mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.artifact_root
-mycel_deprecated_v1:mycel/organizations.py#configured
-mycel_deprecated_v1:mycel/organizations.py#resolve
-mycel_deprecated_v1:mycel/organizations.py#members
-mycel_deprecated_v1:mycel/organizations.py#artifact_root
-mycel_deprecated_v1:mycel/organizations.py#for_path
-mycel_deprecated_v1:mycel/organizations.py#repo_dirs
-mycel_deprecated_v1:mycel/syncpass.py#code_root
-mycel_deprecated_v1:mycel/syncpass.py#artifact_root
-mycel_deprecated_v1:tests/test_repository_locations.py#test_file_overrides_win_over_organization_and_stale_database_flags
-mycel_deprecated_v1:tests/test_repository_locations.py#test_scope_uses_configured_repos_outside_legacy_roots
-mycel_deprecated_v1:tests/test_repository_locations.py#test_duplicate_members_require_explicit_code_root
-mycel_deprecated_v1:tests/test_organizations.py#test_scope_distinguishes_member_and_organization
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/repo_identity.py#canonical_repo`
+- `mycel_deprecated_v1:mycel/repo_identity.py#canonical_repos`
+- `mycel_deprecated_v1:mycel/repo_identity.py#migrate_arbol`
+- `mycel_deprecated_v1:mycel/scope.py#resolve`
+- `mycel_deprecated_v1:mycel/scope.py#_legacy_scope`
+- `mycel_deprecated_v1:mycel/scope.py#_branch`
+- `mycel_deprecated_v1:mycel/scope.py#_roots`
+- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations`
+- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.scope_bindings`
+- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.settings`
+- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.organization`
+- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.code_root`
+- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.artifact_root`
+- `mycel_deprecated_v1:mycel/organizations.py#configured`
+- `mycel_deprecated_v1:mycel/organizations.py#resolve`
+- `mycel_deprecated_v1:mycel/organizations.py#members`
+- `mycel_deprecated_v1:mycel/organizations.py#artifact_root`
+- `mycel_deprecated_v1:mycel/organizations.py#for_path`
+- `mycel_deprecated_v1:mycel/organizations.py#repo_dirs`
+- `mycel_deprecated_v1:mycel/syncpass.py#code_root`
+- `mycel_deprecated_v1:mycel/syncpass.py#artifact_root`
+- `mycel_deprecated_v1:tests/test_repository_locations.py#test_file_overrides_win_over_organization_and_stale_database_flags`
+- `mycel_deprecated_v1:tests/test_repository_locations.py#test_scope_uses_configured_repos_outside_legacy_roots`
+- `mycel_deprecated_v1:tests/test_repository_locations.py#test_duplicate_members_require_explicit_code_root`
+- `mycel_deprecated_v1:tests/test_organizations.py#test_scope_distinguishes_member_and_organization`
 
 ---
 
@@ -888,40 +890,40 @@ no completion provider: the `infer` executable was not found; RAPTOR generation 
 | unified `search` | also checks freshness of, and reads documents from, `mycel` | retrieval.py:147-148; embedder.py:383, 400-405 |
 | function parameters `repo: str = "Arbol"` | 25 signatures in `store.py`, `embedder.py`, `raptor.py`, `fs.py` | for example raptor.py:175, store.py:658 |
 
-<!-- sources:
-mycel_deprecated_v1:mycel/cli.py#main
-mycel_deprecated_v1:mycel/cli.py#search_payload
-mycel_deprecated_v1:mycel/cli.py#_cmd_search
-mycel_deprecated_v1:mycel/cli.py#_cmd_sync
-mycel_deprecated_v1:mycel/cli.py#_cmd_embed
-mycel_deprecated_v1:mycel/cli.py#_cmd_status
-mycel_deprecated_v1:mycel/cli.py#_cmd_activity
-mycel_deprecated_v1:mycel/cli.py#_cmd_drifts
-mycel_deprecated_v1:mycel/cli.py#_cmd_derive
-mycel_deprecated_v1:mycel/cli.py#_cmd_repos
-mycel_deprecated_v1:mycel/cli.py#_cmd_raptor
-mycel_deprecated_v1:mycel/cli.py#_cmd_wt
-mycel_deprecated_v1:mycel/cli.py#_connect_with_config
-mycel_deprecated_v1:mycel/better_grep.py#run
-mycel_deprecated_v1:mycel/better_grep.py#_parse
-mycel_deprecated_v1:mycel/better_grep.py#_semantic_query
-mycel_deprecated_v1:mycel/better_grep.py#main
-mycel_deprecated_v1:mycel/retrieval.py#search
-mycel_deprecated_v1:mycel/retrieval.py#_payload
-mycel_deprecated_v1:mycel/retrieval.py#_read_location
-mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending
-mycel_deprecated_v1:mycel/knowledge/store.py#status
-mycel_deprecated_v1:mycel/knowledge/store.py#list_activity
-mycel_deprecated_v1:mycel/knowledge/store.py#list_drifts
-mycel_deprecated_v1:mycel/knowledge/store.py#assert_derivation
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#status
-mycel_deprecated_v1:mycel/organizations.py#repo_dirs
-mycel_deprecated_v1:tests/test_cli_metadata.py#test_mycel_version
-mycel_deprecated_v1:tests/test_organizations.py#test_search_organization_fans_out_to_each_member
-mycel_deprecated_v1:tests/test_worktree_cli.py#test_worktree_commands_retired_without_connecting
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/cli.py#main`
+- `mycel_deprecated_v1:mycel/cli.py#search_payload`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_search`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_sync`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_embed`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_status`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_activity`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_drifts`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_derive`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_repos`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_raptor`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_wt`
+- `mycel_deprecated_v1:mycel/cli.py#_connect_with_config`
+- `mycel_deprecated_v1:mycel/better_grep.py#run`
+- `mycel_deprecated_v1:mycel/better_grep.py#_parse`
+- `mycel_deprecated_v1:mycel/better_grep.py#_semantic_query`
+- `mycel_deprecated_v1:mycel/better_grep.py#main`
+- `mycel_deprecated_v1:mycel/retrieval.py#search`
+- `mycel_deprecated_v1:mycel/retrieval.py#_payload`
+- `mycel_deprecated_v1:mycel/retrieval.py#_read_location`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#status`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_activity`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_drifts`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#assert_derivation`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#status`
+- `mycel_deprecated_v1:mycel/organizations.py#repo_dirs`
+- `mycel_deprecated_v1:tests/test_cli_metadata.py#test_mycel_version`
+- `mycel_deprecated_v1:tests/test_organizations.py#test_search_organization_fans_out_to_each_member`
+- `mycel_deprecated_v1:tests/test_worktree_cli.py#test_worktree_commands_retired_without_connecting`
 
 ---
 
@@ -1052,35 +1054,35 @@ Generation edge, `store.derive(conn, summary_id, member_id, kind="generated")` (
 
 Membership is fixed between builds: new corpus chunks join no summary until the next `build` (raptor.py:318-320).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/clustering.py#cluster
-mycel_deprecated_v1:mycel/knowledge/raptor.py#build_tree
-mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale
-mycel_deprecated_v1:mycel/knowledge/raptor.py#plan_build
-mycel_deprecated_v1:mycel/knowledge/raptor.py#plan_regen
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_instruction
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_raptor_prompts
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_prompt_sections
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_clear
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_summary_doc_id
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_insert_summary
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_stale_members
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_worker_connection
-mycel_deprecated_v1:mycel/completion_client.py#_infer_bin
-mycel_deprecated_v1:mycel/completion_client.py#_run_infer
-mycel_deprecated_v1:mycel/completion_client.py#run
-mycel_deprecated_v1:mycel/completion_client.py#available
-mycel_deprecated_v1:mycel/command_executor.py#run
-mycel_deprecated_v1:mycel/command_executor.py#install_executor
-mycel_deprecated_v1:mycel/knowledge/store.py#derive
-mycel_deprecated_v1:mycel/knowledge/store.py#detect
-mycel_deprecated_v1:mycel/knowledge/store.py#count_stale_summaries
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed
-mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_frontmatter
-mycel_deprecated_v1:mycel/cli.py#_cmd_raptor
-mycel_deprecated_v1:tests/test_completion_routing.py#test_run_infer_contract
-mycel_deprecated_v1:tests/test_command_executor.py#test_completion_keeps_recipe_input_and_output_contract
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/clustering.py#cluster`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#build_tree`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#plan_build`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#plan_regen`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_instruction`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_raptor_prompts`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_prompt_sections`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_clear`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_summary_doc_id`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_insert_summary`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_stale_members`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_worker_connection`
+- `mycel_deprecated_v1:mycel/completion_client.py#_infer_bin`
+- `mycel_deprecated_v1:mycel/completion_client.py#_run_infer`
+- `mycel_deprecated_v1:mycel/completion_client.py#run`
+- `mycel_deprecated_v1:mycel/completion_client.py#available`
+- `mycel_deprecated_v1:mycel/command_executor.py#run`
+- `mycel_deprecated_v1:mycel/command_executor.py#install_executor`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#derive`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#detect`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#count_stale_summaries`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_frontmatter`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_raptor`
+- `mycel_deprecated_v1:tests/test_completion_routing.py#test_run_infer_contract`
+- `mycel_deprecated_v1:tests/test_command_executor.py#test_completion_keeps_recipe_input_and_output_contract`
 
 ---
 
@@ -1126,19 +1128,19 @@ No test exercises `run_pass` or `run_repo_pass` on their normal path, the git se
 
 `README.md` (lines 30-32) says `.github/workflows/test-and-build.yml` runs the tests, enforces "the Arbol implementation boundary", builds the executables and smoke-tests their metadata. The repository contains no `.github` directory, and `git log --all -- .github` lists no commit. What CI enforced cannot be read from this repository.
 
-<!-- sources:
-mycel_deprecated_v1:pyproject.toml
-mycel_deprecated_v1:Makefile
-mycel_deprecated_v1:README.md
-mycel_deprecated_v1:mycel.spec
-mycel_deprecated_v1:better-grep.spec
-mycel_deprecated_v1:mycel_entry.py
-mycel_deprecated_v1:better_grep_entry.py
-mycel_deprecated_v1:mycel/__main__.py
-mycel_deprecated_v1:mycel/cli.py#main
-mycel_deprecated_v1:mycel/better_grep.py#main
-mycel_deprecated_v1:tests/test_cli_metadata.py#test_better_grep_version
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:pyproject.toml`
+- `mycel_deprecated_v1:Makefile`
+- `mycel_deprecated_v1:README.md`
+- `mycel_deprecated_v1:mycel.spec`
+- `mycel_deprecated_v1:better-grep.spec`
+- `mycel_deprecated_v1:mycel_entry.py`
+- `mycel_deprecated_v1:better_grep_entry.py`
+- `mycel_deprecated_v1:mycel/__main__.py`
+- `mycel_deprecated_v1:mycel/cli.py#main`
+- `mycel_deprecated_v1:mycel/better_grep.py#main`
+- `mycel_deprecated_v1:tests/test_cli_metadata.py#test_better_grep_version`
 
 ---
 
@@ -1226,44 +1228,44 @@ Each item says what the code does and where. "Inferred" marks a consequence I de
 58. **The version is declared twice** (`pyproject.toml:7`, `mycel/__init__.py:3`).
 59. **`.venv/pyvenv.cfg` records a creation path of `.../sylvan-stack/mycel/.venv`**, the directory name before the repository was renamed; this is an environment artefact, not source.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/syncpass.py#refresh_mirror
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
-mycel_deprecated_v1:mycel/syncpass.py#newer_than
-mycel_deprecated_v1:mycel/syncpass.py#repo_stale
-mycel_deprecated_v1:mycel/cli.py#main
-mycel_deprecated_v1:mycel/cli.py#_cmd_raptor
-mycel_deprecated_v1:mycel/cli.py#_cmd_repos
-mycel_deprecated_v1:mycel/cli.py#_export_dsn
-mycel_deprecated_v1:mycel/cli.py#_connect_with_config
-mycel_deprecated_v1:mycel/cli.py#search_payload
-mycel_deprecated_v1:mycel/better_grep.py#main
-mycel_deprecated_v1:mycel/better_grep.py#run
-mycel_deprecated_v1:better_grep_entry.py
-mycel_deprecated_v1:mycel/config.py#apply
-mycel_deprecated_v1:mycel/config.py#dumps
-mycel_deprecated_v1:mycel/config.py#database_dsn
-mycel_deprecated_v1:mycel/database.py#dsn
-mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.scope_bindings
-mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.settings
-mycel_deprecated_v1:mycel/knowledge/raptor.py#build_tree
-mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_prompt_sections
-mycel_deprecated_v1:mycel/completion_client.py#_run_infer
-mycel_deprecated_v1:mycel/knowledge/code_map.py#write_map
-mycel_deprecated_v1:mycel/knowledge/store.py#detect
-mycel_deprecated_v1:mycel/knowledge/store.py#refresh
-mycel_deprecated_v1:mycel/knowledge/store.py#track_source
-mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts
-mycel_deprecated_v1:mycel/knowledge/store.py#set_repo_flags
-mycel_deprecated_v1:mycel/knowledge/store.py#status
-mycel_deprecated_v1:mycel/knowledge/store.py#list_activity
-mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending
-mycel_deprecated_v1:mycel/retrieval.py#search
-mycel_deprecated_v1:README.md
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/syncpass.py#refresh_mirror`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
+- `mycel_deprecated_v1:mycel/syncpass.py#newer_than`
+- `mycel_deprecated_v1:mycel/syncpass.py#repo_stale`
+- `mycel_deprecated_v1:mycel/cli.py#main`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_raptor`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_repos`
+- `mycel_deprecated_v1:mycel/cli.py#_export_dsn`
+- `mycel_deprecated_v1:mycel/cli.py#_connect_with_config`
+- `mycel_deprecated_v1:mycel/cli.py#search_payload`
+- `mycel_deprecated_v1:mycel/better_grep.py#main`
+- `mycel_deprecated_v1:mycel/better_grep.py#run`
+- `mycel_deprecated_v1:better_grep_entry.py`
+- `mycel_deprecated_v1:mycel/config.py#apply`
+- `mycel_deprecated_v1:mycel/config.py#dumps`
+- `mycel_deprecated_v1:mycel/config.py#database_dsn`
+- `mycel_deprecated_v1:mycel/database.py#dsn`
+- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.scope_bindings`
+- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations.settings`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#build_tree`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_prompt_sections`
+- `mycel_deprecated_v1:mycel/completion_client.py#_run_infer`
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py#write_map`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#detect`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#refresh`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#track_source`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#set_repo_flags`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#status`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_activity`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending`
+- `mycel_deprecated_v1:mycel/retrieval.py#search`
+- `mycel_deprecated_v1:README.md`
 
 ---
 
@@ -1283,14 +1285,14 @@ mycel_deprecated_v1:README.md
 12. How chunk boundaries, embedding batches and ranking work in detail. `store.py`, `embedder.py`, `chunker.py` and `code_chunker.py` were read only where the commands in this inventory call them.
 13. Whether `psycopg` accepts the multi-statement `DDL` string in one `execute` under all configurations; the code relies on it (store.py:201).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/cli.py#_cmd_raptor
-mycel_deprecated_v1:mycel/completion_client.py#_run_infer
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_instruction
-mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts
-mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema
-mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags
-mycel_deprecated_v1:mycel/command_executor.py#install_executor
-mycel_deprecated_v1:mycel/database.py#connect
-mycel_deprecated_v1:README.md
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_raptor`
+- `mycel_deprecated_v1:mycel/completion_client.py#_run_infer`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_instruction`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags`
+- `mycel_deprecated_v1:mycel/command_executor.py#install_executor`
+- `mycel_deprecated_v1:mycel/database.py#connect`
+- `mycel_deprecated_v1:README.md`

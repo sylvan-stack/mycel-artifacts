@@ -1,21 +1,23 @@
 ---
 role: derived
-sources:
-  - mycel_deprecated_v1:mycel/knowledge/store.py
-  - mycel_deprecated_v1:mycel/repo_identity.py
-  - mycel_deprecated_v1:mycel/syncpass.py
-  - mycel_deprecated_v1:mycel/knowledge/embedder.py
-  - mycel_deprecated_v1:mycel/database.py
-  - mycel_deprecated_v1:mycel/knowledge/chunker.py
-  - mycel_deprecated_v1:mycel/knowledge/fs.py
-  - mycel_deprecated_v1:mycel/knowledge/code_chunker.py
-  - mycel_deprecated_v1:mycel/knowledge/raptor.py
-  - mycel_deprecated_v1:mycel/cli.py
-  - mycel_deprecated_v1:mycel/knowledge/code_map.py
 ---
 # v1 Mycel inventory: ingest, chunking, identity and the knowledge graph
 
-What Mycel version 1 does, read from the deprecated source on 7 October 2026. It is evidence for the [specifications](../specs/README.md), not a description of Mycel 2. Source Refs name the deprecated repository as `mycel_deprecated_v1:`; that repository is not indexed, so they are locators for a reader and do not become edges. The scripts behind the runs marked **(probe)** and **(stub run)** are in [`v1-probes-2026-10-07/`](v1-probes-2026-10-07/README.md).
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py`
+- `mycel_deprecated_v1:mycel/repo_identity.py`
+- `mycel_deprecated_v1:mycel/syncpass.py`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py`
+- `mycel_deprecated_v1:mycel/database.py`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py`
+- `mycel_deprecated_v1:mycel/knowledge/fs.py`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py`
+- `mycel_deprecated_v1:mycel/cli.py`
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py`
+
+What Mycel version 1 does, read from the deprecated source on 7 October 2026. It is evidence for the [specifications](../specs/README.md), not a description of Mycel 2. Historical evidence locators name the frozen source as `mycel_deprecated_v1:`. They are ordinary citations outside Source Ref declarations, because deprecated repositories are not indexed and Source Refs may target only enabled repositories. The scripts behind the runs marked **(probe)** and **(stub run)** are in [`v1-probes-2026-10-07/`](v1-probes-2026-10-07/README.md).
 
 Source: `~/repos/sylvan-stack/mycel_deprecated_v1` at commit `b3125d0` (working tree clean). Files read completely: `mycel/knowledge/store.py` (1171 lines), `chunker.py` (190), `code_chunker.py` (251), `fs.py` (120), `code_map.py` (99). Read in part, only where the five files depend on them: `mycel/repo_identity.py` (all), `mycel/locations.py` (all), `mycel/knowledge/__init__.py` (all), `mycel/syncpass.py` (lines 100-116 and 120-340), `mycel/database.py` (60-86), `mycel/knowledge/raptor.py` (60-120, 380-405), `mycel/knowledge/embedder.py` (306-330), `mycel/cli.py` (160-210). Callers were located with text searches over `mycel/` and `tests/`.
 
@@ -104,19 +106,19 @@ Indexes: `kn_chunks_doc (document_id)` (store.py:56); `kn_chunks_embedding USING
 - `migrate_arbol` (repo_identity.py:26-66) folds the legacy namespace `'Arbol'` (and `'Arbol@...'`) into `'arbol'`: it raises `ValueError` when the two namespaces hold a present document at the same path with a different hash or source type, or overlay rows for the same branch that differ; otherwise it marks the `'arbol'` duplicate documents `orphaned` and their chunks `absent`, rewrites `repo` on documents and chunks, merges `kn_overlays` rows, and renames or deletes the `'Arbol'` row in `kn_repos`.
 - `list_repo_flags` and `set_repo_flags` execute `ALTER TABLE kn_repos ADD COLUMN IF NOT EXISTS artifact_root TEXT` on every call (store.py:1063, 1093, 1096).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema
-mycel_deprecated_v1:mycel/knowledge/store.py#ulid
-mycel_deprecated_v1:mycel/knowledge/store.py#now_ms
-mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags
-mycel_deprecated_v1:mycel/knowledge/store.py#set_repo_flags
-mycel_deprecated_v1:mycel/knowledge/store.py#log_activity
-mycel_deprecated_v1:mycel/knowledge/store.py#list_activity
-mycel_deprecated_v1:mycel/repo_identity.py#migrate_arbol
-mycel_deprecated_v1:mycel/syncpass.py#_ensure_last_sync_col
-mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index
-mycel_deprecated_v1:mycel/database.py#connect
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ulid`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#now_ms`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#set_repo_flags`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#log_activity`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_activity`
+- `mycel_deprecated_v1:mycel/repo_identity.py#migrate_arbol`
+- `mycel_deprecated_v1:mycel/syncpass.py#_ensure_last_sync_col`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index`
+- `mycel_deprecated_v1:mycel/database.py#connect`
 
 ## 2. Scan
 
@@ -170,23 +172,23 @@ There are two independent scans: a Markdown scan of the Artifact Corpus (`ingest
 - `fs.write`, `fs.rename` and `fs.remove` change a file under the corpus root, then call `store.ingest` for the whole corpus and `store.detect` (fs.py:62-120). `fs` confines paths with `_safe`, which resolves the path and raises `ValueError("path escapes corpus root: ...")` when the result is outside the root (fs.py:25-32). `fs.tree` lists every non-hidden entry of any file type, directories first, by lower-cased name (fs.py:35-51). `fs.remove` deletes a file with `unlink` or a directory with `shutil.rmtree` (fs.py:115-118).
 - `track_source(conn, path, source_type='code', read_path=None)` (store.py:386-405) reads one file, hashes it and writes the hash to a `kn_documents` row found by `path=%s AND source_type=%s ORDER BY (state='present') DESC, last_seen DESC`; it inserts a new row when none exists. The lookup has no `repo` predicate and the insert sets no `repo`.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/store.py#_scan_corpus
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest
-mycel_deprecated_v1:mycel/knowledge/store.py#_scan_code
-mycel_deprecated_v1:mycel/knowledge/store.py#_lang_of
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code
-mycel_deprecated_v1:mycel/knowledge/store.py#track_source
-mycel_deprecated_v1:mycel/knowledge/store.py#refresh
-mycel_deprecated_v1:mycel/knowledge/chunker.py#sha
-mycel_deprecated_v1:mycel/knowledge/fs.py#_safe
-mycel_deprecated_v1:mycel/knowledge/fs.py#tree
-mycel_deprecated_v1:mycel/knowledge/fs.py#write
-mycel_deprecated_v1:mycel/knowledge/fs.py#rename
-mycel_deprecated_v1:mycel/knowledge/fs.py#remove
-mycel_deprecated_v1:mycel/knowledge/fs.py#_after_mutation
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_scan_corpus`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_scan_code`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_lang_of`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#track_source`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#refresh`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#sha`
+- `mycel_deprecated_v1:mycel/knowledge/fs.py#_safe`
+- `mycel_deprecated_v1:mycel/knowledge/fs.py#tree`
+- `mycel_deprecated_v1:mycel/knowledge/fs.py#write`
+- `mycel_deprecated_v1:mycel/knowledge/fs.py#rename`
+- `mycel_deprecated_v1:mycel/knowledge/fs.py#remove`
+- `mycel_deprecated_v1:mycel/knowledge/fs.py#_after_mutation`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
 
 ## 3. Markdown chunking
 
@@ -268,15 +270,15 @@ zeta:docs/limits.md#Backoff
 -->
 ```
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/chunker.py#chunk_markdown
-mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_frontmatter
-mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_source_refs
-mycel_deprecated_v1:mycel/knowledge/chunker.py#norm
-mycel_deprecated_v1:mycel/knowledge/chunker.py#sha
-mycel_deprecated_v1:mycel/knowledge/chunker.py#content_hash
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#chunk_markdown`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_frontmatter`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_source_refs`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#norm`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#sha`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#content_hash`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest`
 
 ## 4. Code chunking
 
@@ -330,18 +332,18 @@ mycel_deprecated_v1:mycel/knowledge/store.py#ingest
 - Failure: any exception while obtaining the parser or parsing → one `<file>` chunk; observed with the grammar package missing **(probe)**. A file with no chunks also returns `_whole_file`.
 - Observed **(probe)** on fictional sources: overload signatures land in a module run and only the implementation is a `function` chunk; `let one = () => 1, two = () => 2;` is one chunk named `one`; a class field declared after the first method is a module run; the closing `}` of a class with methods is a module run of its own; a getter and setter pair gives two chunks with the same symbol; a computed method name is kept verbatim (`Service.[Symbol.iterator]`); a non-exported `namespace`, a `declare` statement, an anonymous `export default function` and an anonymous default class are module runs; a one-line class with two methods gives two method chunks with identical text and no header; a file with syntax errors is still chunked from whatever nodes the parser produced.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_code
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_chunk
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_whole_file
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_uncovered_runs
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_python
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_svelte
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_ts_parser
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_ts_name
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_typescript
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_code`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_chunk`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_whole_file`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_uncovered_runs`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_python`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_svelte`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_ts_parser`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_ts_name`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_typescript`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code`
 
 ## 5. Identity reconciliation
 
@@ -390,15 +392,15 @@ The two matching rules are applied per chunk in one pass, not as two rounds over
 
 Matching is by natural key only: there is no rename detection, no identity log, no run record, and `last_status`, `prev_natural_key`, `last_run` stay `NULL`. A symbol that disappears and comes back gets a new id, because only present rows are loaded. The return value is `{files, chunks, added, updated, removed, items}`.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code
-mycel_deprecated_v1:mycel/knowledge/store.py#track_source
-mycel_deprecated_v1:mycel/knowledge/store.py#drop_overlay
-mycel_deprecated_v1:mycel/knowledge/chunker.py#chunk_markdown
-mycel_deprecated_v1:mycel/knowledge/chunker.py#content_hash
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_clear
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#track_source`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#drop_overlay`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#chunk_markdown`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#content_hash`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_clear`
 
 ## 6. Roles and states
 
@@ -435,18 +437,18 @@ Transitions:
 
 Readers of these keys in the files read: `detect` reads chunk `heartwood` and `generated` (store.py:535-537); `status` counts present documents with `heartwood` (store.py:1123-1124); `chunks_view` returns a document's `implemented` / `outdated` and a chunk's `unresolved_sources` (store.py:775-781); `ingest` selects chunks by `meta ? 'unresolved_sources'` (store.py:266-267, 343-344). RAPTOR excludes chunks with `heartwood` or `generated` from clustering (raptor.py:198, 427).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code
-mycel_deprecated_v1:mycel/knowledge/store.py#_sync_declared_edges
-mycel_deprecated_v1:mycel/knowledge/store.py#derive
-mycel_deprecated_v1:mycel/knowledge/store.py#detect
-mycel_deprecated_v1:mycel/knowledge/store.py#status
-mycel_deprecated_v1:mycel/knowledge/store.py#chunks_view
-mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_frontmatter
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_insert_summary
-mycel_deprecated_v1:mycel/repo_identity.py#migrate_arbol
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_sync_declared_edges`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#derive`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#detect`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#status`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#chunks_view`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_frontmatter`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_insert_summary`
+- `mycel_deprecated_v1:mycel/repo_identity.py#migrate_arbol`
 
 ## 7. Source Refs and derivations
 
@@ -510,21 +512,21 @@ The symbol is compared with the full heading path (`A > B`) or with the bare hea
 
 **Traversal helpers.** `impact(conn, root)` and `lineage(conn, leaf)` are recursive queries over `kn_derivations` returning ids with their minimum depth (store.py:569-580). `_label` renders a chunk as `{document path} › {natural_key}` and a document as `[{source_type}] {path}` (store.py:377-383).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/store.py#_resolve_source_ref
-mycel_deprecated_v1:mycel/knowledge/store.py#_sync_declared_edges
-mycel_deprecated_v1:mycel/knowledge/store.py#_parent_hash
-mycel_deprecated_v1:mycel/knowledge/store.py#_label
-mycel_deprecated_v1:mycel/knowledge/store.py#derive
-mycel_deprecated_v1:mycel/knowledge/store.py#assert_derivation
-mycel_deprecated_v1:mycel/knowledge/store.py#impact
-mycel_deprecated_v1:mycel/knowledge/store.py#lineage
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest
-mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_source_refs
-mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_frontmatter
-mycel_deprecated_v1:mycel/repo_identity.py#canonical_repo
-mycel_deprecated_v1:mycel/cli.py#_cmd_derive
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_resolve_source_ref`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_sync_declared_edges`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_parent_hash`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_label`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#derive`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#assert_derivation`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#impact`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#lineage`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_source_refs`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_frontmatter`
+- `mycel_deprecated_v1:mycel/repo_identity.py#canonical_repo`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_derive`
 
 ## 8. Detection and drifts
 
@@ -562,20 +564,20 @@ Details of the rules:
 
 **Reporting.** `refresh` returns every present stale chunk of the repository as an item `{repo, path, detail: natural_key, reason: stale_because, action: "stale", file_path}` (store.py:677-687). `fs.write` returns the labels of the repository's present stale chunks (fs.py:72-77). `count_stale_summaries` counts present stale summary chunks (store.py:1102-1109). `status` returns `documents, chunks, stale, edges, open_drifts, heartwood` (store.py:1112-1126).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/store.py#detect
-mycel_deprecated_v1:mycel/knowledge/store.py#_parent_hash
-mycel_deprecated_v1:mycel/knowledge/store.py#_drift_sources
-mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts
-mycel_deprecated_v1:mycel/knowledge/store.py#list_drifts
-mycel_deprecated_v1:mycel/knowledge/store.py#refresh
-mycel_deprecated_v1:mycel/knowledge/store.py#count_stale_summaries
-mycel_deprecated_v1:mycel/knowledge/store.py#status
-mycel_deprecated_v1:mycel/knowledge/store.py#drop_overlay
-mycel_deprecated_v1:mycel/knowledge/fs.py#write
-mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale
-mycel_deprecated_v1:mycel/cli.py#_cmd_drifts
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#detect`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_parent_hash`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_drift_sources`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_drifts`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#refresh`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#count_stale_summaries`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#status`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#drop_overlay`
+- `mycel_deprecated_v1:mycel/knowledge/fs.py#write`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_drifts`
 
 ## 9. Code map
 
@@ -608,13 +610,13 @@ A file that has only `module`, `markup`, `style` or `file` chunks does not appea
 
 **What ingest then makes of it** (inferred from sections 3, 6 and 7): the file is ingested as an ordinary Markdown document on a later Markdown ingest; its three frontmatter lines form the `(preamble)` chunk; `generated: true` lands in the `meta` of every chunk, which exempts them from `detect` and from RAPTOR clustering; each directory chunk gets one `declared` edge per listed code document and `role='derived'`.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/code_map.py#build_markdown
-mycel_deprecated_v1:mycel/knowledge/code_map.py#write_map
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
-mycel_deprecated_v1:mycel/syncpass.py#run_pass
-mycel_deprecated_v1:mycel/syncpass.py#run_repo_pass
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py#build_markdown`
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py#write_map`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
+- `mycel_deprecated_v1:mycel/syncpass.py#run_pass`
+- `mycel_deprecated_v1:mycel/syncpass.py#run_repo_pass`
 
 ## 10. Branch overlays
 
@@ -627,15 +629,15 @@ Retired feature; summary only.
 - `drop_overlay` hard-deletes the overlay's identity-log rows, derivations (by child), drifts, chunks, documents and registry row (store.py:1026-1046). `list_overlays` lists registry rows with chunk and embedded counts.
 - The sync pass auto-registers an overlay for each worktree it finds, re-diffs every registered overlay on each pass, and drops overlays whose worktree directory is gone (syncpass.py:278-334).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/store.py#overlay_ns
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_overlay
-mycel_deprecated_v1:mycel/knowledge/store.py#list_overlays
-mycel_deprecated_v1:mycel/knowledge/store.py#drop_overlay
-mycel_deprecated_v1:mycel/knowledge/store.py#overlay_paths
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#overlay_ns`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_overlay`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_overlays`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#drop_overlay`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#overlay_paths`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
 
 ## Surprises and defects
 
@@ -690,43 +692,43 @@ Ordered by how much they change what a reader would assume. Unless marked **(pro
 33. **Overlay docstrings contradicted.** `ingest_code` and `ingest_overlay` say files reverted to master drop out through the reconcile, but the removed-file reconcile runs only when `only_files is None` (store.py:839-842, 917, 945-946). The DDL comment says overlays are exempt from detection; `detect` has no namespace filter.
 34. **Code map.** The `(no top-level symbols)` branch is unreachable because a file appears only through a symbol row (code_map.py:71). The docstring says the map is written "whenever the code corpus changed"; it is rebuilt and compared on every full pass. `write_map` creates the artifact root directory when it does not exist (inferred from `os.makedirs`, code_map.py:94).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/store.py#refresh
-mycel_deprecated_v1:mycel/knowledge/store.py#track_source
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code
-mycel_deprecated_v1:mycel/knowledge/store.py#_sync_declared_edges
-mycel_deprecated_v1:mycel/knowledge/store.py#_resolve_source_ref
-mycel_deprecated_v1:mycel/knowledge/store.py#_parent_hash
-mycel_deprecated_v1:mycel/knowledge/store.py#derive
-mycel_deprecated_v1:mycel/knowledge/store.py#detect
-mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts
-mycel_deprecated_v1:mycel/knowledge/store.py#_drift_sources
-mycel_deprecated_v1:mycel/knowledge/store.py#impact
-mycel_deprecated_v1:mycel/knowledge/store.py#lineage
-mycel_deprecated_v1:mycel/knowledge/store.py#_scan_corpus
-mycel_deprecated_v1:mycel/knowledge/store.py#_scan_code
-mycel_deprecated_v1:mycel/knowledge/store.py#_lang_of
-mycel_deprecated_v1:mycel/knowledge/store.py#ulid
-mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema
-mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags
-mycel_deprecated_v1:mycel/knowledge/store.py#set_repo_flags
-mycel_deprecated_v1:mycel/knowledge/store.py#status
-mycel_deprecated_v1:mycel/knowledge/store.py#chunks_view
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_overlay
-mycel_deprecated_v1:mycel/knowledge/chunker.py#chunk_markdown
-mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_frontmatter
-mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_source_refs
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_python
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_svelte
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_typescript
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_whole_file
-mycel_deprecated_v1:mycel/knowledge/code_map.py#build_markdown
-mycel_deprecated_v1:mycel/knowledge/code_map.py#write_map
-mycel_deprecated_v1:mycel/knowledge/fs.py#write
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
-mycel_deprecated_v1:mycel/database.py#connect
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#refresh`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#track_source`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_sync_declared_edges`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_resolve_source_ref`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_parent_hash`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#derive`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#detect`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_drift_sources`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#impact`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#lineage`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_scan_corpus`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_scan_code`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_lang_of`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ulid`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#set_repo_flags`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#status`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#chunks_view`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_overlay`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#chunk_markdown`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_frontmatter`
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py#parse_source_refs`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_python`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_svelte`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_typescript`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#_whole_file`
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py#build_markdown`
+- `mycel_deprecated_v1:mycel/knowledge/code_map.py#write_map`
+- `mycel_deprecated_v1:mycel/knowledge/fs.py#write`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
+- `mycel_deprecated_v1:mycel/database.py#connect`
 
 ## Not established
 
@@ -741,16 +743,16 @@ mycel_deprecated_v1:mycel/database.py#connect
 - **tree-sitter coverage.** The TypeScript probe covered the constructs listed in section 4 with the grammar versions installed in the repository's `.venv`. Other constructs and other grammar versions were not examined.
 - **Git mirror refresh.** It runs between `refresh` and `ingest_code` and decides whether item 1 bites; its conditions and its 600-second throttle (`_MIRROR_REFRESH_SECONDS`, syncpass.py:91) were read only in passing (syncpass.py:94-133, 254-261).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code
-mycel_deprecated_v1:mycel/knowledge/store.py#refresh
-mycel_deprecated_v1:mycel/knowledge/store.py#detect
-mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts
-mycel_deprecated_v1:mycel/knowledge/store.py#_scan_corpus
-mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_typescript
-mycel_deprecated_v1:mycel/syncpass.py#refresh_mirror
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
-mycel_deprecated_v1:mycel/database.py#connect
-mycel_deprecated_v1:mycel/cli.py#_cmd_derive
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#refresh`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#detect`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#_scan_corpus`
+- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py#chunk_typescript`
+- `mycel_deprecated_v1:mycel/syncpass.py#refresh_mirror`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
+- `mycel_deprecated_v1:mycel/database.py#connect`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_derive`

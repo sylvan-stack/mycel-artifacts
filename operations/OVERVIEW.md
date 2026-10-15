@@ -50,6 +50,29 @@ One page to (re)load the whole mental model. Each section is two sentences of
   minimums and maximums. Defined once, named in a request, overridden limit
   by limit; separate from which model does the work.
 
+## Working in Linear
+
+- **[Organize Linear Navigation](linear-organize.md)** — a prominent
+  **Needs your attention** entry shows individual open questions, pending
+  decisions, reviews, and actions with the next step and source link.
+  Tidying project references supports that outcome; the guide verifies both
+  actionable content and visible access, while the [runbook](../tools/linear.md)
+  covers connector and UI mechanics.
+
+- **[Resolve Linear Comments](linear-resolve.md)** — the owner comments on
+  specifications, issues and project pages in Linear; a run collects every
+  open thread, makes the change a comment recommends or answers it, and gives
+  the user a numbered list of comments and responses in the session. The
+  discussion stays in the session; a thread gets `Resolved. Resolution: …`
+  only after the user says `Resolved`, and the owner closes it in Linear.
+
+- **[Answer Open Questions from Linear](linear-open-questions.md)** — the
+  questions and pending decisions that wait for the owner are spread over
+  specifications, issues and comments; a run collects them and gives one
+  numbered list in the session, each item written so it can be answered
+  without opening Linear. The user answers by number, and each answer is
+  written to the place its question is recorded in.
+
 ## How it compounds
 
 Retrieval gets smarter through documents, not tuning: jargon the code never
@@ -80,7 +103,8 @@ policy is represented in each provider's supported metadata.
 Distinct task shapes have thin skills
 routing through the Hub: `/code-research`, `/deep-research`,
 `/mycel-search`, `/corpus-admin`, `/authored-work-integration`,
-`/pr-deep-review`, `/create-mycel-skill`.
+`/pr-deep-review`, `/create-mycel-skill`,
+`/linear-resolve`, `/linear-organize`, `/linear-open-questions`.
 Skills carry only *when to trigger*; the process always lives here, in Mycel.
 
 <!-- sources:

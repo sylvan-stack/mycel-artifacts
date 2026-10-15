@@ -1,26 +1,28 @@
 ---
 role: derived
-sources:
-  - mycel_deprecated_v1:mycel/knowledge/embedder.py
-  - mycel_deprecated_v1:mycel/macos_keychain.py
-  - mycel_deprecated_v1:mycel/knowledge/store.py
-  - mycel_deprecated_v1:mycel/database.py
-  - mycel_deprecated_v1:mycel/repo_identity.py
-  - mycel_deprecated_v1:mycel/cli.py
-  - mycel_deprecated_v1:mycel/knowledge/raptor.py
-  - mycel_deprecated_v1:mycel/knowledge/local_embedder.py
-  - mycel_deprecated_v1:mycel/config.py
-  - mycel_deprecated_v1:mycel/retrieval.py
-  - mycel_deprecated_v1:mycel/syncpass.py
-  - mycel_deprecated_v1:mycel/scope.py
-  - mycel_deprecated_v1:mycel/organizations.py
-  - mycel_deprecated_v1:mycel/better_grep.py
-  - mycel_deprecated_v1:better_grep_entry.py
-  - mycel_deprecated_v1:mycel/locations.py
 ---
 # v1 Mycel inventory: embedding and retrieval
 
-What Mycel version 1 does, read from the deprecated source on 7 October 2026. It is evidence for the [specifications](../specs/README.md), not a description of Mycel 2. Source Refs name the deprecated repository as `mycel_deprecated_v1:`; that repository is not indexed, so they are locators for a reader and do not become edges.
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py`
+- `mycel_deprecated_v1:mycel/macos_keychain.py`
+- `mycel_deprecated_v1:mycel/knowledge/store.py`
+- `mycel_deprecated_v1:mycel/database.py`
+- `mycel_deprecated_v1:mycel/repo_identity.py`
+- `mycel_deprecated_v1:mycel/cli.py`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py`
+- `mycel_deprecated_v1:mycel/config.py`
+- `mycel_deprecated_v1:mycel/retrieval.py`
+- `mycel_deprecated_v1:mycel/syncpass.py`
+- `mycel_deprecated_v1:mycel/scope.py`
+- `mycel_deprecated_v1:mycel/organizations.py`
+- `mycel_deprecated_v1:mycel/better_grep.py`
+- `mycel_deprecated_v1:better_grep_entry.py`
+- `mycel_deprecated_v1:mycel/locations.py`
+
+What Mycel version 1 does, read from the deprecated source on 7 October 2026. It is evidence for the [specifications](../specs/README.md), not a description of Mycel 2. Historical evidence locators name the frozen source as `mycel_deprecated_v1:`. They are ordinary citations outside Source Ref declarations, because deprecated repositories are not indexed and Source Refs may target only enabled repositories.
 
 Evidence read from the frozen source at `~/repos/sylvan-stack/mycel_deprecated_v1` (HEAD `b3125d0`, clean tree). Line numbers refer to that snapshot.
 
@@ -87,20 +89,20 @@ Vocabulary used below: a *chunk* is a row of `kn_chunks`; its `origin` is `code`
 - Connections are opened with `autocommit=True` (database.py:77), so each chunk's vector is committed as soon as its `UPDATE` runs.
 - The vector is cleared (`embedding = NULL`) by ingestion when a chunk's content hash changes: for document chunks by the upsert's `CASE` (store.py:322-323), for code chunks by the update (store.py:905). A renamed but unchanged document chunk keeps its vector.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_api_key
-mycel_deprecated_v1:mycel/knowledge/embedder.py#has_api_key
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_embed_text
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_vec_literal
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_query_vec
-mycel_deprecated_v1:mycel/macos_keychain.py#get_password
-mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest
-mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code
-mycel_deprecated_v1:mycel/database.py#connect
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_api_key`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#has_api_key`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_embed_text`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_vec_literal`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_query_vec`
+- `mycel_deprecated_v1:mycel/macos_keychain.py#get_password`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code`
+- `mycel_deprecated_v1:mycel/database.py#connect`
 
 ---
 
@@ -176,22 +178,22 @@ ORDER BY c.id
 
 - The RAPTOR build and regeneration embed each summary directly with `embedder.embed([text], input_type="document")` — the Voyage function — and write the vector themselves (raptor.py:282-284, :395-399). `raptor.py` contains no reference to the repository profile.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_base_repo
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_profile_for
-mycel_deprecated_v1:mycel/knowledge/embedder.py#pending_count
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embedded_count
-mycel_deprecated_v1:mycel/knowledge/embedder.py#request_stop
-mycel_deprecated_v1:mycel/repo_identity.py#canonical_repo
-mycel_deprecated_v1:mycel/cli.py#_cmd_embed
-mycel_deprecated_v1:mycel/cli.py#_cmd_status
-mycel_deprecated_v1:mycel/cli.py#_cmd_sync
-mycel_deprecated_v1:mycel/cli.py#_cmd_overlay
-mycel_deprecated_v1:mycel/cli.py#_cmd_pull
-mycel_deprecated_v1:mycel/knowledge/raptor.py#build_tree
-mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_base_repo`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_profile_for`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#pending_count`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embedded_count`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#request_stop`
+- `mycel_deprecated_v1:mycel/repo_identity.py#canonical_repo`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_embed`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_status`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_sync`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_overlay`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_pull`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#build_tree`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale`
 
 ---
 
@@ -208,17 +210,17 @@ mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale
 - Errors: missing model files, an HTTP error from the provider, and an unreachable provider each raise `RuntimeError`; the unreachable message names `python -m mycel_embedder serve` (local_embedder.py:108-110, :120-130).
 - At query time a `RuntimeError` from the local provider is logged as a warning and the search continues without a query vector; missing model files give the same result without a log line (embedder.py:99-107).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#provider_url
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#model_dir
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#is_available
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#provider_status
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#status
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#download
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#embed
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_query_vec
-mycel_deprecated_v1:mycel/config.py#provider_embedder_url
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#provider_url`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#model_dir`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#is_available`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#provider_status`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#status`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#download`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#embed`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_query_vec`
+- `mycel_deprecated_v1:mycel/config.py#provider_embedder_url`
 
 ---
 
@@ -265,11 +267,11 @@ ORDER BY paradedb.score(c.id) DESC LIMIT %s
 - `LIMIT` is the candidate pool, `max(k, 20)` (embedder.py:272, :442).
 - Any exception from the lexical query sets the lexical list to empty and the search continues (embedder.py:286-287, :494-495).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index
-mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search`
 
 ---
 
@@ -329,12 +331,12 @@ Bridge expansion computes `1-(p.embedding <=> query)` for the parent code chunks
 - `origin` restricted per arm. `repo` restricted to the requested repository (code arm: plus its overlay namespace; document arm: one query per document repository).
 - No filter on `stale`, `tier`, `role`, or `meta`.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema
-mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_bridge_expand
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_bridge_expand`
 
 ---
 
@@ -544,22 +546,22 @@ WHERE dv.parent_id IN (<chunk id>, <chunk's document id>) AND dv.kind IN ('decla
 6. Return value: `{"results": [...], "dense": <n>, "bm25": <n>}` — no `timings` (embedder.py:308).
 7. No bridge, no down-weights, no router exclusion, no query classification.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_bridge_expand
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_documented_in
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_overlay_scope
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_doc_scope
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_query_vec
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_profile_for
-mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_insert_summary
-mycel_deprecated_v1:mycel/knowledge/raptor.py#_summary_doc_id
-mycel_deprecated_v1:mycel/retrieval.py#search
-mycel_deprecated_v1:mycel/retrieval.py#_read_location
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_bridge_expand`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_documented_in`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_overlay_scope`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_doc_scope`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_query_vec`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_profile_for`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_insert_summary`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#_summary_doc_id`
+- `mycel_deprecated_v1:mycel/retrieval.py#search`
+- `mycel_deprecated_v1:mycel/retrieval.py#_read_location`
 
 ---
 
@@ -670,22 +672,22 @@ Nothing in this repository calls `capabilities()`.
 
 `symbol_read(conn, *, path, symbol, repo, overlay=None, context_lines=2, max_bytes=5 MiB)` (retrieval.py:195-295) looks up `code` chunks of one file whose `natural_key` equals the wanted symbol or ends with `#<symbol>` or `.<symbol>`, requires exactly one match (exact matches preferred), and returns the file's lines for that chunk plus up to 50 context lines each side. Success reply: `ok`, `schema_version: 1`, `encoding: "utf-8"`, `contents`, `path`, `symbol`, `canonical_symbol`, `definition_start_line`, `definition_end_line`, `start_line`, `end_line`, `truncated`, `overlay`. Failure replies: `{"ok": false, "error": ..., ["candidates": up to 20], ["suggestion": ...]}`. Nothing in this repository calls it.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/retrieval.py#_payload
-mycel_deprecated_v1:mycel/retrieval.py#_read_location
-mycel_deprecated_v1:mycel/retrieval.py#_resolved_file
-mycel_deprecated_v1:mycel/retrieval.py#_code_root_for_view
-mycel_deprecated_v1:mycel/retrieval.py#_overlay_root
-mycel_deprecated_v1:mycel/retrieval.py#_repo_flags
-mycel_deprecated_v1:mycel/retrieval.py#search
-mycel_deprecated_v1:mycel/retrieval.py#capabilities
-mycel_deprecated_v1:mycel/retrieval.py#symbol_read
-mycel_deprecated_v1:mycel/cli.py#search_payload
-mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search
-mycel_deprecated_v1:mycel/syncpass.py#code_root
-mycel_deprecated_v1:mycel/syncpass.py#artifact_root
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/retrieval.py#_payload`
+- `mycel_deprecated_v1:mycel/retrieval.py#_read_location`
+- `mycel_deprecated_v1:mycel/retrieval.py#_resolved_file`
+- `mycel_deprecated_v1:mycel/retrieval.py#_code_root_for_view`
+- `mycel_deprecated_v1:mycel/retrieval.py#_overlay_root`
+- `mycel_deprecated_v1:mycel/retrieval.py#_repo_flags`
+- `mycel_deprecated_v1:mycel/retrieval.py#search`
+- `mycel_deprecated_v1:mycel/retrieval.py#capabilities`
+- `mycel_deprecated_v1:mycel/retrieval.py#symbol_read`
+- `mycel_deprecated_v1:mycel/cli.py#search_payload`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search`
+- `mycel_deprecated_v1:mycel/syncpass.py#code_root`
+- `mycel_deprecated_v1:mycel/syncpass.py#artifact_root`
 
 ---
 
@@ -739,20 +741,20 @@ mycel_deprecated_v1:mycel/syncpass.py#artifact_root
 - does not fetch remotes and does not write the code map;
 - does not embed. Chunks that the pass adds or changes have a NULL vector, so in the search that follows they can be found by the lexical arm only.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/cli.py#search_payload
-mycel_deprecated_v1:mycel/cli.py#_cmd_search
-mycel_deprecated_v1:mycel/cli.py#main
-mycel_deprecated_v1:mycel/retrieval.py#search
-mycel_deprecated_v1:mycel/syncpass.py#repo_stale
-mycel_deprecated_v1:mycel/syncpass.py#newer_than
-mycel_deprecated_v1:mycel/syncpass.py#run_repo_pass
-mycel_deprecated_v1:mycel/syncpass.py#_run_coalesced
-mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked
-mycel_deprecated_v1:mycel/config.py#load_apply
-mycel_deprecated_v1:mycel/scope.py#resolve
-mycel_deprecated_v1:mycel/organizations.py#resolve
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/cli.py#search_payload`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_search`
+- `mycel_deprecated_v1:mycel/cli.py#main`
+- `mycel_deprecated_v1:mycel/retrieval.py#search`
+- `mycel_deprecated_v1:mycel/syncpass.py#repo_stale`
+- `mycel_deprecated_v1:mycel/syncpass.py#newer_than`
+- `mycel_deprecated_v1:mycel/syncpass.py#run_repo_pass`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_coalesced`
+- `mycel_deprecated_v1:mycel/syncpass.py#_run_pass_locked`
+- `mycel_deprecated_v1:mycel/config.py#load_apply`
+- `mycel_deprecated_v1:mycel/scope.py#resolve`
+- `mycel_deprecated_v1:mycel/organizations.py#resolve`
 
 ---
 
@@ -842,19 +844,19 @@ Printed only when the payload has a non-empty `results` list (better_grep.py:78-
 | `MYCEL_EMBEDDER_URL`, `ARBOL_LOCAL_EMBEDDER_DIR` | local provider address, model directory | local_embedder.py:31, :39-41 |
 | `ARBOL_KN_CODE_ROOT`, `ARBOL_KN_CORPUS` | code / artifact root of the `arbol` repository | locations.py:62, :74 |
 
-<!-- sources:
-mycel_deprecated_v1:mycel/better_grep.py#run
-mycel_deprecated_v1:mycel/better_grep.py#_parse
-mycel_deprecated_v1:mycel/better_grep.py#_semantic_query
-mycel_deprecated_v1:mycel/better_grep.py#main
-mycel_deprecated_v1:better_grep_entry.py
-mycel_deprecated_v1:mycel/cli.py#main
-mycel_deprecated_v1:mycel/cli.py#search_payload
-mycel_deprecated_v1:mycel/scope.py#resolve
-mycel_deprecated_v1:mycel/scope.py#_legacy_scope
-mycel_deprecated_v1:mycel/locations.py#RepositoryLocations
-mycel_deprecated_v1:mycel/database.py#dsn
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/better_grep.py#run`
+- `mycel_deprecated_v1:mycel/better_grep.py#_parse`
+- `mycel_deprecated_v1:mycel/better_grep.py#_semantic_query`
+- `mycel_deprecated_v1:mycel/better_grep.py#main`
+- `mycel_deprecated_v1:better_grep_entry.py`
+- `mycel_deprecated_v1:mycel/cli.py#main`
+- `mycel_deprecated_v1:mycel/cli.py#search_payload`
+- `mycel_deprecated_v1:mycel/scope.py#resolve`
+- `mycel_deprecated_v1:mycel/scope.py#_legacy_scope`
+- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations`
+- `mycel_deprecated_v1:mycel/database.py#dsn`
 
 ---
 
@@ -922,40 +924,40 @@ Ordered roughly by how much they would mislead a specification written from the 
 41. Outside this area but seen while reading `cli.py`: `_cmd_raptor` calls `subprocess.run` (cli.py:151) and the module has no top-level `import subprocess` (cli.py:14-17); the other uses import it locally. `mycel raptor regen|build` would raise `NameError` at that line (inferred).
 42. If an organization contains a member repository whose directory name equals the organization's name (case-insensitive), `search_payload` would recurse without end, because the recursive call resolves the member name as the organization again (cli.py:36-44; organizations.py:30-33). Inferred; not covered by `tests/test_organizations.py`.
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_bridge_expand
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_documented_in
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_query_vec
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending
-mycel_deprecated_v1:mycel/knowledge/embedder.py#pending_count
-mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#is_available
-mycel_deprecated_v1:mycel/retrieval.py#search
-mycel_deprecated_v1:mycel/retrieval.py#_payload
-mycel_deprecated_v1:mycel/retrieval.py#capabilities
-mycel_deprecated_v1:mycel/retrieval.py#symbol_read
-mycel_deprecated_v1:mycel/better_grep.py#run
-mycel_deprecated_v1:mycel/better_grep.py#_parse
-mycel_deprecated_v1:mycel/better_grep.py#_semantic_query
-mycel_deprecated_v1:better_grep_entry.py
-mycel_deprecated_v1:mycel/cli.py#search_payload
-mycel_deprecated_v1:mycel/cli.py#main
-mycel_deprecated_v1:mycel/cli.py#_cmd_overlay
-mycel_deprecated_v1:mycel/cli.py#_cmd_raptor
-mycel_deprecated_v1:mycel/cli.py#_cmd_status
-mycel_deprecated_v1:mycel/knowledge/raptor.py#build_tree
-mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale
-mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema
-mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags
-mycel_deprecated_v1:mycel/syncpass.py#repo_stale
-mycel_deprecated_v1:mycel/syncpass.py#newer_than
-mycel_deprecated_v1:mycel/organizations.py#resolve
-mycel_deprecated_v1:mycel/macos_keychain.py#_get_bindings
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#doc_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_bridge_expand`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_documented_in`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_query_vec`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#pending_count`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#is_available`
+- `mycel_deprecated_v1:mycel/retrieval.py#search`
+- `mycel_deprecated_v1:mycel/retrieval.py#_payload`
+- `mycel_deprecated_v1:mycel/retrieval.py#capabilities`
+- `mycel_deprecated_v1:mycel/retrieval.py#symbol_read`
+- `mycel_deprecated_v1:mycel/better_grep.py#run`
+- `mycel_deprecated_v1:mycel/better_grep.py#_parse`
+- `mycel_deprecated_v1:mycel/better_grep.py#_semantic_query`
+- `mycel_deprecated_v1:better_grep_entry.py`
+- `mycel_deprecated_v1:mycel/cli.py#search_payload`
+- `mycel_deprecated_v1:mycel/cli.py#main`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_overlay`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_raptor`
+- `mycel_deprecated_v1:mycel/cli.py#_cmd_status`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#build_tree`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py#regen_stale`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#list_repo_flags`
+- `mycel_deprecated_v1:mycel/syncpass.py#repo_stale`
+- `mycel_deprecated_v1:mycel/syncpass.py#newer_than`
+- `mycel_deprecated_v1:mycel/organizations.py#resolve`
+- `mycel_deprecated_v1:mycel/macos_keychain.py#_get_bindings`
 
 ---
 
@@ -972,13 +974,13 @@ mycel_deprecated_v1:mycel/macos_keychain.py#_get_bindings
 9. **The `stale` flag's meaning for code chunks** and when `meta.heartwood` is set on chunks are decided at ingest and detection (`store.ingest`, `store.detect`), outside this area; this inventory only records where search reads them.
 10. **Logging output.** No logging configuration exists in the repository; that the "dense search degraded" warning reaches stderr rests on Python's default last-resort handler (inferred, not run).
 
-<!-- sources:
-mycel_deprecated_v1:mycel/knowledge/embedder.py#embed
-mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_bridge_expand
-mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index
-mycel_deprecated_v1:mycel/knowledge/embedder.py#_query_vec
-mycel_deprecated_v1:mycel/knowledge/local_embedder.py#embed
-mycel_deprecated_v1:mycel/retrieval.py#capabilities
-mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_bridge_expand`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#ensure_bm25_index`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_query_vec`
+- `mycel_deprecated_v1:mycel/knowledge/local_embedder.py#embed`
+- `mycel_deprecated_v1:mycel/retrieval.py#capabilities`
+- `mycel_deprecated_v1:mycel/knowledge/store.py#ensure_schema`

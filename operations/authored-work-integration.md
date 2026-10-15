@@ -132,6 +132,9 @@ implementation, and evidence together.
 <!-- sources:
 mycel:operations/knowledge-model.md#Derivation edges
 mycel:operations/source-refs-authoring.md#Rules
-mycel:mycel/knowledge/store.py#assert_derivation
-mycel:mycel/syncpass.py#run_pass
 -->
+
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py#assert_derivation`
+- `mycel_deprecated_v1:mycel/syncpass.py#run_pass`

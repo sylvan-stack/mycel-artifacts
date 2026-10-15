@@ -20,9 +20,9 @@ the write side; the read side is [Code Retrieval Guide](retrieval.md).
   models are different spaces; repo-scoped search guarantees query and corpus
   share one.
 
-<!-- sources:
-mycel:mycel/knowledge/embedder.py#_embed_text
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_embed_text`
 
 ## The iron rules
 

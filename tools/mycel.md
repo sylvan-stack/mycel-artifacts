@@ -3,6 +3,11 @@ role: authored
 ---
 # Runbook: mycel
 
+The Mycel 2 development checkout now has a CLI foundation. Its current
+commands and replies are documented in [Mycel 2 command line](mycel-2.md).
+Feature handlers, store acceptance and installed replacement are pending.
+The installed Mycel 1 executable described below remains in use.
+
 ## Why it exists
 
 The daemon-less knowledge tool: one process per job, direct to Postgres,
@@ -155,24 +160,24 @@ organization-wide research into a separate Mycel corpus.
 These statements describe the checked-out source implementation. Installed
 executables must be rebuilt to acquire the new resolver.
 
-<!-- sources:
-mycel:mycel/config.py#dumps
-mycel:mycel/config.py#apply
-mycel:mycel/locations.py#RepositoryLocations
-mycel:mycel/syncpass.py#artifact_root
-mycel:mycel/syncpass.py#code_root
-mycel:mycel/retrieval.py#_read_location
-mycel:mycel/knowledge/fs.py#corpus_root
-mycel:mycel/scope.py#resolve
-mycel:mycel/organizations.py#members
-mycel:mycel/repo_identity.py#canonical_repo
--->
+**Historical evidence (unindexed):**
 
-<!-- sources:
-mycel:mycel/cli.py
-mycel:mycel/retrieval.py
-mycel:mycel/syncpass.py#run_pass
-mycel:mycel/syncpass.py#run_repo_pass
-mycel:mycel/knowledge/embedder.py#code_search
-mycel:mycel/knowledge/raptor.py
--->
+- `mycel_deprecated_v1:mycel/config.py#dumps`
+- `mycel_deprecated_v1:mycel/config.py#apply`
+- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations`
+- `mycel_deprecated_v1:mycel/syncpass.py#artifact_root`
+- `mycel_deprecated_v1:mycel/syncpass.py#code_root`
+- `mycel_deprecated_v1:mycel/retrieval.py#_read_location`
+- `mycel_deprecated_v1:mycel/knowledge/fs.py#corpus_root`
+- `mycel_deprecated_v1:mycel/scope.py#resolve`
+- `mycel_deprecated_v1:mycel/organizations.py#members`
+- `mycel_deprecated_v1:mycel/repo_identity.py#canonical_repo`
+
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/cli.py`
+- `mycel_deprecated_v1:mycel/retrieval.py`
+- `mycel_deprecated_v1:mycel/syncpass.py#run_pass`
+- `mycel_deprecated_v1:mycel/syncpass.py#run_repo_pass`
+- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py`

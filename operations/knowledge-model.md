@@ -42,9 +42,9 @@ other frontmatter key is inert for the graph.
 | `generated:` | `true` / `1` / `yes` | Regenerated-not-maintained (e.g. the [Code Map](code-map.md)): same exemptions as heartwood — Detection and RAPTOR skip it. |
 | `sources:` | YAML list, or comma-separated scalar | Document-wide governors: materialized as `declared` edges on the document's **first chunk** (the [Detection-parent trick](../../arbol/GLOSSARY.md#source-ref) — e.g. a research document answering to the snapshot it summarises). |
 
-<!-- sources:
-mycel:mycel/knowledge/chunker.py
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/chunker.py`
 
 ## Section-level declaration: `<!-- sources: … -->`
 
@@ -64,9 +64,9 @@ A ref that fails to resolve is recorded **loudly** on the chunk
 passes, never silently dropped. The file is the truth: removing a ref removes
 its edge on the next ingest.
 
-<!-- sources:
-mycel:mycel/knowledge/store.py
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py`
 
 ## Chunk values
 
@@ -96,10 +96,10 @@ declared edges all disappear and nothing else governs it, it drops back to
 **Embedding freshness rides ingest:** an `edited` chunk's vector is cleared
 (pending re-embed); `unchanged`/`renamed` chunks keep theirs.
 
-<!-- sources:
-mycel:mycel/knowledge/store.py
-mycel:mycel/knowledge/raptor.py
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py`
+- `mycel_deprecated_v1:mycel/knowledge/raptor.py`
 
 ## Derivation edges
 
@@ -118,9 +118,9 @@ which is what makes "changed since" answerable.
 re-verify and repair the prose (it cannot be regenerated); `auto` = safe to
 regenerate mechanically.
 
-<!-- sources:
-mycel:mycel/knowledge/store.py
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py`
 
 ## Detection → stale → Drift
 
@@ -142,9 +142,9 @@ stale chunk: `status` `open` → `closed`, one open Drift per chunk, recording
 **every** contributing source (`kn_drift_sources`), not just the first.
 Stale is the adjective; Drift is the assignment.
 
-<!-- sources:
-mycel:mycel/knowledge/store.py
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/knowledge/store.py`
 
 ## Not a Derivation: References
 

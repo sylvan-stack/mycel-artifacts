@@ -43,9 +43,9 @@ precise, so better-grep can't be "more exact" than grep — what it adds is the
 explain the hit*. When grep returns 0 (vocabulary gap) or 500 (needle in a
 haystack), the tail is what rescues you.
 
-<!-- sources:
-mycel:mycel/better_grep.py
--->
+**Historical evidence (unindexed):**
+
+- `mycel_deprecated_v1:mycel/better_grep.py`
 
 - Repo scope inferred from path operands / CWD; `ARBOL_REPO` overrides.
 
