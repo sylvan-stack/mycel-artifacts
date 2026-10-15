@@ -44,7 +44,7 @@ Proposed: the reply holds the chunk's whole text as the index has it for the ver
 
 The reply also says what a search result says about the chunk: its origin and kind, its lines, whether it is stale or Heartwood, every stale reason naming the original source and intermediate dependency path, whether its dependency check completed and any ref faults, and the file when there is one. It reports each required repository's completion or pending state using MYC-4's `RepositoryCheck`. An absent stale mark with an incomplete dependency check is not presented as verified current. This check does not rewrite the chunk, renew its pinned sources or verify its claims.
 
-Proposed under [MYC-D39](02-provenance-and-freshness.md#decisions), open: the reply also lists every document section that describes the chunk, by a direct declared or asserted dependency in either direction, with the direction and the kind of edge ([MYC-2](02-provenance-and-freshness.md#which-documents-describe-a-chunk)). The list is complete, does not depend on embeddings, and is empty when no document describes the chunk.
+Since [MYC-D39](02-provenance-and-freshness.md#decisions), decided on 15 October 2026, the reply also lists every document section that describes the chunk, by a direct declared or asserted dependency in either direction, with the direction and the kind of edge ([MYC-2](02-provenance-and-freshness.md#which-documents-describe-a-chunk)). The list is complete, does not depend on embeddings, and is empty when no document describes the chunk.
 
 For a symbol of a code file that can be read, `--context` adds up to 50 lines before and after, taken from the file. Without the option there are none.
 
@@ -80,7 +80,7 @@ Proposed: no command of its own. `mycel info` ([MYC-0](00-overview-and-legacy-ma
 | MYC-11.9 | cut a text of more than 5 MiB there and say so | Kept | unit |
 | MYC-11.10 | name in `mycel info` the commands of the Build that runs and the version of the read reply, and have no other command that describes the program | Changed | unit |
 | MYC-11.11 | accept MYC-16 qualified code/artifact/index addresses and legacy unambiguous aliases through the central resolver, return a canonical qualified address, and identify root-aware ambiguity candidates without silently choosing a file or index namespace | New | store |
-| MYC-11.12 | list in the reply every document section that describes the chunk by a direct declared or asserted dependency in either direction, with its direction and kind, complete and independent of embeddings, and an empty list when there is none | New | store. Proposed under MYC-D39, not active before the owner decides |
+| MYC-11.12 | list in the reply every document section that describes the chunk by a direct declared or asserted dependency in either direction, with its direction and kind, complete and independent of embeddings, and an empty list when there is none | New | store |
 
 ## Interface
 
@@ -116,7 +116,7 @@ interface ReadReply {
   staleReasons: StaleReason[];          // MYC-2
   dependencyCheck: DependencyCheck;     // MYC-4
   heartwood: boolean;
-  documents: DocumentLink[];            // proposed, MYC-D39 (MYC-2): every document section that describes this chunk; empty when none
+  documents: DocumentLink[];            // MYC-D39 (MYC-2): every document section that describes this chunk; empty when none
   file?: string;                       // absolute path, when the chunk has a file that can be read
   unreadable?: string;                 // the reason, when there is no file
   freshness: {
@@ -149,4 +149,4 @@ interface ReadReply {
 
 ## Decisions
 
-No question of this specification's own is open. MYC-D39 of [MYC-2](02-provenance-and-freshness.md#decisions), open since 14 October 2026, would add the documents that describe a chunk to the reply.
+No question of this specification's own is open. MYC-D39 of [MYC-2](02-provenance-and-freshness.md#decisions), decided on 15 October 2026, adds the documents that describe a chunk to the reply.

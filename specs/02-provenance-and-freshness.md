@@ -170,7 +170,7 @@ Required by [MYC-D13](#decisions): implement all five provenance designs. [MYC-1
 
 ### Which documents describe a chunk
 
-Proposed on 14 October 2026, and open until the owner decides [MYC-D39](#decisions). It is not part of the accepted contract before then.
+Decided on 15 October 2026 by the owner ([MYC-D39](#decisions)).
 
 The owner wants important code to be checkable against the document it comes from, and code that no document describes to be easy to find, because such code goes stale without anyone noticing. Mycel already records the links that answer this, but no reply shows them in full. A search names at most two citing sections, and only once they are embedded ([MYC-4](04-retrieval.md#what-a-result-says)). `mycel read` names a source only when it has changed ([MYC-11](11-reading-a-chunk.md#the-reply)).
 
@@ -215,7 +215,7 @@ Only direct dependencies count. A relation of MYC-7 does not, nor does a summary
 | MYC-2.24 | retain in a surviving dependant the natural place, kind and pinned hash of a previously resolved source that is removed, report it as `source_removed`, and retry its resolution without renewing that baseline; retain no deleted source chunk or version for this purpose | New | store |
 | MYC-2.25 | use MYC-16's portable qualified addresses and central typed resolver, including file bytes and pinned class-family membership, and return canonical addresses in places and ambiguity candidates | New | store |
 | MYC-2.26 | capture exact dependant-owned baseline manifests atomically with authorized pins, preserve per-version/inherited baselines across branches, renames and normalized-equivalent edits, and expose missing/corrupt evidence without substituting a new baseline | New | store |
-| MYC-2.27 | list with `mycel undocumented` the code chunks of a repository's on-disk versions that no document section describes by a direct declared or asserted dependency in either direction, optionally only below given paths, sorted by root, path and name | New | store. Proposed under MYC-D39, not active before the owner decides |
+| MYC-2.27 | list with `mycel undocumented` the code chunks of a repository's on-disk versions that no document section describes by a direct declared or asserted dependency in either direction, optionally only below given paths, sorted by root, path and name | New | store |
 
 ## Interface
 
@@ -228,7 +228,7 @@ mycel derive 'cellar:tests/test_retry.py#test_backoff' 'cellar:docs/limits.md#Li
                                                            # assert: the second governs the first
 mycel confirm 'cellar:docs/net.md#Retry policy'            # checked against its sources: still holds
 mycel derive 'cellar:@code/tests/test_retry.py#test_backoff' 'cellar:@artifact/docs/limits.md#Limits%20%3E%20Backoff'
-mycel undocumented --repo cellar --path src                # proposed, MYC-D39: code below src/ that no document describes
+mycel undocumented --repo cellar --path src                # code below src/ that no document describes (MYC-D39)
 ```
 
 ```ts
@@ -260,7 +260,7 @@ interface RefFault {
   candidates?: Place[];                // root-aware candidates for ambiguous_path
 }
 
-// Proposed, MYC-D39:
+// MYC-D39:
 interface DocumentLink {               // a document section that describes a chunk; used by MYC-4 and MYC-11
   section: Place;
   direction: "source" | "dependant";   // source: the chunk rests on the section; dependant: the section rests on the chunk
@@ -306,4 +306,4 @@ interface UndocumentedReply {          // mycel undocumented
 | MYC-D11 | Which repositories may Source Refs target? | Only repositories registered and enabled in Mycel. Other targets are invalid and reported; valid unresolved refs remain retryable | Decided 8 October 2026 by the owner: Source Refs may target only Mycel-enabled repositories. No outside-reference exemption; disabled or unregistered targets are invalid and visible, and valid unresolved refs are retained for retry |
 | MYC-D12 | What makes a stale chunk fresh again? | An edit to the chunk itself, or the command that confirms it. An edit to another part of its file does not. The stricter choice, confirmation only, would leave a section stale after its prose was repaired | Decided 8 October 2026 by the owner: editing that section or explicitly confirming it clears the stale mark. A file scan or an edit to another section does not |
 | MYC-D13 | Which of the designs version 1 did not build are taken up? | All five are required: stored Drifts, scoring of how much a source changed, relations without authority, recorded verification and generated edges. Complete their remaining detailed specifications and implementation | Decided 8 October 2026 by the owner: implement all specifications regardless of the number of tasks, including all five previously deferred designs. Task volume is not a reason to defer them; their remaining detailed specifications and implementation are required follow-up work. The later MYC-D28 decision replaces the former numerical scoring design with selected Jev dependency classification without a change-size threshold, with five-minute debounce and low-confidence smarter-model review |
-| MYC-D39 | How does Mycel answer "which document describes this chunk?", and show code that no document describes? | `mycel read` lists every document section joined to the chunk by a direct declared or asserted dependency, in either direction, complete and without waiting for embeddings. Each code result of a search says whether any section describes it. `mycel undocumented` lists a repository's code that no section describes, optionally below given paths. Mycel does not decide which code needs a document. The alternative: keep search's `documentedIn`, at most two citing sections, as the only answer | Open. Raised by the owner on 14 October 2026: "All I really want is to have answer to question 'which document describes this code chunk?' and when there is no origin document I want mycel to be able to find out this easily" |
+| MYC-D39 | How does Mycel answer "which document describes this chunk?", and show code that no document describes? | `mycel read` lists every document section joined to the chunk by a direct declared or asserted dependency, in either direction, complete and without waiting for embeddings. Each code result of a search says whether any section describes it. `mycel undocumented` lists a repository's code that no section describes, optionally below given paths. Mycel does not decide which code needs a document. The alternative: keep search's `documentedIn`, at most two citing sections, as the only answer | Decided 15 October 2026 by the owner: the proposed default, without further additions (SYL-167). Raised by the owner on 14 October 2026: "All I really want is to have answer to question 'which document describes this code chunk?' and when there is no origin document I want mycel to be able to find out this easily" |

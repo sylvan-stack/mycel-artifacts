@@ -126,7 +126,7 @@ Proposed: one shape for every result. A file-backed result and its citations nam
 
 The reply names the route that was taken and says whether the meaning arm took part. `documented_in` is ordered by the similarity of the citing section to the query, then by path. That comparison uses the section's best matching part and requires complete current-model coverage; incomplete citing sections are left out of this annotation, while their Source Refs and edges are retained.
 
-Proposed under [MYC-D39](02-provenance-and-freshness.md#decisions), open: each code result also says whether any document section describes it, by a direct declared or asserted dependency in either direction ([MYC-2](02-provenance-and-freshness.md#which-documents-describe-a-chunk)). Unlike `documentedIn`, this depends neither on embeddings nor on the query. `mycel read` lists the sections.
+Since [MYC-D39](02-provenance-and-freshness.md#decisions), decided on 15 October 2026, each code result also says whether any document section describes it, by a direct declared or asserted dependency in either direction ([MYC-2](02-provenance-and-freshness.md#which-documents-describe-a-chunk)). Unlike `documentedIn`, this depends neither on embeddings nor on the query. `mycel read` lists the sections.
 
 **Historical evidence (unindexed):**
 
@@ -221,7 +221,7 @@ Kept by the owner's decision ([MYC-D21](#decisions)): one reply per enabled memb
 | MYC-4.26 | answer from the versions of chunks that are on disk, and never return a version that is found only in a branch or a stash | New | store |
 | MYC-4.27 | score a fully embedded chunk by its best matching part, collapse part matches before all candidate, bridge and result limits and ranks, and return each logical chunk once without accumulating score raises from its parts | New | store |
 | MYC-4.28 | return MYC-16 canonical qualified addresses on results and citations, distinguishing actual root bindings from origin and index-only namespaces while preserving stable chunk identifiers | New | unit |
-| MYC-4.29 | say in each code result whether any document section describes it by a direct declared or asserted dependency in either direction, independently of embeddings and of the query | New | store. Proposed under MYC-D39, not active before the owner decides |
+| MYC-4.29 | say in each code result whether any document section describes it by a direct declared or asserted dependency in either direction, independently of embeddings and of the query | New | store |
 
 ## Interface
 
@@ -270,7 +270,7 @@ interface SearchResult {
   heartwood: boolean;
   via?: Citation;                      // the document section that delivered this result
   documentedIn: Citation[];            // at most two sections whose Source Refs cite it
-  described?: boolean;                 // proposed, MYC-D39: code results only; whether any document section describes it
+  described?: boolean;                 // MYC-D39: code results only; whether any document section describes it
   preview: string;                     // the first 240 characters of the chunk
   file?: string;                       // absolute path to read, when readable
   unreadable?: string;                 // the reason, when there is no file
