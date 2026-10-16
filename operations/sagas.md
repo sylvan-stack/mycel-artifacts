@@ -26,8 +26,8 @@ in the corpus `~/Artifacts/sagas/`: the rules of each Saga's work are in that
 Saga's file, and what a Beat must achieve is in that Beat's file.
 
 **Contents:** when to use · where state lives · territories · holds · order
-and progress · taking the next Beat · while working · stopping and finishing ·
-planning a Saga · not built yet.
+and progress · taking the next Beat · the plan of a Beat · while working ·
+stopping and finishing · planning a Saga · not built yet.
 
 ## When to use
 
@@ -47,7 +47,7 @@ comments ([Resolve Linear Comments](linear-resolve.md)).
 | The list of Sagas | `~/Artifacts/sagas/INDEX.md` | which Sagas there are, and their priority: the order in which they are worked |
 | Saga | The file `saga.md` in its folder `~/Artifacts/sagas/<saga>/`, and a Linear project of the same name in the workspace Sylvan Stack | the file: the rules of its work, the recommended order of its Arcs, and the progress of each Arc |
 | Arc | The file `arc.md` in its own folder `~/Artifacts/sagas/<saga>/<arc>/`, and a parent issue titled `<Name> Arc` in the Saga's Linear project | the file: its goal, its territory, the recommended order of its Beats, and its progress |
-| Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and that issue, a sub-issue of its Arc's issue | the file: what it must achieve, and its own territory when it names one. Linear: its status, its comments, and what it waits for (*blocked by*) |
+| Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and that issue, a sub-issue of its Arc's issue | the file: what it must achieve, its plan, and its own territory when it names one. Linear: its status, its comments, and what it waits for (*blocked by*) |
 | Repository of a Beat | A label of the label group `Repository` | — |
 | Hold | One file per held Beat in `~/.sagas/holds/` on this Mac | who works on a Beat right now |
 
@@ -110,7 +110,8 @@ an entry to them without holding them:
   specification section;
 - the `Progress` and `Territory` sections of the files in
   `~/Artifacts/sagas/`, as [Order and progress](#order-and-progress) and
-  [While working](#while-working) say.
+  [While working](#while-working) say, and the plan in the file of the Beat
+  being worked, as [The plan of a Beat](#the-plan-of-a-beat) says.
 
 Anything more than an addition, such as rewording an entry or correcting a
 requirement, needs the file in the Beat's territory.
@@ -240,12 +241,59 @@ tells its parent how far it got.
    it a moment ago: go back to step 3.
 6. **Mark it in Linear.** Set the Beat to In Progress and comment:
    `**Agent:** Took this Beat. <tool> session <id>. Territory: <paths>.`
-7. **Say which Beat you took, and why,** in the first line of the reply. A
+7. **Write its plan** before any other change, as
+   [The plan of a Beat](#the-plan-of-a-beat) says.
+8. **Say which Beat you took, and why,** in the first line of the reply. A
    Beat that was In Progress without a hold is taken over: read its comments
-   first, since the last one says where the work stopped.
+   and its plan first, since they say where the work stopped.
 
 When nothing can start, say for each Arc what its next Beat waits for: a Beat
 it is blocked by, or a hold and the session that has it.
+
+## The plan of a Beat
+
+The plan is the agent's commitment for its Beat: the steps it will take to
+meet the Beat's "Done when", written where the owner, other agents and other
+programs can read it. It is not the agent's own working notes. It also
+measures progress without guessing sizes: a Beat's progress is how many of
+its steps are done out of all of them.
+
+- **Written when the work starts.** The agent that takes a Beat writes its
+  plan in the Beat's file before any other change. An agent that finds a
+  Beat in work without a plan writes it then, with the steps already done
+  ticked.
+- **A section `## Plan` in the Beat's file.** One step per line, numbered by
+  its place in the tree, a sub-step indented two spaces under its parent:
+
+  ```
+  ## Plan
+
+  - [x] 1. Write contract/1/layout.sql as RCT-3 gives it
+  - [ ] 2. The frame of the conformance suite
+    - [x] 2.1 rct-conformance.py with --trunk, --root-contract and --only
+    - [ ] 2.2 The home folder and the server of a scenario
+    - [ ] 2.3 The stand-in Driver
+    - [ ] 2.4 Bring 2.1 to 2.3 together: one scenario runs from start to end
+  - [ ] 3. The requirement tables name the checks
+  ```
+
+- **A leaf is one safe commit.** A step without sub-steps is a leaf: the
+  smallest change that can be committed on its own without breaking
+  anything. A feature flag may keep unfinished work switched off. So leaves
+  are about the same size in every Beat, and can be counted together across
+  an Arc or a Saga: step 1 above counts the same as step 2.2.
+- **Ticking.** A leaf is ticked together with its commit. A parent step is
+  ticked when all its sub-steps are ticked and the pieces work together.
+  When bringing them together is work of its own, it is written as the
+  parent's last sub-step, as 2.4 above, so it is counted like any other
+  step.
+- **Progress** of a Beat is its ticked leaves out of all its leaves: 2 of 6
+  above.
+- **Keeping it true.** When the work shows that the plan is wrong, change
+  the plan in the file first, and say why in the next `**Agent:**` comment.
+- **Publishing.** After writing the plan and after each tick, commit the
+  Beat's file in `~/Artifacts/sagas/`, push, and bring its Linear copy in
+  line.
 
 ## While working
 
