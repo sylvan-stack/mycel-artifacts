@@ -45,14 +45,15 @@ comments ([Resolve Linear Comments](linear-resolve.md)).
 | What | Where | Source of truth for |
 |---|---|---|
 | The list of Sagas | `~/Artifacts/sagas/INDEX.md` | which Sagas there are, and their priority: the order in which they are worked |
-| Saga | The file `saga.md` in its folder `~/Artifacts/sagas/<saga>/`, and a Linear project of the same name in the workspace Sylvan Stack | the file: the rules of its work, the recommended order of its Arcs, and the progress of each Arc |
+| Saga | The file `saga.md` in its folder `~/Artifacts/sagas/<saga>/`, the documents beside it, and a Linear project of the same name in the workspace Sylvan Stack | the files: `saga.md` holds the recommended order of its Arcs, the progress of each Arc, and what each of its documents holds; `rules.md` the rules of its work; further documents what one task needs, such as its known gaps |
 | Arc | The file `arc.md` in its own folder `~/Artifacts/sagas/<saga>/<arc>/`, and a parent issue titled `<Name> Arc` in the Saga's Linear project | the file: its goal, its territory, the recommended order of its Beats, and its progress |
 | Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and that issue, a sub-issue of its Arc's issue | the file: what it must achieve, its plan, and its own territory when it names one. Linear: its status, its comments, and what it waits for (*blocked by*) |
 | Repository of a Beat | A label of the label group `Repository` | — |
 | Hold | One file per held Beat in `~/.sagas/holds/` on this Mac | who works on a Beat right now |
 
 **The files are the originals.** The page in a Saga's Linear project is a
-one-way copy of its `saga.md`, the description of an Arc's issue a copy of
+one-way copy of its `saga.md`, each other document of the Saga a document in
+the same project, the description of an Arc's issue a copy of
 its `arc.md`, and the description of a Beat's issue a copy of its file. Each copy starts with a line that names its file. An
 edit made only in Linear is overwritten by the next copy. After changing a
 file, commit and push it, then bring its copy in line as the corpus's
@@ -227,7 +228,8 @@ tells its parent how far it got.
    there only. Otherwise go through the Sagas in the order of
    `~/Artifacts/sagas/INDEX.md`, and through each Saga's Arcs in the order of
    its `saga.md`.
-2. **Read the Saga's file.** Its rules apply to every Beat of the Saga.
+2. **Read the Saga's `saga.md` and its `rules.md`.** The rules apply to every
+   Beat of the Saga; `saga.md` says which other document your Beat needs.
 3. **Run [the check](#the-check).**
 4. **Find the Arc's next Beat:** the first Beat in the order of the Arc's
    file that is not Done. It can start when all of these hold:
@@ -334,10 +336,16 @@ its steps are done out of all of them.
 - **The owner decides the Sagas** and their priority. An agent proposes the
   Arcs, each with its territory, and the Beats, such as the tasks of an
   accepted specification, and writes them once the owner agrees.
-- **A Saga is a folder** `~/Artifacts/sagas/<saga>/` with its `saga.md`: the
-  rules of its work, the recommended order of its Arcs, and a `Progress`
-  section with one line for each Arc. It has a line in `INDEX.md`, and a
-  Linear project of the same name whose page is a copy of `saga.md`.
+- **A Saga is a folder** `~/Artifacts/sagas/<saga>/` with its `saga.md`,
+  where the Saga starts: which Beat is next, the recommended order of its
+  Arcs, a `Progress` section with one line for each Arc, and its documents,
+  each with a line on what it holds and when to read it. The rules of its
+  work are `rules.md` beside it. What only some tasks need, such as the
+  Saga's known gaps or which Beat covers which requirement, is a document of
+  its own, so that an agent reads what its task needs and no more. The Saga
+  has a line in `INDEX.md`, and a Linear project of the same name whose page
+  is a copy of `saga.md` and whose other documents are copies of the Saga's
+  other documents.
 - **An Arc is a folder** `~/Artifacts/sagas/<saga>/<arc>/` with its `arc.md`:
   its goal and its `Territory`, `Order` and `Progress` sections. It has a
   parent issue titled `<Name> Arc` in the Saga's Linear project, whose

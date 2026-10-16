@@ -28,6 +28,21 @@ If a future connector provides these capabilities, prefer its supported tools.
 | Locate existing question or decision records | `search` plus scoped listings and existing issue labels |
 | Create or patch a navigation document | `save_document` |
 
+What the connector cannot do, besides favorites, the sidebar and views
+(seen 7 to 16 October 2026): delete a document or a project, edit team or
+workspace settings, mark a comment thread resolved, list comments across the
+workspace (comments are read per document, project or issue), and list or
+create initiatives. Such a change needs the Linear desktop app through computer
+use, and a deletion needs the owner's go-ahead each time. A thread is resolved
+only when the owner asks for that thread, through the ⋯ menu of a reply,
+"Resolve thread with comment". The desktop app may keep showing old text after
+a connector save: verify content with `get_document`, not in the app.
+
+Two workspaces are connected and must not be mixed: **Sylvan Stack**
+(team key `SYL`, MCP server `linear-sylvan`) for all Sylvan Stack work, and a
+second one, through the claude.ai Linear connector, for Euro-Office work only;
+its conventions are in `~/Artifacts/euro-office/README.md`.
+
 Follow each paginated list to completion for the selected scope. Current
 `list_projects` has a maximum page size of 50; do not assume the larger limits
 of other listings apply. A search's ranked top results are not a complete

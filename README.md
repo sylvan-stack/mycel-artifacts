@@ -74,6 +74,7 @@ remain pending.
 | administer Mycel indexing, freshness, embeddings, or configuration | [tools/mycel.md](tools/mycel.md) · [operations/embedding.md](operations/embedding.md) |
 | integrate authored artifacts, code, and tests “according to Mycel” | [operations/authored-work-integration.md](operations/authored-work-integration.md) — coverage → ingest → edges → Detection → embeddings → verify |
 | create, update, or install Mycel Skills for native Codex CLI and Claude Code CLI | [operations/create-skill.md](operations/create-skill.md) |
+| work in a Euro-Office repository, or in Linear for Euro-Office | `~/Artifacts/euro-office/README.md` — where its corpora are, how the local clones relate to the upstream repositories, and the conventions of its Linear workspace |
 | what a term means | [../arbol/GLOSSARY.md](../arbol/GLOSSARY.md) |
 | the full catalog | [INDEX.md](INDEX.md) (operations) · [../arbol/INDEX.md](../arbol/INDEX.md) (product) |
 
@@ -101,3 +102,87 @@ one screen, a family is missing; add a family, not rows.*
   existing docs rather than adding siblings. Current source uses the shared
   organization-aware resolver; installed applications need the corresponding
   rebuilt executables. See the runbook for precedence and remaining limits.
+
+## Working rules for every task
+
+These hold for every agent on this Mac, whatever the task and the tool.
+
+**Working with the owner**
+
+- **Do the work yourself.** You have every permission: install software, start
+  servers and launch agents, and run any command, checks and probes included,
+  without asking. Do not hand the owner commands to run. Keep a backup of
+  anything a change replaces.
+- **Ask only what only the owner can decide**, and give a proposed answer, so
+  that silence means "go". Settle everything else from code and documents. A
+  specification of something that already exists says what it does; it does
+  not end with questions about it.
+- **Plain words.** Say what a thing is in everyday terms before naming it, and
+  give one concrete example: a directory tree, a table with real names, one
+  case followed step by step. Use the [glossary](../arbol/GLOSSARY.md)'s exact
+  terms, and never one word for two things.
+- **Smallest change.** Carry out a direction with the smallest change that does
+  it. Your own additions go into the reply as suggestions, not into the work.
+- **Reviews.** Read a specification in review yourself. Give the owner a
+  verdict, the problems as a numbered list they can answer by number, the few
+  consequences they would agree to, and at most a few sections worth their own
+  read. Never ask them to read it all.
+- **Names and numbers.** Use only names the owner gave to real things;
+  describe anything else or use a placeholder such as `<root>`. Numbers the
+  owner gives "for example" are not defaults: recommend a value with its basis
+  and write it only after they agree.
+- **Processes, not trackers.** Recurring multi-step work becomes a guide with a
+  thin skill ([create-skill.md](operations/create-skill.md)). Never stand in
+  for a missing feature with a hand-kept tracking document in Linear.
+- **No native memory.** The memory of Claude Code and of Codex is switched off.
+  What must outlast a session goes into a corpus: this Hub, a guide, a
+  specification or a Saga's files.
+
+**Repositories and publishing**
+
+- **Push every commit** in a current Sylvan Stack repository or corpus, never
+  in a `*_deprecated_v1` one. Before a push, check what it publishes for
+  credentials, real account data, other people, employer or client context and
+  server access details. Private work material never goes into a public
+  corpus. Recorded results of tests, probes and benchmarks stay out of git;
+  test code and fixtures are tracked.
+- **Another agent may work in the same checkout.** Commit only your own files,
+  never revert or tidy a change you did not make, and report drift you cannot
+  explain.
+- **Mycel 2 belongs to another session.** Its code in
+  `~/repos/sylvan-stack/mycel`, its specifications in `specs/`, its outputs in
+  `research/`, the Linear issue SYL-97 with its children and its status page
+  are worked by a Codex session. Do not change them; tell the owner what looks
+  wrong.
+- **Version 1 is not run and not a source.** No `*_deprecated_v1` code, and no
+  Mycel 1: neither the `mycel` command the rows above name nor the skills built
+  on it (mycel-search, code-research, deep-research, corpus-admin,
+  authored-work-integration). Search with grep and by reading files until
+  Mycel 2 is installed.
+- **A new Sylvan Stack repository** starts at version 1.0.0; its corpus is
+  `~/Artifacts/<repo>`, published as `sylvan-stack/<repo>-artifacts`; add it to
+  the "Sylvan Stack 2" table of every code README.
+- **Leftovers.** Jira, Confluence, GitLab and Slack material in the Mycel and
+  Arbol corpora is left over from an earlier project and may be removed.
+  Telegram is the only integration that stays.
+
+**Tools on this Mac**
+
+- **Run `claude`, `codex` and other CLIs with the owner's terminal settings**:
+  in the Terminal panel, or from a clean login shell,
+  `env -i HOME="$HOME" USER="$USER" LOGNAME="$LOGNAME" TERM=xterm-256color /bin/zsh -l -i -c '<command>'`.
+  The variables a session inherits from its app can make the CLI overwrite its
+  own login. Say beforehand when a command writes a CLI's own state. Plain
+  `claude` uses `~/.claude`; the alias `claude-zai` runs it on other models
+  through `~/.claude/settings-zai.json`; never recreate `~/.claude-anthropic`.
+- **Sign-in pages** open in the built-in browser pane. The owner types the
+  credentials and approves; never enter them.
+- **Linear.** Every comment an agent posts begins with `**Agent:**`. The two
+  workspaces and what the connector cannot do are in the
+  [Linear runbook](tools/linear.md).
+
+**How this file reaches every agent.** Claude Code imports it from
+`~/.claude/CLAUDE.md` at the start of every session. Codex gets a copy as
+`developer_instructions` in `~/.codex/config.toml`, rewritten whenever this
+file changes. Everything here costs context in every session: keep it short,
+and put detail in the guide a row above points to.
