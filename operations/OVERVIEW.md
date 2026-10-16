@@ -73,9 +73,10 @@ One page to (re)load the whole mental model. Each section is two sentences of
   without opening Linear. The user answers by number, and each answer is
   written to the place its question is recorded in.
 
-- **[Working in Sagas](sagas.md)** — work is grouped as Sagas (Linear
-  projects), Arcs (parent issues whose tasks run one after another) and
-  Beats (their sub-issues). Each Arc reserves the folders and files it
+- **[Working in Sagas](sagas.md)** — work is grouped as Sagas and Arcs,
+  kept as files in the private corpus `~/Artifacts/sagas/` and copied to
+  Linear, and Beats, which are Linear issues. A parent gives the order of its
+  children, and a child reports its progress to its parent. Each Arc reserves the folders and files it
   changes, and an agent of any tool holds the Beat it works on, so several
   agents work at once without changing the same files; a hold is released
   automatically when its agent's program or thread is gone.

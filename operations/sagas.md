@@ -19,10 +19,11 @@ that works on a Beat *holds* it, and no other agent starts a Beat whose
 territory overlaps a held one. Agents of any tool take part: Claude Code and
 Codex, in a terminal or in their apps, and agents that Arbol runs.
 
-This guide is authoritative for how Sagas are kept in Linear, territories,
-holds, and how a Beat is taken, worked, stopped and finished. The terms are
-defined in the [glossary](../../arbol/GLOSSARY.md#saga). What a Beat must
-achieve, and the rules of each Saga's work, are on that Saga's own page.
+This guide is authoritative for how Sagas are kept, territories, holds, and
+how a Beat is taken, worked, stopped and finished. The terms are defined in
+the [glossary](../../arbol/GLOSSARY.md#saga). The Sagas themselves are files
+in the corpus `~/Artifacts/sagas/`: what a Beat must achieve is in its Linear
+issue, and the rules of each Saga's work are in that Saga's file.
 
 **Contents:** when to use · where state lives · territories · holds · order
 and progress · taking the next Beat · while working · stopping and finishing ·
@@ -43,12 +44,20 @@ comments ([Resolve Linear Comments](linear-resolve.md)).
 
 | What | Where | Source of truth for |
 |---|---|---|
-| Saga | A Linear project in the workspace Sylvan Stack | its Arcs, its priority, its status |
-| The Saga's page | A Linear document in that project, written by the owner | the rules of its work, the recommended order of its Arcs and of the Beats in each Arc, and the progress of each Arc |
-| Arc | A parent issue in the Saga's project, titled `<Name> Arc` | its territory and its progress, in the sections `Territory` and `Progress` of its description |
-| Beat | A sub-issue of its Arc | what it must achieve, its status, what it waits for (Linear's *blocked by*) |
+| The list of Sagas | `~/Artifacts/sagas/INDEX.md` | which Sagas there are, and their priority: the order in which they are worked |
+| Saga | The file `saga.md` in its folder `~/Artifacts/sagas/<saga>/`, and a Linear project of the same name in the workspace Sylvan Stack | the file: the rules of its work, the recommended order of its Arcs, and the progress of each Arc |
+| Arc | The file `<name>-arc.md` in its Saga's folder, and a parent issue titled `<Name> Arc` in the Saga's Linear project | the file: its goal, its territory, the recommended order of its Beats, and its progress |
+| Beat | A sub-issue of its Arc's issue in Linear; it has no file | what it must achieve, its status, what it waits for (Linear's *blocked by*) |
 | Repository of a Beat | A label of the label group `Repository` | — |
 | Hold | One file per held Beat in `~/.sagas/holds/` on this Mac | who works on a Beat right now |
+
+**The files are the originals.** The page in a Saga's Linear project is a
+one-way copy of its `saga.md`, and the description of an Arc's issue is a
+copy of its Arc file. Each copy starts with a line that names its file. An
+edit made only in Linear is overwritten by the next copy. After changing a
+file, commit and push it, then bring its copy in line as the corpus's
+`README.md` says. `~/Artifacts/sagas/` is a private repository, because it
+names the work of every project on this computer.
 
 Specification copies in Linear stay in the projects they are in now. A
 project may hold such copies without being a Saga.
@@ -67,8 +76,8 @@ the files being edited at the moment. While a Beat is held, no other Beat
 whose territory overlaps it may start, even when the two would edit
 different files in a reserved folder.
 
-- **Written as full paths, one per line**, in the section `Territory` of the
-  Arc's description. A folder ends with `/`:
+- **Written as full paths, one per line**, in a code block in the section
+  `Territory` of the Arc's file. A folder ends with `/`:
 
   ```
   ~/repos/sylvan-stack/arbol-trunk/trunks/trivial/
@@ -98,7 +107,10 @@ an entry to them without holding them:
 - the `INDEX.md` and `README.md` tables of every corpus;
 - the Linear page "Specifications";
 - the Source Ref comments (`<!-- sources: … -->`) at the end of a
-  specification section.
+  specification section;
+- the `Progress` and `Territory` sections of the files in
+  `~/Artifacts/sagas/`, as [Order and progress](#order-and-progress) and
+  [While working](#while-working) say.
 
 Anything more than an addition, such as rewording an entry or correcting a
 requirement, needs the file in the Beat's territory.
@@ -114,7 +126,7 @@ agent can take a Beat. It holds:
 {
   "beat": "SYL-171",
   "arc": "<the Arc's issue id>",
-  "saga": "<the Saga's Linear project>",
+  "saga": "<the Saga's folder in ~/Artifacts/sagas>",
   "territory": ["~/repos/sylvan-stack/arbol-trunk/trunks/trivial/"],
   "agent": {
     "tool": "claude-code",
@@ -183,14 +195,15 @@ its status: its last `**Agent:**` comment says where the work stopped.
 A parent says in which order its children should be worked, and a child
 tells its parent how far it got.
 
-- **A parent recommends the order of its children.** The Saga's page gives
-  the recommended order of its Arcs, and for each Arc the order of its Beats,
-  with the reason where it is not obvious. The order guides the choice of the
+- **A parent recommends the order of its children.** `INDEX.md` gives the
+  order of the Sagas, a Saga's file the recommended order of its Arcs, and an
+  Arc's file the recommended order of its Beats, each with the reason where
+  it is not obvious. The order guides the choice of the
   next Beat. What a Beat must wait for is still a *blocked by* relation, and
   Arcs whose territories do not overlap may run at the same time.
 - **A Beat reports to its Arc.** When a Beat is finished or stopped, its agent
-  adds one line at the top of the `Progress` section of the Arc's description,
-  and creates the section if it is missing. The line gives the date, the Beat,
+  adds one line at the top of the `Progress` section of the Arc's file, and
+  creates the section if it is missing. The line gives the date, the Beat,
   `Done` or `stopped`, and in a few words what works now and what comes next:
 
   ```
@@ -200,20 +213,23 @@ tells its parent how far it got.
 - **An Arc reports to its Saga.** When a Beat's end changes what its Arc has
   reached, such as the Arc's first Beat Done, a Beat that another Arc waits
   for Done, or the Arc Done, the agent also rewrites that Arc's one line in
-  the `Progress` section of the Saga's page. The line says how many of the
+  the `Progress` section of the Saga's file. The line says how many of the
   Arc's Beats are Done, what the Arc has reached, and what comes next. An
   agent changes only its own Arc's line, so two agents that finish at the
   same time do not overwrite each other.
+- **Then publish it.** Commit only the files you changed in
+  `~/Artifacts/sagas/`, push, and bring their Linear copies in line.
 
 ## Taking the next Beat
 
 1. **Choose where to look.** A request that names a Saga or an Arc looks
-   there only. Otherwise go through the Sagas by their priority in Linear,
-   and through each Saga's Arcs in the order of its page.
-2. **Read the Saga's page.** Its rules apply to every Beat of the Saga.
+   there only. Otherwise go through the Sagas in the order of
+   `~/Artifacts/sagas/INDEX.md`, and through each Saga's Arcs in the order of
+   its `saga.md`.
+2. **Read the Saga's file.** Its rules apply to every Beat of the Saga.
 3. **Run [the check](#the-check).**
-4. **Find the Arc's next Beat:** the first Beat in the Arc's order that is not
-   Done. It can start when all of these hold:
+4. **Find the Arc's next Beat:** the first Beat in the order of the Arc's
+   file that is not Done. It can start when all of these hold:
    - no hold names it;
    - every Beat it is *blocked by* in Linear is Done;
    - its territory overlaps no hold. A hold of the same Arc counts too,
@@ -235,7 +251,7 @@ it is blocked by, or a hold and the session that has it.
 
 - **Grow the territory when needed.** When the Beat needs a file or folder
   outside its territory, add it to the hold if no other hold covers it, and
-  to the Arc's `Territory` section, so that later Beats know. When another
+  to the `Territory` section of the Arc's file, so that later Beats know. When another
   hold covers it, stop the Beat as below and say what it waits for. Never
   edit it anyway.
 - **Commit only your own files.** Add the files to a commit by name, never
@@ -249,29 +265,32 @@ it is blocked by, or a hold and the session that has it.
 
 ## Stopping and finishing
 
-- **Stopping in the middle:** follow the Saga page's rules (commit what
+- **Stopping in the middle:** follow the Saga's rules (commit what
   works, leave the `**Agent:**` comment that says what is done and what comes
   next), then delete the hold file and end the comment with `Released.`
-- **Finishing:** set the Beat to Done as the Saga page says, then delete the
-  hold file.
+- **Finishing:** set the Beat to Done as the Saga's rules say, then delete
+  the hold file.
 - **Either way, report the progress** to the Arc, and when needed to the
   Saga, as [Order and progress](#order-and-progress) says.
 - **An Arc is Done** when all its Beats are Done. **A Saga is Done** when the
-  owner closes its project.
+  owner says so: its line in `INDEX.md` and its Linear project are closed.
 
 ## Planning a Saga
 
 - **The owner decides the Sagas** and their priority. An agent proposes the
   Arcs, each with its territory, and the Beats, such as the tasks of an
   accepted specification, and writes them once the owner agrees.
-- **A Saga is a Linear project** with one page for its rules, the
-  recommended order of its Arcs and of each Arc's Beats, and a `Progress`
-  section with one line for each Arc. An existing page of rules and order
-  becomes the page of its Saga.
-- **An Arc is a parent issue** titled `<Name> Arc`, with its goal and its
-  `Territory` and `Progress` sections.
-- **A Beat is a sub-issue of its Arc,** labelled with its repository. What it
-  waits for in another Arc is a *blocked by* relation.
+- **A Saga is a folder** `~/Artifacts/sagas/<saga>/` with its `saga.md`: the
+  rules of its work, the recommended order of its Arcs, and a `Progress`
+  section with one line for each Arc. It has a line in `INDEX.md`, and a
+  Linear project of the same name whose page is a copy of `saga.md`.
+- **An Arc is a file** `<name>-arc.md` in its Saga's folder, with its goal and
+  its `Territory`, `Order` and `Progress` sections, and a parent issue titled
+  `<Name> Arc` in the Saga's Linear project, whose description is a copy of
+  the file. `.linear.json` in the corpus names the copy of every file.
+- **A Beat is a sub-issue of its Arc's issue,** labelled with its repository.
+  What it waits for in another Arc is a *blocked by* relation. A Beat has no
+  file.
 - **Names:** a specific unit is named by its own name followed by its tier
   word, as the [glossary](../../arbol/GLOSSARY.md#saga) says. Use only names
   the owner gave to real work.
