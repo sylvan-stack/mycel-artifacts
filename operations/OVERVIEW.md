@@ -75,11 +75,13 @@ One page to (re)load the whole mental model. Each section is two sentences of
 
 - **[Working in Sagas](sagas.md)** — work is grouped as Sagas, Arcs and
   Beats, kept as files in the private corpus `~/Artifacts/sagas/` and copied
-  one way to Linear, where Beats keep their status and comments. A parent gives the order of its
-  children, and a child reports its progress to its parent. Each Arc reserves the folders and files it
-  changes, and an agent of any tool holds the Beat it works on, so several
-  agents work at once without changing the same files; a hold is released
-  automatically when its agent's program or thread is gone.
+  one way to Linear, where Beats keep their status and comments. A parent
+  gives the order of its children, and a child reports its progress to its
+  parent. Each Arc reserves the folders and files it changes, and an agent of
+  any tool holds the Beat it works on, so several agents work at once without
+  changing the same files; a hold is released automatically when its agent's
+  program or thread is gone. [Radar statistics](radar-stats.md) show how far
+  each Saga is in plan steps and which agents work on it now.
 
 ## How it compounds
 
@@ -112,7 +114,7 @@ Distinct task shapes have thin skills
 routing through the Hub: `/code-research`, `/deep-research`,
 `/mycel-search`, `/corpus-admin`, `/authored-work-integration`,
 `/pr-deep-review`, `/create-mycel-skill`,
-`/linear-resolve`, `/linear-organize`, `/linear-open-questions`.
+`/linear-resolve`, `/linear-organize`, `/linear-open-questions`, `/radar-stats`.
 Skills carry only *when to trigger*; the process always lives here, in Mycel.
 
 <!-- sources:
