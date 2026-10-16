@@ -44,8 +44,8 @@ comments ([Resolve Linear Comments](linear-resolve.md)).
 
 | What | Where | Source of truth for |
 |---|---|---|
-| The list of Sagas | `~/Artifacts/sagas/INDEX.md` | which Sagas there are, and their priority: the order in which they are worked |
-| Saga | The file `saga.md` in its folder `~/Artifacts/sagas/<saga>/`, the documents beside it, and a Linear project of the same name in the workspace Sylvan Stack | the files: `saga.md` holds the recommended order of its Arcs, the progress of each Arc, and what each of its documents holds; `rules.md` the rules of its work; further documents what one task needs, such as its known gaps |
+| The list of Sagas | `~/Artifacts/sagas/INDEX.md` | which Sagas there are, their priority: the order in which they are worked, and which Sagas each one waits for |
+| Saga | The file `saga.md` in its folder `~/Artifacts/sagas/<saga>/`, the documents beside it, and a Linear project of the same name in the workspace Sylvan Stack | the files: `saga.md` holds the recommended order of its Arcs, the progress of each Arc, what it waits for in other Sagas and what they wait for in it, and what each of its documents holds; `rules.md` the rules of its work; further documents what one task needs, such as its known gaps |
 | Arc | The file `arc.md` in its own folder `~/Artifacts/sagas/<saga>/<arc>/`, and a parent issue titled `<Name> Arc` in the Saga's Linear project | the file: its goal, its territory, the recommended order of its Beats, and its progress |
 | Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and that issue, a sub-issue of its Arc's issue | the file: what it must achieve, its plan, and its own territory when it names one. Linear: its status, its comments, and what it waits for (*blocked by*) |
 | Repository of a Beat | A label of the label group `Repository` | — |
@@ -109,8 +109,9 @@ an entry to them without holding them:
 - the Linear page "Specifications";
 - the Source Ref comments (`<!-- sources: … -->`) at the end of a
   specification section;
-- the `Progress` and `Territory` sections of the files in
-  `~/Artifacts/sagas/`, as [Order and progress](#order-and-progress) and
+- the `Progress`, `Territory` and `Other Sagas` sections of the files in
+  `~/Artifacts/sagas/` and the table of `INDEX.md` there, as
+  [Order and progress](#order-and-progress) and
   [While working](#while-working) say, and the plan in the file of the Beat
   being worked, as [The plan of a Beat](#the-plan-of-a-beat) says.
 
@@ -203,6 +204,25 @@ tells its parent how far it got.
   it is not obvious. The order guides the choice of the
   next Beat. What a Beat must wait for is still a *blocked by* relation, and
   Arcs whose territories do not overlap may run at the same time.
+- **Sagas know each other.** Every `saga.md` has a section `Other Sagas`.
+  It names each Saga this one waits for and each Saga that waits for it,
+  with a link to its `saga.md`, and says Beat by Beat what waits for what,
+  for example `SYL-195 (First Roots Arc) is blocked by SYL-190 of the Arbol 2
+  Specifications Saga`. Where the order between two Sagas matters, it gives
+  the recommended order and the reason, for example "SYL-190 is accepted
+  before the First Roots Arc reaches SYL-195". A Saga with no such link
+  says `None.`. Each Beat-to-Beat dependency is also a *blocked by* relation
+  in Linear, which is what [Taking the next Beat](#taking-the-next-beat)
+  checks; the section lets an agent see them without searching Linear.
+  `INDEX.md` gives, for each Saga, the Sagas it waits for. Its order of the
+  Sagas stays the owner's priority, because a dependency between two Sagas
+  holds back only the Beats it names.
+- **A dependency is written on both sides.** The agent that creates,
+  changes or removes a dependency between Sagas, or finishes a Beat that
+  another Saga waits for, writes it in the `Other Sagas` sections of both
+  Sagas and in `INDEX.md` in the same commit, and sets the *blocked by*
+  relation in Linear. A dependency that is met stays listed, marked `Done`
+  with its date, until the Beat that waited for it is Done.
 - **A Beat reports to its Arc.** When a Beat is finished or stopped, its agent
   adds one line at the top of the `Progress` section of its Arc's `arc.md`,
   and creates the section if it is missing. The line gives the date, the Beat,
@@ -346,6 +366,10 @@ its steps are done out of all of them.
   has a line in `INDEX.md`, and a Linear project of the same name whose page
   is a copy of `saga.md` and whose other documents are copies of the Saga's
   other documents.
+- **A new Saga is placed among the others.** Read the `saga.md` of every
+  Saga in `INDEX.md` first. Write the new Saga's `Other Sagas` section, the
+  matching lines in the Sagas it touches, and its row in `INDEX.md`, with
+  the *blocked by* relations in Linear, before its first Beat starts.
 - **An Arc is a folder** `~/Artifacts/sagas/<saga>/<arc>/` with its `arc.md`:
   its goal and its `Territory`, `Order` and `Progress` sections. It has a
   parent issue titled `<Name> Arc` in the Saga's Linear project, whose
