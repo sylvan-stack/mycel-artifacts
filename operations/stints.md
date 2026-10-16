@@ -9,11 +9,13 @@ Naming a stint in a request replaces spelling out the limits each time.
 
 This guide is authoritative for the list of stints, how one is written down,
 and how to use, add and change them. What each measure counts and what each
-kind of limit does is defined by the process that runs the stint. One process
-honours stints today: the
+kind of limit does is defined by the process that runs the stint. Two
+processes honour stints: the
 [deep pull-request review](pr-deep-review.md#stop-criteria), whose measures
 and kinds are in its
-[reference](pr-deep-review-reference.md#stop-criteria).
+[reference](pr-deep-review-reference.md#stop-criteria), and the work on a
+Beat of a Saga, whose measures and kinds are in
+[Working in Sagas](sagas.md#stop-criteria-of-a-beat).
 
 A stint is not a model setting. Which model does the work and how hard it
 thinks is a separate choice.
@@ -26,7 +28,7 @@ A run takes its stint from the first of these that exists:
 
 1. the stint named in the request;
 2. the default stint of the work in hand — for a review, `default_stint` in
-   its `state.json`;
+   its `state.json`; for a Beat, `beat`;
 3. the default stint named in this guide;
 4. none: the run continues until the process says the work is complete.
 
@@ -48,9 +50,22 @@ Then:
 
 ## Defined stints
 
-Default stint: none.
+Default stint: none. The work on a Beat has its own default, `beat`.
 
-None defined yet.
+### beat
+
+The default for every run of a Beat of a Saga: stop and ask after an hour
+without progress, and release the Beat after four hours whatever is left.
+Basis: the first nine Beats of the Arbol 2 Foundation Saga, 14 to 16 October
+2026: eight took between 14 minutes and 2.7 hours, and SYL-165 took 10.5 hours
+overnight; SYL-171 ticked 35 plan steps in 40 minutes. Against them, a Codex
+run on Mycel 2 on 15 and 16 October went 31 hours and spent about 3.4 billion
+tokens without a commit. The values are the owner's, 16 October 2026.
+
+| Measure | Kind | Value |
+|---|---|---|
+| `quiet` | soft maximum | 60 minutes |
+| `time` | hard maximum | 240 minutes |
 
 ## Adding or changing a stint
 

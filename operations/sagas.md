@@ -27,8 +27,9 @@ Saga's file, and what a Beat must achieve is in that Beat's file.
 
 **Contents:** when to use · where state lives · territories · prepared
 folders · holds · order and progress · taking the next Beat · the plan of a
-Beat · the hand-over of a Beat · while working · stopping and finishing ·
-reviewing a Beat, an Arc or a Saga · planning a Saga · not built yet.
+Beat · the hand-over of a Beat · while working · stop criteria of a Beat ·
+stopping and finishing · reviewing a Beat, an Arc or a Saga · planning a
+Saga · not built yet.
 
 ## When to use
 
@@ -189,6 +190,8 @@ agent can take a Beat. It holds:
   "saga": "<the Saga's folder in ~/Artifacts/sagas>",
   "territory": ["~/repos/sylvan-stack/arbol-trunk/trunks/trivial/"],
   "folder": "~/repos/sylvan-stack/3",
+  "stint": { "name": "beat", "limits": [ { "measure": "quiet", "kind": "soft-max", "value": 60 },
+                                          { "measure": "time", "kind": "hard-max", "value": 240 } ] },
   "agent": {
     "tool": "claude-code",
     "session": "<the tool's session or thread id>",
@@ -327,7 +330,7 @@ tells its parent how far it got.
    a moment when nothing changed.
 7. **Mark it in Linear.** Set the Beat to In Progress and comment:
    `**Agent:** Took this Beat. <tool> session <id>. Folder: <folder>.
-   Territory: <paths>.`
+   Territory: <paths>. Stint: <name> (<its limits>).`
 8. **Read what earlier Beats left for it:** the hand-over of each Beat it is
    blocked by, and of the Beat before it in its Arc's order, as
    [The hand-over of a Beat](#the-hand-over-of-a-beat) says.
@@ -453,6 +456,29 @@ For example, at the end of `SYL-179.md`:
   in another folder. A check that fails in another Beat's territory is not
   yours to fix; say so in your report.
 
+## Stop criteria of a Beat
+
+Every run of a Beat has a [stint](stints.md): the stint the owner names when
+asking for the work, else `beat`, the default for every Beat (the owner, 16
+October 2026). A *run* is one hold: it starts at the hold's `takenAt`, and
+taking a Beat over starts a new run. The hold records the stint's name and
+its resolved limits, and so does the comment that takes the Beat, so a later
+change to the stint does not change what a past run reports.
+
+| Measure | Unit | Counting rule |
+|---|---|---|
+| `quiet` | minutes | Wall clock since the last plan step of the Beat was ticked in this run, or since its plan was written when none is ticked yet. The time the owner takes to answer a question is left out |
+| `time` | minutes | Wall clock since the hold's `takenAt` |
+
+| Kind | What the agent does when the limit is reached |
+|---|---|
+| `soft-max` | Stops at the next point where the work is safe to leave: after the command that runs, with what works committed and pushed. It says in Linear and in its reply where the Beat stands, what is stuck and what it proposes, and asks the owner whether to go on. An answer to go on starts the `quiet` count again |
+| `hard-max` | Stops the Beat as [Stopping and finishing](#stopping-and-finishing) says: commits and pushes what works, writes the hand-over, returns its prepared folder and releases the hold, whatever is left. The Beat can be taken again in a new run |
+
+The agent checks both counts after each tick and before it starts any
+command that may take long. Neither limit is a target: a Beat that is done
+early finishes early.
+
 ## Stopping and finishing
 
 - **Stopping in the middle:** follow the Saga's rules (commit what
@@ -539,6 +565,10 @@ territory instead.
   names that record, and the check reads it the same way for every tool. It
   will also tell *waiting for the owner* and *silent* apart. Until then the
   owners above are used, and a hold shows neither.
+- **A check of the stint from outside.** Today each agent counts its own
+  stint. A regular check that reads the holds, the Beat files' last ticks
+  and the agents' token spend, and tells the owner of a run that is busy
+  without progress, is still to be built.
 - **The check as a command.** Until it exists, the agent does it by hand:
   `ps -o lstart= -p <pid>` for a process, and `lsof <threadFile>` for a Codex
   thread.
