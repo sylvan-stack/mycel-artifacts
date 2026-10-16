@@ -26,8 +26,9 @@ in the corpus `~/Artifacts/sagas/`: the rules of each Saga's work are in that
 Saga's file, and what a Beat must achieve is in that Beat's file.
 
 **Contents:** when to use · where state lives · territories · holds · order
-and progress · taking the next Beat · the plan of a Beat · while working ·
-stopping and finishing · planning a Saga · not built yet.
+and progress · taking the next Beat · the plan of a Beat · the hand-over of a
+Beat · while working · stopping and finishing · planning a Saga · not built
+yet.
 
 ## When to use
 
@@ -47,7 +48,7 @@ comments ([Resolve Linear Comments](linear-resolve.md)).
 | The list of Sagas | `~/Artifacts/sagas/INDEX.md` | which Sagas there are, their priority: the order in which they are worked, and which Sagas each one waits for |
 | Saga | The file `saga.md` in its folder `~/Artifacts/sagas/<saga>/`, the documents beside it, and a Linear project of the same name in the workspace Sylvan Stack | the files: `saga.md` holds the recommended order of its Arcs, the progress of each Arc, what it waits for in other Sagas and what they wait for in it, and what each of its documents holds; `rules.md` the rules of its work; further documents what one task needs, such as its known gaps |
 | Arc | The file `arc.md` in its own folder `~/Artifacts/sagas/<saga>/<arc>/`, and a parent issue titled `<Name> Arc` in the Saga's Linear project | the file: its goal, its territory, the recommended order of its Beats, and its progress |
-| Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and that issue, a sub-issue of its Arc's issue | the file: what it must achieve, its plan, and its own territory when it names one. Linear: its status, its comments, and what it waits for (*blocked by*) |
+| Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and that issue, a sub-issue of its Arc's issue | the file: what it must achieve, its plan, its hand-over to later Beats, and its own territory when it names one. Linear: its status, its comments, and what it waits for (*blocked by*) |
 | Repository of a Beat | A label of the label group `Repository` | — |
 | Hold | One file per held Beat in `~/.sagas/holds/` on this Mac | who works on a Beat right now |
 
@@ -113,7 +114,8 @@ an entry to them without holding them:
   `~/Artifacts/sagas/` and the table of `INDEX.md` there, as
   [Order and progress](#order-and-progress) and
   [While working](#while-working) say, and the plan in the file of the Beat
-  being worked, as [The plan of a Beat](#the-plan-of-a-beat) says.
+  being worked, as [The plan of a Beat](#the-plan-of-a-beat) says, and its
+  hand-over, as [The hand-over of a Beat](#the-hand-over-of-a-beat) says.
 
 Anything more than an addition, such as rewording an entry or correcting a
 requirement, needs the file in the Beat's territory.
@@ -263,11 +265,14 @@ tells its parent how far it got.
    it a moment ago: go back to step 3.
 6. **Mark it in Linear.** Set the Beat to In Progress and comment:
    `**Agent:** Took this Beat. <tool> session <id>. Territory: <paths>.`
-7. **Write its plan** before any other change, as
+7. **Read what earlier Beats left for it:** the hand-over of each Beat it is
+   blocked by, and of the Beat before it in its Arc's order, as
+   [The hand-over of a Beat](#the-hand-over-of-a-beat) says.
+8. **Write its plan** before any other change, as
    [The plan of a Beat](#the-plan-of-a-beat) says.
-8. **Say which Beat you took, and why,** in the first line of the reply. A
-   Beat that was In Progress without a hold is taken over: read its comments
-   and its plan first, since they say where the work stopped.
+9. **Say which Beat you took, and why,** in the first line of the reply. A
+   Beat that was In Progress without a hold is taken over: read its comments,
+   its plan and its hand-over first, since they say where the work stopped.
 
 When nothing can start, say for each Arc what its next Beat waits for: a Beat
 it is blocked by, or a hold and the session that has it.
@@ -323,6 +328,49 @@ its steps are done out of all of them.
   Beat's file in `~/Artifacts/sagas/`, push, and bring its Linear copy in
   line.
 
+## The hand-over of a Beat
+
+What a later Beat must know from this one, and finds in no specification, is
+the Beat's *hand-over*: a section `## Hand-over` at the end of the Beat's
+file, after its plan. The Beat's file is the original and its Linear issue a
+copy, so every agent finds the hand-over, whichever tool it runs in and
+whichever session started it.
+
+- **What goes in.** Only what a later Beat needs and cannot read anywhere
+  else: where the new code is and how its parts fit together, what the Beat
+  left on this Mac (something installed, a copy of what it replaced), a
+  choice that would be easy to undo by mistake, and each open point with the
+  Beat or file it belongs to. Each item names the Beat it is for when it is
+  for one, and links to the specification section or decision that says the
+  rest instead of repeating it.
+- **What does not go in.** What a specification should say: change the
+  specification. A point for the whole Saga: the Saga's document for it, such
+  as its known gaps. The account of the work: the `**Agent:**` comment.
+- **When.** When the Beat is finished or stopped, before its hold is deleted;
+  commit and push the Beat's file and bring its Linear copy in line, as for
+  its plan. A stopped Beat's hand-over says where the work stopped and what
+  comes next, for the agent that takes it over. A Beat with nothing to hand
+  over has no section.
+- **Nowhere else.** Never leave a hand-over where only one tool or one group
+  of sessions can see it: a tool's memory, a notes folder that an app gives
+  the sessions one session started, a session's scratch folder. An agent of
+  another tool, or a session started later, never finds it there. When an
+  instruction names such a place for notes, write the hand-over in the Beat's
+  file instead.
+
+For example, at the end of `SYL-179.md`:
+
+```
+## Hand-over
+
+- For SYL-158: `src/arbol_builds/roots.py` reads the Root records and picks the
+  current Root (BLD-D17); give the launchers of `arbol` and `arbol-root` its
+  text after `launcher.py`, as `arbol-trunk` has it.
+- For SYL-180: the installed `arbol-builds` is current, so the first build of
+  `arbol-trunk/trivial` writes `~/.local/bin/arbol-trunk`.
+- Open: `known-gaps.md` still lists the point BLD-D17 settles.
+```
+
 ## While working
 
 - **Grow the territory when needed.** When the Beat needs a file or folder
@@ -343,9 +391,10 @@ its steps are done out of all of them.
 
 - **Stopping in the middle:** follow the Saga's rules (commit what
   works, leave the `**Agent:**` comment that says what is done and what comes
-  next), then delete the hold file and end the comment with `Released.`
-- **Finishing:** set the Beat to Done as the Saga's rules say, then delete
-  the hold file.
+  next), write the Beat's hand-over, then delete the hold file and end the
+  comment with `Released.`
+- **Finishing:** set the Beat to Done as the Saga's rules say, write its
+  hand-over, then delete the hold file.
 - **Either way, report the progress** to the Arc, and when needed to the
   Saga, as [Order and progress](#order-and-progress) says.
 - **An Arc is Done** when all its Beats are Done. **A Saga is Done** when the

@@ -80,8 +80,10 @@ One page to (re)load the whole mental model. Each section is two sentences of
   parent. Each Arc reserves the folders and files it changes, and an agent of
   any tool holds the Beat it works on, so several agents work at once without
   changing the same files; a hold is released automatically when its agent's
-  program or thread is gone. [Radar statistics](radar-stats.md) show how far
-  each Saga is in plan steps and which agents work on it now.
+  program or thread is gone. What a later Beat must know, a Beat leaves in its
+  own file, its hand-over, never where only one tool or one group of sessions
+  sees it. [Radar statistics](radar-stats.md) show how far each Saga is in
+  plan steps and which agents work on it now.
 
 ## How it compounds
 
