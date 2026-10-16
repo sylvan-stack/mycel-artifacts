@@ -25,10 +25,10 @@ the [glossary](../../arbol/GLOSSARY.md#saga). The Sagas themselves are files
 in the corpus `~/Artifacts/sagas/`: the rules of each Saga's work are in that
 Saga's file, and what a Beat must achieve is in that Beat's file.
 
-**Contents:** when to use · where state lives · territories · holds · order
-and progress · taking the next Beat · the plan of a Beat · the hand-over of a
-Beat · while working · stopping and finishing · planning a Saga · not built
-yet.
+**Contents:** when to use · where state lives · territories · prepared
+folders · holds · order and progress · taking the next Beat · the plan of a
+Beat · the hand-over of a Beat · while working · stopping and finishing ·
+reviewing a Beat, an Arc or a Saga · planning a Saga · not built yet.
 
 ## When to use
 
@@ -50,7 +50,8 @@ comments ([Resolve Linear Comments](linear-resolve.md)).
 | Arc | The file `arc.md` in its own folder `~/Artifacts/sagas/<saga>/<arc>/`, and a parent issue titled `<Name> Arc` in the Saga's Linear project | the file: its goal, its territory, the recommended order of its Beats, and its progress |
 | Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and that issue, a sub-issue of its Arc's issue | the file: what it must achieve, its plan, its hand-over to later Beats, and its own territory when it names one. Linear: its status, its comments, and what it waits for (*blocked by*) |
 | Repository of a Beat | A label of the label group `Repository` | — |
-| Hold | One file per held Beat in `~/.sagas/holds/` on this Mac | who works on a Beat right now |
+| Hold | One file per held Beat in `~/.sagas/holds/` on this Mac | who works on a Beat right now, and in which prepared folder |
+| A Beat's code | The branch `beat/<Beat>` in each repository its territory touches, worked in a prepared folder and merged into `main` as one merge commit | exactly what the Beat changed in code, whichever tool, session or kind of edit made the change |
 
 **The files are the originals.** The page in a Saga's Linear project is a
 one-way copy of its `saga.md`, each other document of the Saga a document in
@@ -120,6 +121,59 @@ an entry to them without holding them:
 Anything more than an addition, such as rewording an entry or correcting a
 requirement, needs the file in the Beat's territory.
 
+## Prepared folders
+
+A Beat's code is changed on a branch of its own, `beat/<Beat>` such as
+`beat/SYL-173`, in a *prepared folder*: a folder holding one clone of every
+repository, set up once, environments included, and kept from one Beat to the
+next. The owner decided this on 16 October 2026, so that many agents can work
+at once without making and removing a worktree for each task, and so that a
+Beat's changes are exactly its branch.
+
+```
+~/repos/sylvan-stack/
+  arbol/  arbol-root/  arbol-trunk/  …       the repositories' own folders: the owner's, and
+                                             Claude Code or Codex used directly; no Beat works here
+  1/  2/  3/  4/  5/                         the prepared folders, each with a clone of every repository
+    arbol/  arbol-root/  arbol-trunk/  …     on main while free; on beat/<Beat> while a hold names the folder
+  readonly/                                  one more clone of every repository, always the last main;
+    arbol/  arbol-root/  arbol-trunk/  …     nobody edits it
+```
+
+| Folder | Checked out | Who works in it |
+|---|---|---|
+| `~/repos/sylvan-stack/<repo>/` | whatever its user chose | the owner, and Claude Code or Codex started there |
+| `~/repos/sylvan-stack/<n>/<repo>/` | `main` while free; `beat/<Beat>` while a hold names the folder | the agent of that hold, and nobody else |
+| `~/repos/sylvan-stack/readonly/<repo>/` | `main`, brought up to date after every merge | nobody; it is read, for the last merged state |
+
+- **Free.** A prepared folder is free when no hold names it, and every
+  repository in it is on `main` with nothing uncommitted and no file that git
+  does not ignore. A folder that is not clean is never taken; say which and
+  what is in it.
+- **Territories keep their paths.** An entry under
+  `~/repos/sylvan-stack/<repo>/` means the same path in the prepared folder
+  the hold names: `~/repos/sylvan-stack/arbol-trunk/trunks/trivial/` is worked
+  in `~/repos/sylvan-stack/3/arbol-trunk/trunks/trivial/`. Overlap is judged as
+  before, because every branch is merged into the one `main`.
+- **Several repositories, one folder.** A Beat whose territory spans
+  repositories uses their clones in the same prepared folder, so that a check
+  of one against another, such as a suite in one repository run against a
+  program in another, uses the Beat's own copies.
+- **Corpora stay on `main`.** The specification corpora in `~/Artifacts/` and
+  `~/Artifacts/sagas/` are not cloned: a Beat commits to them on `main`, as
+  before, and names itself at the start of each commit's subject, such as
+  `SYL-173: …`.
+- **Nothing installed from a branch.** A program installed on this Mac, such
+  as a launcher in `~/.local/bin`, is made only from merged work, never from a
+  Beat's branch.
+- **Setting one up.** A new prepared folder, or a repository new to the stack,
+  is a clone whose `origin` is the repository's GitHub address, on `main`, with
+  every environment its lockfiles name installed once: `uv sync --locked
+  --group dev` beside each `uv.lock`, `npm ci` beside each
+  `package-lock.json`. Every prepared folder and `readonly` holds the same
+  repositories. When all five are taken, an agent may set up `6/` the same
+  way.
+
 ## Holds
 
 A hold says that an agent works on a Beat now. It is a file
@@ -133,6 +187,7 @@ agent can take a Beat. It holds:
   "arc": "<the Arc's issue id>",
   "saga": "<the Saga's folder in ~/Artifacts/sagas>",
   "territory": ["~/repos/sylvan-stack/arbol-trunk/trunks/trivial/"],
+  "folder": "~/repos/sylvan-stack/3",
   "agent": {
     "tool": "claude-code",
     "session": "<the tool's session or thread id>",
@@ -261,16 +316,23 @@ tells its parent how far it got.
      unless both Beats name smaller territories that do not overlap.
 
    When it cannot start, go to the next Arc.
-5. **Take it.** Create its hold file. If the file exists, another agent took
-   it a moment ago: go back to step 3.
-6. **Mark it in Linear.** Set the Beat to In Progress and comment:
-   `**Agent:** Took this Beat. <tool> session <id>. Territory: <paths>.`
-7. **Read what earlier Beats left for it:** the hand-over of each Beat it is
+5. **Take it.** Create its hold file, naming the first free
+   [prepared folder](#prepared-folders) as `folder`. If the file exists,
+   another agent took it a moment ago: go back to step 3.
+6. **Make its branch** in each repository its territory touches, in the
+   prepared folder: `git fetch origin`, then `git switch -c beat/<Beat>
+   origin/main`, or `git switch beat/<Beat>` when the Beat is taken over and
+   its branch is on GitHub. Run the folder's environment setup again; it takes
+   a moment when nothing changed.
+7. **Mark it in Linear.** Set the Beat to In Progress and comment:
+   `**Agent:** Took this Beat. <tool> session <id>. Folder: <folder>.
+   Territory: <paths>.`
+8. **Read what earlier Beats left for it:** the hand-over of each Beat it is
    blocked by, and of the Beat before it in its Arc's order, as
    [The hand-over of a Beat](#the-hand-over-of-a-beat) says.
-8. **Write its plan** before any other change, as
+9. **Write its plan** before any other change, as
    [The plan of a Beat](#the-plan-of-a-beat) says.
-9. **Say which Beat you took, and why,** in the first line of the reply. A
+10. **Say which Beat you took, and why,** in the first line of the reply. A
    Beat that was In Progress without a hold is taken over: read its comments,
    its plan and its hand-over first, since they say where the work stopped.
 
@@ -382,23 +444,54 @@ For example, at the end of `SYL-179.md`:
   "everything". Before each commit, compare the files in it with the hold's
   territory and the files every Beat may add to. A file outside both is not
   committed: grow the territory, or stop.
-- **Another Beat's unfinished edits are not yours.** Agents work directly in
-  the repository folders, so they see each other's uncommitted changes. A
-  check that fails in another Beat's territory is not yours to fix; say so in
-  your report.
+- **Work only in your prepared folder,** on the Beat's branch, for code; the
+  corpora on `main`, as [Prepared folders](#prepared-folders) says. Push the
+  branch with each commit (`git push -u origin beat/<Beat>` the first time),
+  so the work is on GitHub before it is merged.
+- **Another Beat's unfinished work is not yours.** It lives on another branch
+  in another folder. A check that fails in another Beat's territory is not
+  yours to fix; say so in your report.
 
 ## Stopping and finishing
 
 - **Stopping in the middle:** follow the Saga's rules (commit what
   works, leave the `**Agent:**` comment that says what is done and what comes
-  next), write the Beat's hand-over, then delete the hold file and end the
-  comment with `Released.`
-- **Finishing:** set the Beat to Done as the Saga's rules say, write its
-  hand-over, then delete the hold file.
+  next), push the branch unmerged, write the Beat's hand-over, return the
+  prepared folder (below), then delete the hold file and end the comment with
+  `Released.` The agent that takes the Beat over switches to its branch.
+- **Finishing:** when the Beat's checks pass, merge it, in each repository it
+  changed:
+  1. Bring the branch up to date: `git fetch origin`, `git merge
+     origin/main`, run the checks again, push the branch.
+  2. Merge it into `main` as one merge commit named after the Beat:
+     `git switch --detach origin/main`, `git merge --no-ff beat/<Beat> -m
+     "<Beat>: <the Beat's title>"`, `git push origin HEAD:main`. When the push
+     is refused because another merge came first, repeat from step 1.
+  3. Bring `readonly` up to date: `git -C ~/repos/sylvan-stack/readonly/<repo>
+     pull --ff-only`.
+
+  Then set the Beat to Done as the Saga's rules say, write its hand-over,
+  return the prepared folder, and delete the hold file.
+- **Returning the prepared folder,** in each repository the Beat used:
+  `git fetch origin`, `git switch main`, `git merge --ff-only origin/main`,
+  then `git branch -d beat/<Beat>` and `git push origin --delete
+  beat/<Beat>` once the branch is merged. `git status` then shows nothing; a
+  folder that does not end clean is not released, and the hold stays until it
+  is.
 - **Either way, report the progress** to the Arc, and when needed to the
   Saga, as [Order and progress](#order-and-progress) says.
 - **An Arc is Done** when all its Beats are Done. **A Saga is Done** when the
   owner says so: its line in `INDEX.md` and its Linear project are closed.
+
+## Reviewing a Beat, an Arc or a Saga
+
+In each repository, `git log --first-parent main` lists one merge commit for
+each Beat, named after it, and `git diff <merge>^1 <merge>` is exactly what
+that Beat changed there. An Arc's changes are the merges of the Beats its
+`arc.md` lists, and a Saga's are those of its Arcs. A Beat's commits in the
+corpora name the Beat at the start of their subject. Beats finished before
+16 October 2026 committed straight to `main` and are found by their dates and
+territory instead.
 
 ## Planning a Saga
 
