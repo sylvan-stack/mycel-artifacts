@@ -258,10 +258,16 @@ programs can read it. It is not the agent's own working notes. It also
 measures progress without guessing sizes: a Beat's progress is how many of
 its steps are done out of all of them.
 
-- **Written when the work starts.** The agent that takes a Beat writes its
-  plan in the Beat's file before any other change. An agent that finds a
-  Beat in work without a plan writes it then, with the steps already done
-  ticked.
+- **A draft when the Beat is created.** The agent that creates a Beat writes
+  a section `## Draft plan` in its file, in the same form and with steps of
+  the same size as well as it can judge from the specification. It is an
+  estimate, not a commitment: it gives the Beat a size before anyone works
+  on it.
+- **The plan when the work starts.** The agent that takes a Beat writes its
+  plan in the Beat's file before any other change, replacing the draft;
+  git keeps the draft, so drafts and plans can be compared later. An agent
+  that finds a Beat in work without a plan writes it then, with the steps
+  already done ticked. Beats that were Done before plans existed get none.
 - **A section `## Plan` in the Beat's file.** One step per line, numbered by
   its place in the tree, a sub-step indented two spaces under its parent:
 
@@ -339,7 +345,7 @@ its steps are done out of all of them.
   copy of every Saga and Arc file.
 - **A Beat is a file** `<ID>.md` in its Arc's folder, and a sub-issue of its
   Arc's issue, labelled with its repository. The file holds what the Beat
-  must achieve; the issue's description is its copy. Linear gives the
+  must achieve and its draft plan; the issue's description is its copy. Linear gives the
   identifier, so a new Beat starts as an issue: create it, write its file
   under that identifier, then replace the issue's description with the
   file's copy. What a Beat waits for in another Arc is a *blocked by*
