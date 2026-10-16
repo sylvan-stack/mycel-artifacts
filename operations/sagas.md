@@ -24,9 +24,9 @@ holds, and how a Beat is taken, worked, stopped and finished. The terms are
 defined in the [glossary](../../arbol/GLOSSARY.md#saga). What a Beat must
 achieve, and the rules of each Saga's work, are on that Saga's own page.
 
-**Contents:** when to use · where state lives · territories · holds · taking
-the next Beat · while working · stopping and finishing · planning a Saga ·
-not built yet.
+**Contents:** when to use · where state lives · territories · holds · order
+and progress · taking the next Beat · while working · stopping and finishing ·
+planning a Saga · not built yet.
 
 ## When to use
 
@@ -44,8 +44,8 @@ comments ([Resolve Linear Comments](linear-resolve.md)).
 | What | Where | Source of truth for |
 |---|---|---|
 | Saga | A Linear project in the workspace Sylvan Stack | its Arcs, its priority, its status |
-| The Saga's page | A Linear document in that project, written by the owner | the rules of its work and the order of the Beats in each Arc |
-| Arc | A parent issue in the Saga's project, titled `<Name> Arc` | its territory, in a section `Territory` of its description |
+| The Saga's page | A Linear document in that project, written by the owner | the rules of its work, the recommended order of its Arcs and of the Beats in each Arc, and the progress of each Arc |
+| Arc | A parent issue in the Saga's project, titled `<Name> Arc` | its territory and its progress, in the sections `Territory` and `Progress` of its description |
 | Beat | A sub-issue of its Arc | what it must achieve, its status, what it waits for (Linear's *blocked by*) |
 | Repository of a Beat | A label of the label group `Repository` | — |
 | Hold | One file per held Beat in `~/.sagas/holds/` on this Mac | who works on a Beat right now |
@@ -54,7 +54,9 @@ Specification copies in Linear stay in the projects they are in now. A
 project may hold such copies without being a Saga.
 
 Progress is read in Linear: its project list shows how far each Saga is, and
-each Arc shows how many of its Beats are done. The live overview of all work,
+each Arc shows how many of its Beats are done. Each parent also keeps a short
+written account of its children, as [Order and progress](#order-and-progress)
+says. The live overview of all work,
 the [Radar](../../arbol/GLOSSARY.md#radar), is a planned Arbol feature that
 will read the same holds.
 
@@ -176,6 +178,33 @@ each hold whose owner is gone, it deletes the file and comments on the Beat:
 session's program ended" or "the Codex thread was closed">.` The Beat keeps
 its status: its last `**Agent:**` comment says where the work stopped.
 
+## Order and progress
+
+A parent says in which order its children should be worked, and a child
+tells its parent how far it got.
+
+- **A parent recommends the order of its children.** The Saga's page gives
+  the recommended order of its Arcs, and for each Arc the order of its Beats,
+  with the reason where it is not obvious. The order guides the choice of the
+  next Beat. What a Beat must wait for is still a *blocked by* relation, and
+  Arcs whose territories do not overlap may run at the same time.
+- **A Beat reports to its Arc.** When a Beat is finished or stopped, its agent
+  adds one line at the top of the `Progress` section of the Arc's description,
+  and creates the section if it is missing. The line gives the date, the Beat,
+  `Done` or `stopped`, and in a few words what works now and what comes next:
+
+  ```
+  2026-10-16 · SYL-170 · Done · the suite's frame and layout.sql; next SYL-171
+  ```
+
+- **An Arc reports to its Saga.** When a Beat's end changes what its Arc has
+  reached, such as the Arc's first Beat Done, a Beat that another Arc waits
+  for Done, or the Arc Done, the agent also rewrites that Arc's one line in
+  the `Progress` section of the Saga's page. The line says how many of the
+  Arc's Beats are Done, what the Arc has reached, and what comes next. An
+  agent changes only its own Arc's line, so two agents that finish at the
+  same time do not overwrite each other.
+
 ## Taking the next Beat
 
 1. **Choose where to look.** A request that names a Saga or an Arc looks
@@ -225,6 +254,8 @@ it is blocked by, or a hold and the session that has it.
   next), then delete the hold file and end the comment with `Released.`
 - **Finishing:** set the Beat to Done as the Saga page says, then delete the
   hold file.
+- **Either way, report the progress** to the Arc, and when needed to the
+  Saga, as [Order and progress](#order-and-progress) says.
 - **An Arc is Done** when all its Beats are Done. **A Saga is Done** when the
   owner closes its project.
 
@@ -233,11 +264,12 @@ it is blocked by, or a hold and the session that has it.
 - **The owner decides the Sagas** and their priority. An agent proposes the
   Arcs, each with its territory, and the Beats, such as the tasks of an
   accepted specification, and writes them once the owner agrees.
-- **A Saga is a Linear project** with one page for its rules and the order
-  of each Arc's Beats. An existing page of rules and order becomes the page
-  of its Saga.
+- **A Saga is a Linear project** with one page for its rules, the
+  recommended order of its Arcs and of each Arc's Beats, and a `Progress`
+  section with one line for each Arc. An existing page of rules and order
+  becomes the page of its Saga.
 - **An Arc is a parent issue** titled `<Name> Arc`, with its goal and its
-  `Territory` section.
+  `Territory` and `Progress` sections.
 - **A Beat is a sub-issue of its Arc,** labelled with its repository. What it
   waits for in another Arc is a *blocked by* relation.
 - **Names:** a specific unit is named by its own name followed by its tier
