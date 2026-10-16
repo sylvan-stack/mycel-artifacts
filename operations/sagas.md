@@ -170,7 +170,8 @@ Beat's changes are exactly its branch.
   is a clone whose `origin` is the repository's GitHub address, on `main`, with
   every environment its lockfiles name installed once: `uv sync --locked
   --group dev` beside each `uv.lock`, `npm ci` beside each
-  `package-lock.json`. Every prepared folder and `readonly` holds the same
+  `package-lock.json`, and `uv venv` with `uv pip install -e .` beside a
+  `pyproject.toml` that has no `uv.lock`, as `mycel`'s has none. Every prepared folder and `readonly` holds the same
   repositories. When all five are taken, an agent may set up `6/` the same
   way.
 
