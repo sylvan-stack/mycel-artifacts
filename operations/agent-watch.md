@@ -89,7 +89,7 @@ The numbers are the owner's, 17 October 2026.
 
 | Signal | When it is raised | Basis |
 |---|---|---|
-| How often the check runs | Every 5 minutes | The owner's value. A run takes about half a second: the scan of 68,875 files takes 0.5 s, and each transcript is read only where it grew |
+| How often the check runs | Every 5 minutes | The owner's value. Its first ten runs from the LaunchAgent, at low priority, took 1.4 to 1.8 s, and the first, which read the transcripts of the last 6 hours, 2.5 s: the scan of about 69,000 files takes most of it, and each transcript is read only where it grew |
 | A Beat without a tick | 15 minutes since the last progress while the agent spends tokens | On 16 October, the 54 tick commits of 6 Beats came a median of 1 minute apart; 95% came within 6 minutes, and the longest gap was 38 minutes (SYL-179, which ticked 5 steps at once). One day of data |
 | New ticks | A review of the steps ticked since the last one, at most every 15 minutes per agent, the first no sooner than 15 minutes after the hold is taken | Three runs between two reviews, so that each judges a stretch of work. It catches a step ticked without being done |
 | A write outside the territory | At the next run: a file the hold's agent changed outside its territory and outside the files every Beat may add to (Working in Sagas) | The guide forbids it. A file inside another held Beat's territory says which Beat |
