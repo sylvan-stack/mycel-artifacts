@@ -477,7 +477,10 @@ change to the stint does not change what a past run reports.
 
 The agent checks both counts after each tick and before it starts any
 command that may take long. Neither limit is a target: a Beat that is done
-early finishes early.
+early finishes early. From outside, [the check from outside](agent-watch.md)
+measures every run each 5 minutes and raises a signal, such as when a Beat
+goes 15 minutes without a tick while its agent spends tokens, or passes its
+hard stop.
 
 ## Stopping and finishing
 
@@ -565,10 +568,12 @@ territory instead.
   names that record, and the check reads it the same way for every tool. It
   will also tell *waiting for the owner* and *silent* apart. Until then the
   owners above are used, and a hold shows neither.
-- **A check of the stint from outside.** Today each agent counts its own
-  stint. A regular check that reads the holds, the Beat files' last ticks
-  and the agents' token spend, and tells the owner of a run that is busy
-  without progress, is still to be built.
+- **What the check from outside does with its signals.**
+  [The check from outside](agent-watch.md) reads the holds, the Beat files'
+  ticks and the agents' token spend every 5 minutes and raises its signals.
+  A reviewer of the other tool that judges them, steering through a hook of
+  the check's own, and reports to the owner on Telegram are still to be
+  built (SYL-220 to SYL-222).
 - **The check as a command.** Until it exists, the agent does it by hand:
   `ps -o lstart= -p <pid>` for a process, and `lsof <threadFile>` for a Codex
   thread.

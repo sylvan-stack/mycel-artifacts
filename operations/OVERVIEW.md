@@ -83,7 +83,9 @@ One page to (re)load the whole mental model. Each section is two sentences of
   program or thread is gone. What a later Beat must know, a Beat leaves in its
   own file, its hand-over, never where only one tool or one group of sessions
   sees it. [Radar statistics](radar-stats.md) show how far each Saga is in
-  plan steps and which agents work on it now.
+  plan steps and which agents work on it now. [The check from
+  outside](agent-watch.md) measures every 5 minutes what each working agent
+  did since its last progress and raises the signals that call for a review.
 
 ## How it compounds
 
