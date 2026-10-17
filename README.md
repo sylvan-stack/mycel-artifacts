@@ -150,11 +150,10 @@ These hold for every agent on this Mac, whatever the task and the tool.
 - **Another agent may work in the same checkout.** Commit only your own files,
   never revert or tidy a change you did not make, and report drift you cannot
   explain.
-- **Mycel 2 belongs to another session.** Its code in
-  `~/repos/sylvan-stack/mycel`, its specifications in `specs/`, its outputs in
-  `research/`, the Linear issue SYL-97 with its children and its status page
-  are worked by a Codex session. Do not change them; tell the owner what looks
-  wrong.
+- **Mycel 2 is worked as Beats of the Mycel Specs Implementation Saga**
+  (`~/Artifacts/sagas/mycel-2-implementation/`). Change its code in
+  `~/repos/sylvan-stack/mycel`, its specifications in `specs/` and its guides
+  only within a Beat you hold. Write no run results into `research/`.
 - **Version 1 is not run and not a source.** No `*_deprecated_v1` code, and no
   Mycel 1: neither the `mycel` command the rows above name nor the skills built
   on it (mycel-search, code-research, deep-research, corpus-admin,
