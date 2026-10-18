@@ -19,8 +19,8 @@ counting; it reads files and runs `ps` and `lsof`, and writes nothing.
 
 ## When to use
 
-The owner asks how far the Sagas are, or which agents are working now and on
-what: "/radar-stats", "/radar-stats arbol-2-specs-implementation",
+The owner asks how far the Sagas are, or which agents are working on them now:
+"/radar-stats", "/radar-stats arbol-2-specs-implementation",
 "How far are the Sagas?", "Show the radar with Arcs".
 
 Not for taking, planning or finishing a Beat ([Working in Sagas](sagas.md)),
@@ -38,8 +38,8 @@ without regard to case or surrounding whitespace. For example,
 natural-language request naming that Saga uses the same scope. With no
 parameter or named Saga, show every Saga as before.
 
-When a Saga is selected, show only that Saga and its Arcs, and omit the
-machine-wide **Not in any Saga** row. Do not query Linear for other Sagas.
+When a Saga is selected, show only that Saga and its Arcs. Do not query Linear
+for other Sagas.
 An unknown or ambiguous selection must identify the available names and folders
 instead of falling back to all Sagas; resolve the choice before collecting
 statuses or counting.
@@ -48,7 +48,9 @@ statuses or counting.
 
 One row for each Saga in scope, in the order of `~/Artifacts/sagas/INDEX.md`,
 and under it one row for each of its Arcs, in the order its `saga.md` names
-them. An Arc's row counts its own Beats the same way:
+them. An Arc's row counts its own Beats the same way. An Arc whose steps are
+all Done and that no agent works on is left out, such as the Drivers Arc once
+its last Beat is Done:
 
 | Column | What it counts |
 |---|---|
@@ -59,9 +61,10 @@ them. An Arc's row counts its own Beats the same way:
 | Agents | The holds on the Saga's Beats whose agent is alive: the agents working on it now |
 | Context | Those agents' context, added up: the input of each one's last model call, which Claude Code's session file and Codex's thread file record |
 
-A last row in the all-Saga view, **Not in any Saga**, counts the agents working
-now that hold no Beat: Codex threads in the middle of a turn, with their context,
-and Claude Code programs that are running, whose context is unknown (see below).
+Agents that hold no Beat are not shown. From outside, a running `claude`
+program does not show which session it runs or whether it works or waits: the
+desktop app keeps one alive, idle, for every session that Remote Control
+serves. So a count of them says nothing about work on the Sagas.
 
 ## A run
 
@@ -79,24 +82,17 @@ and Claude Code programs that are running, whose context is unknown (see below).
    `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs`.
    For a selected Saga, add `--saga <folder>`; for example,
    `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs --saga arbol-2-specs-implementation`.
-   Add `--json` when a program reads the result; scoped JSON omits
-   `notInAnySaga`.
+   Add `--json` when a program reads the result; the JSON lists every Arc,
+   finished ones too.
 4. **Show** the table as printed, in a code block, with its note on `~`.
    Then say in one or two plain sentences what stands out, such as a Saga
-   with agents but no step in progress, or agents working outside any Saga.
+   with agents but no step in progress, or a Beat In Progress that no agent
+   holds.
 5. **Change nothing.** No corpus file, no Linear item, no hold. Remove the
    temporary statuses file after counting.
 
 ## Not counted yet
 
-- **Claude Code programs.** From outside, a running `claude` program does not
-  show which session it runs, so every running program is counted, and its
-  context and whether it works or waits are unknown. A Claude Code session
-  that holds a Beat is known exactly, through its hold. The agent records
-  that Claude Code's and Codex's hooks will write give every session's state
-  and session file; once they exist (the Agent Records Arc in
-  `~/Artifacts/sagas/arbol-2-specs-implementation/agent-records/`), the tool reads them
-  instead.
 - **Agreed metrics not counted yet:** the last 1, 4 and 24 hours of agents,
   context and generated tokens; waiting on the owner; idle lanes (Beats ready
   to take that no agent holds); Subscription headroom.
