@@ -46,9 +46,9 @@ statuses or counting.
 
 ## What is shown
 
-One row for each Saga in scope, in the order of `~/Artifacts/sagas/INDEX.md`,
-and under it one row for each of its Arcs, in the order its `saga.md` names
-them. An Arc's row counts its own Beats the same way. An Arc whose steps are
+The numbers of each Saga in scope, in the order of `~/Artifacts/sagas/INDEX.md`,
+and under them those of each of its Arcs, in the order its `saga.md` names
+them. An Arc counts its own Beats the same way. An Arc whose steps are
 all Done and that no agent works on is left out, such as the Drivers Arc once
 its last Beat is Done:
 
@@ -85,10 +85,10 @@ serves. So a count of them says nothing about work on the Sagas.
    Without `--markdown` the tool prints a plain-text table for a terminal.
    Use `--json` instead when a program reads the result; the JSON lists every
    Arc, finished ones too.
-4. **Show** the Markdown table as printed, with its note on `~`, as Markdown
-   and not in a code block, so that it fits any window. Saga names are in
-   bold, Arcs are marked `↳`, and an Arc that an agent works on now is in
-   bold across its row. Then say in one or two plain sentences what stands out, such as a Saga
+4. **Show** the output as printed, with its note on `~`, as Markdown and not
+   in a code block, so that it fits any window: one section for each Saga,
+   with its name as a heading, its numbers on one line, and a table of its
+   Arcs, where an Arc that an agent works on now is in bold. Then say in one or two plain sentences what stands out, such as a Saga
    with agents but no step in progress, or a Beat In Progress that no agent
    holds.
 5. **Change nothing.** No corpus file, no Linear item, no hold. Remove the
