@@ -168,7 +168,13 @@ The Keychain items are generic passwords of the login Keychain ([MYC-D24](#decis
 | The password of the store | `mycel` | `store-password` |
 | The Jev API key | `mycel` | `jev-api-key` |
 
-Mycel reads an item with `/usr/bin/security`. Whoever sets one, the owner by hand, Arbol or another editor of settings, writes a generic password with the same program and explicitly trusts `/usr/bin/security` for reading (`-T /usr/bin/security`, without a blanket allow-all ACL). This is MYC-3.14's identity contract: one item, one secret, any number of independent writers. A missing Jev item, a locked Keychain or refused Jev access is an `authentication` fault within selected classification work. Voyage key failures stop embedding or refuse the query's provider operation with `refused`; they do not introduce a global error code. A missing store-password item sends no password; refusal or a rejected connection is `store_unavailable`. Mycel does not rewrite an ACL or repeatedly prompt.
+Mycel reads an item with `/usr/bin/security`. Whoever sets one, the owner by hand, Arbol or another editor of settings, writes a generic password with the same program and explicitly trusts `/usr/bin/security` for reading (`-T /usr/bin/security`, without a blanket allow-all ACL). This is MYC-3.14's identity contract: one item, one secret, any number of independent writers. A missing Jev item, a locked Keychain or refused Jev access is an `authentication` fault within selected classification work. Voyage key failures stop embedding or refuse the query's provider operation with `refused`; they do not introduce a global error code. A missing store-password item sends no password; refusal or a rejected connection is `store_unavailable`. Credential readers do not rewrite an ACL or repeatedly prompt. The explicit `api-key` writer sets the trusted-reader rule when it writes an item.
+
+`mycel api-key voyage` and `mycel api-key jev` read one nonempty printable-ASCII key from the controlling terminal with echo disabled and store it in the corresponding login-Keychain item above (MYC-D40). They do not accept a key in argv or standard input. Missing terminal access, empty or non-printable-ASCII input, or input that cannot safely fit in the native interpreter is `invalid_input`; a failed Keychain write is `refused`. Settings must be valid as for other commands. No store connection, provider call or old-secret read is needed.
+
+The writer starts `/usr/bin/security -q -i` and sends exactly one `add-generic-password` command over a private pipe, with the printable-ASCII secret encoded as hexadecimal for `-X` and `/usr/bin/security` explicitly trusted with `-T`. Encoding does not make the secret public: neither that request nor native output is logged or written to a file. The explicit login-Keychain path is quoted for the native interpreter, which is not a shell. Requests that reach its 4096-byte input-line limit are refused before any write. The key is stored only in the intended encrypted Keychain item.
+
+The writer first attempts creation. Duplicate-item status selects a single `-U` replacement attempt; other faults are not retried. The JSON reply names `stored`, the `item` service/account and `replaced`, without the key. `replaced` means an existing item was found by the creation attempt; concurrent independent writers can still change that item. macOS may request native permission to change an existing item's access rules. Refusal or a bounded timeout is a failed write, and the key may already have changed before an access-rule update fails; no rollback is claimed. Automated checks use stand-ins and isolated dummy items, never the owner's real API-key items.
 
 Observed on 8 October 2026 on macOS 27.0.1: an isolated generic-password item with a generated probe service/account and a public dummy value was created with that trusted-program ACL, read by a separate `/usr/bin/security` invocation with an exact value match and no permission interaction, then deleted. Create/read/delete all returned 0. No real credentials were accessed or changed. This confirms the mechanism on this machine; packaged-runtime checks repeat it with a temporary item rather than assuming every existing item's ACL is suitable.
 
@@ -204,11 +210,12 @@ Proposed: `mycel info` says which file was read, whether it exists and can be re
 | MYC-5.8 | refuse with `settings` a store address that carries a password; take the key of the embedding service from the command the settings name or else from its Keychain item, and the password of the store from its Keychain item | Changed | unit |
 | MYC-5.9 | start a command that gives a secret without a shell, take its output without the final line break as the secret, and treat a status other than 0 as no secret | New | unit |
 | MYC-5.10 | read a Keychain item with the system's `security` program, under the service and account named above | Changed | unit |
-| MYC-5.11 | never write a secret to standard output, standard error, the store, a file or the environment of a program it starts | Changed | unit |
+| MYC-5.11 | never write a secret to standard output, standard error, the store, a file outside its named encrypted Keychain item, or the environment of a program it starts | Changed | unit |
 | MYC-5.12 | list in `mycel repos` every repository of the file with the folders worked out for it, where each folder comes from, and its fault when it has one | Changed | unit |
 | MYC-5.13 | validate supported model/dimension pairs, finite classifier limits and complete reviewer command/provider/model/revision configuration before index or network access | New | unit |
 | MYC-5.14 | read Jev's key only for explicit classification or live drift qualification from the named Keychain item, forward none of Mycel's credentials to reviewer commands, and acquire none during dry-run | New | unit |
 | MYC-5.15 | validate the complete reviewer command/provider/model/revision configuration and exact argv/revision syntax, resolve only the first-member leading tilde, and document the protocol-1 setup without storing credentials or running a dry-run probe | New | unit |
+| MYC-5.16 | provide `mycel api-key voyage` and `mycel api-key jev` to read a nonempty printable-ASCII key from a terminal without echo, refuse absent or unsafe terminal input with `invalid_input`, create or replace its named login-Keychain item through `/usr/bin/security` with that program explicitly trusted for reading, keep the key out of argv, output, logs, plaintext files and child environments, and return only the provider, item identity and replacement flag | New | unit |
 
 ## Interface
 
@@ -261,11 +268,13 @@ review_model = "example-model-2026-10-01"
 review_revision = "example-adapter-v1"
 ```
 
-Setting the key of the embedding service by hand, and what Mycel runs to read it:
+Setting either API key without placing it in an argument, and what Mycel runs to read the embedding key:
 
 ```sh
-/usr/bin/security add-generic-password -U -s mycel -a voyage-api-key -T /usr/bin/security -w
-# The command asks for the key; no key is written in an argument.
+mycel api-key voyage
+mycel api-key jev
+# Each command asks for its key on the terminal without echo.
+# Reply: {"stored":"voyage","item":{"service":"mycel","account":"voyage-api-key"},"replaced":false}
 /usr/bin/security find-generic-password -s mycel -a voyage-api-key -w
 ```
 
@@ -317,3 +326,4 @@ interface RepositoriesReply {
 |---|---|---|---|
 | MYC-D23 | What does Mycel do with a key in the settings file that it does not know? | It runs, and `mycel info` lists the key. The owner's file was written for version 1 and holds such keys today: `profile`, `[providers]`, `url`. Refusing them would stop every command until the file is cleaned by hand. The other choice is to refuse: a misspelt key such as `enabeld` could then never go unnoticed, at the price of that clean-up first | Decided 8 October 2026 by the owner: "Refuse unknown keys and show detailed error message." Unknown tables or keys stop commands that need valid settings with a detailed `settings` error. The earlier decision to remove deprecated keys remains recorded; that cleanup was completed the same day |
 | MYC-D24 | Under what name is the key of the embedding service kept in the Keychain, and how is it written and read? | A generic password with the service `mycel` and the account `voyage-api-key`, written and read with the system's `security` program. Arbol sets the key by running the same program, so one item serves both and Mycel holds no code of Arbol (MYC-D15). The temporary-item ACL trial records the writer/reader mechanism and must be repeated by the packaged-runtime probe | Decided 8 October 2026 by the owner: the agent chooses. Chosen: the proposed default, the service `mycel` and the account `voyage-api-key`, through the `security` program. The isolated dummy-item create/read/delete trial passed on macOS 27.0.1 on 8 October 2026; real credentials were not touched |
+| MYC-D40 | How does the owner set the Voyage and Jev API keys without running `security` by hand, and how does the key reach it safely? | One `mycel api-key voyage\|jev` command prompts without echo and writes the existing named Keychain item | Decided 17 October 2026 by the owner: "I don't know how to add this key in Keychain. Let's add command 'mycel api-key' that will prompt to enter API key and save it to Keychain"; the owner agreed that the command serves both Voyage and Jev. Implementation choice, 18 October 2026: a bounded private pipe to `/usr/bin/security -q -i`, exactly one command with hexadecimal `-X` data, an explicit login-Keychain path and `-T /usr/bin/security`; no shell, secret argv, plaintext file or old-secret read. Create first and retry only duplicate-item status with `-U`; native access-rule approval may be required on replacement |

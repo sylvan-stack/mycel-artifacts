@@ -100,6 +100,7 @@ Proposed. The rules below hold for every command. The commands themselves are sp
 | `mycel read` | Returns one whole chunk | MYC-11 |
 | `mycel activity` | The record of what Mycel did | MYC-12 |
 | `mycel evaluate` | Runs a repository's evaluation set | MYC-13 |
+| `mycel api-key voyage`, `mycel api-key jev` | Prompt without echo and store the API key in its named login-Keychain item | MYC-5 |
 | `mycel init` | Creates the index store's structure, or brings it to the format of the Build that runs | here, MYC-6 |
 | `mycel info` | Says which Build runs and what it found | here, MYC-5 |
 
@@ -113,7 +114,7 @@ Proposed. The rules below hold for every command. The commands themselves are sp
 | Exit status | 0: done as asked. 1: refused or failed. 2: stopped by the caller |
 | Several repositories | A command that covers one or several repositories gives each an entry of its own. When any of them was refused or not run, the status is 1 and the full reply is still written. An error object alone is the result only when nothing could be started for any of them (MYC-6.14, MYC-D27) |
 | Standard error | Progress and diagnostics for a person. A caller never needs it to understand a result, and no secret is written there |
-| Secrets | Mycel is never given a secret, neither as an argument nor on standard input nor in its settings file (MYC-3.14) |
+| Secrets | Mycel is never given a secret as an argument, on standard input or in its settings file (MYC-3.14). The explicit `api-key` command reads one key from a terminal with echo disabled and writes only its named encrypted Keychain item (MYC-5.16) |
 | Reports | A command that only reports writes nothing (MYC-1.28). The store's structure changes only in `mycel init` |
 | `info` | Prints the package version and the build number of the Build that runs, the version of the search reply it produces, the settings file, the index store and its format number, and the embedding model |
 
