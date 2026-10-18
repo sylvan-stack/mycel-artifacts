@@ -56,7 +56,7 @@ Default stint: none. The work on a Beat has its own default, `beat`.
 
 The default for every run of a Beat of a Saga: stop and ask after an hour
 without progress, and release the Beat after four hours whatever is left.
-Basis: the first nine Beats of the Arbol 2 Foundation Saga, 14 to 16 October
+Basis: the first nine Beats of the Arbol 2 Specs Implementation Saga, 14 to 16 October
 2026: eight took between 14 minutes and 2.7 hours, and SYL-165 took 10.5 hours
 overnight; SYL-171 ticked 35 plan steps in 40 minutes. Against them, a Codex
 run on Mycel 2 on 15 and 16 October went 31 hours and spent about 3.4 billion

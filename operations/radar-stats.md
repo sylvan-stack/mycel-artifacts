@@ -20,7 +20,7 @@ counting; it reads files and runs `ps` and `lsof`, and writes nothing.
 ## When to use
 
 The owner asks how far the Sagas are, or which agents are working now and on
-what: "/radar-stats", "/radar-stats arbol-2-foundation",
+what: "/radar-stats", "/radar-stats arbol-2-specs-implementation",
 "How far are the Sagas?", "Show the radar with Arcs".
 
 Not for taking, planning or finishing a Beat ([Working in Sagas](sagas.md)),
@@ -33,10 +33,10 @@ nor for what waits for the owner in Linear
 The optional parameter selects a Saga listed in `~/Artifacts/sagas/INDEX.md`
 by its folder name or the full name heading in its `saga.md`, matched exactly
 without regard to case or surrounding whitespace. For example,
-`/radar-stats arbol-2-foundation` and
-`/radar-stats "Arbol 2 Foundation Saga"` select the same Saga. A natural-language
-request naming that Saga uses the same scope. With no parameter or named Saga,
-show every Saga as before.
+`/radar-stats arbol-2-specs-implementation` and
+`/radar-stats "Arbol 2 Specs Implementation Saga"` select the same Saga. A
+natural-language request naming that Saga uses the same scope. With no
+parameter or named Saga, show every Saga as before.
 
 When a Saga is selected, show only that Saga and its Arcs, and omit the
 machine-wide **Not in any Saga** row. Do not query Linear for other Sagas.
@@ -78,7 +78,7 @@ and Claude Code programs that are running, whose context is unknown (see below).
 3. **Count.** Run
    `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs`.
    For a selected Saga, add `--saga <folder>`; for example,
-   `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs --saga arbol-2-foundation`.
+   `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs --saga arbol-2-specs-implementation`.
    Add `--json` when a program reads the result; scoped JSON omits
    `notInAnySaga`.
 4. **Show** the table as printed, in a code block, with its note on `~`.
@@ -95,7 +95,7 @@ and Claude Code programs that are running, whose context is unknown (see below).
   that holds a Beat is known exactly, through its hold. The agent records
   that Claude Code's and Codex's hooks will write give every session's state
   and session file; once they exist (the Agent Records Arc in
-  `~/Artifacts/sagas/arbol-2-foundation/agent-records/`), the tool reads them
+  `~/Artifacts/sagas/arbol-2-specs-implementation/agent-records/`), the tool reads them
   instead.
 - **Agreed metrics not counted yet:** the last 1, 4 and 24 hours of agents,
   context and generated tokens; waiting on the owner; idle lanes (Beats ready
