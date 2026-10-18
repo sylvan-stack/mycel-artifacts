@@ -1,6 +1,3 @@
----
-role: authored
----
 # Staging and maintaining offline Mycel Builds
 
 The development tool runs as `python -m mycel_build` from this repository's
@@ -175,7 +172,7 @@ the complete installed unit/store suite, and the packaged selector/CLI checks
 from two private installation paths. The receiver derives its expected named
 inventory and ordered claim lists independently from the frozen source; a
 child cannot define its own expected count or substitute a partial report.
-The retained report names every outcome and preserves all 332 requirement rows,
+The retained report names every outcome and preserves all 333 requirement rows,
 including pending requirements. Evaluation and live checks are never selected
 by this automatic gate and their pending rows are not promoted.
 
@@ -319,7 +316,7 @@ product-only.
 A separate accepted-program feasibility diagnostic informed this implementation.
 Every new Build must execute its own current-source/current-program check; the
 diagnostic cannot be replayed as qualification. Unit fixtures use openly
-fictional complete327-automatic/332-registry preconditions and fake native APIs
+fictional complete328-automatic/333-registry preconditions and fake native APIs
 to test policy. No new source application, automatic Build qualification,
 provider qualification or working release is claimed by this preparation; all315
 previous shared ordered claim lists remain unchanged.
@@ -337,7 +334,7 @@ mycel:@code/tests/test_working_publication.py#WorkingPublicationTests
 
 ## Read-only one-time replacement planning
 
-The [Mycel-owned replacement procedure](mycel-2-replacement.md) documents exact current
+The [Mycel-owned replacement procedure](replacement.md) documents exact current
 inventory, independently inspectable ownership evidence, a qualified new
 launcher/private store, verified command cutover and restrictive exact cleanup.
 `python -m mycel_build replacement-plan --inventory /absolute/inventory.json`
