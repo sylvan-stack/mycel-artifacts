@@ -88,6 +88,7 @@ MYC-D1 records the owner’s Python decision; MYC-15 makes its independent distr
 | MYC-D36 · Which store do the automatic checks work on? | Decided 8 October 2026 by the owner: resolved; automatic store checks create and remove their own `mycel_check_` databases on the configured server and never open the owner's actual database | [MYC-D36](13-checks-and-evaluation.md) |
 | MYC-D37 · Keep prescribed named defaults/exclusions? | Decided 9 October 2026 by the owner: keep the prescribed names as explicit packaged-data exceptions, without implicit repository registration, aliasing, folder fallback or product dependency | [MYC-D37](00-overview-and-legacy-map.md) |
 | MYC-D38 · Recognize a function rename separately from the complete-code hash? | Decided 9 October 2026 by the owner: preserve identity using a conservative parser-derived body/signature key; retain the complete-code hash for exact change tracking and evidence | [MYC-D38](01-corpora-and-ingest.md) |
+| MYC-D42 · Must tokenizer and provider usage counts agree for embedding compatibility? | Decided 18 October 2026 by the owner: keep the pinned tokenizer for limits, retain provider usage separately and report agreement/difference without failing compatibility on disagreement; continue full Drift qualification | [MYC-D42](13-checks-and-evaluation.md#decisions) |
 
 ## Conventions
 
