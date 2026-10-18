@@ -4,9 +4,10 @@ role: authored
 # Guide: Radar Statistics
 
 Use this guide to show the owner, in the session, every Saga or one selected
-Saga with how much of its work is Done, In progress and left, how many agents
-work on it now, and how much context those agents hold. It stands in for the
-[Radar](../../arbol/GLOSSARY.md#radar), the live overview Arbol will have.
+Saga, and every Arc under it, with how much of its work is Done, In progress
+and left, how many agents work on it now, and how much context those agents
+hold. It stands in for the [Radar](../../arbol/GLOSSARY.md#radar), the live
+overview Arbol will have.
 The Sagas, their Arcs and the plans of their Beats are files in
 `~/Artifacts/sagas/`, kept as [Working in Sagas](sagas.md) says.
 
@@ -46,8 +47,8 @@ statuses or counting.
 ## What is shown
 
 One row for each Saga in scope, in the order of `~/Artifacts/sagas/INDEX.md`,
-and on request one row for each of its Arcs under it. Selecting a Saga includes
-its Arcs:
+and under it one row for each of its Arcs, in the order its `saga.md` names
+them. An Arc's row counts its own Beats the same way:
 
 | Column | What it counts |
 |---|---|
@@ -75,11 +76,11 @@ and Claude Code programs that are running, whose context is unknown (see below).
    corpus. If Linear cannot be reached, run without it and say that Done then
    counts only Beats whose plan is fully ticked.
 3. **Count.** Run
-   `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file>`.
-   For a selected Saga, add `--saga <folder>` and `--arcs`; for example,
-   `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --saga arbol-2-foundation --arcs`.
-   Otherwise add `--arcs` when the owner asks for Arcs. Add `--json` when a
-   program reads the result; scoped JSON omits `notInAnySaga`.
+   `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs`.
+   For a selected Saga, add `--saga <folder>`; for example,
+   `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs --saga arbol-2-foundation`.
+   Add `--json` when a program reads the result; scoped JSON omits
+   `notInAnySaga`.
 4. **Show** the table as printed, in a code block, with its note on `~`.
    Then say in one or two plain sentences what stands out, such as a Saga
    with agents but no step in progress, or agents working outside any Saga.

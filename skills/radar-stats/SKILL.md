@@ -2,7 +2,7 @@
 name: radar-stats
 description: >-
   Show the Radar statistics of the Sagas in ~/Artifacts/sagas: for every
-  Saga or one selected by name or folder, and on request every Arc, how much
+  Saga or one selected by name or folder, and every Arc under it, how much
   of its work is Done, In progress and Other, counted in the steps of its
   Beats' plans, how many agents work on it now and how much context they hold,
   plus the agents working outside any Saga in the all-Saga view.
