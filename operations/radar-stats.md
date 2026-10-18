@@ -79,13 +79,16 @@ serves. So a count of them says nothing about work on the Sagas.
    corpus. If Linear cannot be reached, run without it and say that Done then
    counts only Beats whose plan is fully ticked.
 3. **Count.** Run
-   `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs`.
+   `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs --markdown`.
    For a selected Saga, add `--saga <folder>`; for example,
-   `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs --saga arbol-2-specs-implementation`.
-   Add `--json` when a program reads the result; the JSON lists every Arc,
-   finished ones too.
-4. **Show** the table as printed, in a code block, with its note on `~`.
-   Then say in one or two plain sentences what stands out, such as a Saga
+   `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs --markdown --saga arbol-2-specs-implementation`.
+   Without `--markdown` the tool prints a plain-text table for a terminal.
+   Use `--json` instead when a program reads the result; the JSON lists every
+   Arc, finished ones too.
+4. **Show** the Markdown table as printed, with its note on `~`, as Markdown
+   and not in a code block, so that it fits any window. Saga names are in
+   bold, Arcs are marked `↳`, and an Arc that an agent works on now is in
+   bold across its row. Then say in one or two plain sentences what stands out, such as a Saga
    with agents but no step in progress, or a Beat In Progress that no agent
    holds.
 5. **Change nothing.** No corpus file, no Linear item, no hold. Remove the
