@@ -388,6 +388,14 @@ its steps are done out of all of them.
   step.
 - **Progress** of a Beat is its ticked leaves out of all its leaves: 2 of 6
   above.
+- **Tests in the plan.** The last leaf of every plan runs the repository's
+  complete suite, then merges and records the hand-over. Every earlier leaf
+  runs only the tests of the files it changes, and after a failure only the
+  failed tests until they pass. No other step runs the complete suite: a
+  Beat runs it when it is taken, to know where it starts, and in its last
+  leaf. A run that takes longer than about a minute is started in the
+  background, and the work goes on while it runs. The Saga's `rules.md`
+  names the commands of its repository.
 - **Keeping it true.** When the work shows that the plan is wrong, change
   the plan in the file first, and say why in the next `**Agent:**` comment.
 - **Publishing.** After writing the plan and after each tick, commit the
