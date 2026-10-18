@@ -578,10 +578,11 @@ territory instead.
   owners above are used, and a hold shows neither.
 - **What the check from outside does with its signals.**
   [The check from outside](agent-watch.md) reads the holds, the Beat files'
-  ticks and the agents' token spend every 5 minutes and raises its signals.
-  A reviewer of the other tool that judges them, steering through a hook of
-  the check's own, and reports to the owner on Telegram are still to be
-  built (SYL-220 to SYL-222).
+  ticks and the agents' token spend every 5 minutes, raises its signals, and
+  has a fresh agent of the other tool review what each signal points at.
+  Steering through a hook of the check's own, by the reviews' answers, and
+  reports to the owner on Telegram are still to be built (SYL-221 and
+  SYL-222).
 - **The check as a command.** Until it exists, the agent does it by hand:
   `ps -o lstart= -p <pid>` for a process, and `lsof <threadFile>` for a Codex
   thread.
