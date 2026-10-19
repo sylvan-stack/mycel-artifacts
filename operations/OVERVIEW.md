@@ -118,7 +118,8 @@ Distinct task shapes have thin skills
 routing through the Hub: `/code-research`, `/deep-research`,
 `/mycel-search`, `/corpus-admin`, `/authored-work-integration`,
 `/pr-deep-review`, `/create-mycel-skill`,
-`/linear-resolve`, `/linear-organize`, `/linear-open-questions`, `/radar-stats`.
+`/linear-resolve`, `/linear-organize`, `/linear-open-questions`, `/radar-stats`,
+`/arbol-chat-prepared-folder`.
 Skills carry only *when to trigger*; the process always lives here, in Mycel.
 
 <!-- sources:

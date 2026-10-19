@@ -185,6 +185,7 @@ Not process guides: `mycel raptor regen|build` loads both files from this folder
 ### `skills/` — Mycel Skill provider adapters
 Shared activation contracts and thin Hub dispatchers for native Codex CLI and Claude Code CLI. Canonical sources are linked into `~/.agents/skills/` (Codex) and `~/.claude/skills/` (Claude). See [authoring rules](skills/README.md) and the [creation guide](operations/create-skill.md).
 
+- [`arbol-chat-prepared-folder`](./skills/arbol-chat-prepared-folder/SKILL.md)
 - [`authored-work-integration`](./skills/authored-work-integration/SKILL.md)
 - [`code-research`](./skills/code-research/SKILL.md)
 - [`corpus-admin`](./skills/corpus-admin/SKILL.md)
@@ -197,7 +198,7 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 - [`mycel-search`](./skills/mycel-search/SKILL.md)
 - [`pr-deep-review`](./skills/pr-deep-review/SKILL.md)
 
-The active catalog contains 11 Mycel skills for both providers. Personal and
+The active catalog contains 12 Mycel skills for both providers. Personal and
 third-party skills remain outside this catalog.
 
 ## Conventions
