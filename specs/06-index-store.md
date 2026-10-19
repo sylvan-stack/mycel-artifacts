@@ -26,6 +26,7 @@ Proposed:
 | Record | Written by | Specified in |
 |---|---|---|
 | Documents and chunks; for each chunk its versions and the locations each version is found in | `ingest` | MYC-1 |
+| Requirement and decision entities: chunks of kind `req` and `dec` whose identifier is the UUID of their row, with their versions and locations; the entity row is never deleted | `ingest` | MYC-17 |
 | For each repository: when its last pass ran, and which branch and stash commits were already read | `ingest` | MYC-1 |
 | Edges, relations, faults in refs, stale reasons and classification evidence, including pending debounce and LLM review | `ingest`, `derive`, `relate`, `confirm`, `classify` | MYC-2, MYC-7, MYC-14 |
 | Drifts and recorded verifications | reconciliation, `classify`, `confirm` | MYC-14, MYC-7 |
@@ -85,6 +86,8 @@ Proposed: the structure is made and changed by `mycel init` and by no other comm
 | holds tables that are not Mycel's | is refused with `refused`: Mycel shares its database with nothing | is refused with `store_format` |
 
 `mycel info` runs in every one of these states and reports the format it found. `mycel grep` runs grep and leaves out its tail.
+
+Format 3, of 19 October 2026, admits the chunk kinds `req` and `dec` of [MYC-17](17-justification.md) and keeps their rows out of collection; `mycel init` brings a format 2 store forward in one step, with no row to rewrite.
 
 Builds are kept side by side, and each can be started by its number (MYC-0). Once a newer Build has raised the format, the older Builds refuse this store, and there is no way back to the earlier format.
 
@@ -206,6 +209,7 @@ Everything of version 1 is removed: its ten tables in Arbol 1's database, its tw
 | MYC-6.18 | retain only MYC-16 owning-reference-protected evidence outside searchable located versions, capture/repin it atomically, and collect only unreferenced owner-repository blobs | New | store |
 | MYC-6.19 | create a unique index-generation UUID when initializing an empty store, preserve it through ordinary ingest and migrations, and report it in init/info/activity so a lost-store rebuild cannot impersonate old evidence | New | store |
 | MYC-6.20 | implement nonblocking classification, summary, pinning and evidence-lease/removal locks with distinct advisory namespaces and exact invocation liveness; hold no pass lock during model calls | New | store |
+| MYC-6.21 | hold requirement and decision entities as chunks of kind `req` and `dec` in store format 3, bring a format 2 store forward in one step, report the format in `mycel info`, and never delete an entity row in collection | New | store |
 
 ## Interface
 

@@ -51,6 +51,7 @@ Proposed: the keys below and no others. Each is named by the requirement that ne
 | `[scan]` | `skip_folders` | list of texts | version 1's list for code | MYC-1.6, MYC-D7 |
 | `[search]` | `shared_documents` | list of `{ repo, paths }` | the two entries of MYC-D18 | MYC-4.3 |
 | `[search]` | `freshness_seconds` | number above 0 | `5` | MYC-4.19 |
+| `[discussions]` | `address` | text: a password-free PostgreSQL address of the Arbol database | none: no discussion can be shown | [MYC-17](17-justification.md#the-discussion-of-a-decision), MYC-D48 |
 | `[drifts]` | `debounce_seconds` | whole number, 0 or more | `300` | [MYC-14](14-drift-detection.md), MYC-D28 |
 | `[drifts]` | `model` | text: exact versioned Jev ID | `jev-1.13.0` | [MYC-14](14-drift-detection.md) |
 | `[drifts]` | `confidence_floor` | finite number from 0 to 1 inclusive | `0.7` | [MYC-14](14-drift-detection.md) |
@@ -157,6 +158,7 @@ The store, Voyage and Jev credentials use the contracts below. Mycel reads Jev's
 | The password of the store, when the store asks for one | The Keychain item below ([MYC-D25](06-index-store.md#decisions)); when there is none, no password is sent |
 | The Jev API key | The `mycel` / `jev-api-key` Keychain item; no key means a classification authentication fault |
 | The smarter reviewer's credential | The independently configured review command's own provider authentication; Mycel neither acquires nor forwards it |
+| The password of the discussion database, when it asks for one | The Keychain item below; when there is none, no password is sent (MYC-D48) |
 
 A command that gives a secret is a program of the owner's. Mycel starts it without a shell and takes what it prints, without the final line break, as the secret. A status other than 0 means there is none.
 
@@ -167,6 +169,7 @@ The Keychain items are generic passwords of the login Keychain ([MYC-D24](#decis
 | The key of the embedding service | `mycel` | `voyage-api-key` |
 | The password of the store | `mycel` | `store-password` |
 | The Jev API key | `mycel` | `jev-api-key` |
+| The password of the discussion database | `mycel` | `discussions-password` |
 
 Mycel reads an item with `/usr/bin/security`. Whoever sets one, the owner by hand, Arbol or another editor of settings, writes a generic password with the same program and explicitly trusts `/usr/bin/security` for reading (`-T /usr/bin/security`, without a blanket allow-all ACL). This is MYC-3.14's identity contract: one item, one secret, any number of independent writers. A missing Jev item, a locked Keychain or refused Jev access is an `authentication` fault within selected classification work. Voyage key failures stop embedding or refuse the query's provider operation with `refused`; they do not introduce a global error code. A missing store-password item sends no password; refusal or a rejected connection is `store_unavailable`. Credential readers do not rewrite an ACL or repeatedly prompt. The explicit `api-key` writer sets the trusted-reader rule when it writes an item.
 
@@ -216,6 +219,7 @@ Proposed: `mycel info` says which file was read, whether it exists and can be re
 | MYC-5.14 | read Jev's key only for explicit classification or live drift qualification from the named Keychain item, forward none of Mycel's credentials to reviewer commands, and acquire no Jev or Voyage credential during dry-run | New | unit |
 | MYC-5.15 | validate the complete reviewer command/provider/model/revision configuration and exact argv/revision syntax, resolve only the first-member leading tilde, and document the protocol-1 setup without storing credentials or running a dry-run probe | New | unit |
 | MYC-5.16 | provide `mycel api-key voyage` and `mycel api-key jev` to read a nonempty printable-ASCII key from a terminal without echo, refuse absent or unsafe terminal input with `invalid_input`, create or replace its named login-Keychain item through `/usr/bin/security` with that program explicitly trusted for reading, keep the key out of argv, output, logs, plaintext files and child environments, and return only the provider, item identity and replacement flag | New | unit |
+| MYC-5.17 | know the table `[discussions]` with its key `address`, a password-free PostgreSQL address of the Arbol database, refuse one that carries a password with `settings`, take its password from the Keychain item `mycel` / `discussions-password` when the database asks for one, and leave every command but the read of a decision's discussion untouched by its absence | New | unit |
 
 ## Interface
 

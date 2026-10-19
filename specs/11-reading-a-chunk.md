@@ -46,6 +46,8 @@ The reply also says what a search result says about the chunk: its origin and ki
 
 Since [MYC-D39](02-provenance-and-freshness.md#decisions), decided on 15 October 2026, the reply also lists every document section that describes the chunk, by a direct declared or asserted dependency in either direction, with the direction and the kind of edge ([MYC-2](02-provenance-and-freshness.md#which-documents-describe-a-chunk)). The list is complete, does not depend on embeddings, and is empty when no document describes the chunk.
 
+Since 19 October 2026 a requirement or decision is a chunk of its own ([MYC-17](17-justification.md#requirements-and-decisions-are-entities)), named by its Entity URI, by its full address or by its human id within its file. The reply of such a chunk carries its `entity` fields: the kind, the UUID, the human id, the URI, the title, the status and the metadata of the row. For a decision it also carries the discussion: the content of each chat its Discussion cell names, read as data from the Arbol database that the `[discussions]` settings of [MYC-5](05-settings.md#the-keys) name, or `available: false` with the reason when the settings name none or it cannot be reached; the read succeeds either way and writes nothing there ([MYC-D48](17-justification.md#decisions)).
+
 For a symbol of a code file that can be read, `--context` adds up to 50 lines before and after, taken from the file. Without the option there are none.
 
 A text of more than 5 MiB is cut there, and the reply says so.
@@ -81,6 +83,7 @@ Proposed: no command of its own. `mycel info` ([MYC-0](00-overview-and-legacy-ma
 | MYC-11.10 | name in `mycel info` the commands of the Build that runs and the version of the read reply, and have no other command that describes the program | Changed | unit |
 | MYC-11.11 | accept MYC-16 qualified code/artifact/index addresses and legacy unambiguous aliases through the central resolver, return a canonical qualified address, and identify root-aware ambiguity candidates without silently choosing a file or index namespace | New | store |
 | MYC-11.12 | list in the reply every document section that describes the chunk by a direct declared or asserted dependency in either direction, with its direction and kind, complete and independent of embeddings, and an empty list when there is none | New | store |
+| MYC-11.13 | read a requirement or decision chunk by its Entity URI, its full address or its human id within its file, carry its entity fields in the reply, and for a decision show the chats of its Discussion cell from the configured Arbol database or `available: false` with the reason, succeeding either way and writing nothing there | New | store |
 
 ## Interface
 
@@ -95,6 +98,7 @@ mycel read 'cellar:@code/README.md#Setup'               # explicit checkout docu
 mycel read 'cellar:@artifact/README.md#Setup'           # a distinct artifact document
 mycel read 'handbook:@index/summaries#1%2F7'            # explicit index-only summary
 mycel read --id 01JB2M0000000000000000000A --no-fresh    # by identifier, without the freshness check
+mycel read '[dec:0f2c1b4e-8a9d-4c3e-9b7a-1d2e3f4a5b6c:V2hpY2ggbGFuZ3VhZ2U]'   # a decision by its Entity URI, with its discussion (MYC-17)
 ```
 
 ```ts
@@ -117,6 +121,7 @@ interface ReadReply {
   dependencyCheck: DependencyCheck;     // MYC-4
   heartwood: boolean;
   documents: DocumentLink[];            // MYC-D39 (MYC-2): every document section that describes this chunk; empty when none
+  entity?: EntityFields;                // MYC-17: a chunk of kind req or dec, with its discussion for a decision
   file?: string;                       // absolute path, when the chunk has a file that can be read
   unreadable?: string;                 // the reason, when there is no file
   freshness: {

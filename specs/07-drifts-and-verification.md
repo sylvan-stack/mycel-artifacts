@@ -32,6 +32,10 @@ Observed in version 1: designed in the Glossary under the name [Coupling](../../
 Proposed: a relation says "when that chunk changes, look at this one". It is made in the same two ways as an edge ([MYC-D30](#decisions)):
 
 ```markdown
+### The discussion of a decision
+
+Decided on 19 October 2026 ([MYC-D47](17-justification.md#decisions)): the Discussion column of a Decisions table holds chat Entity URIs only, `[cht:<uuid>:<title>]`. A chat is neither a source nor a relation: no edge is made from it, it pins nothing, and it never makes the decision stale. A decision that rests on a research note cites it as an ordinary Source Ref and goes stale when the note changes. A decision row is a chunk of its own ([MYC-17](17-justification.md#requirements-and-decisions-are-entities)); editing it makes everything that rests on it stale, by the rules of MYC-2, as editing a requirement does.
+
 ## Reply format
 
 A reply repeats the identifier of its request.
@@ -146,6 +150,7 @@ An assertion can also be withdrawn on purpose. `mycel derive` and `mycel relate`
 | MYC-7.28 | determine verification applicability from the exact dependant version, source text and selection membership, and retain record-owned evidence for the verification history | New | store |
 | MYC-7.29 | publish generated pins only with successfully generated text, retain the exact request evidence, and expose stale generated text as regeneration work without semantic classification | New | store |
 | MYC-7.30 | return the relation assertion/removal result and complete verification evidence; make verification listing read-only, deterministically ordered and successful when empty | New | store |
+| MYC-7.31 | retain the chat Entity URIs of a decision's Discussion column with the decision, make no edge, pin and stale mark from a chat, and mark what rests on a decision stale when its row is edited | New | store |
 
 On 8 October 2026, at the owner's request to research Drift detection separately, MYC-7.1 through MYC-7.13 moved out of this active requirements table to the candidate requirements of [MYC-14](14-drift-detection.md#requirements). Their numbers remain reserved and are never reused. The map is MYC-7.1 → MYC-14.1, MYC-7.2 → MYC-14.2, MYC-7.3 → MYC-14.3, MYC-7.4 → MYC-14.4, MYC-7.5 → MYC-14.5, MYC-7.6 → MYC-14.6, MYC-7.7 → MYC-14.7, MYC-7.8 → MYC-14.8, MYC-7.9 → MYC-14.9, MYC-7.10 → MYC-14.10, MYC-7.11 → MYC-14.11, MYC-7.12 → MYC-14.12 and MYC-7.13 → MYC-14.13. Their completed implementation defaults are accepted under MYC-D28/MYC-D29 on 8 October 2026; [the extraction map](14-drift-detection.md#extraction-and-identifier-map) preserves this history.
 
