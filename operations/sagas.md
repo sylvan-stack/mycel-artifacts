@@ -26,10 +26,10 @@ in the corpus `~/Artifacts/sagas/`: the rules of each Saga's work are in that
 Saga's file, and what a Beat must achieve is in that Beat's file.
 
 **Contents:** when to use · where state lives · territories · prepared
-folders · holds · order and progress · taking the next Beat · the plan of a
-Beat · the hand-over of a Beat · while working · stop criteria of a Beat ·
-stopping and finishing · reviewing a Beat, an Arc or a Saga · planning a
-Saga · not built yet.
+folders · holds · a prepared folder for an Arbol chat · order and progress ·
+taking the next Beat · the plan of a Beat · the hand-over of a Beat · while
+working · stop criteria of a Beat · stopping and finishing · reviewing a
+Beat, an Arc or a Saga · planning a Saga · not built yet.
 
 ## When to use
 
@@ -37,6 +37,7 @@ Saga · not built yet.
   "continue the `<name>` Arc" or "take the next Beat".
 - The owner asks to plan new work as a Saga, or to add an Arc or Beats.
 - An agent stops or finishes a Beat.
+- An agent in an Arbol chat has to change files in a repository.
 
 Not for answering the owner's open questions
 ([Answer Open Questions from Linear](linear-open-questions.md)) or their
@@ -51,7 +52,7 @@ comments ([Resolve Linear Comments](linear-resolve.md)).
 | Arc | The file `arc.md` in its own folder `~/Artifacts/sagas/<saga>/<arc>/`, and a parent issue titled `<Name> Arc` in the Saga's Linear project | the file: its goal, its territory, the recommended order of its Beats, and its progress |
 | Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and that issue, a sub-issue of its Arc's issue | the file: what it must achieve, its plan, its hand-over to later Beats, and its own territory when it names one. Linear: its status, its comments, and what it waits for (*blocked by*) |
 | Repository of a Beat | A label of the label group `Repository` | — |
-| Hold | One file per held Beat in `~/.sagas/holds/` on this Mac | who works on a Beat right now, and in which prepared folder |
+| Hold | One file per held Beat, and one per Arbol chat that booked a prepared folder, in `~/.sagas/holds/` on this Mac | who works on a Beat right now, which chat works in which prepared folder |
 | A Beat's code | The branch `beat/<Beat>` in each repository its territory touches, worked in a prepared folder and merged into `main` as one merge commit | exactly what the Beat changed in code, whichever tool, session or kind of edit made the change |
 
 **The files are the originals.** The page in a Saga's Linear project is a
@@ -136,7 +137,7 @@ Beat's changes are exactly its branch.
   arbol/  arbol-root/  arbol-trunk/  …       the repositories' own folders: the owner's, and
                                              Claude Code or Codex used directly; no Beat works here
   1/  2/  3/  4/  5/                         the prepared folders, each with a clone of every repository
-    arbol/  arbol-root/  arbol-trunk/  …     on main while free; on beat/<Beat> while a hold names the folder
+    arbol/  arbol-root/  arbol-trunk/  …     on main while free; on beat/<Beat> or chat/<chat> while a hold names the folder
   readonly/                                  one more clone of every repository, always the last main;
     arbol/  arbol-root/  arbol-trunk/  …     nobody edits it
 ```
@@ -144,8 +145,8 @@ Beat's changes are exactly its branch.
 | Folder | Checked out | Who works in it |
 |---|---|---|
 | `~/repos/sylvan-stack/<repo>/` | whatever its user chose | the owner, and Claude Code or Codex started there |
-| `~/repos/sylvan-stack/<n>/<repo>/` | `main` while free; `beat/<Beat>` while a hold names the folder | the agent of that hold, and nobody else |
-| `~/repos/sylvan-stack/readonly/<repo>/` | `main`, brought up to date after every merge | nobody; it is read, for the last merged state |
+| `~/repos/sylvan-stack/<n>/<repo>/` | `main` while free; `beat/<Beat>` or `chat/<chat>` while a hold names the folder | the agent of that hold, and nobody else |
+| `~/repos/sylvan-stack/readonly/<repo>/` | `main`, brought up to date after every merge | nobody edits it; it is read, for the last merged state, and an Arbol chat works in it ([below](#a-prepared-folder-for-an-arbol-chat)) |
 
 - **Free.** A prepared folder is free when no hold names it, and every
   repository in it is on `main` with nothing uncommitted and no file that git
@@ -218,11 +219,11 @@ owner.
 |---|---|---|
 | Claude Code, terminal or app | The session's own program: its number is in `CLAUDE_PID`, its session in `CLAUDE_CODE_SESSION_ID` | the process lives |
 | Codex, terminal or app | All threads share one program, so the thread is named too: `CODEX_THREAD_ID`, and its record file `~/.codex/sessions/…/rollout-…-<thread id>.jsonl` as `threadFile` | a Codex process has the thread's record file open (`lsof`); Codex keeps it open exactly while the thread is loaded |
-| A Chat Exchange of an Arbol Trunk | The Exchange's `record.json` | its process lives, as [RCT-1](../../arbol-root/contract/01-the-exchange-folder.md) says |
+| An Arbol chat | No process: an Arbol chat has none between two messages. The hold names the chat as the agent of the tool `arbol` with the session `<root>/<chat>`, and its `owner` is `null` ([AGR-D11](../../arbol/agent-records/00-the-agent-record.md#decisions)) | never gone by itself: Arbol cannot close a chat yet, so the hold is released only by hand |
 
 <!-- sources:
 arbol:driver-contract/06-state-and-simultaneous-calls.md#Knowing that a process is alive
-arbol-root:contract/01-the-exchange-folder.md#The record
+arbol:agent-records/00-the-agent-record.md#An Exchange of an Arbol Trunk
 -->
 
 ### What happens to a hold
@@ -252,7 +253,85 @@ Before taking a Beat, an agent checks every file in `~/.sagas/holds/`. For
 each hold whose owner is gone, it deletes the file and comments on the Beat:
 `**Agent:** Released automatically: <the reason, such as "the Claude Code
 session's program ended" or "the Codex thread was closed">.` The Beat keeps
-its status: its last `**Agent:**` comment says where the work stopped.
+its status: its last `**Agent:**` comment says where the work stopped. A hold
+that names an Arbol chat has no owner to check, and the check leaves it.
+
+## A prepared folder for an Arbol chat
+
+An Arbol chat works in `~/repos/sylvan-stack/readonly/`: in its repository's
+folder there, such as `readonly/arbol-trunk`, or in `readonly/` itself for the
+stack as a whole. It keeps that folder for every message, because a Driver
+continues its saved conversation only in the same folder. Most chats only
+read and answer. An agent in a chat that has to change files *books* a
+prepared folder, when it needs one, and works there. So more chats than
+prepared folders can be open at once. The owner decided this on 19 October
+2026 ([BKD-D4](../../arbol/backend/00-the-arbol-backend.md#decisions)).
+
+The tool is `~/Artifacts/sagas/tools/prepared_folder.py`. It takes the chat
+from `ARBOL_ROOT` and `ARBOL_CHAT`, which the Trunk hands to the agent
+([AGR-D11](../../arbol/agent-records/00-the-agent-record.md#decisions)), or
+from `--root` and `--chat`. It prints the folder alone on standard output, and
+what it did or why on standard error:
+
+| Command | What it does | Exit status |
+|---|---|---|
+| `python3 -I ~/Artifacts/sagas/tools/prepared_folder.py book` | Prints the folder this chat booked. When it booked none, it takes the first [free](#prepared-folders) prepared folder, writes the hold `~/.sagas/holds/chat-<chat>.json`, and prints that folder | 0; 1 when no folder is free, with the reason for each |
+| `… prepared_folder.py where` | Prints the folder this chat booked | 0; 1 when it booked none: the chat works in `readonly/` |
+| `… prepared_folder.py release` | Deletes the chat's hold, once every repository in its folder is on `main` with nothing uncommitted and no file that git does not ignore | 0; 1 when the folder is not clean, with what is left, and the hold stays |
+
+All three exit with 2 when the chat is missing or malformed. The hold names
+the chat and the folder, and has no owner:
+
+```json
+{
+  "beat": null,
+  "folder": "~/repos/sylvan-stack/2",
+  "agent": { "tool": "arbol", "session": "sapling/c3d4e5f6-…", "owner": null, "threadFile": null },
+  "takenAt": "2026-10-19T07:38:03Z"
+}
+```
+
+For example, a chat on `arbol-trunk` reads `readonly/arbol-trunk`. Asked to
+fix a test, its agent runs `book`, which prints `~/repos/sylvan-stack/2`, and
+fixes the test in `2/arbol-trunk`. At the chat's next message `where` prints
+`2` again. A second chat on `arbol-trunk` that only answers questions books
+nothing.
+
+1. **Book before the first change.** Change files only in the folder `book`
+   printed, never in `readonly/`. A change only to a corpus in `~/Artifacts/`
+   needs no booking: corpora stay on `main`, as
+   [Prepared folders](#prepared-folders) says.
+2. **A branch of its own** in each repository it changes, in that folder:
+   `git fetch origin`, then `git switch -c chat/<chat> origin/main`; run the
+   folder's environment setup as a Beat does. The chat's own folder is still
+   `readonly/`, so name the booked folder in full, such as
+   `git -C ~/repos/sylvan-stack/2/arbol-trunk status`.
+3. **At each later message,** run `where` before changing a file, and go on
+   in the folder it prints, on the same branch.
+4. **Territories still hold.** A booking reserves a folder, not files. A
+   chat changes no file inside a held Beat's territory; it says which hold
+   has it instead.
+5. **Finishing:** merge the branch as a Beat's branch is merged
+   ([Stopping and finishing](#stopping-and-finishing)), with the merge commit
+   named `chat <root>/<chat>: <what it changed>`, and return the folder the
+   same way. Work the owner sets aside is pushed on its branch unmerged; the
+   folder is returned all the same, and a later message books again and
+   switches to the branch.
+6. **Release** with `release` in the message that returned the folder.
+   Nothing releases a booking by itself while Arbol cannot close a chat
+   (AGR-D11), and the booking stays across messages until then. A booking
+   left behind is released the same way by any agent the owner asks, with
+   `--root` and `--chat`.
+
+A Beat taken in a chat, once SYL-207 lets one be, has the Beat's own hold
+`<Beat>.json` with the same `agent`: `where` finds its folder too, and it is
+released as [Stopping and finishing](#stopping-and-finishing) says, not with
+`release`.
+
+<!-- sources:
+arbol:backend/00-the-arbol-backend.md#The working folder of a chat
+arbol:agent-records/00-the-agent-record.md#An Exchange of an Arbol Trunk
+-->
 
 ## Order and progress
 
@@ -586,6 +665,15 @@ territory instead.
 - **The check as a command.** Until it exists, the agent does it by hand:
   `ps -o lstart= -p <pid>` for a process, and `lsof <threadFile>` for a Codex
   thread.
+- **A chat's Root and chat in its environment.** Until SYL-207 is done, the
+  Trunk does not hand `ARBOL_ROOT` and `ARBOL_CHAT` to the agent, so
+  `prepared_folder.py` refuses in a chat with exit status 2, and a chat
+  cannot book a folder yet.
+- **Closing an Arbol chat**, which would release its booking. Until Arbol
+  can close a chat, a booking is released by hand.
+- **Chat holds in the other tools.** The Radar and the check from outside
+  read a chat's hold as one whose owner is gone: neither counts it as an
+  agent.
 - **Not tried yet:** whether `CODEX_THREAD_ID` is set in a Codex app thread
   and in the codex CLI, and whether the codex CLI in a terminal keeps the
   thread's record file open as the Codex app does.
