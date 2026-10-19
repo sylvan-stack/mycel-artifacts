@@ -120,15 +120,17 @@ A good set grows from real use: a question somebody asked and the chunks that an
 
 ### Running it
 
+**MYC-D44 decided 19 October 2026 by the owner:** “Use production Jev-only outcomes (Recommended)”. Keep raw tentative-label error/critical-miss comparisons separate from the operational unresolved baseline. The owner separately accepted canonical-confidence routing under MYC-D43 in MYC-14.
+
 Proposed: `mycel evaluate --kind retrieval` (the default) runs every query of the selected repository's set as `mycel search` would, with ten results and without freshness checking. It writes nothing: no ingest, vectors, activity, pins or model-result cache. Required query vectors are computed first by normal search rules, then all retrievals and expectation resolution use one consistent read-only index snapshot and frozen effective settings. The report names the index generation, a fingerprint of relevant chunk versions/vectors/eligibility, evaluation-file hash and query-vector hash. Before/after comparisons are valid only when these inputs match; a changed index requires rerunning both Builds.
 
 The report gives each expected chunk's position, or its absence, and recall at 3 and at 10: found expected chunks divided by all expected chunks of valid queries. It reports both shares overall and by MYC-4 route. A zero denominator is null, not zero or a fabricated perfect score. Faulted queries remain visible with their faults and are excluded. Wording-only searches are counted; a report with any such query does not establish semantic-ranking quality. The report retains the returned top-ten places for diagnosis.
 
 `mycel evaluate --kind drift` runs the drift fixtures through deterministic stand-ins and the real local routing/evidence/lifecycle code, without paid calls or store writes. It validates the suite and pipeline behavior; it does not qualify Jev or a reviewer. Add `--live` explicitly to send eligible complete-evidence fixtures to the pinned Jev model and configured review command. `--live` is valid only with `--kind drift`; unavailable keys/reviewer configuration are reported as a qualification failure, not substituted by the agent's model. Calls obey MYC-14 concurrency, per-stage time, retry and input limits. The fixture runner processes the whole selected set in bounded candidate batches; it is not silently limited to the production default of 100 candidates. Each batch observes the MYC-14 invocation deadline, and stopped/unprocessed cases make qualification inconclusive. SIGINT terminates reviewer process groups and cancels outstanding requests without persisting partial evaluation state. Unavailable-evidence fixtures remain local unresolved no-call checks; a deletion tombstone with complete baseline/dependant/context is a valid semantic case.
 
-A live report records every Jev probability/confidence and tentative judgement, escalation reason, reviewer judgement and exact returned provider/model, final outcome, expected label, request hash, input bytes, elapsed time, attempts and available usage/cost. Unknown usage or cost remains null; Mycel does not infer prices or pretend a measurement occurred. Pipeline identity includes protocol, exact `jev-1.13.0` model, `mycel-dependency-v1` question, Choice ordering, effective confidence floor/routing revision, reviewer command hash, immutable adapter revision, instruction/environment versions and actual provider/model. Different identities are separate evaluations. A reviewer that changes identity within a run makes qualification fail.
+A live report records every Jev probability, canonical routing confidence, separately reported provider confidence and exact agreement/signed difference, raw tentative judgement, escalation reason, reviewer judgement and exact returned provider/model, final outcome, expected label, request hash, input bytes, elapsed time, attempts and available usage/cost. It separately retains the Jev-only production-policy baseline and its unresolved reason; a raw label is never overwritten with that baseline. Unknown usage or cost remains null; Mycel does not infer prices or pretend a measurement occurred. The revised live report uses `reportVersion = 2` and `qualificationRevision = "mycel-drift-qualification-v2"`; `pipeline.qualificationRevision` also binds this comparison policy into the profile fingerprint. Each valid live Jev reply retains `jevOnlyOutcome` separately from `jev.judgement`; its routing reason stays in `escalation`. The report records `reviewerComparisonBasis` as wrong labels and critical misses from `jev-tentative-label`, and unresolved counts from `jev-only-confidence-routing`. No valid Jev reply means no invented Jev-only outcome. Pipeline identity includes protocol, exact `jev-1.13.0` model, `mycel-dependency-v1` question, Choice ordering, `mycel-drift-routing-v2`, effective confidence floor, reviewer command hash, immutable adapter revision, instruction/environment versions and actual provider/model. Different identities are separate evaluations. A reviewer that changes identity within a run makes qualification fail.
 
-Initial provider qualification requires at least 200 distinct labelled pairs, including at least 50 critical-change and 50 unchanged/cosmetic cases. Critical labels cover negation, operator, permission and deletion. There must be zero incorrectly suppressed critical work: no critical case labelled `needs_review` or `unresolved` may finish as `still_supported`; unavailable-evidence cases must stay unresolved without paid calls. The configured reviewer must be evaluated on at least one routed, adjudicated case; on that common routed subset it must have no more critical misses and no more wrong labels than Jev alone, and improve either wrong-label count or insufficient/unresolved count. Otherwise the report is not qualified, including when there are no comparative cases. Duplicate semantic fixtures (same before/current/dependant/context/availability state, excluding ID and label metadata) count only once toward qualification coverage; rerunning them is still useful for variability diagnostics. The report also gives aggregate error/false-positive rates, routing frequency, latency and reported cost; these diagnostics do not replace the critical-case and relative-quality gates. This is a finite-corpus release check, never a claim that a confidence score guarantees correctness. A retuned confidence profile needs a new versioned report; no evaluation modifies the configured threshold automatically.
+Initial provider qualification requires at least 200 distinct labelled pairs, including at least 50 critical-change and 50 unchanged/cosmetic cases. Critical labels cover negation, operator, permission and deletion. There must be zero incorrectly suppressed critical work: no critical case labelled `needs_review` or `unresolved` may finish as `still_supported`; unavailable-evidence cases must stay unresolved without paid calls. The configured reviewer must be evaluated on at least one common routed, adjudicated case with valid Jev and reviewer replies. On that exact common subset, compare wrong-label counts and critical misses against the raw tentative Jev labels, retaining the existing strict definitions: the reviewer must have no more of either. Separately compare unresolved counts against the actual production Jev-only policy. A valid Jev result routed for low canonical confidence, a tied maximum or `insufficient_evidence` is unresolved without the reviewer, even when its raw tentative label matches ground truth. Retain both the raw label and this separate baseline, without treating uncertainty as a raw-label error or a critical miss. Qualification still requires strict improvement in raw wrong-label count or production-baseline unresolved count; equality on both is insufficient. Provider errors, malformed replies, failed/unprocessed cases and changed identities do not become successful unresolved-baseline cases and still prevent qualification. Otherwise the report is not qualified, including when there are no comparative cases. Duplicate semantic fixtures (same before/current/dependant/context/availability state, excluding ID and label metadata) count only once toward qualification coverage; rerunning them is still useful for variability diagnostics. The report also gives aggregate error/false-positive rates, routing frequency, latency and reported cost; these diagnostics do not replace the critical-case and relative-quality gates. This is a finite-corpus release check, never a claim that a confidence score guarantees correctness. A changed confidence or comparison policy needs a fresh versioned qualification report; old failed records remain failed and cannot be relabelled or retroactively qualified. No evaluation modifies the configured threshold automatically.
 
 Builds are kept side by side by MYC-15, so a ranking measurement before and after is two runs over matching index/file/query-vector inputs. Changes to ranking or grouping constants require both reports (MYC-4.25, MYC-D20), kept with the change record. A provider/routing change likewise records the exact old and new pipeline identity and qualification reports. The CLI returns reports to its caller; retaining them in an authored review or Build record is an explicit caller action, not an evaluation side effect.
 
@@ -160,7 +162,7 @@ Builds are kept side by side by MYC-15, so a ranking measurement before and afte
 | MYC-13.17 | validate exact retrieval expectations and exclude faulted queries from recall; return null for a zero denominator and record file/index/query-vector fingerprints for comparisons | New | store |
 | MYC-13.18 | test MYC-14 and MYC-16 with deterministic classifiers, controlled clocks and exact evidence, including obsolete results, missing review configuration, protected history and separation from freshness | New | store |
 | MYC-13.19 | make paid drift evaluation opt-in with `--kind drift --live`, retain exact pipeline/provider identities in its reply, and report errors, routing, latency and known usage/cost without invented measurements | New | live |
-| MYC-13.20 | qualify a provider profile only against the stated critical-case and relative-reviewer gates, require new reports for retuning, and never let evaluation change pins, freshness or settings | New | eval |
+| MYC-13.20 | qualify a provider profile only against the stated critical-case and relative-reviewer gates, retain raw tentative-label no-more gates separately from the production Jev-only unresolved baseline, require strict improvement and new versioned reports for policy changes, and never let evaluation change pins, freshness or settings | New | eval |
 | MYC-13.21 | exercise the real reviewer subprocess boundary with executable stand-ins, strict JSON/exit and environment fixtures, cancellation/cleanup, bounded retries and command/revision cache guards without real credentials or paid calls | New | unit |
 
 ## Interface
@@ -216,6 +218,8 @@ interface RetrievalEvaluationReport {
 interface DriftEvaluationReport {
   kind: "drift";
   evaluationSchema: 1;
+  reportVersion?: 2;                  // required for the revised live qualification path
+  qualificationRevision?: "mycel-drift-qualification-v2";
   repository: string;
   file: string;
   fileHash: string;
@@ -227,6 +231,7 @@ interface DriftEvaluationReport {
     questionVersion: "mycel-dependency-v1";
     choiceOrder: string[];
     policyRevision: string;
+    qualificationRevision?: "mycel-drift-qualification-v2"; // live profile identity
     confidenceFloor: number;
     reviewCommandHash?: string;           // MYC-14 canonical ReviewCommandIdentity SHA-256
     reviewRevision?: string;
@@ -240,11 +245,16 @@ interface DriftEvaluationReport {
   criticalMisses: number;              // labelled critical work incorrectly suppressed as supported
   unchangedCases: number;
   routedCases: number;
-  jevUnresolvedOnRouted: number;
+  reviewerComparisonBasis?: {        // required for the revised live qualification path
+    wrongLabels: "jev-tentative-label";
+    criticalMisses: "jev-tentative-label";
+    unresolved: "jev-only-confidence-routing";
+  };
+  jevUnresolvedOnRouted: number;       // production Jev-only policy baseline, separately retained per case
   reviewerUnresolvedOnRouted: number;
-  jevCriticalMissesOnRouted: number;
+  jevCriticalMissesOnRouted: number;   // raw tentative-label comparison
   reviewerCriticalMissesOnRouted: number;
-  jevErrorsOnRouted: number;
+  jevErrorsOnRouted: number;           // raw tentative-label comparison
   reviewerErrorsOnRouted: number;
   errorRate: number | null;
   falsePositiveRate: number | null;    // needs_review among labelled still_supported cases
@@ -258,7 +268,12 @@ interface DriftEvaluationReport {
     expect: "still_supported" | "needs_review" | "insufficient_evidence" | "unresolved";
     actual: string;                    // categorical outcome, unresolved or explicit error
     inputHash: string;
-    jev?: { judgement: string; probabilities: Record<string, number>; confidence: number };
+    jev?: {                           // raw judgement; keep the production-policy baseline separately
+      judgement: string; probabilities: Record<string, number>; confidence: number;
+      reportedConfidence: number;
+      confidenceComparison: { matches: boolean; reportedMinusCanonical: number };
+    };
+    jevOnlyOutcome?: "still_supported" | "needs_review" | "unresolved"; // valid live Jev replies only
     review?: { provider: string; model: string; judgement: string };
     escalation?: string;
     correct: boolean;
@@ -294,3 +309,4 @@ interface DriftEvaluationReport {
 | MYC-D35 | Where is the evaluation set kept, and who writes it? | The evaluation set is a list of questions with the chunks each should find; it measures whether a change makes search better or worse. One file for each repository, in its document folder, named in that repository's settings. It is versioned with the documents it asks about, and a person or an agent adds a query whenever a real question was answered well or badly. The other choice is one set for all repositories in the Mycel corpus: one place to look, but its queries would name chunks of repositories that change without it | Decided 8 October 2026 by the owner: resolved; one configured evaluation file per repository in its document folder, versioned with its documents. A person or an agent adds real questions and the chunks that should answer them |
 | MYC-D36 | Which store do the automatic checks work on? | The automatic checks are the tests that run on every build. They work on a database the check run makes for itself in the same database server as the owner's store, under a name that begins with `mycel_check_`, removed after each check. The owner's own database is never opened by a check. This needs the right to create databases on that server. The other choice is a database server started only for the checks; it keeps the checks away from the owner's server altogether, at the price of something that starts and stops servers on every build | Decided 8 October 2026 by the owner: resolved; automatic store checks create and remove their own `mycel_check_` databases on the configured server and never open the owner's actual database |
 | MYC-D42 | Should a difference between the official tokenizer's count and Voyage's reported usage fail embedding compatibility? | Retain both local counts and actual provider usage, report agreement and signed difference, and keep pinned tokenizer limits; disagreement alone does not fail compatibility | Decided 18 October 2026 by the owner: “Revise the requirement and continue (Recommended)” in response to the proposal to revise MYC-13.9 and continue full Drift qualification. The current official tokenizer gives eleven tokens while a fresh unchanged fixed-document request reports nine; neither value is adjusted. Keep the fixed text/query, model, dimensions, tokenizer and all planning limits. Preserve old reports and distinguish the revised check/report version |
+| MYC-D44 | Which Jev baseline measures the reviewer’s unresolved improvement? | Keep raw tentative-label errors and critical misses for the no-more gates; separately score unresolved outcomes using the actual production Jev-only confidence/tie/insufficient-evidence policy. Retain both views, require strict improvement, and bind them with reportVersion 2 and mycel-drift-qualification-v2; no corpus, labels, floors or critical gates change | Decided 19 October 2026 by the owner: “Use production Jev-only outcomes (Recommended)”. Keep the existing raw tentative-label no-more error/critical-miss gates; use the actual production Jev-only routing outcome for unresolved comparison, retain both views and require strict improvement. Qualification/report v2 requires fresh qualification; failed v5 remains failed |

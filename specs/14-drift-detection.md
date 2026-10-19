@@ -57,13 +57,15 @@ These exact texts are packaged in the Build. Changing any instruction, criterion
 
 ### Jev API and confidence routing
 
+**MYC-D43 decided 19 October 2026 by the owner:** “Compute from probabilities; retain reported confidence (Recommended)”. The canonical statistic below controls routing; reported provider confidence is retained separately as diagnostic evidence.
+
 Use `POST https://api.typesafe.ai/v1/systemone`, bearer authentication, the exact configured `drifts.model` (default `jev-1.13.0`), one state containing one complete decision payload and one question named `dependency`, of type `choice`, with the instruction and criteria above. Pin a versioned model; moving `jev-latest`/`jev-preview` aliases are refused as configuration values. The response's exact model must match the configured model. Record that configured version in requests, results and evaluation reports; changing it changes the input identity and requires qualification of the new pipeline under MYC-13 before deployment. The provider is TypeSafe AI, not an Arbol service. [Official API](https://docs.typesafe.ai/api), [versioned models](https://docs.typesafe.ai/models)
 
-The default setting `drifts.confidence_floor = 0.7` is the owner-accepted initial routing value. For three Choice labels, the documented formula is `(p_top - 1/3) / (2/3)`; 0.7 therefore means a top probability of 0.8. This makes the routing interpretation explicit. It does not mean an 80% independently verified chance of correctness. The vendor advises choosing boundaries for the domain and evaluating them; MYC-13 requires that evaluation before release. Retuning changes the recorded routing revision. [Confidence definition and guidance](https://docs.typesafe.ai/confidence)
+The default setting `drifts.confidence_floor = 0.7` remains the owner-accepted initial routing value. For three Choice labels, compute canonical routing confidence exactly as `(3 * p_top - 1) / 2` from the validated returned probabilities; 0.7 therefore means a top probability of 0.8. Do not renormalize probabilities, clamp the computed value, round it to the provider’s precision or infer a provider rounding rule. A computed confidence outside [0,1] is invalid. This statistic does not mean an 80% independently verified chance of correctness. The vendor advises choosing boundaries for the domain and evaluating them; MYC-13 requires that evaluation before release. This semantic change uses `mycel-drift-routing-v2`; retuning or a later routing change requires another recorded revision. [Confidence definition and guidance](https://docs.typesafe.ai/confidence)
 
-A valid Jev result below the floor becomes `needs_llm_review`. Equality with the floor is sufficient for the Jev path. `insufficient_evidence` also goes to review regardless of confidence. A high-confidence `needs_review` opens work immediately; a high-confidence `still_supported` takes only the work-list consequence above. No confidence value restores freshness.
+Compare canonical routing confidence with the unchanged floor. A valid result below the floor becomes `needs_llm_review`; exact equality is sufficient for the Jev path. `insufficient_evidence` also goes to review regardless of confidence, and any tied maximum routes to review. A high-confidence `needs_review` opens work immediately; a high-confidence `still_supported` takes only the work-list consequence above. The reported provider confidence is diagnostic, so a reported value below 0.7 may take the Jev path when canonical confidence reaches 0.7 and the other routing conditions permit it. No confidence value restores freshness.
 
-Validate exactly the three known probability keys, finite numbers in [0,1], total within 0.000001 of 1, a known chosen label that has the highest probability, and finite confidence in [0,1]. A tied maximum routes to review. Recompute the confidence formula; a difference above 0.000001 is a malformed reply. A different model, missing field, unexpected answer type or inconsistent distribution is a recorded `provider_result_invalid`, not support.
+Validate exactly the three known probability keys, finite numbers in [0,1], total within 0.000001 of 1, a known chosen label that has the highest probability, and reported provider confidence finite in [0,1]. Keep the returned distribution unchanged. Retain canonical routing confidence, reported provider confidence, their exact agreement and the signed difference `reported - canonical` separately. A difference alone is diagnostic and does not invalidate the result. The tolerance on the probability total is unchanged; no confidence-difference tolerance is invented. A different model, missing field, unexpected answer type, malformed distribution or out-of-range canonical confidence remains a recorded `provider_result_invalid`, not support. Duplicate keys, invalid usage and other existing schema checks remain failures.
 
 The complete serialized Jev HTTP body has an initial 24,000-byte local cap. This is a chosen request-size budget, not a claim about the provider's tokenization. No required text is truncated. Exceeding this cap bypasses Jev and routes the complete input to the smarter reviewer with `jev_input_too_large`. A provider refusal for context length likewise routes to review; other 422 errors remain provider failures. The official token limits still apply on the server. Byte-cap behavior and longer model inputs are tested separately.
 
@@ -280,7 +282,7 @@ Existing requirement IDs are retained, with the completed wording accepted under
 | MYC-14.14 | enforce the configured default-300-second quiet period over all required live file/version changes, using the timestamp/tombstone/generated rules above | New | store |
 | MYC-14.15 | recheck exact inputs, enablement, current version and eligibility before both model stages and result application | New | store |
 | MYC-14.16 | keep search/read within their existing budgets, make no classifier/reviewer calls there, and expose pending/evidence status | New | unit |
-| MYC-14.17 | validate exact known Jev labels/probabilities/confidence/model and route low confidence, ties or insufficient evidence to review | New | unit |
+| MYC-14.17 | validate exact known Jev labels/probabilities/model and finite reported confidence, compute canonical confidence without renormalization or clamping, retain provider agreement/difference as diagnostics, and route low canonical confidence, ties or insufficient evidence to review | New | unit |
 | MYC-14.18 | apply deterministic selection, candidate/concurrency/deadline/retry caps, nonblocking locks and cancellation; preserve partial replies | New | store |
 | MYC-14.19 | launch the configured independent reviewer without a shell and validate its protocol/input/model/evidence reply, limits and credential isolation | New | unit |
 | MYC-14.20 | send no truncated required text; route oversized Jev input to complete reviewer input or visible unresolved work | New | unit |
@@ -408,7 +410,9 @@ interface ClassificationStage {
   policyRevision: string;
   at: string;
   probabilities?: Record<DependencyJudgement, number>;
-  confidence?: number;
+  confidence?: number;                 // canonical routing statistic, computed from unchanged probabilities
+  reportedConfidence?: number;         // finite provider value in [0,1], retained separately
+  confidenceComparison?: { matches: boolean; reportedMinusCanonical: number };
   rationale?: string;
   evidence?: string[];                   // supplied MYC-16 locators
   usage?: { inputTokens?: number; outputTokens?: number };
@@ -487,7 +491,7 @@ Objects are pretty-printed here for reading. Actual stdin is canonical JSON plus
 ```json
 {
   "protocol": 1,
-  "inputHash": "0b6c820165f68eb1b6e2e471d914cabf8f701959aa43931fde6d1df10c64e7ae",
+  "inputHash": "19e88692cd7967928ba8fca03cff8197f1e37b641c57010122e327c229b1f33e",
   "questionVersion": "mycel-dependency-v1",
   "provider": "example-provider",
   "model": "example-model-2026-10-01",
@@ -666,7 +670,7 @@ Objects are pretty-printed here for reading. Actual stdin is canonical JSON plus
       }
     },
     "routing": {
-      "revision": "mycel-drift-routing-v1",
+      "revision": "mycel-drift-routing-v2",
       "confidenceFloor": "0.7"
     }
   },
@@ -695,7 +699,7 @@ A success exits 0; its judgement concerns exactly this input. Optional usage is 
 ```json
 {
   "protocol": 1,
-  "inputHash": "0b6c820165f68eb1b6e2e471d914cabf8f701959aa43931fde6d1df10c64e7ae",
+  "inputHash": "19e88692cd7967928ba8fca03cff8197f1e37b641c57010122e327c229b1f33e",
   "provider": "example-provider",
   "model": "example-model-2026-10-01",
   "adapterRevision": "example-adapter-v1",
@@ -715,7 +719,7 @@ A transient failure exits 1 and permits only the parent's bounded retry; the ada
 ```json
 {
   "protocol": 1,
-  "inputHash": "0b6c820165f68eb1b6e2e471d914cabf8f701959aa43931fde6d1df10c64e7ae",
+  "inputHash": "19e88692cd7967928ba8fca03cff8197f1e37b641c57010122e327c229b1f33e",
   "provider": "example-provider",
   "model": "example-model-2026-10-01",
   "adapterRevision": "example-adapter-v1",
@@ -745,6 +749,7 @@ Jev can be confidently wrong, and context/option order can change decisions. The
 | MYC-D28 | What exact contracts implement Jev, debounce and smarter-model escalation? | The complete contract above: pinned Jev1.13.0, question mycel-dependency-v1, initial confidence0.7 routing, explicit classify with finite budgets, independent configured protocol-1 reviewer and MYC-16 retained evidence; model/reviewer qualification before deployment | Decided 8 October 2026 by the owner: “For smarter model let's use command specified in settings. Agreed with other proposals.” Use the independent `drifts.review_command` from settings for smarter review; accept the initial confidence floor 0.7, explicit bounded `mycel classify`, five-minute quiet period, retained exact evidence and completed execution/reviewer contract. Jev considers changes without a change-size gate. Exact review provider/model identities are configuration for the command; provider qualification remains an implementation/release check |
 | MYC-D29 | What does still_supported do to work and freshness? | Suppress/close only that exact pair's Drift work; retain classification evidence on stale reports; preserve stale marks and baseline pins until the accepted edit-or-explicit-confirmation rule acts | Decided 8 October 2026 by the owner: agreed with the proposal. A complete still_supported result suppresses/closes only that exact pair's Drift work; preserve stale marks and baseline pins until an affected-section edit or explicit confirmation under MYC-D12 |
 | MYC-D41 | Does `classify --dry-run` read the store password? | Yes. A dry-run reaches the store as every other command does; its "no credential" means no Jev, reviewer or Voyage credential | Decided 17 October 2026 by the owner with the Commands Arc: SYL-231 requires that `mycel classify --repo <name> --dry-run` report the classification work it would do "on any store that the other commands reach", both when the store-password item exists and when the store asks for no password. Reconciled 18 October 2026: MYC-14.21, MYC-5.14 and their paragraphs name the credentials a dry-run never takes; the store-password item is read only when the store asks for a password, as [MYC-5](05-settings.md) says for every command |
+| MYC-D43 | Which confidence controls Jev routing when the reported value differs from the documented distribution formula? | Compute the exact canonical formula from validated returned probabilities, without renormalization or clamping; retain finite reported confidence, exact agreement and signed reported-minus-canonical difference as diagnostics; keep the 0.7 floor and all other validation/routing gates; version routing as mycel-drift-routing-v2. A reported value below the floor can be promoted by the canonical statistic | Decided 19 October 2026 by the owner: “Compute from probabilities; retain reported confidence (Recommended)”. Canonical confidence controls the unchanged 0.7 floor, including cases reported below it; no renormalization or clamping. Preserve finite reported confidence, exact agreement and signed difference as diagnostics. All other validation/routing gates remain. No provider precision guarantee is inferred. Old failed records remain failed; routing v2 requires fresh qualification |
 
 ### Extraction and identifier map
 

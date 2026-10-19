@@ -40,7 +40,7 @@ Checked 9 October 2026 against the specification originals and their Linear copi
 
 ### Open questions and pending decisions
 
-None remain among MYC-D1 through MYC-D38. The owner answered the final MYC-D28/MYC-D29 proposals on 8 October 2026; all 17 specifications are accepted for implementation.
+No questions remain pending in this index. The owner answered the final MYC-D28/MYC-D29 proposals on 8 October 2026; all 17 specifications are accepted for implementation. On 19 October 2026 the owner accepted MYC-D43 canonical-confidence routing and MYC-D44 production Jev-only unresolved comparison. Their changed pipeline requires fresh qualification; the earlier failed v5 record remains failed.
 
 Decided on 15 October 2026 by the owner: [MYC-D39](02-provenance-and-freshness.md#decisions), how Mycel answers "which document describes this chunk?" and shows code that no document describes. `mycel read` lists the document sections joined to a chunk, a search marks code that has one, and `mycel undocumented` lists the code of a repository that has none. Its requirements MYC-2.27, MYC-4.29 and MYC-11.12 are accepted; SYL-167 implements them.
 
@@ -89,6 +89,8 @@ MYC-D1 records the owner’s Python decision; MYC-15 makes its independent distr
 | MYC-D37 · Keep prescribed named defaults/exclusions? | Decided 9 October 2026 by the owner: keep the prescribed names as explicit packaged-data exceptions, without implicit repository registration, aliasing, folder fallback or product dependency | [MYC-D37](00-overview-and-legacy-map.md) |
 | MYC-D38 · Recognize a function rename separately from the complete-code hash? | Decided 9 October 2026 by the owner: preserve identity using a conservative parser-derived body/signature key; retain the complete-code hash for exact change tracking and evidence | [MYC-D38](01-corpora-and-ingest.md) |
 | MYC-D42 · Must tokenizer and provider usage counts agree for embedding compatibility? | Decided 18 October 2026 by the owner: keep the pinned tokenizer for limits, retain provider usage separately and report agreement/difference without failing compatibility on disagreement; continue full Drift qualification | [MYC-D42](13-checks-and-evaluation.md#decisions) |
+| MYC-D43 · Which confidence controls Jev routing? | Decided 19 October 2026 by the owner: “Compute from probabilities; retain reported confidence (Recommended)”. Use the exact canonical statistic without renormalization/clamping; retain finite provider confidence and exact agreement/signed difference as diagnostics. Keep the 0.7 floor and other gates; reported below-floor values may take the Jev path under canonical confidence. Routing v2 requires fresh qualification | [MYC-D43](14-drift-detection.md#decisions) |
+| MYC-D44 · Which Jev baseline measures unresolved improvement? | Decided 19 October 2026 by the owner: “Use production Jev-only outcomes (Recommended)”. Keep raw tentative-label error/critical-miss no-more gates; separately compare unresolved counts using actual Jev-only routing. Retain both views, strict improvement, qualification/report v2 and fresh qualification; preserve failed history | [MYC-D44](13-checks-and-evaluation.md#decisions) |
 
 ## Conventions
 

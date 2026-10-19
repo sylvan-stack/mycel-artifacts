@@ -211,7 +211,7 @@ literal UTF-8 bytes `fictional adapter bytes; not an installed executable`
 followed by LF. A real identity fingerprints its actual executable. The
 pretty-printed request is for reading; canonical JSON plus LF occupies
 **11055 transmitted bytes**. Its payload hash is
-`541fe745b5b14c23b9be3ea91b9f54a4bbd4d1ba98a35fa21617af6dbe5c63cb`.
+`e997d8d538baba0fdf63a3e2cb6422d14fb68f4391b7d2ab5c9498984db6bcc9`.
 Tests recompute this count and every hash from the supplied complete texts.
 
 
@@ -236,7 +236,7 @@ Tests recompute this count and every hash from the supplied complete texts.
     "snapshot:877f6f5a4c87f2a9185c8ead7d1dcc7304de19ba2e1897f48a4ebfb42f0d9ae3",
     "snapshot:d2c71a5b44d03fb426863ec91b074f4ec2ce800a0fe50415662479a9b1fe27fd"
   ],
-  "inputHash": "541fe745b5b14c23b9be3ea91b9f54a4bbd4d1ba98a35fa21617af6dbe5c63cb",
+  "inputHash": "e997d8d538baba0fdf63a3e2cb6422d14fb68f4391b7d2ab5c9498984db6bcc9",
   "instructionVersion": "mycel-review-v1",
   "judgements": [
     "needs_review",
@@ -601,7 +601,7 @@ Tests recompute this count and every hash from the supplied complete texts.
     "questionVersion": "mycel-dependency-v1",
     "routing": {
       "confidenceFloor": "0.7",
-      "revision": "mycel-drift-routing-v1"
+      "revision": "mycel-drift-routing-v2"
     }
   },
   "protocol": 1,
@@ -615,7 +615,7 @@ Tests recompute this count and every hash from the supplied complete texts.
 ```json
 {
   "protocol": 1,
-  "inputHash": "541fe745b5b14c23b9be3ea91b9f54a4bbd4d1ba98a35fa21617af6dbe5c63cb",
+  "inputHash": "e997d8d538baba0fdf63a3e2cb6422d14fb68f4391b7d2ab5c9498984db6bcc9",
   "provider": "example-provider",
   "model": "example-model-2026-10-01",
   "adapterRevision": "example-adapter-v1",
@@ -640,7 +640,7 @@ Tests recompute this count and every hash from the supplied complete texts.
 ```json
 {
   "protocol": 1,
-  "inputHash": "541fe745b5b14c23b9be3ea91b9f54a4bbd4d1ba98a35fa21617af6dbe5c63cb",
+  "inputHash": "e997d8d538baba0fdf63a3e2cb6422d14fb68f4391b7d2ab5c9498984db6bcc9",
   "provider": "example-provider",
   "model": "example-model-2026-10-01",
   "adapterRevision": "example-adapter-v1",
