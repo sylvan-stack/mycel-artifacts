@@ -1,0 +1,161 @@
+---
+role: authored
+spec: MYC-17
+status: draft
+---
+# Mycel · 17 Justification
+
+Every chunk of code and every document chunk that is not itself authored should be traceable to what ordered it: a requirement, a decision, a document section or, when nothing better exists, a code chunk. This specification makes requirements and decisions entities of their own in the Index Store, addresses them by the glossary's Entity URI, keeps the discussion of a decision with it, and defines the Origin Link from a chunk to its Origin. It is the chapter the owner asked for on 19 October 2026 ([MYC-D63](#decisions)); the commands `mycel justify`, `mycel origins`, `mycel recovery` and `mycel audit` are specified here by the Beats that build them (SYL-260, SYL-262, SYL-263), and the agent procedure lives in a guide that this chapter points to, where running `origins` is useful, not required.
+
+It follows the conventions of the [specifications chapter](README.md#conventions). It is written with the `From v1` column and with a UUID in every row, as [MYC-D49](#decisions) and [MYC-D45](#decisions) require; the seventeen earlier chapters are brought to the same form by the normalization run of SYL-261.
+
+## Scope
+
+Covered: the entity model of requirements and decisions, the UUID written in a table row, the Entity URI in Mycel, the Discussion column of a decision and how its chats are read, the Origin Link with its fields and bands. Later sections, added by the Beats that build them: stating an Origin Link (`justify`), Origin Coverage (`origins`), recovery and audit.
+
+Specified elsewhere: how a document is split and how chunks keep their identity ([MYC-1](01-corpora-and-ingest.md)); Source Refs, edges and staleness ([MYC-2](02-provenance-and-freshness.md)); relations, confirmation and verification ([MYC-7](07-drifts-and-verification.md)); the reply of `mycel read` ([MYC-11](11-reading-a-chunk.md)); portable addresses and the one resolver ([MYC-16](16-source-addresses-and-evidence.md)); the settings file ([MYC-5](05-settings.md)); the store's format ([MYC-6](06-index-store.md)). Arbol's side of Entity URIs is Arbol's: Mycel reads and writes the string form the glossary gives and holds no Arbol entity table.
+
+## Behaviour
+
+### Requirements and decisions are entities
+
+Before this chapter a requirement was one line of a table inside a section chunk. It had no identity of its own, so nothing could point at it, and an edit to a neighbouring row changed the hash of every requirement of the section. The owner decided on 19 October 2026 that requirements and decisions are entities, not locators ([MYC-D45](#decisions)).
+
+A row of a Requirements or Decisions table is recognised when its first cell is exactly a human id, `<PREFIX>-<n>.<m>` for a requirement such as `MYC-2.13` or `<PREFIX>-D<n>` for a decision such as `MYC-D45`, followed by nothing but an HTML comment that holds the row's UUID:
+
+```markdown
+| MYC-2.13 <!-- 9b6984cc-db34-4a84-b948-0eaefbea916a --> | mark a chunk stale when a source of it has a content hash other than the one its edge stores … | Changed | store |
+```
+
+Readers and Linear copies do not see the comment; Mycel reads it. A first cell with more text than the id, such as `MYC-D1 · What language is Mycel 2 written in?`, is prose and not a row of an entity.
+
+Such a row is a chunk of its own in the Index Store, beside the section chunk that holds it. Its identifier is the UUID of the comment, its kind is `req` or `dec`, its name is the human id, and its text is the exact row. Like any chunk it has versions, one for each text it has had, and locations, one per place its text is found ([MYC-1](01-corpora-and-ingest.md#branches-and-stashes)): a file, a row position, a branch, a clone. There may be several locations or none. The section keeps its own chunk with its complete text and hashes, so that the exact-byte coverage of [MYC-16](16-source-addresses-and-evidence.md#comparison-hashes-and-exact-versions) still holds; an edit to the row changes the section's hash as before, and in addition gives the entity a new version of its own.
+
+The row holds what Mycel reads from its cells:
+
+| Field | A requirement | A decision |
+|---|---|---|
+| `kind` | `req` | `dec` |
+| `id`, the display name | the human id, never edited | the human id, never edited |
+| `title` | the second cell, "Mycel must…" | the Question cell |
+| `text`, and its hashes | the exact row | the exact row |
+| `status` | the chapter's status from its frontmatter, or `withdrawn` when the row says so | `decided` when the Outcome begins with `Decided`, else `open` |
+| `decidedBy`, `decidedAt` | — | from `Decided <date> by <who>` in the Outcome |
+| `verifiedBy` | the Verified by cell: `unit`, `store`, `eval` or `live` | — |
+| `fromV1` | the From v1 cell: `Kept`, `Changed`, `New` or `Dropped` | — |
+| `discussion` | — | the chat Entity URIs of the Discussion cell |
+
+Identity follows the UUID and nothing else. An edit to a neighbouring row leaves the entity, its version and its locations as they were. An edit to the row's own text makes a new version of the same entity. Moving the row to another section, another file or another chapter changes a location, not the entity. A row is never deleted: when its last version leaves every location the versions are collected like any chunk's, but the entity row stays, so a withdrawn id stays reserved and every edge that references the UUID keeps its end.
+
+A recognised row without a UUID is a reported fault of its file, as a malformed Source Ref is ([MYC-2](02-provenance-and-freshness.md#source-refs)): the pass goes on, the section is split as before, and no entity is made of the row. Two rows with one UUID are a fault too, and neither becomes an entity, so that nothing silently wins. The normalization run of SYL-261 adds a UUID to every existing row once; a new row gets its UUID from its author.
+
+### The Entity URI in Mycel
+
+Mycel uses the glossary's [Entity URI](../../arbol/GLOSSARY.md#entity-uri) as it stands ([MYC-D46](#decisions)): `[req:<uuid>:<title>]`, `[dec:<uuid>:<title>]` and `[cht:<uuid>:<title>]`, with the title Base64-encoded as the glossary says, and the four-part form `[<repo>:req:<uuid>:<title>]` with the repository's code. The repo code is optional; when Mycel writes a URI it uses the repository's name, and no setting chooses it. Mycel resolves a URI by the UUID alone, because UUIDs are unique across kinds and repositories, and uses the kind tag only as a check: a URI whose tag does not match the entity's kind is refused as `invalid_input`. The title is a display snapshot; two URIs with different titles and one UUID name the same entity.
+
+The one resolver of [MYC-16](16-source-addresses-and-evidence.md#root-aliases-and-one-resolver) accepts an Entity URI wherever it accepts an address, and its typed selection gains `req` and `dec`. An entity is also reached by its full address, `mycel:@artifact/specs/02-provenance-and-freshness.md#MYC-2.13`, and by its human id within its file, since the human id is the chunk's name. A reply writes an Origin as an Entity URI when it has a UUID and as a Mycel address otherwise.
+
+### The discussion of a decision
+
+A decision was taken in a discussion, and the discussion lives in an Arbol chat. The Discussion column of a Decisions table holds chat Entity URIs only ([MYC-D47](#decisions)). Mycel retains them with the decision and makes nothing else of them: a chat is not a source, derives no edge, and never makes the decision stale. A decision that rests on a research note cites it as an ordinary Source Ref and goes stale when the note changes. Editing a decision row makes everything that rests on it stale, as editing a requirement does.
+
+`mycel read` of a decision shows the content of the chats its Discussion cell names ([MYC-D48](#decisions)): Mycel reads them from the Arbol database as data, through a settings table of its own, `[discussions]` in [MYC-5](05-settings.md#the-keys), with the database's address and the Keychain item for its password. MYC-D5 as amended on 19 October 2026 allows this read: it is no integration and no dependency on Arbol code, and Mycel writes nothing there. When the database cannot be reached, or the settings name none, the read still succeeds and the discussion says `available: false` with the reason.
+
+### The Origin Link
+
+An Origin is the chunk at the source end of an Origin Link: what ordered the chunk at the other end. It is of any kind: a requirement, a decision, a document section, or a code chunk when nothing better exists, as in an undocumented open-source repository. The word *origin* is used for nothing else in Mycel ([MYC-D49](#decisions)); the former `Origin` column of the requirement tables is named `From v1`.
+
+An Origin Link is a directed link from a chunk to its Origin: a claim, never a proof. It lives in the Index Store, never in the code, and every link references the Origin's UUID when it has one. A chunk has a list of Origin Links, each with:
+
+| Field | Values |
+|---|---|
+| `method` | `stated` by a person, `proven` by a check, `inferred` by a model, `recovered` from history |
+| `confidence_score` | a number from 0 to 1 |
+| `confidence` | the band the score falls in: `asserted` above 0.9, `proven` 0.8 to 0.9, `inferred` 0.5 to 0.8, `candidate` below 0.5. The thresholds are example values, set in one place |
+| who and when | who made the link and when |
+| `review` | the review of the link, when one was made |
+
+The score rises by a review or a passing check and falls by a failed conformance check. Stating a link (`mycel justify`), listing Origin Coverage (`mycel origins`), inferring candidates for a chunk without Origin (`mycel recovery`) and disputing links (`mycel audit`) are specified in the sections the Beats SYL-260, SYL-262 and SYL-263 add here. Linear is never an Origin; a task, a Beat or a Linear issue never justifies code.
+
+## Requirements
+
+| ID | Mycel must… | From v1 | Verified by |
+|---|---|---|---|
+| MYC-17.1 <!-- 3b9f4d6a-7c2e-4f8b-9a1d-5e6f7a8b9c0d --> | keep every recognised requirement and decision row of a document as a chunk of its own in the Index Store, of kind `req` or `dec`, whose identifier is the UUID of the HTML comment in the row's first cell, beside the section chunk that holds the row, with versions and locations like any chunk | New | store |
+| MYC-17.2 <!-- 8e1c2a3f-4b5d-4c6e-8f7a-9b0c1d2e3f4a --> | read from a recognised row its human id as its name and display name, its title, its exact text and hashes, its status, and its metadata: who decided and when, the discussion chats, the Verified by kind and the From v1 value | New | unit |
+| MYC-17.3 <!-- 2f7a8b9c-0d1e-4f2a-b3c4-d5e6f7a8b9c0 --> | report a recognised row without a UUID, and two rows with one UUID, as faults of their file, make no entity of them, and split the section as before | New | unit |
+| MYC-17.4 <!-- 6c5d4e3f-2a1b-4c0d-9e8f-7a6b5c4d3e2f --> | keep an entity's identity through an edit to a neighbouring row, through an edit to its own text and through a move of its row to another section, file or chapter; collect its versions like any chunk's but never delete the entity row, so a withdrawn id stays reserved | New | store |
+| MYC-17.5 <!-- a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d --> | accept the glossary's Entity URI, with or without the repo code, wherever an address is accepted; resolve it by the UUID alone, refuse a kind tag that does not match the entity with `invalid_input`, and write an Origin as an Entity URI when it has a UUID and as a Mycel address otherwise | New | unit |
+| MYC-17.6 <!-- d4c3b2a1-f6e5-4d7c-8b9a-0f1e2d3c4b5a --> | retain the chat Entity URIs of a decision's Discussion column with the decision, derive no edge and no stale mark from a chat, and mark what rests on a decision stale when its row is edited | New | store |
+| MYC-17.7 <!-- 5e6f7a8b-9c0d-4e1f-a2b3-c4d5e6f7a8b9 --> | show with the read of a decision the content of the chats its Discussion column names, read as data from the Arbol database that the `[discussions]` settings name, writing nothing there; and succeed with `available: false` and the reason when the settings name none or it cannot be reached | New | store |
+| MYC-17.8 <!-- 9c0d1e2f-3a4b-4c5d-8e6f-7a8b9c0d1e2f --> | keep Origin Links in the Index Store and never in a file, each with its method, its confidence score and band, who made it and when, and its review, referencing the Origin's UUID when it has one | New | store |
+
+The requirements of `justify`, `origins`, recovery and audit are appended by the Beats that build them.
+
+## Interface
+
+Proposed. The command line follows the rules of [MYC-0](00-overview-and-legacy-map.md#the-command-line).
+
+```sh
+mycel read '[req:9b6984cc-db34-4a84-b948-0eaefbea916a:bWFyayBhIGNodW5rIHN0YWxl]'   # by Entity URI
+mycel read '[mycel:dec:0f2c1b4e-8a9d-4c3e-9b7a-1d2e3f4a5b6c:V2hpY2ggbGFuZ3VhZ2U]' # with the repo code
+mycel read 'mycel:@artifact/specs/02-provenance-and-freshness.md#MYC-2.13'          # by full address
+mycel read 'mycel:specs/02-provenance-and-freshness.md#MYC-2.13'                    # by human id within the file
+```
+
+```ts
+// A chunk of kind "req" or "dec" has, in a search result and in ReadReply of MYC-11:
+interface EntityFields {
+  entity: {
+    kind: "req" | "dec";
+    uuid: string;                        // the UUID of the row's comment, also the chunk's id
+    id: string;                          // the human id, the display name: "MYC-2.13"
+    uri: string;                         // the Entity URI with the repository's code
+    title: string;
+    status: string;                      // a requirement: its chapter's status or "withdrawn"; a decision: "decided" | "open"
+    decidedBy?: string;
+    decidedAt?: string;
+    verifiedBy?: "unit" | "store" | "eval" | "live";
+    fromV1?: "Kept" | "Changed" | "New" | "Dropped";
+    discussion?: Discussion[];           // a decision: one entry per chat Entity URI of its Discussion cell
+  };
+}
+
+interface Discussion {
+  uri: string;                           // the chat Entity URI as written
+  available: boolean;
+  reason?: string;                       // when not available: no settings, unreachable, no such chat
+  title?: string;
+  messages?: Array<{ role: "user" | "assistant"; text: string }>;   // in the chat's order, replaced Exchanges left out
+}
+
+interface OriginLink {
+  chunk: string;                         // the dependant: an Entity URI when it has a UUID, else a Mycel address
+  origin: string;                        // the Origin: the same rule
+  method: "stated" | "proven" | "inferred" | "recovered";
+  confidenceScore: number;               // 0 to 1
+  confidence: "asserted" | "proven" | "inferred" | "candidate";
+  who: string;
+  when: string;
+  review?: { who: string; when: string; outcome: string };
+}
+```
+
+## Known problems
+
+This is a new contract. Version 1 had no entity of its own for a requirement or a decision; its `@proves` decorators and the registry `requirements.json` named requirements by human id alone, so a row could not be pointed at from the index and nothing noticed an edit to one row apart from its neighbours. The registry still gates `make check` until SYL-261 retires it after a one-time import.
+
+A chunk of kind `req` or `dec` is embedded like any other chunk when the owner runs `mycel embed`; nothing in this chapter embeds it.
+
+## Decisions
+
+The owner answered the fifteen decisions of the Traceability Arc's first draft on 19 October 2026; this chapter records the six that concern the entities, the URIs, the discussion and the words. The others are recorded by the Beats that build their subject. Where this Beat needed a choice no decision covers, it chose a default and recorded it in its own file (`~/Artifacts/sagas/mycel-2-implementation/traceability/SYL-259.md`): entity rows are chunks whose identifier is the UUID, the section keeps its complete chunk, a row is recognised by its first cell alone, and the discussion database is read through `[discussions]`.
+
+| ID | Question | Proposed default | Outcome | Discussion |
+|---|---|---|---|---|
+| MYC-D45 <!-- 0d9b7e4c-5a3f-4b2e-8c1d-6e7f8a9b0c1d --> | What is a requirement or decision in the Index Store, and how is it named? | A row of its own keyed by a UUID in an HTML comment after the human id; the alternative was a visible ID column | Decided 19 October 2026 by the owner: requirements and decisions are entities, not locators. A `req` or `dec` is a row of its own in the Index Store, keyed by a UUID that is written in the artifact in an HTML comment after the human id in the first cell of the table row, invisible to readers and Linear copies, read by Mycel. The human id such as `MYC-2.13` is the display name and is itself never edited. The row holds the kind, the human id, the title, the text and its hash, the status, and metadata: who decided and when, the discussion chats, the Verified-by kind, the From v1 value. Its locations are attributes of the row, one per place the text is found (file, row position, branch, clone); there may be several or none; a row is never deleted and a withdrawn id stays reserved. Every edge references the UUID, never a path. Moving a row between chapters changes a location, not the entity. A row without a UUID is a reported fault, and the normalization run adds UUIDs to every existing row once. The alternative of a visible ID column was rejected | |
+| MYC-D46 <!-- 7a1e3c5b-9d2f-4e4a-b6c8-0d1e2f3a4b5c --> | How is a requirement, a decision or a chat addressed? | The glossary's Entity URI, resolved by UUID | Decided 19 October 2026 by the owner: Mycel uses the glossary's Entity URI as it stands: `[req:<uuid>:<title>]`, `[dec:<uuid>:<title>]`, `[cht:<uuid>:<title>]`, the title Base64-encoded as the glossary says. The repo code is optional and inferred from the repository name when a URI is written; no setting for it. Mycel resolves a URI by the UUID alone, since ids are unique across all kinds and repositories, and uses the kind tag only as a check. The resolver accepts an Entity URI wherever it accepts an address. `dec` is added as an entity kind in the glossary's table | |
+| MYC-D47 <!-- c2d4e6f8-1a3b-4c5d-9e7f-8a9b0c1d2e3f --> | What is in the Discussion column of a decision, and what does Mycel make of it? | Chat Entity URIs only; a chat never makes the decision stale | Decided 19 October 2026 by the owner: the Discussion column holds chat Entity URIs only. A decision that rests on a research note cites it as an ordinary Source Ref and goes stale when the note changes. Editing a decision row makes everything based on it stale, as for a requirement. A discussion chat never makes the decision stale | |
+| MYC-D48 <!-- e8f0a2b4-c6d8-4e0f-a1b3-c5d7e9f1a3b5 --> | How does Mycel read the content of a chat named in a Discussion cell? | By its Entity URI from the Arbol database, through a settings table of Mycel's own | Decided 19 October 2026 by the owner: by its Entity URI from the Arbol database, through a settings table of Mycel's own with the address and the Keychain item for the password. MYC-D5 was amended on 19 October 2026 (commit `2101eb5` in `~/Artifacts/mycel`): Mycel may read Arbol-owned databases as data. Unavailable with a reason when not reachable, the read still succeeds, Mycel writes nothing there. The form `chat:<root>/<chat>` of the first draft is dropped | |
+| MYC-D49 <!-- 4b6d8f0a-2c4e-4a6b-8d0f-2e4a6c8e0a2c --> | Which words name the things of this Arc? | Requirement, Decision, Origin, Origin Link, Origin Coverage, Index Store; the column `Origin` renamed `From v1` | Decided 19 October 2026 by the owner. Terms, all added to `~/Artifacts/arbol/GLOSSARY.md`: **Requirement**; **Decision**; **Origin**, the one-word term for a chunk at the source end of an Origin Link, of any kind: a requirement, a decision, a document section, or a code chunk when nothing better exists, as in an undocumented open-source repository; **Origin Link**, the directed link from a chunk to its Origin, a claim and never a proof, with the fields `method` (`stated` by a person, `proven` by a check, `inferred` by a model, `recovered` from history), `confidence_score` from 0 to 1, `confidence` as the band the score falls in (`asserted` above 0.9, `proven` 0.8 to 0.9, `inferred` 0.5 to 0.8, `candidate` below 0.5; the thresholds are example values set in one place), who and when, and `review`; a chunk has a list of Origin Links; the score rises by a review or a passing check and falls by a failed conformance check; **Origin Coverage**, what the command `origins` reports; **Index Store**, Mycel's own PostgreSQL database with ParadeDB at the address in its settings, holding chunks, versions, vectors, edges, marks and the record of work, a different database from Arbol's. The word *origin* is used for nothing else: the requirement tables' column `Origin` with Kept, Changed, New, Dropped is renamed `From v1` (MYC-17 is written with `From v1`; the seventeen existing chapters are renamed by the normalization run of SYL-261). Rejected names: Entity Origin, Presumed Origin, Evidence (collides with MYC-16), Locator. Nodes of the graph are Chunks; no new entity type for code; a target is written as an Entity URI when it has a UUID and as a Mycel address otherwise | |
+| MYC-D63 <!-- 1f3d5b7a-9c0e-4f2a-8b4c-6d8e0f2a4b6c --> | Where is justification specified? | A new chapter MYC-17, Justification, and a guide with the agent procedure | Decided 19 October 2026 by the owner: a new chapter MYC-17, Justification, specifies the entities, Origin Links, `justify`, `origins`, recovery and audit as Mycel behaviour, and points to a guide with the agent procedure for new and existing code, where running `origins` is useful, not required. Its requirements are `MYC-17.n`; the Status table lists it as `draft` until the owner accepts it | |
