@@ -67,6 +67,8 @@ Compare canonical routing confidence with the unchanged floor. A valid result be
 
 Validate exactly the three known probability keys, finite numbers in [0,1], total within 0.000001 of 1, a known chosen label that has the highest probability, and reported provider confidence finite in [0,1]. Keep the returned distribution unchanged. Retain canonical routing confidence, reported provider confidence, their exact agreement and the signed difference `reported - canonical` separately. A difference alone is diagnostic and does not invalidate the result. The tolerance on the probability total is unchanged; no confidence-difference tolerance is invented. A different model, missing field, unexpected answer type, malformed distribution or out-of-range canonical confidence remains a recorded `provider_result_invalid`, not support. Duplicate keys, invalid usage and other existing schema checks remain failures.
 
+Every retained valid Jev result also carries mandatory `exactDecimals`: `probabilities` with exactly the three known labels, canonical `confidence`, `reportedConfidence` and `reportedMinusCanonical`, each represented as a decimal string. These strings preserve the validated decimal values and exact derived arithmetic; they do not claim to preserve the original JSON number lexemes or wire bytes. Existing numeric probabilities/confidence/difference fields are display projections and may lose decimal precision. Routing, ties, confidence-floor decisions, Jev-only baseline reconstruction, qualification and deployment validation use the exact decimal evidence, never reconstructed floats. Validate the companion evidence against the same model/schema/distribution/formula/range rules and its numeric display projections; missing or inconsistent evidence cannot establish qualification. This representation implements accepted MYC-D43/MYC-D44 without changing their policy, floor, gates or revisions.
+
 The complete serialized Jev HTTP body has an initial 24,000-byte local cap. This is a chosen request-size budget, not a claim about the provider's tokenization. No required text is truncated. Exceeding this cap bypasses Jev and routes the complete input to the smarter reviewer with `jev_input_too_large`. A provider refusal for context length likewise routes to review; other 422 errors remain provider failures. The official token limits still apply on the server. Byte-cap behavior and longer model inputs are tested separately.
 
 ### Five-minute debounce and stale results
@@ -409,10 +411,16 @@ interface ClassificationStage {
   questionVersion: string;
   policyRevision: string;
   at: string;
-  probabilities?: Record<DependencyJudgement, number>;
-  confidence?: number;                 // canonical routing statistic, computed from unchanged probabilities
-  reportedConfidence?: number;         // finite provider value in [0,1], retained separately
-  confidenceComparison?: { matches: boolean; reportedMinusCanonical: number };
+  probabilities?: Record<DependencyJudgement, number>; // numeric display projections
+  confidence?: number;                 // display projection of exact canonical routing statistic
+  reportedConfidence?: number;         // display projection of finite provider value
+  confidenceComparison?: { matches: boolean; reportedMinusCanonical: number }; // delta is display-only
+  exactDecimals?: {                    // required for a valid retained Jev result; absent for other stages
+    probabilities: Record<DependencyJudgement, string>; // all three validated decimal values
+    confidence: string;
+    reportedConfidence: string;
+    reportedMinusCanonical: string;
+  };
   rationale?: string;
   evidence?: string[];                   // supplied MYC-16 locators
   usage?: { inputTokens?: number; outputTokens?: number };
