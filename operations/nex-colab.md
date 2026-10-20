@@ -721,7 +721,8 @@ changed there is none. The reply says nothing else about the map: no account
 of what was written, checked, committed or pushed, no `Shown` line below three
 exchanges unless the owner asked, no sentence about a line that is left out,
 such as why there is no `Shown` line, and no advice about showup beyond the
-lines of this table.
+lines of this table. A length the owner asks for, "in two sentences", is the
+length of the explanation; the lines of this table come on top of it.
 
 | Line | Form | When |
 |---|---|---|
