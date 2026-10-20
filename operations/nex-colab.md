@@ -275,7 +275,8 @@ becomes the owner's own entry only through a showup.
 
 ### Step 2: the topics
 
-Run `index`, then read `map/INDEX.md` once. Match the subjects of the prompt
+Run `index` before reading anything of the corpus, since `map/INDEX.md` may
+be out of date until it has run; then read `map/INDEX.md` once. Match the subjects of the prompt
 against the titles, the aliases and the paths, and decide two sets before
 writing a word of the explanation:
 
@@ -393,7 +394,8 @@ way, so that the owner's answer is always a number:
 2. What else a commit releases, and in which order (transactions, toward advanced)
 ```
 
-A line names the way, what it adds, and the topic and level it leads to. A
+A line names the way, what it adds, and the topic and level it leads to, and
+ends with the closing parenthesis, with no period after it. A
 way is a gap of the explained topic, a child the map shows below the pitched
 level or not assessed, the topic's own next level, a related topic the
 explanation leaned on, or a needed topic explained in a few words. No way
@@ -524,6 +526,11 @@ too.
   `Map: transactions practical → superficial: you said you have not used commit yourself.`
   When the level it replaces is the owner's own entry, the line says so:
   `Map: transactions practical → superficial, re-evaluating your own entry: you said you have not used commit yourself; showup restates it.`
+  The entry's evidence keeps the form of a rise, naming first the test of the
+  new level that the exchange still shows met, then the gap:
+  `exchange on transactions, <tool> session <id>; test of superficial met: <what still meets it>; test of practical not met: <the gap>`,
+  and the `assessment` line's `evidence` is its part from `test of`. For
+  *ignorant*, which has no test, it is `…; test of superficial not met: <the gap>`.
   The owner's entry is never changed or deleted; it stays in the history, and
   the owner restates their level with showup if they disagree.
 
@@ -584,7 +591,10 @@ other's:
    prints `<corpus>`. Add by name the files this round wrote and the
    summaries `index` printed as written, and nothing else, so that another
    session's half-written round or the owner's unfinished edit is not swept
-   in. Commit with the identity git already has and no agent credit, with
+   in. Before committing, `git -C "<corpus>" status --short -- map log` lists
+   every changed file: each one this round wrote or `index` printed goes into
+   the commit, the parent whose `## Children` section `index` rewrote
+   included. Commit with the identity git already has and no agent credit, with
    the subject `Nex Colab: <the titles of the topics written>`: the topics
    the round wrote, or, when it wrote only log lines, the topics they name.
    A file left out by mistake goes into a further commit with the same
@@ -675,7 +685,9 @@ work is explained, never what the work is.
    - *The owner says so.* Words in the message such as
      `(use colab, read only)` or "only read my map" make the work read only;
      words such as "update my map" make it write. The owner's word overrides
-     the agent's own choice.
+     the agent's own choice. Only words about the map count: "read the
+     files", "don't run anything" or "just look" are about the work, and the
+     work still writes.
    - *The session is already long.* When the owner has said nothing, and the
      tool shows that the session has used more than half of its context
      window, the agent puts the work in hand first and only reads. When the
