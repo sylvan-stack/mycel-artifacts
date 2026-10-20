@@ -25,8 +25,8 @@ for a step. The guide reads and writes the map as data, with the check that
 lives in that corpus.
 
 **Contents:** when to use · the corpus and its files · an exchange, round by
-round · writing the map and the log · (use colab) · showup · the lines the
-owner sees · what the agent never does · not built yet.
+round, from the prompt to writing the map and the log · (use colab) · showup ·
+the lines the owner sees · what the agent never does · not built yet.
 
 ## When to use
 
@@ -544,6 +544,74 @@ name the topic since its newest entry, this round's included; the ways deeper
 picked in one exchange count once. The owner may also ask at any time,
 "remind me where I stand": the reply gives the line for the topics the owner
 names, or for the exchange's topics when they name none, also below three.
+
+### Step 7: writing the map and the log
+
+At the end of every round that changed the map or the log, in this order,
+so that two sessions writing the map on the same day lose nothing of each
+other's:
+
+1. **The topics.** For each topic the round adds or changes, read its file
+   immediately before writing it back whole, once in the round. A new entry
+   goes at the top of `entries`, and `level` follows it. A note goes into the
+   body, above `## Children`. A gap, an alias or a related link goes into its
+   key, a related link into both topics. A new topic gets its folder and its
+   `topic.md`, with the entry the round showed or with none, and every folder
+   on the way that did not exist gets a `topic.md` with its `title` only. The
+   agent that creates a child for a gap removes the gap from the parent.
+2. **The log.** Append the round's lines to `log/<YYYY-MM>.jsonl`, the file
+   of the UTC month of each line's `at`, each line in one write and never
+   by rewriting the file: an `added` line before the `attempt` line, the
+   `attempt` line before the `assessment` line. The time is
+   `date -u +%Y-%m-%dT%H:%M:%SZ`. For example:
+
+   ```bash
+   cd "<corpus>" && cat >> log/2026-10.jsonl <<'LINE'
+   {"at":"2026-10-21T09:14:02Z","kind":"attempt","session":"claude-code <session>","topics":["software-development/postgresql/advisory-locks"],"shown":"…","before":{}}
+   LINE
+   ```
+
+3. **`index`, then `check`.** An error that `check` reports in a file this
+   round wrote is fixed before the round ends. Undoing this round's own
+   uncommitted writes, such as a new alias that coincides with another
+   topic's, is a fix and not a deletion. An error in any other file is not
+   this exchange's to fix: the reply says so once per exchange,
+   `Map check: <file>: <message>; left as it is.`, and the work goes on.
+   When that error makes `index` refuse, the round's summaries stay out of
+   date until it is fixed, and the round's own files are still committed.
+4. **The commit**, made only when `git -C "<corpus>" rev-parse --show-toplevel`
+   prints `<corpus>`. Add by name the files this round wrote and the
+   summaries `index` printed as written, and nothing else, so that another
+   session's half-written round or the owner's unfinished edit is not swept
+   in. Commit with the identity git already has and no agent credit, with
+   the subject `Nex Colab: <the titles of the topics written>`: the topics
+   the round wrote, or, when it wrote only log lines, the topics they name.
+5. **The push.** `git push`. When it is refused because another session
+   pushed first, `git pull --no-rebase --no-edit` and push again. A
+   conflict in a log file keeps both sides' lines; a conflict in
+   `map/INDEX.md` or in a `## Children` section is resolved by running
+   `index` again; two entries added to one topic by two sessions are both
+   kept, newest first. Then `check`, commit the merge, push. Any other
+   conflict, or a push that fails, leaves the commit local (`git merge
+   --abort` when a merge is open), and the reply says
+   `Map not pushed: <why>; the next push carries it.` The next round's push
+   carries it.
+
+The round's reply is given after the push. An exchange whose last round
+left the map unwritten has not happened as far as the next agent can see, so
+every round commits, the last one included.
+
+**When the corpus cannot be written**, in a session with no shell or no
+access to the folder, the agent still answers, writes nothing, and says so
+once per exchange: `Map not written: <why>; nothing recorded.`
+
+Example, fictional: the first round of an exchange on advisory locks writes
+`software-development/postgresql/advisory-locks/topic.md` with its new entry
+at *superficial*, appends the `attempt` and the `assessment` lines to
+`log/2026-10.jsonl`, runs `index`, which rewrites the `## Children` section
+of `software-development/postgresql/topic.md` and one line of `map/INDEX.md`,
+runs `check`, which reports nothing, and commits the four files as
+`Nex Colab: Advisory locks in PostgreSQL`.
 
 ## showup
 
