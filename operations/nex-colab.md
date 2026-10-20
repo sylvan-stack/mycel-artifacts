@@ -613,6 +613,82 @@ of `software-development/postgresql/topic.md` and one line of `map/INDEX.md`,
 runs `check`, which reports nothing, and commits the four files as
 `Nex Colab: Advisory locks in PostgreSQL`.
 
+## (use colab): the map in other work
+
+The map is needed most when an agent explains something technical in the
+middle of other work, a review, a fix, the cause of a failing build, so that
+it knows the owner's experience in the field. The owner asks for that by
+writing the phrase `(use colab)` anywhere in a message, or by calling
+`/use-colab`. Nothing else starts it. It lasts for the work that message asks
+for: a later message that goes on with that work is a round of it, as in an
+exchange, and a message about other work ends it. The map changes how the
+work is explained, never what the work is.
+
+1. **The subagent.** When the work will write (step 3), run `index` first.
+   Then hand the message to a subagent, a second agent with a context of its
+   own, so that the map's files do not crowd the work: in Claude Code the
+   Agent tool, in Codex its own way of starting one. Give it this request,
+   with the corpus and the owner's whole message filled in:
+
+   ```
+   Read the Nex Knowledge Map for another agent, and write nothing: no file, no log line, no commit.
+   Corpus: <corpus>
+   Message: <the owner's message>
+   1. Read <corpus>/map/INDEX.md. Match the subjects of the message against the titles, the aliases and the paths, and find the topics the message touches and the topics an explanation of them needs. For each path listed under "## Not interested" in the message's field, read its topic.md for its title and aliases.
+   2. Read the topic.md of each topic found: its level, entries, gaps, notes and former paths.
+   3. Read the lines of <corpus>/log/*.jsonl that name its path or one of its former paths since its newest entry: lines whose "at" is later than the assessment or statement line that wrote that entry; for an entry the owner made by hand, the lines from the day after its date; for a topic with no entry, every line.
+   4. Answer with the brief only, one line per topic, leaving out a part with nothing to say:
+      <title> (<path>) · <level, or not assessed> · gaps: <gaps> · notes: <what matters for pitching> · shown <n> times since its level was set
+      where <n> counts the distinct "session" values of those "attempt" lines. Then, when the message touches a marked topic, one line: Not interested: <paths>
+   ```
+
+   Fictional example of a brief:
+
+   ```
+   Test fixtures (software-development/testing/fixtures) · superficial · notes: met fixtures only in passing · shown 1 times since its level was set
+   Event loops (software-development/concurrency/event-loops) · practical
+   ```
+
+2. **The work, pitched by the brief.** Do the work as asked, and pitch every
+   explanation in it as [step 3](#step-3-the-depth) says: skip what the owner
+   knows, explain what they do not one level up, and close each explanation
+   with the skipped line. Fictional example: `(use colab) why does this test
+   hang?`; the brief has test fixtures at *superficial* and event loops at
+   *practical*; the agent finds the cause, a fixture that never closes its
+   loop, explains how a fixture's teardown runs and why this one never reaches
+   it, without saying what an event loop is, and ends with
+   `Skipped: event loops (practical).` A topic the brief marks not interested
+   is used plainly, with the `Not interested:` line when the message touches
+   it, and recorded nowhere.
+3. **Writing, by default.** The work writes the map as an exchange does:
+   each reply that explains something writes its `attempt` line (step 5),
+   the assessment runs after each reply of the owner's (step 6), and the
+   writes, the commit and the push follow step 7, with the lines of
+   [The lines the owner sees](#the-lines-the-owner-sees). Two things make it
+   only read:
+   - *The owner says so.* Words in the message such as
+     `(use colab, read only)` or "only read my map" make the work read only;
+     words such as "update my map" make it write. The owner's word overrides
+     the agent's own choice.
+   - *The session is already long.* When the owner has said nothing, and the
+     tool shows that the session has used more than half of its context
+     window, the agent puts the work in hand first and only reads. When the
+     tool does not show it, the work writes.
+
+   Work that only reads runs no `index` and writes nothing to the map or the
+   log, and says so once per session, first among its `Map` lines:
+   `Map read only: <why>; nothing recorded. Say "update my map" to record.`
+4. **Talking a level through** works here too, one question at a time, as
+   step 6 says. While the work only reads, the answer steers the explanation
+   and is not recorded.
+5. **A showup in the middle** of such work is handled as one in the middle of
+   an exchange: it is recorded as [showup](#showup) says, its messages are no
+   evidence, and the work goes on with its explanations pitched at the new
+   level. A showup that names no topic, "advanced in this", refers to the
+   topics of the work's last `attempt` line, or, when the work only reads, of
+   the brief. A request in plain words to record a level gets the
+   `To record it:` line here too.
+
 ## showup
 
 `/colab showup "<words>"` is the owner's own statement of their level or
@@ -649,3 +725,35 @@ one of the five levels.
 | Shown without a rise | `Shown in <n> exchanges since <level>: <topic>; say where you stand (/colab showup), or ask for it another way.`; for a topic with no entry `Shown in <n> exchanges, never assessed: <topic>; say where you stand (/colab showup), or ask for it another way.` | in the round that makes it the third exchange or a later one, or when the owner asks to be reminded |
 | A question that talks a level through | one question that invites the owner to reason with the topic | before the options, when the owner's words sit between two levels' tests |
 | The options | `<n>. <the way> (<topic>, toward <level>)` | last, one per way deeper |
+
+## What the agent never does
+
+- Read or write the map without the owner's `/colab`, `(use colab)` or
+  `/use-colab`, or write the owner's map in a trial or a sample, which point
+  the agent at a fictional corpus with `COLAB_CORPUS`.
+- Write a level from what it showed, from the number of rounds, from how
+  long the owner has used something, or from a claim alone; or write a level
+  to a child from its parent, or to a parent from its children.
+- Delete or change an entry, whoever made it; delete or move a topic; edit
+  `map/INDEX.md` or a `## Children` section by hand; rewrite or remove a log
+  line, or write one with other keys than its kind's.
+- Set or remove a not-interested mark on its own judgement, or write anything
+  for a marked topic or under it.
+- Take a way deeper the owner did not pick.
+- Write a topic, a note, an evidence, a `shown` or a `reason` that names a
+  repository, a project or a product, the owner's own included.
+- Quote the map or the log outside the owner's session.
+- Commit files the round did not write, commit when git's top folder is not
+  the corpus, set an identity, or add an agent credit.
+
+## Not built yet
+
+- **showup**, `/colab showup "<words>"`: [the section above](#showup) is
+  written by SYL-280 of the Nex Colab Saga, from CLB-2.
+- **The samples** that prove this guide, and the script that compares an
+  agent's run with what a sample expects: kept in `~/Artifacts/colab/tools/`
+  beside the check, and built by SYL-282 of the Nex Colab Saga, from CLB-1's
+  "The sample". A sample's harness copies its fictional corpus into a
+  temporary git repository with a local bare `origin` and points the agent at
+  it with `COLAB_CORPUS`, so that its commits and pushes never reach the
+  owner's corpus.
