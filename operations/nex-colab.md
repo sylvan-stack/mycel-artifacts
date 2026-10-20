@@ -4,8 +4,8 @@ role: authored
 # Guide: Nex Colab
 
 Use this guide when the owner asks to learn something with `/colab "prompt"`,
-or asks that their knowledge be taken into account in other work with
-`(use colab)`. The agent answers at the depth the owner's
+states their own level with `/colab showup "<words>"`, or asks that their
+knowledge be taken into account in other work with `(use colab)`. The agent answers at the depth the owner's
 [Nex Knowledge Map](../../arbol/GLOSSARY.md#nex-knowledge-map) says is
 missing, logs every time it shows the owner something, judges from the
 owner's own words whether a level has risen or fallen, and writes the map
@@ -25,8 +25,9 @@ for a step. The guide reads and writes the map as data, with the check that
 lives in that corpus.
 
 **Contents:** when to use · the corpus and its files · an exchange, round by
-round, from the prompt to writing the map and the log · (use colab) · showup ·
-the lines the owner sees · what the agent never does · not built yet.
+round, from the prompt to writing the map and the log · (use colab) · showup,
+from the words to the reply · the lines the owner sees · what the agent never
+does · the samples.
 
 ## When to use
 
@@ -712,17 +713,259 @@ work is explained, never what the work is.
 
 ## showup
 
-`/colab showup "<words>"` is the owner's own statement of their level or
-experience in a topic, at any time, also in the middle of an exchange or of
-`(use colab)` work ([CLB-2](../../colab/specs/02-showup.md)). This section
-will hold its steps in execution order, as CLB-2's "A showup from start to
-end" gives them, from the words to the reply; SYL-280 of the
-[Nex Colab Saga](../../sagas/nex-colab/saga.md) writes it. Until then the
-agent's whole reply to a showup is the one line
-`showup is not built yet; nothing recorded.`; it writes nothing and, in the
-middle of an exchange or of `(use colab)` work, goes on with it as
-[An exchange, round by round](#an-exchange-round-by-round) says of a showup
-in the middle.
+`/colab showup "<words>"`, in Codex `$colab showup "<words>"`, is the owner
+telling the agent on purpose what they know, so that the map records it as
+theirs ([CLB-2](../../colab/specs/02-showup.md)). It may come at any time,
+with no exchange open, in the middle of one, or in `(use colab)` work.
+Nothing else is a showup:
+
+- A request in plain words, "note in my map that I know event loops well",
+  gets the `To record it:` line and writes nothing.
+- A remark in passing, "I have used asyncio for years", is a claim:
+  [step 1](#step-1-the-prompt) takes it as the starting value and writes no
+  entry for it.
+
+A showup shows the owner nothing and assesses nothing. It writes only what the
+words give: the owner's entries, gaps, marks and aliases, the topics it has to
+create for them, and the log lines below. No notes, no related links, no entry
+of the agent's own, no `attempt` and no `assessment` line.
+
+A showup takes these steps, as CLB-2's "A showup from start to end" gives
+them. Fictional example, used through this section: on a map where
+`software-development/databases/postgresql` stands at *superficial* from an
+agent's estimate, the owner writes
+`/colab showup "Six years of PostgreSQL in daily work: queries, schema design, a few index tunings. Never touched replication. Not interested in PL/pgSQL."`
+
+### showup step 1: the topics
+
+Run `index` before reading anything of the corpus, then read `map/INDEX.md`
+once, and match each subject of the words against the titles, the aliases and
+the paths. `map/INDEX.md` lists a marked topic by its path only, under
+`## Not interested`, and nothing under it: read the `topic.md` of each path
+listed there in the field the words name, for its title and aliases. Before
+writing to any topic, read its own file and its ancestors' for the mark.
+
+- **An existing topic** is used, also under another of its names: "Postgres"
+  finds the topic titled "PostgreSQL" through its alias. A name the owner uses
+  that the topic's title and aliases lack, compared without regard to case,
+  is added to its `aliases`.
+- **A new topic** goes under the parent the words' own nesting names,
+  "the actors in Swift concurrency", or under the one you judge right, with a
+  `topic.md` holding only `title` for every folder on the way. A new field at
+  the top of `map/` is a choice for the question (step 4), with the field you
+  propose.
+- **A part of a topic** the words name as not learned is step 3's.
+- **Words about a particular repository, project or product**, "I know the
+  billing service of one shop inside out", record nothing as they stand.
+  When you see a general topic behind them, restate the words in general
+  terms and offer that restatement as a choice in the question; record only
+  what the owner accepts. When you see none, the reply says the subject is not
+  recorded.
+- **Words that name no topic**, `/colab showup "advanced in this"`: in the
+  middle of an exchange they refer to the topics of the exchange's last
+  `attempt` line, and when it names more than one, which of them is the
+  question. Outside an exchange they record nothing, and the reply says so.
+
+### showup step 2: the level
+
+- **A level named by its name** is recorded as named: "practical in Swift
+  concurrency" is *practical*. "Approximately", "roughly" and "about" change
+  nothing.
+- **Otherwise** the level is the highest whose test the words meet, by the
+  tests of [step 6](#step-6-the-assessment) and no other rule. Years of
+  everyday work with a topic meet *practical*, whatever the number of years;
+  words that say nothing about why it behaves as it does, its limits or its
+  trade-offs do not meet *advanced*. "Never heard of it" and "know nothing
+  about it" are *ignorant*; "have read about it, never used it" is
+  *superficial*; "could build one" is *design*.
+- **Words that meet one test and hint at the next**, "reasonably well",
+  "quite good at": the level is talked through with the owner, not picked
+  from two (step 4).
+
+The owner's word is the starting value, not a floor: a later exchange may
+write an agent's entry above or below it, by the tests, as
+[Lowering a level](#step-6-the-assessment) says. A showup that states the
+level the map already shows is recorded too: the owner confirmed it that day.
+
+In the example, "six years of PostgreSQL in daily work: queries, schema
+design, a few index tunings" meets *practical* and says nothing of why
+PostgreSQL behaves as it does: *practical*, with no choice.
+
+### showup step 3: children, parts not learned, and marks
+
+- **A statement about a topic says nothing about its children or its
+  parent.** "advanced in Swift" writes to `swift/` only and leaves
+  `swift/concurrency` as its own file has it; "I know nothing about actors in
+  Swift" writes to the child only.
+- **A part named as not learned**, "never touched replication", meets
+  *ignorant*, or *superficial* when the words show the owner knows what it is
+  for; when both fit, that is a choice. When the topic has no child of that
+  name, the part becomes a gap on the topic, not added twice. When a child of
+  that name exists, the child gets an entry at that level.
+- **A clear word of not interested**, "not interested in", "do not teach me",
+  "leave out", sets `not-interested: true` on the topic, created with no entry
+  when the map lacks it. Words that only lean that way, "I do not care much
+  about", are a choice, with the mark proposed.
+- **"Interested after all"** removes the mark from the topic that carries it.
+  When the mark sits on an ancestor, removing it would bring the ancestor's
+  other children back too: that is a choice, proposed not to remove it.
+- **A topic under a mark**, its own or an ancestor's, gets nothing: no entry,
+  no gap, no alias, no topic under it. The reply names the topic that carries
+  the mark; the owner removes it and states the level again.
+- **A level and a mark in the same words**, "practical in PL/pgSQL but not
+  interested in it": the entry is written first and the mark after it.
+
+### showup step 4: asking back
+
+Ask before writing anything when the words leave a choice, and only then:
+two topics fit a subject; two parents fit a new topic, or it is a new field;
+two adjacent levels fit the words; the words lean towards not interested; the
+words name a particular product and you see a general topic behind them;
+"interested after all" meets a mark on an ancestor; or words that name no
+topic meet an `attempt` line with several. Ask nothing the words have settled,
+and nothing about a topic the words do not name. The question is the whole
+reply, one message, every choice numbered on one line:
+
+```
+Before I write:
+1. Where does Tokio go? As a new topic under rust/ (proposed), or under a new rust/async-runtimes/.
+2. Rust: "reasonably well" meets practical, a routine task done alone, and may meet advanced, knowing why it behaves as it does and when not to use it. What have you built with it, and could you say when Rust is the wrong choice?
+Answer 1 by number or "go"; tell me about 2 in your own words.
+```
+
+The last line names the choices of place, field, mark and restatement that
+"go" answers, and the choices of level that are talked through; it leaves out
+a kind the question does not hold.
+
+- **A choice of place, field, mark or restatement** gives its options with
+  the proposed one marked `(proposed)`. The owner answers with the number and
+  the option they want for each choice they change, or with `go`, which takes
+  every proposal; a choice they leave unnamed takes its proposal. Silence
+  writes nothing.
+- **A choice of level** opens a conversation, a message at a time: say in a
+  sentence each what the two tests ask, and ask what the owner has done or
+  can do that bears on them, as a colleague would. Show nothing and explain
+  nothing: an owner who wants something explained has an exchange for it.
+  Go on while the answers add something. Then name the level whose test the
+  owner's words met, with that test, and ask the owner to agree:
+  `That meets practical, a routine task done alone, and not yet advanced. I will record Rust as practical. Right?`
+  The owner's agreement, or the level they name instead, settles it. Write
+  nothing before that.
+- **A message that turns to something else**, "run the tests", ends the
+  showup with nothing written. Say so in one line, before whatever the message
+  asks: `Showup stopped: nothing recorded; /colab showup starts it again.`
+- **New words about another topic** in an answer, "and I know Diesel too",
+  are a new showup, taken after the first is written.
+
+### showup step 5: writing the topics
+
+When every choice is settled, for each topic, read its file immediately before
+writing it back whole, once, and note the level it held then, for the reply.
+
+- **The entry.** For each topic the words give a level, one entry at the top
+  of `entries`, and `level` follows it:
+
+  ```
+    - level: practical
+      source: owner
+      date: 2026-10-21
+      evidence: "showup: Six years of PostgreSQL in daily work: queries, schema design, a few index tunings"
+  ```
+
+  `date` is the UTC date of the write, never a date the words mention.
+  `evidence` begins `showup: ` and gives the sentences of the owner's words
+  that bear on this topic, as given or as accepted, one or two sentences on
+  one line, in double quotes with `"` and `\` escaped. Words about a subject
+  not recorded never go into it.
+- **Gaps, aliases and marks** go into their keys as step 1 and step 3 say.
+- **A new topic** gets its folder and a `topic.md` with its `title`, and the
+  entry or the mark the words give it. A child created under a topic removes
+  the gap of that topic whose hyphenated form is the child's folder name.
+
+### showup step 6: the log
+
+Append, each in one write, as [step 7](#step-7-writing-the-map-and-the-log)
+of an exchange does:
+
+1. **One `added` line** when the showup created topics: `topics` every path
+   created, the folders on the way included, and `reason` a sentence that
+   begins `the owner's showup`.
+2. **One `statement` line** for the whole showup, not one per topic: `topics`
+   every path it wrote to, an entry, a gap, an alias or a mark; `said` the
+   owner's words that bear on those topics, from the showup and from the
+   conversation that settled it, as given or as accepted, leaving out words
+   about a subject not recorded; `level` the new level of each topic that got
+   an entry, path → level, and `{}` when none did.
+
+```
+{"at":"2026-10-21T08:14:01Z","kind":"added","session":"claude-code <session>","topics":["software-development/databases/postgresql/pl-pgsql"],"reason":"the owner's showup: created to carry the not-interested mark"}
+{"at":"2026-10-21T08:14:02Z","kind":"statement","session":"claude-code <session>","topics":["software-development/databases/postgresql","software-development/databases/postgresql/pl-pgsql"],"said":"Six years of PostgreSQL in daily work: queries, schema design, a few index tunings. Never touched replication. Not interested in PL/pgSQL.","level":{"software-development/databases/postgresql":"practical"}}
+```
+
+A showup that changed nothing writes no line.
+
+### showup step 7: finishing
+
+Run `index`, then `check`, and commit and push as step 7 of an exchange says,
+with the subject `Nex Colab: showup of <the titles of the topics written>`:
+the titles joined by commas, never the owner's words, such as
+`Nex Colab: showup of PostgreSQL, PL/pgSQL`. An error `check` reports in a
+file the showup wrote is fixed before the commit; an error in another file is
+named in the reply and left. A showup that changed nothing commits nothing.
+
+### showup step 8: the reply
+
+The reply says exactly what went into the map, and nothing else: it explains
+nothing of the topic and offers no teaching or way deeper.
+
+```
+Recorded on 21 October 2026:
+- software-development/databases/postgresql · practical · was superficial (agent, 2026-10-02) · gap added: replication
+- software-development/databases/postgresql/pl-pgsql · not interested · new topic
+```
+
+The first line names the UTC date of the write, day month year. Then one line
+per topic that got an entry, a gap, an alias or a mark, in this form, the
+parts that do not apply left out:
+
+```
+- <path> · <level> · new topic | was <level> (<source>, <date>) · gap added: <gap> | gap removed: <gap>
+- <path> · not interested | mark removed · new topic
+- not recorded: <subject> · <why>
+```
+
+`was` names the level the file held at the read before the write, with the
+source and date of its newest entry. One `not recorded:` line per subject the
+showup did not record, with why: it names a particular product, it lies under
+the mark of `<path>`, or the words name no topic.
+
+### A showup in the middle of an exchange
+
+Complete the showup first: the question when there is one, the writes, the
+log, the commit and the push, the reply. Its messages are no rounds of the
+exchange: they show nothing, write no `attempt` line, and are no evidence for
+the exchange's assessment. Then go on with the exchange: read again the files
+of the topics the showup changed, pitch what you show next at the new level,
+and close it with the skipped line, which says what you now skip. What you
+show after the showup, in the same reply or the next, is a round, with its
+`attempt` line and its own commit. A mark set on the topic being explained
+ends that explanation. In `(use colab)` work the same holds, and words that
+name no topic refer to the work's last `attempt` line, or to the brief when
+the work only reads.
+
+### What the agent never does in a showup
+
+- Write an owner's entry without `/colab showup`, or take a plain-word
+  request or a remark in passing for one.
+- Write a level the words do not give, a level higher than they meet, or a
+  level to a child or a parent the words do not name.
+- Write before every choice is settled, or on silence.
+- Write notes or related links, an entry of its own, or an `attempt` or
+  `assessment` line.
+- Write anything to a topic under a mark, or create a topic under one.
+- Write anything that names a particular repository, project or product, in
+  an entry, a `said`, a topic or a commit subject.
+- Explain the topic or offer teaching in the reply.
 
 ## The lines the owner sees
 
@@ -777,14 +1020,11 @@ length of the explanation; the lines of this table come on top of it.
   the corpus, set an identity, or add an agent credit; amend a commit, force
   a push, or rewrite the corpus's history in any other way.
 
-## Not built yet
+## The samples
 
-- **showup**, `/colab showup "<words>"`: [the section above](#showup) is
-  written by SYL-280 of the Nex Colab Saga, from CLB-2.
-- **The samples** that prove this guide, and the script that compares an
-  agent's run with what a sample expects: kept in `~/Artifacts/colab/tools/`
-  beside the check, and built by SYL-282 of the Nex Colab Saga, from CLB-1's
-  "The sample". A sample's harness copies its fictional corpus into a
-  temporary git repository with a local bare `origin` and points the agent at
-  it with `COLAB_CORPUS`, so that its commits and pushes never reach the
-  owner's corpus.
+The samples that prove this guide are in `~/Artifacts/colab/tools/samples/`,
+CLB-1's and the seven recordings of showup, each a fictional corpus with the
+owner's messages and what each round must show. `tools/sample.py run <sample>
+--cli claude|codex` runs one in a fresh session against a temporary copy and
+compares the result ([its README](../../colab/tools/samples/README.md)). A
+change to this guide is run again on the samples it concerns, in both CLIs.

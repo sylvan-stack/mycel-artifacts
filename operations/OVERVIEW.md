@@ -96,7 +96,9 @@ One page to (re)load the whole mental model. Each section is two sentences of
   Every explanation is logged, levels rise or fall only on the owner's own
   words judged by fixed tests, and the map is written and pushed after each
   reply; with `(use colab)` the same map pitches the explanations of any
-  other work.
+  other work. With `/colab showup "<words>"` the owner states their own level,
+  which goes into the map as their entry once every choice the words leave is
+  settled.
 
 ## How it compounds
 
