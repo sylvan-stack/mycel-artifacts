@@ -2,7 +2,7 @@
 name: linear-resolve
 description: >-
   Go through every unresolved comment the owner left in the Linear workspace
-  Sylvan Stack and settle each one in the session: collect the open threads
+  amorphius and settle each one in the session: collect the open threads
   on documents, issues and project pages, make the change a comment
   recommends or open the topic, answer what it asks, and give the user a
   numbered list of the comments with a response to each. Posts

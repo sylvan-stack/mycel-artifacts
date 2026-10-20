@@ -1,8 +1,8 @@
 ---
 name: linear-organize
 description: >-
-  Make what needs the owner's attention now easy to find in the Sylvan Stack
-  Linear workspace. Create or refresh a prominent Needs your attention entry
+  Make what needs the owner's attention now easy to find in the Linear workspace
+  amorphius. Create or refresh a prominent Needs your attention entry
   with individual open questions, pending decisions, reviews, blockers needing
   input, and other action items, each with the next action and a source link;
   then tidy project navigation and remove obsolete shortcuts. Examples:
