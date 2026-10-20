@@ -703,8 +703,8 @@ experience in a topic, at any time, also in the middle of an exchange or of
 will hold its steps in execution order, as CLB-2's "A showup from start to
 end" gives them, from the words to the reply; SYL-280 of the
 [Nex Colab Saga](../../sagas/nex-colab/saga.md) writes it. Until then the
-agent answers a showup with the one line
-`showup is not built yet; nothing recorded.`, writes nothing, and, in the
+agent's whole reply to a showup is the one line
+`showup is not built yet; nothing recorded.`; it writes nothing and, in the
 middle of an exchange or of `(use colab)` work, goes on with it as
 [An exchange, round by round](#an-exchange-round-by-round) says of a showup
 in the middle.
