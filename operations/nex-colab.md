@@ -632,7 +632,7 @@ work is explained, never what the work is.
    Then hand the message to a subagent, a second agent with a context of its
    own, so that the map's files do not crowd the work: in Claude Code the
    Agent tool with the subagent type `Explore`, which cannot write; in Codex
-   its own way of starting one. The agent itself reads no file of `map/` or
+   the tool `spawn_agent`. The agent itself reads no file of `map/` or
    `log/` in such work: it reads the brief. Give the subagent this request,
    with the corpus and the owner's whole message filled in:
 
@@ -719,8 +719,9 @@ levels and nothing else. A line whose *When* does not hold is left out: a
 `Map:` line is written only for an entry the round wrote, and when no level
 changed there is none. The reply says nothing else about the map: no account
 of what was written, checked, committed or pushed, no `Shown` line below three
-exchanges unless the owner asked, and no advice about showup beyond the lines
-of this table.
+exchanges unless the owner asked, no sentence about a line that is left out,
+such as why there is no `Shown` line, and no advice about showup beyond the
+lines of this table.
 
 | Line | Form | When |
 |---|---|---|
