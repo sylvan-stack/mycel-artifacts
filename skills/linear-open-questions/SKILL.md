@@ -2,7 +2,7 @@
 name: linear-open-questions
 description: >-
   Collect every open question and pending decision that waits for the owner
-  in the Linear workspace Sylvan Stack and give them as one numbered list in
+  in the Linear workspace amorphius and give them as one numbered list in
   the session: rows marked Open in a specification's Decisions table, issues
   that ask the owner to decide, and questions agents put to the owner in
   comments. Each item is written so it can be answered in the chat without

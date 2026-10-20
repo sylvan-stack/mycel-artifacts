@@ -5,7 +5,7 @@ role: authored
 
 Use this guide to put every question that waits for the owner in front of
 them in the session. Questions and pending decisions are recorded in the
-Linear workspace Sylvan Stack (`https://linear.app/amorphius`): as rows in
+Linear workspace amorphius (`https://linear.app/amorphius`, team Sylvan Stack): as rows in
 the Decisions table of a specification, as issues, and in comments. Answering
 them there means opening each place and writing a comment. A run collects
 them all and gives one numbered list in the session. The user answers there,

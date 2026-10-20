@@ -205,4 +205,4 @@ third-party skills remain outside this catalog.
 
 - Every artifact goes into a chapter folder, never directly into the corpus root. `README.md`, `INDEX.md` and a `GLOSSARY.md` are the exceptions.
 - List a chapter here when it is created.
-- Tasks are tracked in Linear, not in this corpus: project [Mycel](https://linear.app/amorphius/project/mycel-6bbdbce253fb) in the Sylvan Stack workspace. Specifications are copied there as documents; `.linear.json` maps each file to its copy. The files here are the originals.
+- Tasks are tracked in Linear, not in this corpus: project [Mycel](https://linear.app/amorphius/project/mycel-6bbdbce253fb) in the Linear workspace amorphius. Specifications are copied there as documents; `.linear.json` maps each file to its copy. The files here are the originals.

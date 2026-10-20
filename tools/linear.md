@@ -38,10 +38,17 @@ only when the owner asks for that thread, through the ⋯ menu of a reply,
 "Resolve thread with comment". The desktop app may keep showing old text after
 a connector save: verify content with `get_document`, not in the app.
 
-Two workspaces are connected and must not be mixed: **Sylvan Stack**
-(team key `SYL`, MCP server `linear-sylvan`) for all Sylvan Stack work, and a
-second one, through the claude.ai Linear connector, for Euro-Office work only;
-its conventions are in `~/Artifacts/euro-office/README.md`.
+One workspace is connected: **amorphius** (`https://linear.app/amorphius`),
+through the claude.ai Linear connector, with the team **Sylvan Stack** (key
+`SYL`) for all Sylvan Stack work. It was the Euro-Office workspace `eo-group`
+until 20 October 2026, when the owner renamed it, the Sylvan Stack workspace
+was imported into it with Linear's own "Linear to Linear import" (every SYL
+identifier kept; documents and projects got new ids and slugs), and the
+Euro-Office team, projects, documents and labels were removed at the owner's
+request. The old workspace `linear.app/sylvan-stack` is left as it was and is
+no longer written to. The MCP server `linear-sylvan` in `~/.claude.json` still
+authorizes that old workspace: do not use it until the owner re-authorizes it
+for amorphius or removes it.
 
 Follow each paginated list to completion for the selected scope. Current
 `list_projects` has a maximum page size of 50; do not assume the larger limits
