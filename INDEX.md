@@ -149,6 +149,7 @@ What must happen, in Mycel vocabulary — the invariant behind every invocation 
 - [`sagas.md`](./operations/sagas.md) — organize work as Sagas, Arcs and Beats, with Sagas, Arcs and Beats as files in `~/Artifacts/sagas/` and their copies in Linear: order and progress, territories of folders and files, the files every Beat may add to, hold files and who owns them, automatic release of a gone agent's hold, taking the next Beat, the plan of a Beat and how its ticked steps measure progress, working, stopping and finishing, planning a Saga, and what is not built yet.
 - [`radar-stats.md`](./operations/radar-stats.md) — show every Saga or one selected by name or folder, each with its Arcs: its share of work Done, In progress and Other in plan steps, the agents working on it now and their context; finished Arcs and agents that hold no Beat are left out; how each number is counted, and what is not counted yet.
 - [`agent-watch.md`](./operations/agent-watch.md) — the check from outside: every 5 minutes, with no AI, what each working agent did since its last tick, commit or message from the owner; how tokens, owner's messages, ticks, commits, changed files and repeated drafts are counted; the signals and their agreed numbers; how a signal is raised and ended; what a run leaves in `~/.sagas/watch/`; the replay and the LaunchAgent.
+- [`nex-colab.md`](./operations/nex-colab.md) — Nex Colab: answer what the owner wants to learn (`/colab "prompt"`) at the depth their Nex Knowledge Map says is missing, and pitch the explanations of other work by it (`(use colab)`): the rounds of an exchange, finding the topics, the depth one level up, the skipped line and the numbered ways deeper, the `attempt` line, the assessment by the tests, raising and lowering a level, the `Shown` line, writing, checking, committing and pushing the map and the log after each reply, the subagent's brief, and the place of showup, which is not built yet. The map is data in the private corpus `~/Artifacts/colab/`.
 - [`source-refs-authoring.md`](./operations/source-refs-authoring.md) — author durable provenance and section-level Source Refs without relying on instructions from another corpus.
 
 ### `tools/` — technical manuals for the client-agnostic CLIs
@@ -188,6 +189,7 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 - [`arbol-chat-prepared-folder`](./skills/arbol-chat-prepared-folder/SKILL.md)
 - [`authored-work-integration`](./skills/authored-work-integration/SKILL.md)
 - [`code-research`](./skills/code-research/SKILL.md)
+- [`colab`](./skills/colab/SKILL.md) — explicit-only; its Claude Code adapter is [`providers/claude/colab`](./skills/providers/claude/colab/SKILL.md)
 - [`corpus-admin`](./skills/corpus-admin/SKILL.md)
 - [`create-mycel-skill`](./skills/create-mycel-skill/SKILL.md)
 - [`deep-research`](./skills/deep-research/SKILL.md)
@@ -197,8 +199,9 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 - [`radar-stats`](./skills/radar-stats/SKILL.md)
 - [`mycel-search`](./skills/mycel-search/SKILL.md)
 - [`pr-deep-review`](./skills/pr-deep-review/SKILL.md)
+- [`use-colab`](./skills/use-colab/SKILL.md)
 
-The active catalog contains 12 Mycel skills for both providers. Personal and
+The active catalog contains 14 Mycel skills for both providers. Personal and
 third-party skills remain outside this catalog.
 
 ## Conventions

@@ -68,6 +68,7 @@ remain pending.
 | see how far every Saga is and which agents work on them now (`/radar-stats`) | [operations/radar-stats.md](operations/radar-stats.md) — Done, In progress and Other in plan steps, and the agents holding each Saga's Beats and their context |
 | see what each working agent did since its last progress, and which of them a signal calls for a review | [operations/agent-watch.md](operations/agent-watch.md) — the check from outside, every 5 minutes with no AI: time and tokens since the last tick, commit or owner's message, files outside git, repeated drafts, the agreed signals |
 | make what needs the owner's attention now easy to find in Linear, then organize project navigation | [operations/linear-organize.md](operations/linear-organize.md) — publish a prominent attention entry with individual open questions, pending decisions, reviews, and next actions; then remove obsolete shortcuts |
+| learn something at the depth the owner's Nex Knowledge Map says is missing (`/colab "prompt"`), or pitch the explanations of other work at the owner's level (`(use colab)`) | [operations/nex-colab.md](operations/nex-colab.md) — the map is data in the private corpus `~/Artifacts/colab/`, assessed, written and pushed after each reply |
 | Mycel CLI syntax, flags, defaults | [tools/mycel.md](tools/mycel.md) |
 | what Mycel 2 must do: its function, requirements and open decisions | [specs/README.md](specs/README.md) |
 | what Mycel 1 actually did, with the place in its source | the inventories listed in [specs/README.md](specs/README.md) |

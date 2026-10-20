@@ -87,6 +87,17 @@ One page to (re)load the whole mental model. Each section is two sentences of
   outside](agent-watch.md) measures every 5 minutes what each working agent
   did since its last progress and raises the signals that call for a review.
 
+## Learning at the owner's depth
+
+- **[Nex Colab](nex-colab.md)** — the owner asks to learn something with
+  `/colab "prompt"`, and the agent answers one level above what the owner's
+  Nex Knowledge Map, a private corpus of topics and levels, says they know,
+  skipping what they know and offering the ways deeper as numbered options.
+  Every explanation is logged, levels rise or fall only on the owner's own
+  words judged by fixed tests, and the map is written and pushed after each
+  reply; with `(use colab)` the same map pitches the explanations of any
+  other work.
+
 ## How it compounds
 
 Retrieval gets smarter through documents, not tuning: jargon the code never
@@ -119,7 +130,7 @@ routing through the Hub: `/code-research`, `/deep-research`,
 `/mycel-search`, `/corpus-admin`, `/authored-work-integration`,
 `/pr-deep-review`, `/create-mycel-skill`,
 `/linear-resolve`, `/linear-organize`, `/linear-open-questions`, `/radar-stats`,
-`/arbol-chat-prepared-folder`.
+`/arbol-chat-prepared-folder`, `/colab`, `/use-colab`.
 Skills carry only *when to trigger*; the process always lives here, in Mycel.
 
 <!-- sources:
