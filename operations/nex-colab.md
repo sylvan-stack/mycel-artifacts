@@ -147,8 +147,9 @@ The full form is
 
 ### The session
 
-`session`, in every log line and in the evidence of an entry, names the tool
-and the session the agent runs in:
+`session`, in every log line, names the tool and the session the agent runs
+in. The evidence of an entry names the same two with the word `session`
+between them: `claude-code session <session id>`, `codex session <thread id>`.
 
 | The agent runs in | `session` | Where the identifier is |
 |---|---|---|
@@ -529,8 +530,10 @@ too.
   The entry's evidence keeps the form of a rise, naming first the test of the
   new level that the exchange still shows met, then the gap:
   `exchange on transactions, <tool> session <id>; test of superficial met: <what still meets it>; test of practical not met: <the gap>`,
-  and the `assessment` line's `evidence` is its part from `test of`. For
-  *ignorant*, which has no test, it is `…; test of superficial not met: <the gap>`.
+  and the `assessment` line's `evidence` is its part from `test of`. When the
+  level goes one down because the words show only that the shown level's
+  test is not met, the gap alone: `…; test of practical not met: <the gap>`;
+  so too for *ignorant*, which has no test: `…; test of superficial not met: <the gap>`.
   The owner's entry is never changed or deleted; it stays in the history, and
   the owner restates their level with showup if they disagree.
 
