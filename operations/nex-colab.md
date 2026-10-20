@@ -179,3 +179,269 @@ cd "<corpus>" && python3 ~/Artifacts/colab/tools/knowledge_map.py check
 Git: the corpus is committed and pushed only when it is a git repository of
 its own, `git -C "<corpus>" rev-parse --show-toplevel` printing `<corpus>`,
 with the identity git already has and no agent credit.
+
+## An exchange, round by round
+
+An exchange is made of *rounds*: one message of the owner's and the agent's
+reply to it. The first round's message is `/colab "<prompt>"`. A later
+message is a round when it stays on the exchange's topics: one number from
+the last list of options, an objection to the last skipped line, or a
+question or a statement about a topic the exchange has touched. A number
+that is not on the list gets one question back. Any other message ends the
+exchange, without a word said: thanks, other work, another
+`/colab "<prompt>"`, which starts a new exchange, or the session closing. An
+owner who comes back to a topic the next day starts a new exchange; the log
+ties the two by the topic's path.
+
+Two kinds of message neither end the exchange nor are rounds:
+
+- **A showup in the middle**, `/colab showup "<words>"`. Its message, its
+  question and every message that answers the question, up to the showup's
+  reply, belong to the showup: they show nothing, write no `attempt` line and
+  no skipped line, and are no evidence for the exchange's assessment. The
+  agent records it as [showup](#showup) says, then goes on with the exchange:
+  it reads the files of the topics the showup changed again, pitches what it
+  shows next at the new level, and says in one line what it now skips. What
+  it shows after the showup, in the same reply or the next, is a round. A
+  mark set on the topic being explained ends that explanation. Words that
+  name no topic, `/colab showup "advanced in this"`, refer to the topics of
+  the exchange's last `attempt` line.
+- **A request in plain words to record a level**, "note that I know this
+  well". The reply begins with the `To record it:` line, and nothing is
+  written for it.
+
+The agent cannot see a session end, so it treats every round as possibly the
+last: everything a round changed is in the map, in the log and pushed before
+its reply is given.
+
+**The first round** takes seven steps:
+
+1. [The prompt](#step-1-the-prompt): is it a Nex Colab prompt, and what is
+   its general topic?
+2. [The topics](#step-2-the-topics): the topics the prompt touches and the
+   topics the answer needs, found in the map, read, and set aside when the
+   owner is not interested in them.
+3. [The depth](#step-3-the-depth): topic by topic, what is skipped and what
+   is explained, at which level.
+4. [The reply](#step-4-the-reply): the explanation, the skipped line, and
+   the ways deeper as numbered options last.
+5. [The `attempt` line](#step-5-the-attempt-line) for what the reply shows.
+6. [The assessment](#step-6-the-assessment): from the owner's words in the
+   exchange so far, whether a level has risen or fallen, over every topic the
+   exchange has touched.
+7. [Writing the map and the log](#step-7-writing-the-map-and-the-log):
+   the files, `index`, `check`, the commit and the push.
+
+**Every later round** takes steps 3 to 7 for what its message asks. A number
+picks an option: the round explains that way, pitched at the level the option
+named. A question is answered at the owner's depth, and is the evidence step
+6 reads. An objection to the skipped line is answered by explaining what was
+skipped, or by moving the pitch up, as step 3 says. An answer that says the
+owner is done, or that is other work, ends the exchange.
+
+Nothing is written before step 7, and every `before` is the level a topic
+showed at the start of the round. Steps 4 to 6 prepare the reply; it is
+given once step 7 is done, so that its lines say what was written.
+
+### Step 1: the prompt
+
+The prompt is what the owner wants to learn, in their own words.
+
+- **A question in general**, "what is a CRDT?", "advisory locks": the topics
+  are in the words.
+- **A question about something in the current session**, "why did you use a
+  fixture in the test you just wrote?": name the general topic behind the
+  thing, test fixtures, and explain that topic at the owner's depth with the
+  thing in the session as its example. The map and the log record the
+  general topic only, in general terms: "asked why a test needs a fixture",
+  never what the test or its repository is.
+- **No general topic behind it**, "what does this project's `retry` setting
+  do?": the test is whether someone could learn it from public sources,
+  without access to a particular repository, project or product. When not,
+  it is no Nex Colab prompt: answer it as without Nex Colab, write nothing
+  to the map or the log, and begin the reply with the `Not a map topic:`
+  line. A prompt that mixes the two, "why does this project's retry loop use
+  exponential backoff?", is a Nex Colab prompt about its general topic,
+  exponential backoff.
+
+The prompt need not name a level: the map supplies it. Words that *use* a
+topic, "I took the lock inside the transaction and expected it to stay", are
+evidence that step 6 reads. Words that only *claim* a level, "I use
+transactions every day" or "I am new to this", meet no test by themselves:
+pitch the round at the level they name, say so in the skipped line, and
+write no entry for the claim alone. A claim not to know a topic is the one
+exception: it is evidence for lowering the level shown (step 6). A claim
+becomes the owner's own entry only through a showup.
+
+### Step 2: the topics
+
+Run `index`, then read `map/INDEX.md` once. Match the subjects of the prompt
+against the titles, the aliases and the paths, and decide two sets before
+writing a word of the explanation:
+
+- **The topics the prompt touches**: what the owner asks about, the subjects
+  in its words or the general topic behind the thing in the session.
+- **The topics the answer needs**: what an explanation of the touched
+  topics, at the depth it will be pitched, rests on and cannot do without. In
+  "why is my advisory lock gone after commit?", transactions, because a lock
+  gone at commit cannot be explained to someone who does not know what a
+  commit ends. A topic the explanation could mention but does not need is in
+  neither set; it may be a way deeper.
+
+Read the `topic.md` of every topic in both sets, and no other: its level,
+its entries, its gaps and its notes, which say what confused the owner
+before and which examples worked. Read the log lines that name its path, or
+one of its `former` paths, since its newest entry (step 6 says which those
+are): what was shown before is not shown again the same way.
+
+- **A topic found under another parent, or under one of its aliases**, is
+  used; it is never created a second time.
+- **A topic with no entry** is *not assessed*: unknown, never *ignorant*.
+- **A topic the map lacks** is noted. Step 7 adds it, but only when the round
+  explains or assesses it, not when it is only skipped. It goes under the
+  parent you judge right from the field the prompt belongs to and the topics
+  already there, or as a new field at the top of `map/`, with every folder on
+  the way. Prefer a shallow tree: `software-development/postgresql/advisory-locks`,
+  not a chain of folders made for one topic. The map started empty, so an
+  agent that finds nothing for a prompt is in the normal case.
+- **A topic the owner is not interested in**, marked `not-interested: true`
+  in its own file or in an ancestor's, is outside the map. `map/INDEX.md`
+  lists marked topics by path only, under `## Not interested`: before
+  matching, read the `topic.md` of each listed path in the prompt's field,
+  for its title and aliases. When the prompt touches one, begin the reply
+  with the `Not interested:` line and answer it plainly, at whatever depth
+  the question needs, as any agent would. For that topic and everything under
+  it, write no entry, gap, alias or log line, create no topic, pitch no
+  explanation, offer no way deeper and follow no related link. A needed topic
+  that is marked is used plainly and recorded nowhere. The other topics of
+  the prompt are handled as usual. The mark is set and removed on the
+  owner's word only, through showup or by hand, never on the agent's
+  judgement.
+
+### Step 3: the depth
+
+The depth is decided topic by topic, for every topic the prompt touches and
+every topic the answer needs, by the level the map shows. The rule is one
+level up: the explanation gives what the test of the next level names, and
+no more.
+
+| The map shows | The explanation gives | So that the owner can, afterwards… |
+|---|---|---|
+| *ignorant*, or no entry and nothing in the prompt's words | what the topic is for and roughly how it works, in a few sentences, with one example | explain the idea in a few sentences |
+| *superficial* | how to carry out the routine task: the steps, the common cases and the common mistakes, and where its documentation is | carry out a routine task with it alone |
+| *practical* | how it works inside, its limits and its trade-offs, the alternatives and when not to use it | explain why it behaves as it does, and say when not to use it |
+| *advanced* | how one would build it, with its trade-offs | lay out how one would build it |
+| *design* | nothing more of the topic in general; a precise question is still answered, and the way deeper is a child, a gap or a related topic, which the reply says | — |
+
+- **The pitch** rests on the level the topic shows, or on the higher level
+  that the prompt's own words meet by the tests of step 6: a prompt that
+  reasons about the inside of a topic the map has at *ignorant* is answered
+  at the depth its words show, and step 6 brings the map up in the same
+  round.
+- **A precise question**, "how does the lock table work inside?", is
+  answered at the depth it asks, whatever the level; the table pitches what
+  the answer needs around it.
+- **A touched topic with no entry**, and nothing in the prompt's words: pitch
+  it for someone who does not know what it is for, write no entry, and say
+  so in the skipped line.
+- **A needed topic** is *skipped*, used without being explained, when the map
+  has it at the level the explanation needs the owner to have in it, or
+  higher. One the map has below that level is explained too, in the fewest
+  words that let the explanation stand, pitched by the table, and offered as
+  a way deeper of its own. One with no entry, or not in the map, is skipped
+  and named in the skipped line as `not assessed`, so that the owner objects
+  when they need it. Skipping writes nothing.
+- **The notes** steer the wording: the example that worked before is reused,
+  the one that confused is not, and one the log shows was shown before is not
+  shown again.
+- **An objection** to the skipped line is answered in the next round.
+  "Explain transactions too": explain what was skipped. "I know advisory
+  locks, go on" or "I am not new to CRDTs": a claim, so go on at the level
+  the owner names; writing it into the map is the owner's showup.
+
+### Step 4: the reply
+
+The reply holds its lines in the order of
+[The lines the owner sees](#the-lines-the-owner-sees): a `To record it:`
+line, then a `Not interested:` or a `Not a map topic:` line, then the
+explanation, the skipped line, the `Map` lines of steps 6 and 7, a `Shown`
+line, one question that talks a level through, and the options last. Each
+line the table names starts with its word and is one line.
+
+**The skipped line** closes the explanation of every reply that explains a
+topic by the map, in the first round or a later one, so that the owner can
+object. It names every skipped topic with the level the map has for it, or
+as `not assessed`, and says `nothing` when nothing was skipped:
+
+```
+Skipped: transactions (practical), connection pools (not assessed).
+Skipped: nothing; pitched CRDTs as new to you, say so if not.
+Skipped: transactions (practical); pitched advisory locks at practical, as you said.
+```
+
+The second form is for a touched topic with no entry and nothing in the
+prompt's words; the third for a level the owner only claimed (step 1). The
+line is always written, also when nothing was skipped: an exchange without
+it is one that did not read the map.
+
+**The ways deeper** close the reply as a numbered list, one line each, a
+few, the most useful first, and also as a list of one when there is only one
+way, so that the owner's answer is always a number:
+
+```
+1. How the lock table works inside, and what a dropped connection does to a session-level lock (advisory locks, toward advanced)
+2. What else a commit releases, and in which order (transactions, toward advanced)
+```
+
+A line names the way, what it adds, and the topic and level it leads to. A
+way is a gap of the explained topic, a child the map shows below the pitched
+level or not assessed, the topic's own next level, a related topic the
+explanation leaned on, or a needed topic explained in a few words. No way
+leads into a not-interested topic. An option is a way the agent would
+recommend, written so that the owner can choose without reading more; not a
+quiz, and not a menu of everything. The reply that offers the options
+explains none of them, and no way is taken before the owner answers.
+
+**The way the owner picks**, by number or in words, is the next round: it is
+explained at the level the option named, with its own `attempt` line, and the
+map still rises only on evidence (step 6). A way that is a gap of the topic
+is explained under the topic's own path, with the gap named in `shown`; it
+becomes a child topic of its own, and leaves the parent's `gaps`, only when
+step 6 has a level for it on its own.
+
+## showup
+
+`/colab showup "<words>"` is the owner's own statement of their level or
+experience in a topic, at any time, also in the middle of an exchange or of
+`(use colab)` work ([CLB-2](../../colab/specs/02-showup.md)). This section
+will hold its steps in execution order, as CLB-2's "A showup from start to
+end" gives them, from the words to the reply; SYL-280 of the
+[Nex Colab Saga](../../sagas/nex-colab/saga.md) writes it. Until then the
+agent answers a showup with the one line
+`showup is not built yet; nothing recorded.`, writes nothing, and, in the
+middle of an exchange or of `(use colab)` work, goes on with it as
+[An exchange, round by round](#an-exchange-round-by-round) says of a showup
+in the middle.
+
+## The lines the owner sees
+
+A reply holds them in the order of this table, each in its form, each one
+line starting with the word given. `<topic>` is the topic's title, `<level>`
+one of the five levels.
+
+| Line | Form | When |
+|---|---|---|
+| To record it | `To record it: /colab showup "<the words>"` | first in the reply, when the owner asks in plain words to record a level; nothing is written for it |
+| Not interested | `Not interested: <topic> is marked; it is answered without the map and nothing is recorded for it; showup removes the mark.` | at the start of the reply, for a touched topic that is marked |
+| Not a map topic | `Not a map topic: <what the prompt is about>; answered without the map, nothing recorded.` | at the start of the reply, for a prompt with no general topic |
+| The explanation | free text, pitched as step 3 says | |
+| The skipped line | `Skipped: <topic> (<level>), <topic> (not assessed).` or `Skipped: nothing.`; for a touched topic with no entry and nothing in the prompt's words the period gives way to `; pitched <topic> as new to you, say so if not.`; for a level the owner only claimed, to `; pitched <topic> at <level>, as you said.` | after the explanation of every reply that explains a topic by the map |
+| Read only | `Map read only: <why>; nothing recorded. Say "update my map" to record.` | first among the `Map` lines of `(use colab)` work that only reads, once per session |
+| A change of level | `Map: <topic> <before> → <after>: <the test met, in a few words>.`; for a first entry `Map: <topic> → <level>: <the test met>.` | in the round that wrote the entry |
+| A level below the owner's own entry | `Map: <topic> <before> → <after>, re-evaluating your own entry: <the gap, in a few words>; showup restates it.` | in the round that wrote the entry |
+| A check error elsewhere | `Map check: <file>: <message>; left as it is.` | after `check`, once per exchange for one file |
+| Not pushed | `Map not pushed: <why>; the next push carries it.` | in the round whose push failed |
+| Not written | `Map not written: <why>; nothing recorded.` | once per exchange, when the corpus cannot be written |
+| Shown without a rise | `Shown in <n> exchanges since <level>: <topic>; say where you stand (/colab showup), or ask for it another way.`; for a topic with no entry `Shown in <n> exchanges, never assessed: <topic>; say where you stand (/colab showup), or ask for it another way.` | in the round that makes it the third exchange or a later one, or when the owner asks to be reminded |
+| A question that talks a level through | one question that invites the owner to reason with the topic | before the options, when the owner's words sit between two levels' tests |
+| The options | `<n>. <the way> (<topic>, toward <level>)` | last, one per way deeper |
