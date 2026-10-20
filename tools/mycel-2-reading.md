@@ -1,3 +1,6 @@
+---
+role: authored
+---
 # Reading exact indexed chunks
 
 `mycel read` returns one complete current indexed chunk: a code symbol, a
@@ -15,7 +18,7 @@ mycel read 'cellar:@index/overview#src%2Fnet'
 mycel read --id '<search-result-id>' --no-fresh
 ```
 
-Qualified addresses use the central [source resolver](source-refs.md).
+Qualified addresses use the central [source resolver](mycel-2-source-refs.md).
 Legacy literal places remain valid when unambiguous. Short method names and
 unique bare section titles are accepted. An unqualified path matching distinct
 physical files is ambiguous before its heading is selected. Freshly captured root or short-name collisions
@@ -77,9 +80,10 @@ stored chunk text or identity.
 
 `mycel info` lists this Build's command names in `commands` and advertises
 `readReply: 1`. Help identifies currently implemented handlers and read options.
-There is no separate capabilities command. Complete installed distribution,
-summary creation and Drift execution keep their own
-task requirements.
+There is no separate capabilities command. Summary creation uses `summaries`,
+and explicit Drift execution uses `classify`. Installed working-Build
+qualification and publication are owned by SYL-148; owner installation is
+owned by SYL-236.
 
 Local classification bookkeeping shares the original freshness allowance.
 It makes no Jev or reviewer calls. After successfully checked sources it updates
