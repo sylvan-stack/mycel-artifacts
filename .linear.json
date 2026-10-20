@@ -1,125 +1,125 @@
 {
-  "workspace": "https://linear.app/sylvan-stack",
+  "workspace": "https://linear.app/amorphius",
   "team": "Sylvan Stack",
   "project": {
     "name": "Mycel",
-    "url": "https://linear.app/sylvan-stack/project/mycel-01b43a09de20",
-    "id": "P-SYL-4"
+    "url": "https://linear.app/amorphius/project/mycel-6bbdbce253fb",
+    "id": "P-SYL-7"
   },
   "note": "Local files are the originals. Linear documents are copies republished from them.",
   "documents": {
     "specs/README.md": {
       "title": "Mycel · Conventions and index",
-      "id": "0447b2f3-106a-4267-bf7e-183e62a9131e",
-      "url": "https://linear.app/sylvan-stack/document/mycel-conventions-and-index-e42d493df173",
+      "id": "f635119a-a19d-49b1-ba62-a669b3da3b87",
+      "url": "https://linear.app/amorphius/document/mycel-conventions-and-index-bbd8691a945b",
       "published": "2026-10-20"
     },
     "specs/00-overview-and-legacy-map.md": {
       "title": "Mycel · 00 Overview and legacy map",
-      "id": "0fa082ac-3c21-4b33-8641-353d93887d59",
-      "url": "https://linear.app/sylvan-stack/document/mycel-00-overview-and-legacy-map-96f3680f6a35",
+      "id": "40959506-ff68-4889-a4da-d98ae581c869",
+      "url": "https://linear.app/amorphius/document/mycel-00-overview-and-legacy-map-4549eec775d4",
       "published": "2026-10-08"
     },
     "specs/01-corpora-and-ingest.md": {
       "title": "Mycel · 01 Corpora and ingest",
-      "id": "baa1ab22-466c-4e1e-a679-4517ce449445",
-      "url": "https://linear.app/sylvan-stack/document/mycel-01-corpora-and-ingest-fc032bc89d2f",
+      "id": "2bb24194-46bf-4a5f-ab82-f3f1830f67ad",
+      "url": "https://linear.app/amorphius/document/mycel-01-corpora-and-ingest-aaf2271e48b6",
       "published": "2026-10-20"
     },
     "specs/02-provenance-and-freshness.md": {
       "title": "Mycel · 02 Provenance and freshness",
-      "id": "ad542130-c47e-43e7-ac2d-4550ac4f9712",
-      "url": "https://linear.app/sylvan-stack/document/mycel-02-provenance-and-freshness-c2b606880cb9",
+      "id": "014b3ec4-a25d-4e25-9907-04cfc55f9899",
+      "url": "https://linear.app/amorphius/document/mycel-02-provenance-and-freshness-89c57929140a",
       "published": "2026-10-08"
     },
     "specs/03-embedding.md": {
       "title": "Mycel · 03 Embedding",
-      "id": "ceaf0c86-c5fb-4426-a855-445531d6933a",
-      "url": "https://linear.app/sylvan-stack/document/mycel-03-embedding-f28032e68c01",
+      "id": "a8b3bb69-cb04-4d98-b29c-a11119a7376e",
+      "url": "https://linear.app/amorphius/document/mycel-03-embedding-834366c020d1",
       "published": "2026-10-08"
     },
     "specs/04-retrieval.md": {
       "title": "Mycel · 04 Retrieval",
-      "id": "0d735e7b-74d1-40b1-a0c4-b7e8e0e01687",
-      "url": "https://linear.app/sylvan-stack/document/mycel-04-retrieval-550ede0d1ab0",
+      "id": "1574f40a-0ad1-4d35-9b10-06e963f434dd",
+      "url": "https://linear.app/amorphius/document/mycel-04-retrieval-a3ea1ada8b00",
       "published": "2026-10-08"
     },
     "specs/05-settings.md": {
       "title": "Mycel · 05 Settings",
-      "id": "132a7d51-7271-4937-a372-38a140a6e003",
-      "url": "https://linear.app/sylvan-stack/document/mycel-05-settings-fc1032d4a621",
+      "id": "b8bd1d5b-18f9-4385-8eb4-688c44401789",
+      "url": "https://linear.app/amorphius/document/mycel-05-settings-1dc89e725626",
       "published": "2026-10-19"
     },
     "specs/06-index-store.md": {
       "title": "Mycel · 06 The index store",
-      "id": "36dcf0ea-87d1-4cad-814d-d34717c1a91c",
-      "url": "https://linear.app/sylvan-stack/document/mycel-06-the-index-store-cc1f897b306a",
+      "id": "45adad5a-8edb-425c-a252-97bb2dfe3246",
+      "url": "https://linear.app/amorphius/document/mycel-06-the-index-store-05bf3e7e0125",
       "published": "2026-10-19"
     },
     "specs/07-drifts-and-verification.md": {
       "title": "Mycel · 07 Drifts and verification",
-      "id": "7d1744b1-116e-4804-9cea-a771703e90a4",
-      "url": "https://linear.app/sylvan-stack/document/mycel-07-drifts-and-verification-39876bcc25cc",
+      "id": "264f80db-3bc5-436e-88d3-7db9ffb1a805",
+      "url": "https://linear.app/amorphius/document/mycel-07-drifts-and-verification-29964d66823f",
       "published": "2026-10-19"
     },
     "specs/08-summaries.md": {
       "title": "Mycel · 08 Summaries",
-      "id": "a128044a-724e-448e-8d4c-f25aae4f4a3a",
-      "url": "https://linear.app/sylvan-stack/document/mycel-08-summaries-3357e934f660",
+      "id": "03dc797e-4831-45f8-80fa-2f3b4d98af92",
+      "url": "https://linear.app/amorphius/document/mycel-08-summaries-d6ef213b7d7f",
       "published": "2026-10-08"
     },
     "specs/09-code-overview.md": {
       "title": "Mycel · 09 The code overview",
-      "id": "127b3ab6-6896-4337-988b-ecafaf3c544d",
-      "url": "https://linear.app/sylvan-stack/document/mycel-09-the-code-overview-05a0e05094b8",
+      "id": "d20a93e3-f8ba-4771-8426-7be03944077b",
+      "url": "https://linear.app/amorphius/document/mycel-09-the-code-overview-940a7eea2a26",
       "published": "2026-10-08"
     },
     "specs/10-grep-replacement.md": {
       "title": "Mycel · 10 The grep replacement",
-      "id": "536dbcda-7869-4f8f-a10a-99a35ef3a546",
-      "url": "https://linear.app/sylvan-stack/document/mycel-10-the-grep-replacement-51b4f4fc6874",
+      "id": "6cc940b3-9d7f-4fd6-a8a7-443157f143a9",
+      "url": "https://linear.app/amorphius/document/mycel-10-the-grep-replacement-8c86d3d89a19",
       "published": "2026-10-08"
     },
     "specs/11-reading-a-chunk.md": {
       "title": "Mycel · 11 Reading a chunk",
-      "id": "1644ad7b-f14f-4776-abea-d0f4636143e7",
-      "url": "https://linear.app/sylvan-stack/document/mycel-11-reading-a-chunk-84901594464a",
+      "id": "7d586101-e2c5-433a-bfaa-5b94ff1bc882",
+      "url": "https://linear.app/amorphius/document/mycel-11-reading-a-chunk-3006878a7fc6",
       "published": "2026-10-19"
     },
     "specs/12-record-of-work.md": {
       "title": "Mycel · 12 The record of work",
-      "id": "5a803377-dc11-4e75-9b15-aed9703bd2c7",
-      "url": "https://linear.app/sylvan-stack/document/mycel-12-the-record-of-work-fc737c395ff8",
+      "id": "8a76ab88-40eb-44b1-914c-6ae82d7a718c",
+      "url": "https://linear.app/amorphius/document/mycel-12-the-record-of-work-94369b00b466",
       "published": "2026-10-08"
     },
     "specs/13-checks-and-evaluation.md": {
       "title": "Mycel · 13 Checks and the evaluation set",
-      "id": "74418644-f0c5-4946-ac41-be4adfab1e61",
-      "url": "https://linear.app/sylvan-stack/document/mycel-13-checks-and-the-evaluation-set-4397c917f0d0",
+      "id": "89c51ea6-d7c3-487d-9e0e-2b9fb5f2f3a7",
+      "url": "https://linear.app/amorphius/document/mycel-13-checks-and-the-evaluation-set-a6e1c9126683",
       "published": "2026-10-08"
     },
     "specs/14-drift-detection.md": {
       "title": "Mycel · 14 Drift detection",
-      "id": "f36289cd-bbcd-44c4-a9fb-7ee230029cac",
-      "url": "https://linear.app/sylvan-stack/document/mycel-14-drift-detection-f1b877f654eb",
+      "id": "49f66986-f068-41e1-9008-c139617a40e0",
+      "url": "https://linear.app/amorphius/document/mycel-14-drift-detection-96bcd0377a0d",
       "published": "2026-10-08"
     },
     "specs/15-distribution-and-replacement.md": {
       "title": "Mycel · 15 Distribution and replacement",
-      "id": "acb229db-3b12-4606-b8fd-7f9d91af3bac",
-      "url": "https://linear.app/sylvan-stack/document/mycel-15-distribution-and-replacement-1a2742d98305",
+      "id": "a6780a75-72c5-481a-b91f-80f47da18c8b",
+      "url": "https://linear.app/amorphius/document/mycel-15-distribution-and-replacement-c62c0c9cc447",
       "published": "2026-10-08"
     },
     "specs/16-source-addresses-and-evidence.md": {
       "title": "Mycel · 16 Source addresses and retained evidence",
-      "id": "f36cfed3-20e1-4c2f-abb3-fe7b842698a2",
-      "url": "https://linear.app/sylvan-stack/document/mycel-16-source-addresses-and-retained-evidence-264a2e5b743e",
+      "id": "495aa66e-e7f8-4261-9de9-c3ff7ba11465",
+      "url": "https://linear.app/amorphius/document/mycel-16-source-addresses-and-retained-evidence-957b793fa6e2",
       "published": "2026-10-19"
     },
     "specs/17-justification.md": {
       "title": "Mycel · 17 Justification",
-      "id": "98712b44-5675-4be6-92b4-16889f1668d9",
-      "url": "https://linear.app/sylvan-stack/document/mycel-17-justification-4c7f949fc2fb",
+      "id": "8c6f1a7f-e328-431f-b226-7937b190f49b",
+      "url": "https://linear.app/amorphius/document/mycel-17-justification-ee2e0853cc4d",
       "published": "2026-10-19"
     }
   }

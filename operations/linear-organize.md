@@ -28,7 +28,7 @@ explicit checked-empty state, scope, and check date rather than deleting it.
 
 ## Scope and authority
 
-The default workspace is [Sylvan Stack](https://linear.app/sylvan-stack), and
+The default workspace is [Sylvan Stack](https://linear.app/amorphius), and
 the default surface is the authenticated owner's personal left sidebar,
 including favorites and their folders. Honor a named workspace, project,
 folder, or different navigation surface. A project-scoped run changes that

@@ -5,7 +5,7 @@ role: authored
 
 Use this guide to go through the comments the owner has left in Linear. The
 owner reads specifications, issues and project pages in the Linear workspace
-Sylvan Stack (`https://linear.app/sylvan-stack`) and comments there, because
+Sylvan Stack (`https://linear.app/amorphius`) and comments there, because
 that is where the reading happens. The discussion of a comment does not
 happen there. A run collects every open thread, acts on each comment, and
 gives the user a list in the session: each comment with the agent's response.
@@ -184,7 +184,7 @@ The link to a comment is the link of its place followed by `#comment-` and
 the first eight characters of the id of the thread's first comment:
 
 ```text
-https://linear.app/sylvan-stack/document/<slug>#comment-1a2b3c4d
+https://linear.app/amorphius/document/<slug>#comment-1a2b3c4d
 ```
 
 Every thread named in the list is linked this way, also with `list` and in
