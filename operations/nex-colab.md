@@ -409,6 +409,142 @@ is explained under the topic's own path, with the gap named in `shown`; it
 becomes a child topic of its own, and leaves the parent's `gaps`, only when
 step 6 has a level for it on its own.
 
+### Step 5: the attempt line
+
+Every reply that shows the owner something writes one `attempt` line: the
+explanation of the first round, each way deeper the owner picked, each answer
+to a question that shows something not shown before in the exchange, and
+each skipped topic explained on the owner's objection. A reply that shows
+nothing writes none: one that only offers the options, only asks back, only
+repeats what was shown in other words, only gives the `Not interested:` or
+`Not a map topic:` line, or only answers a showup.
+
+- `topics`: the paths of the topics the reply explained, those its
+  explanation was pitched for; never the skipped ones, of which nothing was
+  shown. A gap explained is logged under its topic's path, and named in
+  `shown`.
+- `shown`: what was shown, in one or two sentences, in general terms: "the
+  two scopes of an advisory lock, and that the transaction scope ends at
+  commit", never what the owner's own program does with a lock. Never the
+  owner's reactions: the log records what the owner was shown, the map what
+  they have shown they understand.
+- `before`: each of those topics with the level it showed at the start of
+  the round; a topic without entries is left out, so `before` may be `{}`.
+- `session`: as [The session](#the-session) says.
+
+### Step 6: the assessment
+
+At the end of every round, the agent judges again every topic the exchange
+has touched so far, from everything the owner has said in the exchange so
+far, not from the last message alone: three messages may together describe
+the routine task that none of them describes alone. In the first round the
+words are the prompt's own. This is the periodic check whether a level has
+risen; it is not the command `check`, which knows nothing of levels.
+
+**By the tests, and by no other rule**, the tests of the five levels
+([CLB-0](../../colab/specs/00-the-nex-knowledge-map.md#the-five-levels)).
+Never from what the agent showed, from the number of rounds, or from how long
+the owner has used something. Words of the owner's meet a test when they
+could only come from someone who can do what the test names: they reason
+*with* the thing, not merely *about* it.
+
+| Level | Its test: the owner can… | Words that meet it | Words that do not |
+|---|---|---|---|
+| *superficial* | explain the idea in a few sentences | use the idea correctly: "so the lock went because the transaction ended, not because of the commit statement itself"; the prompt's own framing, when it shows what the topic is for | asking what it is for |
+| *practical* | carry out a routine task with it alone | describe a routine task carried out alone, name a common case or a common mistake from experience, or correct the agent on routine use | asking how to do it; choosing an option |
+| *advanced* | explain why it behaves as it does, and say when not to use it | reason about why it behaves as it does, about a limit, or about when not to use it: "a session-level lock held by a pooled connection would travel to the connection's next user, is that why the transaction scope exists?" | asking why it behaves as it does; asking for the inside |
+| *design* | lay out how one would build it, with its trade-offs | lay out how one would build it, or weigh a design choice of it against another | asking how it is built |
+
+*Ignorant* is the owner who cannot say what the topic is for.
+
+- A question that only asks for more is no proof; it is the next attempt. The
+  choice of a way deeper is no proof. Repeating the agent's words is no
+  proof, and neither are words that only restate or recombine what this
+  exchange has just shown: words meet a test when they add a case, a
+  consequence or a comparison the agent did not make.
+- Words about a topic the exchange has not touched are not assessed.
+- The level written is the highest whose test is met, whatever the level
+  before and however many rounds it took: a first prompt that reasons about
+  the inside of a topic the map has at *ignorant* meets *advanced*.
+- Each topic rests on its own words: nothing is written to a child from its
+  parent, or to a parent from its children.
+
+**What the agent reads for it**, for each topic: its entries, and the log
+lines that name its path or one of its `former` paths since its newest entry,
+of this exchange and of earlier ones. *Since its newest entry* means the lines
+whose `at` is later than the `assessment` or `statement` line that wrote that
+entry; for an entry the owner made by hand, which has no log line, the lines
+from the day after its date; for a topic with no entry, every line.
+
+**The result:**
+
+- **The level holds:** nothing is written. The log has no line for "checked
+  and held".
+- **The level rose:** a new entry goes at the top of the topic's `entries`,
+  and `level` follows it:
+
+  ```
+    - level: advanced
+      source: agent
+      date: 2026-10-21
+      evidence: "exchange on advisory locks, claude-code session <session>; test of advanced met: reasoned that a session-level lock held by a pooled connection would pass to the connection's next user"
+  ```
+
+  The evidence has the form `exchange on <topic>, <tool> session <id>; test
+  of <level> met: <what the owner said or asked, in general terms>`. One
+  `assessment` line goes to the log, with `before`, `level` and `evidence`
+  `test of <level> met: <…>`. One `Map:` line goes into the reply, so that
+  the owner sees every change to their map when it is made:
+  `Map: advisory locks superficial → advanced: you reasoned about lock scope and pooled connections.`
+  A topic with no entry that the exchange shows a level for gets its first
+  entry the same way; its `assessment` line leaves it out of `before`, and
+  the line is `Map: <topic> → <level>: <the test met>.`
+- **The level fell**, as below: written, logged and said the same way.
+
+**Lowering a level.** The owner's words about their knowledge are a starting
+value, never believed blindly, and that holds for the owner's own entries
+too.
+
+- *A gap starts it:* the owner's words in the exchange say they cannot do
+  what the shown level's test names. They say they do not know the topic, or
+  use it in a way the test rules out, such as calling a commit the end of the
+  connection while transactions stand at *practical*. Whoever wrote the
+  level, the owner or an agent, makes no difference.
+- *Not a gap:* a forgotten detail, a wrong guess, a question about an
+  unusual case, a request to explain a skipped topic, or asking for the next
+  level. Everyone at *practical* looks things up.
+- *Re-evaluated by the tests:* judge the topic again from everything the
+  owner said in the exchange, and do not lower it on one remark when the rest
+  of the exchange shows the level met. The agent may first ask one question
+  that tests the shown level, and judge after the answer.
+- *Written as a rise is:* the new level is the highest whose test the
+  exchange still shows met, or one level down when the words show only that
+  the shown level's test is not met; a new entry of the agent's at the top,
+  an `assessment` line and a `Map:` line:
+  `Map: transactions practical → superficial: you said you have not used commit yourself.`
+  When the level it replaces is the owner's own entry, the line says so:
+  `Map: transactions practical → superficial, re-evaluating your own entry: you said you have not used commit yourself; showup restates it.`
+  The owner's entry is never changed or deleted; it stays in the history, and
+  the owner restates their level with showup if they disagree.
+
+**Talking a level through.** When the owner's words sit between two levels'
+tests, the agent may close its reply, before the options, with one question
+that invites the owner to reason with the topic, such as "would a
+session-level lock survive a pooled connection?", never a quiz with one
+right answer. The owner's answer is evidence like any other; a question left
+unanswered changes nothing.
+
+**A topic shown without a rise.** When the round's `attempt` line makes a
+topic shown in a third exchange, or a later one, since its newest entry, and
+its level has not risen, the reply adds the `Shown` line and still explains
+what the round asked:
+`Shown in 3 exchanges since superficial: advisory locks; say where you stand (/colab showup), or ask for it another way.`
+Exchanges are counted by the distinct `session` of the `attempt` lines that
+name the topic since its newest entry, this round's included; the ways deeper
+picked in one exchange count once. The owner may also ask at any time,
+"remind me where I stand": the reply gives the line for the topics the owner
+names, or for the exchange's topics when they name none, also below three.
+
 ## showup
 
 `/colab showup "<words>"` is the owner's own statement of their level or
