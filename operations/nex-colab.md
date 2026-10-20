@@ -541,7 +541,8 @@ what the round asked:
 `Shown in 3 exchanges since superficial: advisory locks; say where you stand (/colab showup), or ask for it another way.`
 Exchanges are counted by the distinct `session` of the `attempt` lines that
 name the topic since its newest entry, this round's included; the ways deeper
-picked in one exchange count once. The owner may also ask at any time,
+picked in one exchange count once. Below three, the reply has no `Shown` line,
+unless the owner asks. The owner may also ask at any time,
 "remind me where I stand": the reply gives the line for the topics the owner
 names, or for the exchange's topics when they name none, also below three.
 
@@ -586,6 +587,9 @@ other's:
    in. Commit with the identity git already has and no agent credit, with
    the subject `Nex Colab: <the titles of the topics written>`: the topics
    the round wrote, or, when it wrote only log lines, the topics they name.
+   A file left out by mistake goes into a further commit with the same
+   subject; a commit is never amended and a push is never forced, because
+   another session may already have pulled it.
 5. **The push.** `git push`. When it is refused because another session
    pushed first, `git pull --no-rebase --no-edit` and push again. A
    conflict in a log file keeps both sides' lines; a conflict in
@@ -707,7 +711,10 @@ in the middle.
 
 A reply holds them in the order of this table, each in its form, each one
 line starting with the word given. `<topic>` is the topic's title, `<level>`
-one of the five levels.
+one of the five levels. A line whose *When* does not hold is left out, and the
+reply says nothing else about the map: no account of what was written,
+checked, committed or pushed, no `Shown` line below three exchanges unless the
+owner asked, and no advice about showup beyond the lines of this table.
 
 | Line | Form | When |
 |---|---|---|
@@ -744,7 +751,8 @@ one of the five levels.
   repository, a project or a product, the owner's own included.
 - Quote the map or the log outside the owner's session.
 - Commit files the round did not write, commit when git's top folder is not
-  the corpus, set an identity, or add an agent credit.
+  the corpus, set an identity, or add an agent credit; amend a commit, force
+  a push, or rewrite the corpus's history in any other way.
 
 ## Not built yet
 
