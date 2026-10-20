@@ -46,9 +46,9 @@ was imported into it with Linear's own "Linear to Linear import" (every SYL
 identifier kept; documents and projects got new ids and slugs), and the
 Euro-Office team, projects, documents and labels were removed at the owner's
 request. The old workspace `linear.app/sylvan-stack` is left as it was and is
-no longer written to. The MCP server `linear-sylvan` in `~/.claude.json` still
-authorizes that old workspace: do not use it until the owner re-authorizes it
-for amorphius or removes it.
+no longer written to. Both the MCP server `linear-sylvan` in `~/.claude.json`, re-authorized by
+the owner for amorphius on 20 October 2026, and the claude.ai Linear connector
+reach this workspace; either serves.
 
 Follow each paginated list to completion for the selected scope. Current
 `list_projects` has a maximum page size of 50; do not assume the larger limits
