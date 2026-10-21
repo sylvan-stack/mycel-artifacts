@@ -8,9 +8,11 @@ states their own level with `/colab showup "<words>"`, asks that their
 knowledge be taken into account in other work with `(use colab)`, or starts
 learn mode with `/learn`, a whole session of learning and nothing else. The agent answers at the depth the owner's
 [Nex Knowledge Map](../../arbol/GLOSSARY.md#nex-knowledge-map) says is
-missing, logs every time it shows the owner something, judges from the
-owner's own words whether a level has risen or fallen, and writes the map
-and the log, then commits and pushes them, after each reply of the owner's.
+missing, closes each reply that teaches with a short quiz, logs every time it
+shows the owner something, judges from the owner's own words and quiz answers
+whether a level has risen or fallen, lists what it changed in the map, and
+writes the map and the log, then commits and pushes them, after each reply of
+the owner's.
 [Nex Colab](../../arbol/GLOSSARY.md#nex-colab) is that exchange: the owner
 is its [H-Nex](../../arbol/GLOSSARY.md#h-nex), the agent an
 [A-Nex](../../arbol/GLOSSARY.md#a-nex).
@@ -198,8 +200,9 @@ with the identity git already has and no agent credit.
 An exchange is made of *rounds*: one message of the owner's and the agent's
 reply to it. The first round's message is `/colab "<prompt>"`. A later
 message is a round when it stays on the exchange's topics: one number from
-the last list of options, an objection to the last skipped line, or a
-question or a statement about a topic the exchange has touched. A number
+the last list of options, the answers to the last quiz, an objection to the
+last skipped line, or a question or a statement about a topic the exchange
+has touched. A number
 that is not on the list gets one question back. Any other message ends the
 exchange, without a word said: thanks, other work, another
 `/colab "<prompt>"`, which starts a new exchange, or the session closing. An
@@ -237,7 +240,8 @@ its reply is given.
 3. [The depth](#step-3-the-depth): topic by topic, what is skipped and what
    is explained, at which level.
 4. [The reply](#step-4-the-reply): the explanation, the skipped line, and
-   the ways deeper as numbered options last.
+   the three closing blocks: the quiz, the list of changes, and the ways
+   deeper as numbered options last.
 5. [The `attempt` line](#step-5-the-attempt-line) for what the reply shows.
 6. [The assessment](#step-6-the-assessment): from the owner's words in the
    exchange so far, whether a level has risen or fallen, over every topic the
@@ -249,8 +253,10 @@ its reply is given.
 picks an option: the round explains that way, pitched at the level the option
 named. A question is answered at the owner's depth, and is the evidence step
 6 reads. An objection to the skipped line is answered by explaining what was
-skipped, or by moving the pitch up, as step 3 says. An answer that says the
-owner is done, or that is other work, ends the exchange.
+skipped, or by moving the pitch up, as step 3 says. The answers to the last
+quiz, `1b 2d 3a`, alone or with a number, are marked first in the reply, and
+step 6 reads them as evidence. An answer that says the owner is done, or that
+is other work, ends the exchange.
 
 Nothing is written before step 7, and every `before` is the level a topic
 showed at the start of the round. Steps 4 to 6 prepare the reply; it is
@@ -376,11 +382,15 @@ no more.
 ### Step 4: the reply
 
 The reply holds its lines in the order of
-[The lines the owner sees](#the-lines-the-owner-sees): a `To record it:`
-line, then a `Not interested:` or a `Not a map topic:` line, then the
-explanation, the skipped line, the `Map` lines of steps 6 and 7, a `Shown`
-line, one question that talks a level through, and the options last. Each
-line the table names starts with its word and is one line.
+[The lines the owner sees](#the-lines-the-owner-sees): the marking, when the
+owner's message answered the last quiz; a `To record it:` line; a
+`Not interested:` or a `Not a map topic:` line; the explanation; the skipped
+line; a `Map check:`, `Map not pushed:` or `Map not written:` line of step 7;
+a `Shown` line; one question that talks a level through; and then the three
+blocks that close it, in this order: the quiz, the list of changes of step 6,
+and the options last. Each line the table names starts with its word and is
+one line; a block is its first line and the lines under it, with no blank
+line between them.
 
 **The skipped line** closes the explanation of every reply that explains a
 topic by the map, in the first round or a later one, so that the owner can
@@ -398,8 +408,59 @@ prompt's words; the third for a level the owner only claimed (step 1). The
 line is always written, also when nothing was skipped: an exchange without
 it is one that did not read the map.
 
-**The ways deeper** close the reply as a numbered list, one line each, a
-few, the most useful first, and also as a list of one when there is only one
+**The quiz** closes every reply that shows the owner something, the reply
+that writes an `attempt` line (step 5), after the skipped line, a `Shown`
+line and a question that talks a level through, and before the list of
+changes and the options. It assesses what the owner understood of what this
+reply showed:
+
+- **2 to 10 questions**, about one for each idea the reply showed, and at
+  least two on each topic it explained, as far as ten allow: two or three
+  after a short explanation, more after a long one over several topics.
+- **A case the reply did not show.** Each question asks the owner to apply
+  what the reply showed to a new case, a consequence or a comparison the
+  reply did not make; never to repeat one of its sentences. Write it for the
+  test of the level the reply pitched its topic toward (step 3): after an
+  explanation of the routine task, a question on what to do in a case the
+  reply did not give, the test of *practical*.
+- **Four options, one right.** Options of a few words, plausible to someone
+  who has not understood, the common mistakes among them; the right one's
+  letter changes from question to question. A topic at *design* gets
+  questions too, though they raise nothing.
+
+The quiz is one block: its first line, word for word, then one line per
+question, numbered from 1, with its four options on the same line:
+
+```
+Quiz: answer as 1b 2d 3a, or skip it.
+Q1. A report job takes a lock, runs three queries in three transactions and must hold the lock throughout. Which scope does it need? a) transaction-level b) session-level c) either, they behave alike d) none, a commit keeps every lock
+Q2. A pooled connection returns to the pool while it still holds a session-level lock. What happens to the lock? a) it is released on return b) it is released at the next commit c) it stays with the connection d) the pool raises an error
+```
+
+The owner answers in their next message, `1b 2c`, alone or with a number
+that picks a way deeper (`1b 2c, then 1`), or not at all: an unanswered quiz
+changes nothing. Only the last quiz is answered; an earlier one lapses when a
+later reply gives a new one. No other reply holds a quiz: not one that shows
+nothing, such as a `Not interested:` or `Not a map topic:` answer or a reply
+that only marks a quiz, not `(use colab)` work and not a showup's reply.
+
+**The marking** opens the reply to a message that answers the last quiz,
+before every other line: its first line, then one line per question of that
+quiz, in its order:
+
+```
+Quiz answers: 1 of 2 right.
+- 1b: right.
+- 2a: wrong; c) it stays with the connection: a session-level lock lasts as long as the session, and the pool keeps the session open.
+```
+
+A question the owner left out is `- <n>: not answered.` The marking shows
+nothing new, so a reply that only marks writes no `attempt` line and gives no
+quiz; it ends, as the reply the quiz closed did, with the ways deeper, which
+may offer the part a wrong answer missed. Step 6 reads the answers.
+
+**The ways deeper** close the reply, after the quiz and the list of changes,
+as a numbered list, one line each, a few, the most useful first, and also as a list of one when there is only one
 way, so that the owner's answer is always a number:
 
 ```
@@ -431,8 +492,8 @@ explanation of the first round, each way deeper the owner picked, each answer
 to a question that shows something not shown before in the exchange, and
 each skipped topic explained on the owner's objection. A reply that shows
 nothing writes none: one that only offers the options, only asks back, only
-repeats what was shown in other words, only gives the `Not interested:` or
-`Not a map topic:` line, or only answers a showup.
+repeats what was shown in other words, only marks a quiz, only gives the
+`Not interested:` or `Not a map topic:` line, or only answers a showup.
 
 - `topics`: the paths of the topics the reply explained, those its
   explanation was pitched for; never the skipped ones, of which nothing was
@@ -477,6 +538,14 @@ could only come from someone who can do what the test names: they reason
   proof, and neither are words that only restate or recombine what this
   exchange has just shown: words meet a test when they add a case, a
   consequence or a comparison the agent did not make.
+- **The quiz's answers** are the one place where choosing among options
+  the agent wrote is proof: when the owner answers right every question of
+  the last quiz on a topic, and they are at least two, the test of the level
+  those questions were written for is met. Fewer right answers meet no test,
+  since one right pick in four is a guess; a question not answered counts as
+  not right. A wrong answer is a wrong guess: it lowers nothing. The
+  evidence names the quiz: `test of practical met: answered right the 3 quiz
+  questions on <what they asked, in general terms>`.
 - Words about a topic the exchange has not touched are not assessed.
 - The level written is the highest whose test is met, whatever the level
   before and however many rounds it took: a first prompt that reasons about
@@ -508,13 +577,32 @@ from the day after its date; for a topic with no entry, every line.
   The evidence has the form `exchange on <topic>, <tool> session <id>; test
   of <level> met: <what the owner said or asked, in general terms>`. One
   `assessment` line goes to the log, with `before`, `level` and `evidence`
-  `test of <level> met: <…>`. One `Map:` line goes into the reply, so that
-  the owner sees every change to their map when it is made:
-  `Map: advisory locks superficial → advanced: you reasoned about lock scope and pooled connections.`
+  `test of <level> met: <…>`. One line goes into the reply's list of changes,
+  so that the owner sees every change to their map when it is made:
+  `- Advisory locks: superficial → advanced: you reasoned about lock scope and pooled connections.`
   A topic with no entry that the exchange shows a level for gets its first
   entry the same way; its `assessment` line leaves it out of `before`, and
-  the line is `Map: <topic> → <level>: <the test met>.`
+  its line names `not assessed` as the old level:
+  `- Advisory locks: not assessed → superficial: <the test met>.`
 - **The level fell**, as below: written, logged and said the same way.
+
+**The list of changes** says, in the reply, what the round changed in the
+map: after the quiz and before the options, the line `Map changes:` and one
+line for each topic whose level the round changed and for each topic it
+added to the map, the folders on the way included:
+
+```
+Map changes:
+- Advisory locks: superficial → practical: answered right the 3 quiz questions on choosing a lock's scope.
+- Vector clocks: new topic → not assessed: added for your question on ordering edits.
+```
+
+The old level is `not assessed` for a first entry and `new topic` for a
+topic the round added; a topic added without an entry ends at
+`not assessed`, with why it was added. Gaps, aliases, related links and
+notes change no level and no topic, and are not listed. A round that changed
+nothing has no list. In `(use colab)` work each change is its one-line
+`Map:` line instead, and there is no list.
 
 **Lowering a level.** The owner's words about their knowledge are a starting
 value, never believed blindly, and that holds for the owner's own entries
@@ -535,10 +623,10 @@ too.
 - *Written as a rise is:* the new level is the highest whose test the
   exchange still shows met, or one level down when the words show only that
   the shown level's test is not met; a new entry of the agent's at the top,
-  an `assessment` line and a `Map:` line:
-  `Map: transactions practical → superficial: you said you have not used commit yourself.`
+  an `assessment` line and a line in the list of changes:
+  `- Transactions: practical → superficial: you said you have not used commit yourself.`
   When the level it replaces is the owner's own entry, the line says so:
-  `Map: transactions practical → superficial, re-evaluating your own entry: you said you have not used commit yourself; showup restates it.`
+  `- Transactions: practical → superficial, re-evaluating your own entry: you said you have not used commit yourself; showup restates it.`
   The entry's evidence keeps the form of a rise, naming first the test of the
   new level that the exchange still shows met, then the gap:
   `exchange on transactions, <tool> session <id>; test of superficial met: <what still meets it>; test of practical not met: <the gap>`,
@@ -550,11 +638,11 @@ too.
   the owner restates their level with showup if they disagree.
 
 **Talking a level through.** When the owner's words sit between two levels'
-tests, the agent may close its reply, before the options, with one question
-that invites the owner to reason with the topic, such as "would a
-session-level lock survive a pooled connection?", never a quiz with one
-right answer. The owner's answer is evidence like any other; a question left
-unanswered changes nothing.
+tests, the agent may close its reply, before the quiz, with one open question
+that invites the owner to reason with the topic in their own words, such as
+"would a session-level lock survive a pooled connection?"; it offers no
+options, which are the quiz's. The owner's answer is evidence like any other;
+a question left unanswered changes nothing.
 
 **A topic shown without a rise.** When the round's `attempt` line makes a
 topic shown in a third exchange, or a later one, since its newest entry, and
@@ -695,8 +783,10 @@ work is explained, never what the work is.
    each reply that explains something writes its `attempt` line (step 5),
    the assessment runs after each reply of the owner's (step 6), and the
    writes, the commit and the push follow step 7, with the lines of
-   [The lines the owner sees](#the-lines-the-owner-sees). Two things make it
-   only read:
+   [The lines the owner sees](#the-lines-the-owner-sees): each change of
+   level is its one-line `Map:` line, and such work gives no quiz, no
+   marking and no list of changes, which close the replies of an exchange and
+   of learn mode only. Two things make it only read:
    - *The owner says so.* Words in the message such as
      `(use colab, read only)` or "only read my map" make the work read only;
      words such as "update my map" make it write. The owner's word overrides
@@ -932,7 +1022,8 @@ named in the reply and left. A showup that changed nothing commits nothing.
 ### showup step 8: the reply
 
 The reply says exactly what went into the map, and nothing else: it explains
-nothing of the topic and offers no teaching or way deeper.
+nothing of the topic and offers no teaching, way deeper, quiz or list of
+changes; its lines below are the record.
 
 ```
 Recorded on 21 October 2026:
@@ -966,7 +1057,8 @@ the exchange's assessment. Then go on with the exchange: read again the files
 of the topics the showup changed, pitch what you show next at the new level,
 and close it with the skipped line, which says what you now skip. What you
 show after the showup, in the same reply or the next, is a round, with its
-`attempt` line and its own commit. A mark set on the topic being explained
+`attempt` line and its own commit, and closes with the quiz, the list of
+changes and the ways deeper. A mark set on the topic being explained
 ends that explanation. In `(use colab)` work the same holds, and words that
 name no topic refer to the work's last `attempt` line, or to the brief when
 the work only reads.
@@ -995,7 +1087,9 @@ to 7 above, with four differences: it lasts the whole session; it does no
 other work, also when asked; each reply gives one piece to learn; and the
 options at its end are ways to go on learning in any direction, not only
 deeper. There is no study plan: the agent gives a piece, offers ways on, and
-reads from the owner's replies what they have learned, as an exchange does
+reads from the owner's replies and quiz answers what they have learned, as an
+exchange does, and each reply that teaches closes as an exchange's does, with
+the quiz, the list of changes and the options
 ([CLB-3](../../colab/specs/03-learn.md)).
 
 ### What the agent may do in learn mode
@@ -1049,7 +1143,7 @@ log line or commit subject. A goal with no general topic behind it gets the
 `What would you like to learn? Or go on with:` followed by the options: the
 topics those lines name, the most recent first, each as an option in the
 form of step 4, pitched one level above the level the map shows for it. The
-reply teaches nothing and writes nothing; the owner's answer, a number or
+reply teaches nothing, writes nothing and holds no quiz; the owner's answer, a number or
 words, is the first round. With no `attempt` line in the log, the line stands
 alone, without options.
 
@@ -1067,7 +1161,8 @@ agent taught or asked, is a round: steps 2 to 7 of an exchange. What changes:
   exchanges by session, as step 6 says.
 - **Nothing ends it but the owner's word.** A message off the topics of the
   last round, on any general topic, is a round too, and so are a number from
-  the last options, an objection to the skipped line, a request for code a
+  the last options, the answers to the last quiz, an objection to the skipped
+  line, a request for code a
   reply can show, `/colab "<prompt>"` and `/colab showup "<words>"`. Only
   what [Leaving](#learn-mode-step-4-leaving) says ends the mode.
 - **One piece per reply.** The reply gives one piece to learn, not all that
@@ -1076,7 +1171,14 @@ agent taught or asked, is a round: steps 2 to 7 of an exchange. What changes:
   level the map shows, by the table. A topic not assessed is pitched as new
   to the owner, with the skipped line saying so. The rest of the topic is
   among the ways on.
-- **The ways on.** The reply ends with options, as step 4 says, in its form,
+- **The quiz and the list of changes** close every reply that teaches, as
+  step 4 and step 6 say: the quiz on the piece just given, two to four
+  questions for one piece as a rule, then the list when the round changed the
+  map. The answers to the quiz are a round: the next reply marks them first,
+  after only a `Learn mode is on:` line, and a reply that only marks ends
+  with the options.
+- **The ways on.** The reply ends with options, after the quiz and the list of
+  changes, as step 4 says, in its form,
   `<n>. <the way> (<topic>, toward <level>)`, a few, the most useful first,
   none into a marked topic, and none taken before the owner answers. They
   are the ways to go on learning, not only the ways deeper: the next piece of
@@ -1089,10 +1191,9 @@ agent taught or asked, is a round: steps 2 to 7 of an exchange. What changes:
   step 7 says, also in a long session: the rule of `(use colab)` work that
   only reads in a long session does not apply.
 
-The question that talks a level through may close a reply, before the
-options, as step 6 allows. Ask no practice question with a model answer, run
-no mock interview and ask no question with one right answer: the owner
-decided that learn mode has none.
+The question that talks a level through may stand before the quiz, as step
+6 allows. Besides the quiz, ask no practice question with a model answer and
+run no mock interview: the owner decided that learn mode has none.
 
 ### Learn mode step 3: a request for other work
 
@@ -1108,8 +1209,11 @@ Learn mode is on: <the work asked, in a few words> is not done here; say "leave 
 ```
 
 followed by the options to go on learning, the general topic behind the
-request among them when it has one. It shows nothing, writes nothing and
-commits nothing. A request a reply can satisfy is learning, not work: "show
+request among them when it has one. It shows nothing, writes nothing,
+commits nothing, and holds no quiz and no list of changes. When the same
+message also answers the last quiz, the marking follows the line, the
+answers are assessed and written as in any round, and the list of changes
+follows the marking when they changed the map. A request a reply can satisfy is learning, not work: "show
 me in code how a consumer commits its position" is answered with the code in
 the reply.
 
@@ -1123,7 +1227,8 @@ is all for today, end learn mode". The reply is the line
 Learn mode ended; /learn starts it again.
 ```
 
-and nothing more. When the same message also asks for work, "leave learn
+and nothing more: answers to the last quiz in the same message are not
+marked and change nothing. When the same message also asks for work, "leave learn
 mode and fix the failing test", the reply begins with that line, and the
 rest of the message is answered as it would be without learn mode. The mode
 also ends when the session closes.
@@ -1139,45 +1244,51 @@ also ends when the session closes.
 - Read a repository or a project's files that the owner did not name or
   paste to study.
 - Do other work, or end the mode, on a request for work alone.
-- Ask a practice question with a model answer, run a mock interview, or ask
-  a question with one right answer.
+- Ask a practice question with a model answer or run a mock interview; the
+  quiz of step 4 is the one set of questions.
 - Write the goal, or any employer, product or repository it names, into the
   map, the log or a commit subject.
 
 ## The lines the owner sees
 
-A reply holds them in the order of this table, each in its form, each one
-line starting with the word given. `<topic>` is the topic's title, `<level>`
-one of the five levels. The forms are exact: only the parts in `<…>` are
-filled in, and nothing is added to a line, so `Skipped:` names topics and
-levels and nothing else. A line whose *When* does not hold is left out: a
-`Map:` line is written only for an entry the round wrote, and when no level
-changed there is none. The reply says nothing else about the map: no account
-of what was written, checked, committed or pushed, no `Shown` line below three
-exchanges unless the owner asked, no sentence about a line that is left out,
-such as why there is no `Shown` line, and no advice about showup beyond the
-lines of this table. A length the owner asks for, "in two sentences", is the
-length of the explanation; the lines of this table come on top of it.
+A reply holds them in the order of this table, each in its form, each line
+starting with the word given; a block is its first line and the lines under
+it, with no blank line between them. `<topic>` is the topic's title,
+`<level>` one of the five levels. The forms are exact: only the parts in
+`<…>` are filled in, and nothing is added to a line, so `Skipped:` names
+topics and levels and nothing else. A line whose *When* does not hold is left
+out: the list of changes, or a `Map:` line in `(use colab)` work, is written
+only for a change the round made, and when nothing changed there is none. The
+reply says nothing else about the map: no account of what was written,
+checked, committed or pushed beyond the list of changes, no `Shown` line below
+three exchanges unless the owner asked, no sentence about a line that is left
+out, such as why there is no `Shown` line or no quiz, and no advice about
+showup beyond the lines of this table. A length the owner asks for, "in two
+sentences", is the length of the explanation; the lines of this table come on
+top of it.
 
 | Line | Form | When |
 |---|---|---|
-| To record it | `To record it: /colab showup "<the words>"` | first in the reply, when the owner asks in plain words to record a level; nothing is written for it |
+| Learn mode ended | `Learn mode ended; /learn starts it again.` | the whole reply to the owner's word to leave learn mode, or first when the message also asks for work |
+| Learn mode, other work | `Learn mode is on: <the work asked, in a few words> is not done here; say "leave learn mode" to end it.` | first in the reply to a request for other work in learn mode, followed by the options |
+| Learn mode, what to learn | `What would you like to learn? Or go on with:` followed by the options | the reply to `/learn` alone |
+| The marking | `Quiz answers: <right> of <questions> right.`, then one line per question of the last quiz, in its order: `- <n><letter>: right.`, `- <n><letter>: wrong; <letter>) <the right option>: <why, in a few words>.` or `- <n>: not answered.` | first in the reply to a message that answers the last quiz, after only a learn mode line |
+| To record it | `To record it: /colab showup "<the words>"` | when the owner asks in plain words to record a level; nothing is written for it |
 | Not interested | `Not interested: <topic> is marked; it is answered without the map and nothing is recorded for it; showup removes the mark.` | at the start of the reply, for a touched topic that is marked |
 | Not a map topic | `Not a map topic: <what the prompt is about>; answered without the map, nothing recorded.` | at the start of the reply, for a prompt with no general topic |
 | The explanation | free text, pitched as step 3 says | |
 | The skipped line | `Skipped: <topic> (<level>), <topic> (not assessed).` or `Skipped: nothing.`; for a touched topic with no entry and nothing in the prompt's words the period gives way to `; pitched <topic> as new to you, say so if not.`; for a level the owner only claimed, to `; pitched <topic> at <level>, as you said.` | after the explanation of every reply that explains a topic by the map |
 | Read only | `Map read only: <why>; nothing recorded. Say "update my map" to record.` | first among the `Map` lines of `(use colab)` work that only reads, once per session |
-| A change of level | `Map: <topic> <before> → <after>: <the test met, in a few words>.`; for a first entry `Map: <topic> → <level>: <the test met>.` | in the round that wrote the entry |
-| A level below the owner's own entry | `Map: <topic> <before> → <after>, re-evaluating your own entry: <the gap, in a few words>; showup restates it.` | in the round that wrote the entry |
+| A change of level, in `(use colab)` work | `Map: <topic> <before> → <after>: <the test met, in a few words>.`; for a first entry `Map: <topic> → <level>: <the test met>.` | in the round of `(use colab)` work that wrote the entry |
+| A level below the owner's own entry, in `(use colab)` work | `Map: <topic> <before> → <after>, re-evaluating your own entry: <the gap, in a few words>; showup restates it.` | in the round of `(use colab)` work that wrote the entry |
 | A check error elsewhere | `Map check: <file>: <message>; left as it is.` | after `check`, once per exchange for one file |
 | Not pushed | `Map not pushed: <why>; the next push carries it.` | in the round whose push failed |
 | Not written | `Map not written: <why>; nothing recorded.` | once per exchange, when the corpus cannot be written |
 | Shown without a rise | `Shown in <n> exchanges since <level>: <topic>; say where you stand (/colab showup), or ask for it another way.`; for a topic with no entry `Shown in <n> exchanges, never assessed: <topic>; say where you stand (/colab showup), or ask for it another way.` | in the round that makes it the third exchange or a later one, or when the owner asks to be reminded |
-| A question that talks a level through | one question that invites the owner to reason with the topic | before the options, when the owner's words sit between two levels' tests |
+| A question that talks a level through | one open question that invites the owner to reason with the topic | before the quiz, when the owner's words sit between two levels' tests |
+| The quiz | `Quiz: answer as 1b 2d 3a, or skip it.`, then one line per question, numbered from 1: `Q<n>. <the question> a) <option> b) <option> c) <option> d) <option>` | in every reply of an exchange or of learn mode that writes an `attempt` line, 2 to 10 questions |
+| The list of changes | `Map changes:`, then one line per topic: `- <topic>: <before> → <after>: <the test met, in a few words>.`, `<before>` being `not assessed` for a first entry and `new topic` for a topic the round added; `- <topic>: <before> → <after>, re-evaluating your own entry: <the gap, in a few words>; showup restates it.` when it replaces the owner's own entry; `- <topic>: new topic → not assessed: <why it was added, in a few words>.` for a topic added without an entry | after the quiz, in a round of an exchange or of learn mode that changed a level or added a topic |
 | The options | `<n>. <the way> (<topic>, toward <level>)` | last, one per way deeper; in learn mode one per way to go on learning |
-| Learn mode, what to learn | `What would you like to learn? Or go on with:` followed by the options | the reply to `/learn` alone |
-| Learn mode, other work | `Learn mode is on: <the work asked, in a few words> is not done here; say "leave learn mode" to end it.` | first in the reply to a request for other work in learn mode, followed by the options |
-| Learn mode ended | `Learn mode ended; /learn starts it again.` | first in the reply to the owner's word to leave learn mode |
 
 ## What the agent never does
 
@@ -1193,6 +1304,9 @@ length of the explanation; the lines of this table come on top of it.
 - Set or remove a not-interested mark on its own judgement, or write anything
   for a marked topic or under it.
 - Take a way deeper the owner did not pick.
+- Raise a level on a quiz unless every question on the topic was answered
+  right, at least two; lower one for a wrong answer; or give a quiz, a
+  marking or a list of changes in a showup's reply or in `(use colab)` work.
 - Write a topic, a note, an evidence, a `shown` or a `reason` that names a
   repository, a project or a product, the owner's own included.
 - Quote the map or the log outside the owner's session.
