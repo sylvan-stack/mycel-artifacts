@@ -98,7 +98,9 @@ One page to (re)load the whole mental model. Each section is two sentences of
   reply; with `(use colab)` the same map pitches the explanations of any
   other work. With `/colab showup "<words>"` the owner states their own level,
   which goes into the map as their entry once every choice the words leave is
-  settled.
+  settled. With `/learn` a whole session becomes learn mode: one piece per
+  reply, options to go on in any direction, the map kept current, and no
+  other work until the owner leaves it.
 
 ## How it compounds
 
@@ -132,7 +134,7 @@ routing through the Hub: `/code-research`, `/deep-research`,
 `/mycel-search`, `/corpus-admin`, `/authored-work-integration`,
 `/pr-deep-review`, `/create-mycel-skill`,
 `/linear-resolve`, `/linear-organize`, `/linear-open-questions`, `/radar-stats`,
-`/arbol-chat-prepared-folder`, `/colab`, `/use-colab`.
+`/arbol-chat-prepared-folder`, `/colab`, `/use-colab`, `/learn`.
 Skills carry only *when to trigger*; the process always lives here, in Mycel.
 
 <!-- sources:
