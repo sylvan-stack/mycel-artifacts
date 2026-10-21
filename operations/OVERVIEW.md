@@ -54,7 +54,7 @@ One page to (re)load the whole mental model. Each section is two sentences of
 
 - **[Complete Linear Tasks](linear-completion.md)** — record each completed
   task's ID and durable hand-over before deleting its Linear issue, instead
-  of setting it to Done. The private completion artifact keeps prerequisite
+  of setting it to Done. Private weekly files of at most 100 tasks keep prerequisite
   and progress checks working after the issue is removed.
 
 - **[Organize Linear Navigation](linear-organize.md)** — a prominent

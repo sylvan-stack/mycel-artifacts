@@ -51,7 +51,7 @@ comments ([Resolve Linear Comments](linear-resolve.md)).
 | Saga | The file `saga.md` in its folder `~/Artifacts/sagas/<saga>/`, the documents beside it, and a Linear project of the same name in the Linear workspace amorphius | the files: `saga.md` holds the recommended order of its Arcs, the progress of each Arc, what it waits for in other Sagas and what they wait for in it, and what each of its documents holds; `rules.md` the rules of its work; further documents what one task needs, such as its known gaps |
 | Arc | The file `arc.md` in its own folder `~/Artifacts/sagas/<saga>/<arc>/`, and a parent issue titled `<Name> Arc` in the Saga's Linear project | the file: its goal, its territory, the recommended order of its Beats, and its progress |
 | Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and its issue while unfinished | the file: what it must achieve, its plan, hand-over and territory. Linear: its live unfinished status and discussion. Record prerequisite IDs in the file before deleting their completed issues |
-| Completed tasks | `~/Artifacts/sagas/completed-linear-tasks.md` | the completed IDs, their durable local records, and whether each issue's removal was confirmed; a completed issue is deleted instead of set to Done |
+| Completed tasks | Weekly files under `~/Artifacts/sagas/completed-linear-tasks/`, linked by `completed-linear-tasks.md` | the completed IDs, their durable local records, and whether each issue's removal was confirmed; a completed issue is deleted instead of set to Done |
 | Repository of a Beat | A label of the label group `Repository` | — |
 | Hold | One file per held Beat, and one per Arbol chat that booked an Environment, in `~/.sagas/holds/` on this Mac | who works on a Beat right now, which chat works in which Environment |
 | A Beat's code | The branch `beat/<Beat>` in each repository its territory touches, worked in an Environment and merged into `main` as one merge commit | exactly what the Beat changed in code, whichever tool, session or kind of edit made the change |
@@ -112,9 +112,10 @@ These files are touched by almost every Beat. Any Beat may **add** a line or
 an entry to them without holding them:
 
 - `~/Artifacts/arbol/GLOSSARY.md`;
-- `~/Artifacts/sagas/completed-linear-tasks.md`: add a completion row and update
-  that task's removal state as [Complete Linear Tasks](linear-completion.md)
-  says, preserving every other task's record;
+- the weekly files under `~/Artifacts/sagas/completed-linear-tasks/`: add a
+  completion row and update that task's removal state, adding a link to a new
+  part in `completed-linear-tasks.md` when needed, as
+  [Complete Linear Tasks](linear-completion.md) says; preserve every other task's record;
 - the `INDEX.md` and `README.md` tables of every corpus;
 - the Linear page "Specifications";
 - the Source Ref comments (`<!-- sources: … -->`) at the end of a

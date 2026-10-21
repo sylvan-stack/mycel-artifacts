@@ -70,8 +70,9 @@ serves. So a count of them says nothing about work on the Sagas.
 
 1. **Resolve scope.** Match the optional Saga parameter or named Saga as above.
    Use its folder name for the counter's `--saga` option.
-2. **Statuses from the completion artifact and Linear.** Read
-   `~/Artifacts/sagas/completed-linear-tasks.md` and seed the temporary status
+2. **Statuses from the completion archive and Linear.** Use the index
+   `~/Artifacts/sagas/completed-linear-tasks.md` to locate every weekly file
+   under `~/Artifacts/sagas/completed-linear-tasks/`, and seed the temporary status
    object with `Done` for completed IDs belonging to the selected Saga's files
    and current workspace. Removed Arc and Beat issues stay in the file-based
    scope; skip querying a parent whose removal is recorded. For every surviving Arc issue in scope that
@@ -81,7 +82,7 @@ serves. So a count of them says nothing about work on the Sagas.
    fields `id` and `status`). Write them as one JSON object of identifier to
    status, such as `{"SYL-170": "Done"}`, to that object in a temporary file
    outside the corpus. Merge live statuses, preserving completed IDs that no
-   longer appear in Linear. Reconcile a live reopened issue against its
+   longer appear in Linear; do not inspect only the newest week. Reconcile a live reopened issue against its
    completion record before counting it as Done. If Linear cannot be reached,
    use the completion records and fully ticked plans, and say that other live
    statuses could not be collected.

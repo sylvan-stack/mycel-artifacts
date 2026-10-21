@@ -181,7 +181,8 @@ These hold for every agent on this Mac, whatever the task and the tool.
 - **Linear.** Every comment an agent posts begins with `**Agent:**`. The
   workspace, how it is reached and what the connector cannot do are in the
   [Linear runbook](tools/linear.md). On task completion, preserve its ID in
-  `~/Artifacts/sagas/completed-linear-tasks.md`, then delete the issue instead
+  `~/Artifacts/sagas/completed-linear-tasks/` (weekly files, at most 100 tasks
+  each), then delete the issue instead
   of setting it to Done; follow [Complete Linear Tasks](operations/linear-completion.md).
 
 **How this file reaches every agent.** Claude Code imports it from
