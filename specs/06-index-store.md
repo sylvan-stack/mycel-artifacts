@@ -216,7 +216,7 @@ Everything of version 1 is removed: its ten tables in Arbol 1's database, its tw
 | MYC-6.21 | hold requirement and decision entities as chunks of kind `req` and `dec` in store format 3, bring a format 2 store forward in one step, report the format in `mycel info`, and never delete an entity row in collection | New | store |
 
 | MYC-6.22 <!-- 92bc6b25-6f4d-404d-a139-9e0e5bf9fcb2 --> | reserve passes per configured clone location, allow capture on two clones of one repository concurrently, guard shared identity and evidence publication, and exclude repository removal while any location operation is live | New | store |
-| MYC-6.23 <!-- b911eee1-ec41-46e1-886e-e81db83057e3 --> | keep stated Origin Links as unique authored Index Store content, regenerate recovered links from their inputs, keep chat content in its owning database, and leave the shared local PostgreSQL backup to the owner | New | store |
+| MYC-6.23 <!-- b911eee1-ec41-46e1-886e-e81db83057e3 --> | persist stated Origin Links in the Index Store without writing a copy into source files or another product database, and provide no backup command because the owner backs up the shared local PostgreSQL | New | store |
 
 ## Interface
 
