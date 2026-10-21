@@ -1145,7 +1145,10 @@ From `/learn` until the owner says to leave the mode, and only this:
 - **Write** files only under the corpus's `map/` and `log/`, as step 7 does,
   and git's own files of the corpus. No file anywhere else: no code written
   to a file, no project created, nothing changed in the folder the session
-  started in or in any repository.
+  started in or in any repository. A topic's file is written with the CLI's
+  own tool for writing a file, Write or Edit in Claude Code, apply_patch in
+  Codex, never with a shell command or a script such as `cat > <file>` or
+  `python3 -`; only the log is appended in the shell, as step 7 shows.
 - **Run** only the commands this guide gives for the corpus: finding the
   corpus folder, `date -u`, appending a log line, `knowledge_map.py index`
   and `check`, and `git` on the corpus (`status`, `add`, `commit`, `pull`,
