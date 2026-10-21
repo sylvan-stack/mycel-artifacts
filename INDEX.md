@@ -155,6 +155,8 @@ What must happen, in Mycel vocabulary — the invariant behind every invocation 
 
 ### `tools/` — technical manuals for the client-agnostic CLIs
 
+- [`mycel-2-origins.md`](./tools/mycel-2-origins.md) — atomic stated Origin Links and verification, JSON-lines batches, Origin Coverage, clone changes and reasoned requirement marks.
+
 - [`mycel-2-drifts.md`](./tools/mycel-2-drifts.md) — internal exact-pair work, categorical results, answered-reason closure and retained evidence; public classification and reporting remain pending.
 - [`mycel-2-classification.md`](./tools/mycel-2-classification.md) — canonical complete decision evidence, immutable reviewer command identity, quiet-period observations and fresh call/application/cache guards; reviewer execution and public classification remain pending.
 - [`mycel-2-jev.md`](./tools/mycel-2-jev.md) — one bounded pinned-model Jev attempt, exact confidence validation and complete independent-review handoff; public orchestration and live qualification remain pending.
