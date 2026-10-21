@@ -381,10 +381,9 @@ no more.
 
 ### Step 4: the reply
 
-The reply begins with the marking or with the explanation itself: no
-sentence before it, or anywhere in it, says what the round wrote, logged or
-pushed, since the list of changes says what changed. The reply holds its
-lines in the order of
+No sentence of the reply, at its start or anywhere else, says what the
+round wrote, logged or pushed: the list of changes says what changed. The
+reply holds its lines in the order of
 [The lines the owner sees](#the-lines-the-owner-sees): the marking, when the
 owner's message answered the last quiz; a `To record it:` line; a
 `Not interested:` or a `Not a map topic:` line; the explanation; the skipped
