@@ -44,6 +44,10 @@ starts on its two forms only, the first word `showup` choosing the second;
 the skill `use-colab` starts on the phrase and on its own name only. Both
 hand this guide the whole message.
 
+Every reply speaks to the owner about their topic or their work, in the forms
+this guide gives. It never names, quotes or links this guide, a skill or a
+file of the corpus to justify what it does or does not do.
+
 ## The corpus and its files
 
 The corpus is the folder that the variable `COLAB_CORPUS` names when it is
@@ -748,7 +752,8 @@ writing to any topic, read its own file and its ancestors' for the mark.
 - **An existing topic** is used, also under another of its names: "Postgres"
   finds the topic titled "PostgreSQL" through its alias. A name the owner uses
   that the topic's title and aliases lack, compared without regard to case,
-  is added to its `aliases`.
+  is added to its `aliases`: "Go generics" for a topic titled "Generics in
+  Go" is such a name.
 - **A new topic** goes under the parent the words' own nesting names,
   "the actors in Swift concurrency", or under the one you judge right, with a
   `topic.md` holding only `title` for every folder on the way. A new field at
@@ -824,7 +829,8 @@ words name a particular product and you see a general topic behind them;
 "interested after all" meets a mark on an ancestor; or words that name no
 topic meet an `attempt` line with several. Ask nothing the words have settled,
 and nothing about a topic the words do not name. The question is the whole
-reply, one message, every choice numbered on one line:
+reply, one message that begins with `Before I write:`, with nothing before
+it, and every choice numbered on one line:
 
 ```
 Before I write:
