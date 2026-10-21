@@ -833,9 +833,11 @@ Before I write:
 Answer 1 by number or "go"; tell me about 2 in your own words.
 ```
 
-The last line names the choices of place, field, mark and restatement that
-"go" answers, and the choices of level that are talked through; it leaves out
-a kind the question does not hold.
+The question ends with its answer line, word for word but for the numbers,
+and nothing comes after it: no explanation, no reference to this guide.
+`Answer 1 by number or "go"; tell me about 2 in your own words.` when it holds
+both kinds of choice, `Answer 1 by number or "go".` when it holds no level,
+`Answer 1 in your own words.` when it holds only levels.
 
 - **A choice of place, field, mark or restatement** gives its options with
   the proposed one marked `(proposed)`. The owner answers with the number and
@@ -852,8 +854,9 @@ a kind the question does not hold.
   The owner's agreement, or the level they name instead, settles it. Write
   nothing before that.
 - **A message that turns to something else**, "run the tests", ends the
-  showup with nothing written. Say so in one line, before whatever the message
-  asks: `Showup stopped: nothing recorded; /colab showup starts it again.`
+  showup with nothing written. The reply's first line says so, word for word:
+  `Showup stopped: nothing recorded; /colab showup starts it again.`, and then
+  the reply does what the message asks.
 - **New words about another topic** in an answer, "and I know Diesel too",
   are a new showup, taken after the first is written.
 
@@ -924,9 +927,11 @@ Recorded on 21 October 2026:
 - software-development/databases/postgresql/pl-pgsql · not interested · new topic
 ```
 
-The first line names the UTC date of the write, day month year. Then one line
-per topic that got an entry, a gap, an alias or a mark, in this form, the
-parts that do not apply left out:
+The reply is this first line and the lines under it, and nothing else, also
+when nothing was recorded. The first line names the UTC date of the write, as
+`date -u '+%-d %B %Y'` prints it, never the local date. Then one line per topic
+that got an entry, a gap, an alias or a mark, in this form, the parts that do
+not apply left out:
 
 ```
 - <path> · <level> · new topic | was <level> (<source>, <date>) · gap added: <gap> | gap removed: <gap>
