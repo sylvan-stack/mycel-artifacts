@@ -93,14 +93,15 @@ One page to (re)load the whole mental model. Each section is two sentences of
   `/colab "prompt"`, and the agent answers one level above what the owner's
   Nex Knowledge Map, a private corpus of topics and levels, says they know,
   skipping what they know and offering the ways deeper as numbered options.
-  Every explanation is logged, levels rise or fall only on the owner's own
-  words judged by fixed tests, and the map is written and pushed after each
-  reply; with `(use colab)` the same map pitches the explanations of any
+  Every explanation is logged and closed by a short quiz, levels rise or
+  fall only on the owner's own words and quiz answers judged by fixed tests,
+  each change listed in the reply, and the map is written and pushed after
+  each reply; with `(use colab)` the same map pitches the explanations of any
   other work. With `/colab showup "<words>"` the owner states their own level,
   which goes into the map as their entry once every choice the words leave is
   settled. With `/learn` a whole session becomes learn mode: one piece per
-  reply, options to go on in any direction, the map kept current, and no
-  other work until the owner leaves it.
+  reply, closed by its quiz and options to go on in any direction, the map
+  kept current, and no other work until the owner leaves it.
 
 ## How it compounds
 

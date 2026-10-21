@@ -4,8 +4,9 @@ description: >-
   Learn mode: a whole session in which the owner only learns, toward a goal
   such as getting ready for a job interview, and the agent only teaches. Each
   reply gives one piece pitched at the owner's Nex Knowledge Map and ends
-  with options to go on learning; every reply is logged and the map kept
-  current; no other work is done until the owner leaves the mode. Starts
+  with a short quiz, the list of the map's changes and options to go on
+  learning; every reply is logged and the map kept current; no other work
+  is done until the owner leaves the mode. Starts
   only when the owner calls it by name, never on a plain wish to learn.
   Example prompts: /learn "prepare for a data engineering interview: stream
   processing" and /learn; in Codex $learn with the same words. NOT for one
