@@ -4,8 +4,9 @@ role: authored
 # Guide: Nex Colab
 
 Use this guide when the owner asks to learn something with `/colab "prompt"`,
-states their own level with `/colab showup "<words>"`, or asks that their
-knowledge be taken into account in other work with `(use colab)`. The agent answers at the depth the owner's
+states their own level with `/colab showup "<words>"`, asks that their
+knowledge be taken into account in other work with `(use colab)`, or starts
+learn mode with `/learn`, a whole session of learning and nothing else. The agent answers at the depth the owner's
 [Nex Knowledge Map](../../arbol/GLOSSARY.md#nex-knowledge-map) says is
 missing, logs every time it shows the owner something, judges from the
 owner's own words whether a level has risen or fallen, and writes the map
@@ -20,13 +21,15 @@ guide alone. What the steps must achieve, and why, is in the specifications
 of the private corpus `~/Artifacts/colab/`:
 [CLB-0](../../colab/specs/00-the-nex-knowledge-map.md), the map and the log;
 [CLB-1](../../colab/specs/01-nex-colab.md), the exchange and `(use colab)`;
-[CLB-2](../../colab/specs/02-showup.md), showup. Read them for a reason, not
+[CLB-2](../../colab/specs/02-showup.md), showup;
+[CLB-3](../../colab/specs/03-learn.md), learn mode. Read them for a reason, not
 for a step. The guide reads and writes the map as data, with the check that
 lives in that corpus.
 
 **Contents:** when to use · the corpus and its files · an exchange, round by
 round, from the prompt to writing the map and the log · (use colab) · showup,
-from the words to the reply · the lines the owner sees · what the agent never
+from the words to the reply · learn mode,
+from the goal to leaving · the lines the owner sees · what the agent never
 does · the samples.
 
 ## When to use
@@ -36,13 +39,15 @@ does · the samples.
 | `/colab "<prompt>"`; in Codex `$colab "<prompt>"` | an exchange | [An exchange, round by round](#an-exchange-round-by-round) |
 | `/colab showup "<words>"`; in Codex `$colab showup "<words>"` | a showup: the owner states their own level | [showup](#showup) |
 | `(use colab)` anywhere in a message, or `/use-colab <message>`; in Codex `$use-colab <message>` | the map used in that work | [(use colab)](#use-colab-the-map-in-other-work) |
+| `/learn "<goal>"` or `/learn`; in Codex `$learn "<goal>"` or `$learn` | learn mode: a whole session in which the agent only teaches | [Learn mode](#learn-mode) |
 
-Nothing else starts either. A question that only looks like a learning
+Nothing else starts any of them. A question that only looks like a learning
 question, "what is a CRDT?", gets an ordinary answer, and a message without
-the phrase `(use colab)` neither reads nor writes the map. The skill `colab`
-starts on its two forms only, the first word `showup` choosing the second;
-the skill `use-colab` starts on the phrase and on its own name only. Both
-hand this guide the whole message.
+the phrase `(use colab)`, outside an exchange and learn mode, neither reads
+nor writes the map. The skill `colab` starts on its two forms only, the first
+word `showup` choosing the second; the skill `use-colab` starts on the phrase
+and on its own name only; the skill `learn` starts on its own name only. Each
+hands this guide the whole message.
 
 Every reply speaks to the owner about their topic or their work, in the forms
 this guide gives. It never names, quotes or links this guide, a skill or a
@@ -978,6 +983,165 @@ the work only reads.
   an entry, a `said`, a topic or a commit subject.
 - Explain the topic or offer teaching in the reply.
 
+## Learn mode
+
+Learn mode is a whole Chat Session in which the owner only learns, toward a
+goal of their own, such as getting ready for a job interview, and the agent
+only teaches. It starts with `/learn "<goal>"` or `/learn` and lasts until
+the owner says to leave it. Its rounds are the rounds of an exchange, steps 1
+to 7 above, with four differences: it lasts the whole session; it does no
+other work, also when asked; each reply gives one piece to learn; and the
+options at its end are ways to go on learning in any direction, not only
+deeper. There is no study plan: the agent gives a piece, offers ways on, and
+reads from the owner's replies what they have learned, as an exchange does
+([CLB-3](../../colab/specs/03-learn.md)).
+
+### What the agent may do in learn mode
+
+From `/learn` until the owner says to leave the mode, and only this:
+
+- **Write** files only under the corpus's `map/` and `log/`, as step 7 does,
+  and git's own files of the corpus. No file anywhere else: no code written
+  to a file, no project created, nothing changed in the folder the session
+  started in or in any repository.
+- **Run** only the commands this guide gives for the corpus: finding the
+  corpus folder, `date -u`, appending a log line, `knowledge_map.py index`
+  and `check`, and `git` on the corpus (`status`, `add`, `commit`, `pull`,
+  `push`, `rev-parse`), and commands that only read the corpus, such as
+  `cat`, `tail` or `grep` on its files. Run no build, no test, no program, no
+  installer, and no code to try out what a reply shows, not even in a
+  temporary folder.
+- **Invoke** no skill but `learn` and `colab`, and follow no other skill's
+  instructions, however close its subject is to what is being learned. A
+  fact comes from public documentation.
+- **Read** only the corpus, this guide and the skill, public documentation to
+  check a fact before teaching it, such as a limit or a default that changes
+  between versions, and a file the owner names by its path or pastes into a
+  message to study. Such a file is read as step 1 reads something in the
+  current session: as the example of a general topic, which is all the map
+  and the log record. Never read a repository or a project's files on your
+  own, the folder the session started in included.
+- **Send** nothing that describes the owner: a search holds the general fact
+  sought, never the goal, a level or a name the goal held.
+
+Code may appear in a reply as part of an explanation, a few lines that show
+the idea, never in a file and never run.
+
+### Learn mode step 1: the start
+
+**`/learn "<goal>"`** starts the mode on the goal, the owner's words: what
+they want to be ready for, and often the topics they name. The message is
+the first round of the mode's exchange, as `/colab "<prompt>"` is, with the
+goal as its prompt: step 1 finds its general topics, step 2 its topics in
+the map, and the reply gives the first piece of it, as step 2 of learn mode
+below says. The goal is kept by the session only: it steers which piece
+comes first and which ways are offered, and is written nowhere. A goal that
+names an employer, a team or one product's insides, "prepare for the
+interview at Example Corp, on their ingest pipeline", is taught through its
+general topic, ingestion pipelines; the employer goes into no topic, entry,
+log line or commit subject. A goal with no general topic behind it gets the
+`Not a map topic:` line, and the mode does not start.
+
+**`/learn` alone** starts the mode with no goal. Run `index`, read the last
+`attempt` lines of the newest file of `log/`, and reply with the line
+`What would you like to learn? Or go on with:` followed by the options: the
+topics those lines name, the most recent first, each as an option in the
+form of step 4, pitched one level above the level the map shows for it. The
+reply teaches nothing and writes nothing; the owner's answer, a number or
+words, is the first round. With no `attempt` line in the log, the line stands
+alone, without options.
+
+### Learn mode step 2: every round
+
+Every message in the mode that asks to learn something, or answers what the
+agent taught or asked, is a round: steps 2 to 7 of an exchange. What changes:
+
+- **One exchange for the whole mode.** All the rounds of learn mode in one
+  session are one exchange: step 6 assesses every topic the mode has
+  touched, from everything the owner said since `/learn`; words that only
+  restate what the mode has shown are no proof; `Map check:` and
+  `Map not written:` are said once in the mode; a showup that names no topic
+  refers to the mode's last `attempt` line. The `Shown` line counts
+  exchanges by session, as step 6 says.
+- **Nothing ends it but the owner's word.** A message off the topics of the
+  last round, on any general topic, is a round too, and so are a number from
+  the last options, an objection to the skipped line, a request for code a
+  reply can show, `/colab "<prompt>"` and `/colab showup "<words>"`. Only
+  what [Leaving](#learn-mode-step-4-leaving) says ends the mode.
+- **One piece per reply.** The reply gives one piece to learn, not all that
+  the depth table of step 3 names at once: a part of what the owner should
+  learn next, sized to be read in one sitting, pitched one level above the
+  level the map shows, by the table. A topic not assessed is pitched as new
+  to the owner, with the skipped line saying so. The rest of the topic is
+  among the ways on.
+- **The ways on.** The reply ends with options, as step 4 says, in its form,
+  `<n>. <the way> (<topic>, toward <level>)`, a few, the most useful first,
+  none into a marked topic, and none taken before the owner answers. They
+  are the ways to go on learning, not only the ways deeper: the next piece of
+  the same topic, a child, a gap, the topic's next level, a related topic, a
+  sibling under the same parent, another topic the goal named, or anything
+  else that fits the goal and what the owner has just shown. Which ones is
+  your judgement; at least one way should lead away from the topic just
+  taught, so that the owner can change direction with one number.
+- **Always written.** The map and the log are written in every round, as
+  step 7 says, also in a long session: the rule of `(use colab)` work that
+  only reads in a long session does not apply.
+
+The question that talks a level through may close a reply, before the
+options, as step 6 allows. Ask no practice question with a model answer, run
+no mock interview and ask no question with one right answer: the owner
+decided that learn mode has none.
+
+### Learn mode step 3: a request for other work
+
+A request is *other work* when answering it needs something learn mode does
+not do: a file written or changed, a command run, a repository or a project
+read for what it does, an outside system touched. "Write this consumer to a
+file", "run the tests", "what does our pipeline's retry setting do?". The
+owner decided that learn mode is never mixed with real work: other work is
+not done, and the mode does not end. The reply is the line
+
+```
+Learn mode is on: <the work asked, in a few words> is not done here; say "leave learn mode" to end it.
+```
+
+followed by the options to go on learning, the general topic behind the
+request among them when it has one. It shows nothing, writes nothing and
+commits nothing. A request a reply can satisfy is learning, not work: "show
+me in code how a consumer commits its position" is answered with the code in
+the reply.
+
+### Learn mode step 4: leaving
+
+Only the owner's word ends the mode: any words that say to end or leave
+learn mode or to stop learning, "leave learn mode", "stop learning", "that
+is all for today, end learn mode". The reply is the line
+
+```
+Learn mode ended; /learn starts it again.
+```
+
+and nothing more. When the same message also asks for work, "leave learn
+mode and fix the failing test", the reply begins with that line, and the
+rest of the message is answered as it would be without learn mode. The mode
+also ends when the session closes.
+
+### What the agent never does in learn mode
+
+- Write, change or delete a file outside the corpus's `map/` and `log/`;
+  write code to a file; change the folder the session started in or any
+  repository.
+- Run a build, a test, a program, an installer, or code that shows what a
+  reply explains; run any command that writes outside the corpus.
+- Invoke or follow a skill other than `learn` and `colab`.
+- Read a repository or a project's files that the owner did not name or
+  paste to study.
+- Do other work, or end the mode, on a request for work alone.
+- Ask a practice question with a model answer, run a mock interview, or ask
+  a question with one right answer.
+- Write the goal, or any employer, product or repository it names, into the
+  map, the log or a commit subject.
+
 ## The lines the owner sees
 
 A reply holds them in the order of this table, each in its form, each one
@@ -1008,12 +1172,15 @@ length of the explanation; the lines of this table come on top of it.
 | Not written | `Map not written: <why>; nothing recorded.` | once per exchange, when the corpus cannot be written |
 | Shown without a rise | `Shown in <n> exchanges since <level>: <topic>; say where you stand (/colab showup), or ask for it another way.`; for a topic with no entry `Shown in <n> exchanges, never assessed: <topic>; say where you stand (/colab showup), or ask for it another way.` | in the round that makes it the third exchange or a later one, or when the owner asks to be reminded |
 | A question that talks a level through | one question that invites the owner to reason with the topic | before the options, when the owner's words sit between two levels' tests |
-| The options | `<n>. <the way> (<topic>, toward <level>)` | last, one per way deeper |
+| The options | `<n>. <the way> (<topic>, toward <level>)` | last, one per way deeper; in learn mode one per way to go on learning |
+| Learn mode, what to learn | `What would you like to learn? Or go on with:` followed by the options | the reply to `/learn` alone |
+| Learn mode, other work | `Learn mode is on: <the work asked, in a few words> is not done here; say "leave learn mode" to end it.` | first in the reply to a request for other work in learn mode, followed by the options |
+| Learn mode ended | `Learn mode ended; /learn starts it again.` | first in the reply to the owner's word to leave learn mode |
 
 ## What the agent never does
 
-- Read or write the map without the owner's `/colab`, `(use colab)` or
-  `/use-colab`, or write the owner's map in a trial or a sample, which point
+- Read or write the map without the owner's `/colab`, `(use colab)`,
+  `/use-colab` or `/learn`, or write the owner's map in a trial or a sample, which point
   the agent at a fictional corpus with `COLAB_CORPUS`.
 - Write a level from what it showed, from the number of rounds, from how
   long the owner has used something, or from a claim alone; or write a level
@@ -1034,8 +1201,9 @@ length of the explanation; the lines of this table come on top of it.
 ## The samples
 
 The samples that prove this guide are in `~/Artifacts/colab/tools/samples/`,
-CLB-1's and the seven recordings of showup, each a fictional corpus with the
-owner's messages and what each round must show. `tools/sample.py run <sample>
+CLB-1's, the seven recordings of showup and the three samples of learn mode,
+each a fictional corpus with the owner's messages and what each round must
+show. `tools/sample.py run <sample>
 --cli claude|codex` runs one in a fresh session against a temporary copy and
 compares the result ([its README](../../colab/tools/samples/README.md)). A
 change to this guide is run again on the samples it concerns, in both CLIs.
