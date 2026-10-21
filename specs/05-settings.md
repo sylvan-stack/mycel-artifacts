@@ -222,7 +222,6 @@ Proposed: `mycel info` says which file was read, whether it exists and can be re
 | MYC-5.15 | validate the complete reviewer command/provider/model/revision configuration and exact argv/revision syntax, resolve only the first-member leading tilde, and document the protocol-1 setup without storing credentials or running a dry-run probe | New | unit |
 | MYC-5.16 | provide `mycel api-key voyage` and `mycel api-key jev` to read a nonempty printable-ASCII key from a terminal without echo, refuse absent or unsafe terminal input with `invalid_input`, create or replace its named login-Keychain item through `/usr/bin/security` with that program explicitly trusted for reading, keep the key out of argv, output, logs, plaintext files and child environments, and return only the provider, item identity and replacement flag | New | unit |
 | MYC-5.17 | know the table `[discussions]` with its key `address`, a password-free PostgreSQL address of the Arbol database, refuse one that carries a password with `settings`, take its password from the Keychain item `mycel` / `discussions-password` when the database asks for one, and leave every command but the read of a decision's discussion untouched by its absence | New | unit |
-
 | MYC-5.18 <!-- df29d081-b840-460c-92b3-6818d704ea97 --> | accept code_clones as additional absolute checkout folders and readonly_root as the listed main-comparison checkout, normalize home paths, reject invalid shapes and an unlisted readonly_root, and preserve existing single-root settings | New | unit |
 
 ## Interface
