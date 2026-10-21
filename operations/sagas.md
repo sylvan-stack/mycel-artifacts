@@ -50,7 +50,8 @@ comments ([Resolve Linear Comments](linear-resolve.md)).
 | The list of Sagas | `~/Artifacts/sagas/INDEX.md` | which Sagas there are, their priority: the order in which they are worked, and which Sagas each one waits for |
 | Saga | The file `saga.md` in its folder `~/Artifacts/sagas/<saga>/`, the documents beside it, and a Linear project of the same name in the Linear workspace amorphius | the files: `saga.md` holds the recommended order of its Arcs, the progress of each Arc, what it waits for in other Sagas and what they wait for in it, and what each of its documents holds; `rules.md` the rules of its work; further documents what one task needs, such as its known gaps |
 | Arc | The file `arc.md` in its own folder `~/Artifacts/sagas/<saga>/<arc>/`, and a parent issue titled `<Name> Arc` in the Saga's Linear project | the file: its goal, its territory, the recommended order of its Beats, and its progress |
-| Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and that issue, a sub-issue of its Arc's issue | the file: what it must achieve, its plan, its hand-over to later Beats, and its own territory when it names one. Linear: its status, its comments, and what it waits for (*blocked by*) |
+| Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and its issue while unfinished | the file: what it must achieve, its plan, hand-over and territory. Linear: its live unfinished status and discussion. Record prerequisite IDs in the file before deleting their completed issues |
+| Completed tasks | `~/Artifacts/sagas/completed-linear-tasks.md` | the completed IDs, their durable local records, and whether each issue's removal was confirmed; a completed issue is deleted instead of set to Done |
 | Repository of a Beat | A label of the label group `Repository` | — |
 | Hold | One file per held Beat, and one per Arbol chat that booked an Environment, in `~/.sagas/holds/` on this Mac | who works on a Beat right now, which chat works in which Environment |
 | A Beat's code | The branch `beat/<Beat>` in each repository its territory touches, worked in an Environment and merged into `main` as one merge commit | exactly what the Beat changed in code, whichever tool, session or kind of edit made the change |
@@ -60,17 +61,19 @@ one-way copy of its `saga.md`, each other document of the Saga a document in
 the same project, the description of an Arc's issue a copy of
 its `arc.md`, and the description of a Beat's issue a copy of its file. Each copy starts with a line that names its file. An
 edit made only in Linear is overwritten by the next copy. After changing a
-file, commit and push it, then bring its copy in line as the corpus's
-`README.md` says. `~/Artifacts/sagas/` is a private repository, because it
+file, commit and push it, then bring its surviving copy in line as the corpus's
+`README.md` says. Skip issue copies already removed under
+[Complete Linear Tasks](linear-completion.md); never recreate them.
+`~/Artifacts/sagas/` is a private repository, because it
 names the work of every project on this computer.
 
 Specification copies in Linear stay in the projects they are in now. A
 project may hold such copies without being a Saga.
 
-Progress is read in Linear: its project list shows how far each Saga is, and
-each Arc shows how many of its Beats are done. Each parent also keeps a short
-written account of its children, as [Order and progress](#order-and-progress)
-says. The live overview of all work,
+Progress comes from the local plans, the completed-task artifact and the
+parent summaries kept as [Order and progress](#order-and-progress) says.
+Linear shows unfinished work and published summaries; its native issue counts
+omit completed issues after removal. The live overview of all work,
 the [Radar](../../arbol/GLOSSARY.md#radar), is a planned Arbol feature that
 will read the same holds.
 
@@ -109,6 +112,9 @@ These files are touched by almost every Beat. Any Beat may **add** a line or
 an entry to them without holding them:
 
 - `~/Artifacts/arbol/GLOSSARY.md`;
+- `~/Artifacts/sagas/completed-linear-tasks.md`: add a completion row and update
+  that task's removal state as [Complete Linear Tasks](linear-completion.md)
+  says, preserving every other task's record;
 - the `INDEX.md` and `README.md` tables of every corpus;
 - the Linear page "Specifications";
 - the Source Ref comments (`<!-- sources: … -->`) at the end of a
@@ -379,8 +385,9 @@ tells its parent how far it got.
   the recommended order and the reason, for example "SYL-190 is accepted
   before the First Roots Arc reaches SYL-195". A Saga with no such link
   says `None.`. Each Beat-to-Beat dependency is also a *blocked by* relation
-  in Linear, which is what [Taking the next Beat](#taking-the-next-beat)
-  checks; the section lets an agent see them without searching Linear.
+  in Linear while both issues exist. Preserve the prerequisite IDs in
+  the dependent Beat's file before a completed issue is removed; the completed
+  task artifact then proves that prerequisite is met.
   `INDEX.md` gives, for each Saga, the Sagas it waits for. Its order of the
   Sagas stays the owner's priority, because a dependency between two Sagas
   holds back only the Beats it names.
@@ -388,7 +395,8 @@ tells its parent how far it got.
   changes or removes a dependency between Sagas, or finishes a Beat that
   another Saga waits for, writes it in the `Other Sagas` sections of both
   Sagas and in `INDEX.md` in the same commit, and sets the *blocked by*
-  relation in Linear. A dependency that is met stays listed, marked `Done`
+  relation in Linear while both issues exist. A dependency that is met stays
+  listed in the files, marked `Done`
   with its date, until the Beat that waited for it is Done.
 - **A Beat reports to its Arc.** When a Beat is finished or stopped, its agent
   adds one line at the top of the `Progress` section of its Arc's `arc.md`,
@@ -419,9 +427,13 @@ tells its parent how far it got.
    Beat of the Saga; `saga.md` says which other document your Beat needs.
 3. **Run [the check](#the-check).**
 4. **Find the Arc's next Beat:** the first Beat in the order of the Arc's
-   file that is not Done. It can start when all of these hold:
+   file that is not Done, consulting the completed-task artifact as well as
+   live Linear status. A removed issue recorded complete is not taken again.
+   It can start when all of these hold:
    - no hold names it;
-   - every Beat it is *blocked by* in Linear is Done;
+   - every prerequisite named in its file or live *blocked by* relations is
+     complete, proved by the completed-task artifact or a legacy live Done
+     issue; a missing issue without a completion record is unknown;
    - its territory overlaps no hold. A hold of the same Arc counts too,
      unless both Beats name smaller territories that do not overlap.
 
@@ -525,10 +537,13 @@ whichever session started it.
   rest instead of repeating it.
 - **What does not go in.** What a specification should say: change the
   specification. A point for the whole Saga: the Saga's document for it, such
-  as its known gaps. The account of the work: the `**Agent:**` comment.
+  as its known gaps. Keep the account of completed work in the completion
+  record and preserve any comment later work needs before removing the issue.
 - **When.** When the Beat is finished or stopped, before its hold is deleted;
-  commit and push the Beat's file and bring its Linear copy in line, as for
-  its plan. A stopped Beat's hand-over says where the work stopped and what
+  commit and push the Beat's file. For a finished Beat, preserve its completion
+  record and remove the issue as [Complete Linear Tasks](linear-completion.md)
+  says; for a stopped Beat, bring its Linear copy in line as for its plan.
+  A stopped Beat's hand-over says where the work stopped and what
   comes next, for the agent that takes it over. A Beat with nothing to hand
   over has no section.
 - **Nowhere else.** Never leave a hand-over where only one tool or one group
@@ -614,8 +629,12 @@ hard stop.
   3. Bring `readonly` up to date: `git -C ~/repos/sylvan-stack/readonly/<repo>
      pull --ff-only`.
 
-  Then set the Beat to Done as the Saga's rules say, write its hand-over,
-  return the Environment, and delete the hold file.
+  Then mark its local progress Done, write its hand-over and preserve the
+  result, prerequisite IDs and completion summary in the local records. Follow
+  [Complete Linear Tasks](linear-completion.md): commit and push the completed
+  ID before deleting its Linear issue, then verify and record removal. Return
+  the Environment and delete the hold file. A failed removal is reported as
+  pending; do not set the issue to Done as a fallback.
 - **Returning the Environment,** in each repository the Beat used:
   `git fetch origin`, `git switch main`, `git merge --ff-only origin/main`,
   then `git branch -d beat/<Beat>` and `git push origin --delete
@@ -624,7 +643,9 @@ hard stop.
   is.
 - **Either way, report the progress** to the Arc, and when needed to the
   Saga, as [Order and progress](#order-and-progress) says.
-- **An Arc is Done** when all its Beats are Done. **A Saga is Done** when the
+- **An Arc is Done** when all its Beats are Done in the local records. Record
+  and remove its parent issue under [Complete Linear Tasks](linear-completion.md)
+  only after every child was completed, recorded and removed. **A Saga is Done** when the
   owner says so: its line in `INDEX.md` and its Linear project are closed.
 
 ## Reviewing a Beat, an Arc or a Saga

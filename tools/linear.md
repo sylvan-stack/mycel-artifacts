@@ -1,12 +1,13 @@
 ---
 role: authored
 ---
-# Runbook: Linear Navigation
+# Runbook: Working with Linear
 
-This runbook covers the connector and UI mechanics used by
-[Organize Linear Navigation](../operations/linear-organize.md). The guide owns
-scope, relevance, and authorization. These capabilities were checked on
-8 October 2026; discover the current tools and read their schemas before use.
+This runbook covers the connector and UI mechanics used by the Linear guides,
+including [Organize Linear Navigation](../operations/linear-organize.md) and
+[Complete Linear Tasks](../operations/linear-completion.md). Those guides own
+scope, relevance, and authorization. Discover the current tools and read their
+schemas before use; completion mechanics were checked on 21 October 2026.
 
 ## Connector capabilities
 
@@ -33,13 +34,16 @@ What the connector cannot do, besides favorites, the sidebar and views
 workspace settings, mark a comment thread resolved, list comments across the
 workspace (comments are read per document, project or issue), and list or
 create initiatives. Such a change needs the Linear desktop app through computer
-use, and a deletion needs the owner's go-ahead each time. A thread is resolved
+use. Deleting documents, projects or unfinished issues needs the owner's
+go-ahead; ordinary recoverable deletion of a completed task follows the owner's
+standing direction in [Complete Linear Tasks](../operations/linear-completion.md).
+A thread is resolved
 only when the owner asks for that thread, through the ⋯ menu of a reply,
 "Resolve thread with comment". The desktop app may keep showing old text after
 a connector save: verify content with `get_document`, not in the app.
 
-One workspace is connected: **amorphius** (`https://linear.app/amorphius`),
-through the claude.ai Linear connector, with the team **Sylvan Stack** (key
+The workspace for current work is **amorphius** (`https://linear.app/amorphius`),
+with the team **Sylvan Stack** (key
 `SYL`) for all Sylvan Stack work. It was the Euro-Office workspace `eo-group`
 until 20 October 2026, when the owner renamed it, the Sylvan Stack workspace
 was imported into it with Linear's own "Linear to Linear import" (every SYL
@@ -49,6 +53,22 @@ request. The old workspace `linear.app/sylvan-stack` is left as it was and is
 no longer written to. Both the MCP server `linear-sylvan` in `~/.claude.json`, re-authorized by
 the owner for amorphius on 20 October 2026, and the claude.ai Linear connector
 reach this workspace; either serves.
+
+In Codex, the connection still labelled **EO Group account** reaches amorphius;
+the connection labelled **Sylvan Stack account** reaches the old workspace.
+Verify with `get_workspace` before listing or changing records. Connection names
+and old task identifiers alone do not establish the target workspace.
+
+### Removing a completed issue
+
+Follow [Complete Linear Tasks](../operations/linear-completion.md) first. The
+Codex connector inspected on 21 October 2026 exposes no issue-deletion tool.
+If that remains true, use the observed Linear desktop UI's ordinary Delete
+issue action and its Recently deleted view. Discover any newly available
+supported deletion tool before falling back to UI. Never use a permanent-delete
+or purge option for routine completion, or change the state to Done when deletion
+is unavailable. Check child issues first; remove completed children individually
+before deleting their completed parent.
 
 Follow each paginated list to completion for the selected scope. Current
 `list_projects` has a maximum page size of 50; do not assume the larger limits

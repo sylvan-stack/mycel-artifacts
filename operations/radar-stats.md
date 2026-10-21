@@ -55,7 +55,7 @@ its last Beat is Done:
 | Column | What it counts |
 |---|---|
 | Steps | The leaves of the plans of the Saga's Beats: `## Plan`, or `## Draft plan` before the work starts. A Beat with neither, such as one Done before plans existed, counts as the average of its Saga's Beats that have one, and the Saga's numbers then carry `~` |
-| Done | Every step of a Beat whose Linear status is Done, and the ticked steps of every other Beat |
+| Done | Every step of a Beat recorded complete in the private completed-task artifact or with a legacy live Done status, and the ticked steps of every other Beat |
 | In progress | The steps not yet ticked of a Beat that is In Progress in Linear, or held |
 | Other | Every remaining step: Beats not started, blocked or waiting. Canceled and Duplicate Beats are left out |
 | Agents | The holds on the Saga's Beats whose agent is alive: the agents working on it now |
@@ -70,14 +70,21 @@ serves. So a count of them says nothing about work on the Sagas.
 
 1. **Resolve scope.** Match the optional Saga parameter or named Saga as above.
    Use its folder name for the counter's `--saga` option.
-2. **Statuses from Linear.** For every Arc issue in scope that
+2. **Statuses from the completion artifact and Linear.** Read
+   `~/Artifacts/sagas/completed-linear-tasks.md` and seed the temporary status
+   object with `Done` for completed IDs belonging to the selected Saga's files
+   and current workspace. Removed Arc and Beat issues stay in the file-based
+   scope; skip querying a parent whose removal is recorded. For every surviving Arc issue in scope that
    `~/Artifacts/sagas/.linear.json` names (only paths under the selected Saga's
    folder when scoped), list its sub-issues with their
    identifier and status (the Linear tool's issue list, by parent, with the
    fields `id` and `status`). Write them as one JSON object of identifier to
-   status, such as `{"SYL-170": "Done"}`, to a temporary file outside the
-   corpus. If Linear cannot be reached, run without it and say that Done then
-   counts only Beats whose plan is fully ticked.
+   status, such as `{"SYL-170": "Done"}`, to that object in a temporary file
+   outside the corpus. Merge live statuses, preserving completed IDs that no
+   longer appear in Linear. Reconcile a live reopened issue against its
+   completion record before counting it as Done. If Linear cannot be reached,
+   use the completion records and fully ticked plans, and say that other live
+   statuses could not be collected.
 3. **Count.** Run
    `python3 -I ~/Artifacts/sagas/tools/radar_stats.py --statuses <file> --arcs --markdown`.
    For a selected Saga, add `--saga <folder>`; for example,

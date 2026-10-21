@@ -171,7 +171,7 @@ An answer is written to the place its question is recorded in:
 | The question is | What is written |
 |---|---|
 | a row in a Decisions table | The row's Outcome: that the owner decided, the date, and what was decided. Text that rests on the earlier proposal is changed in the same change: requirements, other sections, other specifications, an index. Then the Linear copy is brought in line |
-| an issue | One comment on the issue that gives the answer. When the issue names a row, the row is recorded as above. An issue that exists only to ask the question is then set to done; an issue that is a task keeps its state |
+| an issue | One comment on the issue that gives the answer. When the issue names a row, the row is recorded as above. If the issue exists only to ask the question, preserve the answer and completed ID, then remove it under [Complete Linear Tasks](linear-completion.md); an issue with unfinished work keeps its state |
 | a question in a comment | One reply in its thread that gives the answer. The owner closes the thread |
 
 Changing a file and bringing its copy in line follow steps 5 and 6 of
@@ -206,8 +206,8 @@ Repeat steps 3 and 4 until no item is open or the user ends the run.
   A run that could not read every place never says that no questions are
   open.
 - **The original is changed and the copy cannot be updated.** Say so in the
-  report. An issue for that question is not set to done until the copy is in
-  line.
+  report. An issue for that question is not removed until the copy is in line
+  and its answer and completed ID are durable outside the issue.
 - **A comment cannot be posted, or an issue cannot be changed.** Tell the
   user which one. The next run lists the question again.
 - **The session ends before the user answers.** Nothing was written. The

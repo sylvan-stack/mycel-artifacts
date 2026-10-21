@@ -52,6 +52,11 @@ One page to (re)load the whole mental model. Each section is two sentences of
 
 ## Working in Linear
 
+- **[Complete Linear Tasks](linear-completion.md)** — record each completed
+  task's ID and durable hand-over before deleting its Linear issue, instead
+  of setting it to Done. The private completion artifact keeps prerequisite
+  and progress checks working after the issue is removed.
+
 - **[Organize Linear Navigation](linear-organize.md)** — a prominent
   **Needs your attention** entry shows individual open questions, pending
   decisions, reviews, and actions with the next step and source link.
@@ -75,7 +80,8 @@ One page to (re)load the whole mental model. Each section is two sentences of
 
 - **[Working in Sagas](sagas.md)** — work is grouped as Sagas, Arcs and
   Beats, kept as files in the private corpus `~/Artifacts/sagas/` and copied
-  one way to Linear, where Beats keep their status and comments. A parent
+  one way to Linear, where unfinished Beats keep their status and comments;
+  completed IDs and hand-over survive in the private files. A parent
   gives the order of its children, and a child reports its progress to its
   parent. Each Arc reserves the folders and files it changes, and an agent of
   any tool holds the Beat it works on, so several agents work at once without
