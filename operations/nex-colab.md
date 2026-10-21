@@ -381,7 +381,10 @@ no more.
 
 ### Step 4: the reply
 
-The reply holds its lines in the order of
+The reply begins with the marking or with the explanation itself: no
+sentence before it, or anywhere in it, says what the round wrote, logged or
+pushed, since the list of changes says what changed. The reply holds its
+lines in the order of
 [The lines the owner sees](#the-lines-the-owner-sees): the marking, when the
 owner's message answered the last quiz; a `To record it:` line; a
 `Not interested:` or a `Not a map topic:` line; the explanation; the skipped
@@ -575,7 +578,9 @@ from the day after its date; for a topic with no entry, every line.
   ```
 
   The evidence has the form `exchange on <topic>, <tool> session <id>; test
-  of <level> met: <what the owner said or asked, in general terms>`. One
+  of <level> met: <what the owner said or asked, in general terms>`, with the
+  word `session` between the tool and the identifier, `claude-code session
+  <id>`, though the log line's `session` has none. One
   `assessment` line goes to the log, with `before`, `level` and `evidence`
   `test of <level> met: <…>`. One line goes into the reply's list of changes,
   so that the owner sees every change to their map when it is made:
