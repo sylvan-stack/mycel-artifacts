@@ -391,8 +391,34 @@ line; a `Map check:`, `Map not pushed:` or `Map not written:` line of step 7;
 a `Shown` line; one question that talks a level through; and then the three
 blocks that close it, in this order: the quiz, the list of changes of step 6,
 and the options last. Each line the table names starts with its word and is
-one line; a block is its first line and the lines under it, with no blank
-line between them.
+one line. Each of the three closing blocks is a Markdown heading of the third
+level with its title, a blank line, and the block's lines, written the same
+way in every reply so that the owner learns where to look:
+
+```
+### Quiz
+
+Answer as 1b 2d 3a, or skip it.
+
+1. <the question>
+   - a) <option>
+   - b) <option>
+   - c) <option>
+   - d) <option>
+
+### Learnings
+
+- <topic>: <before> → <after>: <the reason, in a few words>.
+
+### Do you want to proceed with...
+
+1. <the way> (<topic>, toward <level>)
+```
+
+The titles are word for word, three dots included, and nothing else stands
+under a title but its block's lines. The `Learnings` block stands only in a
+round that changed the map; the other two close every reply that shows
+something.
 
 **The skipped line** closes the explanation of every reply that explains a
 topic by the map, in the first round or a later one, so that the owner can
@@ -430,13 +456,25 @@ reply showed:
   letter changes from question to question. A topic at *design* gets
   questions too, though they raise nothing.
 
-The quiz is one block: its first line, word for word, then one line per
-question, numbered from 1, with its four options on the same line:
+The quiz is its title `### Quiz`, the line `Answer as 1b 2d 3a, or skip it.`,
+word for word, then each question numbered from 1, with its four options
+under it, one per line:
 
 ```
-Quiz: answer as 1b 2d 3a, or skip it.
-Q1. A report job takes a lock, runs three queries in three transactions and must hold the lock throughout. Which scope does it need? a) transaction-level b) session-level c) either, they behave alike d) none, a commit keeps every lock
-Q2. A pooled connection returns to the pool while it still holds a session-level lock. What happens to the lock? a) it is released on return b) it is released at the next commit c) it stays with the connection d) the pool raises an error
+### Quiz
+
+Answer as 1b 2d 3a, or skip it.
+
+1. A report job takes a lock, runs three queries in three transactions and must hold the lock throughout. Which scope does it need?
+   - a) transaction-level
+   - b) session-level
+   - c) either, they behave alike
+   - d) none, a commit keeps every lock
+2. A pooled connection returns to the pool while it still holds a session-level lock. What happens to the lock?
+   - a) it is released on return
+   - b) it is released at the next commit
+   - c) it stays with the connection
+   - d) the pool raises an error
 ```
 
 The owner answers in their next message, `1b 2c`, alone or with a number
@@ -462,10 +500,13 @@ quiz; it ends, as the reply the quiz closed did, with the ways deeper, which
 may offer the part a wrong answer missed. Step 6 reads the answers.
 
 **The ways deeper** close the reply, after the quiz and the list of changes,
-as a numbered list, one line each, a few, the most useful first, and also as a list of one when there is only one
-way, so that the owner's answer is always a number:
+under the title `### Do you want to proceed with...`, as a numbered list, one
+line each, a few, the most useful first, and also as a list of one when there
+is only one way, so that the owner's answer is always a number:
 
 ```
+### Do you want to proceed with...
+
 1. How the lock table works inside, and what a dropped connection does to a session-level lock (advisory locks, toward advanced)
 2. What else a commit releases, and in which order (transactions, toward advanced)
 ```
@@ -591,12 +632,13 @@ from the day after its date; for a topic with no entry, every line.
 - **The level fell**, as below: written, logged and said the same way.
 
 **The list of changes** says, in the reply, what the round changed in the
-map: after the quiz and before the options, the line `Map changes:` and one
+map: after the quiz and before the options, the title `### Learnings` and one
 line for each topic whose level the round changed and for each topic it
 added to the map, the folders on the way included:
 
 ```
-Map changes:
+### Learnings
+
 - Advisory locks: superficial → practical: answered right the 3 quiz questions on choosing a lock's scope.
 - Vector clocks: new topic → not assessed: added for your question on ordering edits.
 ```
@@ -1144,8 +1186,8 @@ log line or commit subject. A goal with no general topic behind it gets the
 
 **`/learn` alone** starts the mode with no goal. Run `index`, read the last
 `attempt` lines of the newest file of `log/`, and reply with the line
-`What would you like to learn? Or go on with:` followed by the options: the
-topics those lines name, the most recent first, each as an option in the
+`What would you like to learn?` followed by the options under their title
+`### Do you want to proceed with...`: the topics those lines name, the most recent first, each as an option in the
 form of step 4, pitched one level above the level the map shows for it. The
 reply teaches nothing, writes nothing and holds no quiz; the owner's answer, a number or
 words, is the first round. With no `attempt` line in the log, the line stands
@@ -1256,8 +1298,9 @@ also ends when the session closes.
 ## The lines the owner sees
 
 A reply holds them in the order of this table, each in its form, each line
-starting with the word given; a block is its first line and the lines under
-it, with no blank line between them. `<topic>` is the topic's title,
+starting with the word given; each of the three closing blocks is its title,
+a third-level Markdown heading, a blank line and its lines, as step 4 shows.
+`<topic>` is the topic's title,
 `<level>` one of the five levels. The forms are exact: only the parts in
 `<…>` are filled in, and nothing is added to a line, so `Skipped:` names
 topics and levels and nothing else. A line whose *When* does not hold is left
@@ -1275,7 +1318,7 @@ top of it.
 |---|---|---|
 | Learn mode ended | `Learn mode ended; /learn starts it again.` | the whole reply to the owner's word to leave learn mode, or first when the message also asks for work |
 | Learn mode, other work | `Learn mode is on: <the work asked, in a few words> is not done here; say "leave learn mode" to end it.` | first in the reply to a request for other work in learn mode, followed by the options |
-| Learn mode, what to learn | `What would you like to learn? Or go on with:` followed by the options | the reply to `/learn` alone |
+| Learn mode, what to learn | `What would you like to learn?` followed by the options under their title | the reply to `/learn` alone |
 | The marking | `Quiz answers: <right> of <questions> right.`, then one line per question of the last quiz, in its order: `- <n><letter>: right.`, `- <n><letter>: wrong; <letter>) <the right option>: <why, in a few words>.` or `- <n>: not answered.` | first in the reply to a message that answers the last quiz, after only a learn mode line |
 | To record it | `To record it: /colab showup "<the words>"` | when the owner asks in plain words to record a level; nothing is written for it |
 | Not interested | `Not interested: <topic> is marked; it is answered without the map and nothing is recorded for it; showup removes the mark.` | at the start of the reply, for a touched topic that is marked |
@@ -1290,9 +1333,9 @@ top of it.
 | Not written | `Map not written: <why>; nothing recorded.` | once per exchange, when the corpus cannot be written |
 | Shown without a rise | `Shown in <n> exchanges since <level>: <topic>; say where you stand (/colab showup), or ask for it another way.`; for a topic with no entry `Shown in <n> exchanges, never assessed: <topic>; say where you stand (/colab showup), or ask for it another way.` | in the round that makes it the third exchange or a later one, or when the owner asks to be reminded |
 | A question that talks a level through | one open question that invites the owner to reason with the topic | before the quiz, when the owner's words sit between two levels' tests |
-| The quiz | `Quiz: answer as 1b 2d 3a, or skip it.`, then one line per question, numbered from 1: `Q<n>. <the question> a) <option> b) <option> c) <option> d) <option>` | in every reply of an exchange or of learn mode that writes an `attempt` line, 2 to 10 questions |
-| The list of changes | `Map changes:`, then one line per topic: `- <topic>: <before> → <after>: <the test met, in a few words>.`, `<before>` being `not assessed` for a first entry and `new topic` for a topic the round added; `- <topic>: <before> → <after>, re-evaluating your own entry: <the gap, in a few words>; showup restates it.` when it replaces the owner's own entry; `- <topic>: new topic → not assessed: <why it was added, in a few words>.` for a topic added without an entry | after the quiz, in a round of an exchange or of learn mode that changed a level or added a topic |
-| The options | `<n>. <the way> (<topic>, toward <level>)` | last, one per way deeper; in learn mode one per way to go on learning |
+| The quiz | the title `### Quiz`, the line `Answer as 1b 2d 3a, or skip it.`, then each question as `<n>. <the question>`, numbered from 1, with its four options under it as `   - a) <option>` to `   - d) <option>` | in every reply of an exchange or of learn mode that writes an `attempt` line, 2 to 10 questions |
+| The list of changes | the title `### Learnings`, then one line per topic: `- <topic>: <before> → <after>: <the test met, in a few words>.`, `<before>` being `not assessed` for a first entry and `new topic` for a topic the round added; `- <topic>: <before> → <after>, re-evaluating your own entry: <the gap, in a few words>; showup restates it.` when it replaces the owner's own entry; `- <topic>: new topic → not assessed: <why it was added, in a few words>.` for a topic added without an entry | after the quiz, in a round of an exchange or of learn mode that changed a level or added a topic |
+| The options | the title `### Do you want to proceed with...`, then `<n>. <the way> (<topic>, toward <level>)`, one line per way | last, one per way deeper; in learn mode one per way to go on learning; after the `Learn mode is on:` line and the `What would you like to learn?` line too |
 
 ## What the agent never does
 
