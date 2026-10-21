@@ -42,7 +42,9 @@ does · the samples.
 | `/learn "<goal>"` or `/learn`; in Codex `$learn "<goal>"` or `$learn` | learn mode: a whole session in which the agent only teaches | [Learn mode](#learn-mode) |
 
 Nothing else starts any of them. A question that only looks like a learning
-question, "what is a CRDT?", gets an ordinary answer, and a message without
+question, "what is a CRDT?" or "help me get ready for an interview", gets an
+ordinary answer, which says nothing of the map, the log or these skills and
+does not offer them; and a message without
 the phrase `(use colab)`, outside an exchange and learn mode, neither reads
 nor writes the map. The skill `colab` starts on its two forms only, the first
 word `showup` choosing the second; the skill `use-colab` starts on the phrase
