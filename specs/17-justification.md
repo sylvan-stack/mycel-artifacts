@@ -11,7 +11,7 @@ It follows the conventions of the [specifications chapter](README.md#conventions
 
 ## Scope
 
-Covered: the entity model of requirements and decisions, the UUID written in a table row, the Entity URI in Mycel, the Discussion column of a decision and how its chats are read, the Origin Link with its fields and bands. Later sections, added by the Beats that build them: stating an Origin Link (`justify`), Origin Coverage (`origins`), recovery and audit.
+Covered: the entity model of requirements and decisions, the UUID written in a table row, the Entity URI in Mycel, the Discussion column of a decision and how its chats are read, the Origin Link with its fields and bands. Also covered: stating an Origin Link (`justify`) and reporting Origin Coverage (`origins`). Recovery and audit remain the following Beats, SYL-262 and SYL-263.
 
 Specified elsewhere: how a document is split and how chunks keep their identity ([MYC-1](01-corpora-and-ingest.md)); Source Refs, edges and staleness ([MYC-2](02-provenance-and-freshness.md)); relations, confirmation and verification ([MYC-7](07-drifts-and-verification.md)); the reply of `mycel read` ([MYC-11](11-reading-a-chunk.md)); portable addresses and the one resolver ([MYC-16](16-source-addresses-and-evidence.md)); the settings file ([MYC-5](05-settings.md)); the store's format ([MYC-6](06-index-store.md)). Arbol's side of Entity URIs is Arbol's: Mycel reads and writes the string form the glossary gives and holds no Arbol entity table.
 
@@ -77,6 +77,22 @@ An Origin Link is a directed link from a chunk to its Origin: a claim, never a p
 
 The score rises by a review or a passing check and falls by a failed conformance check. Stating a link (`mycel justify`), listing Origin Coverage (`mycel origins`), inferring candidates for a chunk without Origin (`mycel recovery`) and disputing links (`mycel audit`) are specified in the sections the Beats SYL-260, SYL-262 and SYL-263 add here. Linear is never an Origin; a task, a Beat or a Linear issue never justifies code.
 
+### Stating an Origin Link
+
+`mycel justify <chunk> <origin>` resolves one current on-disk chunk and one Origin, by Entity URI or ordinary address, through the one resolver. The Origin must resolve; a missing, ambiguous, disabled or generated selection is refused. A requirement or decision is written as its Entity URI; another chunk is written as its canonical address. A file or class-family Origin is retained as its complete selection, as `derive` permits.
+
+In one transaction the command asserts the dependency with exact pins, records the Origin Link and its author and time, and records a verification of the dependant's exact current version. The normal derive and confirm guards apply: changed-since-ingest dependant or source bytes, invalid selections and a final guard failure leave all feature writes rolled back. `refs`, `stale` and `verifications` read the ordinary dependency and verification result. An Origin Link is still a claim, not a conformance proof.
+
+The single-pair command records `method: stated`, `confidenceScore: 1` and `confidence: asserted`, naming the identity from `--by` or the current operating-system user. These are implementation choices for a direct assertion, not adopted thresholds for inferred links. The example band boundaries above remain examples; recovery and audit own any configurable scoring policy. `review` is absent until a review exists. Repeated statements update the statement's metadata without inventing a review. The bulk form remains open under MYC-D51.
+
+### Reporting Origin Coverage
+
+`mycel origins [<chunk>]` lists current chunks and their Origin Links. `--missing` retains chunks with no links; repeated `--path` filters are component-bounded paths under the selected root. `--changes` compares only the calling clone's disk versions against the configured read-only clone's retained local `main`, using the Index Store query of MYC-1.39. `--unresting` additionally lists requirements and decisions with no dependant. Explicit repository scope and current-folder scope follow MYC-1.
+
+The default performs one scoped ingest before reading the report, with no model call. `--no-fresh` reads only the stored snapshot. The report query itself changes no row. Listings, including nonempty missing-link lists and empty scopes, return status 0. Operational and input failures use the ordinary error statuses. This command is on demand; it installs no gate, hook or commit rule.
+
+`mycel origins --needs-nothing <requirement> --reason <text>` records a nonempty explanation on one requirement. It suppresses that requirement from the unresting list; it invents no dependency, verification or proof. `--clear-needs-nothing <requirement>` withdraws the mark. A constraint such as a forbidden source language needs its conformance check, not a fictional Origin Link.
+
 ## Requirements
 
 | ID | Mycel must… | From v1 | Verified by |
@@ -90,7 +106,12 @@ The score rises by a review or a passing check and falls by a failed conformance
 | MYC-17.7 <!-- 5e6f7a8b-9c0d-4e1f-a2b3-c4d5e6f7a8b9 --> | show with the read of a decision the content of the chats its Discussion column names, read as data from the Arbol database that the `[discussions]` settings name, writing nothing there; and succeed with `available: false` and the reason when the settings name none or it cannot be reached | New | store |
 | MYC-17.8 <!-- 9c0d1e2f-3a4b-4c5d-8e6f-7a8b9c0d1e2f --> | keep Origin Links in the Index Store and never in a file, each with its method, its confidence score and band, who made it and when, and its review, referencing the Origin's UUID when it has one | New | store |
 
-The requirements of `justify`, `origins`, recovery and audit are appended by the Beats that build them.
+| MYC-17.9 <!-- 215362e4-200d-4d82-8652-f567363ef0cb --> | state an Origin Link and record a verification in one guarded transaction, resolving one current dependant and its complete Origin by URI or address, and return JustifyReply with the exact chunk version, canonical Origin, link and verification | New | store |
+| MYC-17.10 <!-- d7da25ae-d86b-4723-bbef-d5f5d8510b80 --> | refuse an unresolved, invalid or changed-since-ingest justification without any partial link, pin, verification or feature-activity write, and expose successful results through refs, stale and verifications | New | store |
+| MYC-17.11 <!-- 8e4caad4-8a09-4238-90d0-6c09620e2040 --> | report Origin Links and chunks without them by current repository, path or calling-clone changes, with one optional scoped ingest and no model call, a read-only report query and status zero regardless of what the list contains | New | store |
+| MYC-17.12 <!-- 73929c40-7721-4723-a5d7-9c6189b42ecc --> | report requirements and decisions that have no dependant and let a requirement be marked needs nothing with a nonempty reason or have that mark withdrawn, without creating a link or a proof | New | store |
+
+Recovery and audit requirements are added by their owning Beats.
 
 ## Interface
 
@@ -141,6 +162,21 @@ interface OriginLink {
 }
 ```
 
+```ts
+interface JustifyReply {
+  chunk: string;
+  chunkVersion: number;
+  origin: string;
+  link: OriginLink;
+  verification: object;                 // the ordinary recorded verification of MYC-7
+}
+interface OriginsReply {
+  scope: { repository: string; location: string; paths: string[]; changes: boolean };
+  chunks: Array<{ chunk: string; links: OriginLink[] }>;
+  unresting?: Array<{ origin: string; reason?: string }>;
+}
+```
+
 ## Known problems
 
 This is a new contract. Version 1 had no entity of its own for a requirement or a decision; its `@proves` decorators and the registry `requirements.json` named requirements by human id alone, so a row could not be pointed at from the index and nothing noticed an edit to one row apart from its neighbours. The registry still gates `make check` until SYL-261 retires it after a one-time import.
@@ -159,3 +195,11 @@ The owner answered the fifteen decisions of the Traceability Arc's first draft o
 | MYC-D48 <!-- e8f0a2b4-c6d8-4e0f-a1b3-c5d7e9f1a3b5 --> | How does Mycel read the content of a chat named in a Discussion cell? | By its Entity URI from the Arbol database, through a settings table of Mycel's own | Decided 19 October 2026 by the owner: by its Entity URI from the Arbol database, through a settings table of Mycel's own with the address and the Keychain item for the password. MYC-D5 was amended on 19 October 2026 (commit `2101eb5` in `~/Artifacts/mycel`): Mycel may read Arbol-owned databases as data. Unavailable with a reason when not reachable, the read still succeeds, Mycel writes nothing there. The form `chat:<root>/<chat>` of the first draft is dropped | |
 | MYC-D49 <!-- 4b6d8f0a-2c4e-4a6b-8d0f-2e4a6c8e0a2c --> | Which words name the things of this Arc? | Requirement, Decision, Origin, Origin Link, Origin Coverage, Index Store; the column `Origin` renamed `From v1` | Decided 19 October 2026 by the owner. Terms, all added to `~/Artifacts/arbol/GLOSSARY.md`: **Requirement**; **Decision**; **Origin**, the one-word term for a chunk at the source end of an Origin Link, of any kind: a requirement, a decision, a document section, or a code chunk when nothing better exists, as in an undocumented open-source repository; **Origin Link**, the directed link from a chunk to its Origin, a claim and never a proof, with the fields `method` (`stated` by a person, `proven` by a check, `inferred` by a model, `recovered` from history), `confidence_score` from 0 to 1, `confidence` as the band the score falls in (`asserted` above 0.9, `proven` 0.8 to 0.9, `inferred` 0.5 to 0.8, `candidate` below 0.5; the thresholds are example values set in one place), who and when, and `review`; a chunk has a list of Origin Links; the score rises by a review or a passing check and falls by a failed conformance check; **Origin Coverage**, what the command `origins` reports; **Index Store**, Mycel's own PostgreSQL database with ParadeDB at the address in its settings, holding chunks, versions, vectors, edges, marks and the record of work, a different database from Arbol's. The word *origin* is used for nothing else: the requirement tables' column `Origin` with Kept, Changed, New, Dropped is renamed `From v1` (MYC-17 is written with `From v1`; the seventeen existing chapters are renamed by the normalization run of SYL-261). Rejected names: Entity Origin, Presumed Origin, Evidence (collides with MYC-16), Locator. Nodes of the graph are Chunks; no new entity type for code; a target is written as an Entity URI when it has a UUID and as a Mycel address otherwise | |
 | MYC-D63 <!-- 1f3d5b7a-9c0e-4f2a-8b4c-6d8e0f2a4b6c --> | Where is justification specified? | A new chapter MYC-17, Justification, and a guide with the agent procedure | Decided 19 October 2026 by the owner: a new chapter MYC-17, Justification, specifies the entities, Origin Links, `justify`, `origins`, recovery and audit as Mycel behaviour, and points to a guide with the agent procedure for new and existing code, where running `origins` is useful, not required. Its requirements are `MYC-17.n`; the Status table lists it as `draft` until the owner accepts it | |
+
+| MYC-D50 <!-- 29b9be1c-6564-4c11-9fa4-0eca516894d0 --> | What does justify compose? | One assertion and one verification | Decided 19 October 2026 by the owner: justify states the Origin Link and verification together under derive and confirm guards, records its method, score, band, who and when, writes an Origin as URI when it has a UUID and as an address otherwise, and refuses changed-since-ingest inputs without writing | |
+
+| MYC-D51 <!-- 22700946-811b-4421-b514-e0392f55582b --> | What is the bulk form of justify? | Postponed: single-pair command is sufficient for this Beat | Open. The owner postponed this on 19 October 2026. Uses: a module against one requirement, recovery results and the one-time decorator import. Options: a selection with several Origins or a JSON-lines file of pairs. SYL-261 and SYL-262 may loop over single pairs until the owner decides | |
+
+| MYC-D52 <!-- ca869d23-64bc-4ad7-9df0-aa9b59395bd5 --> | What does origins report and enforce? | On-demand Origin Coverage | Decided 19 October 2026 by the owner: origins lists links and missing links by chunk, path, repository or branch changes, plus requirements and decisions nothing rests on, with reasoned needs-nothing marks. One scoped ingest and one query, never a model call. No release mode, gate, hook or commit rule; constraint rules need tests | |
+
+| MYC-D53 <!-- 75bebcd2-fcfa-4fb6-b2f6-d389577b00e1 --> | What are changes on this branch? | A query of retained versions | Decided 19 October 2026 by the owner: versions on the calling clone disk absent from main in the read-only clone, found in the Index Store without Git. The former git-status proposal is dropped | |

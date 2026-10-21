@@ -139,6 +139,16 @@ A switch to `main` changes one thing: which version of `expire` is on disk. Noth
 - `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_code`
 - `mycel_deprecated_v1:mycel/knowledge/store.py#ingest_overlay`
 
+### Clones of one repository
+
+Decided 19 October 2026 by the owner (MYC-D60): every clone listed in the settings is a location of the same repository, including prepared Environments and the read-only clone. Each has its own disk, local branches and stashes. The disk location includes the resolved checkout path; branch and stash locations include that same path and their branch name or commit. Aliases of one physical checkout name one location. Passing over one clone never withdraws locations belonging to another.
+
+Chunk identity is shared across clones. Identical text adds a location to the existing version; an edit adds a version of the same chunk. A command run inside a listed clone selects that clone, with the longest containing configured repository taking precedence over its organization. Explicit repository selection outside all its clones uses its primary checkout. Code and checkout Markdown use the selected clone; the repository's artifact corpus stays shared. No remote URL, repository basename or Environment name registers a clone implicitly.
+
+Implementation keys are `code_clones`, a list of additional absolute checkout folders, and `readonly_root`, the listed checkout used for the main-branch comparison. Both are optional; the existing `code_root` remains the primary location. `readonly_root` must be the primary root or one of the additional clones. A query for changes requires that configured read-only location's retained local `main` version; it refuses a missing baseline rather than substituting Git or another clone.
+
+Decided 19 October 2026 by the owner (MYC-D53): changes on this branch are the current selected clone's disk versions absent from `main` in the read-only clone. The Index Store supplies the comparison; the query runs no Git command. This includes uncommitted text already captured by the scoped ingest.
+
 ### Splitting a document
 
 Observed in version 1, and kept: a Markdown file is split at its headings. Each heading owns its own line and the text down to the next heading of any level; a subsection is a chunk of its own and not part of its parent's text. Text before the first heading is one chunk. Lines inside a code fence are never headings. The chunk's name is its heading path, the titles from the top joined by ` > `, such as `Setup > Database > Backups`.
@@ -308,6 +318,9 @@ Proposed: status counts per repository what is on disk and, apart from it, what 
 | MYC-1.36 | report a recognised row without a UUID, and two rows with one UUID, as faults of the file, make no entity of them, and give a `req` or `dec` chunk its UUID as identifier in every location without the two matching rounds | New | store |
 | MYC-1.37 <!-- 388fc246-1b89-4683-a8b7-479bcc6d57c4 --> | save the capture a pass read even when a file of the repository changes before the pass is saved, bind what the pass writes to that capture, name in the reply every file and location that differs from it, retry nothing within the pass, and take the sources of other repositories from the index without comparing their disk | New | store |
 
+| MYC-1.38 <!-- af8e1f2a-5292-4e86-8e7e-7f8bbacd3383 --> | treat every configured clone as a distinct disk/branch/stash location of one repository, share chunk and exact-version identity across clones, preserve other clones when one is ingested, and scope commands to the listed clone they run in | New | store |
+| MYC-1.39 <!-- 7e3d9ff0-cceb-408a-908e-df12a8503f0e --> | find changes on the calling clone by querying its disk versions absent from the retained local main branch in the configured read-only clone, with no Git call in the comparison and a refusal when that baseline is unavailable | New | store |
+
 ## Interface
 
 Proposed. The command line follows the rules of [MYC-0](00-overview-and-legacy-map.md#the-command-line).
@@ -389,3 +402,5 @@ interface RepositoryStatus {
 
 | MYC-D38 | May a function rename use a separate parser-derived body identity key? | Preserve identity for a name-only rename with a conservative parsed body/signature key, while retaining the complete-code hash for change tracking and exact versions | Decided 9 October 2026 by the owner: use that approach. The parser-derived identity projection erases only the declaration name and is versioned separately; it never supplies exact text or dependency comparison evidence |
 | MYC-D64 | What does a pass do with a file that changes after the pass read it and before the pass is saved? | The pass publishes the capture it read, as [The pass](#the-pass) says: what it writes is bound to that capture, it retries nothing and waits for nothing, it reads the disk once more before it saves and names every file and location that differs under `changedDuringPass` with status 0, and the next pass picks those files up by MYC-1.7. For the sources a chunk refers to it takes the index as it stands and never compares another repository's disk with its index. Rejected: retrying the file inside the pass, because the guard is the capture of the whole repository and a repository that is edited all day would never settle; the previous rule, which compared the disk at every step and threw a pass of three hours away for one commit to a corpus | Open. Proposed 20 October 2026 by SYL-232 of the Mycel Specs Implementation Saga; the code follows the proposed default until the owner decides |
+
+| MYC-D60 <!-- 331d1997-c2d0-4353-982b-425185d23d2f --> | What is a location when work happens in several clones? | Every listed clone is a location of one repository | Decided 19 October 2026 by the owner: every clone the settings list, including prepared folders and the read-only clone, has its disk, branches and stashes; chunk identity is shared, identical text costs only a location row, locks are per location, and search and origins use the clone the command runs in. Measure first ingest. Rejected: one repository per clone and chunking a Git diff on the fly | |

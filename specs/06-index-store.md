@@ -56,6 +56,8 @@ Keeping a copy of the store is the owner's affair, with the tools of the databas
 - `mycel_deprecated_v1:mycel/knowledge/store.py#log_activity`
 - `mycel_deprecated_v1:mycel/knowledge/store.py#open_drifts`
 
+MYC-D55, decided 19 October 2026 by the owner: Mycel's and Arbol's databases live on the local PostgreSQL and share one backup. Stated Origin Links are the unique authored content of the Index Store: recovered links regenerate, declared links come from files, and chat content remains Arbol's. Retained evidence, confirmations, vectors and history remain valuable stored results with the ownership and retention rules above; this wording does not delete them or turn them into files. Mycel provides no backup command.
+
 ### Where the store is
 
 Observed in version 1: the address came from the first of four places that gave one: two environment variables that named a private file and its checksum; two more that held the address itself; the settings file; and an address built into the code, which pointed into Arbol 1's database and carried a user name and a password. A further pair of variables chose a schema inside that database.
@@ -156,6 +158,8 @@ A lock is held in the store by the connection of the invocation that took it. It
 - `mycel_deprecated_v1:mycel/knowledge/store.py#detect`
 - `mycel_deprecated_v1:mycel/knowledge/embedder.py#embed_pending`
 
+MYC-D60 changes the pass reservation from repository to location. Each clone's capture and pass reservation are independent; short guarded publication protects shared identities, dependencies, evidence and collection. Repository removal still excludes every live location operation. Contention on shared writes is reported without waiting or partial commit, and a pass on one clone never collects another clone's locations.
+
 ### A command over several repositories
 
 Observed in version 1: a search of an organization returned one reply for each member. A full pass and an embed gave one set of numbers for all repositories together, so nothing said which repository a failure belonged to.
@@ -198,7 +202,7 @@ Everything of version 1 is removed: its ten tables in Arbol 1's database, its tw
 | MYC-6.7 | refuse `mycel init` with `store_format` on a store with a newer format, and with `refused` on a database that holds tables that are not Mycel's or when a needed extension is missing, naming the reason | New | store |
 | MYC-6.8 | hold the number of dimensions of a vector as part of the structure; when the settings name another number, change it only in `mycel init`, removing the vectors of the old size, and until then refuse `embed` with `store_format` and answer a search by wording alone | New | store |
 | MYC-6.9 | write each change of the table above in one transaction, and let a command that only reads see one state of the store | Changed | store |
-| MYC-6.10 | let one pass and one embed at a time work on a repository, and passes on different repositories run side by side | Changed | store |
+| MYC-6.10 | let one pass at a time work on each repository location and one embed at a time work on a repository; passes on different locations, including clones of one repository, run side by side | Changed | store |
 | MYC-6.11 | never wait for another invocation: say at once that the work was not done and why | Kept | store |
 | MYC-6.12 | hold every lock in the store through the connection of the invocation that took it, so that it ends with the process | Kept | store |
 | MYC-6.13 | refuse with `busy` a `repos remove` for a repository on which a pass, embed, classification, summary operation or pinning/evidence mutation is at work, and every command except `info` and `grep` while `mycel init` changes the structure | New | store |
@@ -210,6 +214,9 @@ Everything of version 1 is removed: its ten tables in Arbol 1's database, its tw
 | MYC-6.19 | create a unique index-generation UUID when initializing an empty store, preserve it through ordinary ingest and migrations, and report it in init/info/activity so a lost-store rebuild cannot impersonate old evidence | New | store |
 | MYC-6.20 | implement nonblocking classification, summary, pinning and evidence-lease/removal locks with distinct advisory namespaces and exact invocation liveness; hold no pass lock during model calls | New | store |
 | MYC-6.21 | hold requirement and decision entities as chunks of kind `req` and `dec` in store format 3, bring a format 2 store forward in one step, report the format in `mycel info`, and never delete an entity row in collection | New | store |
+
+| MYC-6.22 <!-- 92bc6b25-6f4d-404d-a139-9e0e5bf9fcb2 --> | reserve passes per configured clone location, allow capture on two clones of one repository concurrently, guard shared identity and evidence publication, and exclude repository removal while any location operation is live | New | store |
+| MYC-6.23 <!-- b911eee1-ec41-46e1-886e-e81db83057e3 --> | keep stated Origin Links as unique authored Index Store content, regenerate recovered links from their inputs, keep chat content in its owning database, and leave the shared local PostgreSQL backup to the owner | New | store |
 
 ## Interface
 
@@ -274,3 +281,5 @@ interface RemoveReply {
 | MYC-D25 | How does the password of the store reach Mycel? | The same two ways as the key of the embedding service: a Keychain item of Mycel's own, or a command of the owner's that prints it. The address in the settings file never holds it. A store on the same machine that asks for no password needs neither | Decided 8 October 2026 by the owner: the Keychain. The password comes from Mycel's Keychain item; no setting names a command for it |
 | MYC-D26 | Is anything carried over from the index of version 1? | No. The new store is a new database and is filled from the files. Every chunk is embedded once more, which the new model requires anyway. Edges that were asserted with `mycel derive` and the summaries are lost and are made again by hand where they are wanted. The other choice is a one-time program that copies the asserted edges across; it would have to read Arbol 1's database, and the number of such edges is not known | Decided 8 October 2026 by the owner: no, and everything of version 1 is removed. Nothing is copied across |
 | MYC-D27 | What does a command report when it covers several repositories and only some could be done? | One entry for each repository, saying done, refused or not run, and the exit status 1 as soon as one was not done. The full reply is written in that case too, so the caller sees what did happen. The other choice is status 0 whenever at least one repository was done; a script that checks only the status would then miss a repository that was skipped | Decided 8 October 2026 by the owner: agreed. One entry for each repository, the status 1 as soon as one was not done, and the full reply in that case too |
+
+| MYC-D55 <!-- 4aeb1b40-133a-4026-99b4-5138de847ce9 --> | Where is the copy of a stated Origin Link? | In the Index Store, backed up with the local PostgreSQL databases | Decided 19 October 2026 by the owner: Mycel and Arbol use separate databases on the local PostgreSQL and share one backup. Stated Origin Links are the only unique authored content in the Index Store; recovered links regenerate, declared links come from files and Arbol owns the chats | |
