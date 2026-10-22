@@ -3,86 +3,53 @@ role: authored
 ---
 # Guide: Code Research Levels
 
-Three levels for understanding code, ordered by cost. **Start at the lowest
-level that can answer; a failed level is information for the next one.** This
-guide exists so an agent picks the right tool on the first try.
+Start with the least work that can answer the request. Exact lookup, a cited
+explanation, and durable task context need different amounts of investigation.
+Follow the [Hub's dated pre-ingest instruction](../README.md): until the owner
+fills the index, use grep and file reads instead of Mycel retrieval.
 
-| Level | Tool | Use when | Cost |
-| --- | --- | --- | --- |
-| 1 | `better-grep` | any text search — an **exact string OR uncertain words** | ~2s (ms with the tail off) |
-| 2 | code-research | you have a **question** needing synthesis | minutes |
-| 3 | deep-research | you need **task context / coverage / an artifact** | 10min+ |
+| Level | Use when | Result |
+| --- | --- | --- |
+| 1 | an exact string or one location is needed | matching paths and lines |
+| 2 | a question needs synthesis across files | a cited answer in the session |
+| 3 | a task needs durable context across several angles | a research artifact |
 
-## Level 1 — better-grep (the default text search — use it instead of grep)
+## Level 1 — text and location lookup
 
-**`better-grep` is a strict superset of grep, so it is the default reflex for
-ALL text search — reach for it, not `grep`/`rg`, whenever you'd otherwise
-grep.** Drop-in: swap the word, keep everything else
-(`grep -rn "foo" src` → `better-grep -rn "foo" src`).
+Use `rg` or `grep` for complete enumeration and claims of absence. Mycel 2 can
+add related recall through `mycel grep -rn "pattern" src`: it runs the first
+`grep` on PATH with the literal arguments, preserves its output and status,
+and may append a clearly marked, read-only search tail. The tail uses the
+current index; it does not prove absence. Before the first ingest, or when a
+script needs only grep bytes, use ordinary grep or
+`MYCEL_GREP_PLAIN=1 mycel grep -rn "pattern" src`.
 
-It is grep *plus* recall, in one call:
+Every argument after `grep` belongs to system grep, including `--repo` and
+`--help`. For explicit repository scope use structured retrieval instead:
+`mycel search --repo <repo> "<query>"`. From a prepared folder always name the
+repository; implicit scope can cover the organization. The
+[grep manual](../tools/mycel-2.md#grep-and-its-related-search-tail) owns exact
+eligibility, tail limits and failure behavior.
 
-- **Head = byte-identical grep.** The exact arm literally runs `/usr/bin/grep`
-  with your flags; same `path:line:` output, same exit code (0 match / 1 none
-  / 2 error). Everything grep is good at, better-grep is exactly as good at —
-  including grep's unique powers: **completeness within scope** (every
-  occurrence, no ranking cutoff) and **proving absence** (exit code 1 is a real
-  no-match; the informational tail never changes it). Scripts stay correct.
-- **Tail = the recall grep can't give**, clearly delimited, informational only:
-  `── mycel: related by meaning ──` — code and docs that are *about* the
-  pattern's words without containing them (dense + **BM25** + doc-bridge over
-  code *and* corpus documents, plus **RAPTOR** summaries where they exist,
-  `⇐ via` attribution); `── mycel: documented in ──` — glossary/research
-  sections citing those hits, with ⚠ stale / heartwood trust flags.
-  *(RAPTOR summaries exist only for repositories where `mycel raptor` has been
-  run. Corpus-doc recall — code-map, glossary, research — works everywhere.)*
+## Level 2 — code research
 
-The win is **recall, not precision**: a literal match is already maximally
-precise, so better-grep can't be "more exact" than grep — what it adds is the
-*places grep would miss* (the code's word isn't your word) and the *docs that
-explain the hit*. When grep returns 0 (vocabulary gap) or 500 (needle in a
-haystack), the tail is what rescues you.
+For “how does this work” or “why is this decided here”, follow
+[code research](code-research.md): consume relevant indexed documents when
+retrieval is available, fill the gaps with targeted reads, and answer with
+file-and-line evidence. If vocabulary is uncertain, a few different search
+phrasings may find prior research; an empty index is a reason to read files.
 
-**Historical evidence (unindexed):**
+## Level 3 — deep research
 
-- `mycel_deprecated_v1:mycel/better_grep.py`
+For “build context for this task”, follow [deep research](deep-research.md).
+Cover the planned angles and persist their evidence under the repository's
+resolved artifact root. Update an existing useful document before adding one.
 
-- Repo scope inferred from path operands / CWD; `ARBOL_REPO` overrides.
+For example, “where is parseConfig used” is level 1; “how does token renewal
+work” is level 2; “research everything the upload-limit change touches” is
+level 3.
 
-**When to drop to plain `grep`:** only when you deliberately want *no* semantic
-tail — an automated script parsing stdout, a tight enumeration loop, or when
-the `mycel` CLI is unavailable. `BETTER_GREP_PLAIN=1 better-grep …` gives you
-exactly that (pure grep, tail suppressed) without leaving the tool. In an
-interactive or agent session there is essentially never a reason to prefer
-bare grep.
-
-The tail needs no daemon: it shells out to `mycel search --no-fresh` per
-invocation.
-
-## Level 2 — code-research
-
-For **question-shaped** requests: "how does X work", "where is Y decided",
-"what breaks if Z changes". In-session, minutes, answer in chat with
-`file:line` citations. See [code-research](code-research.md) for the loop —
-in one line: **Mycel first** (`mycel search`, read every surfaced
-research/glossary doc before opening code), targeted reads into the gaps,
-cited answer, and persist the synthesis if it was expensive and reusable.
-
-## Level 3 — deep-research
-
-Long-running research that **produces or updates a research artifact** in
-`~/Artifacts/<repo>/research/` with Source Refs — task-context building,
-multi-angle coverage of everything a task might touch. See
-[deep-research](deep-research.md) for the inputs, the process and the quality
-bar.
-
-## Escalation examples
-
-- "where is `parseConfig` used" → **better-grep** (its grep head
-  enumerates every call site exactly; the tail flags any indirection).
-- "where do we send the reminder email" → **better-grep** ("reminder" may not
-  be the code's word — the tail finds the code's own term via the glossary).
-- "how does token renewal decide?" → **code-research** (synthesis across
-  service + events + config).
-- "I'm picking up the work on upload limits, build me context" →
-  **deep-research** (coverage + artifact).
+<!-- sources:
+mycel:@code/src/mycel/_grep.py
+mycel:@code/src/mycel/_search.py
+-->

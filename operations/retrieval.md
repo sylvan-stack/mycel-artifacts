@@ -3,71 +3,59 @@ role: authored
 ---
 # Guide: Code Retrieval
 
-How [Mycel](../../arbol/GLOSSARY.md#mycel) answers a code query — the **read path**.
-[Embedding](embedding.md) is the write side; this is what happens between a
-query and its ranked results, identical for every invocation surface
-(the `mycel search` CLI, the [better-grep](../../arbol/GLOSSARY.md#better-grep) tail,
-agents in a [code-research](code-research.md) loop).
+Use Mycel 2 to find current indexed code and documents, then read the evidence
+behind each result. This guide explains how to interpret retrieval; the
+[retrieval manual](../tools/mycel-2-retrieval.md) owns exact ranking, fields
+and limits. [Embedding](embedding.md) describes how retained text gets vectors.
+Follow the [Hub's dated pre-ingest rule](../README.md) before using retrieval.
 
-## The substrate
+## Select a repository
 
-Both arms live in one Postgres: dense = pgvector (HNSW, cosine, one
-`vector(1024)` column shared by every [Embedder
-Profile](../../arbol/GLOSSARY.md#embedder-profile)); lexical = true BM25 via
-**`pg_search`** (Tantivy) — the database image is **ParadeDB's** (bundles
-pg_search + pgvector), pinned by tag; image bumps are deliberate. Code enters
-the corpus through **code-aware chunking** (`code_chunker.py`): Python via
-stdlib `ast`, Svelte block-aware, TypeScript/TSX/JavaScript via tree-sitter —
-one chunk per symbol (`natural_key = path#symbol`, with lang/kind/line span),
-falling back to a whole-file chunk on parse failure so nothing is silently
-dropped.
+`mycel search --repo <repo> "<query>"` searches the named repository. Always
+pass the repository from a prepared folder: implicit scope can include the
+organization. Repeated selectors and organization scope retain independent
+member replies and rankings; never compare scores across repositories.
+Use `--only code` or `--only docs` to narrow results and `--k <count>` to set
+the count. Search has no path filter; narrow a later file read or exact grep.
 
-## The route decision
+## Read the result
 
-A single-token query (`UploadProcessor`) is **identifier-shaped**:
-dense cosine and BM25 fuse by balanced RRF — exact-token evidence deserves
-equal weight. Anything phrase-like is a **natural-language question**: raw
-cosine is the authority, and BM25 only appends a rescue tail (exact-token
-hits dense missed, ranked below everything scored).
+Search returns schema 3 with separate meaning/wording candidate counts,
+`route`, `meaning`, `freshness` and `results`. Wording matching uses complete
+stored text, names and paths even when embeddings are missing or incomplete.
+Meaning matching requires complete valid part coverage for the current model
+and dimensions. Identifier queries combine both ranked lists; question-shaped
+queries place wording-only results after meaning matches.
 
-## The doc bridge (NL route)
+Documents may deliver code through their exact Source Ref dependencies; `via`
+identifies the bridge. `documentedIn` gives ranked document context, while the
+separate `described` flag considers all current directly describing sections.
+Read a code chunk with `mycel read '<qualified-address>'` for the complete
+`documents` list; relations and generated sections do not describe code.
 
-The repo's doc chunks are searched alongside its code; each of the top 8 doc
-sections expands **one hop along its [Source Ref](../../arbol/GLOSSARY.md#source-ref)
-edges** to the code it cites (file-level refs expand through the file's
-chunks, capped to the best 3 by the code's own query cosine). Bridged code
-inherits the doc's similarity × 0.92; when the direct and bridge routes agree,
-the chunk earns a small bonus. Results delivered by a doc carry a `via:`
-annotation with stale/[Heartwood](../../arbol/GLOSSARY.md#heartwood) trust flags —
-prose matches the question, edges deliver the code. This is why
-[per-repo glossaries](embedding.md#the-compounding-habits) pay off.
+Use each result's qualified `address`, actual root, relative path, optional
+readable `file` and retained `lines`. Code and artifact files with the same
+relative path remain distinct. Stored overviews and summaries have index
+addresses; they need no fabricated file path.
 
-## Noise down-weights
+## Check what is current
 
-Two file families lexically mirror feature prose ("should retry the upload when…")
-and would otherwise outrank the implementation they shadow:
+Normal search performs bounded local freshness work on the selected repository
+and its explicit upstream dependencies, with no checkout reset and no pending
+corpus embedding. It can embed the query. `--no-fresh` reads the committed
+index without freshness writes; it still permits query embedding. Missing
+query credentials or failed query preparation leave wording results available
+with an explicit reason, rather than supplying meaning evidence.
 
-- **tests** (`.spec.`/`.test.`/`__tests__`/`test_*.py`) — down-weighted on
-  both routes, unless the query itself mentions tests;
-- **codegen** (`*.generated.*`, `gql/types.ts`) — down-weighted on the NL
-  route only: identifier queries legitimately target generated types.
+Inspect `freshness.finished`, required repository states, `withoutVector`,
+`staleReasons`, `heartwood` and `dependencyCheck.complete`. A missing stale mark
+with incomplete checks is not verification. Mechanical freshness does not
+establish semantic correctness. Empty results describe this index and scope,
+not absence from the repository; use grep to verify completeness.
 
-Module/markup/style/file-level chunks take a small structural down-weight on
-both routes.
-
-## Annotations on the way out
-
-Each result may carry `via` (the doc section that delivered it) and
-`documented_in` (doc sections whose Source Refs cite this code — the recorded
-WHY, stale-flagged).
-
-## Numbers that justify the shape
-
-Bridge research: prod queries 15/22 → 19/22 @3, code jargon 3/6 → 6/6.
-Down-weights + code glossaries: 19/20 @3 across the code repos.
-
-**Historical evidence (unindexed):**
-
-- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
-- `mycel_deprecated_v1:mycel/knowledge/embedder.py#_bridge_expand`
-- `mycel_deprecated_v1:mycel/knowledge/code_chunker.py`
+<!-- sources:
+mycel:@code/src/mycel/_retrieval.py
+mycel:@code/src/mycel/_ranking.py
+mycel:@code/src/mycel/_search_store.py
+mycel:@code/src/mycel/_search_reply.py
+-->

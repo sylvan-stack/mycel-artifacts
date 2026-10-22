@@ -41,18 +41,21 @@ If the request names no topic, stop and ask instead of inventing a brief.
 
 ## Process
 
-1. **Consume Mycel first.** Run `mycel search --repo <repo> "<the question,
-   as asked>"` and read the research and glossary documents it surfaces
-   before exploring by hand. Prior research is context to build on, not to
-   rediscover.
+1. **Check retrieval readiness.** Follow the [Hub's dated pre-ingest rule](../README.md):
+   until the owner fills the index, use grep and file reads. Afterward run
+   `mycel search --repo <repo> "<the question, as asked>"` and read the research
+   and glossary sections it surfaces before exploring by hand. From a prepared
+   folder always name the repository; implicit scope can cover the organization.
+   Normal search may perform local freshness writes and embed the query;
+   `--no-fresh` skips those writes but not query embedding.
 2. **Plan the angles.** Decompose the topic into research angles:
    implementation, data flow, configuration and feature toggles, tests,
    cross-repository edges, history. Depth binds the plan: `survey` covers the
    two or three load-bearing angles; `standard` covers every main angle;
    `exhaustive` adds edge cases, error paths and history.
 3. **Research each angle** with the [code-research](code-research.md) loop:
-   retrieval first, `better-grep` for exactness and for claims of absence,
-   widening only where retrieval runs dry. Each finding carries a 3–15 line
+   use retrieval when ready, then `rg` or `grep` for exact enumeration and
+   claims of absence, widening where the index supplies no evidence. Each finding carries a 3–15 line
    snippet with its path and line range.
 4. **Evaluate and loop.** After each angle, check it against the quality bar.
    An angle that misses gets another iteration. An angle that stays dry after

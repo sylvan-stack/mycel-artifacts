@@ -3,138 +3,82 @@ role: authored
 ---
 # Guide: Integrate authored work into Mycel
 
-Use this guide whenever a person or agent creates or changes an Artifact,
-implementation code, or tests and asks whether the result is **according to
-Mycel**. Passing tests and using Mycel for research are necessary but do not
-integrate the resulting knowledge by themselves.
+Use this guide when an authored artifact, implementation or test must become
+findable together with its real source obligations. Passing tests alone does
+not establish corpus coverage, dependency freshness or retrieval.
 
-## Contract
+Follow the [Hub's dated pre-ingest rule](../README.md). Until the owner fills
+the index, prepare coverage and Source Refs, validate the executable work, and
+report indexing, embedding and retrieval as deferred. Do not run the owner's
+first ingest or embed as part of a Saga Beat.
 
-Work is integrated into Mycel only when all relevant outputs satisfy this loop:
+## 1. Check coverage
 
-```text
-corpus coverage
-→ ingest into stable chunks
-→ establish real authority/coupling edges
-→ run Detection
-→ embed changed chunks
-→ verify retrieval and reverse context
+Resolve the repository's code and artifact roots from its settings and
+`mycel repos`; the [runbook](../tools/mycel.md#repository-corpus-binding) owns
+that binding. Include relevant implementation and tests in the configured
+`code_subdirs`. Inspect settings before proposing a change; a file on disk
+outside the selected corpora is not indexed knowledge.
+
+## 2. Capture authorized changes
+
+Once indexing is authorized, run `mycel ingest --repo <repo>` for the work's
+repository. It captures both roots and local Git locations, reconciles
+identities and declarations, and runs mechanical Detection without changing
+the checkout. It embeds only with explicit `--embed`. Check the actual
+per-repository result, pending work and any committed-prefix warning before
+claiming the pass completed. The [ingest manual](../tools/mycel-2-reconciliation.md#complete-public-ingest)
+owns exact guards and partial outcomes.
+
+## 3. Declare the real relationship
+
+A dependency says the dependant must conform to its source. Put Source Refs
+inside the derived document section according to the
+[authoring guide](source-refs-authoring.md). For an assertion, pass the
+dependant first and source second, for example:
+
+```sh
+mycel derive 'cellar:@code/tests/test_example.py#test_behavior' 'cellar:@artifact/architecture/example.md#Acceptance Contract'
 ```
 
-The unit is the [Chunk](../../arbol/GLOSSARY.md#chunk), not merely a file. Edges
-must follow actual claims and consistency obligations; never connect chunks only
-because they were edited in the same task.
+A relation says to review one chunk when another changes, without granting
+source authority. `mycel relate '<dependant>' '<source>'` asserts one direction;
+reciprocal obligations require both directions. No edge is needed merely
+because two chunks were edited or read together. Exact chunk/file/family
+selection and retained evidence are described in the
+[relation manual](../tools/mycel-2-relations.md).
 
-## 1. Corpus coverage
+Keep portable root-qualified addresses in authored text, never saved search
+result IDs. `mycel refs --repo <repo> --unresolved` reports declaration faults.
+Changing pins or confirming a claim must follow an actual conformance review;
+do not silence a stale mark to make a report look complete.
 
-Every relevant Artifact, implementation file, and test file must be under an
-enabled repo's Artifact or Code Corpus. Tests are code knowledge: when they
-encode behavioral contracts or regression scenarios, the repository's
-`code_subdirs` must include their test tree.
+## 4. Embed and verify
 
-Check and edit `~/.mycel/config.toml`; it is the source of truth for enabled
-repos, code roots, and `code_subdirs`. Do not report Mycel completion while a
-relevant output is outside all configured corpora.
+Run `mycel embed --repo <repo> --dry-run` to plan the scope before an authorized
+embedding pass. Actual `mycel embed --repo <repo>` handles retained pending
+versions in that scope, not every repository. Inspect its committed progress
+and failures; see [embedding](embedding.md).
 
-## 2. Ingest and chunk
-
-Search in the repository that holds the work:
-
-```bash
-mycel search --repo <repo> "<a phrase from the new work>"
-```
-
-Before it answers, a search ingests whatever changed in that repository:
-Artifact sections and code/test symbols, followed by Detection. It embeds
-nothing. Then embed:
-
-```bash
-mycel embed
-```
-
-`mycel embed` covers the pending chunks of every enabled repository; the
-pending number in `mycel status --repo <repo>` is that total.
-
-Do not use `mycel sync` for this. It covers every enabled repository and
-resets configured checkouts to their remote's default branch; see the warning
-in the [runbook](../tools/mycel.md).
-
-A file existing on disk is not enough. Verify that retrieval can find the new
-section or symbol by its meaning and, where useful, by its exact identifier.
-
-## 3. Establish edges
-
-Choose the relationship by meaning:
-
-- **Derivation** — a source/governor defines a contract that the child must
-  conform to. Examples: architecture section → implementation symbol;
-  acceptance contract → regression test.
-- **Coupling** — neither side governs, but a change on either side requires
-  checking the other.
-- **No edge** — the chunks are merely adjacent, were read together, or have no
-  consistency obligation.
-
-For a derived Markdown section, put Source Refs inside the derived section as
-specified by the Source Refs authoring guide. For implementation/test chunks
-that derive from an authoritative Artifact section, assert the edge with stable
-natural refs:
-
-```bash
-mycel derive '<repo>:tests/unit/test_example.py#test_behavior' '<repo>:architecture/example.md#Acceptance Contract'
-```
-
-The first argument is the **derived child**; the second is the **governing
-source**. Use `repo:path#symbol` for code/tests and
-`repo:path#Heading` for Artifact sections. Never store chunk ULIDs in source
-files or task instructions.
-
-One broad file-level edge is not a substitute for precise symbol/section edges.
-A class-family ref is appropriate only when the whole family conforms to the
-same contract.
-
-## 4. Detect and embed
-
-`mycel derive` runs Detection after asserting an edge. After all source and child
-edits are final, search in the repository and embed once more so content
-hashes, declarations, staleness, and embeddings all describe the completed
-work.
-
-A new edge should be fresh. If it is immediately stale, the source or child
-changed after reconciliation; re-check conformance before reasserting it. Never
-silence staleness merely to make the status green.
-
-## 5. Verify
-
-Before reporting completion, verify all of the following:
-
-1. semantic search finds the new Artifact, implementation, and tests;
-2. exact symbol search finds named contracts and scenarios;
-3. implementation/test results expose their governing Artifact through reverse
-   context (`documented_in`);
-4. Detection reports no unexplained stale dependent;
-5. changed chunks have embeddings, unless embedding was deliberately deferred
-   and reported.
+Check retrieval with `mycel search --repo <repo> "<the new work's meaning>"`
+and an exact identifier. Read the result through
+`mycel read '<qualified-address>'` for full text and all directly describing
+sections in `documents`. `documentedIn` in search is separately ranked and may
+omit a real dependency without disproving it. Inspect `dependencyCheck`,
+`staleReasons` and freshness completion; `mycel stale --repo <repo>` and
+`mycel drifts --repo <repo>` expose remaining mechanical/review work.
 
 ## Completion report
 
-State separately:
-
-- executable validation (tests/build);
-- corpus coverage and Sync Pass result;
-- authority/coupling edges established;
-- Detection/freshness result;
-- embedding and retrieval verification.
-
-Do not collapse these into “tests pass.” Tests prove executable behavior; Mycel
-integration keeps the knowledge graph able to find and refresh the contract,
-implementation, and evidence together.
+Report executable validation, corpus coverage, ingest outcome, real dependency
+or relation declarations, freshness, and embedding/retrieval verification
+separately. Name deferred steps and their reason. Empty results or passing
+tests cannot substitute for an unperformed integration step.
 
 <!-- sources:
-mycel:operations/knowledge-model.md#Derivation edges
-mycel:operations/source-refs-authoring.md#Rules
+mycel:@code/src/mycel/_ingest.py
+mycel:@code/src/mycel/_located_dependencies.py
+mycel:@code/src/mycel/_relations.py
+mycel:@code/src/mycel/_document_links.py
+mycel:@code/src/mycel/_search_reply.py
 -->
-
-**Historical evidence (unindexed):**
-
-- `mycel_deprecated_v1:mycel/knowledge/store.py#assert_derivation`
-- `mycel_deprecated_v1:mycel/syncpass.py#run_pass`
