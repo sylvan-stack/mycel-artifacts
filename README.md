@@ -16,42 +16,20 @@ Mycel 2 and the research they rest on. The **product** — Arbol's
 specifications and the shared glossary — lives one corpus over in
 `~/Artifacts/arbol/` ([its catalog](../arbol/INDEX.md)).
 
-The engine guides and the `mycel` runbook describe Mycel 1, the executable
-installed today. Mycel 2 has a local Python CLI foundation in progress. Strict settings,
-repository resolution/listing, private credentials, offline embedding plans and
-lossless parser preparation, explicit private-store init and store diagnostics
-are implemented. Complete scoped `ingest` now publishes disk, local branches
-and stashes with dependency reconciliation, Detection and collection; explicit
-`--embed` adds embedding. Entry-only activity reads expose recorded identity
-decisions. Exact `confirm` and read-only `verifications` now compose guarded
-pin renewal, record-owned evidence, current applicability and retained history;
-store format 2 keeps history across old-version collection. Configured
-disposable-store acceptance covers the implemented surfaces; general activity
-history, stale/status, search replies and full installed release qualification
-remain pending. Its current guides are `tools/mycel-2.md`,
-`tools/mycel-2-checks.md`, `tools/mycel-2-settings.md`,
-`tools/mycel-2-embedding.md`, `tools/mycel-2-parsing.md` and
-`tools/mycel-2-store.md`, `tools/mycel-2-capture.md`,
-`tools/mycel-2-evidence.md`, `tools/mycel-2-identity.md`,
-`tools/mycel-2-pin-observation.md`, `tools/mycel-2-reconciliation.md` and
-`tools/mycel-2-relations.md`. The evaluation file validator and offline snapshot harness are described in `tools/mycel-2-evaluation.md`; normal search and Drift adapters remain pending. The complete
-Mycel 1 corpus, including the chapters that were not carried over, is frozen
-at `~/Artifacts/mycel_deprecated_v1/`.
+Mycel 2 is installed as `~/.local/bin/mycel`, with its independent launcher
+and working Build `1` (package version 2.0.0). The [runbook](tools/mycel.md)
+routes to the current command, settings, search, ingest, embedding, evidence,
+classification and Build guides. Search returns schema 3; complete ingest,
+scoped embedding, summaries and exact chunk reading are implemented. Live
+qualification remains bound to the source and Build that actually passed it;
+installation does not supply new provider proof.
 
-`tools/mycel-2-retrieval.md` describes current-disk wording and meaning
-candidates, configured shared selections, separate organization-member lists
-and internal deterministic ranking with exact disk-owned document bridges.
-Internal recursive freshness checks the exact explicit upstream closure under one existing invocation deadline; public search replies retain their task owner.
-
-`tools/mycel-2-drifts.md` describes internal exact-pair Drift work, categorical
-results, reason-level closure and independently retained evidence. Public
-classification, canonical requests and provider adapters retain their task owners.
-`tools/mycel-2-classification.md` describes canonical complete classification
-evidence, reviewer command identity, quiet-period observations and fresh
-stage/application/cache guards. `tools/mycel-2-jev.md` describes the internal
-bounded Jev attempt, strict pinned-model/confidence validation and complete
-review handoff; the reviewer process, public execution and live qualification
-remain pending.
+**22 October 2026 — before the owner's first ingest:** use `rg`, `grep` and
+file reads for research. The owner fills the index and embeds repositories by
+hand after Seqoya Lab exists. Do not start a search freshness pass, ingest or
+embedding on the owner's repositories in the owner's store. Checks may use
+acknowledged disposable stores with fictional inputs. The owner removes this
+dated instruction, or asks an agent to, after that first ingest.
 
 ## Route by need
 
@@ -91,7 +69,9 @@ one screen, a family is missing; add a family, not rows.*
   this folder is the corpus of repo `mycel` (how to work). From another
   repository's checkout use `mycel search --repo mycel "…"` to search it — or
   read the files above directly (absolute paths always work; `mycel` needs no
-  daemon at all). `mycel repos` lists the repositories and which are enabled.
+  daemon at all). `mycel repos` lists configured repositories and their enabled
+  state. From a prepared folder pass `--repo <name>` explicitly: without it,
+  scope can cover the whole organization (MYC-1.4).
 - **Outputs are artifacts**: resolve the repository's `artifact_root` in
   `~/.mycel/config.toml` before placing work. Organization member repositories
   use `~/Artifacts/<org-directory>/repos/<repo>/`; standalone repositories
@@ -101,9 +81,8 @@ one screen, a family is missing; add a family, not rows.*
   The repository's `code_root` links its source checkout to that corpus; see
   [repository corpus binding](tools/mycel.md#repository-corpus-binding).
   Follow the [authoring guide](operations/source-refs-authoring.md) and update
-  existing docs rather than adding siblings. Current source uses the shared
-  organization-aware resolver; installed applications need the corresponding
-  rebuilt executables. See the runbook for precedence and remaining limits.
+  existing docs rather than adding siblings. The [settings guide](tools/mycel-2-settings.md)
+  owns current root resolution, clone locations and explicit overrides.
 
 ## Working rules for every task
 
@@ -155,11 +134,10 @@ These hold for every agent on this Mac, whatever the task and the tool.
   (`~/Artifacts/sagas/mycel-2-implementation/`). Change its code in
   `~/repos/sylvan-stack/mycel`, its specifications in `specs/` and its guides
   only within a Beat you hold. Write no run results into `research/`.
-- **Version 1 is not run and not a source.** No `*_deprecated_v1` code, and no
-  Mycel 1: neither the `mycel` command the rows above name nor the skills built
-  on it (mycel-search, code-research, deep-research, corpus-admin,
-  authored-work-integration). Search with grep and by reading files until
-  Mycel 2 is installed.
+- **Version 1 is not run and not a source.** Never run Mycel 1 or read
+  `*_deprecated_v1` code as current implementation. The installed `mycel` is
+  Mycel 2; follow the dated pre-ingest restriction above until the owner
+  fills its index.
 - **A new Sylvan Stack repository** starts at version 1.0.0; its corpus is
   `~/Artifacts/<repo>`, published as `sylvan-stack/<repo>-artifacts`; add it to
   the "Sylvan Stack 2" table of every code README.
