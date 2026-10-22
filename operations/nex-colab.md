@@ -418,7 +418,8 @@ Answer as 1b 2d 3a, or skip it.
 The titles are word for word, three dots included, and nothing else stands
 under a title but its block's lines. The `Learnings` block stands only in a
 round that changed the map; the other two close every reply that shows
-something.
+something. The marking, which opens the reply to the quiz's answers, has the
+same shape under its own title, `### Quiz answers`, as below.
 
 **The skipped line** closes the explanation of every reply that explains a
 topic by the map, in the first round or a later one, so that the owner can
@@ -485,11 +486,14 @@ nothing, such as a `Not interested:` or `Not a map topic:` answer or a reply
 that only marks a quiz, not `(use colab)` work and not a showup's reply.
 
 **The marking** opens the reply to a message that answers the last quiz,
-before every other line: its first line, then one line per question of that
-quiz, in its order:
+before every other line: its title `### Quiz answers`, the line that counts
+the right answers, then one line per question of that quiz, in its order:
 
 ```
-Quiz answers: 1 of 2 right.
+### Quiz answers
+
+1 of 2 right.
+
 - 1b: right.
 - 2a: wrong; c) it stays with the connection: a session-level lock lasts as long as the session, and the pool keeps the session open.
 ```
@@ -1322,7 +1326,7 @@ top of it.
 | Learn mode ended | `Learn mode ended; /learn starts it again.` | the whole reply to the owner's word to leave learn mode, or first when the message also asks for work |
 | Learn mode, other work | `Learn mode is on: <the work asked, in a few words> is not done here; say "leave learn mode" to end it.` | first in the reply to a request for other work in learn mode, followed by the options |
 | Learn mode, what to learn | `What would you like to learn?` followed by the options under their title | the reply to `/learn` alone |
-| The marking | `Quiz answers: <right> of <questions> right.`, then one line per question of the last quiz, in its order: `- <n><letter>: right.`, `- <n><letter>: wrong; <letter>) <the right option>: <why, in a few words>.` or `- <n>: not answered.` | first in the reply to a message that answers the last quiz, after only a learn mode line |
+| The marking | the title `### Quiz answers`, the line `<right> of <questions> right.`, then one line per question of the last quiz, in its order: `- <n><letter>: right.`, `- <n><letter>: wrong; <letter>) <the right option>: <why, in a few words>.` or `- <n>: not answered.` | first in the reply to a message that answers the last quiz, after only a learn mode line |
 | To record it | `To record it: /colab showup "<the words>"` | when the owner asks in plain words to record a level; nothing is written for it |
 | Not interested | `Not interested: <topic> is marked; it is answered without the map and nothing is recorded for it; showup removes the mark.` | at the start of the reply, for a touched topic that is marked |
 | Not a map topic | `Not a map topic: <what the prompt is about>; answered without the map, nothing recorded.` | at the start of the reply, for a prompt with no general topic |
