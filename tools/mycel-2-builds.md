@@ -1,3 +1,6 @@
+---
+role: authored
+---
 # Staging and maintaining offline Mycel Builds
 
 The development tool runs as `python -m mycel_build` from this repository's
@@ -359,7 +362,7 @@ mycel:@code/tests/test_working_publication.py#WorkingPublicationTests
 
 ## Read-only one-time replacement planning
 
-The [Mycel-owned replacement procedure](replacement.md) documents exact current
+The [Mycel-owned replacement procedure](mycel-2-replacement.md) documents exact current
 inventory, independently inspectable ownership evidence, a qualified new
 launcher/private store, verified command cutover and restrictive exact cleanup.
 `python -m mycel_build replacement-plan --inventory /absolute/inventory.json`
@@ -370,10 +373,13 @@ opens a database or copies version1 index state. Uncertain ownership stays
 blocked; source/document corpora and unrelated objects are preserved.
 
 A report binds observations; it does not authenticate ownership, exhaustive
-inventory, actual PostgreSQL execution or native Build qualification. Actual
-operator evidence and independent review remain required. Disposable-file and
-finite-catalog unit rehearsals are not an owner replacement. No such operation
-or new acceptance occurred in this source preparation.
+inventory, actual PostgreSQL execution or native Build qualification. Retain
+and independently review the operator receipts. The procedure includes the
+qualified-release binding, a concrete inventory/report worksheet, explicit new
+private-store commands and absent-old-runtime handling. Unit finite-catalog
+proofs and separately scoped disposable PostgreSQL rehearsals retain their
+own evidence; neither performs owner replacement. The installed command is
+`~/.local/bin/mycel`; callers use `mycel grep` in place of `better-grep`.
 
 <!-- sources:
 mycel:@code/src/mycel_build/_replacement.py#replacement_plan
