@@ -1,183 +1,59 @@
 ---
 role: authored
 ---
-# Runbook: mycel
+# Runbook: Mycel 2
 
-The Mycel 2 development checkout now has a CLI foundation. Its current
-commands and replies are documented in [Mycel 2 command line](mycel-2.md).
-Feature handlers, store acceptance and installed replacement are pending.
-The installed Mycel 1 executable described below remains in use.
+The installed command is `~/.local/bin/mycel`, selected by Mycel's independent
+launcher. Start with `mycel --help`; help is JSON and needs no settings.
+`mycel info` reports the selected Build, package version and settings/store
+diagnostics. The [command manual](mycel-2.md) owns command syntax and replies;
+[settings](mycel-2-settings.md) owns configuration and credentials;
+[Builds](mycel-2-builds.md) owns installation, selection and maintenance.
 
-## Why it exists
-
-The daemon-less knowledge tool: one process per job, direct to Postgres,
-query embeddings via the repository's embedder profile. It is how any agent
-searches the corpus and keeps it fresh. Settings live in
-**`~/.mycel/config.toml`** (repositories, organizations, database and
-embedding settings). Brain Recipes are owned separately by Infer in
-**`~/.infer/config.toml`**. Mycel may read another product's databases and
-logs as data, but it never depends on that product's code or instructions.
-
-This runbook describes the Mycel 1 executable installed as `mycel`.
-Subcommands and flags that its `--help` lists and this runbook omits belong
-to retired workflows; they are not part of any current procedure.
-
-## Use
-
-```
-mycel search "<query>" [--k N] [--repo R] [--path P] [--only code|docs] [--no-fresh]
-mycel better-grep [grep flags] PATTERN [PATH...]   # also installed as `better-grep`
-mycel sync [--no-embed]        # every enabled repository; RESETS CHECKOUTS, read the warning below
-mycel embed                    # embed every pending chunk, then exit
-mycel status [--repo R]        # index freshness: documents, chunks, stale counts, embed counters
-mycel activity [--k N] [--repo R] [--kind K]   # recent sync/embed/raptor feed
-mycel drifts [--repo R]        # Detection findings: docs whose cited code changed
-mycel derive '<child-ref>' '<source-ref>'  # assert source governs derived code/doc/test chunk
-mycel repos [list] [--root PATH] [--organization NAME]     # repos under ~/repo + mycel-enabled flag
-mycel raptor status|plan|regen|build [--recipe NAME] [--repo R] [--regen]   # default recipe: raptor-agent;
-                               # recipe is resolved by the independent `infer` executable
-```
-
-- **Name the repository.** `search` defaults to the repository containing the
-  CWD and falls back to `Arbol`; `status`, `drifts` and `raptor` default to
-  `Arbol` outright. Pass `--repo` whenever another repository is meant.
-- **Search contract.** A search prints one JSON object, schema version 2:
-  `{schema_version, transport, repo, overlay, results, dense, bm25, timings,
-  freshness}`. `dense` and `bm25` count the hits of each arm; `dense` is 0
-  for a repository whose chunks are not embedded yet.
-- **derive** records an asserted Derivation using stable Source Refs rather
-  than database chunk IDs. The first argument is the derived child
-  (`repo:path#symbol` or `#Heading`); the second is its governor. It runs
-  Detection after the edge is committed.
-- **search** is unified — code + docs + summaries in one ranking; docs appear
-  only when they clearly beat the best code hit (≤2, never INDEX/README).
-  `--only` narrows. **Fresh-on-read**: `search` mtime-scans the repo
-  (milliseconds, early-exit) and auto-syncs the delta when the source changed;
-  `--no-fresh` skips, and so does `--only docs`. That pass is local and
-  scoped to the searched repository: it refreshes no remotes and embeds
-  nothing, so new or edited chunks stay pending until an embed runs.
-- **sync changes checkouts. Do not run it where work is in progress.** It
-  is the all-repository pass. For every enabled repository that has an
-  explicit `code_root`, an `origin` remote and no uncommitted or untracked
-  files, it runs `git fetch origin <default branch>` and then
-  `git reset --hard FETCH_HEAD` in that folder, whatever branch is checked
-  out. Commits that are not on the remote's default branch are dropped from
-  the branch; uncommitted changes are the only thing that stops it. It then
-  ingests every enabled repository, rewrites their code maps and, unless
-  `--no-embed` is given, embeds every pending chunk of every enabled
-  repository. To bring one repository up to date, search in it: that pass
-  runs no git command that changes anything.
-- **repos** lists repos under `~/repo` (`--root` overrides) with each repo's
-  mycel-enabled flag, embedder profile, and whether it has an Artifact Corpus.
-- **Organizations** are configured in `~/.mycel/config.toml`. Compatible
-  settings editors use the same file. For example:
-
-  ```toml
-  [organizations."Euro Office"]
-  root = "~/repos/euro-office"
-  url = "https://github.com/Euro-Office"
-  ```
-
-  Direct Git repository children of that folder are members (including
-  `.github`; ordinary folders and symlinks are excluded). `repos` flattens
-  organization folders and adds `organization` to each member.
-  `mycel repos list --organization "Euro Office"` resolves the name
-  case-insensitively; an unknown organization fails with nonzero exit.
-  Configured checkout and artifact roots infer the individual repo from CWD;
-  the organization checkout/corpus root infers its name. This includes roots
-  under `~/repos` and relocated paths. `mycel search --repo "Euro Office" "<query>"` searches each member
-  corpus and returns `{schema_version: 2, organization, transport,
-  repositories}` with a complete search payload per member. `--k` applies per
-  member. Membership alone does not enable indexing: configure each
-  member's `[repos."<name>"]` entry and opt in separately; paths are inferred.
-  Other commands retain their individual-repository scope.
-
-- **raptor** `regen` and `build` read their two prompt files from
-  `system-instructions/` in this corpus (`raptor-summary.md` and
-  `raptor-request.md.tmpl`); the `MYCEL_SYSTEM_INSTRUCTIONS` environment
-  variable names another folder. A missing or empty file stops the run with
-  an error.
-- **activity** reads the `kn_activity` feed — one row per completed
-  sync/embed/raptor run. No-op passes are never logged (fresh-on-read runs
-  one on nearly every search).
-- A disabled repo (config `enabled = false`) ingests AND embeds nothing — the
-  pause switch.
+Follow the [Hub's dated pre-ingest instruction](../README.md) before running
+search, ingest or embedding. Until the owner fills the index, research uses
+`rg`, `grep` and file reads. Mycel 1 and its deprecated implementations are
+never run.
 
 ## Repository corpus binding
 
-`~/.mycel/config.toml` is the authoritative repository-to-corpus mapping.
-`[repos."<repo>"]` may independently specify `code_root` and `artifact_root`:
+`~/.mycel/config.toml`, or the file explicitly selected by `MYCEL_CONFIG`, is
+the source of truth. `mycel repos` lists configured organizations and
+repositories, resolved code/artifact roots, enabled state and local faults.
+Use those resolved roots for authored artifacts; do not infer them from an
+old flat-folder example. The [settings guide](mycel-2-settings.md#tables-and-defaults)
+gives explicit `code_root`/`artifact_root` overrides, organization defaults,
+`code_clones` and `readonly_root`. Creating a folder does not enable indexing.
 
-```toml
-[repos.core]
-enabled = true
-profile = "voyage"
-code_root = "/Users/example/repos/euro-office/core"
-artifact_root = "/Users/example/Artifacts/euro-office/repos/core"
-```
+From a prepared folder pass `--repo <name>` explicitly; without it scope can
+cover the organization's enabled members. On this Mac the intended indexed
+checkout is `~/repos/sylvan-stack/readonly/<repo>`, plus its configured corpus.
+Settings preparation belongs to SYL-241; this guide changes no settings.
 
-The example's indexing flag/profile are independent settings, not requirements
-for the folder layout. Preserve existing flags when changing paths. Creating
-a folder or joining an organization does not itself opt a repository into
-indexing; adding a new mapping may use `enabled = false`.
+## Choose the current manual
 
-For organization members, place repository-specific artifacts under
-`~/Artifacts/<org-directory>/repos/<repo>/`. Keep organization-wide research
-under `~/Artifacts/<org-directory>/researches/`. Standalone corpora keep their
-flat layout. Existing `~/Artifacts/<repo>/…` examples should be expanded using
-the configured root. Source Ref identities remain `repo:relative/path`, with
-the path relative to that repository's configured corpus, rather than the
-organization's container directory.
+- [Search and its schema-3 results](mycel-2-retrieval.md),
+  [exact chunk reading](mycel-2-reading.md), and
+  [grep with an optional related-search tail](mycel-2.md#grep-and-its-related-search-tail).
+- [Complete scoped ingest](mycel-2-reconciliation.md#complete-public-ingest),
+  [embedding and dry-run plans](mycel-2-embedding.md), and
+  [summary status, build, regeneration and removal](mycel-2-summaries.md).
+- [Dependencies, relations and verification](mycel-2-relations.md),
+  [Origin Links and coverage](mycel-2-origins.md),
+  [classification](mycel-2-classification.md), and
+  [activity history](mycel-2-activity.md).
 
-The shared `mycel.locations.RepositoryLocations` resolver reads current file
-settings and discovers direct Git checkouts through the
-existing Organizations catalog. Its location precedence is:
+Normal search can perform a bounded local freshness pass and embed its query;
+`--no-fresh` skips freshness writes, but does not disable query embedding.
+Search never embeds pending corpus text. Ingest leaves Git checkouts as they
+are and embeds only with explicit `--embed`; embedding itself uses retained
+text and explicit/CWD scope. Use the manuals above for retries and partial
+results rather than treating an empty result as proof that the index is ready.
 
-1. The historical Arbol environment override (`ARBOL_KN_CORPUS` or
-   `ARBOL_KN_CODE_ROOT`), when set.
-2. Explicit repository `artifact_root` / `code_root` from the settings file;
-   supplied database flags act as a compatibility cache.
-3. Organization membership: code stays in the discovered checkout;
-   artifacts use `~/Artifacts/<checkout-org-directory>/repos/<repo>/`.
-   Optional `[organizations."<name>"].artifact_root` replaces the organization
-   corpus root while retaining the `repos/<repo>` suffix.
-4. Existing standalone defaults (including Arbol's historical folder spelling).
-
-Sync, generated code maps, search-result files, browser/editor operations and
-repository listings share this resolver. CWD scope uses the longest matching
-configured code/artifact root. New organization
-checkouts acquire a corpus location without a per-repository path entry;
-membership does not enable indexing. Existing flat corpora can be retained
-through explicit repository overrides without moving their contents.
-
-Repository keys remain globally bare names. If multiple organizations contain
-the same repository key, inference fails and requests an explicit `code_root`
-rather than choosing an organization arbitrarily. This selects one corpus for
-that key; fully independent namespaced identities need a separate migration.
-An organization-name search still fans out to member corpora; it does not index
-organization-wide research into a separate Mycel corpus.
-
-These statements describe the checked-out source implementation. Installed
-executables must be rebuilt to acquire the new resolver.
-
-**Historical evidence (unindexed):**
-
-- `mycel_deprecated_v1:mycel/config.py#dumps`
-- `mycel_deprecated_v1:mycel/config.py#apply`
-- `mycel_deprecated_v1:mycel/locations.py#RepositoryLocations`
-- `mycel_deprecated_v1:mycel/syncpass.py#artifact_root`
-- `mycel_deprecated_v1:mycel/syncpass.py#code_root`
-- `mycel_deprecated_v1:mycel/retrieval.py#_read_location`
-- `mycel_deprecated_v1:mycel/knowledge/fs.py#corpus_root`
-- `mycel_deprecated_v1:mycel/scope.py#resolve`
-- `mycel_deprecated_v1:mycel/organizations.py#members`
-- `mycel_deprecated_v1:mycel/repo_identity.py#canonical_repo`
-
-**Historical evidence (unindexed):**
-
-- `mycel_deprecated_v1:mycel/cli.py`
-- `mycel_deprecated_v1:mycel/retrieval.py`
-- `mycel_deprecated_v1:mycel/syncpass.py#run_pass`
-- `mycel_deprecated_v1:mycel/syncpass.py#run_repo_pass`
-- `mycel_deprecated_v1:mycel/knowledge/embedder.py#code_search`
-- `mycel_deprecated_v1:mycel/knowledge/raptor.py`
+<!-- sources:
+mycel:@code/src/mycel/_cli.py
+mycel:@code/src/mycel/_settings.py
+mycel:@code/src/mycel/_scope.py
+mycel:@code/src/mycel/_search.py
+mycel:@code/src/mycel/_ingest.py
+-->

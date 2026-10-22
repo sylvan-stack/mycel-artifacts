@@ -9,33 +9,35 @@ One page to (re)load the whole mental model. Each section is two sentences of
 
 ## The write side — how knowledge gets in
 
-- **[Embedding](embedding.md)** — chunks become vectors with an identity
-  header (path + symbol first), one [Embedder
-  Profile](../../arbol/GLOSSARY.md#embedder-profile) per repo.
-- **[Code Map](code-map.md)** — a mechanical per-repo overview
-  (`generated/code-map.md`) rebuilt from chunks on every code-changing sync:
-  no LLM, gives overview queries a landing place and every file a
-  `documented_in` pointer.
-- **Sync** — one mechanical pass (docs refresh → code ingest → embed delta).
-  Mycel has no daemon: `mycel search` runs the delta for the searched
-  repository when its source changed (fresh-on-read), without embedding.
-  `mycel sync` runs the pass over every enabled repository and first resets
-  configured checkouts to their remote; read the runbook's warning before
-  using it.
-- **[Authored-work integration](authored-work-integration.md)** — a change is
-  “according to Mycel” only after artifacts, code, and tests are in enabled
-  corpora, ingested as chunks, connected by real authority/coupling edges,
-  checked by Detection, embedded, and verified through retrieval.
+Follow the [Hub's dated pre-ingest instruction](../README.md): the owner has
+not yet filled the index, so current research uses grep and file reads.
+
+- **[Embedding](embedding.md)** — retained exact-text versions become vectors
+  under the configured model and dimensions. Complete part plans preserve the
+  body and its place line; explicit repository scope keeps work bounded.
+- **Stored code overview** — ingest maintains index-only directory outlines;
+  `mycel overview --repo <repo>` reads them. The
+  [overview manual](../tools/mycel-2-overview.md) describes their counts and
+  search behavior.
+- **Ingest** — `mycel ingest --repo <repo>` captures both corpora and local
+  branches/stashes, reconciles identities and dependencies, and runs mechanical
+  Detection without changing the checkout. It embeds only with explicit
+  `--embed`; normal search can perform bounded freshness work without embedding
+  pending corpus text.
+- **[Authored-work integration](authored-work-integration.md)** — integration
+  requires coverage, ingest, real dependency/relation declarations, mechanical
+  freshness, explicit embedding and retrieval verification. Deferred steps are
+  reported separately from passing tests.
 
 ## The read side — how knowledge comes out
 
-- **[Code Retrieval](retrieval.md)** — unified search over code + docs +
-  summaries: natural-language queries rank by cosine with doc-bridges
-  injecting cited code; identifier queries use balanced RRF; tests/codegen
-  are down-weighted; docs must clearly beat code to displace it.
-- **[Research levels](code-research-levels.md)** — `better-grep` (exact +
-  meaning tail) → [code-research](code-research.md) (question → cited answer)
-  → [deep research](deep-research.md) (task → durable artifact).
+- **[Code Retrieval](retrieval.md)** — search ranks current code, documents
+  and generated sections with separate meaning/wording candidates, exact
+  document bridges and visible freshness evidence. The schema-3 reply keeps
+  each repository's results separate.
+- **[Research levels](code-research-levels.md)** — exact text lookup and optional
+  `mycel grep` recall → [code-research](code-research.md), a question answered
+  with citations → [deep research](deep-research.md), durable task context.
 
 ## Large pull-request reviews
 
@@ -124,8 +126,9 @@ its exact semantics — is enumerated in the
 ## Where each piece runs
 
 Mycel is a **per-task CLI** (`mycel …`): one process per job and no daemon.
-Its settings live in `~/.mycel/config.toml`, and RAPTOR generation calls the
-independent `infer` executable.
+Its settings live in `~/.mycel/config.toml`; `mycel summaries` uses the
+explicitly configured writer command for generation. The installed launcher
+selects an immutable working Build; see the [runbook](../tools/mycel.md).
 
 ## Mycel Skill dispatchers
 
@@ -146,7 +149,7 @@ Skills carry only *when to trigger*; the process always lives here, in Mycel.
 
 <!-- sources:
 mycel:operations/embedding.md
-mycel:operations/code-map.md
+mycel:@code/src/mycel/_overview.py
 mycel:operations/retrieval.md
 mycel:operations/code-research-levels.md
 mycel:operations/code-research.md
