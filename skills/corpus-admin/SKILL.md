@@ -1,6 +1,11 @@
 ---
 name: corpus-admin
-description: Mycel corpus administration - "is the index fresh", "sync repo X", "embed pending chunks", "pause/resume embedding", "add a repo to Mycel", "retrieval system status/health". Covers ~/.mycel/config.toml changes, sync and embed runs, RAPTOR status. NOT for searching content (mycel-search).
+description: >-
+  Inspect or administer Mycel 2 repository configuration, ingest, embedding
+  coverage and plans, summaries, and index health. Examples: "Is the Mycel
+  index fresh?" and "Show pending embedding work for Mycel without sending
+  requests". NOT for finding content (mycel-search), explaining code
+  (code-research), or integrating authored work (authored-work-integration).
 ---
 
 Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
