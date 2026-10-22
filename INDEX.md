@@ -138,7 +138,7 @@ What must happen, in Mycel vocabulary — the invariant behind every invocation 
 - [`retrieval.md`](./operations/retrieval.md) — schema-3 wording/meaning results, document bridges, freshness and source citations.
 - [`code-map.md`](./operations/code-map.md) — the mechanical per-repo overview artifact and its `generated: true` semantics.
 - [`knowledge-model.md`](./operations/knowledge-model.md) — the value reference: in-band declarations (`role:` / `status: heartwood` / `generated:` / `sources:`), chunk roles/states, Derivation kinds/policies, Detection reasons, Drift lifecycle.
-- [`authored-work-integration.md`](./operations/authored-work-integration.md) — completion loop for new artifacts, implementation, and tests: corpus coverage, chunk ingest, authority edges, Detection, embeddings, and retrieval verification.
+- [`authored-work-integration.md`](./operations/authored-work-integration.md) — corpus coverage, Source Refs before authorized ingest, assertion exceptions, Detection, embedding and retrieval verification.
 - [`create-skill.md`](./operations/create-skill.md) — create one provider-agnostic Mycel Skill and its thin provider adapters; covers native Codex CLI and Claude Code CLI discovery, symlinks, and invocation policy.
 - [`pr-deep-review.md`](./operations/pr-deep-review.md) — multi-session review of a large pull request: sync with the head, ranked areas, verified and independently challenged findings, a queue of drafted comments for the human reviewer, commands for the recurring steps (next, commits, verify, replies, check, summary, status), stop criteria on findings, time, tokens and coverage; never posts.
 - [`pr-deep-review-reference.md`](./operations/pr-deep-review-reference.md) — its lookup companion: `state.json` schema, area and finding statuses, templates for the reviewer's page, finding card and run report, stop-criteria measures and kinds, reading token spend, commands for reading a GitHub pull request.
@@ -190,12 +190,12 @@ Not process guides: `mycel raptor regen|build` loads both files from this folder
 Shared activation contracts and thin Hub dispatchers for native Codex CLI and Claude Code CLI. Canonical sources are linked into `~/.agents/skills/` (Codex) and `~/.claude/skills/` (Claude). See [authoring rules](skills/README.md) and the [creation guide](operations/create-skill.md).
 
 - [`arbol-chat-prepared-folder`](./skills/arbol-chat-prepared-folder/SKILL.md)
-- [`authored-work-integration`](./skills/authored-work-integration/SKILL.md)
+- [`authored-work-integration`](./skills/authored-work-integration/SKILL.md) — Source Ref-first integration into Mycel 2, with authorized indexing and explicit deferred checks.
 - [`code-research`](./skills/code-research/SKILL.md) — cross-file explanations with file-and-line evidence; retrieval readiness follows the Hub.
 - [`colab`](./skills/colab/SKILL.md) — explicit-only; its Claude Code adapter is [`providers/claude/colab`](./skills/providers/claude/colab/SKILL.md)
 - [`corpus-admin`](./skills/corpus-admin/SKILL.md) — Mycel 2 configuration, ingest, embedding plans, summaries and index health.
 - [`create-mycel-skill`](./skills/create-mycel-skill/SKILL.md)
-- [`deep-research`](./skills/deep-research/SKILL.md)
+- [`deep-research`](./skills/deep-research/SKILL.md) — durable task-context artifacts with source evidence; Mycel 2 retrieval follows Hub readiness.
 - [`learn`](./skills/learn/SKILL.md) — explicit-only; its Claude Code adapter is [`providers/claude/learn`](./skills/providers/claude/learn/SKILL.md)
 - [`linear-open-questions`](./skills/linear-open-questions/SKILL.md)
 - [`linear-organize`](./skills/linear-organize/SKILL.md)
