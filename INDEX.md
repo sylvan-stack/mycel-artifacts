@@ -131,11 +131,11 @@ The 12 October ranking receipts below record current source acceptance: 1,104 pa
 ### `operations/` — Mycel Operations: frontend-agnostic process descriptions
 What must happen, in Mycel vocabulary — the invariant behind every invocation surface (skills, CLI agents, humans).
 - [`OVERVIEW.md`](./operations/OVERVIEW.md) — the readable one-page summary of all operations (for humans; agents use the Hub).
-- [`code-research-levels.md`](./operations/code-research-levels.md) — better-grep → code-research → deep-research: which tool when.
+- [`code-research-levels.md`](./operations/code-research-levels.md) — exact lookup, cited explanations and durable task context: which tool when.
 - [`code-research.md`](./operations/code-research.md) — the level-2 loop. Skills are thin dispatchers pointing here.
 - [`deep-research.md`](./operations/deep-research.md) — the level-3 process: inputs, angles, output contract, quality bar.
-- [`embedding.md`](./operations/embedding.md) — profiles, the identity-header recipe, iron rules, compounding habits.
-- [`retrieval.md`](./operations/retrieval.md) — the read path: route decision, doc bridge, noise down-weights, via/documented_in annotations.
+- [`embedding.md`](./operations/embedding.md) — scoped ingest and embedding plans, retained progress, retries and the owner-first-ingest boundary.
+- [`retrieval.md`](./operations/retrieval.md) — schema-3 wording/meaning results, document bridges, freshness and source citations.
 - [`code-map.md`](./operations/code-map.md) — the mechanical per-repo overview artifact and its `generated: true` semantics.
 - [`knowledge-model.md`](./operations/knowledge-model.md) — the value reference: in-band declarations (`role:` / `status: heartwood` / `generated:` / `sources:`), chunk roles/states, Derivation kinds/policies, Detection reasons, Drift lifecycle.
 - [`authored-work-integration.md`](./operations/authored-work-integration.md) — completion loop for new artifacts, implementation, and tests: corpus coverage, chunk ingest, authority edges, Detection, embeddings, and retrieval verification.
@@ -178,7 +178,7 @@ One [Runbook](../arbol/GLOSSARY.md#runbook) per [Tool](../arbol/GLOSSARY.md#tool
 - [`mycel-2-pin-observation.md`](./tools/mycel-2-pin-observation.md) — real fresh disk/catalog observations for guarded pins and source-missing inheritance, including exact parser projections, aliases and physical observation guards; complete commands remain pending.
 - [`mycel-2-reconciliation.md`](./tools/mycel-2-reconciliation.md) — guarded dependency ownership/pins, source-only foreign refresh, mechanical propagation, public derive/relate and complete scoped ingest with busy retry and exact activity.
 - [`mycel-2-evaluation.md`](./tools/mycel-2-evaluation.md) — strict versioned evaluation files, one-repository dispatch, offline recall/fault accounting and read-only snapshot comparisons; normal search/Drift execution remains pending.
-- [`mycel.md`](./tools/mycel.md) — knowledge CLI: search, sync, embed, status, drifts, derive, repos, raptor; repository corpus binding.
+- [`mycel.md`](./tools/mycel.md) — installed Mycel 2 command/manual router and repository corpus binding.
 - [`linear.md`](./tools/linear.md) — connector capabilities and UI mechanics for Linear favorites, folders, sidebar customization, and question/decision navigation targets.
 
 ### `system-instructions/` — prompt files the `mycel` executable reads
@@ -191,9 +191,9 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 
 - [`arbol-chat-prepared-folder`](./skills/arbol-chat-prepared-folder/SKILL.md)
 - [`authored-work-integration`](./skills/authored-work-integration/SKILL.md)
-- [`code-research`](./skills/code-research/SKILL.md)
+- [`code-research`](./skills/code-research/SKILL.md) — cross-file explanations with file-and-line evidence; retrieval readiness follows the Hub.
 - [`colab`](./skills/colab/SKILL.md) — explicit-only; its Claude Code adapter is [`providers/claude/colab`](./skills/providers/claude/colab/SKILL.md)
-- [`corpus-admin`](./skills/corpus-admin/SKILL.md)
+- [`corpus-admin`](./skills/corpus-admin/SKILL.md) — Mycel 2 configuration, ingest, embedding plans, summaries and index health.
 - [`create-mycel-skill`](./skills/create-mycel-skill/SKILL.md)
 - [`deep-research`](./skills/deep-research/SKILL.md)
 - [`learn`](./skills/learn/SKILL.md) — explicit-only; its Claude Code adapter is [`providers/claude/learn`](./skills/providers/claude/learn/SKILL.md)
@@ -201,7 +201,7 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 - [`linear-organize`](./skills/linear-organize/SKILL.md)
 - [`linear-resolve`](./skills/linear-resolve/SKILL.md)
 - [`radar-stats`](./skills/radar-stats/SKILL.md)
-- [`mycel-search`](./skills/mycel-search/SKILL.md)
+- [`mycel-search`](./skills/mycel-search/SKILL.md) — Mycel 2 location and document lookup with source citations.
 - [`pr-deep-review`](./skills/pr-deep-review/SKILL.md)
 - [`use-colab`](./skills/use-colab/SKILL.md)
 
