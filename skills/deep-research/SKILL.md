@@ -1,6 +1,13 @@
 ---
 name: deep-research
-description: Long-running research producing or UPDATING research artifacts in the applicable Artifact Corpus folder - "research everything involved in Y", "build me FULL context for the work on X", "produce/update a research doc on Z" - multi-angle coverage across the indexed repositories and their artifact corpora. NOT for single questions (code-research), NOT for a single find-it lookup (mycel-search), and NOT for reviewing a pull request (pr-deep-review).
+description: >-
+  Produce or update durable research artifacts with multi-angle task context,
+  source evidence and open questions in the repository's resolved corpus.
+  Examples: "Research everything involved in upload retries and produce a
+  research artifact" and "Update the existing research document on upload
+  retries with full task context". Uses Mycel 2 retrieval when the Hub permits
+  it, and direct source research. NOT for a single question (code-research),
+  one location or document (mycel-search), or a pull-request review (pr-deep-review).
 ---
 
 Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route

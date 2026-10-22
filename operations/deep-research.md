@@ -56,7 +56,10 @@ If the request names no topic, stop and ask instead of inventing a brief.
 3. **Research each angle** with the [code-research](code-research.md) loop:
    use retrieval when ready, then `rg` or `grep` for exact enumeration and
    claims of absence, widening where the index supplies no evidence. Each finding carries a 3–15 line
-   snippet with its path and line range.
+   snippet with its path and line range. Check the current files before treating
+   indexed text as current behavior: an indexed readonly clone can differ from
+   the working branch. A skipped freshness pass or zero stored stale count does
+   not prove the filesystem was checked.
 4. **Evaluate and loop.** After each angle, check it against the quality bar.
    An angle that misses gets another iteration. An angle that stays dry after
    honest effort becomes an explicit open question, never a silent omission.
@@ -64,6 +67,8 @@ If the request names no topic, stop and ask instead of inventing a brief.
    [Source Refs authoring guide](source-refs-authoring.md) and write to
    `research/` under the repository's artifact root; resolve it first, see
    [repository corpus binding](../tools/mycel.md#repository-corpus-binding).
+   Read the destination's README before writing, including the corpus README
+   and any category rules. Keep a backup when replacing an existing artifact.
    Updating an existing research document beats creating a sibling: it
    repairs drift and keeps the corpus curated. New documents are for
    genuinely new topics.
@@ -80,7 +85,9 @@ If the request names no topic, stop and ask instead of inventing a brief.
 
 Before reporting completion, check honestly:
 
-- every claim traces to a resolving Source Ref;
+- every claim traces to a precise Source Ref; distinguish a target verified in
+  source files from a declaration resolved in the index. When ingest is deferred
+  by the Hub, report index resolution and retrieval as deferred too;
 - no planned angle is silently missing — each is covered or carried as an
   open question;
 - an existing document was updated rather than duplicated, where one existed;
@@ -93,3 +100,8 @@ Before reporting completion, check honestly:
 The final message links to the artifact that was written or updated and names
 the two or three findings that most change how the work should proceed. Do
 not paste the file's contents back.
+
+<!-- sources:
+mycel:@code/src/mycel/_search_reply.py
+mycel:@code/src/mycel/_read_store.py
+-->
