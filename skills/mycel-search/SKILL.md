@@ -1,6 +1,12 @@
 ---
 name: mycel-search
-description: Semantic one-shot search over the indexed repositories and their artifact corpora - "find where X is implemented", "which docs mention Y", "is there anything about Z" - when exact grep fails or the vocabulary is unknown. Returns ranked locations and snippets in one pass; repository scope inferred from CWD. NOT for explain-how-it-works questions (code-research) and NOT for exact strings (grep/better-grep).
+description: >-
+  Find one implementation location or relevant document in Mycel 2's indexed
+  repositories and artifact corpora when vocabulary is uncertain. Return ranked
+  locations and source citations. Examples: "Find the guide that explains where
+  a Beat's hold is created" and "Which Mycel documents describe query embedding?".
+  NOT for exact-string enumeration (grep), cross-file explanations (code-research),
+  or index administration (corpus-admin).
 ---
 
 Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
