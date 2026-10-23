@@ -25,7 +25,7 @@ the [glossary](../../arbol/GLOSSARY.md#saga). The Sagas themselves are files
 in the corpus `~/Artifacts/sagas/`: the rules of each Saga's work are in that
 Saga's file, and what a Beat must achieve is in that Beat's file.
 
-**Contents:** when to use · where state lives · territories · Environments ·
+**Contents:** when to use · existing ownership · where state lives · territories · Environments ·
 holds · an Environment for an Arbol chat · order and progress ·
 taking the next Beat · the plan of a Beat · the hand-over of a Beat · while
 working · stop criteria of a Beat · stopping and finishing · reviewing a
@@ -42,6 +42,30 @@ Beat, an Arc or a Saga · planning a Saga · not built yet.
 Not for answering the owner's open questions
 ([Answer Open Questions from Linear](linear-open-questions.md)) or their
 comments ([Resolve Linear Comments](linear-resolve.md)).
+
+## When another session already owns the work
+
+Before acting on a request to start, continue or finish a Saga, Arc or Beat,
+check the holds and confirm their owners are alive as [Who owns a
+hold](#who-owns-a-hold) says. Read only enough current assignment information
+to establish whether another live session already owns the requested work.
+Do this before planning, booking an Environment, running checks or preparing
+closure, and before announcing that you will take or finish the work.
+
+If another live session owns that work, **report it immediately and stop**.
+Name the work, tool, session and Environment, with its latest known status if
+readily available, then end the turn. Do not start a parallel implementation,
+read-only preparation, verification, coordination or closure effort, or wait
+for its hold to clear. A general request to continue or finish the work does
+not authorize a second effort. A separate explicit request to check status,
+monitor, coordinate or arrange a hand-over permits only that requested
+activity; a takeover still follows the hold and release rules.
+
+A hold on one Beat does not assign every Beat of its Saga to that session.
+Independent, unassigned work in another Arc can still be taken when its
+territory overlaps no hold. But if a live session is already assigned the
+remaining Beats of a Saga, a request to finish that Saga requires the
+ownership report and a stop, including for later verification and closure.
 
 ## Where state lives
 
@@ -423,10 +447,13 @@ tells its parent how far it got.
 1. **Choose where to look.** A request that names a Saga or an Arc looks
    there only. Otherwise go through the Sagas in the order of
    `~/Artifacts/sagas/INDEX.md`, and through each Saga's Arcs in the order of
-   its `saga.md`.
+   its `saga.md`. Apply [the existing ownership rule](#when-another-session-already-owns-the-work)
+   before starting task preparation; if another live session already owns
+   the requested work, report it immediately and end the turn.
 2. **Read the Saga's `saga.md` and its `rules.md`.** The rules apply to every
    Beat of the Saga; `saga.md` says which other document your Beat needs.
-3. **Run [the check](#the-check).**
+3. **Run [the check](#the-check).** If ownership changed, apply the existing
+   ownership rule again before proceeding.
 4. **Find the Arc's next Beat:** the first Beat in the order of the Arc's
    file that is not Done, consulting the completed-task artifact as well as
    live Linear status. A removed issue recorded complete is not taken again.
