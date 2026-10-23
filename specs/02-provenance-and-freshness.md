@@ -185,6 +185,8 @@ Only direct dependencies count. A relation of MYC-7 does not, nor does a summary
 
 `mycel read` lists every such section for the chunk it reads, and each code result of a search says whether any section describes it. `mycel undocumented` lists the code chunks of a repository that no section describes, optionally only below given paths, so that tests and scripts can be left out. Before it lists, it checks and ingests changes in the repository as a search does (MYC-4.18), with the same option to turn the check off. The list shows the links as they are: it makes no link, and it does not judge which code needs one. Which code is important enough to need a document is decided by the people and agents who write it.
 
+Origin recovery ([MYC-17](17-justification.md#recovering-origin-links), MYC-D57) uses these document links as candidates alongside symbol mentions. A candidate is not a declaration or proof; only its guarded model judgement may create an inferred/recovered Origin Link.
+
 ## Requirements
 
 | ID | Mycel must… | Origin | Verified by |

@@ -71,6 +71,14 @@ Every retained valid Jev result also carries mandatory `exactDecimals`: `probabi
 
 The complete serialized Jev HTTP body has an initial 24,000-byte local cap. This is a chosen request-size budget, not a claim about the provider's tokenization. No required text is truncated. Exceeding this cap bypasses Jev and routes the complete input to the smarter reviewer with `jev_input_too_large`. A provider refusal for context length likewise routes to review; other 422 errors remain provider failures. The official token limits still apply on the server. Byte-cap behavior and longer model inputs are tested separately.
 
+### Origin-pair classification
+
+Since MYC-D57 (19 October 2026), explicit `mycel recovery` uses this same finite model boundary with a second question, `mycel-origin-v1`, packaged in `classification-prompts.json` in the fixed order `governs`, `related`, `unrelated`. It asks whether a candidate governs the selected chunk, is merely relevant, or has no established relevant connection. It treats all supplied text as data. It does not ask whether a changed source still supports an old claim.
+
+`OriginDecisionPayload` contains protocol/question/criteria/labels, complete exact `chunk` and `candidate` DecisionTexts, sorted source categories, exact local `history`, canonical-address-ordered direct-governor and ancestor `context`, exact Jev/reviewer identities and `mycel-origin-routing-v1` with the canonical decimal floor. Every text validates its exact snapshot hash/length. Its input hash is canonical MYC-16 JSON, independent of timestamps/full-file guard offsets. Origin and drift payloads, labels and caches cannot substitute for each other. The Jev transport keeps one Choice question named `dependency`, with this payload's instruction/criteria and three known labels; the exact canonical confidence formula, probability validation, floor and ties apply unchanged. The Jev confidence is the score for a complete Origin judgement.
+
+The protocol-1 review request carries this questionVersion, its labels and supplied snapshot locators. Its success schema is the existing strict matching-identity/rationale/citations envelope plus mandatory finite `confidenceScore` in [0,1]; the field is forbidden on the drift question. Review is independent of a tentative Jev answer. Recovery's `--review` explicitly judges existing model proposals and can raise or lower their scores; it makes no Jev call. The isolated command, exact adapter fingerprint, byte/deadline/attempt caps, credential isolation and obsolete-input checks are unchanged. Missing configuration remains pending. Recovery preserves exact request/result history and in-flight evidence ownership, keeps current-link evidence, and bounds other ended recovery records to the newest 1,000 per repository. MYC-17 specifies candidate selection, link bands, writes and replies. No deployment qualification is inherited from the drift question.
+
 ### Five-minute debounce and stale results
 
 Ingest, hash detection and cross-repository stale propagation happen immediately. Only semantic model calls wait. The accepted default is 300 seconds, configured by `drifts.debounce_seconds`.
@@ -87,7 +95,7 @@ Immediately before each Jev/reviewer call, and before applying either result, ve
 
 ### Explicit execution and budgets
 
-Only explicit `mycel classify` and MYC-13's `mycel evaluate --kind drift --live` send Jev or reviewer requests. Classification applies the lifecycle below; live evaluation uses the evaluation set and produces qualification evidence without changing corpus freshness or Drift work. Ingest/search/read reconcile local stale reasons, pending eligibility and work-list state within their existing budgets, and reuse already completed matching results; they send no classifier or reviewer calls. `mycel drifts` is report-only. Expiry of the quiet period is not execution.
+Only explicit `mycel classify`, `mycel recovery` and MYC-13's `mycel evaluate --kind drift --live` send Jev or reviewer requests. Classification applies the lifecycle below; live evaluation uses the evaluation set and produces qualification evidence without changing corpus freshness or Drift work. Ingest/search/read reconcile local stale reasons, pending eligibility and work-list state within their existing budgets, and reuse already completed matching results; they send no classifier or reviewer calls. `mycel drifts` is report-only. Expiry of the quiet period is not execution.
 
 Select current on-disk candidates in order `(eligibleAt, dependantId, inputHash)` within each repository; unclassified work with a known time sorts before retries with that time. Repository scope and multi-repository replies follow MYC-0/MYC-1/MYC-6. Off-disk versions may retain evidence but are never classified by this operation.
 
@@ -295,6 +303,8 @@ Existing requirement IDs are retained, with the completed wording accepted under
 | MYC-14.25 | bind adapter revision, argv/executable fingerprint and instruction/environment versions to request, cache, stage and qualification identities, rejecting changed commands at launch/application | New | store |
 | MYC-14.26 | permit one provider call per adapter attempt, retry only typed transient failures within existing budgets, terminate/reap complete process groups and expose unresolved failures without raw diagnostics | New | unit |
 | MYC-14.27 | provide the complete pinned/current governor and ancestor evidence contract and reproducible request/success/failure examples for protocol-adapter setup | New | unit |
+
+| MYC-14.28 <!-- 8bee85cf-69c4-4273-a3dc-a272d4ca3148 --> | classify Origin candidate pairs with the distinct versioned governs/related/unrelated question, exact evidence and matching identities; apply the same quiet period, canonical confidence routing, finite budgets and isolated reviewer with strict confidenceScore replies, no truncation, dry-run calls or obsolete effects | New | store |
 
 ## Interface
 
