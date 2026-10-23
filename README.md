@@ -29,7 +29,10 @@ file reads for research. The owner fills the index and embeds repositories by
 hand after Seqoya Lab exists. Do not start a search freshness pass, ingest or
 embedding on the owner's repositories in the owner's store. Checks may use
 acknowledged disposable stores with fictional inputs. The owner removes this
-dated instruction, or asks an agent to, after that first ingest.
+dated instruction, or asks an agent to, after that first ingest. One
+exception (the owner, 23 October 2026): SYL-261 ingests `readonly/mycel`
+alone into the owner's store, without embedding, and runs only the
+deterministic audit; recovery and the model audit wait for the owner.
 
 ## Route by need
 
