@@ -10,10 +10,10 @@ in these files. Implementation claims must agree with the current program.
 
 ## Mycel 2 guide originals and copies
 
-The repository files under `docs/` are the originals of these 19 guides:
+The repository files under `docs/` are the originals of these 20 guides:
 `activity`, `capture`, `classification`, `drifts`, `embedding`, `evidence`,
 `generated`, `identity`, `origins`, `overview`, `parsing`, `pin-observation`, `reading`,
-`reconciliation`, `relations`, `retrieval`, `source-refs`, `store`, `summaries`.
+`reconciliation`, `recovery`, `relations`, `retrieval`, `source-refs`, `store`, `summaries`.
 Change the original with the code it describes, then remake its corpus copy.
 The copy is `tools/mycel-2-<name>.md`; it adds authored frontmatter and rewrites
 local guide links to this folder's `mycel-2-*.md` names. A link to
@@ -29,7 +29,7 @@ python3 scripts/sync_guides.py write --corpus /path/to/mycel/tools --guide activ
 
 `check` is read-only and exits 1 if any original or copy is absent or differs.
 `write` replaces the selected copies; keep a backup before replacing existing
-work. Repeated `--guide` options select a subset; without them all 19 are used.
+work. Repeated `--guide` options select a subset; without them all 20 are used.
 The command never chooses the owner's corpus from their settings or home.
 `tests/test_guide_copies.py` exercises rendering, every declared guide and drift
 refusal in temporary directories, so `make check` also works in a standalone

@@ -40,7 +40,8 @@ Settings preparation belongs to SYL-241; this guide changes no settings.
   [summary status, build, regeneration and removal](mycel-2-summaries.md).
 - [Dependencies, relations and verification](mycel-2-relations.md),
   [Origin Links and coverage](mycel-2-origins.md),
-  [classification](mycel-2-classification.md), and
+  [classification](mycel-2-classification.md),
+  [Origin recovery](mycel-2-recovery.md) in a Build containing the command, and
   [activity history](mycel-2-activity.md).
 
 Normal search can perform a bounded local freshness pass and embed its query;
