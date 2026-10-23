@@ -88,10 +88,11 @@ retry; do not infer rollback or success from the terminal alone.
 For Mycel's one-time `@proves` transition, MYC-D56 requires method `proven`,
 band `proven` and verification `how: check`. The ordinary statement command
 writes method `stated` with `how: read`, so a generated pair file alone does
-not complete that import. SYL-261 owns the migration implementation and its
-validation. Preserve the registry, claims, decorators and qualification checks
-until that required import is verified in its authorized destination.
-Disposable rehearsal is preparation, rather than acceptance of the owner run.
+not complete that import. SYL-261 carried it out on 23 October 2026 and then
+retired the registry, claims, decorators and their qualification checks
+(MYC-D56). For another repository, preserve its legacy declarations the same
+way until their import is verified in its authorized destination. Disposable
+rehearsal is preparation, rather than acceptance of the owner run.
 
 Read the Origin report with the unresting requirements included. Reconcile
 the imported pairs with the frozen declarations, and retain exact source and
