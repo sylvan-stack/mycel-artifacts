@@ -52,6 +52,7 @@ dated instruction, or asks an agent to, after that first ingest.
 | what Mycel 1 actually did, with the place in its source | the inventories listed in [specs/README.md](specs/README.md) |
 | how retrieval ranks / why a result won | [operations/retrieval.md](operations/retrieval.md) |
 | administer Mycel indexing, freshness, embeddings, or configuration | [tools/mycel.md](tools/mycel.md) · [operations/embedding.md](operations/embedding.md) |
+| bring an existing repository under Origin Coverage, find what lacks an Origin, or justify changed code and documents | [operations/justification.md](operations/justification.md) — normalize rows, preserve declared claims, recover gaps and inspect the audit; Origin reports are optional |
 | integrate authored artifacts, code, and tests “according to Mycel” | [operations/authored-work-integration.md](operations/authored-work-integration.md) — coverage → ingest → edges → Detection → embeddings → verify |
 | create, update, or install Mycel Skills for native Codex CLI and Claude Code CLI | [operations/create-skill.md](operations/create-skill.md) |
 | work in a Euro-Office repository | `~/Artifacts/euro-office/README.md` — where its corpora are, how the local clones relate to the upstream repositories, and what became of its Linear workspace |

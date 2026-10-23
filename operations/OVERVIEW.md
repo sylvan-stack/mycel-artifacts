@@ -29,6 +29,8 @@ not yet filled the index, so current research uses grep and file reads.
   freshness, explicit embedding and retrieval verification. Deferred steps are
   reported separately from passing tests.
 
+- **[Justify code and documents](justification.md)** — identifiable requirements and decisions let existing declarations become stored Origin claims before recovery and audit inspect the gaps. Reports for new work are optional; owner-store writes and paid calls follow the current operator boundary.
+
 ## The read side — how knowledge comes out
 
 - **[Code Retrieval](retrieval.md)** — search ranks current code, documents

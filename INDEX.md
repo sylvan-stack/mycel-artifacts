@@ -1,5 +1,7 @@
 # Mycel Operations Catalog
 
+- [Justify code and documents](operations/justification.md) — normalize requirement identities, preserve existing claims, recover gaps and audit them; optional Origin Coverage for new work.
+
 > **Start at the [Instructions Hub](./README.md)** — the routing table. This
 > INDEX is the full catalog of the Mycel corpus (`~/Artifacts/mycel/`, repo
 > `mycel`, its own git repo): everything about **how to work**. The product —
