@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-15
-status: accepted
+status: implemented
 ---
 # Mycel · 15 Distribution and replacement
 
@@ -164,3 +164,22 @@ The launcher validates recorded format, number and relative installed paths and 
 ## Decisions
 
 The binding owner decisions are [MYC-D1](00-overview-and-legacy-map.md#decisions) (Python command line only), [MYC-D26](06-index-store.md#decisions) (remove version 1 and carry over nothing), and [MYC-D33](10-grep-replacement.md#decisions) (one program, `mycel grep`). The runtime pin, registry location, independent launcher and development-tool shape are defaults accepted with the specification set on 8 October 2026. On 14 October 2026 the owner decided: "we don't need Intel support. Remove this requirement and implementation if any". Apple Silicon (`macos-arm64`) is the sole supported target. This supersedes the former Intel target obligation; historical release and check receipts retain the scope under which they were produced. Building, qualifying and publishing an installed program remain separate work.
+
+## Named checks
+
+Written by `scripts/name_checks.py` from the `proven` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
+
+| Requirement | Kind | Checks |
+|---|---|---|
+| `MYC-15.1` | unit | `test_build.BuildInputsTests.test_creation_refuses_free_threaded_and_non_cpython_before_allocation`, `test_build.BuildWheelTests.test_product_only_noneditable_wheel_installs_exact_recorded_bytes`, `test_build.BuildWheelTests.test_runtime_directory_ancestors_refuse_case_and_unicode_file_collisions_before_writes` and 16 more |
+| `MYC-15.2` | unit | `test_build.BuildInputsTests.test_source_identity_ignores_generated_egg_info_and_tool_caches`, `test_build.BuildInputsTests.test_source_inputs_include_dirty_untracked_and_gate_files`, `test_build.BuildSourceBindingTests.test_gate_input_identity_covers_runner_imports_scripts_metadata_and_entrypoint` and 21 more |
+| `MYC-15.3` | unit | `test_build.BuildManifestTests.test_exec_uses_bundled_isolated_python_and_preserves_arguments_cwd`, `test_build.BuildManifestTests.test_cross_target_probe_is_an_explicit_failure`, `test_build.BuildWheelTests.test_runtime_relative_interpreter_link_remains_inside_relocated_folder` |
+| `MYC-15.4` | unit | `test_build.BuildRegistryTests.test_busy_registry_refuses_without_waiting_or_writing`, `test_build.BuildRegistryTests.test_canonical_numeric_allocation_retains_failed_and_pruned_records`, `test_build.BuildRegistryTests.test_concurrent_process_allocations_are_unique_and_monotonic` and 16 more |
+| `MYC-15.5` | unit | `test_working_publication.WorkingPublicationTests.test_each_precommit_failure_or_interrupt_preserves_old_default_and_exact_retry_is_controlled`, `test_working_publication.WorkingPublicationTests.test_peer_registry_lock_is_immediately_busy_with_no_write_or_default_change`, `test_working_publication.WorkingPublicationTests.test_postcommit_fsync_error_or_interrupt_reports_actual_working_state_without_downgrade` and 3 more |
+| `MYC-15.6` | unit | `test_launcher_selection.LauncherSelectionTests.test_malformed_unknown_unavailable_and_empty_default_are_sanitized_structured_errors`, `test_launcher_selection.LauncherSelectionTests.test_numeric_default_skips_every_unavailable_status_target_and_damaged_build_without_writes`, `test_launcher_selection.LauncherSelectionTests.test_only_first_selector_is_consumed_and_withdrawn_requires_explicit_selection` and 4 more |
+| `MYC-15.7` | unit | `test_launcher_selection.LauncherProcessTests.test_actual_binary_streams_stdin_and_arbitrary_exit_status_pass_without_json_wrapping`, `test_launcher_selection.LauncherProcessTests.test_actual_exec_preserves_pid_cwd_every_argument_and_environment_without_distribution_writes`, `test_launcher_selection.LauncherProcessTests.test_real_product_grep_keeps_raw_stdin_output_error_and_status_under_invalid_settings` and 4 more |
+| `MYC-15.8` | unit | `test_offline_build.InstalledAutomaticTests.test_unknown_child_lifetime_retains_its_private_workspace_without_database_recovery`, `test_private_credential_contract.PrivateCredentialContractTests.test_both_publication_receivers_refuse_global_preference_claim_over_profile_view`, `test_private_credential_contract.PrivateCredentialContractTests.test_invalid_client_admission_never_loads_native_library_or_writes_foreign_root` and 20 more |
+| `MYC-15.9` | unit | `test_launcher_installation.LauncherInstallationTests.test_busy_installer_and_failed_final_cutover_preserve_existing_runnable_launcher`, `test_launcher_installation.LauncherInstallationTests.test_unchecked_or_tampered_bundle_never_replaces_existing_command`, `test_launcher_installation.LauncherInstallationTests.test_unrelated_command_and_unsafe_parent_refuse_before_creating_or_replacing_owner_files` and 9 more |
+| `MYC-15.10` | store | `test_launcher_store.LauncherRollbackStoreTests.test_build_install_select_withdraw_prune_and_version_rollback_preserve_settings_all_rows_schema_and_sequences` |
+| `MYC-15.11` | unit | `test_replacement.ReplacementTests.test_absent_inventory_refuses_present_objects_ambiguous_claims_and_unobservable_paths`, `test_replacement.ReplacementTests.test_already_absent_old_runtime_is_observed_without_inventing_cleanup_or_availability`, `test_replacement.ReplacementTests.test_disposable_rehearsal_removes_only_approved_objects_and_preserves_sources_shell_tail_and_catalog` and 7 more |
+| `MYC-15.12` | unit | `test_replacement.ReplacementTests.test_mycel_owned_help_and_replacement_guide_require_no_other_product_or_runtime_cleanup_command` |

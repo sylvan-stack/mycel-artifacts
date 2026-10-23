@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-9
-status: accepted
+status: implemented
 ---
 # Mycel · 09 The code overview
 
@@ -135,3 +135,23 @@ interface OverviewReply {
 | ID | Question | Proposed default | Outcome |
 |---|---|---|---|
 | MYC-D32 <!-- 1cd36d33-7e94-496c-9885-c54f27fbfd35 --> | Is the code overview a file in the repository's document folder, or is it kept in the index only? | In the index only. A search finds it and `mycel overview` prints it, and Mycel never writes into a folder it reads. Version 1 wrote the file `generated/code-map.md`: it can be opened in an editor and is kept by git, but every change to the code then leaves a changed file in the documents' checkout that somebody has to commit or ignore | Decided 8 October 2026 by the owner: resolved; keep the code overview in the index only, searchable and printable with `mycel overview`, without writing a file in a checkout |
+
+## Named checks
+
+Written by `scripts/name_checks.py` from the `proven` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
+
+| Requirement | Kind | Checks |
+|---|---|---|
+| `MYC-9.1` | store | `test_overview_store.OverviewStoreTests.test_complete_ingest_publishes_all_disk_files_without_checkout_writes_or_branch_stash_names` |
+| `MYC-9.2` | unit | `test_overview_render.OverviewRenderTests.test_all_files_classes_eight_caps_order_and_complete_counts_are_offline`, `test_overview_render.OverviewRenderTests.test_duplicate_nested_classes_continuations_kind_and_position_ties` |
+| `MYC-9.3` | unit | `test_overview_render.OverviewRenderTests.test_all_files_classes_eight_caps_order_and_complete_counts_are_offline`, `test_overview_render.OverviewRenderTests.test_duplicate_nested_classes_continuations_kind_and_position_ties` |
+| `MYC-9.4` | store | `test_overview_store.OverviewStoreTests.test_fresh_search_pass_builds_and_reconciles_the_applied_outline`, `test_overview_store.OverviewStoreTests.test_normal_embedding_is_preserved_on_body_only_edits_and_changed_outline_becomes_pending`, `test_overview_store.OverviewStoreTests.test_order_kind_membership_and_path_changes_update_exact_directories` |
+| `MYC-9.5` | store | `test_overview_store.OverviewStoreTests.test_complete_ingest_publishes_all_disk_files_without_checkout_writes_or_branch_stash_names` |
+| `MYC-9.6` | store | `test_overview_store.OverviewStoreTests.test_missing_sections_rebuild_from_store_and_empty_directory_sections_delete`, `test_overview_store.OverviewStoreTests.test_search_read_report_origin_no_edges_shared_exclusion_and_document_margin_limit` |
+| `MYC-9.7` | store | `test_overview_store.OverviewStoreTests.test_normal_embedding_is_preserved_on_body_only_edits_and_changed_outline_becomes_pending` |
+| `MYC-9.8` | store | `test_overview_store.OverviewStoreTests.test_search_read_report_origin_no_edges_shared_exclusion_and_document_margin_limit` |
+| `MYC-9.9` | store | `test_overview_store.OverviewStoreTests.test_search_read_report_origin_no_edges_shared_exclusion_and_document_margin_limit` |
+| `MYC-9.10` | store | `test_overview_store.OverviewStoreTests.test_search_read_report_origin_no_edges_shared_exclusion_and_document_margin_limit` |
+| `MYC-9.11` | unit | `test_overview_render.OverviewRenderTests.test_all_files_classes_eight_caps_order_and_complete_counts_are_offline`, `test_overview_render.OverviewRenderTests.test_duplicate_nested_classes_continuations_kind_and_position_ties` |
+| `MYC-9.12` | store | `test_overview_store.OverviewStoreTests.test_failed_final_projection_rolls_back_code_and_overview_and_stopped_pass_keeps_committed_prefix`, `test_overview_store.OverviewStoreTests.test_fresh_search_pass_builds_and_reconciles_the_applied_outline`, `test_overview_store.OverviewStoreTests.test_missing_sections_rebuild_from_store_and_empty_directory_sections_delete` and 1 more |
+| `MYC-9.13` | unit | `test_overview_cli.OverviewCliTests.test_directory_options_are_normalized_and_escape_is_rejected_before_store_access`, `test_overview_cli.OverviewCliTests.test_repository_scope_is_single_enabled_and_explicit_reports_need_no_folder`, `test_overview_cli.OverviewCliTests.test_stored_report_returns_empty_without_folders_freshness_embedding_or_writes` |

@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-0
-status: accepted
+status: implemented
 ---
 # Mycel · 00 Overview and legacy map
 
@@ -257,3 +257,22 @@ The Glossary entries below still describe version 1. Aligning their wording with
 | MYC-D6 <!-- ac16271d-cc69-4fb6-a93d-8cb3cb88f760 --> | Are work trees and a view of the index per branch carried over? | Not in version 1's form. Version 1 had already retired its work-tree commands, and no view was registered on 7 October 2026. Mycel 2 makes no work tree: it reads every local branch and stash from git and records where each chunk is found (MYC-D8) | Decided 8 October 2026 by the owner: resolved; retire the work-tree commands and separate branch indexes. Read local branches and stashes from git and record where each chunk version is found, as decided in MYC-D8; search uses the versions on disk |
 
 | MYC-D37 | Do the previously prescribed named defaults/exclusion remain exceptions to the independence and repository-name prohibitions? | Retain only the named MYC-D18 shared selections and MYC-D7 `.arbol` scan exclusion as explicit packaged data; no implicit repository, alias, path fallback or dependency | Decided 9 October 2026 by the owner: keep the prescribed names as explicit exceptions. All other product-specific naming remains prohibited; MYC-0.3 and MYC-1.5 are reconciled accordingly |
+
+## Named checks
+
+Written by `scripts/name_checks.py` from the `proven` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
+
+| Requirement | Kind | Checks |
+|---|---|---|
+| `MYC-0.1` | unit | `test_architecture.ArchitectureTests.test_product_surface_is_one_independent_cli`, `test_cli.CliTests.test_clean_environment_finite_help_and_refusal` |
+| `MYC-0.2` | unit | `test_classification_eligibility.ClassificationEligibilityTests.test_all_serialized_times_are_utc_and_custom_zero_quiet_period_is_effective`, `test_classification_eligibility.ClassificationEligibilityTests.test_deletion_uses_first_tombstone_read_and_restoration_checks_that_time`, `test_classification_eligibility.ClassificationEligibilityTests.test_failed_initial_read_stays_pending_until_success_establishes_observation` and 13 more |
+| `MYC-0.3` | unit | `test_named_exceptions.NamedExceptionTests.test_only_prescribed_names_are_packaged_data_and_runtime_has_no_product_coupling`, `test_named_exceptions.NamedExceptionTests.test_shared_defaults_create_no_repository_alias_or_folder_fallback_and_are_overridable`, `test_architecture.ArchitectureTests.test_product_surface_is_one_independent_cli` and 1 more |
+| `MYC-0.4` | store | `test_store_acceptance.ProductStoreTests.test_product_init_has_both_indexes_only_metadata_and_stable_generation` |
+| `MYC-0.5` | unit | `test_settings_cli.SettingsCliTests.test_each_handler_receives_one_immutable_snapshot_and_no_env_settings_override`, `test_settings_cli.SettingsCliTests.test_info_reports_missing_and_invalid_settings_without_writes_or_values`, `test_settings_cli.SettingsCliTests.test_plain_grep_uses_path_and_forwards_no_parent_credentials` and 2 more |
+| `MYC-0.6` | unit | `test_audit.AuditInputTests.test_cli_options_scopes_settlement_and_count_validation`, `test_classification_local.ClassificationCliBoundaryTests.test_final_audit_failure_and_later_interrupt_preserve_committed_repository_replies`, `test_cli.CliTests.test_build_selection_is_explicitly_unavailable` and 42 more |
+| `MYC-0.7` | unit | `test_locks.LockProtocolTests.test_store_failures_name_the_postgres_error_class_and_state_without_native_text`, `test_related_refs.RelatedRefTests.test_asserted_unmanaged_and_corrupt_relation_metadata_is_never_reported_as_declaration`, `test_activity_history.ActivityHistoryUnitTests.test_count_kind_and_exclusive_detail_filters_refuse_before_any_store_access` and 21 more |
+| `MYC-0.8` | store | `test_refs.RefsStoreTests.test_wrong_format_and_structure_contention_refuse_without_repair_or_writes`, `test_store_acceptance.ProductStoreTests.test_compatible_init_and_read_guards_issue_no_ddl`, `test_store_acceptance.EmptyProductStoreTests.test_empty_store_is_refused_by_read_and_created_only_by_explicit_product_init` and 1 more |
+| `MYC-0.9` | unit | `test_init_activity.BuildIdentityTests.test_development_has_no_number_and_exact_package_identity_ignores_environment`, `test_launcher_selection.LauncherProcessTests.test_info_reports_the_selected_package_identity_and_withdrawn_warning_uses_only_stderr` |
+| `MYC-0.10` | unit | `test_classification_payload.ClassificationPayloadTests.test_before_is_complete_exact_baseline_membership_and_dependant_identity`, `test_classification_payload.ClassificationPayloadTests.test_bundle_full_manifest_guard_identity_is_separate_from_payload_cache_identity`, `test_classification_payload.ClassificationPayloadTests.test_bundle_refuses_missing_text_evidence_wrong_owner_and_invalid_guards` and 67 more |
+| `MYC-0.11` | store | `test_store_gate.StoreGateTests.test_real_store_proofs_are_private_executed_and_discarded` |
+| `MYC-0.12` | unit | `test_architecture.ArchitectureTests.test_program_version_matches_package_metadata`, `test_guide_copies.GuideCopyTests.test_check_reports_missing_and_changed_pairs_without_writing`, `test_guide_copies.GuideCopyTests.test_copy_replacement_preserves_hard_linked_outside_bytes_and_mtime` and 10 more |

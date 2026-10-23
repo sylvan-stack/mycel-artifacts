@@ -9,26 +9,26 @@ What Mycel 2 does, written from what Mycel 1 did. [Mycel](../../arbol/GLOSSARY.m
 
 | Spec | Title | Status |
 |---|---|---|
-| [MYC-0](00-overview-and-legacy-map.md) | Overview and legacy map | accepted |
-| [MYC-1](01-corpora-and-ingest.md) | Corpora and ingest | accepted |
-| [MYC-2](02-provenance-and-freshness.md) | Provenance and freshness | accepted |
-| [MYC-3](03-embedding.md) | Embedding | accepted |
-| [MYC-4](04-retrieval.md) | Retrieval | accepted |
-| [MYC-5](05-settings.md) | Settings | accepted |
-| [MYC-6](06-index-store.md) | The index store | accepted |
-| [MYC-7](07-drifts-and-verification.md) | Drifts and verification | accepted |
-| [MYC-8](08-summaries.md) | Summaries | accepted |
-| [MYC-9](09-code-overview.md) | The code overview | accepted |
-| [MYC-10](10-grep-replacement.md) | The grep replacement | accepted |
-| [MYC-11](11-reading-a-chunk.md) | Reading a chunk | accepted |
-| [MYC-12](12-record-of-work.md) | The record of work | accepted |
-| [MYC-13](13-checks-and-evaluation.md) | Checks and the evaluation set | accepted |
-| [MYC-14](14-drift-detection.md) | Drift detection | accepted |
-| [MYC-15](15-distribution-and-replacement.md) | Distribution and replacement | accepted |
-| [MYC-16](16-source-addresses-and-evidence.md) | Source addresses and evidence | accepted |
+| [MYC-0](00-overview-and-legacy-map.md) | Overview and legacy map | implemented |
+| [MYC-1](01-corpora-and-ingest.md) | Corpora and ingest | implemented |
+| [MYC-2](02-provenance-and-freshness.md) | Provenance and freshness | implemented |
+| [MYC-3](03-embedding.md) | Embedding | implemented |
+| [MYC-4](04-retrieval.md) | Retrieval | accepted, held back by MYC-4.25 |
+| [MYC-5](05-settings.md) | Settings | implemented |
+| [MYC-6](06-index-store.md) | The index store | implemented |
+| [MYC-7](07-drifts-and-verification.md) | Drifts and verification | implemented |
+| [MYC-8](08-summaries.md) | Summaries | implemented |
+| [MYC-9](09-code-overview.md) | The code overview | implemented |
+| [MYC-10](10-grep-replacement.md) | The grep replacement | implemented |
+| [MYC-11](11-reading-a-chunk.md) | Reading a chunk | implemented |
+| [MYC-12](12-record-of-work.md) | The record of work | implemented |
+| [MYC-13](13-checks-and-evaluation.md) | Checks and the evaluation set | accepted, held back by MYC-13.9, MYC-13.19 and MYC-13.20 |
+| [MYC-14](14-drift-detection.md) | Drift detection | accepted, held back by MYC-14.22 |
+| [MYC-15](15-distribution-and-replacement.md) | Distribution and replacement | implemented |
+| [MYC-16](16-source-addresses-and-evidence.md) | Source addresses and evidence | implemented |
 | [MYC-17](17-justification.md) | Justification | draft |
 
-MYC-0 sets the boundary. MYC-1 to MYC-4 specify ingest, provenance, embedding and retrieval; MYC-5 and MYC-6 specify settings and storage; MYC-7 to MYC-12 specify relations, verification, summaries, overviews, grep, reads and activity; MYC-13 specifies checks and evaluation. MYC-14 completes Jev classification, five-minute debounce, smarter review and the Drift lifecycle. MYC-15 specifies independent Python distribution and version 1 removal. MYC-16 specifies portable source addresses, exact baseline evidence and retention. MYC-17 specifies justification: requirements and decisions as entities with Entity URIs, the discussion of a decision, and Origin Links; it was opened on 19 October 2026 on the owner's decisions MYC-D45 to MYC-D49 and MYC-D63 and stays `draft` until the owner accepts it. The 17 chapters MYC-0 to MYC-16 are accepted for implementation on 8 October 2026, after the owner answered the final Drift decisions and agreed with the remaining proposals. Acceptance records the specification contract; runtime checks and provider qualification remain implementation/release work. Every chapter is required scope; task volume is not a reason to defer or drop a function (MYC-D4, MYC-D13).
+MYC-0 sets the boundary. MYC-1 to MYC-4 specify ingest, provenance, embedding and retrieval; MYC-5 and MYC-6 specify settings and storage; MYC-7 to MYC-12 specify relations, verification, summaries, overviews, grep, reads and activity; MYC-13 specifies checks and evaluation. MYC-14 completes Jev classification, five-minute debounce, smarter review and the Drift lifecycle. MYC-15 specifies independent Python distribution and version 1 removal. MYC-16 specifies portable source addresses, exact baseline evidence and retention. MYC-17 specifies justification: requirements and decisions as entities with Entity URIs, the discussion of a decision, and Origin Links; it was opened on 19 October 2026 on the owner's decisions MYC-D45 to MYC-D49 and MYC-D63 and stays `draft` until the owner accepts it. The 17 chapters MYC-0 to MYC-16 are accepted for implementation on 8 October 2026, after the owner answered the final Drift decisions and agreed with the remaining proposals. Acceptance records the specification contract; runtime checks and provider qualification remain implementation/release work. On 24 October 2026 (SYL-243) 14 of them became `implemented`; MYC-4, MYC-13 and MYC-14 wait for the on-demand eval and live reports of MYC-4.25, MYC-13.9, MYC-13.19, MYC-13.20 and MYC-14.22. Every chapter is required scope; task volume is not a reason to defer or drop a function (MYC-D4, MYC-D13).
 
 Evidence the specifications rest on is in `research/`:
 
@@ -111,7 +111,7 @@ These conventions belong to Mycel. Their shape is aligned with the historical [D
 
 **From v1.** The requirement tables' third column, named `From v1` since 19 October 2026 (MYC-D49; it was `Origin`, a word now reserved for the source end of an Origin Link, and the chapters MYC-0 to MYC-16 are renamed by SYL-261): `Kept` carries over observed version 1 behavior; `Changed` alters it and explains why under Known problems; `New` has no version 1 counterpart; `Dropped` records behavior deliberately left behind.
 
-**Status.** `draft` → `review` → `accepted` → `implemented`. Only the owner accepts a specification. Open implementation work after acceptance; mark it implemented only when every requirement names a passing check.
+**Status.** `draft` → `review` → `accepted` → `implemented`. Only the owner accepts a specification. Open implementation work after acceptance; mark it implemented only when every requirement names a passing check. Each accepted or implemented chapter ends with a Named checks section that names, for every active requirement, up to three of its passing checks. The Mycel repository's `scripts/name_checks.py` writes it from the `proven` Origin Links of the tests and a complete passing check report, sets the chapter's status here and in its front matter, and with `check` confirms them against a later report; a held-back chapter names here the requirements that have no passing check. The requirement rows are not changed: a changed row is a new version of the requirement, and would put every test resting on it stale.
 
 **Decisions.** Each unresolved choice has a proposed default and an Outcome row. Complete specification work may proceed with a plainly identified proposal; owner acceptance is never inferred from drafting it. Record an owner answer with its date and reconcile affected requirements in the same change. A Decisions table may have a fifth column, `Discussion`, which holds the Entity URIs of the Arbol chats in which the decision was taken, `[cht:<uuid>:<title>]`, and nothing else (MYC-D47); `mycel read` of the decision shows those chats (MYC-D48), and a chat never makes the decision stale.
 
@@ -119,7 +119,7 @@ These conventions belong to Mycel. Their shape is aligned with the historical [D
 
 **Source Refs.** Every tracked Source Ref must name a repository registered in Mycel and currently enabled (MYC-D11). The name `mycel:` means this corpus and, later, the new code. Deprecated repositories have no index entries. A section describing version 1 instead gives ordinary historical evidence locators, written `mycel_deprecated_v1:path#symbol` or `arbol_deprecated_v1:path#heading`, outside frontmatter `sources:` and `<!-- sources: -->` blocks. These preserve the evidence without declaring an index dependency.
 
-**Verified by.** Mycel has no vendor tool behind it, so its kinds of check are its own:
+**Verified by.** The cell holds one kind of check; the checks themselves are named in the chapter's Named checks section. Mycel has no vendor tool behind it, so its kinds of check are its own:
 
 | Check | Meaning |
 |---|---|

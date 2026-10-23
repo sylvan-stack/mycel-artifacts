@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-11
-status: accepted
+status: implemented
 ---
 # Mycel · 11 Reading a chunk
 
@@ -155,3 +155,23 @@ interface ReadReply {
 ## Decisions
 
 No question of this specification's own is open. MYC-D39 of [MYC-2](02-provenance-and-freshness.md#decisions), decided on 15 October 2026, adds the documents that describe a chunk to the reply.
+
+## Named checks
+
+Written by `scripts/name_checks.py` from the `proven` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
+
+| Requirement | Kind | Checks |
+|---|---|---|
+| `MYC-11.1` | store | `test_read_store.ReadStoreTests.test_disk_selection_excludes_branch_and_stash_and_current_exact_bytes_override_text_projection`, `test_read_store.ReadStoreTests.test_whole_retained_code_document_summary_and_overview_text_need_no_vector_or_file`, `test_read_store.ReadFreshnessStoreTests.test_fresh_read_ingests_changed_exact_text_and_new_qualified_file_before_final_selection` and 2 more |
+| `MYC-11.2` | unit | `test_read.ReadTests.test_identifier_and_qualified_alias_use_the_actual_primary_binding`, `test_read.ReadTests.test_qualified_and_legacy_places_and_result_identifier_select_one_exact_chunk`, `test_read_cli.ReadCliTests.test_cli_keeps_a_source_ref_or_identifier_context_and_skipped_check_explicit` |
+| `MYC-11.3` | store | `test_read_store.ReadStoreTests.test_exact_name_wins_and_unique_bare_method_heading_and_class_header_match`, `test_read_store.ReadFreshnessStoreTests.test_fresh_discovery_refuses_a_new_duplicate_bare_heading_instead_of_the_old_unique_match` |
+| `MYC-11.4` | store | `test_read_store.ReadStoreTests.test_missing_ambiguous_disabled_and_unknown_reads_use_the_closed_refusals`, `test_read_store.ReadFreshnessStoreTests.test_fresh_discovery_refuses_a_new_duplicate_bare_heading_instead_of_the_old_unique_match`, `test_read_store.ReadFreshnessStoreTests.test_fresh_discovery_refuses_a_new_physical_root_collision_before_an_old_heading_can_win` and 2 more |
+| `MYC-11.5` | store | `test_read_store.ReadStoreTests.test_disk_selection_excludes_branch_and_stash_and_current_exact_bytes_override_text_projection`, `test_read_store.ReadStoreTests.test_shared_exact_chunk_version_reports_only_faults_owned_by_its_current_disk_location`, `test_read_store.ReadStoreTests.test_whole_retained_code_document_summary_and_overview_text_need_no_vector_or_file` and 3 more |
+| `MYC-11.6` | store | `test_read_generated_store.GeneratedReadStoreTests.test_upper_summary_checks_generated_members_and_transitive_external_sources_without_regeneration`, `test_read_store.ReadFreshnessStoreTests.test_busy_upstream_keeps_committed_text_and_a_visible_incomplete_dependency_check`, `test_read_store.ReadFreshnessStoreTests.test_expired_one_deadline_reads_committed_index_and_lists_pending_work` and 5 more |
+| `MYC-11.7` | unit | `test_read.ReadTests.test_original_source_and_intermediate_paths_faults_and_heartwood_survive_reply`, `test_read.ReadTests.test_pending_source_or_ref_fault_cannot_make_an_unmarked_chunk_verified_current`, `test_read.ReadTests.test_reply_keeps_checkout_markdown_document_origin_exact_lines_and_canonical_root` and 1 more |
+| `MYC-11.8` | unit | `test_read.ReadTests.test_context_comes_from_the_file_while_the_chunk_text_stays_exactly_indexed`, `test_read.ReadTests.test_context_stops_at_file_boundaries`, `test_read.ReadTests.test_context_does_not_read_a_symlink_that_escapes_the_selected_configured_root` |
+| `MYC-11.9` | unit | `test_read.ReadTests.test_five_mib_cut_is_measured_in_utf8_bytes_without_a_partial_character` |
+| `MYC-11.10` | unit | `test_read_cli.ReadCliTests.test_info_names_the_running_build_commands_and_read_reply_without_a_capabilities_command` |
+| `MYC-11.11` | store | `test_read_store.ReadStoreTests.test_qualified_roots_percent_names_index_collisions_and_aliases_never_guess_a_file`, `test_read_store.ReadFreshnessStoreTests.test_fresh_discovery_refuses_a_new_physical_root_collision_before_an_old_heading_can_win` |
+| `MYC-11.12` | store | `test_document_links.DocumentLinksStoreTests.test_actual_declared_whole_file_and_class_family_describe_each_selected_code_chunk`, `test_document_links.DocumentLinksStoreTests.test_current_anchored_versions_replace_old_pins_and_stale_marks_do_not_hide_links`, `test_document_links.DocumentLinksStoreTests.test_read_lists_both_directions_and_edge_kinds_completely_without_vectors` and 1 more |
+| `MYC-11.13` | store | `test_entities.EntityStoreTests.test_read_by_entity_uri_address_and_human_id_with_the_kind_tag_as_a_check` |

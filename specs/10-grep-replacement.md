@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-10
-status: accepted
+status: implemented
 ---
 # Mycel · 10 The grep replacement
 
@@ -153,3 +153,24 @@ The lines of the tail are text for a reader. A program that needs the same resul
 | ID | Question | Proposed default | Outcome |
 |---|---|---|---|
 | MYC-D33 <!-- 3673c632-1c80-4013-850e-421f9708f5dc --> | Under which name is the grep replacement started? | `mycel grep`, and no second program. Mycel is one program with one launcher. Version 1 also had `better-grep` as a program of its own, so that the habit of typing `grep` could be kept by changing one word; the guides and skills of this corpus still tell agents to call it. Keeping that name would need a second launcher, which the Builds specification does not provide, or a line in the owner's shell settings that maps the old name onto the new command | Decided 8 October 2026 by the owner: agreed. `mycel grep`, and no second program |
+
+## Named checks
+
+Written by `scripts/name_checks.py` from the `proven` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
+
+| Requirement | Kind | Checks |
+|---|---|---|
+| `MYC-10.1` | unit | `test_grep_tail.GrepTailUnitTests.test_real_path_first_child_receives_literal_argv_binary_streams_and_unchanged_cwd_without_settings`, `test_grep_tail.GrepTailUnitTests.test_real_child_help_version_noargs_no_match_error_and_eligible_pipe_preserve_grep_prefix_and_status` |
+| `MYC-10.2` | unit | `test_grep_tail.GrepTailUnitTests.test_primary_cancellation_keeps_signal_status_and_reaps_its_real_child_group`, `test_grep_tail.GrepTailUnitTests.test_real_child_status_survives_search_render_write_flush_and_tail_cancellation_faults`, `test_grep_tail.GrepTailUnitTests.test_real_child_help_version_noargs_no_match_error_and_eligible_pipe_preserve_grep_prefix_and_status` |
+| `MYC-10.3` | unit | `test_grep_tail.GrepTailUnitTests.test_primary_cancellation_keeps_signal_status_and_reaps_its_real_child_group`, `test_grep_tail.GrepTailUnitTests.test_real_path_first_child_receives_literal_argv_binary_streams_and_unchanged_cwd_without_settings`, `test_grep_tail.GrepTailUnitTests.test_real_child_help_version_noargs_no_match_error_and_eligible_pipe_preserve_grep_prefix_and_status` |
+| `MYC-10.4` | unit | `test_grep_tail.GrepTailUnitTests.test_explicit_attached_clustered_and_late_patterns_preserve_paths_conservatively` |
+| `MYC-10.5` | unit | `test_grep_tail.GrepTailUnitTests.test_every_accepted_suppression_precedes_settings_and_optional_search`, `test_grep_tail.GrepTailUnitTests.test_explicit_attached_clustered_and_late_patterns_preserve_paths_conservatively` |
+| `MYC-10.6` | unit | `test_grep_tail.GrepTailUnitTests.test_dotted_identifiers_survive_and_other_signs_become_spaces_before_literal_minimum`, `test_grep_tail.GrepTailUnitTests.test_every_accepted_suppression_precedes_settings_and_optional_search`, `test_grep_tail.GrepTailUnitTests.test_first_path_actual_folders_longest_root_and_single_member_organization_boundary` and 2 more |
+| `MYC-10.7` | store | `test_grep_tail_store.GrepTailStoreTests.test_actual_append_uses_normal_wording_fallback_and_retains_every_row_xmin_sequence_and_cited_mark`, `test_grep_tail_store.GrepTailStoreTests.test_actual_default_tail_matches_normal_combined_top_five_with_shared_documents_and_no_freshness_or_writes` |
+| `MYC-10.8` | unit | `test_grep_tail.GrepTailUnitTests.test_first_path_actual_folders_longest_root_and_single_member_organization_boundary` |
+| `MYC-10.9` | unit | `test_grep_tail.GrepTailUnitTests.test_dotted_identifiers_survive_and_other_signs_become_spaces_before_literal_minimum` |
+| `MYC-10.10` | unit | `test_grep_tail.GrepTailUnitTests.test_delimited_ordered_tail_has_exact_places_lines_delivery_and_unique_marked_sections_without_scores`, `test_grep_tail.GrepTailUnitTests.test_document_identity_dedup_and_control_characters_cannot_forge_tail_lines` |
+| `MYC-10.11` | unit | `test_grep_tail.GrepTailUnitTests.test_explicit_plain_silences_invalid_settings_while_selected_failure_is_one_private_line`, `test_grep_tail.GrepTailUnitTests.test_real_path_first_child_receives_literal_argv_binary_streams_and_unchanged_cwd_without_settings` |
+| `MYC-10.12` | unit | `test_grep_tail.GrepTailUnitTests.test_document_identity_dedup_and_control_characters_cannot_forge_tail_lines`, `test_grep_tail.GrepTailUnitTests.test_real_child_status_survives_search_render_write_flush_and_tail_cancellation_faults`, `test_grep_tail.GrepTailUnitTests.test_explicit_plain_silences_invalid_settings_while_selected_failure_is_one_private_line` |
+| `MYC-10.13` | store | `test_grep_tail_store.GrepTailStoreTests.test_actual_append_uses_normal_wording_fallback_and_retains_every_row_xmin_sequence_and_cited_mark`, `test_grep_tail_store.GrepTailStoreTests.test_actual_default_tail_matches_normal_combined_top_five_with_shared_documents_and_no_freshness_or_writes` |
+| `MYC-10.14` | unit | `test_grep_tail.GrepTailUnitTests.test_only_mycel_console_entry_and_raw_grep_command_are_exposed` |
