@@ -303,7 +303,6 @@ Existing requirement IDs are retained, with the completed wording accepted under
 | MYC-14.25 | bind adapter revision, argv/executable fingerprint and instruction/environment versions to request, cache, stage and qualification identities, rejecting changed commands at launch/application | New | store |
 | MYC-14.26 | permit one provider call per adapter attempt, retry only typed transient failures within existing budgets, terminate/reap complete process groups and expose unresolved failures without raw diagnostics | New | unit |
 | MYC-14.27 | provide the complete pinned/current governor and ancestor evidence contract and reproducible request/success/failure examples for protocol-adapter setup | New | unit |
-
 | MYC-14.28 <!-- 8bee85cf-69c4-4273-a3dc-a272d4ca3148 --> | classify Origin candidate pairs with the distinct versioned governs/related/unrelated question, exact evidence and matching identities; apply the same quiet period, canonical confidence routing, finite budgets and isolated reviewer with strict confidenceScore replies, no truncation, dry-run calls or obsolete effects | New | store |
 
 ## Interface
