@@ -12,7 +12,7 @@
       "title": "Mycel · Conventions and index",
       "id": "f635119a-a19d-49b1-ba62-a669b3da3b87",
       "url": "https://linear.app/amorphius/document/mycel-conventions-and-index-bbd8691a945b",
-      "published": "2026-10-20"
+      "published": "2026-10-24"
     },
     "specs/00-overview-and-legacy-map.md": {
       "title": "Mycel · 00 Overview and legacy map",
@@ -96,7 +96,7 @@
       "title": "Mycel · 13 Checks and the evaluation set",
       "id": "89c51ea6-d7c3-487d-9e0e-2b9fb5f2f3a7",
       "url": "https://linear.app/amorphius/document/mycel-13-checks-and-the-evaluation-set-a6e1c9126683",
-      "published": "2026-10-23"
+      "published": "2026-10-24"
     },
     "specs/14-drift-detection.md": {
       "title": "Mycel · 14 Drift detection",
@@ -120,7 +120,7 @@
       "title": "Mycel · 17 Justification",
       "id": "8c6f1a7f-e328-431f-b226-7937b190f49b",
       "url": "https://linear.app/amorphius/document/mycel-17-justification-ee2e0853cc4d",
-      "published": "2026-10-23"
+      "published": "2026-10-24"
     }
   }
 }
