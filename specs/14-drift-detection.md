@@ -280,35 +280,35 @@ These designs are retained as history. Word amounts understate `must` becoming `
 
 Existing requirement IDs are retained, with the completed wording accepted under MYC-D28/MYC-D29 on 8 October 2026. Checks below are obligations for implementation; none is claimed to have passed against Mycel 2.
 
-| ID | Mycel must… | Origin | Verified by |
+| ID | Mycel must… | From v1 | Verified by |
 |---|---|---|---|
-| MYC-14.1 | consider every changed source–dependant/related pair without a change-size gate, using exact Jev classification and the confidence/review policy above | New | unit |
-| MYC-14.2 | obtain complete exact pinned/current/dependant/context evidence under MYC-16; call neither model when required evidence is missing | New | store |
-| MYC-14.3 | preserve baseline pins, bind results/reuse to exact input/model/question/policy identities, and discard obsolete effects | New | store |
-| MYC-14.4 | expose categorical judgements and pending/error reasons, distinguishing removal from read failure and away versions | New | store |
-| MYC-14.5 | maintain visible work for pending/review/insufficient/error states and retain Jev evidence during reviewer escalation | Changed | store |
-| MYC-14.6 | apply the explicit rules for upstream-stale governors, broken refs, removed sources, Heartwood and generated chunks; treat no error as support | New | store |
-| MYC-14.7 | keep at most one open Drift per dependant version, with every contributing pair and reason | Kept | store |
-| MYC-14.8 | execute classification only through an explicit finite invocation, keep off-disk work inactive and install no resident or delayed worker | New | store |
-| MYC-14.9 | close only answered reasons, close supported pair work under the accepted MYC-D29 policy, and distinguish work closure from freshness restoration | Changed | store |
-| MYC-14.10 | retain newest 1,000 closed work records/bundles per repository with protected live/open/in-flight evidence and MYC-16 garbage collection | New | store |
-| MYC-14.11 | preserve MYC-D12: no classifier/reviewer result clears staleness, confirms a chunk or advances a baseline pin | New | store |
-| MYC-14.12 | use the independent Jev and protocol-1 reviewer contracts, exact model identities, Keychain credentials and configured finite budgets, with no Arbol code/instruction dependency | New | unit |
-| MYC-14.13 | list current open work by default, add closed/inactive versions only when requested, and expose separate work/pair/stage counts | Changed | store |
-| MYC-14.14 | enforce the configured default-300-second quiet period over all required live file/version changes, using the timestamp/tombstone/generated rules above | New | store |
-| MYC-14.15 | recheck exact inputs, enablement, current version and eligibility before both model stages and result application | New | store |
-| MYC-14.16 | keep search/read within their existing budgets, make no classifier/reviewer calls there, and expose pending/evidence status | New | unit |
-| MYC-14.17 | validate exact known Jev labels/probabilities/model and finite reported confidence, compute canonical confidence without renormalization or clamping, retain provider agreement/difference as diagnostics, and route low canonical confidence, ties or insufficient evidence to review | New | unit |
-| MYC-14.18 | apply deterministic selection, candidate/concurrency/deadline/retry caps, nonblocking locks and cancellation; preserve partial replies | New | store |
-| MYC-14.19 | launch the configured independent reviewer without a shell and validate its protocol/input/model/evidence reply, limits and credential isolation | New | unit |
-| MYC-14.20 | send no truncated required text; route oversized Jev input to complete reviewer input or visible unresolved work | New | unit |
-| MYC-14.21 | implement dry-run with no state writes, Jev/reviewer/Voyage credential acquisition, adapter launches or model calls, reaching the store as every other command does (MYC-D41), allowing local executable inspection/hash reads and exact eligibility/byte/call reporting | New | unit |
-| MYC-14.22 | require the MYC-13 model/question/policy/reviewer qualification before deployment and retain its quality/cost report | New | live |
-| MYC-14.23 | launch only the specified resolved argv with the fixed child environment, private working directory, pipes and process group, and isolate credentials and unrelated file descriptors | New | unit |
-| MYC-14.24 | transmit the exact canonical request plus LF/EOF, drain pipes concurrently, and validate the strict success/failure JSON and exit combination, matching all identities and allowed evidence locators | New | unit |
-| MYC-14.25 | bind adapter revision, argv/executable fingerprint and instruction/environment versions to request, cache, stage and qualification identities, rejecting changed commands at launch/application | New | store |
-| MYC-14.26 | permit one provider call per adapter attempt, retry only typed transient failures within existing budgets, terminate/reap complete process groups and expose unresolved failures without raw diagnostics | New | unit |
-| MYC-14.27 | provide the complete pinned/current governor and ancestor evidence contract and reproducible request/success/failure examples for protocol-adapter setup | New | unit |
+| MYC-14.1 <!-- 00d3e72a-e417-4364-a9b9-caa961e7e511 --> | consider every changed source–dependant/related pair without a change-size gate, using exact Jev classification and the confidence/review policy above | New | unit |
+| MYC-14.2 <!-- af4ef640-c631-4046-a203-201f24b66a67 --> | obtain complete exact pinned/current/dependant/context evidence under MYC-16; call neither model when required evidence is missing | New | store |
+| MYC-14.3 <!-- 095420fd-0f4e-4813-ad1d-7426e66772be --> | preserve baseline pins, bind results/reuse to exact input/model/question/policy identities, and discard obsolete effects | New | store |
+| MYC-14.4 <!-- 8fcb05c0-d4d2-4c84-8908-e23a28e89805 --> | expose categorical judgements and pending/error reasons, distinguishing removal from read failure and away versions | New | store |
+| MYC-14.5 <!-- 823e95b7-6dc6-4f66-b0ef-a78ccdf0f5c2 --> | maintain visible work for pending/review/insufficient/error states and retain Jev evidence during reviewer escalation | Changed | store |
+| MYC-14.6 <!-- bef791f5-ead6-4f14-9374-38c6838f38a7 --> | apply the explicit rules for upstream-stale governors, broken refs, removed sources, Heartwood and generated chunks; treat no error as support | New | store |
+| MYC-14.7 <!-- 9effc621-841b-4ac0-8351-7dfd179fec16 --> | keep at most one open Drift per dependant version, with every contributing pair and reason | Kept | store |
+| MYC-14.8 <!-- ac782edf-c65b-48c5-a0fe-05cbec00932e --> | execute classification only through an explicit finite invocation, keep off-disk work inactive and install no resident or delayed worker | New | store |
+| MYC-14.9 <!-- fe70c54d-324a-44fc-aaae-4f9a42c18aeb --> | close only answered reasons, close supported pair work under the accepted MYC-D29 policy, and distinguish work closure from freshness restoration | Changed | store |
+| MYC-14.10 <!-- 6819cb72-295c-42e9-a9bb-6ea075316ba7 --> | retain newest 1,000 closed work records/bundles per repository with protected live/open/in-flight evidence and MYC-16 garbage collection | New | store |
+| MYC-14.11 <!-- a7c75261-1adb-4111-8836-785c8e0f1089 --> | preserve MYC-D12: no classifier/reviewer result clears staleness, confirms a chunk or advances a baseline pin | New | store |
+| MYC-14.12 <!-- 68b34a42-7813-430a-a629-9c09c4630d24 --> | use the independent Jev and protocol-1 reviewer contracts, exact model identities, Keychain credentials and configured finite budgets, with no Arbol code/instruction dependency | New | unit |
+| MYC-14.13 <!-- a321a27e-0d4b-4b7e-8ced-dcffb9dd0a84 --> | list current open work by default, add closed/inactive versions only when requested, and expose separate work/pair/stage counts | Changed | store |
+| MYC-14.14 <!-- a73dedf6-784d-4e1c-a8ad-312b1460543b --> | enforce the configured default-300-second quiet period over all required live file/version changes, using the timestamp/tombstone/generated rules above | New | store |
+| MYC-14.15 <!-- 7f193a00-bd23-4fe7-8585-ce45b779c8a9 --> | recheck exact inputs, enablement, current version and eligibility before both model stages and result application | New | store |
+| MYC-14.16 <!-- 51734d60-92de-411f-908c-4a9111757963 --> | keep search/read within their existing budgets, make no classifier/reviewer calls there, and expose pending/evidence status | New | unit |
+| MYC-14.17 <!-- 2139671b-9196-4105-b152-80ec08cf0a3d --> | validate exact known Jev labels/probabilities/model and finite reported confidence, compute canonical confidence without renormalization or clamping, retain provider agreement/difference as diagnostics, and route low canonical confidence, ties or insufficient evidence to review | New | unit |
+| MYC-14.18 <!-- a632ffd5-c627-4d7a-88be-45e452d91013 --> | apply deterministic selection, candidate/concurrency/deadline/retry caps, nonblocking locks and cancellation; preserve partial replies | New | store |
+| MYC-14.19 <!-- 1fd72d7a-0022-4674-b567-5fa0bc7e40a4 --> | launch the configured independent reviewer without a shell and validate its protocol/input/model/evidence reply, limits and credential isolation | New | unit |
+| MYC-14.20 <!-- d5e23906-e04b-483c-8e17-d2da7ab99afd --> | send no truncated required text; route oversized Jev input to complete reviewer input or visible unresolved work | New | unit |
+| MYC-14.21 <!-- 08ae95ec-00f9-4faa-ab3e-48af537789d1 --> | implement dry-run with no state writes, Jev/reviewer/Voyage credential acquisition, adapter launches or model calls, reaching the store as every other command does (MYC-D41), allowing local executable inspection/hash reads and exact eligibility/byte/call reporting | New | unit |
+| MYC-14.22 <!-- 84181aa0-6fe4-4952-a56b-32604508efdb --> | require the MYC-13 model/question/policy/reviewer qualification before deployment and retain its quality/cost report | New | live |
+| MYC-14.23 <!-- 8db3410c-5e22-4612-8d4a-14d8870492e8 --> | launch only the specified resolved argv with the fixed child environment, private working directory, pipes and process group, and isolate credentials and unrelated file descriptors | New | unit |
+| MYC-14.24 <!-- d35c231e-7f71-4758-9144-602a497b6745 --> | transmit the exact canonical request plus LF/EOF, drain pipes concurrently, and validate the strict success/failure JSON and exit combination, matching all identities and allowed evidence locators | New | unit |
+| MYC-14.25 <!-- 195d71de-9bc2-4111-8fd3-a5718f3f8df7 --> | bind adapter revision, argv/executable fingerprint and instruction/environment versions to request, cache, stage and qualification identities, rejecting changed commands at launch/application | New | store |
+| MYC-14.26 <!-- 9e8d5c9c-a8e0-4097-81c3-2ada255fdb80 --> | permit one provider call per adapter attempt, retry only typed transient failures within existing budgets, terminate/reap complete process groups and expose unresolved failures without raw diagnostics | New | unit |
+| MYC-14.27 <!-- 7ee77761-6b5e-492c-9be4-c11f1b26dfb1 --> | provide the complete pinned/current governor and ancestor evidence contract and reproducible request/success/failure examples for protocol-adapter setup | New | unit |
 | MYC-14.28 <!-- 8bee85cf-69c4-4273-a3dc-a272d4ca3148 --> | classify Origin candidate pairs with the distinct versioned governs/related/unrelated question, exact evidence and matching identities; apply the same quiet period, canonical confidence routing, finite budgets and isolated reviewer with strict confidenceScore replies, no truncation, dry-run calls or obsolete effects | New | store |
 | MYC-14.29 <!-- 7795655c-31f9-4af4-9ee2-24c67ac07991 --> | classify conformance, Origin consistency and requirement ambiguity with distinct fixed audit questions, exact complete evidence and isolated caches, canonical confidence routing and the same quiet period, finite budgets and strict score-bearing reviewer; refuse obsolete or incomplete effects | New | store |
 
@@ -770,10 +770,10 @@ Jev can be confidently wrong, and context/option order can change decisions. The
 
 | ID | Question | Proposed default | Outcome |
 |---|---|---|---|
-| MYC-D28 | What exact contracts implement Jev, debounce and smarter-model escalation? | The complete contract above: pinned Jev1.13.0, question mycel-dependency-v1, initial confidence0.7 routing, explicit classify with finite budgets, independent configured protocol-1 reviewer and MYC-16 retained evidence; model/reviewer qualification before deployment | Decided 8 October 2026 by the owner: “For smarter model let's use command specified in settings. Agreed with other proposals.” Use the independent `drifts.review_command` from settings for smarter review; accept the initial confidence floor 0.7, explicit bounded `mycel classify`, five-minute quiet period, retained exact evidence and completed execution/reviewer contract. Jev considers changes without a change-size gate. Exact review provider/model identities are configuration for the command; provider qualification remains an implementation/release check |
-| MYC-D29 | What does still_supported do to work and freshness? | Suppress/close only that exact pair's Drift work; retain classification evidence on stale reports; preserve stale marks and baseline pins until the accepted edit-or-explicit-confirmation rule acts | Decided 8 October 2026 by the owner: agreed with the proposal. A complete still_supported result suppresses/closes only that exact pair's Drift work; preserve stale marks and baseline pins until an affected-section edit or explicit confirmation under MYC-D12 |
-| MYC-D41 | Does `classify --dry-run` read the store password? | Yes. A dry-run reaches the store as every other command does; its "no credential" means no Jev, reviewer or Voyage credential | Decided 17 October 2026 by the owner with the Commands Arc: SYL-231 requires that `mycel classify --repo <name> --dry-run` report the classification work it would do "on any store that the other commands reach", both when the store-password item exists and when the store asks for no password. Reconciled 18 October 2026: MYC-14.21, MYC-5.14 and their paragraphs name the credentials a dry-run never takes; the store-password item is read only when the store asks for a password, as [MYC-5](05-settings.md) says for every command |
-| MYC-D43 | Which confidence controls Jev routing when the reported value differs from the documented distribution formula? | Compute the exact canonical formula from validated returned probabilities, without renormalization or clamping; retain finite reported confidence, exact agreement and signed reported-minus-canonical difference as diagnostics; keep the 0.7 floor and all other validation/routing gates; version routing as mycel-drift-routing-v2. A reported value below the floor can be promoted by the canonical statistic | Decided 19 October 2026 by the owner: “Compute from probabilities; retain reported confidence (Recommended)”. Canonical confidence controls the unchanged 0.7 floor, including cases reported below it; no renormalization or clamping. Preserve finite reported confidence, exact agreement and signed difference as diagnostics. All other validation/routing gates remain. No provider precision guarantee is inferred. Old failed records remain failed; routing v2 requires fresh qualification |
+| MYC-D28 <!-- 68a6dbd6-b600-4134-9b67-aa13661ca496 --> | What exact contracts implement Jev, debounce and smarter-model escalation? | The complete contract above: pinned Jev1.13.0, question mycel-dependency-v1, initial confidence0.7 routing, explicit classify with finite budgets, independent configured protocol-1 reviewer and MYC-16 retained evidence; model/reviewer qualification before deployment | Decided 8 October 2026 by the owner: “For smarter model let's use command specified in settings. Agreed with other proposals.” Use the independent `drifts.review_command` from settings for smarter review; accept the initial confidence floor 0.7, explicit bounded `mycel classify`, five-minute quiet period, retained exact evidence and completed execution/reviewer contract. Jev considers changes without a change-size gate. Exact review provider/model identities are configuration for the command; provider qualification remains an implementation/release check |
+| MYC-D29 <!-- 585a06e4-69e3-46e7-919b-87e21d2d4329 --> | What does still_supported do to work and freshness? | Suppress/close only that exact pair's Drift work; retain classification evidence on stale reports; preserve stale marks and baseline pins until the accepted edit-or-explicit-confirmation rule acts | Decided 8 October 2026 by the owner: agreed with the proposal. A complete still_supported result suppresses/closes only that exact pair's Drift work; preserve stale marks and baseline pins until an affected-section edit or explicit confirmation under MYC-D12 |
+| MYC-D41 <!-- 8911c452-9f2b-4de9-8003-2b7dbf1e24b7 --> | Does `classify --dry-run` read the store password? | Yes. A dry-run reaches the store as every other command does; its "no credential" means no Jev, reviewer or Voyage credential | Decided 17 October 2026 by the owner with the Commands Arc: SYL-231 requires that `mycel classify --repo <name> --dry-run` report the classification work it would do "on any store that the other commands reach", both when the store-password item exists and when the store asks for no password. Reconciled 18 October 2026: MYC-14.21, MYC-5.14 and their paragraphs name the credentials a dry-run never takes; the store-password item is read only when the store asks for a password, as [MYC-5](05-settings.md) says for every command |
+| MYC-D43 <!-- 9f1f4792-d51b-4dec-9cde-c7ff08a38f69 --> | Which confidence controls Jev routing when the reported value differs from the documented distribution formula? | Compute the exact canonical formula from validated returned probabilities, without renormalization or clamping; retain finite reported confidence, exact agreement and signed reported-minus-canonical difference as diagnostics; keep the 0.7 floor and all other validation/routing gates; version routing as mycel-drift-routing-v2. A reported value below the floor can be promoted by the canonical statistic | Decided 19 October 2026 by the owner: “Compute from probabilities; retain reported confidence (Recommended)”. Canonical confidence controls the unchanged 0.7 floor, including cases reported below it; no renormalization or clamping. Preserve finite reported confidence, exact agreement and signed difference as diagnostics. All other validation/routing gates remain. No provider precision guarantee is inferred. Old failed records remain failed; routing v2 requires fresh qualification |
 
 ### Extraction and identifier map
 
@@ -781,18 +781,18 @@ On 8 October 2026 MYC-7.1 through MYC-7.13 moved out of MYC-7's active table int
 
 | Former requirement | Current requirement |
 |---|---|
-| MYC-7.1 | MYC-14.1 |
-| MYC-7.2 | MYC-14.2 |
-| MYC-7.3 | MYC-14.3 |
-| MYC-7.4 | MYC-14.4 |
-| MYC-7.5 | MYC-14.5 |
-| MYC-7.6 | MYC-14.6 |
-| MYC-7.7 | MYC-14.7 |
-| MYC-7.8 | MYC-14.8 |
-| MYC-7.9 | MYC-14.9 |
-| MYC-7.10 | MYC-14.10 |
-| MYC-7.11 | MYC-14.11 |
-| MYC-7.12 | MYC-14.12 |
-| MYC-7.13 | MYC-14.13 |
+| MYC-7.1 <!-- 660f2fb1-e50b-46e0-887d-8b05c2666c21 --> | Withdrawn 8 October 2026; moved to MYC-14.1 |
+| MYC-7.2 <!-- 07cd5da4-ac64-4f80-b2d7-ffd726c7f824 --> | Withdrawn 8 October 2026; moved to MYC-14.2 |
+| MYC-7.3 <!-- a8510566-7343-47c6-889a-7b9d5902d9d5 --> | Withdrawn 8 October 2026; moved to MYC-14.3 |
+| MYC-7.4 <!-- c5be9b4e-6a13-4886-a3a3-176179eef432 --> | Withdrawn 8 October 2026; moved to MYC-14.4 |
+| MYC-7.5 <!-- 812c28b7-a940-4459-b150-7f6fe2e22cb7 --> | Withdrawn 8 October 2026; moved to MYC-14.5 |
+| MYC-7.6 <!-- 9e12fed5-bf2b-427c-a6db-75e4b6cc5dac --> | Withdrawn 8 October 2026; moved to MYC-14.6 |
+| MYC-7.7 <!-- ac8ae1b9-8908-40cf-acb4-076f69839644 --> | Withdrawn 8 October 2026; moved to MYC-14.7 |
+| MYC-7.8 <!-- 204f93d5-ce5a-42dc-b4aa-c23a01d01959 --> | Withdrawn 8 October 2026; moved to MYC-14.8 |
+| MYC-7.9 <!-- ba326c5d-abd3-49e2-a872-41e33a50b72f --> | Withdrawn 8 October 2026; moved to MYC-14.9 |
+| MYC-7.10 <!-- 3bedf40b-0fdc-4d55-a6f3-826687184139 --> | Withdrawn 8 October 2026; moved to MYC-14.10 |
+| MYC-7.11 <!-- 97d7aec9-7935-4de5-950a-dc41bacf5b5c --> | Withdrawn 8 October 2026; moved to MYC-14.11 |
+| MYC-7.12 <!-- 48da9b43-6228-46a0-8738-2522e210d27a --> | Withdrawn 8 October 2026; moved to MYC-14.12 |
+| MYC-7.13 <!-- 9fc03c5b-f34d-4661-bd4d-cb394a816bd8 --> | Withdrawn 8 October 2026; moved to MYC-14.13 |
 
 MYC-D28/MYC-D29 retain their decision IDs and are recorded only here. MYC-D30 remains in MYC-7. This file records extracted historical observations, the owner's successive answers, the accepted classification contract and the dated official-source Jev assessment. It is not a Mycel classifier measurement report.

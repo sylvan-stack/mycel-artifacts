@@ -69,21 +69,21 @@ Proposed: no command of its own. `mycel info` ([MYC-0](00-overview-and-legacy-ma
 
 ## Requirements
 
-| ID | Mycel must… | Origin | Verified by |
+| ID | Mycel must… | From v1 | Verified by |
 |---|---|---|---|
-| MYC-11.1 | return on request the whole text of one chunk: a symbol or a section that is on disk, a summary, or a section of the code overview | Changed | store |
-| MYC-11.2 | accept the chunk by its place in the form of a Source Ref, or by the identifier a search result gave | Changed | unit |
-| MYC-11.3 | match a place as written, and also accept a method without its class and a section by its bare title | Kept | store |
-| MYC-11.4 | refuse the command with `invalid_input` when no chunk fits or several do, naming up to 20 of those that fit; with `refused` for a repository that is switched off; and with `unknown_repository` for one the settings do not name | Kept | store |
-| MYC-11.5 | take the text from the index, as stored for the version on disk, so that a chunk without a file can be read | Changed | store |
-| MYC-11.6 | before reading check and ingest changes in its repository and recursively in the enabled repositories of its explicit upstream sources under the one time limit of MYC-4.18 and MYC-4.19, unless the caller turns the entire check off; report what completed and every pending repository without returning dependency chunks | New | store |
-| MYC-11.7 | say in the reply the chunk's origin, actual root and relative path when file-backed, kind and lines, stale and Heartwood marks, source/path reasons, dependency-check completion and ref faults, and readable file; preserve document origin for checkout Markdown and never present an unchecked chunk as verified current | Changed | unit |
-| MYC-11.8 | add, on request, up to 50 lines before and after a symbol from its file, and none without the request | Changed | unit |
-| MYC-11.9 | cut a text of more than 5 MiB there and say so | Kept | unit |
-| MYC-11.10 | name in `mycel info` the commands of the Build that runs and the version of the read reply, and have no other command that describes the program | Changed | unit |
-| MYC-11.11 | accept MYC-16 qualified code/artifact/index addresses and legacy unambiguous aliases through the central resolver, return a canonical qualified address, and identify root-aware ambiguity candidates without silently choosing a file or index namespace | New | store |
-| MYC-11.12 | list in the reply every document section that describes the chunk by a direct declared or asserted dependency in either direction, with its direction and kind, complete and independent of embeddings, and an empty list when there is none | New | store |
-| MYC-11.13 | read a requirement or decision chunk by its Entity URI, its full address or its human id within its file, carry its entity fields in the reply, and for a decision show the chats of its Discussion cell from the configured Arbol database or `available: false` with the reason, succeeding either way and writing nothing there | New | store |
+| MYC-11.1 <!-- 453d6ce4-c11d-4c49-b630-c049c14b33f2 --> | return on request the whole text of one chunk: a symbol or a section that is on disk, a summary, or a section of the code overview | Changed | store |
+| MYC-11.2 <!-- d71d1ff3-5017-44cd-88ef-8462151c8890 --> | accept the chunk by its place in the form of a Source Ref, or by the identifier a search result gave | Changed | unit |
+| MYC-11.3 <!-- e84e262f-1b39-4fd6-9e7c-3cf1dff7f747 --> | match a place as written, and also accept a method without its class and a section by its bare title | Kept | store |
+| MYC-11.4 <!-- ecf46433-def5-4353-aeee-5883ade80393 --> | refuse the command with `invalid_input` when no chunk fits or several do, naming up to 20 of those that fit; with `refused` for a repository that is switched off; and with `unknown_repository` for one the settings do not name | Kept | store |
+| MYC-11.5 <!-- a1757601-5e4b-40b8-8bb4-9e950fd1e571 --> | take the text from the index, as stored for the version on disk, so that a chunk without a file can be read | Changed | store |
+| MYC-11.6 <!-- fab708ca-a11d-4000-87c4-08aff2d04771 --> | before reading check and ingest changes in its repository and recursively in the enabled repositories of its explicit upstream sources under the one time limit of MYC-4.18 and MYC-4.19, unless the caller turns the entire check off; report what completed and every pending repository without returning dependency chunks | New | store |
+| MYC-11.7 <!-- a3dc39bf-a7b5-411f-8fca-eb6e773caa84 --> | say in the reply the chunk's origin, actual root and relative path when file-backed, kind and lines, stale and Heartwood marks, source/path reasons, dependency-check completion and ref faults, and readable file; preserve document origin for checkout Markdown and never present an unchecked chunk as verified current | Changed | unit |
+| MYC-11.8 <!-- a65e415e-dd4a-4ae8-bd6c-9c941777ffb0 --> | add, on request, up to 50 lines before and after a symbol from its file, and none without the request | Changed | unit |
+| MYC-11.9 <!-- 90101f82-9341-43d2-846e-de1d6fe4d19a --> | cut a text of more than 5 MiB there and say so | Kept | unit |
+| MYC-11.10 <!-- 831eb46e-4d4c-4137-a2b2-cea83b427f1b --> | name in `mycel info` the commands of the Build that runs and the version of the read reply, and have no other command that describes the program | Changed | unit |
+| MYC-11.11 <!-- f0254d36-30c0-4e43-8f9b-e227ca30ae1e --> | accept MYC-16 qualified code/artifact/index addresses and legacy unambiguous aliases through the central resolver, return a canonical qualified address, and identify root-aware ambiguity candidates without silently choosing a file or index namespace | New | store |
+| MYC-11.12 <!-- 11271647-a7a1-4931-8a06-937e3d2364e6 --> | list in the reply every document section that describes the chunk by a direct declared or asserted dependency in either direction, with its direction and kind, complete and independent of embeddings, and an empty list when there is none | New | store |
+| MYC-11.13 <!-- 48054dd7-8c50-41c4-8719-afd270182640 --> | read a requirement or decision chunk by its Entity URI, its full address or its human id within its file, carry its entity fields in the reply, and for a decision show the chats of its Discussion cell from the configured Arbol database or `available: false` with the reason, succeeding either way and writing nothing there | New | store |
 
 ## Interface
 

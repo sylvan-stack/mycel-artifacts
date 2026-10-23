@@ -39,7 +39,7 @@ The row holds what Mycel reads from its cells:
 | `id`, the display name | the human id, never edited | the human id, never edited |
 | `title` | the second cell, "Mycel must…" | the Question cell |
 | `text`, and its hashes | the exact row | the exact row |
-| `status` | the chapter's status from its frontmatter, or `withdrawn` when the row says so | `decided` when the Outcome begins with `Decided`, else `open` |
+| `status` | the chapter's status from its frontmatter, or `withdrawn` when the row begins with an explicit `Withdrawn`, `Withdrawn:` or dated `Withdrawn <date>` marker | `decided` when the Outcome begins with `Decided`, else `open` |
 | `decidedBy`, `decidedAt` | — | from `Decided <date> by <who>` in the Outcome |
 | `verifiedBy` | the Verified by cell: `unit`, `store`, `eval` or `live` | — |
 | `fromV1` | the From v1 cell: `Kept`, `Changed`, `New` or `Dropped` | — |

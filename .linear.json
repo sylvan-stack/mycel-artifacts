@@ -18,13 +18,13 @@
       "title": "Mycel · 00 Overview and legacy map",
       "id": "40959506-ff68-4889-a4da-d98ae581c869",
       "url": "https://linear.app/amorphius/document/mycel-00-overview-and-legacy-map-4549eec775d4",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/01-corpora-and-ingest.md": {
       "title": "Mycel · 01 Corpora and ingest",
       "id": "2bb24194-46bf-4a5f-ab82-f3f1830f67ad",
       "url": "https://linear.app/amorphius/document/mycel-01-corpora-and-ingest-aaf2271e48b6",
-      "published": "2026-10-20"
+      "published": "2026-10-23"
     },
     "specs/02-provenance-and-freshness.md": {
       "title": "Mycel · 02 Provenance and freshness",
@@ -36,13 +36,13 @@
       "title": "Mycel · 03 Embedding",
       "id": "a8b3bb69-cb04-4d98-b29c-a11119a7376e",
       "url": "https://linear.app/amorphius/document/mycel-03-embedding-834366c020d1",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/04-retrieval.md": {
       "title": "Mycel · 04 Retrieval",
       "id": "1574f40a-0ad1-4d35-9b10-06e963f434dd",
       "url": "https://linear.app/amorphius/document/mycel-04-retrieval-a3ea1ada8b00",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/05-settings.md": {
       "title": "Mycel · 05 Settings",
@@ -54,49 +54,49 @@
       "title": "Mycel · 06 The index store",
       "id": "45adad5a-8edb-425c-a252-97bb2dfe3246",
       "url": "https://linear.app/amorphius/document/mycel-06-the-index-store-05bf3e7e0125",
-      "published": "2026-10-19"
+      "published": "2026-10-23"
     },
     "specs/07-drifts-and-verification.md": {
       "title": "Mycel · 07 Drifts and verification",
       "id": "264f80db-3bc5-436e-88d3-7db9ffb1a805",
       "url": "https://linear.app/amorphius/document/mycel-07-drifts-and-verification-29964d66823f",
-      "published": "2026-10-19"
+      "published": "2026-10-23"
     },
     "specs/08-summaries.md": {
       "title": "Mycel · 08 Summaries",
       "id": "03dc797e-4831-45f8-80fa-2f3b4d98af92",
       "url": "https://linear.app/amorphius/document/mycel-08-summaries-d6ef213b7d7f",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/09-code-overview.md": {
       "title": "Mycel · 09 The code overview",
       "id": "d20a93e3-f8ba-4771-8426-7be03944077b",
       "url": "https://linear.app/amorphius/document/mycel-09-the-code-overview-940a7eea2a26",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/10-grep-replacement.md": {
       "title": "Mycel · 10 The grep replacement",
       "id": "6cc940b3-9d7f-4fd6-a8a7-443157f143a9",
       "url": "https://linear.app/amorphius/document/mycel-10-the-grep-replacement-8c86d3d89a19",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/11-reading-a-chunk.md": {
       "title": "Mycel · 11 Reading a chunk",
       "id": "7d586101-e2c5-433a-bfaa-5b94ff1bc882",
       "url": "https://linear.app/amorphius/document/mycel-11-reading-a-chunk-3006878a7fc6",
-      "published": "2026-10-19"
+      "published": "2026-10-23"
     },
     "specs/12-record-of-work.md": {
       "title": "Mycel · 12 The record of work",
       "id": "8a76ab88-40eb-44b1-914c-6ae82d7a718c",
       "url": "https://linear.app/amorphius/document/mycel-12-the-record-of-work-94369b00b466",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/13-checks-and-evaluation.md": {
       "title": "Mycel · 13 Checks and the evaluation set",
       "id": "89c51ea6-d7c3-487d-9e0e-2b9fb5f2f3a7",
       "url": "https://linear.app/amorphius/document/mycel-13-checks-and-the-evaluation-set-a6e1c9126683",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/14-drift-detection.md": {
       "title": "Mycel · 14 Drift detection",
@@ -108,13 +108,13 @@
       "title": "Mycel · 15 Distribution and replacement",
       "id": "a6780a75-72c5-481a-b91f-80f47da18c8b",
       "url": "https://linear.app/amorphius/document/mycel-15-distribution-and-replacement-c62c0c9cc447",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/16-source-addresses-and-evidence.md": {
       "title": "Mycel · 16 Source addresses and retained evidence",
       "id": "495aa66e-e7f8-4261-9de9-c3ff7ba11465",
       "url": "https://linear.app/amorphius/document/mycel-16-source-addresses-and-retained-evidence-957b793fa6e2",
-      "published": "2026-10-19"
+      "published": "2026-10-23"
     },
     "specs/17-justification.md": {
       "title": "Mycel · 17 Justification",

@@ -102,22 +102,22 @@ Decided: one way, `mycel grep` ([MYC-D33](#decisions)). Mycel is one program (MY
 
 ## Requirements
 
-| ID | Mycel must… | Origin | Verified by |
+| ID | Mycel must… | From v1 | Verified by |
 |---|---|---|---|
-| MYC-10.1 | start, for `mycel grep`, the first `grep` on the search path with exactly the arguments given, on its own standard input, output and error | Changed | unit |
-| MYC-10.2 | end with grep's exit status, whatever happens to the tail | Kept | unit |
-| MYC-10.3 | add nothing to grep's arguments and take nothing from them | Changed | unit |
-| MYC-10.4 | find the pattern and the paths by grep's own rules for options: options with a value, a value written onto its option, short options written together, and `--` | Changed | unit |
-| MYC-10.5 | print no tail when it meets an option it does not know | New | unit |
-| MYC-10.6 | print the tail on standard output after grep's output, and leave it out in every case of the table above | Changed | unit |
-| MYC-10.7 | search for the tail as MYC-4 says, with five results, documents and code, and without the freshness check | Kept | store |
-| MYC-10.8 | take the repository of the tail from the first path given to grep, or else from the current directory | Kept | unit |
-| MYC-10.9 | search a pattern that has no sign of a regular expression other than `.` as it was written, and turn the signs of any other pattern into spaces | Changed | unit |
-| MYC-10.10 | print in the tail each result's place, its lines when it is code and the section that delivered it, then once each document section that cites a result, marking stale and Heartwood sections, and print no score | Changed | unit |
-| MYC-10.11 | run grep when no repository is found, when the settings cannot be read and when the store cannot be reached | Kept | unit |
-| MYC-10.12 | write one line on standard error when the search for the tail fails | Kept | unit |
-| MYC-10.13 | write nothing into the store | Changed | store |
-| MYC-10.14 | be reached as `mycel grep` and in no other way | Changed | unit |
+| MYC-10.1 <!-- d7af356e-4643-48ef-9ca0-16fa5d861dfe --> | start, for `mycel grep`, the first `grep` on the search path with exactly the arguments given, on its own standard input, output and error | Changed | unit |
+| MYC-10.2 <!-- a1c3765b-280f-4c34-9764-01930197a463 --> | end with grep's exit status, whatever happens to the tail | Kept | unit |
+| MYC-10.3 <!-- 58b30731-a279-4aae-ad31-ef37b9462693 --> | add nothing to grep's arguments and take nothing from them | Changed | unit |
+| MYC-10.4 <!-- 193c5f93-cdb7-4cbd-ba23-505825fd21d5 --> | find the pattern and the paths by grep's own rules for options: options with a value, a value written onto its option, short options written together, and `--` | Changed | unit |
+| MYC-10.5 <!-- 6d08e90d-8654-4961-842c-15c0f83423f9 --> | print no tail when it meets an option it does not know | New | unit |
+| MYC-10.6 <!-- 274a8884-eef2-4361-83c9-0baecc1f2fb2 --> | print the tail on standard output after grep's output, and leave it out in every case of the table above | Changed | unit |
+| MYC-10.7 <!-- 36cfbcac-0901-4e4b-801c-dbfa7fc47db5 --> | search for the tail as MYC-4 says, with five results, documents and code, and without the freshness check | Kept | store |
+| MYC-10.8 <!-- e4c20317-0794-4bdb-9d78-78247dd350f8 --> | take the repository of the tail from the first path given to grep, or else from the current directory | Kept | unit |
+| MYC-10.9 <!-- ec7751c1-ea7c-40ea-8d55-0a87a50a329e --> | search a pattern that has no sign of a regular expression other than `.` as it was written, and turn the signs of any other pattern into spaces | Changed | unit |
+| MYC-10.10 <!-- 53ee2659-2c80-4751-8956-64c0d7630749 --> | print in the tail each result's place, its lines when it is code and the section that delivered it, then once each document section that cites a result, marking stale and Heartwood sections, and print no score | Changed | unit |
+| MYC-10.11 <!-- 98e4feb5-28c4-4d64-8d91-f50ea95eb979 --> | run grep when no repository is found, when the settings cannot be read and when the store cannot be reached | Kept | unit |
+| MYC-10.12 <!-- f54e9cc0-b69f-4134-8ef0-38e5942bbea5 --> | write one line on standard error when the search for the tail fails | Kept | unit |
+| MYC-10.13 <!-- 5515b86b-1f31-4d76-9db4-c5bbe7464f9e --> | write nothing into the store | Changed | store |
+| MYC-10.14 <!-- d1c91b08-6d5a-461a-976d-006f0e23f6c0 --> | be reached as `mycel grep` and in no other way | Changed | unit |
 
 ## Interface
 
@@ -152,4 +152,4 @@ The lines of the tail are text for a reader. A program that needs the same resul
 
 | ID | Question | Proposed default | Outcome |
 |---|---|---|---|
-| MYC-D33 | Under which name is the grep replacement started? | `mycel grep`, and no second program. Mycel is one program with one launcher. Version 1 also had `better-grep` as a program of its own, so that the habit of typing `grep` could be kept by changing one word; the guides and skills of this corpus still tell agents to call it. Keeping that name would need a second launcher, which the Builds specification does not provide, or a line in the owner's shell settings that maps the old name onto the new command | Decided 8 October 2026 by the owner: agreed. `mycel grep`, and no second program |
+| MYC-D33 <!-- 3673c632-1c80-4013-850e-421f9708f5dc --> | Under which name is the grep replacement started? | `mycel grep`, and no second program. Mycel is one program with one launcher. Version 1 also had `better-grep` as a program of its own, so that the habit of typing `grep` could be kept by changing one word; the guides and skills of this corpus still tell agents to call it. Keeping that name would need a second launcher, which the Builds specification does not provide, or a line in the owner's shell settings that maps the old name onto the new command | Decided 8 October 2026 by the owner: agreed. `mycel grep`, and no second program |

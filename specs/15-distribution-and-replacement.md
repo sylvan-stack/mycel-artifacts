@@ -89,20 +89,20 @@ The release record lists each completed or blocked step and its verification; a 
 
 ## Requirements
 
-| ID | Mycel must… | Origin | Verified by |
+| ID | Mycel must… | From v1 | Verified by |
 |---|---|---|---|
-| MYC-15.1 | ship an independent Apple Silicon macOS 14-or-later command-line distribution for macos-arm64 only, with its pinned Python runtime, locked non-editable dependencies and required data files, and no system-Python, Node, Arbol or source-checkout runtime dependency | Changed | unit |
-| MYC-15.2 | record target, runtime/archive and dependency pins, source and data-file digests, package version, store format, search-reply version and check results for each Build | New | unit |
-| MYC-15.3 | run installed Builds in isolated Python mode without writing bytecode, resolving or installing packages, downloading assets, extracting a bundle or changing the caller's directory | Changed | unit |
-| MYC-15.4 | allocate unique monotonically increasing lowercase hexadecimal build numbers under a registry lock, preserve failed and pruned records, and keep installed program files immutable after publication | New | unit |
-| MYC-15.5 | publish a working record only after staged installed files and every required automatic check pass, and leave the previous default available after failure or interruption | New | unit |
-| MYC-15.6 | select the highest available working Build numerically, accept `-v` only first, permit a withdrawn Build only when explicitly named, and reject unavailable or incompatible selections with a structured error | New | unit |
-| MYC-15.7 | preserve arguments, current directory, process identity, standard streams, signals and exit status through the independent launcher, including MYC-10 grep exceptions | New | unit |
-| MYC-15.8 | run every unit/store and packaged relocation/offline-launch check for each Build, record the results, and keep real account, evaluation and paid provider checks on demand | New | unit |
-| MYC-15.9 | serialize release mutations, perform no automatic pruning, and remove only an explicitly named nonworking Build whose running-process absence has been established, retaining its metadata | New | unit |
-| MYC-15.10 | change no settings or store structure on build, installation, selection, withdrawal or pruning; support rollback only within the store compatibility rules of MYC-6 | New | store |
-| MYC-15.11 | provide a verifiable one-time replacement plan that copies no version 1 index state, removes only inventoried version 1 runtime files and tables, preserves unrelated objects and source corpora, and reports partial completion accurately | Changed | unit |
-| MYC-15.12 | keep release and replacement instructions in Mycel, with no required Arbol scripts, code, process or instruction files | Changed | unit |
+| MYC-15.1 <!-- 62df578d-c123-4a15-a5a8-cc084a6b181e --> | ship an independent Apple Silicon macOS 14-or-later command-line distribution for macos-arm64 only, with its pinned Python runtime, locked non-editable dependencies and required data files, and no system-Python, Node, Arbol or source-checkout runtime dependency | Changed | unit |
+| MYC-15.2 <!-- 8b386417-92c1-49c8-a063-a9d8905e4a13 --> | record target, runtime/archive and dependency pins, source and data-file digests, package version, store format, search-reply version and check results for each Build | New | unit |
+| MYC-15.3 <!-- b5527328-3cba-4535-8e4c-110087cc3beb --> | run installed Builds in isolated Python mode without writing bytecode, resolving or installing packages, downloading assets, extracting a bundle or changing the caller's directory | Changed | unit |
+| MYC-15.4 <!-- ee421dc0-a6d0-4968-a33d-66e1f1220745 --> | allocate unique monotonically increasing lowercase hexadecimal build numbers under a registry lock, preserve failed and pruned records, and keep installed program files immutable after publication | New | unit |
+| MYC-15.5 <!-- 413afb5a-e3a4-4b89-a8de-ab4137e54ef7 --> | publish a working record only after staged installed files and every required automatic check pass, and leave the previous default available after failure or interruption | New | unit |
+| MYC-15.6 <!-- ba4668c3-2ab3-46f0-bc5f-27b651670a4b --> | select the highest available working Build numerically, accept `-v` only first, permit a withdrawn Build only when explicitly named, and reject unavailable or incompatible selections with a structured error | New | unit |
+| MYC-15.7 <!-- e9d40e5e-b305-46ea-b2a7-2dd16162b132 --> | preserve arguments, current directory, process identity, standard streams, signals and exit status through the independent launcher, including MYC-10 grep exceptions | New | unit |
+| MYC-15.8 <!-- f13fd28e-d077-4d78-87b7-d475f4bdc452 --> | run every unit/store and packaged relocation/offline-launch check for each Build, record the results, and keep real account, evaluation and paid provider checks on demand | New | unit |
+| MYC-15.9 <!-- d9948426-6d4d-431e-948e-6987ac6cc415 --> | serialize release mutations, perform no automatic pruning, and remove only an explicitly named nonworking Build whose running-process absence has been established, retaining its metadata | New | unit |
+| MYC-15.10 <!-- fcb8f9b2-460c-4c04-97b5-7eb0cf3065bd --> | change no settings or store structure on build, installation, selection, withdrawal or pruning; support rollback only within the store compatibility rules of MYC-6 | New | store |
+| MYC-15.11 <!-- 062348f5-3f2b-4d4b-9b48-7206ff850b76 --> | provide a verifiable one-time replacement plan that copies no version 1 index state, removes only inventoried version 1 runtime files and tables, preserves unrelated objects and source corpora, and reports partial completion accurately | Changed | unit |
+| MYC-15.12 <!-- 2fefd25e-65e1-485b-a9b7-1b527a5a9cfd --> | keep release and replacement instructions in Mycel, with no required Arbol scripts, code, process or instruction files | Changed | unit |
 
 ## Interface
 

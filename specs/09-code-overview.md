@@ -76,21 +76,21 @@ In a search that includes documents, the overview sections of the searched repos
 
 ## Requirements
 
-| ID | Mycel must… | Origin | Verified by |
+| ID | Mycel must… | From v1 | Verified by |
 |---|---|---|---|
-| MYC-9.1 | hold for every directory of a repository's code corpus on disk one overview section that lists each of its code files | Changed | store |
-| MYC-9.2 | give for a file its classes, each with up to eight methods, and up to eight other named symbols, classes in the order of their names and methods and other symbols in the order of the file, with a count of what did not fit; and list a file without a named symbol by its name alone | Changed | unit |
-| MYC-9.3 | make the overview from stored on-disk code file and chunk records alone, with no model and no network | Kept | unit |
-| MYC-9.4 | reconcile the rendered outline as the last step of a pass, updating exactly the directory sections whose displayed text changed, including changes of symbol order, declaration kind, class membership and file path, and leave unchanged text and its embedding intact | Changed | store |
-| MYC-9.5 | keep the overview in the index store as chunks with the origin `overview`, and write no file for it | Changed | store |
-| MYC-9.6 | never mark an overview section stale, open no Drift for it, hold no edge from or to it, and delete it when its directory holds no code file any more | Changed | store |
-| MYC-9.7 | embed an overview section by the rules of MYC-3 | Kept | store |
-| MYC-9.8 | let the overview sections of the searched repository compete in a search as documents do, leave them out of a search for code only, and return one with the origin `overview` and without a file | Kept | store |
-| MYC-9.9 | print on request the overview sections of a repository, or of one directory of it | New | store |
-| MYC-9.10 | not show a code result as documented in the overview | Dropped | store |
-| MYC-9.11 | list every indexed code file, including empty files, in deterministic path/name/source-position order, and count all named declarations whether displayed or omitted | New | unit |
-| MYC-9.12 | publish overview changes atomically from the code state the pass applied, delete empty directory sections and rebuild missing sections on a later pass without rereading unchanged files | New | store |
-| MYC-9.13 | have `overview` report only stored sections without a pass or writes, return an empty list normally for a valid absent directory, and refuse absolute or escaping `--dir` paths | New | unit |
+| MYC-9.1 <!-- 688c079c-d194-418a-bcda-05ca207afbde --> | hold for every directory of a repository's code corpus on disk one overview section that lists each of its code files | Changed | store |
+| MYC-9.2 <!-- db1c1481-e49d-415d-bd43-8646eec9c1e2 --> | give for a file its classes, each with up to eight methods, and up to eight other named symbols, classes in the order of their names and methods and other symbols in the order of the file, with a count of what did not fit; and list a file without a named symbol by its name alone | Changed | unit |
+| MYC-9.3 <!-- fb8ba99d-e145-44c9-9d79-3f241b4acdf0 --> | make the overview from stored on-disk code file and chunk records alone, with no model and no network | Kept | unit |
+| MYC-9.4 <!-- b9d9f1aa-a85a-4548-bbc7-90945b65a5ef --> | reconcile the rendered outline as the last step of a pass, updating exactly the directory sections whose displayed text changed, including changes of symbol order, declaration kind, class membership and file path, and leave unchanged text and its embedding intact | Changed | store |
+| MYC-9.5 <!-- 260a4f66-523b-452d-8e0c-179d12743882 --> | keep the overview in the index store as chunks with the origin `overview`, and write no file for it | Changed | store |
+| MYC-9.6 <!-- c5cf55f8-c504-41fb-843f-e4d656fd2fc1 --> | never mark an overview section stale, open no Drift for it, hold no edge from or to it, and delete it when its directory holds no code file any more | Changed | store |
+| MYC-9.7 <!-- 666eee22-844f-4fbe-a336-45116e1c1469 --> | embed an overview section by the rules of MYC-3 | Kept | store |
+| MYC-9.8 <!-- 7a5345e4-299c-4106-b1bb-1a06aa68c8b1 --> | let the overview sections of the searched repository compete in a search as documents do, leave them out of a search for code only, and return one with the origin `overview` and without a file | Kept | store |
+| MYC-9.9 <!-- ca216f18-c57c-4770-869d-483610219f85 --> | print on request the overview sections of a repository, or of one directory of it | New | store |
+| MYC-9.10 <!-- 49decaa9-2001-42b1-8600-e27be045dc4e --> | not show a code result as documented in the overview | Dropped | store |
+| MYC-9.11 <!-- daa0997e-7bbf-4b82-84a4-61de7a080ef8 --> | list every indexed code file, including empty files, in deterministic path/name/source-position order, and count all named declarations whether displayed or omitted | New | unit |
+| MYC-9.12 <!-- a4a6052b-2e6e-470b-9097-bf1d151146ac --> | publish overview changes atomically from the code state the pass applied, delete empty directory sections and rebuild missing sections on a later pass without rereading unchanged files | New | store |
+| MYC-9.13 <!-- 7204d697-c2fb-4705-8d49-05e0d889f938 --> | have `overview` report only stored sections without a pass or writes, return an empty list normally for a valid absent directory, and refuse absolute or escaping `--dir` paths | New | unit |
 
 ## Interface
 
@@ -134,4 +134,4 @@ interface OverviewReply {
 
 | ID | Question | Proposed default | Outcome |
 |---|---|---|---|
-| MYC-D32 | Is the code overview a file in the repository's document folder, or is it kept in the index only? | In the index only. A search finds it and `mycel overview` prints it, and Mycel never writes into a folder it reads. Version 1 wrote the file `generated/code-map.md`: it can be opened in an editor and is kept by git, but every change to the code then leaves a changed file in the documents' checkout that somebody has to commit or ignore | Decided 8 October 2026 by the owner: resolved; keep the code overview in the index only, searchable and printable with `mycel overview`, without writing a file in a checkout |
+| MYC-D32 <!-- 1cd36d33-7e94-496c-9885-c54f27fbfd35 --> | Is the code overview a file in the repository's document folder, or is it kept in the index only? | In the index only. A search finds it and `mycel overview` prints it, and Mycel never writes into a folder it reads. Version 1 wrote the file `generated/code-map.md`: it can be opened in an editor and is kept by git, but every change to the code then leaves a changed file in the documents' checkout that somebody has to commit or ignore | Decided 8 October 2026 by the owner: resolved; keep the code overview in the index only, searchable and printable with `mycel overview`, without writing a file in a checkout |

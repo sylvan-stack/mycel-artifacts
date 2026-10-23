@@ -113,23 +113,23 @@ A `classify` entry copies the repository portion of `ClassifyReply` (MYC-14), in
 
 ## Requirements
 
-| ID | Mycel must… | Origin | Verified by |
+| ID | Mycel must… | From v1 | Verified by |
 |---|---|---|---|
-| MYC-12.1 | leave one entry of a kind in the table above for each repository whose store state an invocation changed, including downstream dependency records or stale marks changed by a search, read or ingest even when no file changed there | Changed | store |
-| MYC-12.2 | leave no entry for a command that only reports, for `mycel grep`, or for a pass or dependency check that changed nothing | Changed | store |
-| MYC-12.3 | name in every entry its repository, except for `init` and `remove`, what started it, the Build, the times it began and ended, and how it ended, with the error when it did not end as `done` | Changed | store |
-| MYC-12.4 | give in an entry the numbers of the command's own reply for that repository, under the same names and with the same meaning | Changed | store |
-| MYC-12.5 | record for an `ingest` each file that was added, changed or removed, with the location it was read in | Kept | store |
-| MYC-12.6 | record every identity decision of a pass with its entry, for documents and code alike, in the same transaction as the file it is about | Changed | store |
-| MYC-12.7 | open an entry with the first change of an invocation and close it at the end; bind it to that exact invocation and store connection, and show it as `unfinished` when left open after its own invocation ends; another invocation's repository lock grants no running-entry protection | New | store |
-| MYC-12.8 | fail the command with `internal` when an entry cannot be written | Changed | store |
-| MYC-12.9 | keep the newest 1,000 entries of each repository and a separate newest 1,000 for entries belonging to no repository; prune older entries with all attached files, identity decisions and other details when an entry opens or closes, protecting currently running entries until their invocations end even if the limit is temporarily exceeded | New | store |
-| MYC-12.10 | delete the entries of a repository on `repos remove`, and record the removal in an entry that belongs to no repository | New | store |
-| MYC-12.11 | list entries on request, newest first, for one repository or for all, optionally of one kind, 25 unless another number is asked for, a number above 500 being taken as 500 | Kept | store |
-| MYC-12.12 | print on request one entry with its files and its identity decisions | New | store |
-| MYC-12.13 | record explicit classification as `classify`, audit mechanical eligibility changes under ingest, and leave no activity for read-only evaluation, dry-runs or no-op assertions | New | store |
-| MYC-12.14 | identify exact invocation liveness with a collision-free session-owned advisory key plus session identity, and compute unfinished status read-only without using another invocation's lock | New | store |
-| MYC-12.15 | return root-qualified ordered file/decision details and classification bundle references, validate activity filters, and distinguish empty lists from missing/pruned entries | New | store |
+| MYC-12.1 <!-- 42eeaf60-c21e-49ef-9f8c-5162740f7528 --> | leave one entry of a kind in the table above for each repository whose store state an invocation changed, including downstream dependency records or stale marks changed by a search, read or ingest even when no file changed there | Changed | store |
+| MYC-12.2 <!-- 85d3213e-16e6-42a8-b716-8a6618fe81e0 --> | leave no entry for a command that only reports, for `mycel grep`, or for a pass or dependency check that changed nothing | Changed | store |
+| MYC-12.3 <!-- 01d85468-63d8-4ee6-8b94-dc836039ac78 --> | name in every entry its repository, except for `init` and `remove`, what started it, the Build, the times it began and ended, and how it ended, with the error when it did not end as `done` | Changed | store |
+| MYC-12.4 <!-- 1f7db0c1-a4e6-457f-8cbf-9e2945c37aa1 --> | give in an entry the numbers of the command's own reply for that repository, under the same names and with the same meaning | Changed | store |
+| MYC-12.5 <!-- dc79d1ce-acef-4c0a-ac06-9a464374f07c --> | record for an `ingest` each file that was added, changed or removed, with the location it was read in | Kept | store |
+| MYC-12.6 <!-- 8f3db1b4-cfab-4eea-871b-4a1e6fcbbe1e --> | record every identity decision of a pass with its entry, for documents and code alike, in the same transaction as the file it is about | Changed | store |
+| MYC-12.7 <!-- b784d8dd-5549-4e18-ad97-38be8dd62a7d --> | open an entry with the first change of an invocation and close it at the end; bind it to that exact invocation and store connection, and show it as `unfinished` when left open after its own invocation ends; another invocation's repository lock grants no running-entry protection | New | store |
+| MYC-12.8 <!-- bcca48dc-74a9-4bcc-9bd1-5687d748940e --> | fail the command with `internal` when an entry cannot be written | Changed | store |
+| MYC-12.9 <!-- ddc7f204-f668-4052-8452-604a321aac75 --> | keep the newest 1,000 entries of each repository and a separate newest 1,000 for entries belonging to no repository; prune older entries with all attached files, identity decisions and other details when an entry opens or closes, protecting currently running entries until their invocations end even if the limit is temporarily exceeded | New | store |
+| MYC-12.10 <!-- d4224a89-0aeb-48d5-a1a4-d83d5ce49090 --> | delete the entries of a repository on `repos remove`, and record the removal in an entry that belongs to no repository | New | store |
+| MYC-12.11 <!-- 085bc3e3-3bf0-4d3e-a873-209fddf5516a --> | list entries on request, newest first, for one repository or for all, optionally of one kind, 25 unless another number is asked for, a number above 500 being taken as 500 | Kept | store |
+| MYC-12.12 <!-- 7fb261af-3e99-4844-ab0d-0251bb9d4eb3 --> | print on request one entry with its files and its identity decisions | New | store |
+| MYC-12.13 <!-- 2c9ee640-44b6-44b5-a73f-ef517d5c8611 --> | record explicit classification as `classify`, audit mechanical eligibility changes under ingest, and leave no activity for read-only evaluation, dry-runs or no-op assertions | New | store |
+| MYC-12.14 <!-- 087f7e41-fb14-479e-8f72-96e3b38f43b3 --> | identify exact invocation liveness with a collision-free session-owned advisory key plus session identity, and compute unfinished status read-only without using another invocation's lock | New | store |
+| MYC-12.15 <!-- 1894f8e6-4642-419d-9b50-72137346dd2b --> | return root-qualified ordered file/decision details and classification bundle references, validate activity filters, and distinguish empty lists from missing/pruned entries | New | store |
 
 ## Interface
 
@@ -200,6 +200,6 @@ interface ActivityDetail extends ActivityEntry {
 
 | ID | Question | Proposed default | Outcome |
 |---|---|---|---|
-| MYC-D34 | How long is the record of work kept? | The newest 1,000 entries of each repository, with their files and decisions; older ones are deleted as new ones are written. Version 1 never removed a row. A pass after a large change records a decision for every chunk it touched, so a record without a limit would grow without end. The 1,000 are a first value and not a measured one | Decided 8 October 2026 by the owner: delegate the size of the history to the agent. Chosen: newest 1,000 entries per repository, plus a separate newest 1,000 for entries belonging to no repository; delete all attached details with each pruned entry, and protect currently running entries until their invocations end. The chosen limit is not a measured one |
+| MYC-D34 <!-- f2e43dd4-1fec-45c0-83c5-d82105a921b4 --> | How long is the record of work kept? | The newest 1,000 entries of each repository, with their files and decisions; older ones are deleted as new ones are written. Version 1 never removed a row. A pass after a large change records a decision for every chunk it touched, so a record without a limit would grow without end. The 1,000 are a first value and not a measured one | Decided 8 October 2026 by the owner: delegate the size of the history to the agent. Chosen: newest 1,000 entries per repository, plus a separate newest 1,000 for entries belonging to no repository; delete all attached details with each pruned entry, and protect currently running entries until their invocations end. The chosen limit is not a measured one |
 
 Decided on 15 October 2026 by the owner: an unknown or pruned activity entry returns `refused`, using the existing error vocabulary of [MYC-0](00-overview-and-legacy-map.md#the-command-line).

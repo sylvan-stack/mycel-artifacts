@@ -184,37 +184,37 @@ A summary is never one of the sections from which the search follows Source Refs
 
 ## Requirements
 
-| ID | Mycel must… | Origin | Verified by |
+| ID | Mycel must… | From v1 | Verified by |
 |---|---|---|---|
-| MYC-8.1 | summarise the sections of one repository's documents that are on disk and fully embedded, leaving out Heartwood documents, documents declared `generated`, code, sections of the code overview and summaries | Kept | store |
-| MYC-8.2 | count in its reply the sections left out because they are not embedded | New | store |
-| MYC-8.3 | group by the vectors with version 1's method and starting values, give the same groups for the same vectors, and place a section embedded in several parts by the mean of its parts' vectors | Kept | unit |
-| MYC-8.4 | build in levels up to five, stop when ten or fewer nodes are left at the top, summaries and members moved up counted together, or when a level produced no summary, and move a group of one up a level without a summary | Changed | unit |
-| MYC-8.5 | write no summary text itself: start the command `summaries.command` once for each summary, without a shell, in an empty folder, with the whole request on standard input | Changed | unit |
-| MYC-8.6 | take a status other than 0, an empty answer and no answer within five minutes as a failure, try a failed summary once more, and record the reason of one that failed again | Changed | unit |
-| MYC-8.7 | run at most `summaries.at_once` requests at the same time | Changed | unit |
-| MYC-8.8 | refuse actual `build` and `regenerate` with `settings` when the settings name no command, and keep dry-runs, status, removal and search working | Changed | unit |
-| MYC-8.9 | make each request of an instruction, a task and the group's sections, each section with its place line and its complete text, in the order of path and position | Changed | unit |
-| MYC-8.10 | divide a group whose request would pass 48,000 characters until every part fits, and write a summary for each part, so that no section of a group is left out | Changed | unit |
-| MYC-8.11 | give a single section that is longer than a whole request a request to itself, cut to the limit, and name it in the reply | New | unit |
-| MYC-8.12 | take the instruction and the task from the folder `summaries.instructions` when the settings name one, and otherwise from the texts built into the program, putting the sections in the place of the mark `$sections` in the task | Changed | unit |
-| MYC-8.13 | store a summary as a chunk with the origin `summary`, its level, the whole text the command printed, and a generated edge from every section it was written from | Kept | store |
-| MYC-8.14 | embed summaries by the rules of MYC-3, and in a build embed each level before grouping the next | Changed | store |
-| MYC-8.15 | put a new set of summaries in the old one's place in one transaction, only when every level is complete, and otherwise leave the old set untouched | Changed | store |
-| MYC-8.16 | report with `--dry-run` the levels, groups and number of requests of a build, or the summaries a `regenerate` would write, starting no command and writing nothing | Kept | store |
-| MYC-8.17 | write again, on `regenerate`, only the stale summaries, lowest level first, each in its place with the members that still exist, and pin its edges | Kept | store |
-| MYC-8.18 | delete a summary that has no member left, and leave stale a summary whose request failed | Changed | store |
-| MYC-8.19 | never write or rewrite a summary in a pass, a search or any command other than `summaries build` and `summaries regenerate` | Kept | store |
-| MYC-8.20 | report for a repository the summaries of each level, how many are stale, how many sections are in a summary, in none, and not embedded, and whether a command is set | Changed | store |
-| MYC-8.21 | remove every summary of a repository and its edges on request | New | store |
-| MYC-8.22 | let summaries of the searched repository compete in a search as documents do, leave them out of a search for code only, never follow one to code, and return one with the origin `summary` and without a file | Kept | store |
-| MYC-8.23 | report a ref to a summary in a file as a fault, and refuse with `invalid_input` a `derive` or `relate` that names one | New | store |
-| MYC-8.24 | use and record the deterministic `mycel-summary-v1` grouping profile and report invalid numerical inputs or failed fitting | New | unit |
-| MYC-8.25 | validate configured command and prompt files before requests; retain the exact generation request, response and member evidence under MYC-16 | New | store |
-| MYC-8.26 | keep staged summaries and vectors out of searches, recheck exact inputs before publication, discard changed-input builds, and replace an empty eligible set atomically | New | store |
-| MYC-8.27 | publish each regenerated summary with its vectors and pins atomically, keep independent successes, and block parents whose generated members remain stale | New | store |
-| MYC-8.28 | make summary status and both dry-runs read-only with no service calls, distinguish estimated build plans, and return complete regeneration/removal replies | New | store |
-| MYC-8.29 | serialize summary mutations with a nonblocking summary-operation lock, release pass locks during external calls, protect in-flight evidence by exact invocation liveness and clean up subprocesses/staging on interruption | New | store |
+| MYC-8.1 <!-- 5f0b0cdc-41cb-4b7b-b5c8-7e2d8e336839 --> | summarise the sections of one repository's documents that are on disk and fully embedded, leaving out Heartwood documents, documents declared `generated`, code, sections of the code overview and summaries | Kept | store |
+| MYC-8.2 <!-- 7fdbfe9c-fc8e-4e18-9ac0-5e99a16a6fb8 --> | count in its reply the sections left out because they are not embedded | New | store |
+| MYC-8.3 <!-- 2dc8d10b-f545-415d-b6ef-0407f10b6239 --> | group by the vectors with version 1's method and starting values, give the same groups for the same vectors, and place a section embedded in several parts by the mean of its parts' vectors | Kept | unit |
+| MYC-8.4 <!-- 31691e3c-205a-46b6-a574-388fad23e55d --> | build in levels up to five, stop when ten or fewer nodes are left at the top, summaries and members moved up counted together, or when a level produced no summary, and move a group of one up a level without a summary | Changed | unit |
+| MYC-8.5 <!-- 7de52396-3f80-4e7a-b79b-5a63a9c8aaab --> | write no summary text itself: start the command `summaries.command` once for each summary, without a shell, in an empty folder, with the whole request on standard input | Changed | unit |
+| MYC-8.6 <!-- 56a7722d-3cb4-459f-972f-9da530a76af7 --> | take a status other than 0, an empty answer and no answer within five minutes as a failure, try a failed summary once more, and record the reason of one that failed again | Changed | unit |
+| MYC-8.7 <!-- 28e6ea78-61a6-48fd-abb6-24e5f4d60686 --> | run at most `summaries.at_once` requests at the same time | Changed | unit |
+| MYC-8.8 <!-- 5b835649-7c2c-4830-bae5-f1c8abe293b7 --> | refuse actual `build` and `regenerate` with `settings` when the settings name no command, and keep dry-runs, status, removal and search working | Changed | unit |
+| MYC-8.9 <!-- e5f45a54-fbd6-4517-96f5-039e3a0c2ec1 --> | make each request of an instruction, a task and the group's sections, each section with its place line and its complete text, in the order of path and position | Changed | unit |
+| MYC-8.10 <!-- dacc6330-8c09-4f3e-89ee-3dd60aea9b23 --> | divide a group whose request would pass 48,000 characters until every part fits, and write a summary for each part, so that no section of a group is left out | Changed | unit |
+| MYC-8.11 <!-- dfa3c19c-52aa-4f57-95d3-5715f807e7ce --> | give a single section that is longer than a whole request a request to itself, cut to the limit, and name it in the reply | New | unit |
+| MYC-8.12 <!-- bd80a339-0709-4c51-92fc-78f3289cb6ac --> | take the instruction and the task from the folder `summaries.instructions` when the settings name one, and otherwise from the texts built into the program, putting the sections in the place of the mark `$sections` in the task | Changed | unit |
+| MYC-8.13 <!-- d1893d1e-48e9-41d1-8b9e-077d9fd1c3af --> | store a summary as a chunk with the origin `summary`, its level, the whole text the command printed, and a generated edge from every section it was written from | Kept | store |
+| MYC-8.14 <!-- 2f4ddee5-1e7b-45a9-a11c-6a6f0c634a90 --> | embed summaries by the rules of MYC-3, and in a build embed each level before grouping the next | Changed | store |
+| MYC-8.15 <!-- 77109e08-f642-4e16-b941-2f380412663d --> | put a new set of summaries in the old one's place in one transaction, only when every level is complete, and otherwise leave the old set untouched | Changed | store |
+| MYC-8.16 <!-- c9f4dc35-051d-49a8-95f0-20fb53c123a7 --> | report with `--dry-run` the levels, groups and number of requests of a build, or the summaries a `regenerate` would write, starting no command and writing nothing | Kept | store |
+| MYC-8.17 <!-- 75172d5c-2e65-4606-8b8d-9931c46bee42 --> | write again, on `regenerate`, only the stale summaries, lowest level first, each in its place with the members that still exist, and pin its edges | Kept | store |
+| MYC-8.18 <!-- 2527c9ba-fd41-4fc2-ac06-4957fda33d8a --> | delete a summary that has no member left, and leave stale a summary whose request failed | Changed | store |
+| MYC-8.19 <!-- 1304c052-b610-4a82-8404-7a19c0138951 --> | never write or rewrite a summary in a pass, a search or any command other than `summaries build` and `summaries regenerate` | Kept | store |
+| MYC-8.20 <!-- f70708a3-880f-4fbd-b173-256e197dccad --> | report for a repository the summaries of each level, how many are stale, how many sections are in a summary, in none, and not embedded, and whether a command is set | Changed | store |
+| MYC-8.21 <!-- 432e3a46-e88c-4ef5-b95e-5ba781a79d09 --> | remove every summary of a repository and its edges on request | New | store |
+| MYC-8.22 <!-- 94867810-7e67-4ea9-95c8-2f2f72382fc1 --> | let summaries of the searched repository compete in a search as documents do, leave them out of a search for code only, never follow one to code, and return one with the origin `summary` and without a file | Kept | store |
+| MYC-8.23 <!-- bc77a15e-279f-48e8-9225-01455063b5c9 --> | report a ref to a summary in a file as a fault, and refuse with `invalid_input` a `derive` or `relate` that names one | New | store |
+| MYC-8.24 <!-- d0afd36d-1035-4428-b29d-a0154fcefe75 --> | use and record the deterministic `mycel-summary-v1` grouping profile and report invalid numerical inputs or failed fitting | New | unit |
+| MYC-8.25 <!-- ecc1d34a-0f39-4315-b384-4dd7382ef3aa --> | validate configured command and prompt files before requests; retain the exact generation request, response and member evidence under MYC-16 | New | store |
+| MYC-8.26 <!-- 9a99738e-2428-4361-96df-03d928d3a2b5 --> | keep staged summaries and vectors out of searches, recheck exact inputs before publication, discard changed-input builds, and replace an empty eligible set atomically | New | store |
+| MYC-8.27 <!-- e554625a-8b7d-4924-90c4-b6d44936c71b --> | publish each regenerated summary with its vectors and pins atomically, keep independent successes, and block parents whose generated members remain stale | New | store |
+| MYC-8.28 <!-- d1d8effd-f5d2-4273-bfa5-013e08954675 --> | make summary status and both dry-runs read-only with no service calls, distinguish estimated build plans, and return complete regeneration/removal replies | New | store |
+| MYC-8.29 <!-- 4494a6cb-ca43-4831-a8c6-79b933f9d80b --> | serialize summary mutations with a nonblocking summary-operation lock, release pass locks during external calls, protect in-flight evidence by exact invocation liveness and clean up subprocesses/staging on interruption | New | store |
 
 ## Interface
 
@@ -306,4 +306,4 @@ interface SummariesRemoval { repository: string; removed: number }
 
 | ID | Question | Proposed default | Outcome |
 |---|---|---|---|
-| MYC-D31 | Who writes the text of a summary, now that `infer` is deprecated? | A command the owner names in the settings, for example `claude -p`. Mycel starts it for each summary, gives it the sections and stores what it prints. This is what version 1 did with `infer`, with the program's name moved into the settings. Mycel then starts one program that is not its own, and summaries need that program to be installed and signed in. The other choice is that Mycel starts nothing: it hands the groups to whoever called it, an agent or Arbol writes the summaries and hands them back, and Mycel only stores them. Mycel would then stay free of any model, and a build would need a caller that does the writing | Decided 8 October 2026 by the owner: agreed. A command the owner names in the settings writes each summary |
+| MYC-D31 <!-- 4227641a-3f09-4e68-a076-1664dba1f8cf --> | Who writes the text of a summary, now that `infer` is deprecated? | A command the owner names in the settings, for example `claude -p`. Mycel starts it for each summary, gives it the sections and stores what it prints. This is what version 1 did with `infer`, with the program's name moved into the settings. Mycel then starts one program that is not its own, and summaries need that program to be installed and signed in. The other choice is that Mycel starts nothing: it hands the groups to whoever called it, an agent or Arbol writes the summaries and hands them back, and Mycel only stores them. Mycel would then stay free of any model, and a build would need a caller that does the writing | Decided 8 October 2026 by the owner: agreed. A command the owner names in the settings writes each summary |

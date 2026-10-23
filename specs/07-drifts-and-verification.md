@@ -131,26 +131,26 @@ An assertion can also be withdrawn on purpose. `mycel derive` and `mycel relate`
 
 ## Requirements
 
-| ID | Mycel must… | Origin | Verified by |
+| ID | Mycel must… | From v1 | Verified by |
 |---|---|---|---|
-| MYC-7.14 | read the relations of a section from a `related` comment in its text, one ref per line, with the forms, the rules and the fault reports of Source Refs | New | store |
-| MYC-7.15 | hold a relation that was asserted with `mycel relate` apart from one a file declares, so that neither removes the other | New | store |
-| MYC-7.16 | mark a chunk stale with `related_changed` when a chunk it is related to no longer has the stored hash, and clear the mark by the rule of MYC-2.19 | New | store |
-| MYC-7.17 | pass nothing on from a relation, give no role by it, refuse no circle of relations, and leave relations out of the search's bridge and of `documentedIn` | New | store |
-| MYC-7.18 | record with every `mycel confirm` the hash of the chunk's text, the hash of every source and related chunk, who vouches, whether by `read` or by `check`, and when | New | store |
-| MYC-7.19 | treat a chunk as verified exactly while its newest record matches its text and the text of everything it was checked against, and keep records that no longer apply as history | New | store |
-| MYC-7.20 | confirm a chunk that has no source, and list the verifications of a repository on request | New | store |
-| MYC-7.21 | hold a generated edge apart from a declared and an asserted one between the same two ends, and accept none from a file or from a command | Changed | store |
-| MYC-7.22 | pin a generated edge only when its text is produced, and refuse `mycel confirm` for generated text with `refused` | New | store |
-| MYC-7.23 | mark generated text stale by the rules of detection and pass staleness on through it | Kept | store |
-| MYC-7.24 | keep an edge or a relation whose source was deleted, with the source's place and the pinned hash; mark the dependant with `source_removed`; join the edge to a chunk that appears at that place again; and drop it when the dependant is edited or confirmed or the link is taken away | New | store |
-| MYC-7.25 | delete the matching asserted source selection and dependant on `--remove`, and nothing a file declares | New | store |
-| MYC-7.26 | resolve relations through MYC-16, pin all selected members and membership atomically, preserve assertion baselines on an identical no-op, and renew them only by edit or confirmation | New | store |
-| MYC-7.27 | confirm one exact current on-disk dependant version atomically with its pins and verification; refuse changed-since-ingest inputs and new invalid references without mutation | New | store |
-| MYC-7.28 | determine verification applicability from the exact dependant version, source text and selection membership, and retain record-owned evidence for the verification history | New | store |
-| MYC-7.29 | publish generated pins only with successfully generated text, retain the exact request evidence, and expose stale generated text as regeneration work without semantic classification | New | store |
-| MYC-7.30 | return the relation assertion/removal result and complete verification evidence; make verification listing read-only, deterministically ordered and successful when empty | New | store |
-| MYC-7.31 | retain the chat Entity URIs of a decision's Discussion column with the decision, make no edge, pin and stale mark from a chat, and mark what rests on a decision stale when its row is edited | New | store |
+| MYC-7.14 <!-- 49d2e8f3-685e-4381-b5ad-a2b84e18e7fc --> | read the relations of a section from a `related` comment in its text, one ref per line, with the forms, the rules and the fault reports of Source Refs | New | store |
+| MYC-7.15 <!-- d7e373b7-5ed6-4e7b-bc5d-3825e550a3fc --> | hold a relation that was asserted with `mycel relate` apart from one a file declares, so that neither removes the other | New | store |
+| MYC-7.16 <!-- f8bb3adc-f307-4dd8-989f-b22c73b2974d --> | mark a chunk stale with `related_changed` when a chunk it is related to no longer has the stored hash, and clear the mark by the rule of MYC-2.19 | New | store |
+| MYC-7.17 <!-- 0bd85fb2-5b2c-4a9f-9fca-185776cb8971 --> | pass nothing on from a relation, give no role by it, refuse no circle of relations, and leave relations out of the search's bridge and of `documentedIn` | New | store |
+| MYC-7.18 <!-- 6ad71f3b-1a0f-4851-a188-20b076f83f25 --> | record with every `mycel confirm` the hash of the chunk's text, the hash of every source and related chunk, who vouches, whether by `read` or by `check`, and when | New | store |
+| MYC-7.19 <!-- c58f83dd-f737-4837-9c76-7df464b72198 --> | treat a chunk as verified exactly while its newest record matches its text and the text of everything it was checked against, and keep records that no longer apply as history | New | store |
+| MYC-7.20 <!-- 7f56a623-27c0-400e-9f87-c37d9dd46bde --> | confirm a chunk that has no source, and list the verifications of a repository on request | New | store |
+| MYC-7.21 <!-- 251a74d2-71ec-4d25-ab60-75ae3dedc039 --> | hold a generated edge apart from a declared and an asserted one between the same two ends, and accept none from a file or from a command | Changed | store |
+| MYC-7.22 <!-- ca581201-8924-44f1-8bbb-f026a9f8d46e --> | pin a generated edge only when its text is produced, and refuse `mycel confirm` for generated text with `refused` | New | store |
+| MYC-7.23 <!-- f4cea61c-d402-4494-826d-2bd5cd80c5b9 --> | mark generated text stale by the rules of detection and pass staleness on through it | Kept | store |
+| MYC-7.24 <!-- 3d832d50-1c2c-4423-82c2-58efbf573229 --> | keep an edge or a relation whose source was deleted, with the source's place and the pinned hash; mark the dependant with `source_removed`; join the edge to a chunk that appears at that place again; and drop it when the dependant is edited or confirmed or the link is taken away | New | store |
+| MYC-7.25 <!-- 4e0bc657-8f6c-48a7-9d34-3ecf2762710f --> | delete the matching asserted source selection and dependant on `--remove`, and nothing a file declares | New | store |
+| MYC-7.26 <!-- 447ef559-d955-49d5-b65d-39a5b23d4050 --> | resolve relations through MYC-16, pin all selected members and membership atomically, preserve assertion baselines on an identical no-op, and renew them only by edit or confirmation | New | store |
+| MYC-7.27 <!-- f3f1cf42-ae82-48dc-bcfc-e90cfec8ac50 --> | confirm one exact current on-disk dependant version atomically with its pins and verification; refuse changed-since-ingest inputs and new invalid references without mutation | New | store |
+| MYC-7.28 <!-- 342d3038-af35-4fb3-bafa-2f2c706c4cef --> | determine verification applicability from the exact dependant version, source text and selection membership, and retain record-owned evidence for the verification history | New | store |
+| MYC-7.29 <!-- ddd89c4c-a441-4796-82a8-584e2065a482 --> | publish generated pins only with successfully generated text, retain the exact request evidence, and expose stale generated text as regeneration work without semantic classification | New | store |
+| MYC-7.30 <!-- f9e4330e-9218-4a4f-bcab-6b97d977df57 --> | return the relation assertion/removal result and complete verification evidence; make verification listing read-only, deterministically ordered and successful when empty | New | store |
+| MYC-7.31 <!-- 13fad74c-d0af-443c-a774-5bf67c934f58 --> | retain the chat Entity URIs of a decision's Discussion column with the decision, make no edge, pin and stale mark from a chat, and mark what rests on a decision stale when its row is edited | New | store |
 
 On 8 October 2026, at the owner's request to research Drift detection separately, MYC-7.1 through MYC-7.13 moved out of this active requirements table to the candidate requirements of [MYC-14](14-drift-detection.md#requirements). Their numbers remain reserved and are never reused. The map is MYC-7.1 → MYC-14.1, MYC-7.2 → MYC-14.2, MYC-7.3 → MYC-14.3, MYC-7.4 → MYC-14.4, MYC-7.5 → MYC-14.5, MYC-7.6 → MYC-14.6, MYC-7.7 → MYC-14.7, MYC-7.8 → MYC-14.8, MYC-7.9 → MYC-14.9, MYC-7.10 → MYC-14.10, MYC-7.11 → MYC-14.11, MYC-7.12 → MYC-14.12 and MYC-7.13 → MYC-14.13. Their completed implementation defaults are accepted under MYC-D28/MYC-D29 on 8 October 2026; [the extraction map](14-drift-detection.md#extraction-and-identifier-map) preserves this history.
 
@@ -230,4 +230,4 @@ MYC-D28 and MYC-D29 moved on 8 October 2026 to [MYC-14 · Decisions](14-drift-de
 
 | ID | Question | Proposed default | Outcome |
 |---|---|---|---|
-| MYC-D30 | How is a relation between two chunks made, where neither governs the other? | Such a pair is, for example, the description of a request and the description of its reply: when one changes, the other needs a look. The relation is made in the same two ways as an edge: a `related` comment in the section, which travels with the file, and the command `mycel relate` for chunks that cannot carry a comment, such as a function. The smaller choice is the command alone; such a relation would then exist only in the index store and be lost when the store is made again | Decided 8 October 2026 by the owner: agreed. A `related` comment in the section, and the command `mycel relate` |
+| MYC-D30 <!-- 3e0da6fd-9931-4a10-9f3f-2d1aa0077f97 --> | How is a relation between two chunks made, where neither governs the other? | Such a pair is, for example, the description of a request and the description of its reply: when one changes, the other needs a look. The relation is made in the same two ways as an edge: a `related` comment in the section, which travels with the file, and the command `mycel relate` for chunks that cannot carry a comment, such as a function. The smaller choice is the command alone; such a relation would then exist only in the index store and be lost when the store is made again | Decided 8 October 2026 by the owner: agreed. A `related` comment in the section, and the command `mycel relate` |
