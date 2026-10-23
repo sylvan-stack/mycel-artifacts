@@ -30,7 +30,7 @@
       "title": "Mycel · 02 Provenance and freshness",
       "id": "014b3ec4-a25d-4e25-9907-04cfc55f9899",
       "url": "https://linear.app/amorphius/document/mycel-02-provenance-and-freshness-89c57929140a",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/03-embedding.md": {
       "title": "Mycel · 03 Embedding",
@@ -48,7 +48,7 @@
       "title": "Mycel · 05 Settings",
       "id": "b8bd1d5b-18f9-4385-8eb4-688c44401789",
       "url": "https://linear.app/amorphius/document/mycel-05-settings-1dc89e725626",
-      "published": "2026-10-19"
+      "published": "2026-10-23"
     },
     "specs/06-index-store.md": {
       "title": "Mycel · 06 The index store",
@@ -102,7 +102,7 @@
       "title": "Mycel · 14 Drift detection",
       "id": "49f66986-f068-41e1-9008-c139617a40e0",
       "url": "https://linear.app/amorphius/document/mycel-14-drift-detection-96bcd0377a0d",
-      "published": "2026-10-08"
+      "published": "2026-10-23"
     },
     "specs/15-distribution-and-replacement.md": {
       "title": "Mycel · 15 Distribution and replacement",
@@ -120,7 +120,7 @@
       "title": "Mycel · 17 Justification",
       "id": "8c6f1a7f-e328-431f-b226-7937b190f49b",
       "url": "https://linear.app/amorphius/document/mycel-17-justification-ee2e0853cc4d",
-      "published": "2026-10-19"
+      "published": "2026-10-23"
     }
   }
 }
