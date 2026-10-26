@@ -14,10 +14,13 @@ the [Linear runbook](../tools/linear.md).
 
 The owner's direction of 21 October 2026 is to remove completed tasks from
 Linear instead of setting their issues to Done, while retaining every completed
-task ID in a separate artifact. This is standing authorization for the ordinary,
-recoverable deletion of a task an agent finishes under this procedure. It does
-not authorize a bulk cleanup of older Done issues, deletion of unfinished work,
-or permanent purging. The owner may explicitly request those separately.
+task ID in a separate artifact. On 26 October 2026 the owner gave standing
+authorization to remove Linear tasks whenever needed, including older Done
+issues, without asking permission. Linear is a backup and convenient view;
+the artifacts are the source of truth. Preserve authoritative work and relevant
+discussion before removal and use recoverable deletion. Removing an unfinished
+issue does not complete its work: preserve its pending work in its authoritative
+file. Permanent purging still needs an explicit request.
 
 Linear's Free plan limits non-archived issues. Keeping completed work in the
 artifact lets agents recognize it after its issue has been removed. `Done`
