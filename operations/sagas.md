@@ -165,37 +165,57 @@ development dependencies installed. It stays between tasks. The owner chose
 this arrangement on 16 October 2026 and, on 20 October 2026, named the areas
 Environments and increased the pool from five to ten.
 
-The ten color names, in booking order, are **blue, green, amber, red, violet,
-orange, teal, silver, gold, white**. Use **Repository Color Environment**
-for one repository's copy: **Mycel Blue Environment** is
-`~/repos/sylvan-stack/blue/mycel`. **Blue Environment** refers to the whole
-`blue/` working area. A hold reserves the whole color, including every
-repository in it, so work spanning repositories stays together.
+On 26 October 2026 the owner chose animal names instead of colors. The ten
+names, in booking order, are **badger, beaver, fox, hare, lynx, otter, owl,
+panda, raven, wolf**. Use **Repository Animal Environment** for one
+repository's copy: **Mycel Badger Environment** is
+`~/repos/sylvan-stack/badger/mycel`. **Badger Environment** refers to the
+whole `badger/` working area. A hold reserves the whole Environment,
+including every repository in it, so work spanning repositories stays together.
 
 ```
 ~/repos/sylvan-stack/
   mycel/  arbol/  arbol-root/  …     the owner's own checkouts
-  blue/                            Blue Environment
-    mycel/                         Mycel Blue Environment
-    arbol/  arbol-root/  …          the other repositories in Blue
-  green/  amber/  red/  violet/     the other nine Environments,
-  orange/ teal/ silver/ gold/ white/  each with the same repositories
+  badger/                          Badger Environment (alias to blue/)
+    mycel/                         Mycel Badger Environment
+    arbol/  arbol-root/  …          the other repositories in Badger
+  beaver/ fox/ hare/ lynx/ otter/   the other nine Environments,
+  owl/ panda/ raven/ wolf/          each with the same repositories
   readonly/                        one further set, always the last merged main
     mycel/  arbol/  arbol-root/  …  nobody edits these copies
 ```
 
-The former paths `1/` through `5/` remain compatibility aliases to `blue/`,
-`green/`, `amber/`, `red/`, and `violet/`, respectively. They are the same
-checkouts, not five more Environments. Existing holds and running commands
-using those paths remain valid; new bookings and instructions use colors.
-Compare the resolved paths when checking whether a hold already owns an
-Environment. Do not remove the aliases while virtual environments or saved
-sessions still refer to them.
+The animal paths are aliases to the existing physical folders. They rename
+the areas without moving a checkout, changing a branch, rewriting a hold,
+or interrupting a running command:
+
+| Animal name and new path | Existing physical folder | Numbered alias |
+|---|---|---|
+| Badger — `badger/` | `blue/` | `1/` |
+| Beaver — `beaver/` | `green/` | `2/` |
+| Fox — `fox/` | `amber/` | `3/` |
+| Hare — `hare/` | `red/` | `4/` |
+| Lynx — `lynx/` | `violet/` | `5/` |
+| Otter — `otter/` | `orange/` | — |
+| Owl — `owl/` | `teal/` | — |
+| Panda — `panda/` | `silver/` | — |
+| Raven — `raven/` | `gold/` | — |
+| Wolf — `wolf/` | `white/` | — |
+
+New bookings and instructions use animals. Existing bookings keep their
+recorded paths, and the booking tool accepts a color folder while its animal
+alias has not yet been installed. These paths name the same ten checkouts,
+never additional Environments. Compare resolved paths when checking holds:
+a hold on `blue/`, `badger/` or `1/` reserves the same area. The booking tool
+lists each resolved area once, and the check from outside recognizes both
+animal and color names when checking territories. Keep the physical color
+folders and the aliases in place: virtual environments, installed commands
+and saved sessions may contain their absolute paths even after a hold ends.
 
 | Folder | Checked out | Who works in it |
 |---|---|---|
 | `~/repos/sylvan-stack/<repo>/` | whatever its user chose | the owner, and Claude Code or Codex started there |
-| `~/repos/sylvan-stack/<color>/<repo>/` | `main` while free; `beat/<Beat>` or `chat/<chat>` while a hold names the folder | the agent of that hold, and nobody else |
+| `~/repos/sylvan-stack/<animal>/<repo>/` | `main` while free; `beat/<Beat>` or `chat/<chat>` while a hold names the folder | the agent of that hold, and nobody else |
 | `~/repos/sylvan-stack/readonly/<repo>/` | `main`, brought up to date after every merge | nobody edits it; it is read, for the last merged state, and an Arbol chat works in it ([below](#an-environment-for-an-arbol-chat)) |
 
 - **Free.** An Environment is free when setup is complete, no hold names it, and every
@@ -205,7 +225,7 @@ sessions still refer to them.
 - **Territories keep their paths.** An entry under
   `~/repos/sylvan-stack/<repo>/` means the same path in the Environment
   the hold names: `~/repos/sylvan-stack/arbol-trunk/trunks/trivial/` is worked
-  in `~/repos/sylvan-stack/amber/arbol-trunk/trunks/trivial/`. Overlap is judged as
+  in `~/repos/sylvan-stack/fox/arbol-trunk/trunks/trivial/`. Overlap is judged as
   before, because every branch is merged into the one `main`.
 - **Several repositories, one folder.** A Beat whose territory spans
   repositories uses their clones in the same Environment, so that a check
@@ -245,7 +265,7 @@ agent can take a Beat. It holds:
   "arc": "<the Arc's issue id>",
   "saga": "<the Saga's folder in ~/Artifacts/sagas>",
   "territory": ["~/repos/sylvan-stack/arbol-trunk/trunks/trivial/"],
-  "folder": "~/repos/sylvan-stack/amber",
+  "folder": "~/repos/sylvan-stack/fox",
   "stint": { "name": "beat", "limits": [ { "measure": "quiet", "kind": "soft-max", "value": 60 },
                                           { "measure": "time", "kind": "hard-max", "value": 240 } ] },
   "agent": {
@@ -343,16 +363,16 @@ the chat and the folder, and has no owner:
 ```json
 {
   "beat": null,
-  "folder": "~/repos/sylvan-stack/green",
+  "folder": "~/repos/sylvan-stack/beaver",
   "agent": { "tool": "arbol", "session": "sapling/c3d4e5f6-…", "owner": null, "threadFile": null },
   "takenAt": "2026-10-19T07:38:03Z"
 }
 ```
 
 For example, a chat on `arbol-trunk` reads `readonly/arbol-trunk`. Asked to
-fix a test, its agent runs `book`, which prints `~/repos/sylvan-stack/green`, and
-fixes the test in `green/arbol-trunk`. At the chat's next message `where` prints
-`green` again. A second chat on `arbol-trunk` that only answers questions books
+fix a test, its agent runs `book`, which prints `~/repos/sylvan-stack/beaver`, and
+fixes the test in `beaver/arbol-trunk`. At the chat's next message `where` prints
+`beaver` again. A second chat on `arbol-trunk` that only answers questions books
 nothing.
 
 1. **Book before the first change.** Change files only in the folder `book`
@@ -363,7 +383,7 @@ nothing.
    `git fetch origin`, then `git switch -c chat/<chat> origin/main`; run the
    folder's environment setup as a Beat does. The chat's own folder is still
    `readonly/`, so name the booked folder in full, such as
-   `git -C ~/repos/sylvan-stack/green/arbol-trunk status`.
+   `git -C ~/repos/sylvan-stack/beaver/arbol-trunk status`.
 3. **At each later message,** run `where` before changing a file, and go on
    in the folder it prints, on the same branch.
 4. **Territories still hold.** A booking reserves a folder, not files. A

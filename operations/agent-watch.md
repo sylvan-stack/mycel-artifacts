@@ -78,8 +78,10 @@ to the agent whose transcript wrote it (Claude Code's `Write` and `Edit`,
 Codex's `apply_patch`), else it is shown as *not attributed*. A file that git
 does not track, or that is in no repository, is *outside git*. A file inside
 another live hold's territory is marked with that Beat: territories keep
-their paths, so `~/repos/sylvan-stack/red/arbol/…` is inside a territory that
-names `~/repos/sylvan-stack/arbol/`.
+their paths, so `~/repos/sylvan-stack/hare/arbol/…` and its physical path
+`~/repos/sylvan-stack/red/arbol/…` are inside a territory that names
+`~/repos/sylvan-stack/arbol/`. Animal, color and numbered paths are the same
+areas; aliases do not cause files to be scanned twice.
 
 **Repeated drafts** are 3 or more names in one folder that are the same once
 their version marks are taken out, at least two of them with one: `v2`,
