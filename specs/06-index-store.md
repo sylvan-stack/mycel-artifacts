@@ -91,6 +91,8 @@ Proposed: the structure is made and changed by `mycel init` and by no other comm
 
 Format 3, of 19 October 2026, admits the chunk kinds `req` and `dec` of [MYC-17](17-justification.md) and keeps their rows out of collection; `mycel init` brings a format 2 store forward in one step, with no row to rewrite.
 
+Format 4, of 26 October 2026, adds to each repository's state how far a pass run in steps has refreshed its unchanged files ([MYC-1.40](01-corpora-and-ingest.md)); `mycel init` brings a format 3 store forward in one step, adding an empty column.
+
 Builds are kept side by side, and each can be started by its number (MYC-0). Once a newer Build has raised the format, the older Builds refuse this store, and there is no way back to the earlier format.
 
 `mycel init` needs the extensions to be available in the database server. When one is missing it ends with the error `refused` and names the extension. Beyond the structure it writes the format number and the number of dimensions, and no repository and no default row.
