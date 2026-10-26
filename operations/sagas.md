@@ -256,6 +256,20 @@ and saved sessions may contain their absolute paths even after a hold ends.
   unfinished work that prevent booking; do not reuse an occupied work area
   or create another numbered folder.
 
+### Names of the operations
+
+| Operation | Meaning |
+|---|---|
+| **Hold Beaver Workspace** or **book Beaver Workspace** | An agent has started working in **Beaver Workspace**, reserving that area for its work. Holding and booking are synonyms for the same operation and reservation |
+| **Release Beaver Workspace** | End the hold or booking of **Beaver Workspace**. **Unhold** and **unbook** are synonyms; use **release** as the standard operation name |
+
+These names leave the ownership, territory and return rules below in place.
+The current booking commands remain `book`, `where` and `release`.
+
+The **[Workspace Ledger](../../arbol/GLOSSARY.md#workspace-ledger)** is the
+`ledger.jsonl` file for the history of work items while an agent works in
+the named area. Its function and behavior will be described later.
+
 ## Holds
 
 A hold says that an agent works on a Beat now. It is a file
