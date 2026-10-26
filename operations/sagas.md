@@ -181,9 +181,11 @@ The reservation's conceptual lifetime is a
 **[Workspace Booking](../../arbol/GLOSSARY.md#workspace-booking)**: it belongs
 to work, normally a Saga, and can continue across participating or replacement
 Chat Sessions. The [Workspace Ledger design](workspace-ledger.md) defines
-that model, the `.ledger/` files and full tool/file capture. Its controller
-and capture mechanisms are not yet active. The procedures below describe
-the live legacy tool and holds until a coordinated migration changes them;
+that model, the `.ledger/` files, passive tool history and observed file
+changes inside the booked area. Logging does not control tool execution.
+Its controller and capture mechanisms are not yet active. The procedures
+below describe the live legacy tool and holds until a coordinated migration
+changes them;
 do not reinterpret an existing hold or release active work from this design alone.
 
 ```
@@ -279,8 +281,9 @@ The **[Workspace Ledger](../../arbol/GLOSSARY.md#workspace-ledger)** is the
 Git-ignored `.ledger/` directory. Its
 [design](workspace-ledger.md#files-on-disk) specifies `current.jsonl`, a
 timestamped archive for each closed booking, and `history.jsonl`, with
-capture of every tool call and file change. Activation requires the new
-controller, capture adapters and migration described there.
+passive tool history and observed file-change logging inside the booked
+area. Agents retain unrestricted filesystem access. Activation requires the
+new booking controller, capture adapters and migration described there.
 
 ## Holds
 

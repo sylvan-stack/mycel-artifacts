@@ -8,12 +8,14 @@ Workspace Ledger for a named area such as **Beaver Workspace**. It extends
 [Working in Sagas](sagas.md#named-work-areas).
 
 **Status: design, not an activated runtime procedure.** The owner chose the
-directory layout, a booking independent of a Chat Session, capture of every
-tool call and file change, and Saga-linked bookings by default with named
-ad-hoc work allowed on 26 October 2026. The schema, controller and capture
-mechanisms below are proposed implementation choices. Existing live booking
-and hold procedures remain in force until a tested migration activates this
-design. No hook or recorder has been installed by writing this document.
+directory layout, a booking independent of a Chat Session, and Saga-linked
+bookings by default with named ad-hoc work allowed on 26 October 2026. The
+owner then chose passive tool history and file-change logging inside the
+booked area, with unrestricted filesystem access and no command sandbox.
+Logging must not control whether tools run. The schema, booking controller
+and capture mechanisms below are proposed implementation choices. Existing
+live booking and hold procedures remain in force until a tested migration
+activates this design. No hook or recorder has been installed by writing this document.
 
 ## Workspace Booking
 
@@ -61,7 +63,7 @@ four participate in one Workspace Booking. Its start time stays unchanged.
 | File | Contents and lifetime |
 |---|---|
 | `.ledger/current.jsonl` | Only the open booking, starting with its opening record and containing its participants, tool calls, file changes and work notes. Absent when the area is free; never reused by truncating an old booking |
-| `.ledger/booking-<start-time>-<booking_id>.jsonl` | A closed booking, produced by renaming `current.jsonl` on release. It retains the complete event stream and is immutable after closure |
+| `.ledger/booking-<start-time>-<booking_id>.jsonl` | A closed booking, produced by renaming `current.jsonl` on release. It retains the recorded event stream and is immutable after closure |
 | `.ledger/history.jsonl` | The area's append-only index: booking starts, releases, adoptions, coordination handoffs and capture/recovery incidents. Lifecycle entries identify the booking and its archive filename; detailed tool and file events stay in the booking file |
 
 Resolve animal, color and numbered aliases to one physical area before
@@ -108,14 +110,15 @@ same envelope is used in all three file types:
     "started_at": "2026-10-26T12:56:00.000Z",
     "coordinator": {"tool": "codex", "chat_session_id": "<chat-id>", "agent_id": "<agent-id>"},
     "participants": [{"tool": "codex", "chat_session_id": "<chat-id>", "agent_id": "<agent-id>"}],
-    "capture": {"roots": ["."], "excluded_roots": [".ledger/"], "status": "not_qualified"},
+    "capture": {"roots": ["."], "excluded_roots": [".ledger/"], "status": "starting"},
     "booking_file": "booking-2026-10-26-12-56-00Z-11111111-1111-4111-8111-111111111111.jsonl"
   }
 }
 ```
 
 This example is expanded for reading; its on-disk form is one line. Capture
-must be qualified before this illustrative booking can admit tool calls.
+status describes recorder health; it does not grant or deny permission to
+run tools. A `capture.resumed` event records when observation becomes active.
 
 | Field | Rule |
 |---|---|
@@ -127,7 +130,7 @@ must be qualified before this illustrative booking can admit tool calls.
 | `booking_id` | Stable identity of the booking; `null` is permitted only for an area-level incident outside any booking |
 | `type` | Event kind from the table below |
 | `actor` | Tool, Chat Session and distinct agent identities, or `null` when attribution is unknown. Subagents remain distinguishable even when a host reports their parent's Chat Session ID |
-| `source` | Capture source kind, producer identity and source sequence/cursor, so duplicate or missing deliveries can be detected |
+| `source` | Capture source kind, producer identity and source sequence/cursor, to help identify duplicate or missing deliveries where the source supports this |
 | `data` | Event-specific structured fields; human descriptions supplement these fields |
 
 The opening record contains the work scope, coordinator, registered
@@ -146,37 +149,43 @@ and carry the current Arc/Beat references when applicable.
 | `tool.started` | Host invocation ID, tool name, arguments or an explicit payload reference, calling agent and working directory |
 | `tool.finished` | Matching invocation ID, result/error status, result metadata or payload reference, and finish time. Cancellation and denial are explicit outcomes |
 | `tool.transport` | Follow-up input/polling activity when a host represents it as transport for an already-running invocation |
-| `process.started`, `process.finished` | Background process identity/incarnation, parent invocation and outcome, allowing release to wait for remaining writers |
-| `file.changed` | Create, modify, delete, rename or metadata action; physical and displayed paths; previous path for a known rename; before/after identity or digest when available; source and attribution confidence |
+| `process.started`, `process.finished` | Background process identity/incarnation, parent invocation and outcome when exposed by the runtime; evidence for coordinating release, not a complete process audit |
+| `file.changed` | Observed create, modify, delete, rename, metadata or unknown change; physical and displayed paths; previous path for a known rename; before/after identity or digest when available; source, observation method and attribution confidence |
 | `work.note` | Optional progress, decision, check or handoff explanation. Notes never substitute for automatic tool/file capture |
 | `booking.closing`, `booking.released` | Release request, final work references, closure checks, capture coverage and archive link |
 | `capture.gap`, `capture.resumed`, `capture.late_event`, `booking.adopted` | Missing coverage, restart/reconciliation, delayed evidence or adoption of legacy work, with the interval and evidence limits explicitly stated |
 
-Record every invocation by a registered participant, including reads,
-failures, hosted tools, nested tool calls and subagents' calls. A model's
-description of what it ran is not a capture source. Do not count repeated
-polls as new executions of the original command. Record them separately
-when needed to preserve the full host interaction history.
+Aim to record every invocation by a registered participant, including
+reads, failures, hosted tools, nested tool calls and subagents' calls. Capture
+comes from runtime events, supported hooks or transcript import, rather than
+an agent remembering to describe what it ran. Each adapter declares the
+tool types and execution paths it can observe, with known omissions. Missing coverage is explicit;
+unsupported calls still execute. Do not count repeated polls as new
+executions of the original command. Record them separately when needed to
+preserve the full host interaction history.
 
-Record file creations, changes, deletions, renames and metadata changes
-under the physical named area, including ignored files, generated files and
-Git metadata. Register external work paths, such as the booking's shared
-artifact territory, for capture too. Record that scope in the opening event;
-an unrestricted process can write beyond it, so the recorder must not claim
-machine-wide coverage. Do not follow a symlink outside scope implicitly.
+File capture covers changes observed under the physical named area,
+including ignored files, generated files and Git metadata. An agent's tool
+calls remain associated with its booking even when its working directory
+is elsewhere, but file changes outside that area are outside this recorder's
+scope. Agents retain unrestricted filesystem access. Record the watched
+root in the opening event; do not follow a symlink outside scope implicitly.
 
 The recorder's own `.ledger/` writes are the necessary exception: their
 semantic events are already recorded. Feeding them back into file capture
 would recurse indefinitely. This exception must be declared in coverage;
 it is not a license to filter other ignored directories silently.
 
-"Every file change" targets each file operation, including transient files
-created and deleted within one tool call, rather than only the net Git diff
-afterward. It does not mean each byte-sized kernel write is a separate work
-item. A backend must state which operation boundaries and intermediate
-versions it can observe; a final snapshot cannot prove complete coverage.
+File history records observed changes throughout a booking, including
+changes made by shell commands, editors and background processes. A watcher
+can coalesce rapid writes or miss a transient file; it cannot promise one
+record for every filesystem operation or every intermediate version.
+Snapshots reconcile the latest observable state, including untracked and
+ignored paths, rather than just the final Git diff. They cannot reconstruct
+an unseen file that was created and deleted between observations. Preserve
+uncertainty instead of inventing an exact sequence of operations.
 
-The event record is mandatory even when a payload is large, unavailable or
+Capture an event's metadata even when its payload is large, unavailable or
 redacted. Payload references must state their storage location and digest,
 and whether they survive transcript cleanup. An event's presence does not
 claim that its complete tool output or every historical file body is stored.
@@ -189,12 +198,14 @@ change to the nearest tool call by timestamp alone.
 
 ## Deterministic ownership and writing
 
-One controller implementation owns booking transitions, participant
-registration, event validation, ordering and file rotation. Agents and
-hooks submit requests; they do not append JSONL or edit ownership files
-themselves. A short-lived locked script can provide this writer; a daemon
-is not required for the booking logic. Filesystem observation will require
-a continuing capture process.
+One writer implementation owns booking transitions, participant
+registration, event validation, ordering and file rotation. Agents, runtime
+adapters and watchers submit events through it instead of independently
+appending JSONL or editing ownership files. A locked script can provide the
+booking commands; a background service is needed for continuing observation.
+These can share one writer library and later run in one service. This is
+coordination by convention and implementation, not an access-control boundary:
+unrestricted agents can still edit or delete local ledger files.
 
 The controller uses a pool lock to prevent two bookings taking one physical
 area, and serializes writes to each ledger. Where both locks are needed,
@@ -207,19 +218,28 @@ ownership records. Return success only after the complete transition is
 durable. A current file or a legacy hold always blocks a fresh allocation
 until a mismatch has been reconciled.
 
-Releasing first records a closing state that prevents new work from
-starting. The controller then waits, without holding the pool lock, for
-participants' outstanding calls/background writers and capture sources to
-drain. It checks the existing repository-return conditions. Under the locks
-it writes and syncs the terminal release record, renames `current.jsonl` to
-its reserved archive path without overwriting another archive, syncs the
+Release is an explicit coordination operation. The coordinator first asks
+participants to finish or hand off their work, then requests release. A
+closing record expresses that intent; it does not disable tools or stop
+processes. The controller checks participant acknowledgements, known
+outstanding work and the existing repository-return conditions without
+holding the pool lock while waiting. It also flushes pending observations
+and records their last source cursors and any known gaps. Tool completion
+alone does not prove that no background writer remains.
+
+When these checks permit release, the controller writes and syncs the
+terminal release record under the locks, renames `current.jsonl` to its
+reserved archive path without overwriting another archive, syncs the
 directory, appends the release index record and removes the derived
-reservation. Only then is the area free. A failed check leaves it reserved.
+reservation. Only then is the area free. A failed ownership or return check
+leaves it reserved without interrupting tools. A capture outage is reported
+as incomplete history rather than evidence that work must stop; durable
+booking records are still required to complete release safely.
 
 JSONL appends and renames across multiple files are not one atomic
 transaction. Persist event identities, sync writes and directory changes,
-and recover unfinished transitions on controller startup before admitting
-new work. Booking streams are the source for their contents; the history
+and recover unfinished transitions on controller startup before allocating
+a new booking. Booking streams are the source for their contents; the history
 index can be reconciled from them. Preserve independent area-level incident
 records in that index.
 
@@ -234,47 +254,59 @@ Closed archives are immutable. A genuinely late event is preserved in a
 and original evidence; it is never put into the next booking's current file.
 That incident marks the affected capture interval incomplete.
 
-## Hooks, capture and enforcement
+## Passive recording architecture
 
 Use three cooperating components:
 
-1. **Booking controller:** enforces allocation, scope, participation,
-   ordering, release and recovery deterministically.
-2. **Host capture adapters:** record before dispatch and after completion,
-   including failures, nested calls and subagents. They propagate explicit
-   booking and distinct participant IDs instead of inferring them from CWD.
-3. **File-operation capture:** records changes made by editors, commands and
-   background processes, with watcher/snapshot reconciliation as a fallback.
+1. **Booking controller and ledger writer:** handles booking, participants,
+   release, recovery, JSONL ordering and rotation. It controls reservations;
+   it does not intercept tool execution.
+2. **Runtime event adapters:** subscribe to each supported agent runtime's
+   tool-start and tool-finish events and send them to the writer. Supported
+   hooks can supply additional events; transcript import can backfill events
+   after interruption. Preserve booking and distinct participant IDs instead
+   of relying on the current working directory.
+3. **Filesystem watcher with reconciliation:** watches the physical named
+   area, starts before the baseline scan, and compares stored state with
+   later scans after changes, restart or an overflow. It observes changes
+   from any process, including tools that have no file-edit hook.
 
-A controlled dispatcher must durably record the start before running a
-tool. If that write fails, do not dispatch. If completion recording fails,
-the side effects have already happened: preserve the unfinished invocation,
-report it, and stop admitting further work until recovery. Use synchronous
-admission/recording, rather than a best-effort asynchronous hook.
+These are logical components, not three required daemons. A single local
+background service can host the writer and watcher, with small adapters in
+the agent drivers. Commands continue to run directly with the agent's normal
+filesystem access; no command wrapper or sandbox is required by this design.
+The watcher does not need to monitor the entire machine.
 
-Hooks are useful adapters, but do not establish full capture alone. Official
-[Codex hook documentation](https://learn.chatgpt.com/docs/hooks#tool-coverage)
-excludes hosted tools and some specialized paths. It also distinguishes
-unified-exec polling from a new invocation and reports a parent Chat Session
-ID for subagent hooks. These limitations require additional host/runtime
-instrumentation and distinct subagent identities before the owner's full
-capture requirement can be claimed. A transcript importer is useful evidence,
-but retrospective import cannot prevent an unrecorded action.
+The adapters submit asynchronously. A recorder failure must not deny, delay
+for recovery or cancel a tool call. Use a local queue and source cursors where
+available, retry deliveries with stable event IDs, and backfill from retained
+runtime history where possible. Bound the queue and report overflow rather
+than exhausting resources. When capture resumes, record the affected interval
+and what could or could not be recovered. Recorder health is separate from
+execution permissions; an unavailable recorder means partial history.
 
-Apple describes
-[filesystem events](https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/UsingtheFSEventsFramework/UsingtheFSEventsFramework.html)
-as advisory, with coalescing/dropped-event cases requiring rescans. Such a
-watcher can find changed paths but cannot prove every transient operation
-or its author. Start observation before the baseline scan and keep gaps
-visible. Strict capture needs a tested operation-level observer or mediated
-filesystem execution; ordinary hooks plus a watcher remain incomplete.
+Prefer native runtime events over relying on hooks alone. For example,
+[Codex App Server](https://learn.chatgpt.com/docs/app-server) exposes item
+lifecycle notifications, including command execution, file changes and web
+search. The [hook coverage documentation](https://learn.chatgpt.com/docs/hooks#tool-coverage)
+excludes hosted tools and some specialized paths. An adapter must be attached
+to the runtime actually executing a participant's calls; instrumenting one
+driver does not cover unrelated native chats. A transcript importer records
+source occurrence time when known and actual import time separately. It
+must deduplicate events already received live.
 
-At admission, declare each adapter's tool and file coverage. Missing events,
-overflow, unavailable sources and intervals before capture started produce
-explicit gap records. A new booking must not be presented as fully captured
-unless every required source passes its qualification checks. Unrestricted
-native clients or processes outside the controller's dispatch boundary
-cannot be made compliant merely through an instruction file.
+On this Mac, use an FSEvents-backed watcher with a stored file inventory for
+reconciliation. Apple documents
+[coalescing and dropped-event cases](https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/UsingtheFSEventsFramework/UsingtheFSEventsFramework.html)
+that require rescans. Record the source cursor, detected gaps and whether
+an event came from live observation or a later scan. Leave a change's actor
+unknown when the observer cannot identify it. Do not claim that a watcher
+provides every intermediate write, exact authorship or complete history.
+
+At booking boundaries, retain source cursors and the mapping from participants
+to booking IDs. A delayed event belongs to its original booking, not whichever
+booking is open when it arrives. If that identity cannot be established,
+record an area-level incident with the ambiguity rather than guessing.
 
 ## Safe activation and migration
 
@@ -302,12 +334,16 @@ record its observed start, any independently known legacy start, and the
 uncaptured interval. Never fabricate earlier tool/file events or pretend
 that a Beat hold's timestamp proves when a longer booking first began.
 
-Before activation, qualification must cover competing bookings, concurrent
+Before activation, tests must cover competing bookings, concurrent
 participants, replacement Chat Sessions, retries, cancellation, background
 writers, alias paths, two starts in the same minute, recorder outages,
 partial lines, crashes at each rotation step and delayed events. Capture
-tests must include hosted/nested calls and shell-created transient files,
-not only ordinary edit-tool calls or final repository diffs.
+checks include hosted/nested calls, ignored files, shell changes, renames,
+deletes, watcher coalescing, overflow and restart reconciliation. Verify that
+logging failure leaves tool execution unaffected, that scans recover lasting
+changes, and that transient changes and missing sources are described within
+the observer's limits. Verify that outside paths are not watched and that
+`.ledger/` writes do not feed back into capture.
 
 Until those checks pass, this document is the design to implement, not a
-claim that the machine already records every tool call and file change.
+claim that passive recording is already active.
