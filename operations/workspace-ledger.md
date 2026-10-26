@@ -12,10 +12,13 @@ directory layout, a booking independent of a Chat Session, and Saga-linked
 bookings by default with named ad-hoc work allowed on 26 October 2026. The
 owner then chose passive tool history and file-change logging inside the
 booked area, with unrestricted filesystem access and no command sandbox.
-Logging must not control whether tools run. The schema, booking controller
-and capture mechanisms below are proposed implementation choices. Existing
-live booking and hold procedures remain in force until a tested migration
-activates this design. No hook or recorder has been installed by writing this document.
+Logging must not control whether tools run. The owner subsequently accepted
+missing intermediate edits between snapshots: the booking's resulting changes
+are primary, while activity and attribution are supplementary. The schema,
+booking controller and capture mechanisms below are proposed implementation
+choices. Existing live booking and hold procedures remain in force until a
+tested migration activates this design. No hook, recorder or snapshot store
+has been installed by writing this document.
 
 ## Workspace Booking
 
@@ -47,6 +50,59 @@ For example, a Chat Session books **Beaver Workspace** for a Saga, starts
 two subagents, and hands coordination to a replacement Chat Session. All
 four participate in one Workspace Booking. Its start time stays unchanged.
 
+## Booking results and activity history
+
+The primary record is the exact net file-content difference between saved
+states at the beginning and end of a Workspace Booking. The owner accepted
+that an edit undone between snapshots may leave no record. The purpose is
+to preserve the work's result, with activity history helping explain it.
+
+| Record | Authority and limits |
+|---|---|
+| Opening and closing snapshots | Authoritative net contents, additions and deletions within the declared scope, including staged, unstaged and untracked files. Existing dirty work belongs to the opening state, not automatically to the new booking |
+| Retained Git commits | Precise saved project versions and commit history associated with the booking; independent of approximate Chat Session, Arc or Beat attribution |
+| Watcher, tool and work-context events | Supplementary timeline and attribution to Chat Sessions, Arcs and Beats. Events may be missing or attribution unknown; these limits do not invalidate a complete result comparison |
+
+Use Git snapshots and comparisons for repository contents. Record each
+repository's identity, opening and closing commit IDs, index/working-tree
+state and durable snapshot references. Merely saving `HEAD`, a branch name,
+a status listing or the final commit range is insufficient: uncommitted and
+untracked contents must also be preserved. Git can inspect these states;
+ordinary commit history does not automatically retain them. See
+[Git status](https://git-scm.com/docs/git-status) and
+[Git diff](https://git-scm.com/docs/git-diff).
+
+Capture covers the declared physical area, excluding `.ledger/`. Ignored
+and generated files remain in scope unless an explicit coverage definition
+changes that rule. Files outside repository trees also need saved contents;
+Git status alone is not a snapshot of the whole area. Use a manifest and
+content storage alongside Git where necessary. Preserve raw file bytes,
+file types and symlink targets; do not silently lose content through Git
+filters, nested-repository handling or unsupported file types. Report any
+unreadable or omitted path as incomplete result coverage. The result
+comparison concerns file contents and paths; watcher events may separately
+report filesystem attributes and operational Git metadata.
+
+The controller captures the opening state before participants begin changing
+files, then captures the closing state after participants finish writing.
+Participants coordinate those boundaries without a command sandbox. Verify
+stable reads and retry a capture that overlaps ongoing writes; a live walk
+of changing files must not be presented as an atomic snapshot. If a complete
+boundary cannot be established, report the result as incomplete rather than
+claiming exactness. A hash manifest detects differences but does not preserve
+old contents by itself; the referenced snapshot data must remain available.
+
+Record snapshot IDs, scope, coverage, content digests and comparison references
+in the ledger. Retain snapshot objects and referenced commits for as long as
+the booking archive depends on them. Storage may use a separate local Git
+object store plus manifests; its exact layout remains an implementation
+choice. It must not alter participants' staging, create commits on their
+working branches, stash changes, reset files or rewrite their history.
+
+For example, an agent edits and restores a file without committing. The net
+booking comparison correctly shows no difference. A watcher event might
+explain that activity, but its absence does not weaken the result record.
+
 ## Files on disk
 
 ```text
@@ -62,7 +118,7 @@ four participate in one Workspace Booking. Its start time stays unchanged.
 
 | File | Contents and lifetime |
 |---|---|
-| `.ledger/current.jsonl` | Only the open booking, starting with its opening record and containing its participants, tool calls, file changes and work notes. Absent when the area is free; never reused by truncating an old booking |
+| `.ledger/current.jsonl` | Only the open booking, starting with its opening record and containing snapshot/result references, participants, tool calls, observed file changes and work notes. Absent when the area is free; never reused by truncating an old booking |
 | `.ledger/booking-<start-time>-<booking_id>.jsonl` | A closed booking, produced by renaming `current.jsonl` on release. It retains the recorded event stream and is immutable after closure |
 | `.ledger/history.jsonl` | The area's append-only index: booking starts, releases, adoptions, coordination handoffs and capture/recovery incidents. Lifecycle entries identify the booking and its archive filename; detailed tool and file events stay in the booking file |
 
@@ -80,6 +136,11 @@ Every lifecycle entry carries the reserved `booking_file` path. While that
 booking is open, a reader resolves its ID to `current.jsonl`; after release,
 it resolves to the archive. A historical link must never open a later
 booking merely because it is now in `current.jsonl`.
+
+The JSONL files reference retained snapshot data instead of embedding file
+bodies in every event. An archive and its snapshot references must remain
+resolvable together; the three JSONL names above do not prescribe the
+snapshot store's internal layout.
 
 The whole `.ledger/` directory is local, Git-ignored operational data. Do not
 commit it or place it inside one repository's checkout. The current named
@@ -110,7 +171,7 @@ same envelope is used in all three file types:
     "started_at": "2026-10-26T12:56:00.000Z",
     "coordinator": {"tool": "codex", "chat_session_id": "<chat-id>", "agent_id": "<agent-id>"},
     "participants": [{"tool": "codex", "chat_session_id": "<chat-id>", "agent_id": "<agent-id>"}],
-    "capture": {"roots": ["."], "excluded_roots": [".ledger/"], "status": "starting"},
+    "capture": {"roots": ["."], "excluded_roots": [".ledger/"], "activity_status": "starting", "result_status": "baseline_pending"},
     "booking_file": "booking-2026-10-26-12-56-00Z-11111111-1111-4111-8111-111111111111.jsonl"
   }
 }
@@ -118,7 +179,9 @@ same envelope is used in all three file types:
 
 This example is expanded for reading; its on-disk form is one line. Capture
 status describes recorder health; it does not grant or deny permission to
-run tools. A `capture.resumed` event records when observation becomes active.
+run tools. Activity coverage and result coverage are independent. A
+`capture.resumed` event records when observation becomes active; a
+`snapshot.captured` event identifies a successfully saved boundary state.
 
 | Field | Rule |
 |---|---|
@@ -146,13 +209,15 @@ and carry the current Arc/Beat references when applicable.
 | `participant.joined`, `participant.left` | Chat Session/agent identity and relationship to its delegating participant |
 | `booking.handoff` | Previous and new coordinator, reason and continuation references |
 | `work.context` | Current Saga/Arc/Beat references within the booking's work scope |
+| `snapshot.captured` | Opening, closing or optional intermediate boundary; immutable snapshot ID, per-repository commit/state references, scope, manifest/content references, digests, capture interval and completeness |
+| `booking.result` | Opening and closing snapshot IDs, exact net comparison references, retained commit references, result coverage and unresolved capture errors; no claim of exact Chat Session/Arc/Beat attribution |
 | `tool.started` | Host invocation ID, tool name, arguments or an explicit payload reference, calling agent and working directory |
 | `tool.finished` | Matching invocation ID, result/error status, result metadata or payload reference, and finish time. Cancellation and denial are explicit outcomes |
 | `tool.transport` | Follow-up input/polling activity when a host represents it as transport for an already-running invocation |
 | `process.started`, `process.finished` | Background process identity/incarnation, parent invocation and outcome when exposed by the runtime; evidence for coordinating release, not a complete process audit |
 | `file.changed` | Observed create, modify, delete, rename, metadata or unknown change; physical and displayed paths; previous path for a known rename; before/after identity or digest when available; source, observation method and attribution confidence |
 | `work.note` | Optional progress, decision, check or handoff explanation. Notes never substitute for automatic tool/file capture |
-| `booking.closing`, `booking.released` | Release request, final work references, closure checks, capture coverage and archive link |
+| `booking.closing`, `booking.released` | Release request, final work references, closure checks, separate result/activity coverage, booking result reference and archive link |
 | `capture.gap`, `capture.resumed`, `capture.late_event`, `booking.adopted` | Missing coverage, restart/reconciliation, delayed evidence or adoption of legacy work, with the interval and evidence limits explicitly stated |
 
 Aim to record every invocation by a registered participant, including
@@ -180,17 +245,20 @@ File history records observed changes throughout a booking, including
 changes made by shell commands, editors and background processes. A watcher
 can coalesce rapid writes or miss a transient file; it cannot promise one
 record for every filesystem operation or every intermediate version.
-Snapshots reconcile the latest observable state, including untracked and
-ignored paths, rather than just the final Git diff. They cannot reconstruct
-an unseen file that was created and deleted between observations. Preserve
-uncertainty instead of inventing an exact sequence of operations.
+Intermediate scans reconcile the latest observable state, including untracked
+and ignored paths. Opening and closing snapshots separately establish the
+booking's result, even when intermediate events are missing. Neither kind
+of snapshot reconstructs an unseen file created and deleted between captures;
+that is an accepted limitation. Preserve uncertainty instead of inventing
+an exact sequence of operations.
 
 Capture an event's metadata even when its payload is large, unavailable or
 redacted. Payload references must state their storage location and digest,
 and whether they survive transcript cleanup. An event's presence does not
 claim that its complete tool output or every historical file body is stored.
-File content retention and large-payload storage remain implementation
-choices to settle before claiming replay or a self-contained content archive.
+Boundary snapshot contents must be retained to support the result comparison.
+Retention of every intermediate file body and full tool output is a separate
+implementation choice; no complete replay of activity is promised.
 
 Concurrent tool calls can make attribution uncertain. Preserve an unknown
 actor or an explicit set of candidates instead of assigning a filesystem
@@ -214,9 +282,12 @@ for a tool, a process, or a hook that needs to append its completion.
 
 Opening a booking durably creates `current.jsonl` with the opening record,
 then indexes that record in `history.jsonl` and updates any compatibility
-ownership records. Return success only after the complete transition is
-durable. A current file or a legacy hold always blocks a fresh allocation
-until a mismatch has been reconciled.
+ownership records. Capture and retain the verified opening snapshot and
+append its `snapshot.captured` record before reporting a booking ready for
+work. A failed baseline capture leaves the reservation visible for recovery;
+it does not disable agents' tools. Return success only after the booking
+transition and baseline are durable. A current file or a legacy hold always
+blocks a fresh allocation until a mismatch has been reconciled.
 
 Release is an explicit coordination operation. The coordinator first asks
 participants to finish or hand off their work, then requests release. A
@@ -225,16 +296,20 @@ processes. The controller checks participant acknowledgements, known
 outstanding work and the existing repository-return conditions without
 holding the pool lock while waiting. It also flushes pending observations
 and records their last source cursors and any known gaps. Tool completion
-alone does not prove that no background writer remains.
+alone does not prove that no background writer remains. Capture a verified
+closing snapshot and persist `booking.result` before declaring release
+complete. If that fails, keep the reservation for recovery and identify the
+missing result data; do not stop or cancel tools.
 
 When these checks permit release, the controller writes and syncs the
 terminal release record under the locks, renames `current.jsonl` to its
 reserved archive path without overwriting another archive, syncs the
 directory, appends the release index record and removes the derived
 reservation. Only then is the area free. A failed ownership or return check
-leaves it reserved without interrupting tools. A capture outage is reported
-as incomplete history rather than evidence that work must stop; durable
-booking records are still required to complete release safely.
+leaves it reserved without interrupting tools. An activity-recorder outage
+is reported as incomplete activity history; it does not by itself make the
+result incomplete or prevent release when both boundary snapshots and the
+result record are complete and durable.
 
 JSONL appends and renames across multiple files are not one atomic
 transaction. Persist event identities, sync writes and directory changes,
@@ -252,15 +327,18 @@ An uncertain reservation remains occupied.
 Closed archives are immutable. A genuinely late event is preserved in a
 `capture.late_event` history record with its booking ID, archive reference
 and original evidence; it is never put into the next booking's current file.
-That incident marks the affected capture interval incomplete.
+That incident marks the affected activity interval incomplete. Result
+coverage changes only if evidence invalidates a boundary snapshot or its
+comparison, not merely because an activity event arrived late.
 
 ## Passive recording architecture
 
 Use three cooperating components:
 
 1. **Booking controller and ledger writer:** handles booking, participants,
-   release, recovery, JSONL ordering and rotation. It controls reservations;
-   it does not intercept tool execution.
+   boundary snapshots, Git comparison, retained commit references, release,
+   recovery, JSONL ordering and rotation. It controls reservations and saves
+   results; it does not intercept tool execution.
 2. **Runtime event adapters:** subscribe to each supported agent runtime's
    tool-start and tool-finish events and send them to the writer. Supported
    hooks can supply additional events; transcript import can backfill events
@@ -283,7 +361,9 @@ available, retry deliveries with stable event IDs, and backfill from retained
 runtime history where possible. Bound the queue and report overflow rather
 than exhausting resources. When capture resumes, record the affected interval
 and what could or could not be recovered. Recorder health is separate from
-execution permissions; an unavailable recorder means partial history.
+execution permissions; an unavailable activity recorder means a partial
+timeline. Boundary snapshot failures are reported separately as incomplete
+result coverage.
 
 Prefer native runtime events over relying on hooks alone. For example,
 [Codex App Server](https://learn.chatgpt.com/docs/app-server) exposes item
@@ -339,11 +419,15 @@ participants, replacement Chat Sessions, retries, cancellation, background
 writers, alias paths, two starts in the same minute, recorder outages,
 partial lines, crashes at each rotation step and delayed events. Capture
 checks include hosted/nested calls, ignored files, shell changes, renames,
-deletes, watcher coalescing, overflow and restart reconciliation. Verify that
-logging failure leaves tool execution unaffected, that scans recover lasting
-changes, and that transient changes and missing sources are described within
-the observer's limits. Verify that outside paths are not watched and that
-`.ledger/` writes do not feed back into capture.
+deletes, watcher coalescing, overflow and restart reconciliation. Result
+checks cover initial dirty work, staged and unstaged edits, untracked and
+ignored files, binaries, symlinks, files outside repository roots, nested
+repositories, incomplete reads, concurrent writes during capture and durable
+snapshot retention. Verify that an edit restored between snapshots produces
+no net difference, and that unavailable activity events do not weaken a
+complete boundary comparison. Verify that logging failure leaves tool
+execution unaffected, outside paths are not watched, and `.ledger/` writes
+do not feed back into capture.
 
 Until those checks pass, this document is the design to implement, not a
 claim that passive recording is already active.
