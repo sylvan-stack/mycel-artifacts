@@ -5,7 +5,10 @@ role: authored
 
 This document defines the proposed lifecycle and file format for the
 Workspace Ledger for a named area such as **Beaver Workspace**. It extends
-[Working in Sagas](sagas.md#named-work-areas).
+[Working in Sagas](sagas.md#named-work-areas). The independent `workspace-ledger`
+component's draft runtime contract is in the
+[Workspace Ledger specifications](../../sylvan-stack/repos/workspace-ledger/specs/README.md).
+This guide owns the portable booking procedure; those chapters define the recorder.
 
 **Status: design, not an activated runtime procedure.** The owner chose the
 directory layout, a booking independent of a Chat Session, and Saga-linked
@@ -103,6 +106,20 @@ For example, an agent edits and restores a file without committing. The net
 booking comparison correctly shows no difference. A watcher event might
 explain that activity, but its absence does not weaken the result record.
 
+## Local configuration
+
+The owner chose the repository name `workspace-ledger` and directed that working
+area names belong in a Git-ignored configuration file on 26 October 2026. Stable
+IDs, full display names, paths, aliases and booking order come from that local
+inventory. They are not a compiled animal/color list or a fixed pool size.
+The source repository contains a placeholder template and a Git-ignored
+`workspace-ledger.local.toml`; [WL-0](../../sylvan-stack/repos/workspace-ledger/specs/00-scope-and-configuration.md)
+defines its proposed versioned TOML contract and configuration-reload behavior.
+A booking pins its configuration revision and identity so a name change does not
+rename a physical folder or rewrite historical records. Existing legacy booking
+scripts keep their live behavior until coordinated migration; creating the new
+configuration does not switch them over.
+
 ## Files on disk
 
 ```text
@@ -162,6 +179,7 @@ same envelope is used in all three file types:
   "recorded_at": "2026-10-26T12:56:00.000Z",
   "occurred_at": "2026-10-26T12:56:00.000Z",
   "workspace": "beaver",
+  "workspace_name": "Beaver Workspace",
   "booking_id": "11111111-1111-4111-8111-111111111111",
   "type": "booking.started",
   "actor": {"tool": "codex", "chat_session_id": "<chat-id>", "agent_id": "<agent-id>"},
@@ -189,7 +207,8 @@ run tools. Activity coverage and result coverage are independent. A
 | `event_id` | Stable unique identity supplied before recording. Retrying the same event does not append it again. Reusing the ID with conflicting content is an error |
 | `sequence` | Controller-assigned increasing order across this named area's ledger. A lifecycle record copied to `history.jsonl` keeps its identity and sequence; that index therefore has gaps |
 | `recorded_at`, `occurred_at` | UTC timestamps. The controller assigns recording time; source occurrence time is `null` if unknown. Recording order does not claim causal order between concurrent producers |
-| `workspace` | Stable animal key, such as `beaver`; human views render **Beaver Workspace**. Aliases never create a second identity |
+| `workspace` | Stable configured ID, such as `beaver`; independent of the display name. Aliases never create a second identity |
+| `workspace_name` | Full configured name recorded with the event, such as **Beaver Workspace**; later renaming does not rewrite old records |
 | `booking_id` | Stable identity of the booking; `null` is permitted only for an area-level incident outside any booking |
 | `type` | Event kind from the table below |
 | `actor` | Tool, Chat Session and distinct agent identities, or `null` when attribution is unknown. Subagents remain distinguishable even when a host reports their parent's Chat Session ID |
