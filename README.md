@@ -32,6 +32,7 @@ installation does not supply new provider proof.
 | find where something is implemented or documented, in one search | `mycel search` — [runbook](tools/mycel.md) |
 | an answer to "how/where/why" about a codebase | [operations/code-research.md](operations/code-research.md) (level 2) |
 | durable multi-angle task context (an artifact) | [operations/deep-research.md](operations/deep-research.md) (level 3) |
+| take initiative on a broad goal: own the plan, decisions and experiments while keeping the owner's involvement optional until their input is needed | [operations/initiative.md](operations/initiative.md) — applies to the delegated goal and its follow-ups; narrowly assigned tasks and subagent deliverables retain their scope |
 | start or continue an in-depth review of a large pull request: find its next issues, review new commits, verify the author's fixes, weigh the author's replies | [operations/pr-deep-review.md](operations/pr-deep-review.md) — state file per pull request, ranked areas, verified findings queued for the human reviewer; never posts. Named run limits: [operations/stints.md](operations/stints.md) |
 | go through the owner's unresolved comments in Linear: make the change a comment recommends, answer what it asks, or only list them | [operations/linear-resolve.md](operations/linear-resolve.md) — reads every open thread of the Linear workspace, changes the original then its Linear copy, and settles each comment with the user in the session; posts `Resolved. Resolution: …` in Linear only after the user says `Resolved` |
 | list the open questions and pending decisions that wait for the owner in Linear, so they can be answered in the session and not by commenting in Linear | [operations/linear-open-questions.md](operations/linear-open-questions.md) — collects the open rows of the specifications' Decisions tables, the issues that ask the owner to decide and the questions agents asked in comments, gives one numbered list in the session, and writes each answer the user gives there to the place its question is recorded in |
@@ -147,6 +148,14 @@ These hold for every agent on this Mac, whatever the task and the tool.
   own login. Say beforehand when a command writes a CLI's own state. Plain
   `claude` uses `~/.claude`; the alias `claude-zai` runs it on other models
   through `~/.claude/settings-zai.json`; never recreate `~/.claude-anthropic`.
+- **Long work is split and recorded.** Split work that may run more than 5
+  minutes into the smallest steps its tool allows (one repository, one path,
+  one batch) and run them one after another. Start each step that may still
+  run more than 5 minutes as `bgjob run --name "<what it does, in plain words>"
+  [--log <file> | --progress-cmd <command>] -- <command>`, or attach one already
+  running with `bgjob watch --pid <pid> --name "…"`. The menu bar then shows it
+  under the chat that started it, with elapsed time and progress, and macOS
+  notifies when it ends; see [background jobs](operations/background-jobs.md).
 - **Sign-in pages** open in the built-in browser pane. The owner types the
   credentials and approves; never enter them.
 - **Linear.** Every comment an agent posts begins with `**Agent:**`. The
