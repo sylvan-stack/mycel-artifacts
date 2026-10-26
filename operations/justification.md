@@ -39,7 +39,8 @@ Before writing durable claims, establish the PostgreSQL backup arrangement
 and keep the input files available. Statements live only in the Index Store;
 Git does not back them up. The [store manual](../tools/mycel-2-store.md)
 describes store ownership. Select explicit repository scope, especially from
-an Environment, where implicit scope may include more than one repository.
+a booked area such as Beaver Workspace, where implicit scope may include more
+than one repository.
 
 ## Normalize existing requirements and decisions
 

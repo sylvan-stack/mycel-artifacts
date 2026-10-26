@@ -65,8 +65,8 @@ one screen, a family is missing; add a family, not rows.*
   repository's checkout use `mycel search --repo mycel "…"` to search it — or
   read the files above directly (absolute paths always work; `mycel` needs no
   daemon at all). `mycel repos` lists configured repositories and their enabled
-  state. From a prepared folder pass `--repo <name>` explicitly: without it,
-  scope can cover the whole organization (MYC-1.4).
+  state. From a named work area such as Beaver Workspace pass `--repo <name>`
+  explicitly: without it, scope can cover the whole organization (MYC-1.4).
 - **Outputs are artifacts**: resolve the repository's `artifact_root` in
   `~/.mycel/config.toml` before placing work. Organization member repositories
   use `~/Artifacts/<org-directory>/repos/<repo>/`; standalone repositories
@@ -104,8 +104,10 @@ These hold for every agent on this Mac, whatever the task and the tool.
   consequences they would agree to, and at most a few sections worth their own
   read. Never ask them to read it all.
 - **Names and numbers.** Use only names the owner gave to real things;
-  describe anything else or use a placeholder such as `<root>`. Numbers the
-  owner gives "for example" are not defaults: recommend a value with its basis
+  describe anything else or use a placeholder such as `<root>`. Name agent
+  work areas with their full animal name, such as **Beaver Workspace** or
+  **Owl Workspace**, every time. Numbers the owner gives "for example" are
+  not defaults: recommend a value with its basis
   and write it only after they agree.
 - **Processes, not trackers.** Recurring multi-step work becomes a guide with a
   thin skill ([create-skill.md](operations/create-skill.md)). Never stand in

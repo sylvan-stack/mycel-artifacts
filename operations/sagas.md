@@ -25,8 +25,8 @@ the [glossary](../../arbol/GLOSSARY.md#saga). The Sagas themselves are files
 in the corpus `~/Artifacts/sagas/`: the rules of each Saga's work are in that
 Saga's file, and what a Beat must achieve is in that Beat's file.
 
-**Contents:** when to use · existing ownership · where state lives · territories · Environments ·
-holds · an Environment for an Arbol chat · order and progress ·
+**Contents:** when to use · existing ownership · where state lives · territories · named work areas ·
+holds · a booked area for an Arbol chat · order and progress ·
 taking the next Beat · the plan of a Beat · the hand-over of a Beat · while
 working · stop criteria of a Beat · stopping and finishing · reviewing a
 Beat, an Arc or a Saga · planning a Saga · not built yet.
@@ -49,11 +49,11 @@ Before acting on a request to start, continue or finish a Saga, Arc or Beat,
 check the holds and confirm their owners are alive as [Who owns a
 hold](#who-owns-a-hold) says. Read only enough current assignment information
 to establish whether another live session already owns the requested work.
-Do this before planning, booking an Environment, running checks or preparing
+Do this before planning, booking a work area, running checks or preparing
 closure, and before announcing that you will take or finish the work.
 
 If another live session owns that work, **report it immediately and stop**.
-Name the work, tool, session and Environment, with its latest known status if
+Name the work, tool, session and work area, with its latest known status if
 readily available, then end the turn. Do not start a parallel implementation,
 read-only preparation, verification, coordination or closure effort, or wait
 for its hold to clear. A general request to continue or finish the work does
@@ -77,8 +77,8 @@ ownership report and a stop, including for later verification and closure.
 | Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and its issue while unfinished | the file: what it must achieve, its plan, hand-over and territory. Linear: its live unfinished status and discussion. Record prerequisite IDs in the file before deleting their completed issues |
 | Completed tasks | Weekly files under `~/Artifacts/sagas/completed-linear-tasks/`, linked by `completed-linear-tasks.md` | the completed IDs, their durable local records, and whether each issue's removal was confirmed; a completed issue is deleted instead of set to Done |
 | Repository of a Beat | A label of the label group `Repository` | — |
-| Hold | One file per held Beat, and one per Arbol chat that booked an Environment, in `~/.sagas/holds/` on this Mac | who works on a Beat right now, which chat works in which Environment |
-| A Beat's code | The branch `beat/<Beat>` in each repository its territory touches, worked in an Environment and merged into `main` as one merge commit | exactly what the Beat changed in code, whichever tool, session or kind of edit made the change |
+| Hold | One file per held Beat, and one per Arbol chat that booked a work area, in `~/.sagas/holds/` on this Mac | who works on a Beat right now, which chat works in which work area |
+| A Beat's code | The branch `beat/<Beat>` in each repository its territory touches, worked in a work area and merged into `main` as one merge commit | exactly what the Beat changed in code, whichever tool, session or kind of edit made the change |
 
 **The files are the originals.** The page in a Saga's Linear project is a
 one-way copy of its `saga.md`, each other document of the Saga a document in
@@ -156,30 +156,34 @@ requirement, needs the file in the Beat's territory.
 
 <a id="prepared-folders"></a>
 
-## Environments
+<a id="environments"></a>
+
+## Named work areas
 
 A Beat's code is changed on a branch of its own, `beat/<Beat>` such as
-`beat/SYL-173`, in an **[Environment](../../arbol/GLOSSARY.md#environment)**:
-a reusable working area holding one clone of every repository, with its
-development dependencies installed. It stays between tasks. The owner chose
-this arrangement on 16 October 2026 and, on 20 October 2026, named the areas
-Environments and increased the pool from five to ten.
+`beat/SYL-173`, in one of the ten reusable working areas, such as
+**[Beaver Workspace](../../arbol/GLOSSARY.md#workspace)**. Each holds one
+clone of every repository, with its development dependencies installed,
+and stays between tasks. The owner chose this arrangement on 16 October
+2026, increased the pool from five to ten on 20 October, and chose the
+current animal names and term on 26 October 2026.
 
-On 26 October 2026 the owner chose animal names instead of colors. The ten
-names, in booking order, are **badger, beaver, fox, hare, lynx, otter, owl,
-panda, raven, wolf**. Use **Repository Animal Environment** for one
-repository's copy: **Mycel Badger Environment** is
-`~/repos/sylvan-stack/badger/mycel`. **Badger Environment** refers to the
-whole `badger/` working area. A hold reserves the whole Environment,
+Always use each area's full name: **Badger Workspace**, **Beaver Workspace**,
+**Fox Workspace**, **Hare Workspace**, **Lynx Workspace**, **Otter Workspace**,
+**Owl Workspace**, **Panda Workspace**, **Raven Workspace** and **Wolf Workspace**,
+in that booking order. Generic instructions can say "the booked area" or
+"the pool"; do not shorten a name to the animal alone or use the term
+without its name. The Mycel repository in **Beaver Workspace** is
+`~/repos/sylvan-stack/beaver/mycel`. A hold reserves the complete named area,
 including every repository in it, so work spanning repositories stays together.
 
 ```
 ~/repos/sylvan-stack/
   mycel/  arbol/  arbol-root/  …     the owner's own checkouts
-  badger/                          Badger Environment (alias to blue/)
-    mycel/                         Mycel Badger Environment
-    arbol/  arbol-root/  …          the other repositories in Badger
-  beaver/ fox/ hare/ lynx/ otter/   the other nine Environments,
+  badger/                          Badger Workspace (alias to blue/)
+    mycel/                         Mycel repository in Badger Workspace
+    arbol/  arbol-root/  …          other repositories in Badger Workspace
+  beaver/ fox/ hare/ lynx/ otter/   the other nine named work areas,
   owl/ panda/ raven/ wolf/          each with the same repositories
   readonly/                        one further set, always the last merged main
     mycel/  arbol/  arbol-root/  …  nobody edits these copies
@@ -189,23 +193,23 @@ The animal paths are aliases to the existing physical folders. They rename
 the areas without moving a checkout, changing a branch, rewriting a hold,
 or interrupting a running command:
 
-| Animal name and new path | Existing physical folder | Numbered alias |
+| Full name and path | Existing physical folder | Numbered alias |
 |---|---|---|
-| Badger — `badger/` | `blue/` | `1/` |
-| Beaver — `beaver/` | `green/` | `2/` |
-| Fox — `fox/` | `amber/` | `3/` |
-| Hare — `hare/` | `red/` | `4/` |
-| Lynx — `lynx/` | `violet/` | `5/` |
-| Otter — `otter/` | `orange/` | — |
-| Owl — `owl/` | `teal/` | — |
-| Panda — `panda/` | `silver/` | — |
-| Raven — `raven/` | `gold/` | — |
-| Wolf — `wolf/` | `white/` | — |
+| Badger Workspace — `badger/` | `blue/` | `1/` |
+| Beaver Workspace — `beaver/` | `green/` | `2/` |
+| Fox Workspace — `fox/` | `amber/` | `3/` |
+| Hare Workspace — `hare/` | `red/` | `4/` |
+| Lynx Workspace — `lynx/` | `violet/` | `5/` |
+| Otter Workspace — `otter/` | `orange/` | — |
+| Owl Workspace — `owl/` | `teal/` | — |
+| Panda Workspace — `panda/` | `silver/` | — |
+| Raven Workspace — `raven/` | `gold/` | — |
+| Wolf Workspace — `wolf/` | `white/` | — |
 
-New bookings and instructions use animals. Existing bookings keep their
-recorded paths, and the booking tool accepts a color folder while its animal
-alias has not yet been installed. These paths name the same ten checkouts,
-never additional Environments. Compare resolved paths when checking holds:
+New bookings and instructions use these full names and animal paths. Existing
+bookings keep their recorded paths, and the booking tool accepts a color
+folder while its animal alias has not yet been installed. These paths name the same ten checkouts,
+never additional named work areas. Compare resolved paths when checking holds:
 a hold on `blue/`, `badger/` or `1/` reserves the same area. The booking tool
 lists each resolved area once, and the check from outside recognizes both
 animal and color names when checking territories. Keep the physical color
@@ -216,19 +220,19 @@ and saved sessions may contain their absolute paths even after a hold ends.
 |---|---|---|
 | `~/repos/sylvan-stack/<repo>/` | whatever its user chose | the owner, and Claude Code or Codex started there |
 | `~/repos/sylvan-stack/<animal>/<repo>/` | `main` while free; `beat/<Beat>` or `chat/<chat>` while a hold names the folder | the agent of that hold, and nobody else |
-| `~/repos/sylvan-stack/readonly/<repo>/` | `main`, brought up to date after every merge | nobody edits it; it is read, for the last merged state, and an Arbol chat works in it ([below](#an-environment-for-an-arbol-chat)) |
+| `~/repos/sylvan-stack/readonly/<repo>/` | `main`, brought up to date after every merge | nobody edits it; it is read, for the last merged state, and an Arbol chat works in it ([below](#a-booked-area-for-an-arbol-chat)) |
 
-- **Free.** An Environment is free when setup is complete, no hold names it, and every
+- **Free.** A work area is free when setup is complete, no hold names it, and every
   repository in it is on `main` with nothing uncommitted and no file that git
   does not ignore. A folder that is not clean is never taken; say which and
   what is in it.
 - **Territories keep their paths.** An entry under
-  `~/repos/sylvan-stack/<repo>/` means the same path in the Environment
+  `~/repos/sylvan-stack/<repo>/` means the same path in the work area
   the hold names: `~/repos/sylvan-stack/arbol-trunk/trunks/trivial/` is worked
   in `~/repos/sylvan-stack/fox/arbol-trunk/trunks/trivial/`. Overlap is judged as
   before, because every branch is merged into the one `main`.
 - **Several repositories, one folder.** A Beat whose territory spans
-  repositories uses their clones in the same Environment, so that a check
+  repositories uses their clones in the same work area, so that a check
   of one against another, such as a suite in one repository run against a
   program in another, uses the Beat's own copies.
 - **Corpora stay on `main`.** The specification corpora in `~/Artifacts/` and
@@ -238,18 +242,18 @@ and saved sessions may contain their absolute paths even after a hold ends.
 - **Nothing installed from a branch.** A program installed on this Mac, such
   as a launcher in `~/.local/bin`, is made only from merged work, never from a
   Beat's branch.
-- **Setting one up.** A new Environment, or a repository new to the stack,
+- **Setting one up.** A new work area, or a repository new to the stack,
   is a clone whose `origin` is the repository's GitHub address, on `main`, with
   every environment its lockfiles name installed once: `uv sync --locked
   --group dev` beside each `uv.lock`, `npm ci` beside each
   `package-lock.json`, and `uv venv` with `uv pip install -e .` beside a
   `pyproject.toml` that has no `uv.lock`, as `mycel`'s has none. Every
-  Environment and `readonly` hold the same repositories. Put
-  `.environment-preparing` in an Environment while setting it up, and remove
+  work area and `readonly` hold the same repositories. Put
+  `.environment-preparing` in a work area while setting it up, and remove
   it only after every clone and dependency setup succeeds. The booking tool
   skips it until then, and rejects empty or incomplete sets of repositories.
-  The pool has ten Environments. When none is free, report the holds or
-  unfinished work that prevent booking; do not reuse an occupied Environment
+  The pool has ten named work areas. When none is free, report the holds or
+  unfinished work that prevent booking; do not reuse an occupied work area
   or create another numbered folder.
 
 ## Holds
@@ -333,29 +337,33 @@ that names an Arbol chat has no owner to check, and the check leaves it.
 
 <a id="a-prepared-folder-for-an-arbol-chat"></a>
 
-## An Environment for an Arbol chat
+<a id="an-environment-for-an-arbol-chat"></a>
+
+## A booked area for an Arbol chat
 
 An Arbol chat works in `~/repos/sylvan-stack/readonly/`: in its repository's
 folder there, such as `readonly/arbol-trunk`, or in `readonly/` itself for the
 stack as a whole. It keeps that folder for every message, because a Driver
 continues its saved conversation only in the same folder. Most chats only
-read and answer. An agent in a chat that has to change files *books* an
-Environment, when it needs one, and works there. So more chats than
-Environments can be open at once. The owner decided this on 19 October
+read and answer. An agent in a chat that has to change files *books* a
+work area, when it needs one, and works there. So more chats than
+named work areas can be open at once. The owner decided this on 19 October
 2026 ([BKD-D4](../../arbol/backend/00-the-arbol-backend.md#decisions)).
 
-The tool is `~/Artifacts/sagas/tools/environment.py`. It takes the chat
+The tool is `~/Artifacts/sagas/tools/workspace.py`. It takes the chat
 from `ARBOL_ROOT` and `ARBOL_CHAT`, which the Trunk hands to the agent
 ([AGR-D11](../../arbol/agent-records/00-the-agent-record.md#decisions)), or
 from `--root` and `--chat`. It prints the folder alone on standard output, and
-what it did or why on standard error. The old `prepared_folder.py` command
-remains a compatibility entry point to the same tool:
+what it did or why on standard error. The old `environment.py` and
+`prepared_folder.py` commands remain compatibility entry points to the same
+tool. Their names and the `.environment-preparing` setup marker stay valid
+for running agents:
 
 | Command | What it does | Exit status |
 |---|---|---|
-| `python3 -I ~/Artifacts/sagas/tools/environment.py book` | Prints the folder this chat booked. When it booked none, it takes the first [free](#environments) Environment, writes the hold `~/.sagas/holds/chat-<chat>.json`, and prints that folder | 0; 1 when no folder is free, with the reason for each |
-| `… environment.py where` | Prints the folder this chat booked | 0; 1 when it booked none: the chat works in `readonly/` |
-| `… environment.py release` | Deletes the chat's hold, once every repository in its folder is on `main` with nothing uncommitted and no file that git does not ignore | 0; 1 when the folder is not clean, with what is left, and the hold stays |
+| `python3 -I ~/Artifacts/sagas/tools/workspace.py book` | Prints the folder this chat booked. When it booked none, it takes the first [free](#named-work-areas) work area, writes the hold `~/.sagas/holds/chat-<chat>.json`, and prints that folder | 0; 1 when no folder is free, with the reason for each |
+| `… workspace.py where` | Prints the folder this chat booked | 0; 1 when it booked none: the chat works in `readonly/` |
+| `… workspace.py release` | Deletes the chat's hold, once every repository in its folder is on `main` with nothing uncommitted and no file that git does not ignore | 0; 1 when the folder is not clean, with what is left, and the hold stays |
 
 All three exit with 2 when the chat is missing or malformed. The hold names
 the chat and the folder, and has no owner:
@@ -378,7 +386,7 @@ nothing.
 1. **Book before the first change.** Change files only in the folder `book`
    printed, never in `readonly/`. A change only to a corpus in `~/Artifacts/`
    needs no booking: corpora stay on `main`, as
-   [Environments](#environments) says.
+   [Named work areas](#named-work-areas) says.
 2. **A branch of its own** in each repository it changes, in that folder:
    `git fetch origin`, then `git switch -c chat/<chat> origin/main`; run the
    folder's environment setup as a Beat does. The chat's own folder is still
@@ -487,10 +495,10 @@ tells its parent how far it got.
 
    When it cannot start, go to the next Arc.
 5. **Take it.** Create its hold file, naming the first free
-   [Environment](#environments) as `folder`. If the file exists,
+   [work area](#named-work-areas) as `folder`. If the file exists,
    another agent took it a moment ago: go back to step 3.
 6. **Make its branch** in each repository its territory touches, in the
-   Environment: `git fetch origin`, then `git switch -c beat/<Beat>
+   work area: `git fetch origin`, then `git switch -c beat/<Beat>
    origin/main`, or `git switch beat/<Beat>` when the Beat is taken over and
    its branch is on GitHub. Run the folder's environment setup again; it takes
    a moment when nothing changed.
@@ -625,8 +633,8 @@ For example, at the end of `SYL-179.md`:
   "everything". Before each commit, compare the files in it with the hold's
   territory and the files every Beat may add to. A file outside both is not
   committed: grow the territory, or stop.
-- **Work only in your Environment,** on the Beat's branch, for code; the
-  corpora on `main`, as [Environments](#environments) says. Push the
+- **Work only in your booked area,** on the Beat's branch, for code; the
+  corpora on `main`, as [Named work areas](#named-work-areas) says. Push the
   branch with each commit (`git push -u origin beat/<Beat>` the first time),
   so the work is on GitHub before it is merged.
 - **Another Beat's unfinished work is not yours.** It lives on another branch
@@ -650,7 +658,7 @@ change to the stint does not change what a past run reports.
 | Kind | What the agent does when the limit is reached |
 |---|---|
 | `soft-max` | Stops at the next point where the work is safe to leave: after the command that runs, with what works committed and pushed. It says in Linear and in its reply where the Beat stands, what is stuck and what it proposes, and asks the owner whether to go on. An answer to go on starts the `quiet` count again |
-| `hard-max` | Stops the Beat as [Stopping and finishing](#stopping-and-finishing) says: commits and pushes what works, writes the hand-over, returns its Environment and releases the hold, whatever is left. The Beat can be taken again in a new run |
+| `hard-max` | Stops the Beat as [Stopping and finishing](#stopping-and-finishing) says: commits and pushes what works, writes the hand-over, returns its work area and releases the hold, whatever is left. The Beat can be taken again in a new run |
 
 The agent checks both counts after each tick and before it starts any
 command that may take long. Neither limit is a target: a Beat that is done
@@ -664,7 +672,7 @@ hard stop.
 - **Stopping in the middle:** follow the Saga's rules (commit what
   works, leave the `**Agent:**` comment that says what is done and what comes
   next), push the branch unmerged, write the Beat's hand-over, return the
-  Environment (below), then delete the hold file and end the comment with
+  work area (below), then delete the hold file and end the comment with
   `Released.` The agent that takes the Beat over switches to its branch.
 - **Finishing:** when the Beat's checks pass, merge it, in each repository it
   changed:
@@ -681,9 +689,9 @@ hard stop.
   result, prerequisite IDs and completion summary in the local records. Follow
   [Complete Linear Tasks](linear-completion.md): commit and push the completed
   ID before deleting its Linear issue, then verify and record removal. Return
-  the Environment and delete the hold file. A failed removal is reported as
+  the work area and delete the hold file. A failed removal is reported as
   pending; do not set the issue to Done as a fallback.
-- **Returning the Environment,** in each repository the Beat used:
+- **Returning the work area,** in each repository the Beat used:
   `git fetch origin`, `git switch main`, `git merge --ff-only origin/main`,
   then `git branch -d beat/<Beat>` and `git push origin --delete
   beat/<Beat>` once the branch is merged. `git status` then shows nothing; a
@@ -763,7 +771,7 @@ territory instead.
   thread.
 - **A chat's Root and chat in its environment.** Until SYL-207 is done, the
   Trunk does not hand `ARBOL_ROOT` and `ARBOL_CHAT` to the agent, so
-  `environment.py` refuses in a chat with exit status 2, and a chat
+  `workspace.py` refuses in a chat with exit status 2, and a chat
   cannot book a folder yet.
 - **Closing an Arbol chat**, which would release its booking. Until Arbol
   can close a chat, a booking is released by hand.

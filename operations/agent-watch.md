@@ -64,7 +64,7 @@ sub-agents, watched as one: the four Mycel 2 threads above are one agent.
 | The owner's messages, Codex | `response_item` of type `message`, role `user`, in a root thread | text not beginning with `<` or `# AGENTS.md`, plus `<send_user_message_question_reply>`, the owner's answer to a question. A sub-agent's prompts are its parent's tasks, never the owner's |
 | Holds | `~/.sagas/holds/<Beat>.json` | the owner of a Claude Code hold lives while its process does, a Codex hold while a Codex process has its thread file open, read with `radar_stats.py`'s readers |
 | Ticks | the git history of the held Beat's file in `~/Artifacts/sagas/` | a commit that ticks one or more leaves of its `## Plan`, at the commit's author time; ticks before the hold's `takenAt` belong to an earlier run. The plan's first commit counts too |
-| Commits | the output of the agent's own commands, and the hold's branch | a line `[<branch> <commit>] <subject>` in a tool's output; for a hold with an Environment, the commits of `beat/<Beat>` not yet on `main`, each once |
+| Commits | the output of the agent's own commands, and the hold's branch | a line `[<branch> <commit>] <subject>` in a tool's output; for a hold with a work area, the commits of `beat/<Beat>` not yet on `main`, each once |
 | Changed files | one scan of `~/repos/sylvan-stack/` and `~/Artifacts/` | files changed since the last run, leaving out `.git`, `.venv`, `venv`, `node_modules`, the caches and `*_deprecated_v1` |
 
 **The last progress** of a held Beat's agent is the latest of the hold's
@@ -73,7 +73,7 @@ last message. Of an agent outside any Saga, it is the latest of its first
 entry, its last commit and the owner's last message. **Tokens since the last
 progress** add up the agent's sessions and sub-agents since that moment.
 
-**A changed file** is given to the hold whose Environment holds it, else
+**A changed file** is given to the hold whose work area holds it, else
 to the agent whose transcript wrote it (Claude Code's `Write` and `Edit`,
 Codex's `apply_patch`), else it is shown as *not attributed*. A file that git
 does not track, or that is in no repository, is *outside git*. A file inside
@@ -356,6 +356,6 @@ All in `~/.sagas/watch/`, on this Mac only:
   tokens, so neither is flagged.
 - **Files written by a program the agent runs**, such as a script or a
   `bash` redirect, are not given to the agent: only its own `Write`, `Edit`
-  and `apply_patch` are, and the files in its hold's Environment. They
+  and `apply_patch` are, and the files in its hold's work area. They
   show as not attributed, with the Beat whose territory holds them.
 - **Agents on other machines**, and in the cloud.
