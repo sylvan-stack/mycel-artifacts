@@ -100,6 +100,7 @@ MYC-D1 records the owner’s Python decision; MYC-15 makes its independent distr
 | MYC-D56 · What becomes of the requirement registry, the claims and `@proves`? | Decided 19 October 2026 by the owner: retired after a one-time import; each declaration becomes an Origin Link with method `proven` and a verification `how: check`. Carried out 23 October 2026 (SYL-261); MYC-13.3 withdrawn | [MYC-D56](13-checks-and-evaluation.md#decisions) |
 | MYC-D58 · Where does the first run on `mycel` write? | Decided 19 October 2026 by the owner: into the owner's store, ingesting `readonly/mycel` without embedding; narrowed on 23 October 2026 to that ingest, the import and the deterministic audit, with recovery and the model audit after the owner's own first ingest | [MYC-D58](17-justification.md#decisions) |
 | MYC-D63 · Where is justification specified? | Decided 19 October 2026 by the owner: a new chapter MYC-17, Justification, with a guide for the agent procedure, where running `origins` is useful, not required; `draft` until the owner accepts it | [MYC-D63](17-justification.md#decisions) |
+| MYC-D65 · How does a long ingest stop without losing its work? | Decided 26 October 2026 by the owner: steps that each keep their work; `mycel ingest --files <n>` writes at most n changed files per committed step, sources first, with removals and the refresh in the last step | [MYC-D65](01-corpora-and-ingest.md#decisions) |
 
 ## Conventions
 
