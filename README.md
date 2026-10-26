@@ -24,16 +24,6 @@ scoped embedding, summaries and exact chunk reading are implemented. Live
 qualification remains bound to the source and Build that actually passed it;
 installation does not supply new provider proof.
 
-**22 October 2026 — before the owner's first ingest:** use `rg`, `grep` and
-file reads for research. The owner fills the index and embeds repositories by
-hand after Seqoya Lab exists. Do not start a search freshness pass, ingest or
-embedding on the owner's repositories in the owner's store. Checks may use
-acknowledged disposable stores with fictional inputs. The owner removes this
-dated instruction, or asks an agent to, after that first ingest. One
-exception (the owner, 23 October 2026): SYL-261 ingests `readonly/mycel`
-alone into the owner's store, without embedding, and runs only the
-deterministic audit; recovery and the model audit wait for the owner.
-
 ## Route by need
 
 | You need | Go to |
@@ -140,8 +130,7 @@ These hold for every agent on this Mac, whatever the task and the tool.
   only within a Beat you hold. Write no run results into `research/`.
 - **Version 1 is not run and not a source.** Never run Mycel 1 or read
   `*_deprecated_v1` code as current implementation. The installed `mycel` is
-  Mycel 2; follow the dated pre-ingest restriction above until the owner
-  fills its index.
+  Mycel 2.
 - **A new Sylvan Stack repository** starts at version 1.0.0; its corpus is
   `~/Artifacts/<repo>`, published as `sylvan-stack/<repo>-artifacts`; add it to
   the "Sylvan Stack 2" table of every code README.

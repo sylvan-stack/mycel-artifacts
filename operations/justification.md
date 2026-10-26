@@ -20,14 +20,11 @@ and gaps when requested; it creates no commit, release or qualification gate.
 ## Establish the scope and authority
 
 Read the [Hub's current operator instructions](../README.md) before any store
-operation. Its dated 22 October 2026 direction reserves the owner's first
-initialization, ingest and embedding to the owner after Seqoya Lab exists.
-The older 19 October MYC-D58 exception does not override that direction.
-While it remains, prepare files and validate against disposable stores; defer
-owner-store import, recovery and audit. The owner's only exception, on
-23 October 2026, let SYL-261 ingest `readonly/mycel` without embedding,
-import its declarations and run the deterministic audit; recovery and the
-semantic audit wait for the owner's own first ingest and budget. A dry-run is still a store operation:
+operation. On 26 October 2026 the owner lifted the dated 22 October
+direction that reserved the first ingest to the owner, and asked an agent to
+run `mycel ingest --all` on the owner's store without embedding. Embedding,
+recovery and the semantic audit still wait for the owner's cost approval and
+model budget. A dry-run is still a store operation:
 it needs an existing initialized index and does not authorize the first ingest.
 
 Identify the repository, its configured code and artifact roots, the calling
