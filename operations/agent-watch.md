@@ -302,9 +302,24 @@ The control record keeps only action metadata, actual deliveries, first-follow-u
 
 Lifting removes the pending action and old escalation opportunity and records a watermark. An already running or older review cannot reinstate it. The same deterministic hard-stop/foreign-territory signal episode is not recreated after a lift; genuinely new observations/reviews can be considered again. Releasing a hold clears only actions for that exact run. Concurrent consumption or lifting cannot erase a newer replacement action.
 
+<!-- sources:
+sagas:@code/tools/agent-watch/agent_control.py#object_file
+sagas:@code/tools/agent-watch/agent_control.py#atomic
+sagas:@code/tools/agent-watch/agent_control.py#locked
+sagas:@code/tools/agent-watch/agent_control.py#same_hold
+sagas:@code/tools/agent-watch/agent_control.py#transition
+sagas:@code/tools/agent-watch/agent_control.py#lift
+sagas:@code/tools/agent-watch/test_agent_hook.py#Hook
+-->
+
 ### Fresh messages from the owner
 
 The writer captures the owner's latest message time and each root transcript's complete-line byte position and file identity from the current check. Before blocking, the hook reads only bytes appended since those cursors, in memory, using the same provider-specific human-message rules as the check. It persists only cursor metadata and the latest owner timestamp, never text. A new owner message suppresses the action until its 15 minutes end. Missing, rotated, truncated or excessively grown transcripts whose owner freshness cannot be established let the call through; they never count as evidence that the owner is absent. This also protects the gap between a five-minute check and the next tool call.
+
+<!-- sources:
+sagas:@code/tools/agent-watch/agent_control.py#fresh_owner
+sagas:@code/tools/agent-watch/test_agent_hook.py#Hook.test_a_new_owner_message_after_the_check_suppresses_each_provider_without_consuming
+-->
 
 ### What a stopped agent may do
 
@@ -314,6 +329,14 @@ An apply_patch update of its own Beat file is permitted. An Arc update must be a
 
 The block message names why the agent was stopped and how to commit/push what works, write the hand-over, return the work area, comment and release its hold. It includes the concrete own paths and the owner's lift command. Read-only transport/orchestration wrappers are allowed only where the provider invokes the hook again for their nested operations. Hosted tools and specialized paths which the provider does not hook are outside this policy's coverage; a write to an already open shell session is transport and is not intercepted again. No process is killed to close these gaps. Current Codex coverage and exit-status-2 behavior are documented in the [official hook reference](https://learn.chatgpt.com/docs/hooks); provider live checks record the actual tool names/events.
 
+<!-- sources:
+sagas:@code/tools/agent-watch/hook_policy.py#allowed
+sagas:@code/tools/agent-watch/hook_policy.py#shell
+sagas:@code/tools/agent-watch/hook_policy.py#patch
+sagas:@code/tools/agent-watch/hook_policy.py#arc_edit
+sagas:@code/tools/agent-watch/test_agent_hook.py#Policy
+-->
+
 ### Installing, trust and speed
 
 `agent-watch-hook claude-code` or `agent-watch-hook codex` is one fixed command under `~/.local/bin`. Its shell launcher exits before Python when there are no action JSON files or it is an Arbol chat. Otherwise it starts the fixed qualified Python implementation in the foreground; only an intended block prints its message and exits 2, every other outcome exits 0 silently. The no-action path is measured over 20 fresh processes against a 50 ms median.
@@ -321,6 +344,13 @@ The block message names why the agent was stopped and how to commit/push what wo
 The independent installer adds one foreground PreToolUse group for its exact command to each provider's own settings, with a five-second limit. It writes whole JSON files atomically, preserves every unrelated entry and order, refuses unreadable/malformed settings, and never adds a duplicate. Before its first change to a file or launcher it keeps a non-overwritten backup, or records that the path was absent. Codex trust is obtained from hooks/list and written through config/batchWrite, using only its own key/currentHash and preserving other trust/configuration entries; it never computes a provider hash or rewrites TOML by hand. Uninstall removes exactly its commands and trust entries and disables its action switch. Status reports installation, activation, trust and tool versions.
 
 Running Claude sessions retain their old hooks; Codex's desktop app must be reopened to load them. No restart or process kill is performed by the installer. Reviewers stay out of their own hook: Claude uses safe-mode and Codex explicitly disables hooks. The existing five-minute LaunchAgent and existing hooks are preserved.
+
+<!-- sources:
+sagas:@code/tools/agent-watch/agent_hook.py#launcher
+sagas:@code/tools/agent-watch/agent_hook.py#run
+sagas:@code/tools/agent-watch/agent_hook.py#main
+sagas:@code/tools/agent-watch/test_agent_hook.py#Hook.test_wrapper_has_an_empty_fast_path_arbol_chat_bypass_and_silent_missing_runtime
+-->
 
 ## A run
 
