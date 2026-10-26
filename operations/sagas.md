@@ -177,6 +177,15 @@ without its name. The Mycel repository in **Beaver Workspace** is
 `~/repos/sylvan-stack/beaver/mycel`. A hold reserves the complete named area,
 including every repository in it, so work spanning repositories stays together.
 
+The reservation's conceptual lifetime is a
+**[Workspace Booking](../../arbol/GLOSSARY.md#workspace-booking)**: it belongs
+to work, normally a Saga, and can continue across participating or replacement
+Chat Sessions. The [Workspace Ledger design](workspace-ledger.md) defines
+that model, the `.ledger/` files and full tool/file capture. Its controller
+and capture mechanisms are not yet active. The procedures below describe
+the live legacy tool and holds until a coordinated migration changes them;
+do not reinterpret an existing hold or release active work from this design alone.
+
 ```
 ~/repos/sylvan-stack/
   mycel/  arbol/  arbol-root/  …     the owner's own checkouts
@@ -267,8 +276,11 @@ These names leave the ownership, territory and return rules below in place.
 The current booking commands remain `book`, `where` and `release`.
 
 The **[Workspace Ledger](../../arbol/GLOSSARY.md#workspace-ledger)** is the
-`ledger.jsonl` file for the history of work items while an agent works in
-the named area. Its function and behavior will be described later.
+Git-ignored `.ledger/` directory. Its
+[design](workspace-ledger.md#files-on-disk) specifies `current.jsonl`, a
+timestamped archive for each closed booking, and `history.jsonl`, with
+capture of every tool call and file change. Activation requires the new
+controller, capture adapters and migration described there.
 
 ## Holds
 
