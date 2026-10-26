@@ -1,13 +1,13 @@
 ---
 role: authored
 spec: MYC-17
-status: draft
+status: implemented
 ---
 # Mycel · 17 Justification
 
-Every chunk of code and every document chunk that is not itself authored should be traceable to what ordered it: a requirement, a decision, a document section or, when nothing better exists, a code chunk. This specification makes requirements and decisions entities of their own in the Index Store, addresses them by the glossary's Entity URI, keeps the discussion of a decision with it, and defines the Origin Link from a chunk to its Origin. It is the chapter the owner asked for on 19 October 2026 ([MYC-D63](#decisions)); the commands `mycel justify`, `mycel origins`, `mycel recovery` and `mycel audit` are specified here by the Beats that build them (SYL-260, SYL-262, SYL-263), and the agent procedure lives in [Justify code and documents](../operations/justification.md), where running `origins` is useful, not required.
+Every chunk of code and every document chunk that is not itself authored should be traceable to what ordered it: a requirement, a decision, a document section or, when nothing better exists, a code chunk. This specification makes requirements and decisions entities of their own in the Index Store, addresses them by the glossary's Entity URI, keeps the discussion of a decision with it, and defines the Origin Link from a chunk to its Origin. It is the chapter the owner asked for on 19 October 2026 ([MYC-D63](#decisions)); the commands `mycel justify`, `mycel origins`, `mycel recovery` and `mycel audit` are specified here, and the agent procedure lives in [Justify code and documents](../operations/justification.md), where running `origins` is useful, not required.
 
-It follows the conventions of the [specifications chapter](README.md#conventions). It is written with the `From v1` column and with a UUID in every row, as [MYC-D49](#decisions) and [MYC-D45](#decisions) require; the seventeen earlier chapters are brought to the same form by the normalization run of SYL-261.
+It follows the conventions of the [specifications chapter](README.md#conventions). It is written with the `From v1` column and with a UUID in every row, as [MYC-D49](#decisions) and [MYC-D45](#decisions) require; the seventeen earlier chapters were brought to the same form by the normalization run of SYL-261.
 
 ## Scope
 
@@ -47,7 +47,7 @@ The row holds what Mycel reads from its cells:
 
 Identity follows the UUID and nothing else. An edit to a neighbouring row leaves the entity, its version and its locations as they were. An edit to the row's own text makes a new version of the same entity. Moving the row to another section, another file or another chapter changes a location, not the entity. A row is never deleted: when its last version leaves every location the versions are collected like any chunk's, but the entity row stays, so a withdrawn id stays reserved and every edge that references the UUID keeps its end.
 
-A recognised row without a UUID is a reported fault of its file, as a malformed Source Ref is ([MYC-2](02-provenance-and-freshness.md#source-refs)): the pass goes on, the section is split as before, and no entity is made of the row. Two rows with one UUID are a fault too, and neither becomes an entity, so that nothing silently wins. The normalization run of SYL-261 adds a UUID to every existing row once; a new row gets its UUID from its author.
+A recognised row without a UUID is a reported fault of its file, as a malformed Source Ref is ([MYC-2](02-provenance-and-freshness.md#source-refs)): the pass goes on, the section is split as before, and no entity is made of the row. Two rows with one UUID are a fault too, and neither becomes an entity, so that nothing silently wins. The normalization run of SYL-261 added a UUID to every existing row once, on 23 October 2026; a new row gets its UUID from its author.
 
 ### The Entity URI in Mycel
 
@@ -71,11 +71,11 @@ An Origin Link is a directed link from a chunk to its Origin: a claim, never a p
 |---|---|
 | `method` | `stated` by a person, `proven` by a check, `inferred` by a model, `recovered` from history |
 | `confidence_score` | a number from 0 to 1 |
-| `confidence` | the band the score falls in: `asserted` above 0.9, `proven` 0.8 to 0.9, `inferred` 0.5 to 0.8, `candidate` below 0.5. The thresholds are example values, set in one place |
+| `confidence` | the band the score falls in: `asserted` above 0.9, `proven` 0.8 to 0.9, `inferred` 0.5 to 0.8, `candidate` below 0.5. The thresholds are set in one place |
 | who and when | who made the link and when |
 | `review` | the review of the link, when one was made |
 
-The score rises by a review or a passing check and falls by a failed conformance check. Stating a link (`mycel justify`), listing Origin Coverage (`mycel origins`), inferring candidates for a chunk without Origin (`mycel recovery`) and disputing links (`mycel audit`) are specified in the sections the Beats SYL-260, SYL-262 and SYL-263 add here. Linear is never an Origin; a task, a Beat or a Linear issue never justifies code.
+The score is set when the link is made: 1 for a link stated by a person, 0.8 for a link proven by a check (the one-time import of the `@proves` declarations, MYC-D56), and the model's score for an inferred or recovered link. A review can raise or lower a model's score, and a failed conformance check lowers any score. Stating a link (`mycel justify`), listing Origin Coverage (`mycel origins`), inferring candidates for a chunk without Origin (`mycel recovery`) and disputing links (`mycel audit`) are specified in the sections below. Linear is never an Origin; a task, a Beat or a Linear issue never justifies code.
 
 ### Stating an Origin Link
 
@@ -83,7 +83,7 @@ The score rises by a review or a passing check and falls by a failed conformance
 
 In one transaction the command asserts the dependency with exact pins, records the Origin Link and its author and time, and records a verification of the dependant's exact current version. The normal derive and confirm guards apply: changed-since-ingest dependant or source bytes, invalid selections and a final guard failure leave all feature writes rolled back. `refs`, `stale` and `verifications` read the ordinary dependency and verification result. An Origin Link is still a claim, not a conformance proof.
 
-The single-pair command records `method: stated`, `confidenceScore: 1` and `confidence: asserted`, naming the identity from `--by` or the current operating-system user. These are implementation choices for a direct assertion, not adopted thresholds for inferred links. The example band boundaries above remain examples; recovery and audit own any configurable scoring policy. `review` is absent until a review exists. Repeated statements update the statement's metadata without inventing a review. The owner delegated MYC-D51 on 21 October 2026. Chosen: `mycel justify --file <pairs.jsonl>`, with one JSON object per nonempty line containing exactly `chunk` and `origin` text fields. All pairs are validated before writes, and the batch shares one transaction and final input guards: failure of any pair rolls back the whole batch. Duplicate exact pairs are refused. The reply is `{ justifications: JustifyReply[] }` in input order. Pairs naming one dependant share one final verification of its complete policy after all assertions have been stated. A class/file family remains an Origin selection; the dependant in each pair remains one chunk.
+The single-pair command records `method: stated`, `confidenceScore: 1` and `confidence: asserted`, naming the identity from `--by` or the current operating-system user. These are implementation choices for a direct assertion, not adopted thresholds for inferred links. Recovery and audit apply the band boundaries above. `review` is absent until a review exists. Repeated statements update the statement's metadata without inventing a review. The owner delegated MYC-D51 on 21 October 2026. Chosen: `mycel justify --file <pairs.jsonl>`, with one JSON object per nonempty line containing exactly `chunk` and `origin` text fields. All pairs are validated before writes, and the batch shares one transaction and final input guards: failure of any pair rolls back the whole batch. Duplicate exact pairs are refused. The reply is `{ justifications: JustifyReply[] }` in input order. Pairs naming one dependant share one final verification of its complete policy after all assertions have been stated. A class/file family remains an Origin selection; the dependant in each pair remains one chunk.
 
 ### Reporting Origin Coverage
 
@@ -230,13 +230,13 @@ interface OriginsReply {
 
 ## Known problems
 
-This is a new contract. Version 1 had no entity of its own for a requirement or a decision; its `@proves` decorators and the registry `requirements.json` named requirements by human id alone, so a row could not be pointed at from the index and nothing noticed an edit to one row apart from its neighbours. The registry still gates `make check` until SYL-261 retires it after a one-time import.
+This is a new contract. Version 1 had no entity of its own for a requirement or a decision; its `@proves` decorators and the registry `requirements.json` named requirements by human id alone, so a row could not be pointed at from the index and nothing noticed an edit to one row apart from its neighbours. On 23 October 2026 the one-time import made them `proven` Origin Links, and the registry and the decorators were retired (MYC-D56).
 
 A chunk of kind `req` or `dec` is embedded like any other chunk when the owner runs `mycel embed`; nothing in this chapter embeds it.
 
 ## Decisions
 
-The owner answered the fifteen decisions of the Traceability Arc's first draft on 19 October 2026; this chapter records the six that concern the entities, the URIs, the discussion and the words. The others are recorded by the Beats that build their subject. Where this Beat needed a choice no decision covers, it chose a default and recorded it in its own file (`~/Artifacts/sagas/mycel-2-implementation/traceability/SYL-259.md`): entity rows are chunks whose identifier is the UUID, the section keeps its complete chunk, a row is recognised by its first cell alone, and the discussion database is read through `[discussions]`.
+The owner answered the fifteen decisions of the Traceability Arc's first draft on 19 October 2026; this chapter records those that concern its own subject; MYC-D55 and MYC-D60 are recorded in MYC-6 and MYC-1, the chapters they change. Where this Beat needed a choice no decision covers, it chose a default and recorded it in its own file (`~/Artifacts/sagas/mycel-2-implementation/traceability/SYL-259.md`): entity rows are chunks whose identifier is the UUID, the section keeps its complete chunk, a row is recognised by its first cell alone, and the discussion database is read through `[discussions]`.
 
 | ID | Question | Proposed default | Outcome | Discussion |
 |---|---|---|---|---|
@@ -254,3 +254,28 @@ The owner answered the fifteen decisions of the Traceability Arc's first draft o
 | MYC-D61 <!-- 703f56f2-57f3-4a5c-8e3f-6a57e59510ff --> | What are the Origins of a third-party repository's code? | Owner requirements and upstream snapshots | Decided 19 October 2026 by the owner: for a third-party repository the owner's corpus holds their own requirements and snapshots of the upstream's documents and issues; upstream code is recovered against those; Linear is never an Origin; an upstream issue may be one | |
 | MYC-D62 <!-- 62a18c4c-ba6e-4597-9069-085389714af4 --> | How are Origin Links tested? | Deterministic and semantic audit with operator settlement | Decided 19 October 2026 by the owner: by an audit. Deterministic findings in `origins`' data: requirements nothing rests on, code without Origin, two requirements from different chapters governing one chunk, stale chains, decisions without discussion, duplicate ids, terms the glossary lacks. Semantic findings under MYC-14's quiet period and budget: a chunk judged against its Origin for conformance, two Origins of one chunk judged consistent or contradictory, a requirement judged for ambiguity. A finding is an item like a Drift naming the link it disputes, visible until a person settles it; the audit checks every link whatever its certainty | |
 | MYC-D58 <!-- 95faf384-2c76-4b96-ad84-cc126bbc785f --> | Where does the first run on `mycel` write? | Into the owner's store | Decided 19 October 2026 by the owner: MYC-D58 stands. Into the owner's store `mycel`: the Beat ingests the `readonly/mycel` clone (decision 5 of 17 October 2026) without embedding, and that is the exception to decision 4 of 17 October 2026 that the owner grants by letting this Beat start. The first run cannot use the embedding candidate source of recovery, because no vectors exist until the owner embeds. Embedding stays the owner's: nothing in this Beat calls Voyage. After the Hub reserved the owner's first ingest to the owner on 22 October 2026, the owner narrowed the exception on 23 October 2026: “ingest only readonly/mycel into my store without embedding, run the deterministic audit only, and move recovery and the model audit to after my own first ingest.” | |
+
+## Named checks
+
+Written by `scripts/name_checks.py` from the `proven` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
+
+| Requirement | Kind | Checks |
+|---|---|---|
+| `MYC-17.1` | store | `test_entities.EntityStoreTests.test_pass_publishes_entity_rows_keyed_by_uuid_and_keeps_them_through_edits_and_moves` |
+| `MYC-17.2` | unit | `test_entities.EntityRowTests.test_an_edit_to_a_neighbouring_row_leaves_the_entity_its_text_and_hashes`, `test_entities.EntityRowTests.test_rows_with_a_uuid_become_entities_with_their_metadata_beside_unchanged_sections` |
+| `MYC-17.3` | unit | `test_entities.EntityRowTests.test_missing_and_repeated_uuids_are_faults_and_no_entity`, `test_entities.EntityRowTests.test_prose_cells_fenced_rows_and_headerless_lines_are_not_entities` |
+| `MYC-17.4` | store | `test_entities.EntityStoreTests.test_pass_publishes_entity_rows_keyed_by_uuid_and_keeps_them_through_edits_and_moves` |
+| `MYC-17.5` | unit | `test_justify.UriSyntaxTests.test_mutation_preflight_accepts_uuid_spelling_and_rejects_malformed_inputs`, `test_entities.EntityUriTests.test_entity_uris_parse_format_and_resolve_by_uuid_with_the_kind_tag_as_a_check` |
+| `MYC-17.6` | store | `test_entities.EntityStoreTests.test_a_decision_shows_its_chats_from_a_stand_in_database_and_an_edit_marks_dependants_stale` |
+| `MYC-17.7` | store | `test_entities.EntityStoreTests.test_a_decision_shows_its_chats_from_a_stand_in_database_and_an_edit_marks_dependants_stale` |
+| `MYC-17.8` | store | `test_justify.JustifySelectionStoreTests.test_complete_class_family_and_existing_review_are_retained`, `test_justify.JustifyStoreTests.test_all_pairs_resolve_before_mutation_and_changed_or_generated_inputs_refuse`, `test_justify.JustifySharedChunkStoreTests.test_several_origins_for_one_chunk_share_its_complete_final_verification` and 2 more |
+| `MYC-17.9` | store | `test_justify.JustifySelectionStoreTests.test_complete_class_family_and_existing_review_are_retained`, `test_justify.JustifySharedChunkStoreTests.test_several_origins_for_one_chunk_share_its_complete_final_verification`, `test_justify.JustifyStoreTests.test_atomic_stated_link_and_verification_persist_only_in_index_store` and 1 more |
+| `MYC-17.10` | store | `test_justify.CloneEntityMoveStoreTests.test_refs_keep_each_entitys_actual_file_when_its_row_moves_in_only_one_clone`, `test_justify.CloneGraphStoreTests.test_cycles_use_the_selected_location_of_every_repository`, `test_justify.JustifyStoreTests.test_all_pairs_resolve_before_mutation_and_changed_or_generated_inputs_refuse` and 4 more |
+| `MYC-17.11` | store | `test_origins.OriginsStoreTests.test_default_runs_one_scoped_ingest_then_one_report_and_empty_list_still_succeeds`, `test_origins.OriginsStoreTests.test_changes_compare_retained_main_versions_without_git_and_keep_other_clone_unchanged`, `test_origins.OriginsStoreTests.test_links_missing_paths_single_chunk_and_readonly_cli_use_the_calling_clone` |
+| `MYC-17.12` | store | `test_origins.OriginsStoreTests.test_unresting_and_reasoned_requirement_marks_never_invent_edges_or_proofs` |
+| `MYC-17.13` | store | `test_recovery.RecoveryStoreTests.test_dry_run_lists_each_local_source_without_writes_or_model_credentials`, `test_recovery.RecoveryStoreTests.test_embedding_candidates_use_existing_complete_vectors_and_uuid_uri`, `test_recovery.RecoveryStoreTests.test_path_repository_and_public_chunk_commands_use_same_candidates` and 4 more |
+| `MYC-17.14` | store | `test_recovery.RecoveryStoreTests.test_model_claims_survive_ingest_without_source_cycles_and_statement_supersedes`, `test_recovery.RecoveryStoreTests.test_statement_supersedes_moved_uuid_proposal_without_duplicate`, `test_recovery.RecoveryStoreTests.test_changed_inputs_after_call_have_no_link_or_verification_effect` and 8 more |
+| `MYC-17.15` | store | `test_recovery.RecoveryStoreTests.test_third_party_snapshots_recover_without_linear_or_remote_reads` |
+| `MYC-17.16` | store | `test_audit.AuditStoreTests.test_repeated_human_names_are_ambiguous_but_uuid_diagnostics_remain_auditable`, `test_audit.AuditStoreTests.test_requirement_marks_and_withdrawal_exempt_only_unresting_requirements`, `test_audit.AuditStoreTests.test_seven_deterministic_rules_use_only_current_indexed_evidence` and 2 more |
+| `MYC-17.17` | store | `test_audit.SemanticAuditStoreTests.test_changed_input_and_late_activity_edit_roll_back_findings_and_score`, `test_audit.SemanticAuditStoreTests.test_every_method_and_band_is_audited_without_changing_policy_or_verification`, `test_audit.SemanticAuditStoreTests.test_real_isolated_reviewer_routes_each_question_with_exact_scored_evidence` and 1 more |
+| `MYC-17.18` | store | `test_audit.AuditStoreTests.test_person_settles_with_reason_history_and_exact_observation_never_reopens`, `test_audit.SemanticAuditStoreTests.test_newest_thousand_closed_and_ended_bundles_preserve_open_live_and_shared_evidence`, `test_audit.AuditStoreTests.test_dry_run_is_readonly_and_paths_are_component_scoped` and 5 more |
