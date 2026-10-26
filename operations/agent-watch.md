@@ -282,6 +282,46 @@ to 38 seconds by hand, and 67 to 95 seconds when the LaunchAgent started it:
 the LaunchAgent runs at low priority, and so do the processes it starts. With at most 4 reviews an hour, a
 busy agent costs at most about 0.2 million tokens an hour in reviews.
 
+## Steering and stopping
+
+This is the SYL-221 implementation protocol, settled on 26 October 2026 before its code. Actions remain disabled until the qualified hook installation activates them; existing review history is not replayed.
+
+### When an action is justified
+
+A review only reports unless its verdict is off the plan, looping or stuck, its evidence is clear by the rules above, and no reason was given. Such a review steers once. For stuck, the message asks the agent to stop at a safe point and ask the owner. A stop is justified only by the held Beat's hard time limit being passed while the agent still spends tokens, a proven write inside another live held Beat's territory, or the first review after an actually delivered steer clearly finding the same verdict again with no reason. A proposed or queued steer is not a delivered steer. The first subsequent review consumes that escalation opportunity even when it finds progress, a reason, uncertainty or a different verdict.
+
+The check never steers or stops during the 15 minutes after a real message from the owner. It never kills or interrupts a process. `ARBOL_ROOT` marks an Arbol chat, which this hook always lets through. Agent-record hooks remain watching hooks and are not changed.
+
+### Action files and their lifetime
+
+`control.json` under `~/.sagas/watch/` is the explicit activation switch and starting time. Installation enables only new observations and reviews begun after that time; past reviews and in-flight older packets stay historical. The normal check does not create an enabled switch by itself.
+
+A private `steer/` directory holds one small JSON action per provider/session. Each action names its provider/session, steer or stop, issue time, reason/verdict, current hold's Beat and taking time when there is one, own Beat/Arc/hold paths, and root-transcript cursors. Atomic rename and one shared lock protect writers, one-use consumption and lifting. Only an actual blocked call consumes a steer and records delivery. A stop stays until its exact hold is released or replaced, or the owner lifts it. A file for an older run cannot act on a newly taken hold, even for the same Beat. An unheld session's stop lasts until lifted.
+
+The control record keeps only action metadata, actual deliveries, first-follow-up review identity and lift watermarks; the action log contains these transitions, not prompts, tool payloads or transcript text. The hook uses no network and starts no lasting process. An unreadable, malformed, stale or unverifiable action, lock timeout, missing program or other fault of the hook lets the tool call through silently. The check can report the fault later; a broken hook must not block the session that could repair it.
+
+Lifting removes the pending action and old escalation opportunity and records a watermark. An already running or older review cannot reinstate it. The same deterministic hard-stop/foreign-territory signal episode is not recreated after a lift; genuinely new observations/reviews can be considered again. Releasing a hold clears only actions for that exact run. Concurrent consumption or lifting cannot erase a newer replacement action.
+
+### Fresh messages from the owner
+
+The writer captures the owner's latest message time and each root transcript's complete-line byte position and file identity from the current check. Before blocking, the hook reads only bytes appended since those cursors, in memory, using the same provider-specific human-message rules as the check. It persists only cursor metadata and the latest owner timestamp, never text. A new owner message suppresses the action until its 15 minutes end. Missing, rotated, truncated or excessively grown transcripts whose owner freshness cannot be established let the call through; they never count as evidence that the owner is absent. This also protects the gap between a five-minute check and the next tool call.
+
+### What a stopped agent may do
+
+The stop is a wrap-up policy for recognized tool calls, not an operating-system permission boundary. It permits file reads, git commands, editing its own Beat file, editing only its Arc's Progress section, deleting only its own matching hold, and Linear comments. Direct read tools and known filesystem-read MCP calls are allowed. Shell calls are parsed conservatively: simple read commands and git are allowed, as is a literal deletion of the one own hold; shell substitutions, arbitrary interpreters, background commands, redirects that write, unknown commands and mixed unrelated mutations are refused. An agent can split an ambiguous call into these small supported operations.
+
+An apply_patch update of its own Beat file is permitted. An Arc update must be anchored wholly inside the unique current Progress section; creating/deleting that Arc or changing other sections is refused. Unknown edit shapes are refused. A Linear comment call is permitted; broader Linear issue/document mutations are not comments. The owner can run the lift command from a terminal; a stopped agent does not get permission to lift its own stop.
+
+The block message names why the agent was stopped and how to commit/push what works, write the hand-over, return the work area, comment and release its hold. It includes the concrete own paths and the owner's lift command. Read-only transport/orchestration wrappers are allowed only where the provider invokes the hook again for their nested operations. Hosted tools and specialized paths which the provider does not hook are outside this policy's coverage; a write to an already open shell session is transport and is not intercepted again. No process is killed to close these gaps. Current Codex coverage and exit-status-2 behavior are documented in the [official hook reference](https://learn.chatgpt.com/docs/hooks); provider live checks record the actual tool names/events.
+
+### Installing, trust and speed
+
+`agent-watch-hook claude-code` or `agent-watch-hook codex` is one fixed command under `~/.local/bin`. Its shell launcher exits before Python when there are no action JSON files or it is an Arbol chat. Otherwise it starts the fixed qualified Python implementation in the foreground; only an intended block prints its message and exits 2, every other outcome exits 0 silently. The no-action path is measured over 20 fresh processes against a 50 ms median.
+
+The independent installer adds one foreground PreToolUse group for its exact command to each provider's own settings, with a five-second limit. It writes whole JSON files atomically, preserves every unrelated entry and order, refuses unreadable/malformed settings, and never adds a duplicate. Before its first change to a file or launcher it keeps a non-overwritten backup, or records that the path was absent. Codex trust is obtained from hooks/list and written through config/batchWrite, using only its own key/currentHash and preserving other trust/configuration entries; it never computes a provider hash or rewrites TOML by hand. Uninstall removes exactly its commands and trust entries and disables its action switch. Status reports installation, activation, trust and tool versions.
+
+Running Claude sessions retain their old hooks; Codex's desktop app must be reopened to load them. No restart or process kill is performed by the installer. Reviewers stay out of their own hook: Claude uses safe-mode and Codex explicitly disables hooks. The existing five-minute LaunchAgent and existing hooks are preserved.
+
 ## A run
 
 1. Take the lock `~/.sagas/watch/lock`; when another run holds it, end.
