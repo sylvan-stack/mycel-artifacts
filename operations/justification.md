@@ -109,13 +109,20 @@ maximum calls before spending that allowance. Use existing vectors only when
 they are available and authorized. For the first Mycel run no vectors exist,
 so the embedding candidate source remains unavailable; do not buy embeddings.
 
-Recovery proposes candidates from local documents, tests, history and any
-existing vectors. A symbol mention or introducing commit is evidence to judge,
-rather than a declaration of authority. It leaves missing or obsolete evidence
+Recovery proposes candidates from local documents, history and the four
+nearest requirements and decisions by existing vectors. Tests are neither
+recovered nor candidates: state a new test's Origin, the requirement it checks,
+with `mycel justify`. Only a `governs` judgement writes a link; without a
+reviewer its probability must reach `drifts.origin_floor` (0.7). A symbol
+mention or introducing commit is evidence to judge, rather than a declaration
+of authority. It leaves missing or obsolete evidence
 unresolved. Model claims stay inferred or candidate, never a check proof or a
 freshness confirmation. Inspect the committed prefix, pending reasons and
 remaining gaps after a partial or interrupted run; reuse only exact valid
-inputs and respect the remaining operator allowance when resuming.
+inputs and respect the remaining operator allowance when resuming. A repository
+run is one step of a series: repeat `mycel recovery --repo <name> --k <pairs>`
+until the reply says `complete: true`; a step never pays twice for a pair
+already judged.
 
 Run the audit within its separately accounted share of the agreed allowance.
 Its deterministic rules need no model; semantic questions spend the chosen
