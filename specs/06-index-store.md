@@ -93,6 +93,8 @@ Format 3, of 19 October 2026, admits the chunk kinds `req` and `dec` of [MYC-17]
 
 Format 4, of 26 October 2026, adds to each repository's state how far a pass run in steps has refreshed its unchanged files ([MYC-1.40](01-corpora-and-ingest.md)); `mycel init` brings a format 3 store forward in one step, adding an empty column.
 
+Format 5, of 27 October 2026, adds a table of judgements: each recovery or model-audit judgement that changed nothing, under its repository, question, exact chunk version, candidate and judgement policy, so that a series of steps never pays for it again ([MYC-D68](17-justification.md#decisions)). A row goes with its repository or its chunk version. `mycel init` brings a format 4 store forward in one step, adding the empty table.
+
 Builds are kept side by side, and each can be started by its number (MYC-0). Once a newer Build has raised the format, the older Builds refuse this store, and there is no way back to the earlier format.
 
 `mycel init` needs the extensions to be available in the database server. When one is missing it ends with the error `refused` and names the extension. Beyond the structure it writes the format number and the number of dimensions, and no repository and no default row.

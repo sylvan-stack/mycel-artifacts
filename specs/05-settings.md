@@ -63,6 +63,10 @@ Proposed: the keys below and no others. Each is named by the requirement that ne
 | `[drifts]` | `attempts` | whole number, 1 or more | `2` | [MYC-14](14-drift-detection.md) |
 | `[drifts]` | `max_input_bytes` | whole number, 1 or more | `24000` | [MYC-14](14-drift-detection.md) |
 | `[drifts]` | `review_max_input_bytes` | whole number, 1 or more | `1048576` | [MYC-14](14-drift-detection.md) |
+| `[drifts]` | `origin_floor` | finite number from 0 to 1 inclusive | `0.7` | [MYC-17](17-justification.md#decisions) |
+| `[drifts]` | `conformance_floor` | finite number from 0 to 1 inclusive | `0.7` | [MYC-17](17-justification.md#decisions) |
+| `[drifts]` | `consistency_floor` | finite number from 0 to 1 inclusive | `0.7` | [MYC-17](17-justification.md#decisions) |
+| `[drifts]` | `ambiguity_floor` | finite number from 0 to 1 inclusive | `0.8` | [MYC-17](17-justification.md#decisions) |
 | `[drifts]` | `review_command` | nonempty NUL-free argv; absolute or ~/ executable | absent: uncertain work remains pending | [MYC-14](14-drift-detection.md) |
 | `[drifts]` | `review_provider` | nonempty text | absent; required with review_command | [MYC-14](14-drift-detection.md) |
 | `[drifts]` | `review_model` | nonempty exact model-version text | absent; required with review_command | [MYC-14](14-drift-detection.md) |
