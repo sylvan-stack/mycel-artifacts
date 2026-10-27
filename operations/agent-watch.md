@@ -9,8 +9,7 @@ step, its last commit, or the owner's last message to it. When the numbers
 say that something may be wrong, it raises a *signal*, such as "no tick for
 16 min, 4.1M tokens: review". A signal asks for a *review*: a fresh agent of
 the other tool reads a packet about the agent and answers whether it is
-progressing, off the plan, looping or stuck. The answers are recorded; nothing
-is steered or stopped yet.
+progressing, off the plan, looping or stuck. The answers are recorded; explicitly enabled foreground hooks apply only fresh, qualified steering/stopping actions. Telegram remains inactive until the owner completes its local pairing.
 
 For example, on 15 October 2026 a Codex thread on Mycel 2 and its three
 sub-agent threads worked for 31 hours without a commit. Replayed, the check
@@ -139,7 +138,7 @@ counted and shown, and raise no signal until a week of counts gives a number.
 A *review* is a fresh agent of the other tool that reads a *packet* about an
 agent and answers one question: is it progressing, off the plan, looping or
 stuck? Codex reviews a Claude Code agent, and Claude Code reviews a Codex
-agent. The answers are recorded; nothing acts on them yet (SYL-221).
+agent. The answers are recorded; enabled actions follow the fresh-observation rules of SYL-221 below.
 
 For example, at 20:43 UTC on 18 October 2026, after SYL-231's agent ticked
 steps 1 to 3, Codex answered *progressing*, clear, no reason needed, with two
@@ -234,8 +233,7 @@ whether it was verified, and `would` with `why`.
 A reviewer that fails, has no answer within 5 minutes, or answers outside
 the schema leaves no verdict: `verdict` is null and `clear` false.
 
-`would` is what the check would do under the rules in SYL-221's file, which
-nothing carries out yet: **stop** when the hold's hard stop has passed, when
+`would` is what the check would do under the rules in SYL-221's file, retained as diagnostic history while fresh enabled actions apply their own rules: **stop** when the hold's hard stop has passed, when
 the agent wrote inside another held Beat's territory, or when the first
 review after a *steer* finds it straying again; **steer** when the verdict is
 *off the plan*, *looping* or *stuck*, clear, and no reason was given; else
@@ -389,13 +387,55 @@ Setup verifies the bot and refuses a pre-existing webhook rather than deleting a
 
 ### Reports and delivery
 
-Use Python’s HTTPS client with certificate verification, no inherited proxy, no redirect, a five-second request bound, a bounded JSON response and only getMe/getWebhookInfo/getUpdates/sendMessage. No parse mode or rich message is used. Text is capped at 4,096 UTF-16 units without cutting a Unicode scalar, and link previews are disabled. The automatic check has a fixed per-run request budget and never fails because Telegram is unavailable; no configuration means no credential/network call. The existing five-minute job remains the scheduler.
+Use Python’s HTTPS client with certificate verification, no inherited proxy, no redirect, a five-second request bound (including an own-process alarm against a trickling response; another caller’s active timer is preserved by refusing the request), a bounded JSON response and only getMe/getWebhookInfo/getUpdates/sendMessage. No parse mode or rich message is used. Text is capped at 4,096 UTF-16 units without cutting a Unicode scalar, and link previews are disabled. The automatic check has a fixed per-run request budget and never fails because Telegram is unavailable; no configuration means no credential/network call. The existing five-minute job remains the scheduler.
 
 A report names the tool and shortened session, Beat or “outside any Saga”, working folder, event, minutes/tokens since progress, verdict, fixed reason category and safe verified evidence identifiers. Review reason/point text, transcript excerpts, user/agent messages, tool output, raw command arguments, file contents, requests and packets remain local. A supplied reason is reported as “a reason was given”; full wording is deliberately local. Evidence is limited to verified step numbers, commit hashes, bounded masked filenames and the label “verified command”, never the command’s arguments or free-form point. These restrictions resolve the draft’s tension between including review evidence and sending no conversation content.
 
-Only new live answered reviews with a non-progressing verdict and fresh action lifecycles are eligible. Each action has one notice keyed by its action UUID, from queued or delivered records; it is labelled as a request when delivery to the hook has not been observed. Repeated hook blocks do not create extra notices. An end notice uses that same UUID when a request is released/lifted, or a delivered steer sees progress/its follow-up or is superseded. These records add observability only: they do not change the existing steering/escalation rules. Full metadata is captured locally at the event, so later reports do not depend on a surviving hold. Arbitrary signal text is not forwarded.
+Only new live answered reviews with a non-progressing verdict and fresh action lifecycles are eligible. Each action has one notice keyed by its action UUID, from queued or delivered records; it is labelled as a request when delivery to the hook has not been observed. Repeated hook blocks do not create extra notices. An end notice uses that same UUID when a request is released/lifted, or a delivered steer sees progress/its follow-up, its held run is released, or it is superseded. For an agent outside a held run that disappears from the active views, the existing sixty-minute idle-end heuristic also ends its steer notice until SYL-223 can read actual agent records. These records add observability only: they do not change the existing steering/escalation rules. Full metadata is captured locally at the event, so later reports do not depend on a surviving hold. Arbitrary signal text is not forwarded.
 
 Durable cursors/outbox state are protected by a separate short-held lock, beneath the normal check lock when called by the check. Read only complete log lines with bounded reads and refuse rotation/truncation or malformed state; retain an explicit local status rather than silently skipping unknown data. Persist a pending event and then an in-flight marker before sending. A successful Bot API reply records its message identifier and is never sent again. An explicit API rejection or a connection failure known to precede sending stays pending and is retried on a later run, respecting retry_after. Timeouts, lost/malformed acknowledgements and a crash after the in-flight marker are uncertain: keep them visible locally, do not automatically send them twice. Owner-only terminal commands may explicitly retry or record an already-delivered message after inspection. The official sendMessage interface supplies no deduplication key; exactly-once network effects cannot be guaranteed after an uncertain acknowledgement. Normal success and known-rejection retry send one message per event; that bounded claim is what the tests qualify.
+
+### Local commands and recovery
+
+- `agent-watch telegram setup`: run in your own terminal, enter the bot token once at the hidden prompt, then open its one-time link and press Start. Do not paste the token into chat or a command argument.
+- `agent-watch telegram setup --stored`: reuse the stored Keychain item after a failed/expired pairing attempt, without entering or printing its token again.
+- `agent-watch telegram setup --reset`: explicitly retire the current pairing before setting up another. Private old pairing/delivery/drill metadata move into `telegram-backups/<UUID>/`; credentials are never copied into a backup file.
+- `agent-watch telegram status`: local configuration and pending/uncertain event identifiers, with no credential lookup or network call.
+- `agent-watch telegram once`: process only Telegram delivery/replies now, without starting a new scan or an AI review. The normal five-minute check also does this after its action processing.
+- `agent-watch telegram retry <event>`: the owner’s explicit resend of an inspected uncertain event, which may already have arrived. It is never run automatically.
+- `agent-watch telegram delivered <event> <message-id>`: record an inspected message that already arrived, allowing replies to map to that exact stop without sending it again. Refuse a message identifier already mapped to another event.
+- `agent-watch telegram disable`: retire the pairing and retain private metadata, the Keychain item, the check and its hooks. Only this integration’s unfinished synthetic drill stop is removed; real pending stops are untouched.
+- `agent-watch telegram drill`: explicitly send one test notice and create/send one synthetic stop for a new fake session. Reply `lift` to the synthetic stop in Telegram, then run `agent-watch telegram drill --resume`. Resume inspects the same saved drill rather than creating another stop or repeating delivered notices. Success requires its test notice, exact owner reply and end notice; loopback fixtures are labelled as fixtures and never count as live proof.
+
+Delivery state retains its small event records and message IDs for deduplication and late-reply refusal; it does not prune them silently. At 2,000 outbox records or the 16 MiB state limit it reports that local inspection is required. Malformed/rotated/truncated state or logs do the same. No untrusted incoming text, raw API error or token is included in that report. The owner CLI does not echo unknown arguments, including an accidentally supplied secret. Private tests cover native Keychain dictionary/data handling under stubbed SecItem calls, loopback pairing, nonce/sender/webhook refusal, metadata-only reports, per-event deduplication, known-failure retry, uncertain sends, total response deadline, exact-stop reply/lift replay, recovery and disable preservation; real Keychain storage and owner Telegram reply still need the explicit live drill.
+
+<!-- sources:
+sagas:@code/tools/agent-watch/telegram_keychain.py#Keychain
+sagas:@code/tools/agent-watch/telegram_transport.py#Bot
+sagas:@code/tools/agent-watch/telegram_transport.py#deadline
+sagas:@code/tools/agent-watch/telegram_transport.py#clipped
+sagas:@code/tools/agent-watch/telegram_state.py#configuration
+sagas:@code/tools/agent-watch/telegram_state.py#private
+sagas:@code/tools/agent-watch/telegram_state.py#read_log
+sagas:@code/tools/agent-watch/telegram_state.py#atomic
+sagas:@code/tools/agent-watch/telegram_reports.py#safe
+sagas:@code/tools/agent-watch/telegram_reports.py#review
+sagas:@code/tools/agent-watch/telegram_reports.py#action
+sagas:@code/tools/agent-watch/telegram_delivery.py#sync
+sagas:@code/tools/agent-watch/telegram_delivery.py#poll
+sagas:@code/tools/agent-watch/telegram_delivery.py#drain
+sagas:@code/tools/agent-watch/telegram_cli.py#setup
+sagas:@code/tools/agent-watch/telegram_cli.py#drill
+sagas:@code/tools/agent-watch/telegram_cli.py#resolve
+sagas:@code/tools/agent-watch/telegram_cli.py#remove_synthetic_drill
+sagas:@code/tools/agent-watch/agent_control.py#lift
+sagas:@code/tools/agent-watch/agent_actions.py#observe
+sagas:@code/tools/agent-watch/test_telegram_transport.py#Transport
+sagas:@code/tools/agent-watch/test_telegram_transport.py#Secret
+sagas:@code/tools/agent-watch/test_telegram_delivery.py#Delivery
+sagas:@code/tools/agent-watch/test_telegram_cli.py#OwnerSetup
+sagas:@code/tools/agent-watch/test_agent_actions.py#Actions.test_delivered_steer_end_is_once_after_hold_release_or_idle_without_changing_escalation
+-->
 
 ### Replying lift and the live drill
 
@@ -418,9 +458,7 @@ The [official Bot API](https://core.telegram.org/bots/api#sendmessage), [update 
    files, its drafts and its signals. For a hold, the git history of its
    Beat's file and the commits of its branch.
 6. Raise and end signals as above.
-7. Read the results of the reviews that finished, and start the reviews
-   that are due, as [The review](#the-review) says. Then write what the run
-   leaves.
+7. Read the results of the reviews that finished, start those due, and apply fresh enabled actions as specified above. When Telegram is configured, process its bounded delivery/reply pass independently of check success. Then write what the run leaves.
 
 ## What a run leaves
 
@@ -435,6 +473,8 @@ All in `~/.sagas/watch/`, on this Mac only:
 | `reviews/<time>-<tool>-<id>/` | one folder per review: `order.json`, `packet.md`, `meta.json`, the reviewer's output, and `result.json`. A past review's folder has `past-` before the tool |
 | `reviews.jsonl` | one line per review, as [What is recorded](#what-is-recorded) says |
 | `launchd.log` | the LaunchAgent's output, empty unless a run fails |
+| `telegram.json`, `telegram-state.json` | owner-only pairing and delivery/cursor/message-ID state; no token or incoming text |
+| `telegram-drill.json`, `telegram-backups/` | the explicit synthetic drill receipt and retained old pairing metadata |
 
 ## Commands
 
@@ -476,9 +516,7 @@ All in `~/.sagas/watch/`, on this Mac only:
 
 ## Not built yet
 
-- **Steering and stopping** through a hook of the check's own, by the
-  reviews' answers and the stint (SYL-221): until then a verdict and its
-  `would` are only recorded. **Reports on Telegram** (SYL-222).
+- **Telegram live acceptance** (SYL-222): implementation and private tests are complete; the owner-created bot, hidden local setup and real owner reply drill are still required. Steering/stopping hooks themselves completed in SYL-221; current Codex desktop sessions need their eventual reopen to load that registration.
 - **The agent records** (SYL-223): the check cannot yet tell an agent waiting
   for the owner or for a long command from one that is idle; neither spends
   tokens, so neither is flagged.
