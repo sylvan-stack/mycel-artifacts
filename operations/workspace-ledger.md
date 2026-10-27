@@ -295,9 +295,11 @@ coordination by convention and implementation, not an access-control boundary:
 unrestricted agents can still edit or delete local ledger files.
 
 The controller uses a pool lock to prevent two bookings taking one physical
-area, and serializes writes to each ledger. Where both locks are needed,
-take the pool lock before the area's write lock. Hold neither while waiting
-for a tool, a process, or a hook that needs to append its completion.
+area, and serializes writes to each ledger. An integrated legacy transition
+takes the shared legacy reservation lock first, then the pool lock, then the
+area's write lock. Hold none of them while waiting for a tool, a process, a
+participant acknowledgement, a source read, or a hook that needs to append its
+completion.
 
 Opening a booking durably creates `current.jsonl` with the opening record,
 then indexes that record in `history.jsonl` and updates any compatibility
@@ -409,22 +411,28 @@ record an area-level incident with the ambiguity rather than guessing.
 
 ## Safe activation and migration
 
-The existing [booking implementation](../../sagas/tools/environment.py)
-reserves by one Arbol Chat Session, while Saga agents can write Beat holds
-directly. The current [ownership procedure](sagas.md#what-happens-to-a-hold)
-can release a gone agent's hold. These are implementation gaps against this
-design; a ledger hook does not fix them by itself.
+The [booking implementation](../../sagas/tools/environment.py) and its three
+entry points consult the routing fence. An unmanaged area keeps the legacy
+allocator; a managed area delegates `book`, `where` and coordinated `release`
+to the controller, with explicit work scope and participant acknowledgements.
+Controller faults never fall back to an independent legacy hold. Direct Beat
+claims and gone-owner cleanup use `beat_claim.py`: a participant or claim
+projection is never deleted merely because its owner died. Radar and the check
+from outside report permanent area guards as booking authority, separately
+from participant liveness.
 
 <!-- sources:
 mycel:operations/sagas.md#A booked area for an Arbol chat
 mycel:operations/sagas.md#What happens to a hold
+sagas:@code/tools/environment.py#route
+sagas:@code/tools/environment.py#controller
+sagas:@code/tools/beat_claim.py#clean
+sagas:@code/tools/agent-watch/agent_watch.py#read_bookings
 -->
 
-Implement and test the controller, ownership projection, all relevant
-monitor/cleanup readers and capture adapters together. Existing hold files
-can remain compatibility projections for readers, but must not become an
-independent second authority for bookings. Participant death must no longer
-trigger release of a booking that still belongs to continuing work.
+Existing hold files can remain compatibility projections for readers, but must
+not become an independent second authority for bookings. Participant death
+must not trigger release of a booking that still belongs to continuing work.
 
 Roll out first to a free named area, and activate capture for new bookings.
 Keep running agents, paths, branches and legacy holds intact. Adopt an
