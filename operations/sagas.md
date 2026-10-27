@@ -314,7 +314,12 @@ agent can take a Beat. It holds:
 }
 ```
 
-The Linear comment on the Beat is the readable trace; the file decides.
+The Linear comment on the Beat is the readable trace; the file decides when no
+Workspace Ledger routing fence gives the area to the controller. In a managed
+area the controller's booking is authoritative: `workspace-<configured-id>.json`
+is its permanent area guard, and chat/Beat holds are compatibility projections.
+Use `python3 -I ~/Artifacts/sagas/tools/beat_claim.py` to take or release a direct
+Beat claim. A projection's deletion or owner death never releases the booking.
 
 ### Who owns a hold
 
@@ -360,12 +365,14 @@ arbol:driver-contract/04-errors-and-limits.md#Time limits of a run
 
 ### The check
 
-Before taking a Beat, an agent checks every file in `~/.sagas/holds/`. For
-each hold whose owner is gone, it deletes the file and comments on the Beat:
-`**Agent:** Released automatically: <the reason, such as "the Claude Code
-session's program ended" or "the Codex thread was closed">.` The Beat keeps
-its status: its last `**Agent:**` comment says where the work stopped. A hold
-that names an Arbol chat has no owner to check, and the check leaves it.
+Before taking a Beat, an agent checks every file in `~/.sagas/holds/`. Run
+`python3 -I ~/Artifacts/sagas/tools/beat_claim.py clean --hold <file>` for each
+candidate. Only a legacy hold whose owner is gone is deleted; the agent then
+comments on the Beat: `**Agent:** Released automatically: <the reason, such as
+"the Claude Code session's program ended" or "the Codex thread was closed">.`
+The Beat keeps its status: its last `**Agent:**` comment says where the work
+stopped. A hold that names an Arbol chat and every Workspace Ledger guard or
+projection stays. Participant death is not booking release.
 
 <a id="a-prepared-folder-for-an-arbol-chat"></a>
 
@@ -526,9 +533,12 @@ tells its parent how far it got.
      unless both Beats name smaller territories that do not overlap.
 
    When it cannot start, go to the next Arc.
-5. **Take it.** Create its hold file, naming the first free
-   [work area](#named-work-areas) as `folder`. If the file exists,
-   another agent took it a moment ago: go back to step 3.
+5. **Take it.** Write the hold JSON to a private input file, naming the first
+   free [work area](#named-work-areas) as `folder`, then run
+   `python3 -I ~/Artifacts/sagas/tools/beat_claim.py take --input <input.json>
+   --hold ~/.sagas/holds/<Beat>.json`. It fails when the file exists or the
+   controller refuses the claim: go back to step 3. A managed claimant must
+   already be a joined participant in that area's controller-owned booking.
 6. **Make its branch** in each repository its territory touches, in the
    work area: `git fetch origin`, then `git switch -c beat/<Beat>
    origin/main`, or `git switch beat/<Beat>` when the Beat is taken over and
@@ -704,8 +714,9 @@ hard stop.
 - **Stopping in the middle:** follow the Saga's rules (commit what
   works, leave the `**Agent:**` comment that says what is done and what comes
   next), push the branch unmerged, write the Beat's hand-over, return the
-  work area (below), then delete the hold file and end the comment with
-  `Released.` The agent that takes the Beat over switches to its branch.
+  work area (below), then run `beat_claim.py release --hold <file>` and end the
+  comment with `Released.` Releasing a Beat claim does not release a continuing
+  controller-owned booking. The agent that takes the Beat over switches to its branch.
 - **Finishing:** when the Beat's checks pass, merge it, in each repository it
   changed:
   1. Bring the branch up to date: `git fetch origin`, `git merge
@@ -721,8 +732,10 @@ hard stop.
   result, prerequisite IDs and completion summary in the local records. Follow
   [Complete Linear Tasks](linear-completion.md): commit and push the completed
   ID before deleting its Linear issue, then verify and record removal. Return
-  the work area and delete the hold file. A failed removal is reported as
-  pending; do not set the issue to Done as a fallback.
+  the work area and run `beat_claim.py release --hold <file>`. A failed Linear
+  removal is reported as pending; do not set the issue to Done as a fallback.
+  Close the whole controller-owned booking separately, with its coordinator,
+  participant acknowledgements, return checks and saved result.
 - **Returning the work area,** in each repository the Beat used:
   `git fetch origin`, `git switch main`, `git merge --ff-only origin/main`,
   then `git branch -d beat/<Beat>` and `git push origin --delete
