@@ -374,6 +374,7 @@ sagas:@code/tools/agent-watch/test_agent_hook.py#Hook.test_twenty_no_action_call
 sagas:@code/tools/agent-watch/hook_live.py#live
 sagas:@code/tools/agent-watch/hook_live.py#claude_token
 sagas:@code/tools/agent-watch/hook_live_controller.py#main
+sagas:@code/tools/agent-watch/test_hook_live.py#LiveFixture
 -->
 
 ## A run
