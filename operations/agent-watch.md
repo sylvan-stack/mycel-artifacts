@@ -292,6 +292,11 @@ A review only reports unless its verdict is off the plan, looping or stuck, its 
 
 The check never steers or stops during the 15 minutes after a real message from the owner. It never kills or interrupts a process. `ARBOL_ROOT` marks an Arbol chat, which this hook always lets through. Agent-record hooks remain watching hooks and are not changed.
 
+<!-- sources:
+sagas:@code/tools/agent-watch/agent_actions.py#observe
+sagas:@code/tools/agent-watch/test_agent_actions.py#Actions
+-->
+
 ### Action files and their lifetime
 
 `control.json` under `~/.sagas/watch/` is the explicit activation switch and starting time. Installation enables only new observations and reviews begun after that time; past reviews and in-flight older packets stay historical. The normal check does not create an enabled switch by itself.
@@ -310,6 +315,11 @@ sagas:@code/tools/agent-watch/agent_control.py#same_hold
 sagas:@code/tools/agent-watch/agent_control.py#transition
 sagas:@code/tools/agent-watch/agent_control.py#lift
 sagas:@code/tools/agent-watch/test_agent_hook.py#Hook
+sagas:@code/tools/agent-watch/agent_actions.py#action_state
+sagas:@code/tools/agent-watch/agent_actions.py#queue
+sagas:@code/tools/agent-watch/agent_actions.py#cursors
+sagas:@code/tools/agent-watch/agent_review.py#after_run
+sagas:@code/tools/agent-watch/agent_watch.py#run
 -->
 
 ### Fresh messages from the owner
@@ -343,6 +353,8 @@ sagas:@code/tools/agent-watch/test_agent_hook.py#Policy
 
 The independent installer adds one foreground PreToolUse group for its exact command to each provider's own settings, with a five-second limit. It writes whole JSON files atomically, preserves every unrelated entry and order, refuses unreadable/malformed settings, and never adds a duplicate. Before its first change to a file or launcher it keeps a non-overwritten backup, or records that the path was absent. Codex trust is obtained from hooks/list and written through config/batchWrite, using only its own key/currentHash and preserving other trust/configuration entries; it never computes a provider hash or rewrites TOML by hand. Uninstall removes exactly its commands and trust entries and disables its action switch. Status reports installation, activation, trust and tool versions.
 
+The launcher checks that its interpreter is executable and its Python script is a readable file before starting it; Python's own missing-script exit status 2 is not an intentional policy block. Uninstall preserves empty hook groups when removing a group would move another Codex hook's index-based trust key. It removes a launcher only while its bytes still match this installer's own file; owner changes and every first backup stay. An explicit provider setting that disables all hooks is preserved and installation refuses rather than enabling unrelated hooks.
+
 Running Claude sessions retain their old hooks; Codex's desktop app must be reopened to load them. No restart or process kill is performed by the installer. Reviewers stay out of their own hook: Claude uses safe-mode and Codex explicitly disables hooks. The existing five-minute LaunchAgent and existing hooks are preserved.
 
 <!-- sources:
@@ -350,6 +362,18 @@ sagas:@code/tools/agent-watch/agent_hook.py#launcher
 sagas:@code/tools/agent-watch/agent_hook.py#run
 sagas:@code/tools/agent-watch/agent_hook.py#main
 sagas:@code/tools/agent-watch/test_agent_hook.py#Hook.test_wrapper_has_an_empty_fast_path_arbol_chat_bypass_and_silent_missing_runtime
+sagas:@code/tools/agent-watch/hook_install.py#install
+sagas:@code/tools/agent-watch/hook_install.py#uninstall
+sagas:@code/tools/agent-watch/hook_install.py#status
+sagas:@code/tools/agent-watch/hook_install.py#backup
+sagas:@code/tools/agent-watch/hook_install.py#document
+sagas:@code/tools/agent-watch/hook_codex.py#Codex
+sagas:@code/tools/agent-watch/test_hook_install.py#Installation
+sagas:@code/tools/agent-watch/test_hook_codex.py#Protocol
+sagas:@code/tools/agent-watch/test_agent_hook.py#Hook.test_twenty_no_action_calls_stay_below_the_fifty_millisecond_median
+sagas:@code/tools/agent-watch/hook_live.py#live
+sagas:@code/tools/agent-watch/hook_live.py#claude_token
+sagas:@code/tools/agent-watch/hook_live_controller.py#main
 -->
 
 ## A run
@@ -410,6 +434,11 @@ All in `~/.sagas/watch/`, on this Mac only:
   file is read as it stood then, and `--signal` the signal's text, which is
   otherwise worked out as a run would. Uncommitted changes of a past time are
   not known.
+- **Install steering hooks after qualification:** `python3 -I ~/Artifacts/sagas/tools/agent-watch/agent_watch.py --install-hooks` creates the fixed `agent-watch` and `agent-watch-hook` launchers, backs up settings, obtains and verifies Codex trust, and only then enables new actions. First backups and absent-path records are retained under `~/.sagas/watch/hook-backups/` and `hook-installation.json`; no old review is replayed.
+- **Status:** `agent-watch --status-hooks` reports each provider’s entry, the Codex hook’s trust and enabled state, action activation and local tool versions. A trusted definition still needs to be enabled and loaded in the current session.
+- **Lift:** the owner runs `agent-watch --lift codex:<session UUID>` or `agent-watch --lift claude:<session UUID>`. This removes that session’s pending action, clears its escalation opportunity and records the watermark. A stopped agent cannot lift its own stop through the permitted wrap-up calls.
+- **Uninstall only steering:** `agent-watch --uninstall-hooks` disables actions and removes only the exact owned hook commands/trust and unchanged owned launchers. The independent five-minute LaunchAgent and other owners’ hooks are preserved. Hook controls can always be run through the Python source command above, including after uninstall removed the convenience launcher.
+- **All private tests:** `python3 -I -B -m unittest discover -s ~/Artifacts/sagas/tools/agent-watch -p 'test_*.py'`. The explicit live fixture is `hook_live.py --provider codex|claude-code --evidence <new private folder>`; it is never run by discovery. It uses a test profile, synthetic actions around the real fixed hook and a throwaway home. The Claude test token is read from its existing profile’s Keychain entry into the child’s environment only, with no login or credential write. Do not run it while that account has a known rate limit. Results and traces stay outside Git.
 - **The tests:** `python3 -I ~/Artifacts/sagas/tools/agent-watch/test_agent_watch.py`
   and `python3 -I ~/Artifacts/sagas/tools/agent-watch/test_agent_review.py`,
   with transcripts, holds, Beat files and git histories made in a temporary
