@@ -74,7 +74,7 @@ ownership report and a stop, including for later verification and closure.
 | The list of Sagas | `~/Artifacts/sagas/INDEX.md` | which Sagas there are, their priority: the order in which they are worked, and which Sagas each one waits for |
 | Saga | The file `saga.md` in its folder `~/Artifacts/sagas/<saga>/`, the documents beside it, and a Linear project of the same name in the Linear workspace amorphius | the files: `saga.md` holds the recommended order of its Arcs, the progress of each Arc, what it waits for in other Sagas and what they wait for in it, and what each of its documents holds; `rules.md` the rules of its work; further documents what one task needs, such as its known gaps |
 | Arc | The file `arc.md` in its own folder `~/Artifacts/sagas/<saga>/<arc>/`, and a parent issue titled `<Name> Arc` in the Saga's Linear project | the file: its goal, its territory, the recommended order of its Beats, and its progress |
-| Beat | The file `<ID>.md` in its Arc's folder, named after its Linear issue (such as `SYL-170.md`), and its issue while unfinished | the file: what it must achieve, its plan, hand-over and territory. Linear: its live unfinished status and discussion. Record prerequisite IDs in the file before deleting their completed issues |
+| Beat | The file `<ID>.md` in its Arc's folder (such as `SYL-170.md`), and its mirrored issue while unfinished | the file: its ID, what it must achieve, its plan, hand-over and territory. Linear: its live unfinished status and discussion, never the ID's source of truth. Record prerequisite IDs in the file before deleting their completed issues |
 | Completed tasks | Weekly files under `~/Artifacts/sagas/completed-linear-tasks/`, linked by `completed-linear-tasks.md` | the completed IDs, their durable local records, and whether each issue's removal was confirmed; a completed issue is deleted instead of set to Done |
 | Repository of a Beat | A label of the label group `Repository` | — |
 | Hold | One file per held Beat, and one per Arbol chat that booked a work area, in `~/.sagas/holds/` on this Mac | who works on a Beat right now, which chat works in which work area |
@@ -184,7 +184,8 @@ Chat Sessions. The [Workspace Ledger design](workspace-ledger.md) defines
 that model, the `.ledger/` files and precise net booking results from saved
 opening and closing states. Passive tool and watcher history supplements
 those results. Logging does not control tool execution.
-Its controller and capture mechanisms are not yet active. The procedures
+Its controller and capture mechanisms are active for new bookings in the Hare
+Workspace pilot; all other areas remain on legacy authority. The procedures
 below describe the live legacy tool and holds until a coordinated migration
 changes them;
 do not reinterpret an existing hold or release active work from this design alone.
@@ -604,14 +605,13 @@ its steps are done out of all of them.
   step.
 - **Progress** of a Beat is its ticked leaves out of all its leaves: 2 of 6
   above.
-- **Tests in the plan.** The last leaf of every plan runs the repository's
-  complete suite, then merges and records the hand-over. Every earlier leaf
-  runs only the tests of the files it changes, and after a failure only the
-  failed tests until they pass. No other step runs the complete suite: a
-  Beat runs it when it is taken, to know where it starts, and in its last
-  leaf. A run that takes longer than about a minute is started in the
-  background, and the work goes on while it runs. The Saga's `rules.md`
-  names the commands of its repository.
+- **Tests in the plan.** Follow [Test Strategy](test-strategy.md). Do not run
+  suites when taking a Beat, after each leaf, at completion or after merging.
+  Only selected top-tier edge cases and bugfix regressions may be written or
+  run during implementation when useful. Writing or running mid-tier tests
+  requires a separate testing task explicitly requested by the owner. This
+  supersedes older automatic-suite rules in Saga files and plans. Report the
+  checks actually performed and the tests not run in the hand-over.
 - **Keeping it true.** When the work shows that the plan is wrong, change
   the plan in the file first, and say why in the next `**Agent:**` comment.
 - **Publishing.** After writing the plan and after each tick, commit the
@@ -717,10 +717,12 @@ hard stop.
   work area (below), then run `beat_claim.py release --hold <file>` and end the
   comment with `Released.` Releasing a Beat claim does not release a continuing
   controller-owned booking. The agent that takes the Beat over switches to its branch.
-- **Finishing:** when the Beat's checks pass, merge it, in each repository it
-  changed:
+- **Finishing:** when the implementation and the checks authorized for this
+  task are complete, merge it in each repository it changed. Do not imply
+  that unexecuted tests passed:
   1. Bring the branch up to date: `git fetch origin`, `git merge
-     origin/main`, run the checks again, push the branch.
+     origin/main`, review the merge and perform useful static checks. Rerun
+     tests only within the Test Strategy's authorization, then push the branch.
   2. Merge it into `main` as one merge commit named after the Beat:
      `git switch --detach origin/main`, `git merge --no-ff beat/<Beat> -m
      "<Beat>: <the Beat's title>"`, `git push origin HEAD:main`. When the push
@@ -784,12 +786,15 @@ territory instead.
   description is a copy of `arc.md`. `.linear.json` in the corpus names the
   copy of every Saga and Arc file.
 - **A Beat is a file** `<ID>.md` in its Arc's folder, and a sub-issue of its
-  Arc's issue, labelled with its repository. The file holds what the Beat
-  must achieve and its draft plan; the issue's description is its copy. Linear gives the
-  identifier, so a new Beat starts as an issue: create it, write its file
-  under that identifier, then replace the issue's description with the
-  file's copy. What a Beat waits for in another Arc is a *blocked by*
-  relation in Linear.
+  Arc's issue, labelled with its repository. The file holds the Beat's ID,
+  what it must achieve and its draft plan; the issue's description is its
+  copy. **The agent who plans the Beat allocates its short ID when adding the
+  Beat to the approved plan, before the Beat starts.** That agent creates the
+  Linear issue to reserve a fresh ID, immediately writes `<ID>.md`, then
+  replaces the issue's description with the file's copy. Thereafter the Beat
+  file is authoritative for the ID and its content; Linear is only a mirror,
+  never the source of truth. What a Beat waits for in another Arc is a
+  *blocked by* relation in Linear.
 - **Names:** a specific unit is named by its own name followed by its tier
   word, as the [glossary](../../arbol/GLOSSARY.md#saga) says. Use only names
   the owner gave to real work.

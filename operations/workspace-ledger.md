@@ -10,18 +10,18 @@ component's draft runtime contract is in the
 [Workspace Ledger specifications](../../sylvan-stack/repos/workspace-ledger/specs/README.md).
 This guide owns the portable booking procedure; those chapters define the recorder.
 
-**Status: design, not an activated runtime procedure.** The owner chose the
-directory layout, a booking independent of a Chat Session, and Saga-linked
-bookings by default with named ad-hoc work allowed on 26 October 2026. The
-owner then chose passive tool history and file-change logging inside the
-booked area, with unrestricted filesystem access and no command sandbox.
-Logging must not control whether tools run. The owner subsequently accepted
-missing intermediate edits between snapshots: the booking's resulting changes
-are primary, while activity and attribution are supplementary. The schema,
-booking controller and capture mechanisms below are proposed implementation
-choices. Existing live booking and hold procedures remain in force until a
-tested migration activates this design. No hook, recorder or snapshot store
-has been installed by writing this document.
+**Status: activated for new bookings in the Hare Workspace pilot; all other
+areas remain on legacy booking authority.** The owner chose the directory
+layout, a booking independent of a Chat Session, and Saga-linked bookings by
+default with named ad-hoc work allowed on 26 October 2026. The owner then chose
+passive tool history and file-change logging inside the booked area, with
+unrestricted filesystem access and no command sandbox. Logging must not control
+whether tools run. The owner subsequently accepted missing intermediate edits
+between snapshots: the booking's resulting changes are primary, while activity
+and attribution are supplementary. The schema, booking controller and capture
+mechanisms below are implementation choices. Existing live booking and hold
+procedures remain in force outside the activated area; adoption of existing work
+still requires an explicit coordinated migration.
 
 ## Workspace Booking
 
@@ -456,5 +456,7 @@ complete boundary comparison. Verify that logging failure leaves tool
 execution unaffected, outside paths are not watched, and `.ledger/` writes
 do not feed back into capture.
 
-Until those checks pass, this document is the design to implement, not a
-claim that passive recording is already active.
+The 34 named acceptance cases passed, and the Hare Workspace pilot then passed
+an installed-wheel booking cycle with native observation, controlled stop/restart,
+coordinated release and complete retained results. Active adoption and every other
+area remain subject to their own coordinated qualification and migration.
