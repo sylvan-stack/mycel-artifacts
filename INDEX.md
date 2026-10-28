@@ -156,6 +156,7 @@ What must happen, in Mycel vocabulary — the invariant behind every invocation 
 - [`background-jobs.md`](./operations/background-jobs.md) — long work split into the smallest steps its tool allows, each step that may run more than 5 minutes recorded with `bgjob`, so the menu bar shows it under the chat that started it with elapsed time and progress, and macOS notifies when it ends; the states, attaching to a running process, and what to do when a job is lost.
 - [`agent-watch.md`](./operations/agent-watch.md) — the check from outside: every 5 minutes, with no AI, what each working agent did since its last tick, commit or message from the owner; how tokens, owner's messages, ticks, commits, changed files and repeated drafts are counted; the signals and their agreed numbers; how a signal is raised and ended; what a run leaves in `~/.sagas/watch/`; the replay and the LaunchAgent.
 - [`nex-colab.md`](./operations/nex-colab.md) — Nex Colab: answer what the owner wants to learn (`/colab "prompt"`) at the depth their Nex Knowledge Map says is missing, and pitch the explanations of other work by it (`(use colab)`): the rounds of an exchange, finding the topics, the depth one level up, the skipped line and the numbered ways deeper, the `attempt` line, the assessment by the tests, raising and lowering a level, the `Shown` line, writing, checking, committing and pushing the map and the log after each reply, the subagent's brief, and showup, the owner's own statement of their level (`/colab showup`), from the words and the question to the reply; and learn mode (`/learn`), a whole session of learning and no other work, one piece per reply with the ways on, until the owner leaves it. The map is data in the private corpus `~/Artifacts/colab/`.
+- [`owner-goals.md`](./operations/owner-goals.md) — record, change, replace and withdraw the owner's Owner Goals from their own words (`/owner-goals "<words>"`), answer which goals apply to something, and check that they do not contradict each other: how a statement is written, kind, scope and links, comparing with the current goals, proposals the owner confirms, the check and its findings, the commit in the local goals corpus `~/Artifacts/goals`, the reply, and reading the goals in other work.
 - [`source-refs-authoring.md`](./operations/source-refs-authoring.md) — author durable provenance and section-level Source Refs without relying on instructions from another corpus.
 
 ### `tools/` — technical manuals for the client-agnostic CLIs
@@ -210,10 +211,11 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 - [`linear-resolve`](./skills/linear-resolve/SKILL.md)
 - [`radar-stats`](./skills/radar-stats/SKILL.md)
 - [`mycel-search`](./skills/mycel-search/SKILL.md) — Mycel 2 location and document lookup with source citations.
+- [`owner-goals`](./skills/owner-goals/SKILL.md) — the owner's Owner Goals managed from their own words; not Spec Requirements.
 - [`pr-deep-review`](./skills/pr-deep-review/SKILL.md)
 - [`use-colab`](./skills/use-colab/SKILL.md)
 
-The active catalog contains 16 Mycel skills for both providers. Personal and
+The active catalog contains 17 Mycel skills for both providers. Personal and
 third-party skills remain outside this catalog.
 
 ## Conventions

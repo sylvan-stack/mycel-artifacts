@@ -113,6 +113,15 @@ not yet filled the index, so current research uses grep and file reads.
   reply, closed by its quiz and options to go on in any direction, the map
   kept current, and no other work until the owner leaves it.
 
+## The owner's goals
+
+- **[Owner Goals](owner-goals.md)** — what the owner wants of their
+  software, one statement per file in the private corpus `~/Artifacts/goals`.
+  The owner records, changes and withdraws them in their own words with
+  `/owner-goals "<words>"`; the agent writes them with the `goals` command,
+  which refuses a change that breaks the graph, and checks that no two of them
+  contradict each other. Every other piece of work reads them as requirements.
+
 ## How it compounds
 
 Retrieval gets smarter through documents, not tuning: jargon the code never
@@ -146,7 +155,8 @@ routing through the Hub: `/code-research`, `/deep-research`,
 `/mycel-search`, `/corpus-admin`, `/authored-work-integration`,
 `/pr-deep-review`, `/create-mycel-skill`,
 `/linear-resolve`, `/linear-organize`, `/linear-open-questions`, `/radar-stats`,
-`/arbol-chat-prepared-folder`, `/colab`, `/use-colab`, `/learn`.
+`/arbol-chat-prepared-folder`, `/colab`, `/use-colab`, `/learn`,
+`/owner-goals`.
 Skills carry only *when to trigger*; the process always lives here, in Mycel.
 
 <!-- sources:
