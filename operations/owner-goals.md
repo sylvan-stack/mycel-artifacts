@@ -93,8 +93,10 @@ Rust, not Python, and show me the list". Do them in the order the owner gave.
      ("now", "instead", "no longer"), add it with `--replaces OG-n`. If they
      did not, add it `--proposed --replaces OG-n` and ask: "OG-n says X, the
      new goal says Y: does Y replace OG-n? Proposed: yes." A yes is
-     `goals edit <new> --status active`, which puts `OG-n` out of force; a no
-     withdraws the new goal with the owner's reason.
+     `goals edit <new> --status active`, which puts `OG-n` out of force. A no
+     either withdraws the new goal with the owner's reason or, when the owner
+     wants both, removes the link with `goals edit <new> --replaces` and
+     settles or resolves the contradiction as under [Checking](#checking).
 7. **Write it:**
 
    ```sh
@@ -112,8 +114,9 @@ Rust, not Python, and show me the list". Do them in the order the owner gave.
 ## Changing, replacing and withdrawing
 
 - **Same meaning, better form** is `goals edit OG-n` with `--statement`,
-  `--kind` (`none` removes it), `--scope` (`""` removes it), `--source` or
-  `--refines`, which takes the complete new list.
+  `--kind` (`none` removes it), `--scope` (`""` removes it), `--source`, or
+  `--refines` and `--replaces`, which take the complete new list; `--replaces`
+  changes only while the goal is proposed.
 - **A new meaning is a new goal.** "Drivers are implemented in Python" becoming
   "Drivers are implemented in Rust" is `goals add "…" --replaces OG-n`, so the
   old goal stays readable as history; a typo fixed in a statement is an edit.
@@ -131,8 +134,12 @@ Rust, not Python, and show me the list". Do them in the order the owner gave.
 - **What applies to X:** every current goal whose scope covers X, and every
   goal without a scope whose statement or body bears on X. Read the
   statements and bodies, not only the scopes.
-- **One goal:** `goals show OG-n` gives its file and the goals that refine or
-  replace it.
+- **One goal:** `goals show OG-n` gives its file, the goals that refine or
+  replace it, and its settlements.
+- **Read the settlements of every goal in the answer** with `goals show`. A
+  settlement's reason is the owner's word on how those goals agree, such as
+  "one language means one per product", so the answer and any proposal
+  follow it, while the settlement still covers the goals.
 - **History:** `goals list --all`, following each `replaces` back to the goal
   it took the place of.
 - Answer only from the files, with ids and statements. Mark a `proposed` goal
