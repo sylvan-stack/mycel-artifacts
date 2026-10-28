@@ -58,6 +58,7 @@ Rust, not Python, and show me the list". Do them in the order the owner gave.
 | yes or no to a proposal: "accept OG-6", "no to the proposals" | `goals edit OG-6 --status active`, or withdraw it |
 | a question: "what applies to the drivers?", "show OG-2", "what did I decide about languages?" | [answer](#answering-questions) |
 | "check my goals", "do any of them contradict?" | [check](#checking) |
+| a reported contradiction is fine: "OG-4 and OG-7 don't conflict, the setup may ask" | [settle](#checking) it with their reason |
 | how Owner Goals work | explain from this guide and the corpus README, with one example |
 | nothing: a bare `/owner-goals` | list the current goals, the proposals waiting for them, and what they can ask |
 
@@ -148,11 +149,17 @@ current goals, proposed ones included, cannot all hold at once. It runs
   --deterministic` after a withdrawal, which can only remove a contradiction.
 - For each contradiction, give the goals, the model's explanation and its
   confidence, and a proposed resolution: withdraw one, let one replace the
-  other, or a scope or wording that separates them. Change nothing until the
-  owner answers.
-- The tool keeps no record of a finding the owner judged harmless, so it is
-  reported again at the next check. A clearer scope or wording settles it for
-  good; propose one.
+  other, a scope or wording that separates them, or settle it as harmless.
+  Change nothing until the owner answers.
+- **Settle** a contradiction only when the owner says it is harmless, with
+  their reason in their words:
+  `goals settle OG-4 OG-7 --reason "the one setup command may stop to ask"`.
+  Later checks leave it out, and print a `settled` line for it, until one of
+  its goals reads differently; then it is reported again and put to the owner
+  again. Prefer a clearer scope or wording when one would make the goals
+  themselves say why they agree.
+- Name the settled lines in the reply too, so the owner sees what is set
+  aside.
 - Exit status 2 means the model gave no usable answer. Report it with the
   structural result of `goals check --deterministic`; do not present your own
   judgment as the check.
@@ -163,7 +170,7 @@ current goals, proposed ones included, cannot all hold at once. It runs
    else:
 
    ```sh
-   git -C ~/Artifacts/goals add OG-4.md OG-2.md INDEX.md
+   git -C ~/Artifacts/goals add OG-4.md OG-2.md INDEX.md   # and settled.json after `goals settle`
    git -C ~/Artifacts/goals commit -m "Owner Goals: add OG-4, withdraw OG-2"
    ```
 
