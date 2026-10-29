@@ -88,7 +88,9 @@ the configured loopback PostgreSQL port. Unreachable-target fixtures may bind
 an unused loopback TCP port without accepting connections. macOS's
 network-address grammar cannot constrain a non-loopback server
 hostname or IP, so such a server currently produces an explicit unavailable
-automatic gate. With no `--store-settings`, all unit checks still run and
+automatic gate. The automatic gate runs the top tier only: every `unit` and
+`store` check under `tests/top/`, and no mid-tier test (MYC-D73, SYL-329).
+With no `--store-settings`, all top-tier unit checks still run and
 each required store check records its missing-backend failure. Neither case can
 count as passing automatic checks. Fixture failures and incomplete processes
 produce a failed staged record; no named check is skipped to make the gate pass.
@@ -200,7 +202,7 @@ inspection. A database name alone never grants cleanup permission.
 
 An unavailable required probe or failed check produces `failed` and retains its
 sanitized name and reason. `automaticQualification` becomes true only when all
-required groups pass, including every automatic check of the frozen inventory;
+required groups pass, including every top-tier automatic check of the frozen inventory;
 its certificate binds the exact Build, source/check inputs, installed manifests,
 results and that inventory. It records no requirement coverage: which
 requirement a check rests on is an Origin Link in the Index Store (MYC-D56).
