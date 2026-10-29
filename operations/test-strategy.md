@@ -3,11 +3,36 @@ role: authored
 ---
 # Guide: Test Strategy
 
-Use this guide when implementing changes, reviewing tests, or performing a testing task in Sylvan Stack. The owner adopted this policy on 28 October 2026: testing is separate work requested explicitly by the owner, except for a small top tier of informative edge cases and regression tests. Do not run tests after each change by default. Test count and coverage percentage are not quality goals.
+Use this guide when implementing changes, reviewing tests, or performing a testing task in Sylvan Stack. **All test work belongs to a separate task explicitly requested by the owner. There is no top-tier exception during implementation.** The owner prefers to write and polish implementation code first, then request tests when ready. Only the owner decides readiness and starts that testing phase. Test count and coverage percentage are not quality goals.
+
+## The owner decides when testing starts
+
+During implementation, do not add, edit, repair, refactor, classify, retire,
+restore or run tests of any tier. This includes fixtures, snapshots, test data,
+test runners and test inventories. Do not bundle test maintenance with a feature,
+bugfix, refactor or implementation review, even if it seems small, useful or
+necessary to keep existing tests in sync. Reading existing tests as source
+reference is allowed; it does not authorize changing or running them.
+
+Finish the requested code and polish within the implementation task. Report
+relevant test impact and unexecuted checks honestly, then leave testing for the
+owner. Do not decide that the code is ready, automatically transition into a
+testing phase, create or dispatch a testing task, or treat your own checklist as
+the owner's readiness decision. Do not repeatedly prompt the owner to authorize
+tests. A separate testing task starts only when the owner explicitly requests
+the test work and defines its scope. Merely calling part of an implementation
+task a “testing phase” or giving it a new task ID does not make it separate.
+
+This instruction of 29 October 2026 supersedes the earlier allowance to write
+or selectively run top-tier cases during implementation. It also governs
+indirect test execution: inspect commands and hooks first. A Build whose gate
+runs tests must be done in a separately requested testing/Build task, not as
+implementation validation. Do not bypass, disable or weaken that gate. A truly
+test-free syntax, type or compilation check remains available when useful.
 
 This policy supersedes older instructions to run affected tests at every step, full suites at task entry or completion, or suites again after merging. The owner subsequently requested a physical reset: comment existing tests, restore only individually justified top-tier cases, and keep a test inventory with tier reasons in every repository. The reset was merged into main in ten repositories under SYL-316 and is documented in the [reset report](../../sylvan-stack/research/test-tier-reset-2026-10-28.md). MiMo was deferred during that reset; SYL-327 includes its current repository after SYL-314 completed. The old backup is not its current inventory. This is not installed-package or runtime qualification.
 
-**Builds run the top tier only** (the owner, 29 October 2026, SYL-329). A Build's gate runs every top-tier test of its repository and no other test. It refuses when a top-tier test fails, or when a top-tier source is missing or commented. A passing Build says nothing about the mid tier, and its report never replaces requirement proofs or named checks that came from an earlier complete run. **The mid tier runs only when the owner asks for a mid-tier run.** No agent starts one on its own: not for a Build, a merge, a fix, a review, or a testing task it widened.
+**Builds run the top tier only** (the owner, 29 October 2026, SYL-329). In a separately requested testing/Build task, a Build's gate runs every top-tier test of its repository and no other test. It refuses when a top-tier test fails, or when a top-tier source is missing or commented. A passing Build says nothing about the mid tier, and its report never replaces requirement proofs or named checks that came from an earlier complete run. **The mid tier runs only when the owner asks for a mid-tier run.** No agent starts one on its own: not for a Build, a merge, a fix, a review, or a testing task it widened.
 
 Each repository's `TESTS.md` owns its active selection and links the complete inventory, `test-tiers.json` and `MID_TIER.md`. Read it before writing or running tests. The owner subsequently requested that retained mid-tier source stay uncommented (SYL-326). Writing or running it still requires an explicitly requested testing task. Broad qualification entry points must refuse while required tests are disabled; a smaller active inventory must never silently become a full qualification pass.
 
@@ -23,9 +48,9 @@ Mid-tier code stays uncommented in its own folder at the owner's request in the 
 
 | Tier | What belongs here | Writing | Running |
 | --- | --- | --- | --- |
-| **Top** | A small set of high-value, non-obvious edge cases that resolve a concrete uncertainty, or regression tests that reproduce a specific bug. | May be added during implementation when the information or regression warrants it. Extend an existing case if possible. | Agents may run a precisely selected top-tier test when useful. There is no requirement to run it after each edit. Every Build runs the whole top tier. |
+| **Top** | A small set of high-value, non-obvious edge cases that resolve a concrete uncertainty, or regression tests that reproduce a specific bug. | Only in a separate testing task explicitly requested by the owner. Extend an existing case if possible. | Only within the owner’s separately requested testing scope. Every authorized Build runs the whole top tier; never run it as part of implementation. |
 | **Mid** | A small, deliberately selected set of consequential integration, compatibility or workflow checks, or difficult invariants with independent expected results. Every case must meet the admission bar below; ordinary functional coverage is insufficient. | Only in a separate testing task explicitly requested by the owner. | Only when the owner asks for a mid-tier run. Never as part of a Build. |
-| **Low** | Straightforward behavior whose result is obvious from reading the code; copied constants or defaults, trivial accessors/forwarders, tests of fixture construction, tautological or vacuous assertions, or repeated checks with no distinct failure mode. | Do not write. | Remove rather than maintaining or routinely executing them. |
+| **Low** | Straightforward behavior whose result is obvious from reading the code; copied constants or defaults, trivial accessors/forwarders, tests of fixture construction, tautological or vacuous assertions, or repeated checks with no distinct failure mode. This includes superficially useful cases that fail the mid-tier admission bar. | Do not add new cases. Preserve existing rejected cases as comments at the end of their test files. | Never run while classified low. Comments are historical examples to consult, not a dormant suite to enable. |
 
 A short test can expose a subtle defect. A long browser or database test can be low value. Classify by information gained and distinct failure detected, not length, speed, framework, assertion count, author, or words in its name. A successful workflow qualifies only when the real interaction between components is itself uncertain and consequential. Merely crossing a function or module boundary is insufficient. Prefer one representative workflow to a collection of routine permutations.
 
@@ -53,7 +78,7 @@ A retained mid-tier case must satisfy **all** of these criteria:
    branch, field projection, fixed reply, ordinary parser example or forwarding
    call is insufficient even when it is correct and covered by a requirement.
 3. **Distinct evidence.** State what this case reveals beyond the nearest retained
-   case. Keep a representative case for a failure mechanism; remove routine
+   case. Keep a representative case for a failure mechanism; retire routine
    variations in fields, commands, formats, types or error messages. A second
    implementation counts only when its real differing behavior is exercised.
 4. **Trustworthy observation.** The assertion observes the claimed outcome across
@@ -68,7 +93,7 @@ Record the risk, observed boundary/result and incremental value in `MID_TIER.md`
 and the inventory. The keep decision needs affirmative evidence. An old tier,
 name, framework, use of a database/browser, or provisional label grants no
 exemption. Inspect bodies, shared helpers and the exercised implementation before
-removal; uncertainty is not evidence that a case is low tier. Resolve it in the
+retirement; uncertainty is not evidence that a case is low tier. Resolve it in the
 requested review and report any genuinely unresolved scope explicitly.
 
 Preserve the small individually justified top tier. Do not promote ordinary unit
@@ -79,21 +104,81 @@ is materially less low-information execution and maintenance, not a quota or
 higher coverage percentage. Do not weaken a release gate or reinterpret historical
 qualification because the retained suite is smaller.
 
+## Keep runnable suites small
+
+The default is **no new test** unless a concrete uncertainty or consequential
+failure justifies one under the tier rules. A new function, branch, option,
+command, requirement row or bugfix does not automatically need a new test. A
+bugfix merits top tier when the case reproduces the actual failure and rejects
+the broken behavior. Small suites with distinct evidence are the goal; adding
+coverage, matching production-file structure or increasing the count is not.
+
+Before adding a case, read the nearest retained tests, their helpers and the
+low-tier comments at the ends of relevant files. Search the inventory for the
+same behavior, including historical identifiers and rejection reasons. Explain
+what a new case would reveal beyond those cases and reading the implementation.
+Prefer extending an appropriate existing case when it preserves its purpose.
+Do not replace many tests with one giant loop to disguise the same volume.
+
+Keep one representative per failure mechanism unless a second case has a
+different consequential boundary or independent oracle. Keep fixtures and
+permutations proportionate. Reassess overlap when a stronger case is admitted.
+Retire weak cases into the low-tier comment section; do not generate extra low
+tests just to fill that section. There is no numerical deletion target and no
+requirement to make a suite smaller at every edit.
+
+### Apparently useful cases that are still low tier
+
+These examples describe why execution adds too little information. A different
+case with an actual race, regression or independent difficult invariant must be
+judged on that evidence. “Low mid” is not a fourth tier: a case that fails the
+mid-tier bar is low tier after review.
+
+| Tempting test | Why it is low tier in this form | Evidence that could justify a different case |
+| --- | --- | --- |
+| Construct a request and assert every supplied field appears in the output dictionary. | Mirrors a readable field projection; repeating it for every optional field adds no distinct mechanism. | A real protocol peer rejects an otherwise plausible encoding, or a recorded serialization bug loses data. |
+| Verify every default timeout, label, enum member or configuration constant. | Copies implementation constants into another file. The assertion changes whenever the obvious declaration changes. | An independently specified compatibility boundary whose mismatch causes a consequential failure. |
+| Mock the transport to return success and assert that the wrapper returns success or forwards the same arguments. | Confirms mock setup and straightforward forwarding. Calling production code does not make it integration evidence. | The real transport exposes framing, cancellation or retry ordering that a local call cannot establish. |
+| Create a database row and read the same fields back for each entity. | Ordinary CRUD repeats framework/database behavior or an already retained persistence workflow. A real database alone is insufficient. | A transaction rollback, migration or concurrent update with independently verified preservation of data. |
+| Repeat a real browser workflow for every theme, button label, command alias or harmless input value. | Adds costly permutations without a different failure mechanism; screenshots with no meaningful assertion add little. | A distinct keyboard, focus, layout or accessibility failure that the representative workflow cannot detect. |
+| Exercise every ordinary parser rejection and compare the exact prose of its error. | Enumerates readable guards and incidental wording. Merely expecting an exception does not establish safe recovery. | A specific ambiguous/truncated input that previously corrupted state, with an independent state-preservation assertion. |
+| Compute an expected result with the same production helper, or reconstruct its algorithm in the test. | Repeats the implementation's assumptions rather than providing an independent oracle. | A difficult invariant checked against an independent reference or known counterexample. |
+| Assert source text contains a call, SQL fragment, decorator or private helper name. | Freezes source spelling and cannot prove the claimed runtime effect. | An independently observed packaging or dependency boundary, or bytes that are themselves the public contract. |
+| Add another mocked cancellation/ownership case beside an existing real-process regression. | A serious topic does not give every related test value; the local simulation may add no evidence. | A distinct interleaving or fault not exercised by the retained case, with trustworthy ownership/cleanup observations. |
+
 ## During implementation
 
-1. Read the affected code and existing tests. Identify the uncertainty before deciding whether a test would help.
-2. If a top-tier case resolves it, select that case explicitly. A bugfix test should reproduce the actual failure, not merely restate the repaired code. A small table is appropriate when its rows cover materially different edges.
-3. Do not write or run mid-tier tests, a whole suite, a baseline suite, or a post-merge suite. A request to implement, fix, refactor, review, or prune tests is not by itself a request to execute the mid tier. A pruning request authorizes removal, not execution of the remaining mid-tier suites.
-4. Review the diff and use proportionate static validation such as syntax, types, links or build compilation when useful. Do not disguise behavioral tests as probes or validation scripts. Inspect build commands and hooks before invoking them: some run tests indirectly.
-5. Report what was checked and what was not. “Implementation complete; mid-tier tests not run under the testing policy” is an honest outcome. Do not call unexecuted checks passed or claim runtime qualification from static review.
+1. Implement and polish the requested code. Existing tests may be read as reference; leave their source, fixtures and inventories unchanged.
+2. If a bug or uncertainty suggests a useful future test, record the concrete gap briefly in the hand-over. Do not write or run it, including a top-tier regression, and do not declare that testing should now start.
+3. Do not perform test maintenance or execute selected tests, suites, baselines or post-merge checks. The owner must request a separate testing task. Test review or archival work requested separately does not itself authorize execution.
+4. Review the diff and use proportionate test-free static validation such as syntax, types, links or compilation when useful. Do not disguise behavioral tests as probes or validation scripts. Inspect commands and hooks for indirect test execution.
+5. Report what was checked and what was not. “Implementation complete; tests not changed or run under the separate-task policy” is an honest outcome. Do not call unexecuted checks passed or claim runtime qualification from static review.
 
-Do not repeatedly ask the owner for permission to run suites during ordinary work. Leave testing for an explicit request. If a requested release or other action has a hard technical dependency on a broad test gate, explain that dependency and leave that action pending; never silently bypass the gate or infer permission from an implementation request.
+Do not repeatedly ask the owner for permission to run suites during ordinary work.
+If an action requires a test gate, explain that dependency and leave the action
+pending for a separate owner-requested testing task. Never bypass its gate.
 
 ## In a separately requested testing task
 
-The owner's request defines the scope: particular behavior, a component, all repositories, or a named qualification. Run mid-tier cases only when the request names them or the mid tier; never widen a testing task to the mid tier on your own. Reassess the relevant available cases, select useful checks and verify their prerequisites, and write missing mid-tier checks only where they add meaningful information. Keep each repository's inventory current. Leave mid-tier source uncommented after the task. Explicit authorization persists for the requested task, including useful failure investigation and reruns; it does not authorize unrelated live services, spending, or changes to owner data.
+The owner's request decides when this task starts and defines its scope: test
+review, archival maintenance, writing tests, selected execution, a component,
+all repositories, or a named qualification. Do only the requested test work.
+A review, writing or archival request does not imply permission to run tests;
+a top-tier run does not authorize the mid tier. Keep inventories current and
+retained source in its documented state. A bugfix regression should reproduce
+the actual failure, not restate the repaired implementation.
 
-Before running, inspect discovery, prerequisites, skips and indirect execution. Record revisions, selections, elapsed time, results and limitations in existing run output outside Git. Distinguish passed, failed, skipped and unavailable. Zero selected tests is not successful qualification. A focused pass establishes only the selected behavior; live-provider or installed-package proof requires its actual boundary to be exercised.
+For an authorized run, permission persists through useful failure investigation
+and reruns within scope; it does not authorize unrelated live services, spending
+or owner-data changes. Do not fold implementation work into the testing task
+beyond fixes explicitly included in the owner's request.
+
+Before running, inspect discovery, prerequisites, skips and indirect execution.
+Record revisions, selections, elapsed time, results and limitations in existing
+run output outside Git. Distinguish passed, failed, skipped and unavailable.
+Zero selected tests is not successful qualification. A focused pass establishes
+only the selected behavior; live-provider or installed-package proof requires
+its actual boundary to be exercised.
 
 ## Assess value before adding or retaining a test
 
@@ -105,15 +190,61 @@ Ask what plausible wrong behavior the assertion rejects, what new information ru
 - Preserve exact-byte checks when bytes are the contract, such as a protocol, migration, retained payload, or secret-redaction boundary. Source spelling, quote style and private helper names usually supply little useful evidence.
 - Architectural checks may be useful if they enforce an explicit dependency or packaging boundary. A source substring cannot establish runtime absence of writes or calls.
 - Prefer disposable resources and independent starting states. Mock the external boundary or failure point, not the behavior being claimed. A test of a mock's configured return value is low tier.
-- Compare overlapping unit and integration cases. If a dictionary-based database simulation repeats a retained real transaction, lock or persistence case without exposing a distinct edge, remove the simulation. Preserve targeted fault injection or a separate algorithmic uncertainty when it adds information.
+- Compare overlapping unit and integration cases. If a dictionary-based database simulation repeats a retained real transaction, lock or persistence case without exposing a distinct edge, retire the simulation into low-tier comments. Preserve targeted fault injection or a separate algorithmic uncertainty when it adds information.
 
-## Remove low-tier tests
+## Preserve low-tier examples as comments
 
-Inventory current repositories once, excluding historical archives, generated files and duplicate worktrees. Review candidates with the code and their surviving callers or tests. Do not use test size or a keyword as a deletion rule.
+On 29 October 2026 the owner replaced deletion with commented preservation.
+Keep existing cases judged low tier in their source files so later agents can
+see the rejected idea and avoid recreating it. The owner also requested recovery
+of earlier removals from Git. Historical deletion reports remain historical;
+recovered comments are not restored runnable coverage.
 
-Remove each confirmed low-tier case and unused supporting code. For repeated coverage, name the surviving case or shared fixture. Do not remove meaningful coverage to meet a numerical reduction target. If a mixed case contains a weak assertion and a useful edge, preserve the edge. Investigate uncertain cases against their implementation and fixtures; if a judgment remains unresolved, record that limitation explicitly instead of presenting the execution default as an approval of quality.
+Move each confirmed low-tier body, including decorators and parameter rows, into
+a clearly labelled **LOW TIER — DO NOT ENABLE OR RECREATE** section at the end of
+the same test file, after runnable definitions and entry-point guards. If the
+whole file is low tier, keep a comment-only file at that test path. Comment every
+line with the language's line-comment syntax (`#` in Python, `//` in JavaScript
+or TypeScript). Do not use skipped tests, disabled suites, dead branches or
+multiline strings: the archived material must define and execute nothing. Keep
+archived imports, registrations and case-specific helper context commented too;
+do not restore runtime dependencies merely to support an archive.
 
-Check references and runner selection statically after pruning. Keep deletion reasons and source revisions in the task's review artifact; Git retains removed source. Do not update historical run records to imply a new pass. Do not run the remaining mid tier as part of pruning unless the owner also explicitly requested its execution.
+For each case record its original identifier, the concrete rejection reason,
+the nearest retained evidence when applicable, and the source revision. Preserve
+the body faithfully; link shared historical context rather than manufacturing a
+new implementation. Keep it classified **low** and explicitly **commented** in
+the inventory, with the footer location. Report archived counts separately from
+retained top/mid selections and runtime-discovered cases. Preserve earlier
+deletion metadata as history when recording recovery.
+
+Example format (the body is historical source, not a template for a new test):
+
+```python
+# LOW TIER — DO NOT ENABLE OR RECREATE
+# Original: ConfigTests.test_default_timeout
+# Reason: duplicates the explicit default in Config; no independent boundary.
+# Source: <commit containing the original test>
+# def test_default_timeout(self):
+#     self.assertEqual(Config().timeout, 30)
+```
+
+Read these sections before proposing or adding a related test. Do not recreate
+the same assertion elsewhere, rename it, or uncomment it just because a testing
+task is requested. Re-admission needs new evidence meeting the top/mid bar and
+the authorization required for that tier; update the reason and inventory first.
+Comments need not track routine implementation changes: they document a rejected
+test idea and its historical source, not a promise that the old code still runs.
+
+If a mixed case has a useful edge and weak assertions, preserve the useful edge
+and archive the rejected fragment with its reason. Do not retire meaningful
+coverage to meet a quota. Investigate uncertain cases against their code and
+fixtures, and record unresolved judgments honestly.
+
+Check references, runner selection and comment-only preservation statically.
+Keep retained case bodies unchanged during archival recovery. Do not update
+historical run records to imply a new pass, add archives to runners, weaken a
+qualification guard, or run the remaining mid tier unless explicitly requested.
 
 The [October review](../../sylvan-stack/research/test-quality-2026-10-27.md) contains the earlier inventory and examples. It is dated evidence; this guide owns the current testing policy.
 
