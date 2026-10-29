@@ -5,7 +5,7 @@ role: authored
 
 Use this guide when implementing changes, reviewing tests, or performing a testing task in Sylvan Stack. The owner adopted this policy on 28 October 2026: testing is separate work requested explicitly by the owner, except for a small top tier of informative edge cases and regression tests. Do not run tests after each change by default. Test count and coverage percentage are not quality goals.
 
-This policy supersedes older instructions to run affected tests at every step, full suites at task entry or completion, or suites again after merging. The owner subsequently requested a physical reset: comment existing tests, restore only individually justified top-tier cases, and keep a test inventory with tier reasons in every repository. The reset was merged into main in ten repositories under SYL-316 and is documented in the [reset report](../../sylvan-stack/research/test-tier-reset-2026-10-28.md). MiMo is deferred while its separate live Beat owns it; the old backup is not its current inventory. This is not installed-package or runtime qualification.
+This policy supersedes older instructions to run affected tests at every step, full suites at task entry or completion, or suites again after merging. The owner subsequently requested a physical reset: comment existing tests, restore only individually justified top-tier cases, and keep a test inventory with tier reasons in every repository. The reset was merged into main in ten repositories under SYL-316 and is documented in the [reset report](../../sylvan-stack/research/test-tier-reset-2026-10-28.md). MiMo was deferred during that reset; SYL-327 includes its current repository after SYL-314 completed. The old backup is not its current inventory. This is not installed-package or runtime qualification.
 
 Each repository's `TESTS.md` owns its active selection and links the complete inventory, `test-tiers.json` and `MID_TIER.md`. Read it before writing or running tests. The owner subsequently requested that retained mid-tier source stay uncommented (SYL-326). Writing or running it still requires an explicitly requested testing task. Broad qualification entry points must refuse while required tests are disabled; a smaller active inventory must never silently become a full qualification pass.
 
@@ -15,7 +15,7 @@ Keep top-tier case bodies in `tests/top/` and mid-tier bodies in `tests/mid/`, r
 
 Every repository with retained mid-tier cases has a `MID_TIER.md` describing each inventory entry, its tier reason and its review status. Provisional classifications must remain visibly provisional: a generated description or an assertion example does not establish useful coverage. Keep source locations and the machine-readable inventory current. Preserve previous source addresses when moving cases; relocation alone does not authorize indexed Origin migration or ingest.
 
-Mid-tier code stays uncommented in its own folder at the owner's request. Keep necessary imports, shared-fixture links and compatibility entry points intact. A separately requested testing task selects the relevant cases; do not re-comment them afterwards. Broad qualification must refuse incomplete inventories or missing test sources. Folder separation and source restoration do not turn a focused result into full qualification.
+Mid-tier code stays uncommented in its own folder at the owner's request in the ten SYL-326 repositories. MiMo retains its existing mixed-file layout and commented mid selections; SYL-327 does not authorize their restoration or relocation. Keep necessary imports, shared-fixture links and compatibility entry points intact. A separately requested testing task selects the relevant cases; do not re-comment them afterwards. Broad qualification must refuse incomplete inventories or missing test sources. Folder separation and source restoration do not turn a focused result into full qualification.
 
 ## The three tiers
 
@@ -114,3 +114,29 @@ Remove each confirmed low-tier case and unused supporting code. For repeated cov
 Check references and runner selection statically after pruning. Keep deletion reasons and source revisions in the task's review artifact; Git retains removed source. Do not update historical run records to imply a new pass. Do not run the remaining mid tier as part of pruning unless the owner also explicitly requested its execution.
 
 The [October review](../../sylvan-stack/research/test-quality-2026-10-27.md) contains the earlier inventory and examples. It is dated evidence; this guide owns the current testing policy.
+
+## SYL-327 retention result · 29 October 2026
+
+The raised bar reduces the mid-tier inventory from **3,810 to 605 entries**: **3,205 removed (84.1%)**. The **75 existing top-tier entries are unchanged**. These are source-inventory counts, not runtime-discovered tests or a measured speedup. The removed entries comprise 3,070 Python definitions, 8 Node test definitions, 100 scenario entries and 27 whole programs. Programs, scenarios and orchestration can overlap; do not add their internals as separate cases. No tests ran.
+
+| Repository | Mid before | Mid retained | Removed | Top unchanged |
+| --- | ---: | ---: | ---: | ---: |
+| [arbol](/Users/msix/repos/sylvan-stack/readonly/arbol/MID_TIER.md) | 656 | 151 | 505 | 3 |
+| [arbol-classifier](/Users/msix/repos/sylvan-stack/readonly/arbol-classifier/MID_TIER.md) | 142 | 26 | 116 | 2 |
+| [arbol-claude-driver](/Users/msix/repos/sylvan-stack/readonly/arbol-claude-driver/MID_TIER.md) | 44 | 21 | 23 | 2 |
+| [arbol-codex-driver](/Users/msix/repos/sylvan-stack/readonly/arbol-codex-driver/MID_TIER.md) | 137 | 49 | 88 | 2 |
+| [arbol-design-system](/Users/msix/repos/sylvan-stack/readonly/arbol-design-system/MID_TIER.md) | 17 | 9 | 8 | 0 |
+| [arbol-mimo-driver](/Users/msix/repos/sylvan-stack/readonly/arbol-mimo-driver/MID_TIER.md) | 70 | 21 | 49 | 44 |
+| [arbol-pi-driver](/Users/msix/repos/sylvan-stack/readonly/arbol-pi-driver/MID_TIER.md) | 198 | 70 | 128 | 4 |
+| [arbol-root](/Users/msix/repos/sylvan-stack/readonly/arbol-root/MID_TIER.md) | 267 | 52 | 215 | 3 |
+| [arbol-trunk](/Users/msix/repos/sylvan-stack/readonly/arbol-trunk/MID_TIER.md) | 240 | 18 | 222 | 3 |
+| [mycel](/Users/msix/repos/sylvan-stack/readonly/mycel/MID_TIER.md) | 1788 | 135 | 1653 | 8 |
+| [workspace-ledger](/Users/msix/repos/sylvan-stack/readonly/workspace-ledger/MID_TIER.md) | 251 | 53 | 198 | 4 |
+
+MiMo also has a vendored shared-conformance copy: 38 commented scenarios became 12, removing 26 duplicate scenario entries. They are reported separately and not added to the 3,205 headline. Its 21 retained mid-tier definitions/program remain commented under its existing policy. The other ten repositories retain 584 uncommented mid-tier entries; execution still requires a separately requested testing task. MiMo is now included in the review after SYL-314 completed, and is no longer deferred.
+
+Each repository has updated `MID_TIER.md`, `TESTS.md`, `test-tiers.json` and `docs/test-inventory.md` with kept reasons, removals and source revisions. Source and helper inspection drove retention; Mycel used an AST census of calls, assertions and patch boundaries with targeted case/fixture inspection. This is a risk-based reduction in coverage, not evidence that every removed defect is still detected. Retained bodies were compared statically with their original source; no cases were promoted to top tier or hidden in helpers to lower the count.
+
+Historical full Build qualification remains unavailable where its test selection or requirement map was reduced. Packaged unit gates in Classifier, Claude, Codex, Pi, Root and Trunk refuse; Mycel refuses frozen full qualification; Workspace Ledger refuses its old requirement-map qualification. Arbol shared conformance requires explicit selections and reports reduced evidence. Restoring a full gate requires a separately requested qualification task; neither this review nor a future selected pass supplies historical full-suite proof.
+
+No runtime, provider, Build, installed-package, owner-store, ingest or embedding qualification is claimed. Static syntax, source preservation, inventory hashes, references and diff checks are the validation for this change.
