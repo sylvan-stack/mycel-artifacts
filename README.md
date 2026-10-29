@@ -32,6 +32,7 @@ installation does not supply new provider proof.
 | find where something is implemented or documented, in one search | `mycel search` — [runbook](tools/mycel.md) |
 | an answer to "how/where/why" about a codebase | [operations/code-research.md](operations/code-research.md) (level 2) |
 | durable multi-angle task context (an artifact) | [operations/deep-research.md](operations/deep-research.md) (level 3) |
+| decide which tests are worth adding, running, retaining or removing | [operations/test-strategy.md](operations/test-strategy.md) — top-tier edge cases and regressions may be used during implementation; mid-tier testing requires a separate explicit owner request; low-tier tests are removed |
 | take initiative on a broad goal: own the plan, decisions and experiments while keeping the owner's involvement optional until their input is needed | [operations/initiative.md](operations/initiative.md) — applies to the delegated goal and its follow-ups; narrowly assigned tasks and subagent deliverables retain their scope |
 | start or continue an in-depth review of a large pull request: find its next issues, review new commits, verify the author's fixes, weigh the author's replies | [operations/pr-deep-review.md](operations/pr-deep-review.md) — state file per pull request, ranked areas, verified findings queued for the human reviewer; never posts. Named run limits: [operations/stints.md](operations/stints.md) |
 | go through the owner's unresolved comments in Linear: make the change a comment recommends, answer what it asks, or only list them | [operations/linear-resolve.md](operations/linear-resolve.md) — reads every open thread of the Linear workspace, changes the original then its Linear copy, and settles each comment with the user in the session; posts `Resolved. Resolution: …` in Linear only after the user says `Resolved` |
@@ -85,6 +86,8 @@ one screen, a family is missing; add a family, not rows.*
 These hold for every agent on this Mac, whatever the task and the tool.
 
 **Working with the owner**
+
+- **Testing in Sylvan Stack.** Follow [Test Strategy](operations/test-strategy.md) and the repository's `TESTS.md` inventory: only individually justified top-tier edge cases and specific bugfix regressions may be written or selectively run during implementation. Keep retained mid-tier source uncommented in its own folder at the owner's request; write or run it only in a separate testing task explicitly requested by the owner. Do not re-comment it after a run. Do not write low-tier tests; remove them. Unclassified retained tests are provisionally mid tier, not approved for quality. No default suite at entry, after edits, before completion or after merge. Full qualification must refuse incomplete inventories or missing test sources; a top-only run is not full qualification. This supersedes older automatic-test instructions in repository and Saga guides; report tests not run honestly.
 
 - **Do the work yourself.** You have every permission: install software, start
   servers and launch agents, and run any command, checks and probes included,

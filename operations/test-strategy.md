@@ -7,7 +7,7 @@ Use this guide when implementing changes, reviewing tests, or performing a testi
 
 This policy supersedes older instructions to run affected tests at every step, full suites at task entry or completion, or suites again after merging. The owner subsequently requested a physical reset: comment existing tests, restore only individually justified top-tier cases, and keep a test inventory with tier reasons in every repository. The reset was merged into main in ten repositories under SYL-316 and is documented in the [reset report](../../sylvan-stack/research/test-tier-reset-2026-10-28.md). MiMo is deferred while its separate live Beat owns it; the old backup is not its current inventory. This is not installed-package or runtime qualification.
 
-Each repository's `TESTS.md` owns its active selection and links the complete inventory, `test-tiers.json` and `MID_TIER.md`. Read it before writing or running tests. Mid-tier source stays commented except during an explicitly requested testing task. Broad qualification entry points must refuse while required tests are disabled; a smaller active inventory must never silently become a full qualification pass.
+Each repository's `TESTS.md` owns its active selection and links the complete inventory, `test-tiers.json` and `MID_TIER.md`. Read it before writing or running tests. The owner subsequently requested that retained mid-tier source stay uncommented (SYL-326). Writing or running it still requires an explicitly requested testing task. Broad qualification entry points must refuse while required tests are disabled; a smaller active inventory must never silently become a full qualification pass.
 
 ## Separate tier folders
 
@@ -15,7 +15,7 @@ Keep top-tier case bodies in `tests/top/` and mid-tier bodies in `tests/mid/`, r
 
 Every repository with retained mid-tier cases has a `MID_TIER.md` describing each inventory entry, its tier reason and its review status. Provisional classifications must remain visibly provisional: a generated description or an assertion example does not establish useful coverage. Keep source locations and the machine-readable inventory current. Preserve previous source addresses when moving cases; relocation alone does not authorize indexed Origin migration or ingest.
 
-Mid-tier code stays commented in its own folder. A separately requested testing task restores only reviewed selections, necessary imports and shared-fixture links, then returns them to comments unless the owner says otherwise. Broad qualification entry points and mid-tier discovery must continue to refuse while required checks are disabled. Folder separation does not turn a top-tier result into full qualification.
+Mid-tier code stays uncommented in its own folder at the owner's request. Keep necessary imports, shared-fixture links and compatibility entry points intact. A separately requested testing task selects the relevant cases; do not re-comment them afterwards. Broad qualification must refuse incomplete inventories or missing test sources. Folder separation and source restoration do not turn a focused result into full qualification.
 
 ## The three tiers
 
@@ -43,7 +43,7 @@ Do not repeatedly ask the owner for permission to run suites during ordinary wor
 
 ## In a separately requested testing task
 
-The owner's request defines the scope: particular behavior, a component, all repositories, or a named qualification. Reassess the relevant commented cases, restore only useful selections and their imports/helpers, and write missing mid-tier checks only where they add meaningful information. Keep each repository's inventory current. Return mid-tier code to comments after the task unless the owner requested otherwise. Explicit authorization persists for the requested task, including useful failure investigation and reruns; it does not authorize unrelated live services, spending, or changes to owner data.
+The owner's request defines the scope: particular behavior, a component, all repositories, or a named qualification. Reassess the relevant available cases, select useful checks and verify their prerequisites, and write missing mid-tier checks only where they add meaningful information. Keep each repository's inventory current. Leave mid-tier source uncommented after the task. Explicit authorization persists for the requested task, including useful failure investigation and reruns; it does not authorize unrelated live services, spending, or changes to owner data.
 
 Before running, inspect discovery, prerequisites, skips and indirect execution. Record revisions, selections, elapsed time, results and limitations in existing run output outside Git. Distinguish passed, failed, skipped and unavailable. Zero selected tests is not successful qualification. A focused pass establishes only the selected behavior; live-provider or installed-package proof requires its actual boundary to be exercised.
 
