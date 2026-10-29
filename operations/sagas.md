@@ -108,7 +108,7 @@ the files being edited at the moment. While a Beat is held, no other Beat
 whose territory overlaps it may start, even when the two would edit
 different files in a reserved folder.
 
-- **Written as full paths, one per line**, in a code block in the section
+- **Written as one path per line**, in a code block in the section
   `Territory` of the Arc's file. A folder ends with `/`:
 
   ```
@@ -116,6 +116,9 @@ different files in a reserved folder.
   ~/Artifacts/arbol-trunk/trunks/trivial/specs/00-the-trivial-trunk.md
   ```
 
+  A repository entry in an Arc uses this stack-level shorthand. A Beat's hold
+  expands it to the full Workspace path as [Named work areas](#named-work-areas)
+  says.
 - **Folders and files, chosen per place.** Hold a whole folder when the
   folder serves only this Arc. In a folder whose files serve different
   purposes, such as a repository's `tests/`, hold only the files the Arc
@@ -128,7 +131,9 @@ different files in a reserved folder.
   together.
 - **Overlap:** two territories overlap when an entry of one is the same as,
   or lies inside, an entry of the other: a file inside a held folder, or a
-  folder that contains a held file.
+  folder that contains a held file. Repository overlap is judged on the full
+  Workspace path, so the same repository path in two different Workspaces
+  does not overlap.
 
 ### Files every Beat may add to
 
@@ -239,11 +244,12 @@ and saved sessions may contain their absolute paths even after a hold ends.
   repository in it is on `main` with nothing uncommitted and no file that git
   does not ignore. A folder that is not clean is never taken; say which and
   what is in it.
-- **Territories keep their paths.** An entry under
-  `~/repos/sylvan-stack/<repo>/` means the same path in the work area
-  the hold names: `~/repos/sylvan-stack/arbol-trunk/trunks/trivial/` is worked
-  in `~/repos/sylvan-stack/fox/arbol-trunk/trunks/trivial/`. Overlap is judged as
-  before, because every branch is merged into the one `main`.
+- **Territories belong to one Workspace.** The full path of a repository
+  territory in a hold is `~/repos/sylvan-stack/<workspace>/<repo>/`. For
+  example, an Arc's `~/repos/sylvan-stack/arbol-trunk/trunks/trivial/` becomes
+  `~/repos/sylvan-stack/fox/arbol-trunk/trunks/trivial/` when held in **Fox
+  Workspace**. That claim blocks overlapping Beats only in **Fox Workspace**;
+  the corresponding path in another Workspace does not overlap.
 - **Several repositories, one folder.** A Beat whose territory spans
   repositories uses their clones in the same work area, so that a check
   of one against another, such as a suite in one repository run against a
@@ -301,7 +307,7 @@ agent can take a Beat. It holds:
   "beat": "SYL-171",
   "arc": "<the Arc's issue id>",
   "saga": "<the Saga's folder in ~/Artifacts/sagas>",
-  "territory": ["~/repos/sylvan-stack/arbol-trunk/trunks/trivial/"],
+  "territory": ["~/repos/sylvan-stack/fox/arbol-trunk/trunks/trivial/"],
   "folder": "~/repos/sylvan-stack/fox",
   "stint": { "name": "beat", "limits": [ { "measure": "quiet", "kind": "soft-max", "value": 60 },
                                           { "measure": "time", "kind": "hard-max", "value": 240 } ] },
