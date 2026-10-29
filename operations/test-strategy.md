@@ -277,3 +277,19 @@ No runtime, provider, Build, installed-package, owner-store, ingest or embedding
 ## Builds after SYL-329 · 29 October 2026
 
 The Build gates named above no longer refuse for the reduced selection: they run the top tier only, as the rule at the top of this guide says. Mycel's Build gate selects `tests/top/` (MYC-D73). The Arbol `unit` checks of Classifier, Claude, Codex, Pi, MiMo, Root, Trunk and Arbol run their top-tier cases; their `contract` checks run no scenario and say so in the Build log, because no contract scenario is top tier. Root's layout and migration checks and Trunk's Root Contract suite are mid tier and no longer listed in their `arbol-build.json`. The `live` checks, one real message through the vendor tool (BLD-0.5), are unchanged. Full qualification of the reduced selections still needs an owner-requested qualification task, and no Build supplies it.
+
+## SYL-330 policy and archive result · 29 October 2026
+
+All test work now requires a separate owner-requested task, including top-tier
+regressions and maintenance of fixtures, runners and inventories. Only the owner
+decides when implementation is ready for tests. Test-running Builds follow the
+same separation and retain their existing gates. Reading tests as reference and
+performing test-free static checks remain allowed.
+
+The earlier low-tier removals are preserved as comments at the ends of their
+test files: **3,312 canonical entries**, plus **26 duplicate vendored MiMo
+scenarios**, across **439 files**. This includes the 3,205 SYL-327 removals and
+107 earlier rejected entries. Each block identifies its original case, rejection
+reason and source revision; inventories record its commented status and location.
+The 75 top and 605 mid entries remain unchanged. These are source-inventory
+counts; the comments add no runnable cases. No tests or Builds ran.
