@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-1
-status: implemented
+status: accepted
 ---
 # Mycel · 01 Corpora and ingest
 
@@ -406,7 +406,7 @@ interface RepositoryStatus {
 
 ## Named checks
 
-Written by `scripts/name_checks.py` from the `proven` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
+Written by `scripts/name_checks.py` from the `proven` and `stated` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
 
 | Requirement | Kind | Checks |
 |---|---|---|
@@ -449,3 +449,4 @@ Written by `scripts/name_checks.py` from the `proven` Origin Links of the tests 
 | `MYC-1.37` | store | `test_ingest.IngestPublishesItsCaptureStoreTests.test_pass_reads_each_location_catalog_once_for_its_dependency_run`, `test_ingest.IngestPublishesItsCaptureStoreTests.test_pass_takes_a_foreign_source_from_the_index_and_its_own_pass_marks_the_dependant_stale`, `test_initial_source_ingest.InitialSourceIngestStoreTests.test_resolved_uningested_source_change_preserves_existing_pins_and_the_pass_completes` and 2 more |
 | `MYC-1.38` | store | `test_clone_locations.CloneStoreTests.test_capture_cannot_be_published_as_a_different_clone`, `test_clone_locations.CloneStoreTests.test_clones_share_identity_and_exact_versions_and_keep_each_others_locations`, `test_justify.CloneAbsenceStoreTests.test_absence_guard_compares_only_the_selected_clones_retained_witnesses` and 5 more |
 | `MYC-1.39` | store | `test_origins.OriginsStoreTests.test_changes_compare_retained_main_versions_without_git_and_keep_other_clone_unchanged` |
+| `MYC-1.40` | store | no passing check |

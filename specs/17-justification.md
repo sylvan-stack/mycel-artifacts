@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-17
-status: accepted
+status: implemented
 ---
 # Mycel · 17 Justification
 
@@ -270,7 +270,7 @@ The owner answered the fifteen decisions of the Traceability Arc's first draft o
 
 ## Named checks
 
-Written by `scripts/name_checks.py` from the `proven` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
+Written by `scripts/name_checks.py` from the `proven` and `stated` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
 
 | Requirement | Kind | Checks |
 |---|---|---|
@@ -286,9 +286,11 @@ Written by `scripts/name_checks.py` from the `proven` Origin Links of the tests 
 | `MYC-17.10` | store | `test_justify.CloneEntityMoveStoreTests.test_refs_keep_each_entitys_actual_file_when_its_row_moves_in_only_one_clone`, `test_justify.CloneGraphStoreTests.test_cycles_use_the_selected_location_of_every_repository`, `test_justify.JustifyStoreTests.test_all_pairs_resolve_before_mutation_and_changed_or_generated_inputs_refuse` and 4 more |
 | `MYC-17.11` | store | `test_origins.OriginsStoreTests.test_default_runs_one_scoped_ingest_then_one_report_and_empty_list_still_succeeds`, `test_origins.OriginsStoreTests.test_changes_compare_retained_main_versions_without_git_and_keep_other_clone_unchanged`, `test_origins.OriginsStoreTests.test_links_missing_paths_single_chunk_and_readonly_cli_use_the_calling_clone` |
 | `MYC-17.12` | store | `test_origins.OriginsStoreTests.test_unresting_and_reasoned_requirement_marks_never_invent_edges_or_proofs` |
-| `MYC-17.13` | store | `test_recovery.RecoveryStoreTests.test_dry_run_lists_each_local_source_without_writes_or_model_credentials`, `test_recovery.RecoveryStoreTests.test_embedding_candidates_use_existing_complete_vectors_and_uuid_uri`, `test_recovery.RecoveryStoreTests.test_path_repository_and_public_chunk_commands_use_same_candidates` and 4 more |
-| `MYC-17.14` | store | `test_recovery.RecoveryStoreTests.test_model_claims_survive_ingest_without_source_cycles_and_statement_supersedes`, `test_recovery.RecoveryStoreTests.test_statement_supersedes_moved_uuid_proposal_without_duplicate`, `test_recovery.RecoveryStoreTests.test_changed_inputs_after_call_have_no_link_or_verification_effect` and 8 more |
 | `MYC-17.15` | store | `test_recovery.RecoveryStoreTests.test_third_party_snapshots_recover_without_linear_or_remote_reads` |
 | `MYC-17.16` | store | `test_audit.AuditStoreTests.test_repeated_human_names_are_ambiguous_but_uuid_diagnostics_remain_auditable`, `test_audit.AuditStoreTests.test_requirement_marks_and_withdrawal_exempt_only_unresting_requirements`, `test_audit.AuditStoreTests.test_seven_deterministic_rules_use_only_current_indexed_evidence` and 2 more |
 | `MYC-17.17` | store | `test_audit.SemanticAuditStoreTests.test_changed_input_and_late_activity_edit_roll_back_findings_and_score`, `test_audit.SemanticAuditStoreTests.test_every_method_and_band_is_audited_without_changing_policy_or_verification`, `test_audit.SemanticAuditStoreTests.test_real_isolated_reviewer_routes_each_question_with_exact_scored_evidence` and 1 more |
 | `MYC-17.18` | store | `test_audit.AuditStoreTests.test_person_settles_with_reason_history_and_exact_observation_never_reopens`, `test_audit.SemanticAuditStoreTests.test_newest_thousand_closed_and_ended_bundles_preserve_open_live_and_shared_evidence`, `test_audit.AuditStoreTests.test_dry_run_is_readonly_and_paths_are_component_scoped` and 5 more |
+| `MYC-17.19` | store | `test_recovery.RecoveryStoreTests.test_a_name_found_in_many_document_sections_gives_no_name_candidates`, `test_recovery.RecoveryStoreTests.test_tests_are_neither_candidates_nor_sections_to_recover`, `test_recovery.RecoveryStoreTests.test_dry_run_lists_each_local_source_without_writes_or_model_credentials` and 5 more |
+| `MYC-17.20` | store | `test_recovery.RecoveryStoreTests.test_model_claims_survive_ingest_without_source_cycles_and_statement_supersedes`, `test_recovery.RecoveryStoreTests.test_statement_supersedes_moved_uuid_proposal_without_duplicate`, `test_recovery.RecoveryStoreTests.test_changed_inputs_after_call_have_no_link_or_verification_effect` and 9 more |
+| `MYC-17.21` | store | `test_audit.SemanticAuditStoreTests.test_a_series_of_audit_steps_keeps_its_work_and_never_sends_a_pair_twice`, `test_recovery.RecoveryStoreTests.test_a_series_of_steps_keeps_its_work_and_never_sends_a_pair_twice` |
+| `MYC-17.22` | store | `test_audit.SemanticAuditStoreTests.test_quiet_period_byte_budget_and_uncertain_handoff_have_no_claim_effect`, `test_audit.SemanticAuditStoreTests.test_three_negative_questions_retain_exact_evidence_lower_only_disputed_link_and_reuse` |
