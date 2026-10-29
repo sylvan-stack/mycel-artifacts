@@ -179,8 +179,10 @@ Always use each area's full name: **Badger Workspace**, **Beaver Workspace**,
 in that booking order. Generic instructions can say "the booked area" or
 "the pool"; do not shorten a name to the animal alone or use the term
 without its name. The Mycel repository in **Beaver Workspace** is
-`~/repos/sylvan-stack/beaver/mycel`. A hold reserves the complete named area,
-including every repository in it, so work spanning repositories stays together.
+`~/repos/sylvan-stack/beaver/mycel`. A hold reserves only its declared
+territory in the named area. Different Beats, including Beats of different
+Sagas, may work in the same area at once when their territories do not
+overlap.
 
 The reservation's conceptual lifetime is a
 **[Workspace Booking](../../arbol/GLOSSARY.md#workspace-booking)**: it belongs
@@ -237,13 +239,15 @@ and saved sessions may contain their absolute paths even after a hold ends.
 | Folder | Checked out | Who works in it |
 |---|---|---|
 | `~/repos/sylvan-stack/<repo>/` | whatever its user chose | the owner, and Claude Code or Codex started there |
-| `~/repos/sylvan-stack/<animal>/<repo>/` | `main` while free; `beat/<Beat>` or `chat/<chat>` while a hold names the folder | the agent of that hold, and nobody else |
+| `~/repos/sylvan-stack/<animal>/<repo>/` | `main` while available; `beat/<Beat>` or `chat/<chat>` while a hold covers its paths | the agents whose holds name its paths; disjoint work may share the area |
 | `~/repos/sylvan-stack/readonly/<repo>/` | `main`, brought up to date after every merge | nobody edits it; it is read, for the last merged state, and an Arbol chat works in it ([below](#a-booked-area-for-an-arbol-chat)) |
 
-- **Free.** A work area is free when setup is complete, no hold names it, and every
-  repository in it is on `main` with nothing uncommitted and no file that git
-  does not ignore. A folder that is not clean is never taken; say which and
-  what is in it.
+- **Available for a Beat.** A work area is available when setup is complete,
+  the Beat's territory overlaps no hold there, and every repository the Beat
+  will use is on `main` with nothing uncommitted and no file that git does not
+  ignore. A Beat taken over uses its existing branch instead. Holds and
+  changes in repositories the Beat does not use do not block it. A repository
+  the Beat needs that is not clean is never taken; say which and what is in it.
 - **Territories belong to one Workspace.** The full path of a repository
   territory in a hold is `~/repos/sylvan-stack/<workspace>/<repo>/`. For
   example, an Arc's `~/repos/sylvan-stack/arbol-trunk/trunks/trivial/` becomes
@@ -271,16 +275,16 @@ and saved sessions may contain their absolute paths even after a hold ends.
   `.environment-preparing` in a work area while setting it up, and remove
   it only after every clone and dependency setup succeeds. The booking tool
   skips it until then, and rejects empty or incomplete sets of repositories.
-  The pool has ten named work areas. When none is free, report the holds or
-  unfinished work that prevent booking; do not reuse an occupied work area
-  or create another numbered folder.
+  The pool has ten named work areas. When none is available for a Beat,
+  report the overlapping holds or unfinished repositories that prevent
+  booking; do not create another numbered folder.
 
 ### Names of the operations
 
 | Operation | Meaning |
 |---|---|
-| **Hold Beaver Workspace** or **book Beaver Workspace** | An agent has started working in **Beaver Workspace**, reserving that area for its work. Holding and booking are synonyms for the same operation and reservation |
-| **Release Beaver Workspace** | End the hold or booking of **Beaver Workspace**. **Unhold** and **unbook** are synonyms; use **release** as the standard operation name |
+| **Hold Beaver Workspace** or **book Beaver Workspace** | An agent has started working in **Beaver Workspace**, reserving its declared territory there. Holding and booking are synonyms for the same operation and reservation |
+| **Release Beaver Workspace** | End the agent's hold or booking in **Beaver Workspace**, leaving other agents' holds untouched. **Unhold** and **unbook** are synonyms; use **release** as the standard operation name |
 
 These names leave the ownership, territory and return rules below in place.
 The current booking commands remain `book`, `where` and `release`.
@@ -407,17 +411,18 @@ for running agents:
 
 | Command | What it does | Exit status |
 |---|---|---|
-| `python3 -I ~/Artifacts/sagas/tools/workspace.py book` | Prints the folder this chat booked. When it booked none, it takes the first [free](#named-work-areas) work area, writes the hold `~/.sagas/holds/chat-<chat>.json`, and prints that folder | 0; 1 when no folder is free, with the reason for each |
+| `python3 -I ~/Artifacts/sagas/tools/workspace.py book` | Prints the folder this chat booked. When it booked none, it takes the first [available](#named-work-areas) work area where the chat's territory overlaps no hold, writes the hold `~/.sagas/holds/chat-<chat>.json`, and prints that folder | 0; 1 when no folder is available, with the reason for each |
 | `… workspace.py where` | Prints the folder this chat booked | 0; 1 when it booked none: the chat works in `readonly/` |
-| `… workspace.py release` | Deletes the chat's hold, once every repository in its folder is on `main` with nothing uncommitted and no file that git does not ignore | 0; 1 when the folder is not clean, with what is left, and the hold stays |
+| `… workspace.py release` | Deletes the chat's hold, once every repository the chat used is on `main` with nothing uncommitted and no file that git does not ignore | 0; 1 when one of those repositories is not clean, with what is left, and the hold stays |
 
 All three exit with 2 when the chat is missing or malformed. The hold names
-the chat and the folder, and has no owner:
+the chat, its folder and its territory, and has no owner:
 
 ```json
 {
   "beat": null,
   "folder": "~/repos/sylvan-stack/beaver",
+  "territory": ["~/repos/sylvan-stack/beaver/arbol-trunk/"],
   "agent": { "tool": "arbol", "session": "sapling/c3d4e5f6-…", "owner": null, "threadFile": null },
   "takenAt": "2026-10-19T07:38:03Z"
 }
@@ -440,9 +445,10 @@ nothing.
    `git -C ~/repos/sylvan-stack/beaver/arbol-trunk status`.
 3. **At each later message,** run `where` before changing a file, and go on
    in the folder it prints, on the same branch.
-4. **Territories still hold.** A booking reserves a folder, not files. A
-   chat changes no file inside a held Beat's territory; it says which hold
-   has it instead.
+4. **Territories still hold.** A booking reserves the chat's declared
+   territory, not the whole folder. A chat changes only its own territory and
+   no file inside another hold; it says which hold has an overlapping path
+   instead.
 5. **Finishing:** merge the branch as a Beat's branch is merged
    ([Stopping and finishing](#stopping-and-finishing)), with the merge commit
    named `chat <root>/<chat>: <what it changed>`, and return the folder the
@@ -541,7 +547,8 @@ tells its parent how far it got.
 
    When it cannot start, go to the next Arc.
 5. **Take it.** Write the hold JSON to a private input file, naming the first
-   free [work area](#named-work-areas) as `folder`, then run
+   [available work area](#named-work-areas) as `folder` and expanding its
+   repository entries to that area's full paths, then run
    `python3 -I ~/Artifacts/sagas/tools/beat_claim.py take --input <input.json>
    --hold ~/.sagas/holds/<Beat>.json`. It fails when the file exists or the
    controller refuses the claim: go back to step 3. A managed claimant must
@@ -747,9 +754,9 @@ hard stop.
 - **Returning the work area,** in each repository the Beat used:
   `git fetch origin`, `git switch main`, `git merge --ff-only origin/main`,
   then `git branch -d beat/<Beat>` and `git push origin --delete
-  beat/<Beat>` once the branch is merged. `git status` then shows nothing; a
-  folder that does not end clean is not released, and the hold stays until it
-  is.
+  beat/<Beat>` once the branch is merged. `git status` then shows nothing in
+  each repository the Beat used; if one is not clean, the hold stays until it
+  is. Other repositories and other holds in the same area are left untouched.
 - **Either way, report the progress** to the Arc, and when needed to the
   Saga, as [Order and progress](#order-and-progress) says.
 - **An Arc is Done** when all its Beats are Done in the local records. Record
