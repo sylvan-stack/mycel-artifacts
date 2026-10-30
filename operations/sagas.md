@@ -25,8 +25,8 @@ the [glossary](../../arbol/GLOSSARY.md#saga). The Sagas themselves are files
 in the corpus `~/Artifacts/sagas/`: the rules of each Saga's work are in that
 Saga's file, and what a Beat must achieve is in that Beat's file.
 
-**Contents:** when to use · existing ownership · where state lives · territories · named work areas ·
-holds · a booked area for an Arbol chat · order and progress ·
+**Contents:** when to use · existing ownership · where state lives · territories · Workspaces ·
+holds · a booked Workspace for an Arbol chat · order and progress ·
 taking the next Beat · the plan of a Beat · the hand-over of a Beat · while
 working · stop criteria of a Beat · stopping and finishing · reviewing a
 Beat, an Arc or a Saga · planning a Saga · not built yet.
@@ -49,11 +49,11 @@ Before acting on a request to start, continue or finish a Saga, Arc or Beat,
 check the holds and confirm their owners are alive as [Who owns a
 hold](#who-owns-a-hold) says. Read only enough current assignment information
 to establish whether another live session already owns the requested work.
-Do this before planning, booking a work area, running checks or preparing
+Do this before planning, booking a Workspace, running checks or preparing
 closure, and before announcing that you will take or finish the work.
 
 If another live session owns that work, **report it immediately and stop**.
-Name the work, tool, session and work area, with its latest known status if
+Name the work, tool, session and Workspace, with its latest known status if
 readily available, then end the turn. Do not start a parallel implementation,
 read-only preparation, verification, coordination or closure effort, or wait
 for its hold to clear. A general request to continue or finish the work does
@@ -77,8 +77,8 @@ ownership report and a stop, including for later verification and closure.
 | Beat | The file `<ID>.md` in its Arc's folder (such as `SYL-170.md`), and its mirrored issue while unfinished | the file: its ID, what it must achieve, its plan, hand-over and territory. Linear: its live unfinished status and discussion, never the ID's source of truth. Record prerequisite IDs in the file before deleting their completed issues |
 | Completed tasks | Weekly files under `~/Artifacts/sagas/completed-linear-tasks/`, linked by `completed-linear-tasks.md` | the completed IDs, their durable local records, and whether each issue's removal was confirmed; a completed issue is deleted instead of set to Done |
 | Repository of a Beat | A label of the label group `Repository` | — |
-| Hold | One file per held Beat, and one per Arbol chat that booked a work area, in `~/.sagas/holds/` on this Mac | who works on a Beat right now, which chat works in which work area |
-| A Beat's code | The branch `beat/<Beat>` in each repository its territory touches, worked in a work area and merged into `main` as one merge commit | exactly what the Beat changed in code, whichever tool, session or kind of edit made the change |
+| Hold | One file per held Beat, and one per Arbol chat that booked a Workspace, in `~/.sagas/holds/` on this Mac | who works on a Beat right now, which chat works in which Workspace |
+| A Beat's code | The branch `beat/<Beat>` in each repository its territory touches, worked in a Workspace and merged into `main` as one merge commit | exactly what the Beat changed in code, whichever tool, session or kind of edit made the change |
 
 **The files are the originals.** The page in a Saga's Linear project is a
 one-way copy of its `saga.md`, each other document of the Saga a document in
@@ -117,7 +117,7 @@ different files in a reserved folder.
   ```
 
   A repository entry in an Arc uses this stack-level shorthand. A Beat's hold
-  expands it to the full Workspace path as [Named work areas](#named-work-areas)
+  expands it to the full Workspace path as [Workspaces](#workspaces)
   says.
 - **Folders and files, chosen per place.** Hold a whole folder when the
   folder serves only this Arc. In a folder whose files serve different
@@ -163,86 +163,67 @@ requirement, needs the file in the Beat's territory.
 
 <a id="environments"></a>
 
-## Named work areas
+<a id="named-work-areas"></a>
+
+## Workspaces
 
 A Beat's code is changed on a branch of its own, `beat/<Beat>` such as
-`beat/SYL-173`, in one of the ten reusable working areas, such as
-**[Beaver Workspace](../../arbol/GLOSSARY.md#workspace)**. Each holds one
-clone of every repository, with its development dependencies installed,
-and stays between tasks. The owner chose this arrangement on 16 October
-2026, increased the pool from five to ten on 20 October, and chose the
-current animal names and term on 26 October 2026.
+`beat/SYL-173`, in one of the ten reusable
+**[Workspaces](../../arbol/GLOSSARY.md#workspace)**, such as **Beaver
+Workspace**. Each holds one clone of every repository, with its development
+dependencies installed, and stays between tasks. The owner chose this
+arrangement on 16 October 2026, increased the pool from five to ten on
+20 October, and chose the current animal names and term on 26 October 2026.
 
-Always use each area's full name: **Badger Workspace**, **Beaver Workspace**,
+Always use each Workspace's full name: **Badger Workspace**, **Beaver Workspace**,
 **Fox Workspace**, **Hare Workspace**, **Lynx Workspace**, **Otter Workspace**,
 **Owl Workspace**, **Panda Workspace**, **Raven Workspace** and **Wolf Workspace**,
-in that booking order. Generic instructions can say "the booked area" or
-"the pool"; do not shorten a name to the animal alone or use the term
-without its name. The Mycel repository in **Beaver Workspace** is
-`~/repos/sylvan-stack/beaver/mycel`. A hold reserves only its declared
-territory in the named area. Different Beats, including Beats of different
-Sagas, may work in the same area at once when their territories do not
-overlap.
+in that booking order. Generic instructions can say "the booked Workspace" or
+"the pool". Do not shorten a name to the animal alone, use the term without its
+name, or use a word for a Workspace that the owner has not agreed to, such as
+"area" or "pilot" ([glossary](../../arbol/GLOSSARY.md#workspace)). The Mycel
+repository in **Beaver Workspace** is `~/repos/sylvan-stack/beaver/mycel`. A
+hold reserves only its declared territory in the Workspace. Different Beats,
+including Beats of different Sagas, may work in the same Workspace at once when
+their territories do not overlap.
 
-The reservation's conceptual lifetime is a
-**[Workspace Booking](../../arbol/GLOSSARY.md#workspace-booking)**: it belongs
-to work, normally a Saga, and can continue across participating or replacement
-Chat Sessions. The [Workspace Ledger design](workspace-ledger.md) defines
-that model, the `.ledger/` files and precise net booking results from saved
-opening and closing states. Passive tool and watcher history supplements
-those results. Logging does not control tool execution.
-Its controller and capture mechanisms are active for new bookings in the Hare
-Workspace pilot; all other areas remain on legacy authority. The procedures
-below describe the live legacy tool and holds until a coordinated migration
-changes them;
-do not reinterpret an existing hold or release active work from this design alone.
+A reservation is a **[Workspace Booking](../../arbol/GLOSSARY.md#workspace-booking)**
+of a territory: it belongs to work, normally a Saga, and can continue across
+participating or replacement Chat Sessions. On 30 October 2026 the owner decided
+that every Workspace records its bookings in its own `.ledger/bookings.json`,
+replacing the hold files below in one switch-over; the
+[Workspace Ledger guide](workspace-ledger.md) defines that design, its files and
+precise net booking results. It is not implemented yet: no Workspace uses the
+Ledger, and the procedures below, with hold files in `~/.sagas/holds/`, remain
+the live ones until the switch-over. Do not reinterpret an existing hold or
+release active work from that design alone.
 
 ```
 ~/repos/sylvan-stack/
-  mycel/  arbol/  arbol-root/  …     the owner's own checkouts
-  badger/                          Badger Workspace (alias to blue/)
+  badger/                          Badger Workspace
     mycel/                         Mycel repository in Badger Workspace
     arbol/  arbol-root/  …          other repositories in Badger Workspace
-  beaver/ fox/ hare/ lynx/ otter/   the other nine named work areas,
+  beaver/ fox/ hare/ lynx/ otter/   the other nine Workspaces,
   owl/ panda/ raven/ wolf/          each with the same repositories
   readonly/                        one further set, always the last merged main
     mycel/  arbol/  arbol-root/  …  nobody edits these copies
 ```
 
-The animal paths are aliases to the existing physical folders. They rename
-the areas without moving a checkout, changing a branch, rewriting a hold,
-or interrupting a running command:
-
-| Full name and path | Existing physical folder | Numbered alias |
-|---|---|---|
-| Badger Workspace — `badger/` | `blue/` | `1/` |
-| Beaver Workspace — `beaver/` | `green/` | `2/` |
-| Fox Workspace — `fox/` | `amber/` | `3/` |
-| Hare Workspace — `hare/` | `red/` | `4/` |
-| Lynx Workspace — `lynx/` | `violet/` | `5/` |
-| Otter Workspace — `otter/` | `orange/` | — |
-| Owl Workspace — `owl/` | `teal/` | — |
-| Panda Workspace — `panda/` | `silver/` | — |
-| Raven Workspace — `raven/` | `gold/` | — |
-| Wolf Workspace — `wolf/` | `white/` | — |
-
-New bookings and instructions use these full names and animal paths. Existing
-bookings keep their recorded paths, and the booking tool accepts a color
-folder while its animal alias has not yet been installed. These paths name the same ten checkouts,
-never additional named work areas. Compare resolved paths when checking holds:
-a hold on `blue/`, `badger/` or `1/` reserves the same area. The booking tool
-lists each resolved area once, and the check from outside recognizes both
-animal and color names when checking territories. Keep the physical color
-folders and the aliases in place: virtual environments, installed commands
-and saved sessions may contain their absolute paths even after a hold ends.
+Only the Workspaces and `readonly/` sit in `~/repos/sylvan-stack/`. Since
+29 October 2026 each animal folder is its Workspace's physical folder, and the
+former color folders and numbered aliases no longer exist. **Beaver Workspace**
+and **Hare Workspace** were set up again on 30 October 2026 after their folders
+had been deleted. Older holds and saved sessions may still name a former color
+folder: Badger `blue/`, Beaver `green/`, Fox `amber/`, Hare `red/`, Lynx
+`violet/`, Otter `orange/`, Owl `teal/`, Panda `silver/`, Raven `gold/` and Wolf
+`white/`.
 
 | Folder | Checked out | Who works in it |
 |---|---|---|
-| `~/repos/sylvan-stack/<repo>/` | whatever its user chose | the owner, and Claude Code or Codex started there |
-| `~/repos/sylvan-stack/<animal>/<repo>/` | `main` while available; `beat/<Beat>` or `chat/<chat>` while a hold covers its paths | the agents whose holds name its paths; disjoint work may share the area |
-| `~/repos/sylvan-stack/readonly/<repo>/` | `main`, brought up to date after every merge | nobody edits it; it is read, for the last merged state, and an Arbol chat works in it ([below](#a-booked-area-for-an-arbol-chat)) |
+| `~/repos/sylvan-stack/<animal>/<repo>/` | `main` while available; `beat/<Beat>` or `chat/<chat>` while a hold covers its paths | the agents whose holds name its paths; disjoint work may share the Workspace |
+| `~/repos/sylvan-stack/readonly/<repo>/` | `main`, brought up to date after every merge | nobody edits it; it is read, for the last merged state, and an Arbol chat works in it ([below](#a-booked-workspace-for-an-arbol-chat)) |
 
-- **Available for a Beat.** A work area is available when setup is complete,
+- **Available for a Beat.** A Workspace is available when setup is complete,
   the Beat's territory overlaps no hold there, and every repository the Beat
   will use is on `main` with nothing uncommitted and no file that git does not
   ignore. A Beat taken over uses its existing branch instead. Holds and
@@ -255,7 +236,7 @@ and saved sessions may contain their absolute paths even after a hold ends.
   Workspace**. That claim blocks overlapping Beats only in **Fox Workspace**;
   the corresponding path in another Workspace does not overlap.
 - **Several repositories, one folder.** A Beat whose territory spans
-  repositories uses their clones in the same work area, so that a check
+  repositories uses their clones in the same Workspace, so that a check
   of one against another, such as a suite in one repository run against a
   program in another, uses the Beat's own copies.
 - **Corpora stay on `main`.** The specification corpora in `~/Artifacts/` and
@@ -265,19 +246,19 @@ and saved sessions may contain their absolute paths even after a hold ends.
 - **Nothing installed from a branch.** A program installed on this Mac, such
   as a launcher in `~/.local/bin`, is made only from merged work, never from a
   Beat's branch.
-- **Setting one up.** A new work area, or a repository new to the stack,
+- **Setting one up.** A new Workspace, or a repository new to the stack,
   is a clone whose `origin` is the repository's GitHub address, on `main`, with
   every environment its lockfiles name installed once: `uv sync --locked
   --group dev` beside each `uv.lock`, `npm ci` beside each
   `package-lock.json`, and `uv venv` with `uv pip install -e .` beside a
   `pyproject.toml` that has no `uv.lock`, as `mycel`'s has none. Every
-  work area and `readonly` hold the same repositories. Put
-  `.environment-preparing` in a work area while setting it up, and remove
+  Workspace and `readonly` hold the same repositories. Put
+  `.environment-preparing` in a Workspace while setting it up, and remove
   it only after every clone and dependency setup succeeds. The booking tool
   skips it until then, and rejects empty or incomplete sets of repositories.
-  The pool has ten named work areas. When none is available for a Beat,
-  report the overlapping holds or unfinished repositories that prevent
-  booking; do not create another numbered folder.
+  The pool has ten Workspaces. When none is available for a Beat, report the
+  overlapping holds or unfinished repositories that prevent booking; do not
+  create another folder.
 
 ### Names of the operations
 
@@ -290,16 +271,19 @@ These names leave the ownership, territory and return rules below in place.
 The current booking commands remain `book`, `where` and `release`.
 
 The **[Workspace Ledger](../../arbol/GLOSSARY.md#workspace-ledger)** is the
-Git-ignored `.ledger/` directory. Its
-[design](workspace-ledger.md#files-on-disk) specifies `current.jsonl`, a
-timestamped archive for each closed booking, and `history.jsonl`, with
-references to opening/closing snapshots and precise net booking changes,
-including uncommitted and untracked files. Tool and watcher events supply
-supplementary activity history and approximate attribution. Agents retain
-unrestricted filesystem access. Activation requires the new booking
-controller, snapshot storage, capture adapters and migration described there.
+Git-ignored `.ledger/` directory every Workspace will have. Its
+[design](workspace-ledger.md#files-on-disk) specifies `bookings.json`, which
+lists which Chat Sessions and which Saga hold which territory, one event file per
+booking and `history.jsonl`, with references to opening/closing snapshots and
+precise net changes inside each territory, including uncommitted and untracked
+files. Tool and watcher events supply supplementary activity history and
+approximate attribution. Agents retain unrestricted filesystem access.
 
 ## Holds
+
+Until the [switch-over](workspace-ledger.md#switch-over-from-hold-files) to the
+Workspace Ledger, holds are the live booking record; after it, `bookings.json`
+in each Workspace replaces them and `~/.sagas/holds/` is removed.
 
 A hold says that an agent works on a Beat now. It is a file
 `~/.sagas/holds/<Beat>.json`, for example `~/.sagas/holds/SYL-171.json`,
@@ -325,12 +309,11 @@ agent can take a Beat. It holds:
 }
 ```
 
-The Linear comment on the Beat is the readable trace; the file decides when no
-Workspace Ledger routing fence gives the area to the controller. In a managed
-area the controller's booking is authoritative: `workspace-<configured-id>.json`
-is its permanent area guard, and chat/Beat holds are compatibility projections.
+The Linear comment on the Beat is the readable trace; the file decides. The routing file
+`~/.sagas/workspace-ledger-authority.json` marks every Workspace `legacy`, so no
+Workspace Ledger booking or guard file is involved.
 Use `python3 -I ~/Artifacts/sagas/tools/beat_claim.py` to take or release a direct
-Beat claim. A projection's deletion or owner death never releases the booking.
+Beat claim.
 
 ### Who owns a hold
 
@@ -382,22 +365,22 @@ candidate. Only a legacy hold whose owner is gone is deleted; the agent then
 comments on the Beat: `**Agent:** Released automatically: <the reason, such as
 "the Claude Code session's program ended" or "the Codex thread was closed">.`
 The Beat keeps its status: its last `**Agent:**` comment says where the work
-stopped. A hold that names an Arbol chat and every Workspace Ledger guard or
-projection stays. Participant death is not booking release.
+stopped. A hold that names an Arbol chat stays. Participant death is not booking release.
 
 <a id="a-prepared-folder-for-an-arbol-chat"></a>
 
 <a id="an-environment-for-an-arbol-chat"></a>
 
-## A booked area for an Arbol chat
+<a id="a-booked-area-for-an-arbol-chat"></a>
+
+## A booked Workspace for an Arbol chat
 
 An Arbol chat works in `~/repos/sylvan-stack/readonly/`: in its repository's
 folder there, such as `readonly/arbol-trunk`, or in `readonly/` itself for the
 stack as a whole. It keeps that folder for every message, because a Driver
 continues its saved conversation only in the same folder. Most chats only
 read and answer. An agent in a chat that has to change files *books* a
-work area, when it needs one, and works there. So more chats than
-named work areas can be open at once. The owner decided this on 19 October
+Workspace, when it needs one, and works there. So more chats than Workspaces can be open at once. The owner decided this on 19 October
 2026 ([BKD-D4](../../arbol/backend/00-the-arbol-backend.md#decisions)).
 
 The tool is `~/Artifacts/sagas/tools/workspace.py`. It takes the chat
@@ -411,7 +394,7 @@ for running agents:
 
 | Command | What it does | Exit status |
 |---|---|---|
-| `python3 -I ~/Artifacts/sagas/tools/workspace.py book` | Prints the folder this chat booked. When it booked none, it takes the first [available](#named-work-areas) work area where the chat's territory overlaps no hold, writes the hold `~/.sagas/holds/chat-<chat>.json`, and prints that folder | 0; 1 when no folder is available, with the reason for each |
+| `python3 -I ~/Artifacts/sagas/tools/workspace.py book` | Prints the folder this chat booked. When it booked none, it takes the first [available](#workspaces) Workspace where the chat's territory overlaps no hold, writes the hold `~/.sagas/holds/chat-<chat>.json`, and prints that folder | 0; 1 when no folder is available, with the reason for each |
 | `… workspace.py where` | Prints the folder this chat booked | 0; 1 when it booked none: the chat works in `readonly/` |
 | `… workspace.py release` | Deletes the chat's hold, once every repository the chat used is on `main` with nothing uncommitted and no file that git does not ignore | 0; 1 when one of those repositories is not clean, with what is left, and the hold stays |
 
@@ -437,7 +420,7 @@ nothing.
 1. **Book before the first change.** Change files only in the folder `book`
    printed, never in `readonly/`. A change only to a corpus in `~/Artifacts/`
    needs no booking: corpora stay on `main`, as
-   [Named work areas](#named-work-areas) says.
+   [Workspaces](#workspaces) says.
 2. **A branch of its own** in each repository it changes, in that folder:
    `git fetch origin`, then `git switch -c chat/<chat> origin/main`; run the
    folder's environment setup as a Beat does. The chat's own folder is still
@@ -547,14 +530,14 @@ tells its parent how far it got.
 
    When it cannot start, go to the next Arc.
 5. **Take it.** Write the hold JSON to a private input file, naming the first
-   [available work area](#named-work-areas) as `folder` and expanding its
-   repository entries to that area's full paths, then run
+   [available Workspace](#workspaces) as `folder` and expanding its
+   repository entries to that Workspace's full paths, then run
    `python3 -I ~/Artifacts/sagas/tools/beat_claim.py take --input <input.json>
    --hold ~/.sagas/holds/<Beat>.json`. It fails when the file exists or the
    controller refuses the claim: go back to step 3. A managed claimant must
-   already be a joined participant in that area's controller-owned booking.
+   already be a joined participant in that Workspace's controller-owned booking.
 6. **Make its branch** in each repository its territory touches, in the
-   work area: `git fetch origin`, then `git switch -c beat/<Beat>
+   Workspace: `git fetch origin`, then `git switch -c beat/<Beat>
    origin/main`, or `git switch beat/<Beat>` when the Beat is taken over and
    its branch is on GitHub. Run the folder's environment setup again; it takes
    a moment when nothing changed.
@@ -688,8 +671,8 @@ For example, at the end of `SYL-179.md`:
   "everything". Before each commit, compare the files in it with the hold's
   territory and the files every Beat may add to. A file outside both is not
   committed: grow the territory, or stop.
-- **Work only in your booked area,** on the Beat's branch, for code; the
-  corpora on `main`, as [Named work areas](#named-work-areas) says. Push the
+- **Work only in your booked Workspace,** on the Beat's branch, for code; the
+  corpora on `main`, as [Workspaces](#workspaces) says. Push the
   branch with each commit (`git push -u origin beat/<Beat>` the first time),
   so the work is on GitHub before it is merged.
 - **Another Beat's unfinished work is not yours.** It lives on another branch
@@ -713,7 +696,7 @@ change to the stint does not change what a past run reports.
 | Kind | What the agent does when the limit is reached |
 |---|---|
 | `soft-max` | Stops at the next point where the work is safe to leave: after the command that runs, with what works committed and pushed. It says in Linear and in its reply where the Beat stands, what is stuck and what it proposes, and asks the owner whether to go on. An answer to go on starts the `quiet` count again |
-| `hard-max` | Stops the Beat as [Stopping and finishing](#stopping-and-finishing) says: commits and pushes what works, writes the hand-over, returns its work area and releases the hold, whatever is left. The Beat can be taken again in a new run |
+| `hard-max` | Stops the Beat as [Stopping and finishing](#stopping-and-finishing) says: commits and pushes what works, writes the hand-over, returns its Workspace and releases the hold, whatever is left. The Beat can be taken again in a new run |
 
 The agent checks both counts after each tick and before it starts any
 command that may take long. Neither limit is a target: a Beat that is done
@@ -727,7 +710,7 @@ hard stop.
 - **Stopping in the middle:** follow the Saga's rules (commit what
   works, leave the `**Agent:**` comment that says what is done and what comes
   next), push the branch unmerged, write the Beat's hand-over, return the
-  work area (below), then run `beat_claim.py release --hold <file>` and end the
+  Workspace (below), then run `beat_claim.py release --hold <file>` and end the
   comment with `Released.` Releasing a Beat claim does not release a continuing
   controller-owned booking. The agent that takes the Beat over switches to its branch.
 - **Finishing:** when the implementation and the checks authorized for this
@@ -747,16 +730,16 @@ hard stop.
   result, prerequisite IDs and completion summary in the local records. Follow
   [Complete Linear Tasks](linear-completion.md): commit and push the completed
   ID before deleting its Linear issue, then verify and record removal. Return
-  the work area and run `beat_claim.py release --hold <file>`. A failed Linear
+  the Workspace and run `beat_claim.py release --hold <file>`. A failed Linear
   removal is reported as pending; do not set the issue to Done as a fallback.
   Close the whole controller-owned booking separately, with its coordinator,
   participant acknowledgements, return checks and saved result.
-- **Returning the work area,** in each repository the Beat used:
+- **Returning the Workspace,** in each repository the Beat used:
   `git fetch origin`, `git switch main`, `git merge --ff-only origin/main`,
   then `git branch -d beat/<Beat>` and `git push origin --delete
   beat/<Beat>` once the branch is merged. `git status` then shows nothing in
   each repository the Beat used; if one is not clean, the hold stays until it
-  is. Other repositories and other holds in the same area are left untouched.
+  is. Other repositories and other holds in the same Workspace are left untouched.
 - **Either way, report the progress** to the Arc, and when needed to the
   Saga, as [Order and progress](#order-and-progress) says.
 - **An Arc is Done** when all its Beats are Done in the local records. Record
