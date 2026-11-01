@@ -189,14 +189,17 @@ their territories do not overlap.
 
 A reservation is a **[Workspace Booking](../../arbol/GLOSSARY.md#workspace-booking)**
 of a territory: it belongs to work, normally a Saga, and can continue across
-participating or replacement Chat Sessions. On 30 October 2026 the owner decided
-that every Workspace records its bookings in its own `.ledger/bookings.json`,
-replacing the hold files below in one switch-over; the
-[Workspace Ledger guide](workspace-ledger.md) defines that design, its files and
-precise net booking results. It is not implemented yet: no Workspace uses the
-Ledger, and the procedures below, with hold files in `~/.sagas/holds/`, remain
-the live ones until the switch-over. Do not reinterpret an existing hold or
-release active work from that design alone.
+participating or replacement Chat Sessions. On 2 November 2026 the owner decided
+to withdraw the Workspaces: each repository gets one checkout,
+`~/repos/sylvan-stack/<repo>`, on `main` and shared by every agent, kept apart by
+territories, and every open booking is listed in one file,
+`~/Artifacts/sagas/holds.json`
+([Forester decisions](../../sylvan-stack/repos/forester/decisions.md) FOR-D2,
+FOR-D4 and FOR-D5). This replaces the `.ledger/bookings.json` per Workspace decided
+on 30 October 2026. It is not implemented yet: the Workspaces, `readonly/` and the
+hold files in `~/.sagas/holds/` described below remain the live arrangement until
+the [move-over](../../sylvan-stack/repos/forester/decisions.md#moving-over). Do not
+reinterpret an existing hold or release active work from that decision alone.
 
 ```
 ~/repos/sylvan-stack/
@@ -270,20 +273,20 @@ folder: Badger `blue/`, Beaver `green/`, Fox `amber/`, Hare `red/`, Lynx
 These names leave the ownership, territory and return rules below in place.
 The current booking commands remain `book`, `where` and `release`.
 
-The **[Workspace Ledger](../../arbol/GLOSSARY.md#workspace-ledger)** is the
-Git-ignored `.ledger/` directory every Workspace will have. Its
-[design](workspace-ledger.md#files-on-disk) specifies `bookings.json`, which
-lists which Chat Sessions and which Saga hold which territory, one event file per
-booking and `history.jsonl`, with references to opening/closing snapshots and
-precise net changes inside each territory, including uncommitted and untracked
-files. Tool and watcher events supply supplementary activity history and
-approximate attribution. Agents retain unrestricted filesystem access.
+The **[Workspace Ledger](../../arbol/GLOSSARY.md#workspace-ledger)** records
+what each booking changed: precise net changes inside its territory, including
+uncommitted and untracked files, with tool and watcher events as supplementary
+activity history and approximate attribution. Agents retain unrestricted
+filesystem access. Its [design of 30 October 2026](workspace-ledger.md#files-on-disk),
+a `.ledger/` per Workspace with `bookings.json`, is superseded by the decision of
+2 November 2026 above: the Ledger no longer books, and it is rewritten as part of
+Forester.
 
 ## Holds
 
-Until the [switch-over](workspace-ledger.md#switch-over-from-hold-files) to the
-Workspace Ledger, holds are the live booking record; after it, `bookings.json`
-in each Workspace replaces them and `~/.sagas/holds/` is removed.
+Until the [move-over](../../sylvan-stack/repos/forester/decisions.md#moving-over),
+holds are the files in `~/.sagas/holds/` described here; after it, every hold is
+an entry of `~/Artifacts/sagas/holds.json` and `~/.sagas/holds/` is removed.
 
 A hold says that an agent works on a Beat now. It is a file
 `~/.sagas/holds/<Beat>.json`, for example `~/.sagas/holds/SYL-171.json`,
