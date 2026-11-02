@@ -12,10 +12,10 @@ This guide owns the portable booking procedure; those chapters define the record
 
 **Status: superseded on 2 November 2026, never implemented.** The owner withdrew
 the Workspaces: each repository gets one checkout shared by every agent, every
-booking is listed in `~/Artifacts/sagas/holds.json`, and the Ledger only records
+booking is listed in `~/Artifacts/forester/holds.json`, and the Ledger only records
 what each booking changed
-([Forester decisions](../../sylvan-stack/repos/forester/decisions.md) FOR-D2,
-FOR-D4 and FOR-D5, and WL-D22). The territory rules below carry over; the
+([Forester decisions](../../forester/decisions.md) FOR-D2,
+FOR-D4, FOR-D5 and FOR-D13, and WL-D22). The territory rules below carry over; the
 `.ledger/` per Workspace, `bookings.json` and the switch-over are not to be
 implemented. This guide is rewritten as part of Forester. **No Workspace uses
 the Ledger now; the live booking record is still the hold files described in

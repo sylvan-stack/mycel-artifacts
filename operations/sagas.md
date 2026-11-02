@@ -193,12 +193,12 @@ participating or replacement Chat Sessions. On 2 November 2026 the owner decided
 to withdraw the Workspaces: each repository gets one checkout,
 `~/repos/sylvan-stack/<repo>`, on `main` and shared by every agent, kept apart by
 territories, and every open booking is listed in one file,
-`~/Artifacts/sagas/holds.json`
-([Forester decisions](../../sylvan-stack/repos/forester/decisions.md) FOR-D2,
-FOR-D4 and FOR-D5). This replaces the `.ledger/bookings.json` per Workspace decided
+`~/Artifacts/forester/holds.json`
+([Forester decisions](../../forester/decisions.md) FOR-D2,
+FOR-D4, FOR-D5 and FOR-D13). This replaces the `.ledger/bookings.json` per Workspace decided
 on 30 October 2026. It is not implemented yet: the Workspaces, `readonly/` and the
 hold files in `~/.sagas/holds/` described below remain the live arrangement until
-the [move-over](../../sylvan-stack/repos/forester/decisions.md#moving-over). Do not
+the [move-over](../../forester/decisions.md#moving-over). Do not
 reinterpret an existing hold or release active work from that decision alone.
 
 ```
@@ -284,9 +284,9 @@ Forester.
 
 ## Holds
 
-Until the [move-over](../../sylvan-stack/repos/forester/decisions.md#moving-over),
+Until the [move-over](../../forester/decisions.md#moving-over),
 holds are the files in `~/.sagas/holds/` described here; after it, every hold is
-an entry of `~/Artifacts/sagas/holds.json` and `~/.sagas/holds/` is removed.
+an entry of `~/Artifacts/forester/holds.json` and `~/.sagas/holds/` is removed.
 
 A hold says that an agent works on a Beat now. It is a file
 `~/.sagas/holds/<Beat>.json`, for example `~/.sagas/holds/SYL-171.json`,
