@@ -175,5 +175,6 @@ These hold for every agent on this Mac, whatever the task and the tool.
 **How this file reaches every agent.** Claude Code imports it from
 `~/.claude/CLAUDE.md` at the start of every session. Codex gets a copy as
 `developer_instructions` in `~/.codex/config.toml`, rewritten whenever this
-file changes. Everything here costs context in every session: keep it short,
+file changes; the same copy goes to `~/.agents/AGENTS.md`, which Kimi Code and
+other tools read. Everything here costs context in every session: keep it short,
 and put detail in the guide a row above points to.
