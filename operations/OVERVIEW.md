@@ -122,6 +122,15 @@ not yet filled the index, so current research uses grep and file reads.
   which refuses a change that breaks the graph, and checks that no two of them
   contradict each other. Every other piece of work reads them as requirements.
 
+## Reservble places-api logs
+
+- **[Places API Logs](places-api-logs.md)** — `/places-api-logs` diagnoses
+  Reservble's side of the Syrve integration from the daily logs on a read-only
+  SFTP server: list a day's files, pick the log types, search them locally and
+  correlate IDs into a UTC timeline with guest details redacted. The
+  [SFTP manual](../tools/places-api-sftp.md) owns the connection and the
+  sign-in on this Mac.
+
 ## How it compounds
 
 Retrieval gets smarter through documents, not tuning: jargon the code never
@@ -156,7 +165,7 @@ routing through the Hub: `/code-research`, `/deep-research`,
 `/pr-deep-review`, `/create-mycel-skill`,
 `/linear-resolve`, `/linear-organize`, `/linear-open-questions`, `/radar-stats`,
 `/arbol-chat-prepared-folder`, `/colab`, `/use-colab`, `/learn`,
-`/owner-goals`.
+`/owner-goals`, `/places-api-logs`.
 Skills carry only *when to trigger*; the process always lives here, in Mycel.
 
 <!-- sources:

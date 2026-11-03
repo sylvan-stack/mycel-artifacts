@@ -75,6 +75,7 @@ What must happen, in Mycel vocabulary — the invariant behind every invocation 
 - [`nex-colab.md`](./operations/nex-colab.md) — Nex Colab: answer what the owner wants to learn (`/colab "prompt"`) at the depth their Nex Knowledge Map says is missing, and pitch the explanations of other work by it (`(use colab)`): the rounds of an exchange, finding the topics, the depth one level up, the skipped line and the numbered ways deeper, the `attempt` line, the assessment by the tests, raising and lowering a level, the `Shown` line, writing, checking, committing and pushing the map and the log after each reply, the subagent's brief, and showup, the owner's own statement of their level (`/colab showup`), from the words and the question to the reply; and learn mode (`/learn`), a whole session of learning and no other work, one piece per reply with the ways on, until the owner leaves it. The map is data in the private corpus `~/Artifacts/colab/`.
 - [`owner-goals.md`](./operations/owner-goals.md) — record, change, replace and withdraw the owner's Owner Goals from their own words (`/owner-goals "<words>"`), answer which goals apply to something, and check that they do not contradict each other: how a statement is written, kind, scope and links, comparing with the current goals, proposals the owner confirms, the check and its findings, the commit in the local goals corpus `~/Artifacts/goals`, the reply, and reading the goals in other work.
 - [`source-refs-authoring.md`](./operations/source-refs-authoring.md) — author durable provenance and section-level Source Refs without relying on instructions from another corpus.
+- [`places-api-logs.md`](./operations/places-api-logs.md) — diagnose Reservble's side of the Syrve integration from the places-api daily logs: incident time in UTC, choosing log types, local search and correlation of request, order and reservation IDs, guest-data handling; the connection lives in its SFTP manual.
 
 ### `tools/` — technical manuals for the client-agnostic CLIs
 
@@ -105,6 +106,7 @@ One [Runbook](../arbol/GLOSSARY.md#runbook) per [Tool](../arbol/GLOSSARY.md#tool
 - [`mycel-2-evaluation.md`](./tools/mycel-2-evaluation.md) — strict versioned evaluation files, one-repository dispatch, offline recall/fault accounting and read-only snapshot comparisons; normal search/Drift execution remains pending.
 - [`mycel.md`](./tools/mycel.md) — installed Mycel 2 command/manual router and repository corpus binding.
 - [`linear.md`](./tools/linear.md) — connector capabilities and UI mechanics for Linear favorites, folders, sidebar customization, and question/decision navigation targets.
+- [`places-api-sftp.md`](./tools/places-api-sftp.md) — the places-api log server: where the connection settings live, host key verification, unattended `sftp` sign-in on this Mac, interactive and curl access.
 
 ### `system-instructions/` — prompt files the `mycel` executable reads
 Not process guides: `mycel raptor regen|build` loads both files from this folder and stops with an error when either is missing or empty.
@@ -129,10 +131,11 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 - [`radar-stats`](./skills/radar-stats/SKILL.md)
 - [`mycel-search`](./skills/mycel-search/SKILL.md) — Mycel 2 location and document lookup with source citations.
 - [`owner-goals`](./skills/owner-goals/SKILL.md) — the owner's Owner Goals managed from their own words; not Spec Requirements.
+- [`places-api-logs`](./skills/places-api-logs/SKILL.md) — Reservble places-api Syrve integration logs over read-only SFTP.
 - [`pr-deep-review`](./skills/pr-deep-review/SKILL.md)
 - [`use-colab`](./skills/use-colab/SKILL.md)
 
-The active catalog contains 17 Mycel skills for both providers. Personal and
+The active catalog contains 18 Mycel skills for both providers. Personal and
 third-party skills remain outside this catalog.
 
 ## Conventions
