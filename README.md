@@ -37,9 +37,9 @@ installation does not supply new provider proof.
 | start or continue an in-depth review of a large pull request: find its next issues, review new commits, verify the author's fixes, weigh the author's replies | [operations/pr-deep-review.md](operations/pr-deep-review.md) — state file per pull request, ranked areas, verified findings queued for the human reviewer; never posts. Named run limits: [operations/stints.md](operations/stints.md) |
 | go through the owner's unresolved comments in Linear: make the change a comment recommends, answer what it asks, or only list them | [operations/linear-resolve.md](operations/linear-resolve.md) — reads every open thread of the Linear workspace, changes the original then its Linear copy, and settles each comment with the user in the session; posts `Resolved. Resolution: …` in Linear only after the user says `Resolved` |
 | list the open questions and pending decisions that wait for the owner in Linear, so they can be answered in the session and not by commenting in Linear | [operations/linear-open-questions.md](operations/linear-open-questions.md) — collects the open rows of the specifications' Decisions tables, the issues that ask the owner to decide and the questions agents asked in comments, gives one numbered list in the session, and writes each answer the user gives there to the place its question is recorded in |
-| take the next task of a Saga, Arc or Beat ("continue working on tasks"), stop or finish one, or plan new work as a Saga | [operations/sagas.md](operations/sagas.md) — Sagas, Arcs and Beats as files in the private corpus `~/Artifacts/sagas/`, copied one way to Linear projects and issues; an Arc's territory of folders and files; a hold file per Beat in work, released automatically when its agent is gone |
-| see how far every Saga is and which agents work on them now (`/radar-stats`) | [operations/radar-stats.md](operations/radar-stats.md) — Done, In progress and Other in plan steps, and the agents holding each Saga's Beats and their context |
-| see what each working agent did since its last progress, and which of them a signal calls for a review | [operations/agent-watch.md](operations/agent-watch.md) — the check from outside, every 5 minutes with no AI: time and tokens since the last tick, commit or owner's message, files outside git, repeated drafts, the agreed signals |
+| take the next task of a Saga, Arc or Beat ("continue working on tasks"), stop or finish one, or plan new work as a Saga | [Working in Sagas](../forester/operations/sagas.md) — Sagas, Arcs and Beats in `~/Artifacts/forester/sagas/`; one shared checkout per repository, with territory bookings in `~/Artifacts/forester/holds.json`. Linear copies are set aside; automatic release remains unimplemented |
+| see how far every Saga is and which agents work on them now (`/forester-stats`) | [Forester statistics](../forester/operations/forester-stats.md) — Done, In progress and Other in plan steps, and the agents holding each Saga's Beats and their context |
+| inspect Forester hooks and recording | [Forester](../forester/README.md) — hooks record agents and activity; automated Watching remains in design |
 | make what needs the owner's attention now easy to find in Linear, then organize project navigation | [operations/linear-organize.md](operations/linear-organize.md) — publish a prominent attention entry with individual open questions, pending decisions, reviews, and next actions; then remove obsolete shortcuts |
 | record, change, replace or withdraw an Owner Goal from the owner's own words, answer which goals apply to something, or check that the goals do not contradict each other (`/owner-goals`) | [operations/owner-goals.md](operations/owner-goals.md) — the goals corpus `~/Artifacts/goals`, changed only through the `goals` command; only the owner puts a goal in force |
 | learn something at the depth the owner's Nex Knowledge Map says is missing (`/colab "prompt"`), pitch the explanations of other work at the owner's level (`(use colab)`), or study toward a goal in learn mode, a whole session of learning and no other work (`/learn`); each starts only when the owner calls it by name, and a session in learn mode stays in it until the owner leaves it | [operations/nex-colab.md](operations/nex-colab.md) — the map is data in the private corpus `~/Artifacts/colab/`, assessed, written and pushed after each reply |
@@ -68,8 +68,8 @@ one screen, a family is missing; add a family, not rows.*
   repository's checkout use `mycel search --repo mycel "…"` to search it — or
   read the files above directly (absolute paths always work; `mycel` needs no
   daemon at all). `mycel repos` lists configured repositories and their enabled
-  state. From a named work area such as Beaver Workspace pass `--repo <name>`
-  explicitly: without it, scope can cover the whole organization (MYC-1.4).
+  state. From the organization folder pass `--repo <name>` explicitly; a shared
+  repository checkout supplies its own scope (MYC-1.4).
 - **Outputs are artifacts**: resolve the repository's `artifact_root` in
   `~/.mycel/config.toml` before placing work. Organization member repositories
   use `~/Artifacts/<org-directory>/repos/<repo>/`; standalone repositories
@@ -129,11 +129,13 @@ These hold for every agent on this Mac, whatever the task and the tool.
   server access details. Private work material never goes into a public
   corpus. Recorded results of tests, probes and benchmarks stay out of git;
   test code and fixtures are tracked.
-- **Another agent may work in the same checkout.** Commit only your own files,
+- **Shared checkouts.** Book code paths with `forester book` before editing;
+  [the Forester guide](../forester/operations/sagas.md) owns the live procedure
+  and implementation limits. Commit only your own explicitly named files,
   never revert or tidy a change you did not make, and report drift you cannot
   explain.
 - **Mycel 2 is worked as Beats of the Mycel Specs Implementation Saga**
-  (`~/Artifacts/sagas/mycel-2-implementation/`). Change its code in
+  (`~/Artifacts/forester/sagas/mycel/mycel-2-implementation/`). Change its code in
   `~/repos/sylvan-stack/mycel`, its specifications in `specs/` and its guides
   only within a Beat you hold. Write no run results into `research/`.
 - **Version 1 is not run and not a source.** Never run Mycel 1 or read
@@ -162,13 +164,13 @@ These hold for every agent on this Mac, whatever the task and the tool.
   [--log <file> | --progress-cmd <command>] -- <command>`, or attach one already
   running with `bgjob watch --pid <pid> --name "…"`. The menu bar then shows it
   under the chat that started it, with elapsed time and progress, and macOS
-  notifies when it ends; see [background jobs](operations/background-jobs.md).
+  notifies when it ends; see [background jobs](../forester/operations/background-jobs.md).
 - **Sign-in pages** open in the built-in browser pane. The owner types the
   credentials and approves; never enter them.
 - **Linear.** Every comment an agent posts begins with `**Agent:**`. The
   workspace, how it is reached and what the connector cannot do are in the
   [Linear runbook](tools/linear.md). On task completion, preserve its ID in
-  `~/Artifacts/sagas/completed-linear-tasks/` (weekly files, at most 100 tasks
+  `~/Artifacts/forester/sagas/completed-linear-tasks/` (weekly files, at most 100 tasks
   each), then delete the issue instead
   of setting it to Done; follow [Complete Linear Tasks](operations/linear-completion.md).
 

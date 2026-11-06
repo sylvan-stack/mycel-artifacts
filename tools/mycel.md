@@ -27,7 +27,7 @@ gives explicit `code_root`/`artifact_root` overrides, organization defaults,
 
 From a prepared folder pass `--repo <name>` explicitly; without it scope can
 cover the organization's enabled members. On this Mac the intended indexed
-checkout is `~/repos/sylvan-stack/readonly/<repo>`, plus its configured corpus.
+checkout is `~/repos/sylvan-stack/<repo>`, plus its configured corpus.
 Settings preparation belongs to SYL-241; this guide changes no settings.
 
 ## Choose the current manual

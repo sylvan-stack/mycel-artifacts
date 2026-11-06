@@ -83,7 +83,7 @@ not yet filled the index, so current research uses grep and file reads.
   written to the place its question is recorded in.
 
 - **[Working in Sagas](sagas.md)** — work is grouped as Sagas, Arcs and
-  Beats, kept as files in the private corpus `~/Artifacts/sagas/` and copied
+  Beats, kept as files in the private corpus `~/Artifacts/forester/sagas/` and copied
   one way to Linear, where unfinished Beats keep their status and comments;
   completed IDs and hand-over survive in the private files. A parent
   gives the order of its children, and a child reports its progress to its
@@ -92,7 +92,7 @@ not yet filled the index, so current research uses grep and file reads.
   changing the same files; a hold is released automatically when its agent's
   program or thread is gone. What a later Beat must know, a Beat leaves in its
   own file, its hand-over, never where only one tool or one group of sessions
-  sees it. [Radar statistics](radar-stats.md) show how far each Saga is in
+  sees it. [Radar statistics](../../forester/operations/forester-stats.md) show how far each Saga is in
   plan steps and which agents work on it now. [The check from
   outside](agent-watch.md) measures every 5 minutes what each working agent
   did since its last progress and raises the signals that call for a review.
@@ -163,8 +163,8 @@ Distinct task shapes have thin skills
 routing through the Hub: `/code-research`, `/deep-research`,
 `/mycel-search`, `/corpus-admin`, `/authored-work-integration`,
 `/pr-deep-review`, `/create-mycel-skill`,
-`/linear-resolve`, `/linear-organize`, `/linear-open-questions`, `/radar-stats`,
-`/arbol-chat-prepared-folder`, `/colab`, `/use-colab`, `/learn`,
+`/linear-resolve`, `/linear-organize`, `/linear-open-questions`, `/forester-stats`,
+`/arbol-chat-booking`, `/colab`, `/use-colab`, `/learn`,
 `/owner-goals`, `/places-api-logs`.
 Skills carry only *when to trigger*; the process always lives here, in Mycel.
 
