@@ -40,6 +40,7 @@ Settings preparation belongs to SYL-241; this guide changes no settings.
   that contains the commands and a format 6 store.
 - [List the pieces of one file with `mycel pieces`](mycel-2.md#listing-file-pieces).
   Use a Build that contains the command.
+- [Read saved Justifications during explicit ingest](mycel-2-origins.md#ingest-saved-justifications).
 - [Complete scoped ingest](mycel-2-reconciliation.md#complete-public-ingest),
   [embedding and dry-run plans](mycel-2-embedding.md), and
   [summary status, build, regeneration and removal](mycel-2-summaries.md).

@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-17
-status: implemented
+status: accepted
 ---
 # Mycel · 17 Justification
 
@@ -85,6 +85,26 @@ In one transaction the command asserts the dependency with exact pins, records t
 
 The single-pair command records `method: stated`, `confidenceScore: 1` and `confidence: asserted`, naming the identity from `--by` or the current operating-system user. These are implementation choices for a direct assertion, not adopted thresholds for inferred links. Recovery and audit apply the band boundaries above. `review` is absent until a review exists. Repeated statements update the statement's metadata without inventing a review. The owner delegated MYC-D51 on 21 October 2026. Chosen: `mycel justify --file <pairs.jsonl>`, with one JSON object per nonempty line containing exactly `chunk` and `origin` text fields. All pairs are validated before writes, and the batch shares one transaction and final input guards: failure of any pair rolls back the whole batch. Duplicate exact pairs are refused. The reply is `{ justifications: JustifyReply[] }` in input order. Pairs naming one dependant share one final verification of its complete policy after all assertions have been stated. A class/file family remains an Origin selection; the dependant in each pair remains one chunk.
 
+### Reading Justifications during ingest
+
+On the final step of an explicit ingest, read per-source Justifications from
+`@artifact/justifications/<code path>.md` of the publishing repository's disk
+capture. An `##` piece heading names an exact Mycel chunk in the corresponding
+`@code` file. A ` · lines N to M` suffix also states Origins for that piece.
+The last nonblank line outside code or HTML blocks declares the Origins as
+`Origins: <references> · Intention <id> · <date>`. References are comma
+separated canonical Source Addresses, Entity URIs or exact human IDs of
+indexed requirements, decisions or active Owner Goals. A human ID must resolve
+uniquely. A skip, removal or ordinary prose section declares no link.
+
+Reconcile the selected checkout's file-owned statements in the same
+transaction as ingest. Each resolved declaration records a `stated` Origin
+Link with its Intention and date. It creates no verification or derivation
+policy. A file-owned link disappears when its declaration disappears or no
+longer resolves. Independently stated or proven links take precedence and are
+left intact. Malformed or unresolved declarations are reported in the ingest
+reply. The operation uses the guarded catalog and creates no provider call.
+
 ### Reporting Origin Coverage
 
 `mycel origins [<chunk>]` lists current chunks and their Origin Links. `--missing` retains chunks with no links; repeated `--path` filters are component-bounded paths under the selected root. `--changes` compares only the calling clone's disk versions against the configured read-only clone's retained local `main`, using the Index Store query of MYC-1.39. `--unresting` additionally lists requirements and decisions with no dependant. Explicit repository scope and current-folder scope follow MYC-1.
@@ -161,6 +181,7 @@ The format-2 manifest/evidence-owner substrate stores findings and requests with
 | MYC-17.20 <!-- e0e35912-d037-48f3-92d0-e735282b95b8 --> | write one inferred or recovered Origin Link per complete governs judgement, which without a configured reviewer needs a governs probability of at least the origin floor, with its score and a band capped at inferred, no verification, guarded exact inputs and retained evidence; write none for related or unrelated; allow isolated smarter review to raise/lower the score and band or withdraw a related/unrelated model proposal, exposing results through origins | New | store |
 | MYC-17.21 <!-- 60eeb224-1e06-4601-beb1-f772e5c7b509 --> | run recovery and the model audit over a repository or path as a series of bounded steps that keep every judgement of no effect under its exact inputs and judgement policy beyond the request retention, skip judged pairs and fully judged sections until a text, a candidate or the policy changes, reuse them when only a floor changes, and report what remains and whether the series is complete | New | store |
 | MYC-17.22 <!-- 8fd64520-28f7-4196-8022-a0ab644238c2 --> | without a configured reviewer, decide each audit question by the probability of its negative label against that question's floor, opening no finding and lowering no score below it | New | store |
+| MYC-17.23 <!-- 1198f819-c154-4609-b728-4b9d4d1a8f71 --> | reconcile file-owned stated Origin Links from explicit per-source Justifications during ingest, report malformed and unresolved declarations, and preserve independent statements and verifications | New | store |
 
 ## Interface
 
