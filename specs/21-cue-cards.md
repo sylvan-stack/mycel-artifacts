@@ -85,8 +85,8 @@ that fails leaves the previous catalog. A declaration with an unknown type or
 field, no target and no instructions, or a target that does not resolve is a
 fault reported with its file and line, and the other cards compile.
 
-The catalog is compiled on demand, and by a scheduled job whose timing is
-open (MYC-D87). A reader that finds a source's size or
+The catalog is compiled on demand, and by one Mycel job every 15 minutes and
+whenever a file it watches changes (MYC-D87). A reader that finds a source's size or
 time changed since the compile knows that source's cards are stale without
 parsing anything (FOR-2 says what Forester then does).
 
@@ -114,7 +114,7 @@ Each copy is written atomically; the file it replaces is backed up once.
 Switching Claude Code this way needs a one-time change of the owner's
 `~/.claude/CLAUDE.md`: its import `@~/Artifacts/mycel/README.md` becomes
 `@~/.mycel/hub/active.md`. Taking over the sync, the three copies and this
-change are the agent's proposal (MYC-D87).
+change were decided with MYC-D87.
 Running sessions keep what they loaded. The two switches, this one and
 Forester's injection switch (FOR-2), give the four combinations the owner
 wants for testing.
@@ -127,13 +127,13 @@ wants for testing.
 | MYC-21.2 <!-- 29db0032-ad3e-489b-b867-f48c208f5bf9 --> | accept the type `literal` only, and report a declaration with an unknown type or field, with neither target nor instructions, or with an unresolved target as a fault with its file and line, compiling the other cards | New | unit |
 | MYC-21.3 <!-- ff93ca15-95c3-4798-b6c3-102e897b0316 --> | take a card's target from the section that holds its declaration unless it names a `cue_target`, and record a card that has both `instructions` and a target as adding the instructions first | New | unit |
 | MYC-21.4 <!-- a4c158fc-a1bb-4069-af23-32e77be54727 --> | derive one literal card per selected heading from a file-level `section_headings` declaration, splitting `A / B` headings into terms of one target and honouring `literal: exclude` and local `match` lists | New | unit |
-| MYC-21.5 <!-- 23a0e5b4-2571-453f-8c3d-93b2caa0b97a --> | store with each card its target's exact text and a regular expression that applies the matching rule of MYC-D85 (open), and with each source its path, size, modification time and SHA-256 | New | unit |
+| MYC-21.5 <!-- 23a0e5b4-2571-453f-8c3d-93b2caa0b97a --> | store with each card its target's exact text and a regular expression that applies the matching rule of MYC-D85, and with each source its path, size, modification time and SHA-256 | New | unit |
 | MYC-21.6 <!-- a246adc4-e8cc-4a43-b633-d07e4d82442e --> | write the catalog atomically and keep the previous catalog when a compile fails | New | unit |
 | MYC-21.7 <!-- deb8083d-28a6-42e1-9369-878edea91c96 --> | compile the catalog on demand | New | unit |
-| MYC-21.8 <!-- 905279c1-5db5-44bc-a543-6770b9b0ba96 --> | report for a text, with the catalog's expressions, which cards it fires, under the rule of MYC-D85 (open) | New | unit |
+| MYC-21.8 <!-- 905279c1-5db5-44bc-a543-6770b9b0ba96 --> | report for a text, with the catalog's expressions, which cards it fires, under the rule of MYC-D85 | New | unit |
 | MYC-21.9 <!-- 5dd66fb7-2367-4751-88d2-5fb6dd86cb15 --> | switch the Instructions Hub on or off for new sessions and report its state, writing the three copies atomically from the Hub or empty, with one backup of each file replaced | New | unit |
 | MYC-21.10 <!-- 89b150ae-6625-4865-a2c8-20482f405c7b --> | take over the existing Hub sync job, so that one Mycel job keeps the copies current when the Hub is on | New | review |
-| MYC-21.11 <!-- 68a66d4b-60f8-4860-aa03-e7e737efc0e8 --> | compile the catalog by a scheduled job, at the timing MYC-D87 settles | New | review |
+| MYC-21.11 <!-- 68a66d4b-60f8-4860-aa03-e7e737efc0e8 --> | compile the catalog by one scheduled job every 15 minutes and whenever a file it watches changes | New | review |
 
 ## Interface
 
@@ -170,6 +170,6 @@ in order of first appearance in the text, each with its terms and target.
 | MYC-D82 <!-- 19e2cf83-6ce3-4025-aeb0-f6f3c91a2da9 --> | Does precise injection replace the Instructions Hub? | Decided by the owner on 9 November 2026: "I would like to start deprecating Instruction Hub in favor of more precise instruction injection. I don't like the approach of providing too many instruction and rely on agent reading them carefully." Mycel holds the cards and the catalog; Forester delivers. Claude Code, Codex and Kimi Code are all required ("Kimi Code is required as much as Claude Code and Codex"). |
 | MYC-D83 <!-- e9cd23ea-86c5-45e7-b2d0-19c9563ee7bc --> | What is a Cue Card? | Decided by the owner on 9 November 2026: "Let's call them Cue Cards and it will have fields `type`, `activation_rule` and `cue_target`", with no separate term "Cue Type"; `match` replaces `activation_rule` for literal cards; an optional `instructions` field is added verbatim, and a card may have both a target and instructions. Fields of later types are decided with those types; the first version has `literal` only. |
 | MYC-D84 <!-- 6a234ad1-3ee6-4efd-99ac-94720b3fb3e8 --> | What stays loaded in every session? | Decided by the owner on 9 November 2026: "as little … as possible. If possible to use none it would be ideal", and "for testing purposes I would like to be able turn on and off Instructions Hub when needed": nothing static once later card types exist, and `mycel hub on | off` meanwhile. |
-| MYC-D85 <!-- 401f2c02-3d6b-4c9e-a77a-8f8de7569519 --> | How does a literal term match? | Open. Proposed: case-insensitive, as whole words, also with a trailing `s` or `es`, so that "sagas" fires "Saga"; matches inside a fenced code block of the message count too. |
-| MYC-D87 <!-- 88798b31-d4f2-461b-a4b7-5a52af847c7e --> | When is the catalog compiled, and who keeps the Hub copies? | Open. Proposed: by one Mycel job, run every 15 minutes and when a file it watches changes, that both compiles the catalog and writes the three Hub copies, replacing `~/.config/agent-hub/sync-codex-hub.py` and its launchd job `local.agent-hub.codex-sync` (kept as a backup); `~/.claude/CLAUDE.md` imports `~/.mycel/hub/active.md` instead of the Hub. |
+| MYC-D85 <!-- 401f2c02-3d6b-4c9e-a77a-8f8de7569519 --> | How does a literal term match? | Decided by the owner on 9 November 2026 ("Agreed on everything except shadow period"), accepting the agent's proposal: case-insensitive, as whole words, also with a trailing `s` or `es`, so that "sagas" fires "Saga"; matches inside a fenced code block of the message count too. |
+| MYC-D87 <!-- 88798b31-d4f2-461b-a4b7-5a52af847c7e --> | When is the catalog compiled, and who keeps the Hub copies? | Decided by the owner on 9 November 2026 ("Agreed on everything except shadow period"), accepting the agent's proposal: by one Mycel job, run every 15 minutes and when a file it watches changes, that both compiles the catalog and writes the three Hub copies, replacing `~/.config/agent-hub/sync-codex-hub.py` and its launchd job `local.agent-hub.codex-sync` (kept as a backup); `~/.claude/CLAUDE.md` imports `~/.mycel/hub/active.md` instead of the Hub. |
 | MYC-D86 <!-- 2d402f73-7adb-493f-9aa6-0788991af584 --> | Where are cards declared, and what becomes of Cue Channel and Cue Command? | Decided by the owner on 9 November 2026, agreeing to the agent's proposal: beside their targets in `mycel:cues` comments, compiled into one catalog; Cue Channel is replaced by the card's `type` and Cue Command by the one effect a card has, adding its text. |

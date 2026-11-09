@@ -53,8 +53,6 @@ Checked 9 October 2026 against the specification originals and their Linear copi
 
 ### Open questions and pending decisions
 
-Open in MYC-21 since 9 November 2026: [MYC-D85](21-cue-cards.md#decisions), how a literal term matches, and [MYC-D87](21-cue-cards.md#decisions), when the catalog is compiled and who keeps the Hub copies; each has a proposed answer.
-
 The owner answered the final MYC-D28/MYC-D29 proposals on 8 October 2026; all 17 specifications MYC-0 to MYC-16 are accepted for implementation. MYC-17, opened on 19 October 2026 on the owner's decisions MYC-D45 to MYC-D49 and MYC-D63, was accepted on 26 October 2026 under the owner's delegation; the bulk form of `justify` (MYC-D51) was settled on 21 October 2026 by SYL-260. [MYC-D64](01-corpora-and-ingest.md#decisions), what a pass does with a file that changes while it runs, was proposed by SYL-232 on 20 October 2026 and waits for the owner: the pass publishes the capture it read and names what changed. On 19 October 2026 the owner accepted MYC-D43 canonical-confidence routing and MYC-D44 production Jev-only unresolved comparison. Their changed pipeline requires fresh qualification; the earlier failed v5 record remains failed.
 
 Decided on 15 October 2026 by the owner: [MYC-D39](02-provenance-and-freshness.md#decisions), how Mycel answers "which document describes this chunk?" and shows code that no document describes. `mycel read` lists the document sections joined to a chunk, a search marks code that has one, and `mycel undocumented` lists the code of a repository that has none. Its requirements MYC-2.27, MYC-4.29 and MYC-11.12 are accepted; SYL-167 implements them.
@@ -135,6 +133,8 @@ MYC-D1 records the owner’s Python decision; MYC-15 makes its independent distr
 | MYC-D83 · What is a Cue Card? | Decided 9 November 2026 by the owner: `type`, `match` for literal cards, `cue_target`, an optional verbatim `instructions`; literal cards only at first | [MYC-D83](21-cue-cards.md#decisions) |
 | MYC-D84 · What stays loaded in every session? | Decided 9 November 2026 by the owner: nothing static once later card types exist; `mycel hub on \| off` meanwhile | [MYC-D84](21-cue-cards.md#decisions) |
 | MYC-D86 · Where are cards declared? | Decided 9 November 2026 by the owner: beside their targets, compiled into one catalog; Cue Channel and Cue Command replaced | [MYC-D86](21-cue-cards.md#decisions) |
+| MYC-D85 · How does a literal term match? | Decided 9 November 2026 by the owner: case-insensitive, whole words, with a trailing `s` or `es`; matches in code blocks count | [MYC-D85](21-cue-cards.md#decisions) |
+| MYC-D87 · When is the catalog compiled, and who keeps the Hub copies? | Decided 9 November 2026 by the owner: one Mycel job, every 15 minutes and on change, compiles the catalog and writes the three Hub copies, replacing the agent-hub sync | [MYC-D87](21-cue-cards.md#decisions) |
 
 ## Conventions
 
