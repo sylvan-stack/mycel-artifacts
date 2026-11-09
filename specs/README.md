@@ -123,6 +123,7 @@ MYC-D1 records the owner’s Python decision; MYC-15 makes its independent distr
 | MYC-D78 · How is a Beat planned? | Decided 9 November 2026 by the owner, accepting the agent's seven proposals: specification gaps stop planning, code steps name files and Origins, a fresh-context reviewer, no owner approval, `mycel plan check`, the `/plan-beat` skill | [MYC-D78](20-feature-course.md#decisions) |
 | MYC-D79 · How are Sagas and Arcs planned? | Decided 9 November 2026 by the owner: extend an existing Saga or Arc before creating one; ready units run in parallel and a dependency keeps a unit in the status Depends On | [MYC-D79](20-feature-course.md#decisions) |
 | MYC-D80 · Which statuses do Sagas and Arcs have, and when is an Arc Done? | Decided 9 November 2026 by the owner: three Ready statuses, and an Arc is Done only after a review by a fresh agent | [MYC-D80](20-feature-course.md#decisions) |
+| MYC-D81 · How is a requirement met by a guide or skill verified? | Decided 9 November 2026 by the owner: the kind of check `review`, a reading of the guide or skill against the requirement by the owner or a reviewer with fresh context | [MYC-D81](20-feature-course.md#decisions) |
 
 ## Conventions
 
@@ -150,6 +151,7 @@ These conventions belong to Mycel. Their shape is aligned with the historical [D
 | store | Automated, against an index store made for the test and discarded after it. No network |
 | eval | The evaluation set of MYC-4.25: queries with the chunks each should find. It needs vectors, so it is run on demand |
 | live | A check that calls a model service and spends quota, including embedding, Jev or smarter-model review. Run on demand, never in the automatic suite |
+| review | The owner or a reviewer with fresh context reads a guide or skill against the requirement; the Named checks section names who read it and when (MYC-D81) |
 
 **Observed.** *Observed in version 1* means read in the version 1 source; the inventories say for each statement whether it was also run. *Observed on* a date means seen on the installed program that day, and is recorded in the observations file.
 
