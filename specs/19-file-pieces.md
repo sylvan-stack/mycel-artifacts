@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-19
-status: review
+status: accepted
 ---
 # Mycel · 19 File pieces
 
@@ -65,4 +65,8 @@ can use Git's rename information when it wants to compare those paths.
 
 | ID | Question | Outcome |
 |---|---|---|
-| MYC-D76 <!-- 0b02803d-1cbb-4cc4-9cc2-ef8c0a6f35cd --> | What should the file listing return? | Proposed for review. Return both versions in one JSON response. Include a chunk digest so a caller can detect changed content at the same name and line range. |
+| MYC-D76 <!-- 0b02803d-1cbb-4cc4-9cc2-ef8c0a6f35cd --> | What should the file listing return? | Accepted by the owner with MYC-19 on 9 November 2026. Return both versions in one JSON response. Include a chunk digest so a caller can detect changed content at the same name and line range. |
+
+## Named checks
+
+MYC-19.1 through MYC-19.3 await qualification in a separate testing task.

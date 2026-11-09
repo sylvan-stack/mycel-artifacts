@@ -103,6 +103,7 @@ Proposed. The rules below hold for every command. The commands themselves are sp
 | `mycel api-key voyage`, `mycel api-key jev` | Prompt without echo and store the API key in its named login-Keychain item | MYC-5 |
 | `mycel init` | Creates the index store's structure, or brings it to the format of the Build that runs | here, MYC-6 |
 | `mycel ids next`, `mycel ids list` | Issue a series number with its purpose or list committed issues | [MYC-18](18-identifiers.md) |
+| `mycel pieces` | Lists the chunks of one working file and its version at `HEAD` | [MYC-19](19-file-pieces.md) |
 | `mycel info` | Says which Build runs and what it found | here, MYC-5 |
 
 | Rule | Detail |

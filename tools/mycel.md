@@ -38,6 +38,8 @@ Settings preparation belongs to SYL-241; this guide changes no settings.
 - [Issue a number with `mycel ids next` and read the issue history with
   `mycel ids list`](mycel-2.md#issuing-and-listing-identifiers). Use a Build
   that contains the commands and a format 6 store.
+- [List the pieces of one file with `mycel pieces`](mycel-2.md#listing-file-pieces).
+  Use a Build that contains the command.
 - [Complete scoped ingest](mycel-2-reconciliation.md#complete-public-ingest),
   [embedding and dry-run plans](mycel-2-embedding.md), and
   [summary status, build, regeneration and removal](mycel-2-summaries.md).

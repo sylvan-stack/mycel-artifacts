@@ -28,7 +28,7 @@ What Mycel 2 does, written from what Mycel 1 did. [Mycel](../../arbol/GLOSSARY.m
 | [MYC-16](16-source-addresses-and-evidence.md) | Source addresses and evidence | implemented |
 | [MYC-17](17-justification.md) | Justification | implemented |
 | [MYC-18](18-identifiers.md) | Issued identifiers | accepted, held back by MYC-18.1 through MYC-18.4 |
-| [MYC-19](19-file-pieces.md) | File pieces | review |
+| [MYC-19](19-file-pieces.md) | File pieces | accepted, held back by MYC-19.1 through MYC-19.3 |
 
 MYC-0 sets the boundary. MYC-1 to MYC-4 specify ingest, provenance, embedding and retrieval; MYC-5 and MYC-6 specify settings and storage; MYC-7 to MYC-12 specify relations, verification, summaries, overviews, grep, reads and activity; MYC-13 specifies checks and evaluation. MYC-14 completes Jev classification, five-minute debounce, smarter review and the Drift lifecycle. MYC-15 specifies independent Python distribution and version 1 removal. MYC-16 specifies portable source addresses, exact baseline evidence and retention. MYC-17 specifies justification: requirements and decisions as entities with Entity URIs, the discussion of a decision, and Origin Links; it was opened on 19 October 2026 on the owner's decisions MYC-D45 to MYC-D49 and MYC-D63. On 26 October 2026 the owner delegated its acceptance ("I want you to take decision whether accept it. If you don't see any issues with that then I'm fine too"); it was accepted that day after its out-of-date sentences were corrected. The 17 chapters MYC-0 to MYC-16 are accepted for implementation on 8 October 2026, after the owner answered the final Drift decisions and agreed with the remaining proposals. Acceptance records the specification contract; runtime checks and provider qualification remain implementation/release work. On 24 October 2026 (SYL-243) 14 of them became `implemented`; MYC-4, MYC-13 and MYC-14 wait for the on-demand eval and live reports of MYC-4.25, MYC-13.9, MYC-13.19, MYC-13.20 and MYC-14.22. On 29 October 2026 (SYL-289) the named checks were written again from Build 7's complete installed gate (source `a80c617`, 1,828 checks passed), the last complete gate. Since 29 October 2026 a Build runs the top tier only (MYC-D73, SYL-329), so the named checks keep coming from Build 7's complete gate until the owner asks for a complete run. MYC-17 became `implemented`; MYC-1 went back to `accepted`, held back by MYC-1.40, added on 26 October by SYL-286, whose tests have no Origin Link yet. Every chapter is required scope; task volume is not a reason to defer or drop a function (MYC-D4, MYC-D13).
 
@@ -42,9 +42,6 @@ Evidence the specifications rest on is in `research/`:
 Checked 9 October 2026 against the specification originals and their Linear copies. Each linked specification records the questions and proposed defaults in its Decisions section.
 
 ### Open questions and pending decisions
-
-[MYC-19](19-file-pieces.md) awaits owner acceptance. The proposed command and
-reply fields are recorded in [MYC-D76](19-file-pieces.md#decisions).
 
 The owner answered the final MYC-D28/MYC-D29 proposals on 8 October 2026; all 17 specifications MYC-0 to MYC-16 are accepted for implementation. MYC-17, opened on 19 October 2026 on the owner's decisions MYC-D45 to MYC-D49 and MYC-D63, was accepted on 26 October 2026 under the owner's delegation; the bulk form of `justify` (MYC-D51) was settled on 21 October 2026 by SYL-260. [MYC-D64](01-corpora-and-ingest.md#decisions), what a pass does with a file that changes while it runs, was proposed by SYL-232 on 20 October 2026 and waits for the owner: the pass publishes the capture it read and names what changed. On 19 October 2026 the owner accepted MYC-D43 canonical-confidence routing and MYC-D44 production Jev-only unresolved comparison. Their changed pipeline requires fresh qualification; the earlier failed v5 record remains failed.
 
@@ -116,6 +113,7 @@ MYC-D1 records the owner’s Python decision; MYC-15 makes its independent distr
 | MYC-D73 · Which tests does a Build run? | Decided 29 October 2026 by the owner: a Build runs every top-tier `unit` and `store` check and no other test; the mid tier runs only when the owner asks for it (SYL-329) | [MYC-D73](13-checks-and-evaluation.md#decisions) |
 | MYC-D74 · Who issues new numbers? | Decided 9 November 2026 by the owner. Mycel issues the new numbers. The `SYL` series continues at 341. | [MYC-D74](18-identifiers.md#decisions) |
 | MYC-D75 · What do the commands return? | Accepted 9 November 2026 with MYC-18. `next` returns an ID in JSON. `list` returns the issued IDs and their purposes. | [MYC-D75](18-identifiers.md#decisions) |
+| MYC-D76 · What should the file listing return? | Accepted 9 November 2026 with MYC-19. One JSON reply contains both versions and the digest of each piece. | [MYC-D76](19-file-pieces.md#decisions) |
 
 ## Conventions
 
