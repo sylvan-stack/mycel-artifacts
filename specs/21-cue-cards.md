@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-21
-status: draft
+status: accepted
 ---
 # Mycel · 21 Cue Cards
 
