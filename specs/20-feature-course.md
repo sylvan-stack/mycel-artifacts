@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-20
-status: draft
+status: accepted
 ---
 # Mycel · 20 The Feature Course
 
