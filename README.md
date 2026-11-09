@@ -155,8 +155,8 @@ These hold for every agent on this Mac, whatever the task and the tool.
   `env -i HOME="$HOME" USER="$USER" LOGNAME="$LOGNAME" TERM=xterm-256color /bin/zsh -l -i -c '<command>'`.
   The variables a session inherits from its app can make the CLI overwrite its
   own login. Say beforehand when a command writes a CLI's own state. Plain
-  `claude` uses `~/.claude`; the alias `claude-zai` runs it on other models
-  through `~/.claude/settings-zai.json`; never recreate `~/.claude-anthropic`.
+  `claude` uses `~/.claude`; never recreate `~/.claude-anthropic`. The z.ai
+  subscription is used through Pi.
 - **Long work is split and recorded.** Split work that may run more than 5
   minutes into the smallest steps its tool allows (one repository, one path,
   one batch) and run them one after another. Start each step that may still
