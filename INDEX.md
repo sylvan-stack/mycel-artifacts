@@ -64,6 +64,7 @@ What must happen, in Mycel vocabulary — the invariant behind every invocation 
 - [`pr-deep-review-reference.md`](./operations/pr-deep-review-reference.md) — its lookup companion: `state.json` schema, area and finding statuses, templates for the reviewer's page, finding card and run report, stop-criteria measures and kinds, reading token spend, commands for reading a GitHub pull request.
 - [`stints.md`](./operations/stints.md) — named sets of stop criteria for a run: the defined stints, how a run resolves its stint and limits, how to add or change one.
 - [Working in Sagas](../forester/operations/sagas.md) — shared checkouts, Forester territory bookings, local plans, progress and hand-over.
+- [`implementation-planning.md`](./operations/implementation-planning.md) — write, check and change a Beat's implementation plan: the standard of a step, the inputs, the specification-gap stop, the territory, the deterministic check and the fresh-context review (MYC-20).
 - [`workspace-ledger.md`](./operations/workspace-ledger.md) — territory bookings in a Workspace for a Saga or ad-hoc work, shared across Chat Sessions and subagents; `.ledger/bookings.json`, one event file per booking and `history.jsonl` in every Workspace; precise net results inside each territory from Git-backed boundary snapshots, supplementary tool/watcher history, private configuration and the single switch-over from hold files; links to the standalone `workspace-ledger` specifications. Decided 30 October 2026, not yet implemented.
 - [`forester-stats.md`](../forester/operations/forester-stats.md) — show unfinished Sagas or one selected by name or folder, each with its unfinished Arcs: its share of work Done, In progress and Other in plan steps, the agents working on it now and their context; open with names of Sagas finished within three days, omit older completions, and end with recently worked-on Sagas and Arcs under unfinished Sagas; how each number is counted, and what is not counted yet.
 - [`background-jobs.md`](./operations/background-jobs.md) — long work split into the smallest steps its tool allows, each step that may run more than 5 minutes recorded with `bgjob`, so the menu bar shows it under the chat that started it with elapsed time and progress, and macOS notifies when it ends; the states, attaching to a running process, and what to do when a job is lost.
@@ -124,10 +125,11 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 - [`mycel-search`](./skills/mycel-search/SKILL.md) — Mycel 2 location and document lookup with source citations.
 - [`owner-goals`](./skills/owner-goals/SKILL.md) — the owner's Owner Goals managed from their own words; not Spec Requirements.
 - [`places-api-logs`](./skills/places-api-logs/SKILL.md) — Reservble places-api Syrve integration logs over read-only SFTP.
+- [`plan-beat`](./skills/plan-beat/SKILL.md) — one Beat's implementation plan; not Saga Planning.
 - [`pr-deep-review`](./skills/pr-deep-review/SKILL.md)
 - [`use-colab`](./skills/use-colab/SKILL.md)
 
-The active catalog contains 18 Mycel skills for both providers. Personal and
+The active catalog contains 19 Mycel skills for both providers. Personal and
 third-party skills remain outside this catalog.
 
 ## Conventions

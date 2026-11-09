@@ -70,6 +70,15 @@ not yet filled the index, so current research uses grep and file reads.
   outside](agent-watch.md) measures every 5 minutes what each working agent
   did since its last progress and raises the signals that call for a review.
 
+## Planning a Beat
+
+- **[Planning a Beat](implementation-planning.md)** — before a Beat is
+  implemented it gets a plan: logical, atomic steps of any kind, each code
+  step naming its files and the requirements it serves. A gap in the
+  specification stops planning and goes to the owner; a reviewer with fresh
+  context accepts the plan, not the owner. `/plan-beat` starts it, and
+  Forester sends an agent there when a Beat has no plan.
+
 ## Learning at the owner's depth
 
 - **[Nex Colab](nex-colab.md)** — the owner asks to learn something with
@@ -138,7 +147,7 @@ routing through the Hub: `/code-research`, `/deep-research`,
 `/pr-deep-review`, `/create-mycel-skill`,
 `/forester-stats`,
 `/arbol-chat-booking`, `/colab`, `/use-colab`, `/learn`,
-`/owner-goals`, `/places-api-logs`.
+`/owner-goals`, `/places-api-logs`, `/plan-beat`.
 Skills carry only *when to trigger*; the process always lives here, in Mycel.
 
 <!-- sources:
