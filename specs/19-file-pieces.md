@@ -69,4 +69,5 @@ can use Git's rename information when it wants to compare those paths.
 
 ## Named checks
 
-MYC-19.1 through MYC-19.3 await qualification in a separate testing task.
+MYC-19.1 through MYC-19.3 await named checks under the complete qualification
+policy.
