@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-19
-status: accepted
+status: implemented
 ---
 # Mycel · 19 File pieces
 
@@ -73,5 +73,11 @@ can use Git's rename information when it wants to compare those paths.
 
 ## Named checks
 
-MYC-19.1 through MYC-19.4 await named checks under the complete qualification
-policy.
+Written by `scripts/name_checks.py` from the `proven` and `stated` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
+
+| Requirement | Kind | Checks |
+|---|---|---|
+| `MYC-19.1` | unit | `test_top_pieces.FilePiecesTests.test_working_and_head_match_ingest_across_rename_and_body_edit` |
+| `MYC-19.2` | unit | `test_top_pieces.FilePiecesTests.test_absent_and_unsafe_versions_are_distinct_without_mutation` |
+| `MYC-19.3` | unit | `test_top_pieces.FilePiecesTests.test_absent_and_unsafe_versions_are_distinct_without_mutation` |
+| `MYC-19.4` | unit | `test_top_pieces.FilePiecesTests.test_working_and_head_match_ingest_across_rename_and_body_edit` |

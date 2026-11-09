@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-18
-status: accepted
+status: implemented
 ---
 # Mycel · 18 Issued identifiers
 
@@ -81,5 +81,11 @@ are outside the allocation list and remain reserved by the series floor.
 
 ## Named checks
 
-MYC-18.1 through MYC-18.4 await named checks under the complete qualification
-policy.
+Written by `scripts/name_checks.py` from the `proven` and `stated` Origin Links of the tests and a complete check report in which they passed. Each requirement keeps its kind in its Verified by cell and names here up to three of its passing checks: those of its own kind first, then those that rest on the fewest requirements. `mycel origins --repo mycel --path tests` lists every link. Do not edit this section by hand: run the script again.
+
+| Requirement | Kind | Checks |
+|---|---|---|
+| `MYC-18.1` | store | `test_top_ids.IdentifierStoreTests.test_allocation_refuses_contention_and_lists_only_committed_issues` |
+| `MYC-18.2` | store | `test_top_ids.IdentifierStoreTests.test_allocation_refuses_contention_and_lists_only_committed_issues` |
+| `MYC-18.3` | store | `test_top_ids.IdentifierStoreTests.test_allocation_refuses_contention_and_lists_only_committed_issues` |
+| `MYC-18.4` | store | `test_top_ids.IdentifierStoreTests.test_init_migrates_format_five_without_tying_issues_to_repository_lifetime` |
