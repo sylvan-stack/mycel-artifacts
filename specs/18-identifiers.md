@@ -81,4 +81,5 @@ are outside the allocation list and remain reserved by the series floor.
 
 ## Named checks
 
-MYC-18.1 through MYC-18.4 await qualification in a separate testing task.
+MYC-18.1 through MYC-18.4 await named checks under the complete qualification
+policy.
