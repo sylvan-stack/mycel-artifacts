@@ -388,46 +388,6 @@ No links to local artifacts, which the author cannot open.
    read, and point to `README.md`. The page is the deliverable; the chat
    message is only a pointer to it.
 
-## Readable artifacts in Linear
-
-For a review tracked in Linear, keep full readable copies of its authored
-artifacts in the appropriate canonical home after closing a run and after
-material artifact edits. The agent prepares; the reviewer posts.
-
-- Choose the parent by scope: issue for its brief, findings, reproducers,
-  candidate-specific studies and run reports; repository project for reusable
-  architecture, contracts, build guidance and knowledge; team for conventions
-  shared across repositories. Search for existing projects and documents first.
-  A citation to one PR does not make a general artifact issue-specific. Preserve
-  pinned commits and scope; do not promote candidate claims to merged behavior.
-- Reuse the same document ID when changing its parent or title. Keep a
-  repository-level document registry and let review manifests reference it.
-  Link to canonical shared documents from issue summaries rather than copying
-  them. Maintain a team guide, repository knowledge index and review index;
-  use clear topic titles and reserve PR prefixes for PR-specific material.
-- Mirror the full reviewer page, brief, dossiers, run reports and relevant
-  linked knowledge as native Linear documents. Preserve evidence, scope
-  caveats, pinned commits, neutral drafts and marked source excerpts.
-- Do not upload archives or use download bundles as artifact destinations.
-  Keep raw fixtures, binaries, generated packages and bulky machine logs in
-  the local workspace. Present the observations, relevant result records,
-  tables, commands and source witnesses directly in readable documents.
-  Distinguish a readable interpretation from a byte-for-byte raw-file copy.
-- Keep the issue description brief and link each finding and run summary to
-  the corresponding readable document or section. Convert links between
-  authored artifacts into verified Linear links. For a raw local file, name
-  its path and link to the readable evidence that explains it when available;
-  never leave an archive or machine-local hyperlink as the only evidence.
-  Use heading links exposed by Linear, or dedicated section documents when
-  heading IDs are unavailable. Do not invent anchors.
-- Record document IDs, section links and source hashes in the workspace mirror
-  manifest. Reuse the same documents on later syncs. Check for remote edits,
-  preserve reviewer decisions and reconcile changes before updating content.
-- Read back the documents and issue, check links, code excerpts and completeness,
-  and record the snapshot time and reviewed head. Record pending items after
-  interruptions and resume without duplicate documents. A mirror refresh is
-  not a new code review or newer source verification.
-
 ## Severity
 
 Rate on impact and likelihood for the users the pull request says it serves.

@@ -35,12 +35,9 @@ installation does not supply new provider proof.
 | decide when to work on tests and which tests are worth retaining | [operations/test-strategy.md](operations/test-strategy.md) — all test work requires a separate owner-requested task; only the owner decides readiness; keep suites small and rejected low-tier examples commented |
 | take initiative on a broad goal: own the plan, decisions and experiments while keeping the owner's involvement optional until their input is needed | [operations/initiative.md](operations/initiative.md) — applies to the delegated goal and its follow-ups; narrowly assigned tasks and subagent deliverables retain their scope |
 | start or continue an in-depth review of a large pull request: find its next issues, review new commits, verify the author's fixes, weigh the author's replies | [operations/pr-deep-review.md](operations/pr-deep-review.md) — state file per pull request, ranked areas, verified findings queued for the human reviewer; never posts. Named run limits: [operations/stints.md](operations/stints.md) |
-| go through the owner's unresolved comments in Linear: make the change a comment recommends, answer what it asks, or only list them | [operations/linear-resolve.md](operations/linear-resolve.md) — reads every open thread of the Linear workspace, changes the original then its Linear copy, and settles each comment with the user in the session; posts `Resolved. Resolution: …` in Linear only after the user says `Resolved` |
-| list the open questions and pending decisions that wait for the owner in Linear, so they can be answered in the session and not by commenting in Linear | [operations/linear-open-questions.md](operations/linear-open-questions.md) — collects the open rows of the specifications' Decisions tables, the issues that ask the owner to decide and the questions agents asked in comments, gives one numbered list in the session, and writes each answer the user gives there to the place its question is recorded in |
-| take the next task of a Saga, Arc or Beat ("continue working on tasks"), stop or finish one, or plan new work as a Saga | [Working in Sagas](../forester/operations/sagas.md) — Sagas, Arcs and Beats in `~/Artifacts/forester/sagas/`; one shared checkout per repository, with territory bookings in `~/Artifacts/forester/holds.json`. Linear copies are set aside; automatic release remains unimplemented |
+| take the next task of a Saga, Arc or Beat ("continue working on tasks"), stop or finish one, or plan new work as a Saga | [Working in Sagas](../forester/operations/sagas.md) — Sagas, Arcs and Beats in `~/Artifacts/forester/sagas/`; one shared checkout per repository, with territory bookings in `~/Artifacts/forester/holds.json`. Automatic release remains unimplemented |
 | see how far every Saga is and which agents work on them now (`/forester-stats`) | [Forester statistics](../forester/operations/forester-stats.md) — Done, In progress and Other in plan steps, and the agents holding each Saga's Beats and their context |
 | inspect Forester hooks and recording | [Forester](../forester/README.md) — hooks record agents and activity; automated Watching remains in design |
-| make what needs the owner's attention now easy to find in Linear, then organize project navigation | [operations/linear-organize.md](operations/linear-organize.md) — publish a prominent attention entry with individual open questions, pending decisions, reviews, and next actions; then remove obsolete shortcuts |
 | record, change, replace or withdraw an Owner Goal from the owner's own words, answer which goals apply to something, or check that the goals do not contradict each other (`/owner-goals`) | [operations/owner-goals.md](operations/owner-goals.md) — the goals corpus `~/Artifacts/goals`, changed only through the `goals` command; only the owner puts a goal in force |
 | learn something at the depth the owner's Nex Knowledge Map says is missing (`/colab "prompt"`), pitch the explanations of other work at the owner's level (`(use colab)`), or study toward a goal in learn mode, a whole session of learning and no other work (`/learn`); each starts only when the owner calls it by name, and a session in learn mode stays in it until the owner leaves it | [operations/nex-colab.md](operations/nex-colab.md) — the map is data in the private corpus `~/Artifacts/colab/`, assessed, written and pushed after each reply |
 | Mycel CLI syntax, flags, defaults | [tools/mycel.md](tools/mycel.md) |
@@ -116,7 +113,7 @@ These hold for every agent on this Mac, whatever the task and the tool.
   and write it only after they agree.
 - **Processes, not trackers.** Recurring multi-step work becomes a guide with a
   thin skill ([create-skill.md](operations/create-skill.md)). Never stand in
-  for a missing feature with a hand-kept tracking document in Linear.
+  for a missing feature with a hand-kept tracking document.
 - **No native memory.** The memory of Claude Code and of Codex is switched off.
   What must outlast a session goes into a corpus: this Hub, a guide, a
   specification or a Saga's files.
@@ -134,8 +131,9 @@ These hold for every agent on this Mac, whatever the task and the tool.
   and implementation limits. Commit only your own explicitly named files,
   never revert or tidy a change you did not make, and report drift you cannot
   explain.
-- **Mycel 2 is worked as Beats of the Mycel Specs Implementation Saga**
-  (`~/Artifacts/forester/sagas/mycel/mycel-2-implementation/`). Change its code in
+- **Mycel 2 is worked as Beats of a Saga.** The Mycel Specs Implementation
+  Saga is closed; new Mycel work joins the Saga that needs it, such as the
+  Forester Commit and Justification Saga. Change its code in
   `~/repos/sylvan-stack/mycel`, its specifications in `specs/` and its guides
   only within a Beat you hold. Write no run results into `research/`.
 - **Version 1 is not run and not a source.** Never run Mycel 1 or read
@@ -167,12 +165,6 @@ These hold for every agent on this Mac, whatever the task and the tool.
   notifies when it ends; see [background jobs](../forester/operations/background-jobs.md).
 - **Sign-in pages** open in the built-in browser pane. The owner types the
   credentials and approves; never enter them.
-- **Linear.** Every comment an agent posts begins with `**Agent:**`. The
-  workspace, how it is reached and what the connector cannot do are in the
-  [Linear runbook](tools/linear.md). On task completion, preserve its ID in
-  `~/Artifacts/forester/sagas/completed-linear-tasks/` (weekly files, at most 100 tasks
-  each), then delete the issue instead
-  of setting it to Done; follow [Complete Linear Tasks](operations/linear-completion.md).
 
 **How this file reaches every agent.** Claude Code imports it from
 `~/.claude/CLAUDE.md` at the start of every session. Codex gets a copy as

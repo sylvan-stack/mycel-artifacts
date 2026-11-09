@@ -63,10 +63,6 @@ What must happen, in Mycel vocabulary — the invariant behind every invocation 
 - [`pr-deep-review.md`](./operations/pr-deep-review.md) — multi-session review of a large pull request: sync with the head, ranked areas, verified and independently challenged findings, a queue of drafted comments for the human reviewer, commands for the recurring steps (next, commits, verify, replies, check, summary, status), stop criteria on findings, time, tokens and coverage; never posts.
 - [`pr-deep-review-reference.md`](./operations/pr-deep-review-reference.md) — its lookup companion: `state.json` schema, area and finding statuses, templates for the reviewer's page, finding card and run report, stop-criteria measures and kinds, reading token spend, commands for reading a GitHub pull request.
 - [`stints.md`](./operations/stints.md) — named sets of stop criteria for a run: the defined stints, how a run resolves its stint and limits, how to add or change one.
-- [`linear-resolve.md`](./operations/linear-resolve.md) — go through the owner's unresolved comments in the Linear workspace: which threads a run takes, what a comment may ask for, changing the original and then its Linear copy, the numbered list of comments and responses given in the session, the user's answers, the `Resolved. Resolution: …` reply posted only after the user says `Resolved`, and what the Linear connector can and cannot do.
-- [`linear-open-questions.md`](./operations/linear-open-questions.md) — answer in the session the questions and pending decisions that wait for the owner in the Linear workspace: what counts as an open question, the numbered list a run gives, how the user answers by number, and what is written to the specification, the issue or the thread once they have answered.
-- [`linear-organize.md`](./operations/linear-organize.md) — make the owner's current attention items visible through a prominent document/view with individual open questions, pending decisions, reviews, and next actions; then organize project references and remove obsolete shortcuts.
-- [`linear-completion.md`](./operations/linear-completion.md) — finish a task by preserving its ID and hand-over in private weekly files of at most 100 tasks, then deleting its Linear issue; resume failed removals and recognize completed prerequisites after deletion.
 - [Working in Sagas](../forester/operations/sagas.md) — shared checkouts, Forester territory bookings, local plans, progress and hand-over.
 - [`workspace-ledger.md`](./operations/workspace-ledger.md) — territory bookings in a Workspace for a Saga or ad-hoc work, shared across Chat Sessions and subagents; `.ledger/bookings.json`, one event file per booking and `history.jsonl` in every Workspace; precise net results inside each territory from Git-backed boundary snapshots, supplementary tool/watcher history, private configuration and the single switch-over from hold files; links to the standalone `workspace-ledger` specifications. Decided 30 October 2026, not yet implemented.
 - [`forester-stats.md`](../forester/operations/forester-stats.md) — show unfinished Sagas or one selected by name or folder, each with its unfinished Arcs: its share of work Done, In progress and Other in plan steps, the agents working on it now and their context; open with names of Sagas finished within three days, omit older completions, and end with recently worked-on Sagas and Arcs under unfinished Sagas; how each number is counted, and what is not counted yet.
@@ -105,7 +101,6 @@ One [Runbook](../arbol/GLOSSARY.md#runbook) per [Tool](../arbol/GLOSSARY.md#tool
 - [`mycel-2-reconciliation.md`](./tools/mycel-2-reconciliation.md) — guarded dependency ownership/pins, source-only foreign refresh, mechanical propagation, public derive/relate and complete scoped ingest with busy retry and exact activity.
 - [`mycel-2-evaluation.md`](./tools/mycel-2-evaluation.md) — strict versioned evaluation files, one-repository dispatch, offline recall/fault accounting and read-only snapshot comparisons; normal search/Drift execution remains pending.
 - [`mycel.md`](./tools/mycel.md) — installed Mycel 2 command/manual router and repository corpus binding.
-- [`linear.md`](./tools/linear.md) — connector capabilities and UI mechanics for Linear favorites, folders, sidebar customization, and question/decision navigation targets.
 - [`places-api-sftp.md`](./tools/places-api-sftp.md) — the places-api log server: where the connection settings live, host key verification, unattended `sftp` sign-in on this Mac, interactive and curl access.
 
 ### `system-instructions/` — prompt files the `mycel` executable reads
@@ -125,9 +120,6 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 - [`deep-research`](./skills/deep-research/SKILL.md) — durable task-context artifacts with source evidence; Mycel 2 retrieval follows Hub readiness.
 - [`initiative`](./skills/initiative/SKILL.md) — ownership of a delegated broad goal with minimal demands on the owner's attention; excludes narrowly assigned tasks and subagent work with fixed deliverables.
 - [`learn`](./skills/learn/SKILL.md) — explicit-only; its Claude Code adapter is [`providers/claude/learn`](./skills/providers/claude/learn/SKILL.md)
-- [`linear-open-questions`](./skills/linear-open-questions/SKILL.md)
-- [`linear-organize`](./skills/linear-organize/SKILL.md)
-- [`linear-resolve`](./skills/linear-resolve/SKILL.md)
 - [`forester-stats`](../forester/skills/forester-stats/SKILL.md)
 - [`mycel-search`](./skills/mycel-search/SKILL.md) — Mycel 2 location and document lookup with source citations.
 - [`owner-goals`](./skills/owner-goals/SKILL.md) — the owner's Owner Goals managed from their own words; not Spec Requirements.
@@ -142,4 +134,4 @@ third-party skills remain outside this catalog.
 
 - Every artifact goes into a chapter folder, never directly into the corpus root. `README.md`, `INDEX.md` and a `GLOSSARY.md` are the exceptions.
 - List a chapter here when it is created.
-- Tasks are tracked in Linear, not in this corpus: project [Mycel](https://linear.app/amorphius/project/mycel-6bbdbce253fb) in the Linear workspace amorphius. Specifications are copied there as documents; `.linear.json` maps each file to its copy. The files here are the originals.
+- Tasks are tracked as Sagas, Arcs and Beats in `~/Artifacts/forester/sagas/`, not in this corpus. The files here are the originals.

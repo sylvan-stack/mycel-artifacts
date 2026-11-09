@@ -157,13 +157,12 @@ Checking Origin Coverage for the calling clone's changes before a commit is
 useful and optional. Capture the authorized changed inputs first and ingest
 the read-only baseline before relying on its stored comparison. A changed or
 unresolved input is a reason to refresh or correct it, rather than guess an
-Origin. Leave uncertain gaps visible for recovery or human review. A task,
-Beat or Linear issue is never an Origin.
+Origin. Leave uncertain gaps visible for recovery or human review. A task
+or a Beat is never an Origin.
 
 For third-party code, put the owner's actual requirements and time-pinned
 upstream document, commit or issue snapshots in the owner's corpus before
-an authorized ingest. An upstream issue can be an Origin; Linear snapshots
-are excluded. Recovery uses local indexed snapshots and local Git, without
+an authorized ingest. An upstream issue can be an Origin. Recovery uses local indexed snapshots and local Git, without
 fetching or modifying upstream code. The owner decides when that repository
 is normalized.
 

@@ -72,7 +72,7 @@ Below, `<corpus>` is the folder this prints.
 **The corpus is private**, because the map describes the owner. Its levels
 are quoted to the owner in the session and nowhere else: nothing of `map/`
 or `log/` goes into a reply outside the owner's session, another corpus, a
-specification, a Linear page or a sample's fixtures. Every note, evidence and
+specification or a sample's fixtures. Every note, evidence and
 `shown` speaks of the owner's learning in general terms and never names a
 repository, a project or a product, the owner's own included, also when the
 prompt was about one ([CLB-0, Privacy](../../colab/specs/00-the-nex-knowledge-map.md#privacy)).

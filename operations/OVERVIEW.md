@@ -54,38 +54,11 @@ not yet filled the index, so current research uses grep and file reads.
   minimums and maximums. Defined once, named in a request, overridden limit
   by limit; separate from which model does the work.
 
-## Working in Linear
-
-- **[Complete Linear Tasks](linear-completion.md)** — record each completed
-  task's ID and durable hand-over before deleting its Linear issue, instead
-  of setting it to Done. Private weekly files of at most 100 tasks keep prerequisite
-  and progress checks working after the issue is removed.
-
-- **[Organize Linear Navigation](linear-organize.md)** — a prominent
-  **Needs your attention** entry shows individual open questions, pending
-  decisions, reviews, and actions with the next step and source link.
-  Tidying project references supports that outcome; the guide verifies both
-  actionable content and visible access, while the [runbook](../tools/linear.md)
-  covers connector and UI mechanics.
-
-- **[Resolve Linear Comments](linear-resolve.md)** — the owner comments on
-  specifications, issues and project pages in Linear; a run collects every
-  open thread, makes the change a comment recommends or answers it, and gives
-  the user a numbered list of comments and responses in the session. The
-  discussion stays in the session; a thread gets `Resolved. Resolution: …`
-  only after the user says `Resolved`, and the owner closes it in Linear.
-
-- **[Answer Open Questions from Linear](linear-open-questions.md)** — the
-  questions and pending decisions that wait for the owner are spread over
-  specifications, issues and comments; a run collects them and gives one
-  numbered list in the session, each item written so it can be answered
-  without opening Linear. The user answers by number, and each answer is
-  written to the place its question is recorded in.
+## Working in Sagas
 
 - **[Working in Sagas](sagas.md)** — work is grouped as Sagas, Arcs and
-  Beats, kept as files in the private corpus `~/Artifacts/forester/sagas/` and copied
-  one way to Linear, where unfinished Beats keep their status and comments;
-  completed IDs and hand-over survive in the private files. A parent
+  Beats, kept as files in the private corpus `~/Artifacts/forester/sagas/`, where
+  completed IDs and hand-over survive. A parent
   gives the order of its children, and a child reports its progress to its
   parent. Each Arc reserves the folders and files it changes, and an agent of
   any tool holds the Beat it works on, so several agents work at once without
@@ -163,7 +136,7 @@ Distinct task shapes have thin skills
 routing through the Hub: `/code-research`, `/deep-research`,
 `/mycel-search`, `/corpus-admin`, `/authored-work-integration`,
 `/pr-deep-review`, `/create-mycel-skill`,
-`/linear-resolve`, `/linear-organize`, `/linear-open-questions`, `/forester-stats`,
+`/forester-stats`,
 `/arbol-chat-booking`, `/colab`, `/use-colab`, `/learn`,
 `/owner-goals`, `/places-api-logs`.
 Skills carry only *when to trigger*; the process always lives here, in Mycel.

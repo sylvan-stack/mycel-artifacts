@@ -108,7 +108,7 @@ Rust, not Python, and show me the list". Do them in the order the owner gave.
    The body keeps the owner's own words, so the statement can always be
    compared with what they said. `--source` names where they said it when it
    has a stable address, such as an Arbol chat's
-   [Entity URI](../../arbol/GLOSSARY.md#entity-uri) or a Linear comment link;
+   [Entity URI](../../arbol/GLOSSARY.md#entity-uri);
    leave it out otherwise.
 
 ## Changing, replacing and withdrawing
