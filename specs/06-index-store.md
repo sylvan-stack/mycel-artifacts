@@ -34,7 +34,8 @@ Proposed:
 | Index generation UUID and invocation/session liveness identities | `init`, mutating invocations | MYC-12, MYC-16 |
 | Embedding plans, parts, vectors and failures | `embed` | MYC-3 |
 | Summaries and the sections of the code overview | `summaries`, `ingest` | MYC-8, MYC-9 |
-| The record of work, with the identity decisions of each pass | every command that changes the store | MYC-12 |
+| The record of work, with the identity decisions of each pass | the invocations listed in MYC-12 | MYC-12 |
+| Issued identifiers and their purposes, independent of repository data | `ids next` | [MYC-18](18-identifiers.md) |
 | The format number and the number of dimensions of a vector | `init` | here |
 
 The store holds no settings copy (MYC-1.1), no secret and no operational state of another product. Searchable chunk/version rows contain only text found in a current disk, local branch or stash location (MYC-1.21). The explicit exception is MYC-16's dependant-owned immutable evidence: snapshots and manifests may retain exact before text after the source's indexed rows are deleted, with no searchable chunk, locations or vector. Every pin, work/verification bundle and in-flight lease owns its evidence in the dependant repository. Pin/repin and owning-reference changes commit in the same transaction as their operation; garbage collection deletes only unreferenced blobs under that owner repository's lock.
@@ -46,6 +47,7 @@ Most of the store can be made again from the files with `mycel ingest`. The foll
 - summaries, which cost calls to a model;
 - vectors, which cost quota of the embedding service;
 - the record of work and the history of Drifts;
+- issued identifiers and their recorded purposes;
 - former pinned source snapshots and exact request evidence whose bytes no live location retains.
 
 Keeping a copy of the store is the owner's affair, with the tools of the database. Mycel has no command for it.
@@ -94,6 +96,10 @@ Format 3, of 19 October 2026, admits the chunk kinds `req` and `dec` of [MYC-17]
 Format 4, of 26 October 2026, adds to each repository's state how far a pass run in steps has refreshed its unchanged files ([MYC-1.40](01-corpora-and-ingest.md)); `mycel init` brings a format 3 store forward in one step, adding an empty column.
 
 Format 5, of 27 October 2026, adds a table of judgements: each recovery or model-audit judgement that changed nothing, under its repository, question, exact chunk version, candidate and judgement policy, so that a series of steps never pays for it again ([MYC-D68](17-justification.md#decisions)). A row goes with its repository or its chunk version. `mycel init` brings a format 4 store forward in one step, adding the empty table.
+
+Format 6 adds the issue table for [MYC-18](18-identifiers.md). `mycel init`
+brings a format 5 store forward in one step, adding the empty table and
+preserving the existing rows and generation.
 
 Builds are kept side by side, and each can be started by its number (MYC-0). Once a newer Build has raised the format, the older Builds refuse this store, and there is no way back to the earlier format.
 

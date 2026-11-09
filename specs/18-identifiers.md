@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-18
-status: review
+status: accepted
 ---
 # Mycel · 18 Issued identifiers
 
@@ -77,4 +77,8 @@ are outside the allocation list and remain reserved by the series floor.
 | ID | Question | Outcome |
 |---|---|---|
 | MYC-D74 <!-- 072e5887-1991-454d-acb0-53352d95c20e --> | Who issues new numbers? | The owner directed on 9 November 2026 that Mycel issue new numbers. The initial `SYL` series continues at 341. |
-| MYC-D75 <!-- eda4e219-3349-4b3d-891a-669f69e6d30d --> | What do the commands return? | Proposed for review. Use Mycel's single-JSON-document convention. `next` returns an `id`. `list` returns the series and the committed `id` and `for` pairs. |
+| MYC-D75 <!-- eda4e219-3349-4b3d-891a-669f69e6d30d --> | What do the commands return? | Accepted by the owner with MYC-18 on 9 November 2026. Use Mycel's single-JSON-document convention. `next` returns an `id`. `list` returns the series and the committed `id` and `for` pairs. |
+
+## Named checks
+
+MYC-18.1 through MYC-18.4 await qualification in a separate testing task.

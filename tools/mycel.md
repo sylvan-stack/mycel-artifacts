@@ -35,6 +35,9 @@ Settings preparation belongs to SYL-241; this guide changes no settings.
 - [Search and its schema-3 results](mycel-2-retrieval.md),
   [exact chunk reading](mycel-2-reading.md), and
   [grep with an optional related-search tail](mycel-2.md#grep-and-its-related-search-tail).
+- [Issue a number with `mycel ids next` and read the issue history with
+  `mycel ids list`](mycel-2.md#issuing-and-listing-identifiers). Use a Build
+  that contains the commands and a format 6 store.
 - [Complete scoped ingest](mycel-2-reconciliation.md#complete-public-ingest),
   [embedding and dry-run plans](mycel-2-embedding.md), and
   [summary status, build, regeneration and removal](mycel-2-summaries.md).
