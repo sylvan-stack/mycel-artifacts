@@ -5,9 +5,9 @@ role: authored
 
 ## <before Step>
 
-Reason: Check each named file against its configured code checkout and allow a new file in an existing folder
+Reason: Resolve the named requirements and decisions against the existing Index Store in one read-only snapshot
 
-Origins: MYC-20.13 · Intention i-47bfa32b · 2026-11-10
+Origins: MYC-20.13 · Intention i-aea66b33 · 2026-11-10
 
 ## Step
 
@@ -68,4 +68,28 @@ Origins: MYC-20.13 · Intention i-47bfa32b · 2026-11-10
 Reason: Check each named file against its configured code checkout and allow a new file in an existing folder
 
 Origins: MYC-20.13 · Intention i-47bfa32b · 2026-11-10
+
+## <before _origin_names>
+
+Reason: Resolve the named requirements and decisions against the existing Index Store in one read-only snapshot
+
+Origins: MYC-20.13 · Intention i-aea66b33 · 2026-11-10
+
+## _check_origins
+
+Reason: Resolve the named requirements and decisions against the existing Index Store in one read-only snapshot
+
+Origins: MYC-20.13 · Intention i-aea66b33 · 2026-11-10
+
+## _origin_names
+
+Reason: Resolve the named requirements and decisions against the existing Index Store in one read-only snapshot
+
+Origins: MYC-20.13 · Intention i-aea66b33 · 2026-11-10
+
+## _resolved_origin_names
+
+Reason: Resolve the named requirements and decisions against the existing Index Store in one read-only snapshot
+
+Origins: MYC-20.13 · Intention i-aea66b33 · 2026-11-10
 
