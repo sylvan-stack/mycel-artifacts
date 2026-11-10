@@ -5,9 +5,9 @@ role: authored
 
 ## Tests: mycel > Active top tier
 
-Reason: Qualify document-local Markdown reference anchors, card IDs and exact target text through the published Cue Card catalog.
+Reason: Qualify ordered-list paragraph and URI autolink anchors, card IDs and exact source text through the published Cue Card catalog.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-6f600945 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-6baab59b · 2026-11-10
 
 ## Tests: mycel > Selection and limits
 

@@ -65,9 +65,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-1efd5d36 
 
 ## CueCardTests.test_heading_cards_preserve_prose_aliases_and_unique_anchors
 
-Reason: Qualify document-local Markdown reference anchors, card IDs and exact target text through the published Cue Card catalog.
+Reason: Qualify ordered-list paragraph and URI autolink anchors, card IDs and exact source text through the published Cue Card catalog.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-6f600945 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-6baab59b · 2026-11-10
 
 ## CueCardTests.test_invalid_escaped_scalars_report_faults_without_losing_valid_cards
 
