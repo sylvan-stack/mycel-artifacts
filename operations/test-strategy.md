@@ -56,7 +56,7 @@ Keep top-tier case bodies in `tests/top/` and mid-tier bodies in `tests/mid/`, r
 
 Every repository with retained mid-tier cases has a `MID_TIER.md` describing each inventory entry, its tier reason and its review status. Provisional classifications must remain visibly provisional: a generated description or an assertion example does not establish useful coverage. Keep source locations and the machine-readable inventory current. Preserve previous source addresses when moving cases; relocation alone does not authorize indexed Origin migration or ingest.
 
-Mid-tier code stays uncommented in its own folder at the owner's request in the ten SYL-326 repositories. MiMo retains its existing mixed-file layout and commented mid selections; SYL-327 does not authorize their restoration or relocation. Keep necessary imports, shared-fixture links and compatibility entry points intact. A separately requested testing task selects the relevant cases; do not re-comment them afterwards. Broad qualification must refuse incomplete inventories or missing test sources. Folder separation and source restoration do not turn a focused result into full qualification.
+Mid-tier code stays uncommented in its own folder at the owner's request in the ten SYL-326 repositories. MiMo retains its existing mixed-file layout and commented mid selections; SYL-327 does not authorize their restoration or relocation. Keep necessary imports, shared-fixture links and compatibility entry points intact. Select relevant cases within the authorized testing scope and leave their retained source uncommented. Broad qualification must refuse incomplete inventories or missing test sources. Folder separation and source restoration do not turn a focused result into full qualification.
 
 ## The three tiers
 
@@ -163,7 +163,7 @@ mid-tier bar is low tier after review.
 ## During implementation
 
 1. Implement and polish the requested code. Existing tests may be read as reference; leave their source, fixtures and inventories unchanged.
-2. If a bug or uncertainty suggests a useful future test, record the concrete gap briefly in the hand-over. Do not write or run it, including a top-tier regression, and do not declare that testing should now start.
+2. If a bug or uncertainty suggests a useful future test, record the concrete gap briefly in the hand-over for the testing Beat or separate testing task.
 3. Leave test maintenance, selected tests, suites, baselines and post-merge checks to the testing Beat or a separate testing task.
 4. Review the diff and use proportionate test-free static validation such as syntax, types, links or compilation when useful. Do not disguise behavioral tests as probes or validation scripts. Inspect commands and hooks for indirect test execution.
 5. Report what was checked and what was not. “Implementation complete; tests not changed or run under the separate-task policy” is an honest outcome. Do not call unexecuted checks passed or claim runtime qualification from static review.
