@@ -41,9 +41,9 @@ Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-D88, MYC-D91, MYC-D92, MYC-D93 · Int
 
 ## <before MarkdownDecodeError>
 
-Reason: Finish the matching verbatim HTML end tag across lines before resuming Cue Card recognition.
+Reason: Keep numbered paragraph continuations out of Markdown reference definitions while preserving real list items.
 
-Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-75382381 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-896b9141 · 2026-11-10
 
 ## _FrontmatterError.__init__
 
@@ -86,4 +86,10 @@ Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-75382381 · 2026-11-10
 Reason: Finish the matching verbatim HTML end tag across lines before resuming Cue Card recognition.
 
 Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-75382381 · 2026-11-10
+
+## _container_prefix
+
+Reason: Keep numbered paragraph continuations out of Markdown reference definitions while preserving real list items.
+
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-896b9141 · 2026-11-10
 
