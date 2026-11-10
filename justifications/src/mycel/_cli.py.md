@@ -5,9 +5,9 @@ role: authored
 
 ## parse
 
-Reason: Expose the completed report as mycel plan check and return problems in step order
+Reason: Expose cues match with one unchanged text argument and keep cues compile available
 
-Origins: MYC-20.13 · Intention i-99049064 · 2026-11-10
+Origins: MYC-21.8 · Intention i-4b08488b · 2026-11-10
 
 ## run
 
