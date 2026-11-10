@@ -285,3 +285,9 @@ Reason: Read catalog version 1 from the compiler path and preserve card order fo
 
 Origins: MYC-21.8, MYC-D88 · Intention i-9fb95a11 · 2026-11-10
 
+## _match_cards
+
+Reason: Apply the stored expressions to the complete text and report matches by first appearance
+
+Origins: MYC-21.8, MYC-D85 · Intention i-6391fba4 · 2026-11-10
+
