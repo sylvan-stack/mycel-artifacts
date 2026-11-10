@@ -59,9 +59,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 
 ## CueCardTests.test_directory_sync_failure_reports_the_published_catalog
 
-Reason: Qualify the five Cue Card compiler review fixes with public command regressions and register the exact checks.
+Reason: Qualify malformed YAML fault isolation and Cue Card declarations inside ordinary HTML blocks.
 
-Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-21.6 · Intention i-5548e096 · 2026-11-10
+Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-1efd5d36 · 2026-11-10
 
 ## CueCardTests.test_heading_cards_preserve_prose_aliases_and_unique_anchors
 
@@ -74,4 +74,16 @@ Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-21.6 · Intention i-5548e096 · 2026-
 Reason: Qualify the five Cue Card compiler review fixes with public command regressions and register the exact checks.
 
 Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-21.6 · Intention i-5548e096 · 2026-11-10
+
+## CueCardTests.test_html_container_declares_a_card_and_preserves_literal_examples
+
+Reason: Qualify malformed YAML fault isolation and Cue Card declarations inside ordinary HTML blocks.
+
+Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-1efd5d36 · 2026-11-10
+
+## CueCardTests.test_malformed_tagged_values_leave_valid_cards_in_the_catalog
+
+Reason: Qualify malformed YAML fault isolation and Cue Card declarations inside ordinary HTML blocks.
+
+Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-1efd5d36 · 2026-11-10
 

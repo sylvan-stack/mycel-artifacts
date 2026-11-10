@@ -5,13 +5,13 @@ role: authored
 
 ## Tests: mycel > Active top tier
 
-Reason: Qualify the five Cue Card compiler review fixes with public command regressions and register the exact checks.
+Reason: Qualify malformed YAML fault isolation and Cue Card declarations inside ordinary HTML blocks.
 
-Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-21.6 · Intention i-5548e096 · 2026-11-10
+Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-1efd5d36 · 2026-11-10
 
 ## Tests: mycel > Selection and limits
 
-Reason: Qualify the five Cue Card compiler review fixes with public command regressions and register the exact checks.
+Reason: Qualify malformed YAML fault isolation and Cue Card declarations inside ordinary HTML blocks.
 
-Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-21.6 · Intention i-5548e096 · 2026-11-10
+Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-1efd5d36 · 2026-11-10
 
