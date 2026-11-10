@@ -29,9 +29,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 
 ## CueCardTests.test_compile_keeps_exact_cross_root_targets_and_reports_faults
 
-Reason: Verify the exact published Cue Card targets and declaration locations under ATX and Setext list headings
+Reason: Verify exact Cue Card targets after a list reference definition and under a heading in a surviving outer list item
 
-Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-84e19cf3 · 2026-11-10
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-f2fabebd · 2026-11-10
 
 ## CueCardTests.test_fatal_compile_leaves_previous_catalog_bytes
 
