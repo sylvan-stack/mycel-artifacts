@@ -66,7 +66,16 @@ match: ["plan-beat", "implementation plan"]
 -->
 ```
 
-The comment's body is YAML. A declaration at the top of a file may derive one
+The comment's body is YAML. A `cue_target` that names another target writes it
+in the [Cue Target](../../arbol/GLOSSARY.md#cue-target) form: `<repo>:<path>`
+for a whole file, or `<repo>:<path>#<heading path>` for a section, where
+`<repo>` is the configured repository, `<path>` is relative to its artifact
+root, and the heading path lists the headings that contain the section,
+outermost first, ending with its own, joined by ` > `, such as
+`arbol:GLOSSARY.md#Arbol Glossary > Arbol Trunk` (MYC-D89). The catalog still
+names cards by the section's anchor (`id`, MYC-D88).
+
+A declaration at the top of a file may derive one
 card per selected heading, as the glossary does today
 ([Cue Detection Catalog](../../arbol/GLOSSARY.md#cue-detection-catalog)):
 `literal: section_headings` with `heading-levels`, where a heading such as
@@ -350,3 +359,4 @@ times only illustrative:
 | MYC-D86 <!-- 2d402f73-7adb-493f-9aa6-0788991af584 --> | Where are cards declared, and what becomes of Cue Channel and Cue Command? | Decided by the owner on 9 November 2026, agreeing to the agent's proposal: beside their targets in `mycel:cues` comments, compiled into one catalog; Cue Channel is replaced by the card's `type` and Cue Command by the one effect a card has, adding its text. |
 | MYC-D87 <!-- 88798b31-d4f2-461b-a4b7-5a52af847c7e --> | When is the catalog compiled, and who keeps the Hub copies? | Decided by the owner on 9 November 2026 ("Agreed on everything except shadow period"), accepting the agent's proposal: by one Mycel job, run every 15 minutes and when a file it watches changes, that both compiles the catalog and writes the three Hub copies, replacing `~/.config/agent-hub/sync-codex-hub.py` and its launchd job `local.agent-hub.codex-sync` (kept as a backup); `~/.claude/CLAUDE.md` imports `~/.mycel/hub/active.md` instead of the Hub. |
 | MYC-D88 <!-- ccdbbef7-3275-4219-b961-877825ecc822 --> | What is the catalog's exact JSON form? | Chosen by the agent on 10 November 2026 in SYL-356, under MYC-21.1 and MYC-21.5, so that Mycel and Forester can be built at the same time: the keys of [The catalog file](#the-catalog-file); an `id` built from the target's anchor so that a recompile does not send a card again; `group` with `other` before `glossary`, the order the owner agreed for FOR-D129; one Python `re` expression per card; `text` composed by Mycel; and each card's `sources` and `declared_at`, so that a stale card names the lines to read (FOR-D131). |
+| MYC-D89 <!-- b8162e02-0a03-4325-a876-79057dd0a43c --> | How does a declaration name another target? | Decided by the owner on 10 November 2026 ("Agreed with Heading path"), accepting the agent's recommendation over the GitHub anchor: the [Cue Target](../../arbol/GLOSSARY.md#cue-target) form, `<repo>:<path>` or `<repo>:<path>#<heading path>`, readable and unambiguous where two sections share a heading; the catalog's `id` and `cue_target.anchor` (MYC-D88) are unchanged. |
