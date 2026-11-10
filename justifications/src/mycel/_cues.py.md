@@ -233,9 +233,9 @@ Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
 
 ## _target_text
 
-Reason: Preserve exact Cue Card text, apply aliases to their containing heading, allocate unique anchors, and isolate malformed YAML scalars.
+Reason: Trim trailing blank lines after declaration removal only for section targets, preserving the final physical lines of a whole-file target
 
-Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-D88, MYC-D91, MYC-D92, MYC-D93 · Intention i-2d1419a4 · 2026-11-10
+Origins: MYC-21.5, MYC-D88 · Intention i-164f3f65 · 2026-11-10
 
 ## _terms
 
