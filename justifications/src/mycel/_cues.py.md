@@ -5,9 +5,9 @@ role: authored
 
 ## <before _File>
 
-Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
+Reason: Keep the visible text of GFM URI autolinks intact while resolving surrounding Markdown heading references.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-86182f10 · 2026-11-10
 
 ## <before _Loader>
 
@@ -203,9 +203,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 
 ## _rendered
 
-Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
+Reason: Keep the visible text of GFM URI autolinks intact while resolving surrounding Markdown heading references.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-86182f10 · 2026-11-10
 
 ## _repositories
 
@@ -305,9 +305,9 @@ Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-D88, MYC-D91, MYC-D92, MYC-D93 · Int
 
 ## <before _inline_link_end>
 
-Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
+Reason: Keep the visible text of GFM URI autolinks intact while resolving surrounding Markdown heading references.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-86182f10 · 2026-11-10
 
 ## _inline_link_end
 
