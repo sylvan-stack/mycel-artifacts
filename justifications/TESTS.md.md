@@ -5,9 +5,9 @@ role: authored
 
 ## Tests: mycel > Active top tier
 
-Reason: Qualify ordered-list paragraph and URI autolink anchors, card IDs and exact source text through the published Cue Card catalog.
+Reason: Qualify declaration discovery, written headings and rendered card IDs, and exact whole-file text through the published Cue Card catalog.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-6baab59b · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-6ed813af · 2026-11-10
 
 ## Tests: mycel > Selection and limits
 
