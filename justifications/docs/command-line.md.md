@@ -5,15 +5,15 @@ role: authored
 
 ## Command line and settings
 
-Reason: Document the plan checker invocation, report fields and read-only checks
+Reason: Document the match invocation, reply and ordering and refresh its command contract
 
-Origins: MYC-20.13 · Intention i-5d85e1eb · 2026-11-10
+Origins: MYC-21.8 · Intention i-d5dc1d42 · 2026-11-10
 
 ## Command line and settings > Recovering Origin Links
 
-Reason: Document the plan checker invocation, report fields and read-only checks
+Reason: Document the match invocation, reply and ordering and refresh its command contract
 
-Origins: MYC-20.13 · Intention i-5d85e1eb · 2026-11-10
+Origins: MYC-21.8 · Intention i-d5dc1d42 · 2026-11-10
 
 ## Command line and settings > Compiling Cue Cards
 
@@ -26,4 +26,10 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 Reason: Document the plan checker invocation, report fields and read-only checks
 
 Origins: MYC-20.13 · Intention i-5d85e1eb · 2026-11-10
+
+## Command line and settings > Matching Cue Cards
+
+Reason: Document the match invocation, reply and ordering and refresh its command contract
+
+Origins: MYC-21.8 · Intention i-d5dc1d42 · 2026-11-10
 
