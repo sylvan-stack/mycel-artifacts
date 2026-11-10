@@ -41,9 +41,9 @@ Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-D88, MYC-D91, MYC-D92, MYC-D93 · Int
 
 ## <before MarkdownDecodeError>
 
-Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+Reason: Finish the matching verbatim HTML end tag across lines before resuming Cue Card recognition.
 
-Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-75382381 · 2026-11-10
 
 ## _FrontmatterError.__init__
 
@@ -71,19 +71,19 @@ Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc 
 
 ## _CueHTML.__init__
 
-Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+Reason: Finish the matching verbatim HTML end tag across lines before resuming Cue Card recognition.
 
-Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-75382381 · 2026-11-10
 
 ## _CueHTML.pending
 
-Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+Reason: Finish the matching verbatim HTML end tag across lines before resuming Cue Card recognition.
 
-Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-75382381 · 2026-11-10
 
 ## _CueHTML.scan
 
-Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+Reason: Finish the matching verbatim HTML end tag across lines before resuming Cue Card recognition.
 
-Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-75382381 · 2026-11-10
 
