@@ -87,12 +87,18 @@ A status line under the title of `saga.md` and `arc.md` holds one of these
 | Ready to Plan | a Beat can start now, but has no plan yet | Forester, computed |
 | Partly Ready | a Beat with a plan can start now, but the unit cannot be finished in one run | Forester, computed |
 | Fully Ready | every unfinished Beat has a plan and waits only for Beats inside the unit | Forester, computed |
+| Waiting on Arcs | Saga only: no Beat can start and one or more of its Arcs still wait for other Arcs. The Saga and index link to the unmet Arc prerequisites | Forester, computed |
 | In Review | the Arc has finished its Beats and its review runs, or the Saga has finished its Beats and an Arc is in review | Forester |
 | Ready to Close | all Arcs of the Saga are Done and the owner has yet to close the Saga | Forester |
 | Done | an Arc: its review passed; a Saga: the owner closed it | the reviewer; the owner |
 
 When several Ready statuses apply, the strongest is shown with the number of
 Beats that still need a plan, so that planning work stays visible.
+
+While a Saga is Waiting on Arcs, completed Arcs can still enter and finish
+review. Forester recomputes the Saga status when the Arc prerequisites clear.
+The links describe the wait already recorded on the child Arcs. The
+mechanical rules and status format are in [FOR-1](../../forester/specs/01-forester.md#2--planning).
 
 ### Implementation plans
 
