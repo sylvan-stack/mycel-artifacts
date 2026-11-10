@@ -70,6 +70,13 @@ not yet filled the index, so current research uses grep and file reads.
   outside](agent-watch.md) measures every 5 minutes what each working agent
   did since its last progress and raises the signals that call for a review.
 
+## Developing a new feature
+
+- **[Feature Course](feature-course.md)** — the owner and agent work through six
+  stages from the first idea to Beats with implementation plans. One research
+  document carries the evidence into planning, and a gap in the specification
+  sends that behavior back to Spec Writing for the owner’s decision.
+
 ## Planning a Beat
 
 - **[Planning a Beat](implementation-planning.md)** — before a Beat is
