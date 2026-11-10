@@ -203,9 +203,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 
 ## _rendered
 
-Reason: Render the label without the destination when a heading link contains balanced parentheses.
+Reason: Normalize NUL for heading rendering so source text cannot impersonate an internal placeholder or stop publication.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-3451e9d3 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D90, MYC-D94 · Intention i-5dfa590c · 2026-11-10
 
 ## _repositories
 
