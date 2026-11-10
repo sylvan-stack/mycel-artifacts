@@ -3,17 +3,18 @@ role: authored
 ---
 # Guide: Test Strategy
 
-Use this guide when implementing changes, reviewing tests, or performing a testing task in Sylvan Stack. **All test work belongs to a separate task explicitly requested by the owner. There is no top-tier exception during implementation.** The owner prefers to write and polish implementation code first, then request tests when ready. Only the owner decides readiness and starts that testing phase. Test count and coverage percentage are not quality goals.
+Use this guide when implementing changes, reviewing tests, or performing a testing task in Sylvan Stack. **All test work belongs to a testing Beat or a separate testing task outside a Saga.** Test count and coverage percentage are not quality goals.
 
-## The owner decides when testing starts
+## When testing starts
 
 <!-- mycel:cues
 type: literal
 match: ["test strategy", "write tests", "run tests", "test tier"]
 cue_target: none
 instructions: >-
-  Sylvan Stack test work starts in a separate task explicitly requested by the
-  owner. Implementation work uses test-free static checks. The Test Strategy
+  An eligible testing Beat starts in a fresh chat under the same rules as
+  other Beats. Outside a Saga, the owner separately requests testing.
+  Implementation work uses test-free static checks. The Test Strategy
   at ~/Artifacts/mycel/operations/test-strategy.md and the repository’s
   TESTS.md are required reading before test work.
 -->
@@ -25,27 +26,29 @@ bugfix, refactor or implementation review, even if it seems small, useful or
 necessary to keep existing tests in sync. Reading existing tests as source
 reference is allowed; it does not authorize changing or running them.
 
-Finish the requested code and polish within the implementation task. Report
-relevant test impact and unexecuted checks honestly, then leave testing for the
-owner. Do not decide that the code is ready, automatically transition into a
-testing phase, create or dispatch a testing task, or treat your own checklist as
-the owner's readiness decision. Do not repeatedly prompt the owner to authorize
-tests. A separate testing task starts only when the owner explicitly requests
-the test work and defines its scope. Merely calling part of an implementation
-task a “testing phase” or giving it a new task ID does not make it separate.
+In a Saga, the testing Beat follows the Arc's implementation Beats. When it
+is the next eligible Beat, start it in a fresh chat under
+[Working in Sagas](../../forester/operations/sagas.md#continue-with-the-next-beat).
+Its documented scope governs the testing and any Build it calls for. Outside
+a Saga, the owner explicitly requests a separate testing task and defines
+its scope.
+
+The owner changed the testing Beat start rule on 10 November 2026. This
+section governs eligibility even where older repository or Saga instructions
+require a separate owner request for all test work.
 
 This instruction of 29 October 2026 supersedes the earlier allowance to write
 or selectively run top-tier cases during implementation. It also governs
 indirect test execution: inspect commands and hooks first. A Build whose gate
-runs tests must be done in a separately requested testing/Build task, not as
-implementation validation. Do not bypass, disable or weaken that gate. A truly
+runs tests belongs to the testing Beat or a separate testing and Build task
+outside a Saga. Do not bypass, disable or weaken that gate. A truly
 test-free syntax, type or compilation check remains available when useful.
 
 This policy supersedes older instructions to run affected tests at every step, full suites at task entry or completion, or suites again after merging. The owner subsequently requested a physical reset: comment existing tests, restore only individually justified top-tier cases, and keep a test inventory with tier reasons in every repository. The reset was merged into main in ten repositories under SYL-316 and is documented in the [reset report](../../sylvan-stack/research/test-tier-reset-2026-10-28.md). MiMo was deferred during that reset; SYL-327 includes its current repository after SYL-314 completed. The old backup is not its current inventory. This is not installed-package or runtime qualification.
 
-**Builds run the top tier only** (the owner, 29 October 2026, SYL-329). In a separately requested testing/Build task, a Build's gate runs every top-tier test of its repository and no other test. It refuses when a top-tier test fails, or when a top-tier source is missing or commented. A passing Build says nothing about the mid tier, and its report never replaces requirement proofs or named checks that came from an earlier complete run. **The mid tier runs only when the owner asks for a mid-tier run.** No agent starts one on its own: not for a Build, a merge, a fix, a review, or a testing task it widened.
+**Builds run the top tier only** (the owner, 29 October 2026, SYL-329). A Build's gate runs every top-tier test of its repository and no other test. It refuses when a top-tier test fails, or when a top-tier source is missing or commented. A passing Build says nothing about the mid tier, and its report never replaces requirement proofs or named checks that came from an earlier complete run. **The mid tier runs only when the owner explicitly requests mid-tier execution.**
 
-Each repository's `TESTS.md` owns its active selection and links the complete inventory, `test-tiers.json` and `MID_TIER.md`. Read it before writing or running tests. The owner subsequently requested that retained mid-tier source stay uncommented (SYL-326). Writing or running it still requires an explicitly requested testing task. Broad qualification entry points must refuse while required tests are disabled; a smaller active inventory must never silently become a full qualification pass.
+Each repository's `TESTS.md` owns its active selection and links the complete inventory, `test-tiers.json` and `MID_TIER.md`. Read it before writing or running tests. The owner subsequently requested that retained mid-tier source stay uncommented (SYL-326). Work on it belongs to a testing Beat or a separate testing task, with explicit scope for mid-tier execution. Broad qualification entry points must refuse while required tests are disabled; a smaller active inventory must never silently become a full qualification pass.
 
 ## Separate tier folders
 
@@ -59,8 +62,8 @@ Mid-tier code stays uncommented in its own folder at the owner's request in the 
 
 | Tier | What belongs here | Writing | Running |
 | --- | --- | --- | --- |
-| **Top** | A small set of high-value, non-obvious edge cases that resolve a concrete uncertainty, or regression tests that reproduce a specific bug. | Only in a separate testing task explicitly requested by the owner. Extend an existing case if possible. | Only within the owner’s separately requested testing scope. Every authorized Build runs the whole top tier; never run it as part of implementation. |
-| **Mid** | A small, deliberately selected set of consequential integration, compatibility or workflow checks, or difficult invariants with independent expected results. Every case must meet the admission bar below; ordinary functional coverage is insufficient. | Only in a separate testing task explicitly requested by the owner. | Only when the owner asks for a mid-tier run. Never as part of a Build. |
+| **Top** | A small set of high-value, non-obvious edge cases that resolve a concrete uncertainty, or regression tests that reproduce a specific bug. | In a testing Beat or a separate testing task. Extend an existing case if possible. | Within the testing scope. Every authorized Build runs the whole top tier. |
+| **Mid** | A small, deliberately selected set of consequential integration, compatibility or workflow checks, or difficult invariants with independent expected results. Every case must meet the admission bar below; ordinary functional coverage is insufficient. | In a testing Beat or a separate testing task, subject to the admission bar. | Only when the owner explicitly requests a mid-tier run. Never as part of a Build. |
 | **Low** | Straightforward behavior whose result is obvious from reading the code; copied constants or defaults, trivial accessors/forwarders, tests of fixture construction, tautological or vacuous assertions, or repeated checks with no distinct failure mode. This includes superficially useful cases that fail the mid-tier admission bar. | Do not add new cases. Preserve existing rejected cases as comments at the end of their test files. | Never run while classified low. Comments are historical examples to consult, not a dormant suite to enable. |
 
 A short test can expose a subtle defect. A long browser or database test can be low value. Classify by information gained and distinct failure detected, not length, speed, framework, assertion count, author, or words in its name. A successful workflow qualifies only when the real interaction between components is itself uncertain and consequential. Merely crossing a function or module boundary is insufficient. Prefer one representative workflow to a collection of routine permutations.
@@ -161,19 +164,19 @@ mid-tier bar is low tier after review.
 
 1. Implement and polish the requested code. Existing tests may be read as reference; leave their source, fixtures and inventories unchanged.
 2. If a bug or uncertainty suggests a useful future test, record the concrete gap briefly in the hand-over. Do not write or run it, including a top-tier regression, and do not declare that testing should now start.
-3. Do not perform test maintenance or execute selected tests, suites, baselines or post-merge checks. The owner must request a separate testing task. Test review or archival work requested separately does not itself authorize execution.
+3. Leave test maintenance, selected tests, suites, baselines and post-merge checks to the testing Beat or a separate testing task.
 4. Review the diff and use proportionate test-free static validation such as syntax, types, links or compilation when useful. Do not disguise behavioral tests as probes or validation scripts. Inspect commands and hooks for indirect test execution.
 5. Report what was checked and what was not. “Implementation complete; tests not changed or run under the separate-task policy” is an honest outcome. Do not call unexecuted checks passed or claim runtime qualification from static review.
 
 Do not repeatedly ask the owner for permission to run suites during ordinary work.
-If an action requires a test gate, explain that dependency and leave the action
-pending for a separate owner-requested testing task. Never bypass its gate.
+If an action requires a test gate, record the dependency for the testing Beat
+or a separate testing task. Keep the gate intact.
 
-## In a separately requested testing task
+## In a testing Beat or separate testing task
 
-The owner's request decides when this task starts and defines its scope: test
-review, archival maintenance, writing tests, selected execution, a component,
-all repositories, or a named qualification. Do only the requested test work.
+Use the Beat's documented scope or the scope of the owner's separate request.
+It may cover test review, archival maintenance, writing tests, selected
+execution, a component, all repositories, or a named qualification.
 A review, writing or archival request does not imply permission to run tests;
 a top-tier run does not authorize the mid tier. Keep inventories current and
 retained source in its documented state. A bugfix regression should reproduce
@@ -182,7 +185,7 @@ the actual failure, not restate the repaired implementation.
 For an authorized run, permission persists through useful failure investigation
 and reruns within scope; it does not authorize unrelated live services, spending
 or owner-data changes. Do not fold implementation work into the testing task
-beyond fixes explicitly included in the owner's request.
+beyond fixes explicitly included in that scope.
 
 Before running, inspect discovery, prerequisites, skips and indirect execution.
 Record revisions, selections, elapsed time, results and limitations in existing
@@ -291,11 +294,11 @@ The Build gates named above no longer refuse for the reduced selection: they run
 
 ## SYL-330 policy and archive result · 29 October 2026
 
-All test work now requires a separate owner-requested task, including top-tier
-regressions and maintenance of fixtures, runners and inventories. Only the owner
-decides when implementation is ready for tests. Test-running Builds follow the
-same separation and retain their existing gates. Reading tests as reference and
-performing test-free static checks remain allowed.
+SYL-330 separated test work from implementation, including top-tier
+regressions and maintenance of fixtures, runners and inventories. Its
+original separate-request rule for testing Beats was superseded on
+10 November 2026. Test-running Builds retain their gates. Reading tests
+as reference and performing test-free static checks remain allowed.
 
 The earlier low-tier removals are preserved as comments at the ends of their
 test files: **3,312 canonical entries**, plus **26 duplicate vendored MiMo

@@ -46,8 +46,9 @@ it. If current work exposes a gap, return to
 
 Put a `### Order` list in each Arc's Approach, using the
 [Forester data format](../../forester/specs/03-data-formats.md#the-order-of-an-arcs-beats).
-Put the testing Beat last and have it wait for the work it covers. Testing
-starts when the owner requests it under the [Test Strategy](test-strategy.md).
+Put the testing Beat last and have it wait for the work it covers. It starts
+under the same eligibility rules as other Beats. Give it a testing and Build
+scope that follows the [Test Strategy](test-strategy.md#when-testing-starts).
 For example, two independent Beats might build a command and write a guide.
 Both can start immediately. The final Beat checks their combined result.
 

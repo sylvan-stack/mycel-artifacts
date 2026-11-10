@@ -41,6 +41,14 @@ not yet filled the index, so current research uses grep and file reads.
   `mycel grep` recall → [code-research](code-research.md), a question answered
   with citations → [deep research](deep-research.md), durable task context.
 
+## Tests and confidence in changes
+
+- **[Test Strategy](test-strategy.md)** — work on tests in an eligible testing
+  Beat or a separate testing task outside a Saga. Each repository's `TESTS.md`
+  lists its active selection and links the tier inventory. Low-tier examples
+  stay commented. The [test reset](../../sylvan-stack/research/test-tier-reset-2026-10-28.md)
+  records the historical inventory changes.
+
 ## Large pull-request reviews
 
 - **[Deep Review of a Large Pull Request](pr-deep-review.md)** — a review too
