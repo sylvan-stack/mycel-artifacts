@@ -203,9 +203,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 
 ## _rendered
 
-Reason: Keep the visible text of GFM URI autolinks intact while resolving surrounding Markdown heading references.
+Reason: Consume each opening backtick run in full and leave it literal if no equally long closing run exists, preserving links in heading anchors
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-86182f10 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-c9ae6880 · 2026-11-10
 
 ## _repositories
 
@@ -305,9 +305,9 @@ Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-D88, MYC-D91, MYC-D92, MYC-D93 · Int
 
 ## <before _inline_link_end>
 
-Reason: Keep the visible text of GFM URI autolinks intact while resolving surrounding Markdown heading references.
+Reason: Consume each opening backtick run in full and leave it literal if no equally long closing run exists, preserving links in heading anchors
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-86182f10 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-c9ae6880 · 2026-11-10
 
 ## _inline_link_end
 
