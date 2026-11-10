@@ -77,13 +77,25 @@ Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-21.6 · Intention i-5548e096 · 2026-
 
 ## CueCardTests.test_html_container_declares_a_card_and_preserves_literal_examples
 
-Reason: Qualify malformed YAML fault isolation and Cue Card declarations inside ordinary HTML blocks.
+Reason: Qualify front matter fault isolation and HTML token boundaries for Cue Card compilation.
 
-Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-1efd5d36 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-513f6972 · 2026-11-10
 
 ## CueCardTests.test_malformed_tagged_values_leave_valid_cards_in_the_catalog
 
 Reason: Qualify malformed YAML fault isolation and Cue Card declarations inside ordinary HTML blocks.
 
 Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-1efd5d36 · 2026-11-10
+
+## CueCardTests.test_html_tokens_preserve_cue_lookalikes_in_the_published_target
+
+Reason: Qualify front matter fault isolation and HTML token boundaries for Cue Card compilation.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-513f6972 · 2026-11-10
+
+## CueCardTests.test_malformed_front_matter_keeps_scanning_cue_files
+
+Reason: Qualify front matter fault isolation and HTML token boundaries for Cue Card compilation.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-513f6972 · 2026-11-10
 
