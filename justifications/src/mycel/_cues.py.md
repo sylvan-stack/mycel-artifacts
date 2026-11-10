@@ -5,9 +5,9 @@ role: authored
 
 ## <before _File>
 
-Reason: SYL-357 steps 3-9: MYC-21.1-21.7 compile mycel:cues declarations into the catalog (artifact-root walk, Markdown outline, compiler, mycel cues compile, guide)
+Reason: Run one Hub and catalog sync action and serialize catalog compiles across invocations
 
-Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, MYC-D88, MYC-D89, MYC-D90, MYC-D91, MYC-D92, MYC-D93, MYC-D94 · Intention i-49ff28f1 · 2026-11-10
+Origins: MYC-21.10, MYC-21.11, MYC-D87 · Intention i-f56f15de · 2026-11-10
 
 ## <before _Loader>
 
@@ -257,9 +257,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 
 ## compile_catalog
 
-Reason: SYL-357 steps 3-9: MYC-21.1-21.7 compile mycel:cues declarations into the catalog (artifact-root walk, Markdown outline, compiler, mycel cues compile, guide)
+Reason: Run one Hub and catalog sync action and serialize catalog compiles across invocations
 
-Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, MYC-D88, MYC-D89, MYC-D90, MYC-D91, MYC-D92, MYC-D93, MYC-D94 · Intention i-49ff28f1 · 2026-11-10
+Origins: MYC-21.10, MYC-21.11, MYC-D87 · Intention i-f56f15de · 2026-11-10
 
 ## handle_cues
 
@@ -290,4 +290,10 @@ Origins: MYC-21.8, MYC-D88 · Intention i-9fb95a11 · 2026-11-10
 Reason: Apply the stored expressions to the complete text and report matches by first appearance
 
 Origins: MYC-21.8, MYC-D85 · Intention i-6391fba4 · 2026-11-10
+
+## _catalog_lock
+
+Reason: Run one Hub and catalog sync action and serialize catalog compiles across invocations
+
+Origins: MYC-21.10, MYC-21.11, MYC-D87 · Intention i-f56f15de · 2026-11-10
 

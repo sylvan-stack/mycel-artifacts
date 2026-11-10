@@ -197,7 +197,19 @@ Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
 
 ## _switch
 
-Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
+Reason: Run one Hub and catalog sync action and serialize catalog compiles across invocations
 
-Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
+Origins: MYC-21.10, MYC-21.11, MYC-D87 · Intention i-f56f15de · 2026-11-10
+
+## _refresh_copies
+
+Reason: Run one Hub and catalog sync action and serialize catalog compiles across invocations
+
+Origins: MYC-21.10, MYC-21.11, MYC-D87 · Intention i-f56f15de · 2026-11-10
+
+## _sync
+
+Reason: Run one Hub and catalog sync action and serialize catalog compiles across invocations
+
+Origins: MYC-21.10, MYC-21.11, MYC-D87 · Intention i-f56f15de · 2026-11-10
 
