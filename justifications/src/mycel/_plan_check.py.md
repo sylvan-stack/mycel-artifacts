@@ -5,9 +5,9 @@ role: authored
 
 ## <before Step>
 
-Reason: Resolve the named requirements and decisions against the existing Index Store in one read-only snapshot
+Reason: Expose the completed report as mycel plan check and return problems in step order
 
-Origins: MYC-20.13 · Intention i-aea66b33 · 2026-11-10
+Origins: MYC-20.13 · Intention i-99049064 · 2026-11-10
 
 ## Step
 
@@ -77,9 +77,9 @@ Origins: MYC-20.13 · Intention i-aea66b33 · 2026-11-10
 
 ## _check_origins
 
-Reason: Resolve the named requirements and decisions against the existing Index Store in one read-only snapshot
+Reason: Expose the completed report as mycel plan check and return problems in step order
 
-Origins: MYC-20.13 · Intention i-aea66b33 · 2026-11-10
+Origins: MYC-20.13 · Intention i-99049064 · 2026-11-10
 
 ## _origin_names
 
@@ -92,4 +92,10 @@ Origins: MYC-20.13 · Intention i-aea66b33 · 2026-11-10
 Reason: Resolve the named requirements and decisions against the existing Index Store in one read-only snapshot
 
 Origins: MYC-20.13 · Intention i-aea66b33 · 2026-11-10
+
+## handle_plan_check
+
+Reason: Expose the completed report as mycel plan check and return problems in step order
+
+Origins: MYC-20.13 · Intention i-99049064 · 2026-11-10
 
