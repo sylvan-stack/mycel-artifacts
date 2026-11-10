@@ -5,9 +5,9 @@ role: authored
 
 ## _headings
 
-Reason: Recognize list-contained Cue Card headings while preserving written titles, source ranges and ingest boundaries
+Reason: Recognize list-relative link reference definitions and headings after nested list items end in Cue Card targets
 
-Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-19860f0e · 2026-11-10
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-5a3ef098 · 2026-11-10
 
 ## <before outline_markdown>
 
@@ -110,4 +110,40 @@ Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-8dcc249a · 2026-11-10
 Reason: Recognize list-contained Cue Card headings while preserving written titles, source ranges and ingest boundaries
 
 Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-19860f0e · 2026-11-10
+
+## _ReferenceCursor
+
+Reason: Recognize list-relative link reference definitions and headings after nested list items end in Cue Card targets
+
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-5a3ef098 · 2026-11-10
+
+## _ReferenceCursor.__init__
+
+Reason: Recognize list-relative link reference definitions and headings after nested list items end in Cue Card targets
+
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-5a3ef098 · 2026-11-10
+
+## _ReferenceCursor.advance
+
+Reason: Recognize list-relative link reference definitions and headings after nested list items end in Cue Card targets
+
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-5a3ef098 · 2026-11-10
+
+## _ReferenceCursor.peek
+
+Reason: Recognize list-relative link reference definitions and headings after nested list items end in Cue Card targets
+
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-5a3ef098 · 2026-11-10
+
+## _link_reference_end
+
+Reason: Recognize list-relative link reference definitions and headings after nested list items end in Cue Card targets
+
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-5a3ef098 · 2026-11-10
+
+## _reference_title
+
+Reason: Recognize list-relative link reference definitions and headings after nested list items end in Cue Card targets
+
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-5a3ef098 · 2026-11-10
 
