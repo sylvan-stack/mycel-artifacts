@@ -75,12 +75,81 @@ outermost first, ending with its own, joined by ` > `, such as
 `arbol:GLOSSARY.md#Arbol Glossary > Arbol Trunk` (MYC-D89). The catalog still
 names cards by the section's anchor (`id`, MYC-D88).
 
-A declaration at the top of a file may derive one
+A file-level declaration may derive one
 card per selected heading, as the glossary does today
 ([Cue Detection Catalog](../../arbol/GLOSSARY.md#cue-detection-catalog)):
 `literal: section_headings` with `heading-levels`, where a heading such as
 `Fold / Projection` gives two terms for one target, `literal: exclude` in a
 section suppresses its card, and a local `match` list adds terms.
+
+**The files read** (MYC-D94). The compile reads the Markdown files, those
+whose names end in one of `scan.document_endings` (`.md` by default), under
+the artifact root of every enabled configured repository, with the scan of
+MYC-1.6: it skips the folders of `scan.skip_folders` and what the
+repository's `.gitignore` files exclude, and follows no link. A disabled
+repository gives no cards, and neither does Markdown in a code checkout. A
+file under two artifact roots is read once, for the repository whose root is
+innermost, so that it gives no cards when that repository is disabled. A
+configured artifact root that does not exist holds no declarations and gives
+no cards. A `cue_target` resolves only to a file read this way. A file that
+is not UTF-8 text gives no cards, and a fault at its line 1 when its bytes
+contain `mycel:cues`.
+
+**A declaration** (MYC-D91) is an HTML comment that begins a line, with at
+most three spaces before it, with `<!-- mycel:cues`; its body is the text
+from there to the first `-->`. A comment inside a fenced code block is
+neither a declaration nor left out of a target's text: it is an example, such
+as the one above.
+
+**Its keys** (MYC-D92):
+
+| Key | Holds |
+|---|---|
+| `type` | `literal` |
+| `match` | one term, or a list of one or more terms; each a string that is not empty |
+| `cue_target` | another target, in the Cue Target form above, or `none` for a card with `instructions` only |
+| `instructions` | a string that is not empty |
+| `literal` | `section_headings` or `exclude`, the forms of the next paragraph; `literal:` means `type: literal`, so these need no `type` |
+| `heading-levels` | with `literal: section_headings` only: a list of heading levels, integers from 1 to 6 |
+
+**Its target** (MYC-D90). Without `cue_target`, a declaration targets the
+section of the last heading before it, or the whole file when it stands
+before the first heading. `cue_target: none` gives a card with `instructions`
+only. A heading path that names no section of the file, or more than one,
+does not resolve. A heading is taken as written in the source, without its
+`#` marks, closing `#`s and outer spaces, in a heading path, in a card's
+`title` and `cue_target.heading`, and in the terms derived from it, so that a
+code span keeps its backticks; only the anchor comes from its rendered text.
+
+**The file-level form** (MYC-D93). A declaration `literal: section_headings`
+with `heading-levels`, and no other key but `type: literal`, derives one card
+for each heading of those levels in its file, wherever in the file it stands;
+a file has at most one. Each derived card targets its heading's section, its
+terms are the heading split at ` / `, its `group` is `glossary` and its
+`declared_at` is this declaration. A comment in the section of a selected
+heading, the last selected heading before it, acts on that heading's card:
+
+- `literal: exclude`, with no other key, suppresses the card;
+- a comment with `match` and no other key but `type: literal` adds its terms
+  after the heading's;
+- a comment with `instructions` or `cue_target` is a card of its own under
+  the rules above, in `group` `other`.
+
+**Faults** (MYC-21.2, MYC-D92). Besides an unknown type or key, a card with
+neither target nor instructions, and a target that does not resolve, a fault
+is: a comment with no `-->`, which is then no declaration and stays in a
+target's text; a body that is not a YAML mapping; a value not of its key's
+form; a declaration with neither `type` nor `literal`, other than the local
+`match` comment of the file-level form; a literal card without `match`;
+`literal: section_headings` without `heading-levels` or with a key other
+than `type` and `heading-levels`, `heading-levels` without it, or a second
+such declaration in a file; `literal: exclude`
+outside a selected heading's section or with another key; and a `match`
+comment in a section whose card is excluded. A fault is reported at the
+comment's first line. A compile with faults still writes the catalog; a
+compile fails, keeping the previous catalog, only when an enabled
+repository's artifact root exists but cannot be read completely, or the
+catalog cannot be written (MYC-D94).
 
 ### The catalog
 
@@ -154,7 +223,10 @@ mycel hub status
 ```
 
 `compile` replies with the number of cards and sources and the faults, each
-with `file`, `line` and `problem`. `match` replies with the cards it fires,
+with `file`, `line` and `problem`:
+`{"cards": 412, "sources": 37, "faults": [{"file": …, "line": 12, "problem": …}]}`,
+the faults in the catalog's order. A compile that fails replies with the
+error code `io` and keeps the previous catalog (MYC-D94). `match` replies with the cards it fires,
 in order of first appearance in the text, each with its terms and target.
 `hub status` replies `on` or `off` and the time of the last sync.
 
@@ -360,3 +432,8 @@ times only illustrative:
 | MYC-D87 <!-- 88798b31-d4f2-461b-a4b7-5a52af847c7e --> | When is the catalog compiled, and who keeps the Hub copies? | Decided by the owner on 9 November 2026 ("Agreed on everything except shadow period"), accepting the agent's proposal: by one Mycel job, run every 15 minutes and when a file it watches changes, that both compiles the catalog and writes the three Hub copies, replacing `~/.config/agent-hub/sync-codex-hub.py` and its launchd job `local.agent-hub.codex-sync` (kept as a backup); `~/.claude/CLAUDE.md` imports `~/.mycel/hub/active.md` instead of the Hub. |
 | MYC-D88 <!-- ccdbbef7-3275-4219-b961-877825ecc822 --> | What is the catalog's exact JSON form? | Chosen by the agent on 10 November 2026 in SYL-356, under MYC-21.1 and MYC-21.5, so that Mycel and Forester can be built at the same time: the keys of [The catalog file](#the-catalog-file); an `id` built from the target's anchor so that a recompile does not send a card again; `group` with `other` before `glossary`, the order the owner agreed for FOR-D129; one Python `re` expression per card; `text` composed by Mycel; and each card's `sources` and `declared_at`, so that a stale card names the lines to read (FOR-D131). |
 | MYC-D89 <!-- b8162e02-0a03-4325-a876-79057dd0a43c --> | How does a declaration name another target? | Decided by the owner on 10 November 2026 ("Agreed with Heading path"), accepting the agent's recommendation over the GitHub anchor: the [Cue Target](../../arbol/GLOSSARY.md#cue-target) form, `<repo>:<path>` or `<repo>:<path>#<heading path>`, readable and unambiguous where two sections share a heading; the catalog's `id` and `cue_target.anchor` (MYC-D88) are unchanged. |
+| MYC-D90 <!-- a305551d-e89b-4c6f-af9a-40155095b854 --> | How does a declaration say which target it has, or that it has none? | Chosen by the agent on 10 November 2026 in SYL-357, under MYC-21.2 and MYC-21.3, on the gap SYL-357 was handed when the Specification Arc closed: `cue_target: none` gives a card with `instructions` only; without `cue_target` a declaration targets the section of the last heading before it, or the whole file before the first heading; a heading path that names no section, or more than one, does not resolve; a heading is compared, titled and split into terms as written in the source, without its `#` marks, the anchor alone coming from its rendered text. |
+| MYC-D91 <!-- 04a251c4-e450-49fb-a55c-c1c1e8833115 --> | Is a `mycel:cues` comment inside a fenced code block a declaration? | Chosen by the agent on 10 November 2026 in SYL-357, under MYC-21.1, on item 1 of the Specification Arc's review: no, and it stays in a target's text, so that an example such as the one in [Declaring a card](#declaring-a-card) is neither a card nor cut out of what is sent; a declaration is an HTML comment beginning a line with `<!-- mycel:cues`, its body running to the first `-->`. |
+| MYC-D92 <!-- c998244f-ab4c-4dac-baa4-7cf69f6f19cb --> | Which keys does a declaration know, and what else is a fault? | Chosen by the agent on 10 November 2026 in SYL-357, under MYC-21.2, on item 2(b) of the Specification Arc's review: `type`, `match`, `cue_target`, `instructions`, `literal` and `heading-levels`, with `literal:` meaning `type: literal`; the further faults of [Declaring a card](#declaring-a-card), among them a comment with no `-->`, kept in a target's text, a declaration with neither `type` nor `literal`, and `section_headings` without `heading-levels` or with another key, each reported at the comment's first line. |
+| MYC-D93 <!-- ccdb4c5d-cfbc-4187-9183-c96a2ee97b05 --> | How do local comments act in a file with a `section_headings` declaration? | Chosen by the agent on 10 November 2026 in SYL-357, under MYC-21.4, on item 2(c) of the Specification Arc's review: a comment with only `match` adds terms to the card of the selected heading whose section holds it, `literal: exclude` alone suppresses that card, and a comment with `instructions` or `cue_target` is a card of its own in `group` `other`; the file-level declaration applies wherever in its file it stands, once per file. |
+| MYC-D94 <!-- 84ccc1bc-d430-4461-a8a9-480f07f3ef76 --> | Which files does the compile read, and when does a compile fail? | Chosen by the agent on 10 November 2026 in SYL-357, under MYC-21.1 and MYC-21.6, on item 2(d) of the Specification Arc's review: the Markdown files under the artifact roots of enabled repositories, read with the scan of MYC-1.6, its skip list and `.gitignore`, so that ignored folders such as Forester's `backups/` give no cards; a file under two artifact roots belongs to the innermost one's repository; a root that does not exist gives no cards; a compile fails, keeping the previous catalog, with the error `io`, only when an artifact root exists but cannot be read completely or the catalog cannot be written, never for a faulty declaration. |
