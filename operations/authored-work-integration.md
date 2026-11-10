@@ -3,6 +3,17 @@ role: authored
 ---
 # Guide: Integrate authored work into Mycel
 
+<!-- mycel:cues
+type: literal
+match: ["authored-work-integration", "integrate authored work"]
+cue_target: none
+instructions: >-
+  When integrating authored work into Mycel,
+  ~/Artifacts/mycel/operations/authored-work-integration.md is required
+  reading for coverage, Source Refs, and the owner’s ingest and embedding
+  boundaries.
+-->
+
 Use this guide when an authored artifact, implementation or test must become
 findable together with its real source obligations. Passing tests alone does
 not establish corpus coverage, dependency freshness or retrieval.

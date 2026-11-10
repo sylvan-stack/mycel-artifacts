@@ -3,6 +3,16 @@ role: authored
 ---
 # Guide: Code Research (level 2)
 
+<!-- mycel:cues
+type: literal
+match: ["code-research"]
+cue_target: none
+instructions: >-
+  When the code-research skill applies,
+  ~/Artifacts/mycel/operations/code-research.md is required reading for a
+  codebase answer with file and line evidence.
+-->
+
 Answer a question that needs evidence across files, in the session with
 file-and-line citations. Exact lookups are [level 1](code-research-levels.md);
 a durable task-context artifact is [level 3](deep-research.md).

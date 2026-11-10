@@ -9,6 +9,16 @@ Based on the supplied `SYRVE_DEV_LOGS_ACCESS.md`.
 
 ## Access
 
+<!-- mycel:cues
+type: literal
+match: ["places-api logs", "places-api-logs"]
+cue_target: none
+instructions: >-
+  For a requested places-api log investigation,
+  ~/Artifacts/mycel/operations/places-api-logs.md is required reading. The log
+  server is read-only and reports redact guest details.
+-->
+
 - The logs are reached by **SFTP only**, on a log server whose host, port, user, log directory and host fingerprint are configured locally; the [SFTP manual](../tools/places-api-sftp.md) says where. The log directory is `/webhooks`, the directory the SFTP login opens in.
 - Only listing, reading, and downloading are available. Shell commands, SSH tunnels, and writes are disabled. Do not use remote grep or rsync, which needs remote command execution.
 - Verify the host fingerprint before authenticating. Stop on a mismatch and report it to the user; never disable host verification or automatically trust an unverified scanned key.

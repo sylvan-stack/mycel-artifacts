@@ -14,6 +14,16 @@ does not fill the owner's store.
 
 ## Choose and plan the work
 
+<!-- mycel:cues
+type: literal
+match: ["corpus-admin", "embedding coverage", "embedding plan"]
+cue_target: none
+instructions: >-
+  The Mycel runbook at ~/Artifacts/mycel/tools/mycel.md is required reading
+  for corpus administration. For embedding coverage and plans,
+  ~/Artifacts/mycel/operations/embedding.md is also required reading.
+-->
+
 Mycel 2 uses the validated `embedding.model` and `embedding.dimensions` in its
 settings, not a per-repository profile. Each chunk part keeps a saved place
 line and complete exact text; splitting preserves every body byte instead of

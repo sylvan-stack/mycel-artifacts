@@ -3,6 +3,16 @@ role: authored
 ---
 # Guide: Create a Mycel Skill
 
+<!-- mycel:cues
+type: literal
+match: ["create-mycel-skill", "create a mycel skill"]
+cue_target: none
+instructions: >-
+  When creating or changing a provider-agnostic Mycel Skill,
+  ~/Artifacts/mycel/operations/create-skill.md is required reading for its
+  shared contract and provider adapters.
+-->
+
 A Mycel Skill is one provider-independent activation contract backed by a
 portable process and exposed to **native Codex CLI and Claude Code CLI**.
 

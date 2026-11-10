@@ -36,6 +36,18 @@ does · the samples.
 
 ## When to use
 
+<!-- mycel:cues
+type: literal
+match: ["(use colab)", "/use-colab", "$use-colab", "/colab", "$colab", "/learn", "$learn"]
+cue_target: none
+instructions: >-
+  The exact phrase (use colab) or an explicit /use-colab or $use-colab
+  invocation selects map use for the current work. An explicit /colab or
+  $colab selects an exchange or showup, and an explicit /learn or $learn
+  starts learn mode. The selected mode uses
+  ~/Artifacts/mycel/operations/nex-colab.md as required reading.
+-->
+
 | The owner writes | It starts | Section |
 |---|---|---|
 | `/colab "<prompt>"`; in Codex `$colab "<prompt>"` | an exchange | [An exchange, round by round](#an-exchange-round-by-round) |

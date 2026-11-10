@@ -21,6 +21,15 @@ a plan written earlier · changing a plan · what Forester does.
 
 ## When to plan
 
+<!-- mycel:cues
+type: literal
+match: ["plan-beat", "implementation plan"]
+cue_target: none
+instructions: >-
+  When writing, checking or changing a Beat’s implementation plan,
+  ~/Artifacts/mycel/operations/implementation-planning.md is required reading.
+-->
+
 - Forester answers that the Beat you booked or took has no plan
   ([FOR-D121, FOR-D127](../../forester/decisions.md)).
 - A Feature Course reaches Implementation Planning.

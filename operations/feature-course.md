@@ -10,6 +10,16 @@ defines the course.
 
 ## Follow the six stages
 
+<!-- mycel:cues
+type: literal
+match: ["feature course guide", "start a feature course", "plan a new feature"]
+cue_target: none
+instructions: >-
+  The Feature Course guide at ~/Artifacts/mycel/operations/feature-course.md
+  is required reading when taking a new feature through research,
+  specification and Beat planning.
+-->
+
 | Stage | Work with the owner | Result |
 |---|---|---|
 | 1. Idea Discussion | Listen to the feature in the owner's own words. Ask about what changes for the people who use it and restate the idea for the owner. | An idea clear enough to research. |

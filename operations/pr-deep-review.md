@@ -24,6 +24,16 @@ severity · stopping and stop criteria · failure and resume.
 
 ## When to use
 
+<!-- mycel:cues
+type: literal
+match: ["pr-deep-review"]
+cue_target: none
+instructions: >-
+  For the requested long review of a pull request,
+  ~/Artifacts/mycel/operations/pr-deep-review.md is required reading before
+  opening its state file or reviewing further changes.
+-->
+
 Start or continue a deep review when the user asks to review a named pull
 request in depth, to continue such a review, or to find the next issue in one.
 A request such as “continue the review of `<PR>`” is complete: everything

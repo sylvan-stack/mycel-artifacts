@@ -11,6 +11,16 @@ covers the detailed steps that follow.
 
 ## Choose the Saga and Arcs
 
+<!-- mycel:cues
+type: literal
+match: ["saga planning", "plan a saga"]
+cue_target: none
+instructions: >-
+  For Saga Planning, the guide at
+  ~/Artifacts/mycel/operations/saga-planning.md is required reading before
+  dividing specified work into Sagas, Arcs and Beats.
+-->
+
 Read the requirements, decisions and research before dividing the work. Find
 the existing Sagas in the [Forester Saga index](../../forester/sagas/INDEX.md).
 
@@ -57,6 +67,16 @@ Ask the owner to confirm a new Saga and its priority in the index. Existing
 Saga extensions, Arcs and Beats need no separate Saga Planning approval.
 
 ## Review the Arc
+
+<!-- mycel:cues
+type: literal
+match: ["arc review", "review an arc"]
+cue_target: none
+instructions: >-
+  For a requested Arc Review, ~/Artifacts/mycel/operations/saga-planning.md is
+  required reading. The review follows the testing Beat and belongs to a
+  session that took none of the Arc’s Beats.
+-->
 
 When the final testing Beat is complete, the Arc enters In Review. The
 Forester action item that dispatches the review is specified in

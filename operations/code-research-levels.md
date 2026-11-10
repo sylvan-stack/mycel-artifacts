@@ -3,6 +3,17 @@ role: authored
 ---
 # Guide: Code Research Levels
 
+<!-- mycel:cues
+type: literal
+match: ["research levels", "choose a search tool", "mycel-search"]
+cue_target: none
+instructions: >-
+  The research levels guide at
+  ~/Artifacts/mycel/operations/code-research-levels.md is required reading
+  when choosing a search method or using mycel-search for a one-location
+  lookup.
+-->
+
 Start with the least work that can answer the request. Exact lookup, a cited
 explanation, and durable task context need different amounts of investigation.
 Follow the [Hub's dated pre-ingest instruction](../README.md): until the owner

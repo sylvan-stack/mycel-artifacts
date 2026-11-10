@@ -19,6 +19,15 @@ and gaps when requested; it creates no commit, release or qualification gate.
 
 ## Establish the scope and authority
 
+<!-- mycel:cues
+type: literal
+match: ["origin coverage", "justify code", "justify changed code"]
+cue_target: none
+instructions: >-
+  When auditing Origin Coverage or justifying changed code and documents,
+  ~/Artifacts/mycel/operations/justification.md is required reading.
+-->
+
 Read the [Hub's current operator instructions](../README.md) before any store
 operation. On 26 October 2026 the owner lifted the dated 22 October
 direction that reserved the first ingest to the owner, and asked an agent to

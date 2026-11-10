@@ -7,6 +7,17 @@ Use this guide when implementing changes, reviewing tests, or performing a testi
 
 ## The owner decides when testing starts
 
+<!-- mycel:cues
+type: literal
+match: ["test strategy", "write tests", "run tests", "test tier"]
+cue_target: none
+instructions: >-
+  Sylvan Stack test work starts in a separate task explicitly requested by the
+  owner. Implementation work uses test-free static checks. The Test Strategy
+  at ~/Artifacts/mycel/operations/test-strategy.md and the repository’s
+  TESTS.md are required reading before test work.
+-->
+
 During implementation, do not add, edit, repair, refactor, classify, retire,
 restore or run tests of any tier. This includes fixtures, snapshots, test data,
 test runners and test inventories. Do not bundle test maintenance with a feature,

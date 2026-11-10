@@ -3,6 +3,16 @@ role: authored
 ---
 # Guide: Deep Research (level 3)
 
+<!-- mycel:cues
+type: literal
+match: ["deep-research"]
+cue_target: none
+instructions: >-
+  When the deep-research skill applies,
+  ~/Artifacts/mycel/operations/deep-research.md is required reading for a
+  durable research artifact.
+-->
+
 Long-running research that **produces or updates a research artifact** —
 task-context building, multi-angle coverage of everything a task might touch.
 Level 3 of [code-research-levels](code-research-levels.md): reach for it when

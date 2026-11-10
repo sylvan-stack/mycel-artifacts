@@ -46,6 +46,16 @@ Owner Goals in other work.
 
 ## Reading the request
 
+<!-- mycel:cues
+type: literal
+match: ["/owner-goals", "$owner-goals"]
+cue_target: none
+instructions: >-
+  An explicit Owner Goals invocation uses
+  ~/Artifacts/mycel/operations/owner-goals.md as required reading. Changes to
+  Owner Goals go through the goals command.
+-->
+
 One prompt may ask for several of these at once, such as "drivers are now in
 Rust, not Python, and show me the list". Do them in the order the owner gave.
 
