@@ -5,9 +5,9 @@ role: authored
 
 ## _headings
 
-Reason: Retain matching parent containers when a dedent closes an inner fence, so a new fence can still be scoped to its outer item.
+Reason: Recognize list-contained Cue Card headings while preserving written titles, source ranges and ingest boundaries
 
-Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-8dcc249a · 2026-11-10
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-19860f0e · 2026-11-10
 
 ## <before outline_markdown>
 
@@ -89,9 +89,9 @@ Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-75382381 · 2026-11-10
 
 ## _container_prefix
 
-Reason: Keep a fence after a second blank line outside the empty list item, so cue examples within it remain literal.
+Reason: Recognize list-contained Cue Card headings while preserving written titles, source ranges and ingest boundaries
 
-Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-6a2b3488 · 2026-11-10
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-19860f0e · 2026-11-10
 
 ## _in_container
 
@@ -104,4 +104,10 @@ Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-8dcc249a · 2026-11-10
 Reason: Retain matching parent containers when a dedent closes an inner fence, so a new fence can still be scoped to its outer item.
 
 Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-8dcc249a · 2026-11-10
+
+## _written_view
+
+Reason: Recognize list-contained Cue Card headings while preserving written titles, source ranges and ingest boundaries
+
+Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-19860f0e · 2026-11-10
 
