@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-21
-status: accepted
+status: implemented
 ---
 # Mycel · 21 Cue Cards
 
@@ -405,6 +405,19 @@ times only illustrative:
   ]
 }
 ```
+
+## Qualification
+
+10 November 2026 · The independent Mycel Cue Cards Arc Review accepted
+all eleven requirements. The named unit checks in SYL-361 passed again
+in installed Build `17`, built from published Mycel `995e369`. Its public
+catalog regression includes the qualified target and anchor corrections.
+The review of MYC-21.10 and MYC-21.11 verified the isolated on-mode refresh
+of all three Hub copies, the registered job's load, watch and interval
+runs, and a fresh catalog published by Build `17`.
+[Named checks and original job qualification](../../forester/sagas/sylvan-stack/cue-cards/mycel-cue-cards/SYL-361.md#myc-21-qualification) ·
+[Build 17 qualification](../../forester/sagas/sylvan-stack/cue-cards/mycel-cue-cards/SYL-395.md#hand-over) ·
+[Final Arc Review](../../forester/sagas/sylvan-stack/cue-cards/mycel-cue-cards/arc.md#final-arc-review)
 
 ## Known problems
 
