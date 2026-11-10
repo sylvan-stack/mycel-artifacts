@@ -65,9 +65,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-1efd5d36 
 
 ## CueCardTests.test_heading_cards_preserve_prose_aliases_and_unique_anchors
 
-Reason: Qualify the five Cue Card compiler review fixes with public command regressions and register the exact checks.
+Reason: Qualify Cue Card publication after multiline HTML end tags, rendered anchors for balanced links, and isolation from literal NUL in headings.
 
-Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-21.6 · Intention i-5548e096 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D88, MYC-D90, MYC-D91, MYC-D94 · Intention i-27000709 · 2026-11-10
 
 ## CueCardTests.test_invalid_escaped_scalars_report_faults_without_losing_valid_cards
 
@@ -77,9 +77,9 @@ Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-21.6 · Intention i-5548e096 · 2026-
 
 ## CueCardTests.test_html_container_declares_a_card_and_preserves_literal_examples
 
-Reason: Qualify front matter fault isolation and HTML token boundaries for Cue Card compilation.
+Reason: Qualify Cue Card publication after multiline HTML end tags, rendered anchors for balanced links, and isolation from literal NUL in headings.
 
-Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-513f6972 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D88, MYC-D90, MYC-D91, MYC-D94 · Intention i-27000709 · 2026-11-10
 
 ## CueCardTests.test_malformed_tagged_values_leave_valid_cards_in_the_catalog
 
@@ -98,4 +98,10 @@ Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-513f6972 
 Reason: Qualify front matter fault isolation and HTML token boundaries for Cue Card compilation.
 
 Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-513f6972 · 2026-11-10
+
+## CueCardTests.test_literal_nul_in_heading_preserves_catalog_publication
+
+Reason: Qualify Cue Card publication after multiline HTML end tags, rendered anchors for balanced links, and isolation from literal NUL in headings.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D88, MYC-D90, MYC-D91, MYC-D94 · Intention i-27000709 · 2026-11-10
 
