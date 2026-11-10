@@ -5,13 +5,13 @@ role: authored
 
 ## Test inventory: mycel > Retained selections
 
-Reason: Qualify Cue Card compilation, catalog publication, matching and Hub switch recovery with independent temporary fixtures and registered top-tier selectors.
+Reason: Qualify the five Cue Card compiler review fixes with public command regressions and register the exact checks.
 
-Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, MYC-21.8, MYC-21.9 · Intention i-8e730c9e · 2026-11-10
+Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-21.6 · Intention i-5548e096 · 2026-11-10
 
 ## Test inventory: mycel
 
-Reason: Qualify Cue Card compilation, catalog publication, matching and Hub switch recovery with independent temporary fixtures and registered top-tier selectors.
+Reason: Qualify the five Cue Card compiler review fixes with public command regressions and register the exact checks.
 
-Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, MYC-21.8, MYC-21.9 · Intention i-8e730c9e · 2026-11-10
+Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-21.6 · Intention i-5548e096 · 2026-11-10
 
