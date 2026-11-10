@@ -5,9 +5,9 @@ role: authored
 
 ## _headings
 
-Reason: Apply the list interruption rule before recognizing fences so that an ordered marker continuing a paragraph leaves the next cue declaration visible
+Reason: Keep a fence after a second blank line outside the empty list item, so cue examples within it remain literal.
 
-Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-8f620859 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-6a2b3488 · 2026-11-10
 
 ## <before outline_markdown>
 
@@ -89,7 +89,7 @@ Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-75382381 · 2026-11-10
 
 ## _container_prefix
 
-Reason: Keep a fence in a blank-start list item scoped to the item, so a dedented declaration is found and the fenced example stays in both targets.
+Reason: Keep a fence after a second blank line outside the empty list item, so cue examples within it remain literal.
 
-Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-8eaf04d7 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-6a2b3488 · 2026-11-10
 
