@@ -5,9 +5,9 @@ role: authored
 
 ## <before _Paths>
 
-Reason: Prepare the three Hub copies and private backups while preserving unrelated Codex settings
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
 
-Origins: MYC-21.9, MYC-D87 · Intention i-2b220eae · 2026-11-10
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
 
 ## _File
 
@@ -77,9 +77,9 @@ Origins: MYC-21.9 · Intention i-53a66ee2 · 2026-11-10
 
 ## _read_state
 
-Reason: Read recorded or agreed existing Hub mode and last successful sync without writing any files
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
 
-Origins: MYC-21.9 · Intention i-53a66ee2 · 2026-11-10
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
 
 ## _text
 
@@ -107,9 +107,9 @@ Origins: MYC-21.9, MYC-D87 · Intention i-2b220eae · 2026-11-10
 
 ## _backup
 
-Reason: Prepare the three Hub copies and private backups while preserving unrelated Codex settings
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
 
-Origins: MYC-21.9, MYC-D87 · Intention i-2b220eae · 2026-11-10
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
 
 ## _codex_assignment
 
@@ -131,9 +131,9 @@ Origins: MYC-21.9, MYC-D87 · Intention i-2b220eae · 2026-11-10
 
 ## _staged_copies
 
-Reason: Prepare the three Hub copies and private backups while preserving unrelated Codex settings
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
 
-Origins: MYC-21.9, MYC-D87 · Intention i-2b220eae · 2026-11-10
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
 
 ## _temporary
 
@@ -152,4 +152,52 @@ Origins: MYC-21.9, MYC-D87 · Intention i-2b220eae · 2026-11-10
 Reason: Prepare the three Hub copies and private backups while preserving unrelated Codex settings
 
 Origins: MYC-21.9, MYC-D87 · Intention i-2b220eae · 2026-11-10
+
+## _apply_mode
+
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
+
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
+
+## _fsync_parent
+
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
+
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
+
+## _hub_lock
+
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
+
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
+
+## _replace
+
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
+
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
+
+## _require_unchanged
+
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
+
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
+
+## _save_state
+
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
+
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
+
+## _saved_state
+
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
+
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
+
+## _switch
+
+Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
+
+Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
 
