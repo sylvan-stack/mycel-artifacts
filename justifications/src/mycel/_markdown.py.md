@@ -5,9 +5,9 @@ role: authored
 
 ## _headings
 
-Reason: Keep a fence after a second blank line outside the empty list item, so cue examples within it remain literal.
+Reason: Retain matching parent containers when a dedent closes an inner fence, so a new fence can still be scoped to its outer item.
 
-Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-6a2b3488 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-8dcc249a · 2026-11-10
 
 ## <before outline_markdown>
 
@@ -92,4 +92,16 @@ Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-75382381 · 2026-11-10
 Reason: Keep a fence after a second blank line outside the empty list item, so cue examples within it remain literal.
 
 Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-6a2b3488 · 2026-11-10
+
+## _in_container
+
+Reason: Retain matching parent containers when a dedent closes an inner fence, so a new fence can still be scoped to its outer item.
+
+Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-8dcc249a · 2026-11-10
+
+## _container_view
+
+Reason: Retain matching parent containers when a dedent closes an inner fence, so a new fence can still be scoped to its outer item.
+
+Origins: MYC-21.1, MYC-21.5, MYC-D91 · Intention i-8dcc249a · 2026-11-10
 
