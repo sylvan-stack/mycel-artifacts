@@ -5,9 +5,9 @@ role: authored
 
 ## <before _File>
 
-Reason: Keep the visible text of GFM URI autolinks intact while resolving surrounding Markdown heading references.
+Reason: Consume complete inline HTML tags during heading rendering so quoted greater-than signs stay inside attributes, and derive the anchor and card ID from rendered text while keeping the written heading.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-86182f10 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-fac6123c · 2026-11-10
 
 ## <before _Loader>
 
@@ -203,9 +203,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 
 ## _rendered
 
-Reason: Consume each opening backtick run in full and leave it literal if no equally long closing run exists, preserving links in heading anchors
+Reason: Consume complete inline HTML tags during heading rendering so quoted greater-than signs stay inside attributes, and derive the anchor and card ID from rendered text while keeping the written heading.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-c9ae6880 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-fac6123c · 2026-11-10
 
 ## _repositories
 
@@ -305,9 +305,9 @@ Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-D88, MYC-D91, MYC-D92, MYC-D93 · Int
 
 ## <before _inline_link_end>
 
-Reason: Consume each opening backtick run in full and leave it literal if no equally long closing run exists, preserving links in heading anchors
+Reason: Consume complete inline HTML tags during heading rendering so quoted greater-than signs stay inside attributes, and derive the anchor and card ID from rendered text while keeping the written heading.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-c9ae6880 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-fac6123c · 2026-11-10
 
 ## _inline_link_end
 
@@ -317,9 +317,9 @@ Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-3451e9d3 · 2026-11-10
 
 ## _link_labels
 
-Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
+Reason: Consume complete inline HTML tags during heading rendering so quoted greater-than signs stay inside attributes, and derive the anchor and card ID from rendered text while keeping the written heading.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-fac6123c · 2026-11-10
 
 ## _heading_reference_end
 
