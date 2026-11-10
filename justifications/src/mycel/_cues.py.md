@@ -5,9 +5,9 @@ role: authored
 
 ## <before _File>
 
-Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
 
-Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
 
 ## <before _Loader>
 
@@ -203,9 +203,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 
 ## _rendered
 
-Reason: Normalize NUL for heading rendering so source text cannot impersonate an internal placeholder or stop publication.
+Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
 
-Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D90, MYC-D94 · Intention i-5dfa590c · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
 
 ## _repositories
 
@@ -221,15 +221,15 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 
 ## _sections
 
-Reason: Preserve exact Cue Card text, apply aliases to their containing heading, allocate unique anchors, and isolate malformed YAML scalars.
+Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
 
-Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-D88, MYC-D91, MYC-D92, MYC-D93 · Intention i-2d1419a4 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
 
 ## _slug
 
-Reason: SYL-357 steps 3-9: MYC-21.1-21.7 compile mycel:cues declarations into the catalog (artifact-root walk, Markdown outline, compiler, mycel cues compile, guide)
+Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
 
-Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, MYC-D88, MYC-D89, MYC-D90, MYC-D91, MYC-D92, MYC-D93, MYC-D94 · Intention i-49ff28f1 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
 
 ## _target_text
 
@@ -305,9 +305,9 @@ Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-D88, MYC-D91, MYC-D92, MYC-D93 · Int
 
 ## <before _inline_link_end>
 
-Reason: Render the label without the destination when a heading link contains balanced parentheses.
+Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-3451e9d3 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
 
 ## _inline_link_end
 
@@ -317,7 +317,13 @@ Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-3451e9d3 · 2026-11-10
 
 ## _link_labels
 
-Reason: Render the label without the destination when a heading link contains balanced parentheses.
+Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-3451e9d3 · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
+
+## _heading_reference_end
+
+Reason: Resolve heading link references against the target document before deriving Cue Card anchors and IDs.
+
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-2f135abc · 2026-11-10
 
