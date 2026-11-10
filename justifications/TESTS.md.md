@@ -5,13 +5,13 @@ role: authored
 
 ## Tests: mycel > Active top tier
 
-Reason: Add and inventory focused store checks for identifier allocation, migration and retention, and match tiered test paths to their runner names.
+Reason: Qualify Cue Card compilation, catalog publication, matching and Hub switch recovery with independent temporary fixtures and registered top-tier selectors.
 
-Origins: MYC-D74, MYC-D72 · Intention i-df6fea19 · 2026-11-09
+Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, MYC-21.8, MYC-21.9 · Intention i-8e730c9e · 2026-11-10
 
 ## Tests: mycel > Selection and limits
 
-Reason: Add and inventory focused store checks for identifier allocation, migration and retention, and match tiered test paths to their runner names.
+Reason: Qualify Cue Card compilation, catalog publication, matching and Hub switch recovery with independent temporary fixtures and registered top-tier selectors.
 
-Origins: MYC-D74, MYC-D72 · Intention i-df6fea19 · 2026-11-09
+Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, MYC-21.8, MYC-21.9 · Intention i-8e730c9e · 2026-11-10
 
