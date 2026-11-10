@@ -5,9 +5,9 @@ role: authored
 
 ## Tests: mycel > Active top tier
 
-Reason: Verify exact Cue Card targets after a list reference definition and under a heading in a surviving outer list item
+Reason: Verify the exact published Cue Card when a heading reference is defined after a nested list item ends
 
-Origins: MYC-21.3, MYC-21.5, MYC-D88, MYC-D90, MYC-D91 · Intention i-f2fabebd · 2026-11-10
+Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-eb3063a0 · 2026-11-10
 
 ## Tests: mycel > Selection and limits
 
