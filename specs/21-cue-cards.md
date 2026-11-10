@@ -149,6 +149,182 @@ with `file`, `line` and `problem`. `match` replies with the cards it fires,
 in order of first appearance in the text, each with its terms and target.
 `hub status` replies `on` or `off` and the time of the last sync.
 
+### The catalog file
+
+`~/.mycel/cues/catalog.json` is one JSON object in UTF-8, written whole by
+`mycel cues compile` (MYC-21.6). Its reader, Forester, needs nothing else: no
+Markdown, no matching rule (FOR-2, [Cue Cards](../../forester/specs/02-hooks.md#cue-cards)).
+The form is MYC-D88.
+
+| Key | Holds |
+|---|---|
+| `version` | the integer `1`; a reader that finds another value, or no file, treats it as no catalog |
+| `compiled_at` | when the compile ran, UTC, ISO 8601 |
+| `cards` | the cards, sorted by `id` in Unicode code point order |
+| `sources` | one record per file a card's text comes from, sorted by `path` in code point order |
+| `faults` | the declarations that did not compile (MYC-21.2), each `file`, `line` and `problem`, as `compile` replies, sorted by `file`, then `line` |
+
+**A card** has these keys, all present, `null` where the table says so:
+
+| Key | Holds |
+|---|---|
+| `id` | a name that stays the same from one compile to the next while the target keeps its heading: `<repo>:<path>#<anchor>` of the card's target section, with `<path>` relative to the repository's artifact root; `<repo>:<path>` for a whole file; for a card with instructions only, `<repo>:<path>#<anchor>` of the section that holds its declaration, or `<repo>:<path>` when the declaration stands before the first heading. Several cards that would get one `id` keep it for the first and get `~2`, `~3` for the others, in the order of their declaring file's path, then of `declared_at`'s `first_line` |
+| `type` | `literal` |
+| `group` | `glossary` for a card derived from a file-level `section_headings` declaration (MYC-21.4), `other` for every other card; FOR-2 delivers `other` first |
+| `title` | the target's heading; for a whole file its first heading, or its file name if it has none; for a card with instructions only, its first term. The overflow statement lists cards by it |
+| `match` | the terms that fire the card, as written, derived ones included: `Fold / Projection` gives `["Fold", "Projection"]` |
+| `pattern` | one expression in the syntax of Python's `re` that applies MYC-D85 to all the terms (below) |
+| `cue_target` | `path`, `heading`, `anchor`, `first_line` and `last_line` of the target; for a whole file `heading` and `anchor` are `null` and the lines run from the first line after its YAML front matter (1 if it has none) to its last line; the whole key is `null` for a card with instructions only |
+| `instructions` | the card's instructions as written, or `null` |
+| `text` | the exact text a delivery adds: the instructions without trailing line breaks, then `\n\n`, then the target's text; or only one of the two (MYC-21.3) |
+| `sources` | the `path` of every file the text comes from: the declaration's file and the target's file, once each |
+| `declared_at` | `path`, `first_line` and `last_line` of the whole `mycel:cues` comment that declares the card |
+
+A target section runs from its heading line to the line before the next
+heading with the same number of `#` or fewer, without trailing blank lines; a
+heading inside a fenced code block is not a heading. Its anchor is the one
+GitHub gives the heading. The target's text is those lines, or the whole
+file's lines without its YAML front matter, with every `mycel:cues` comment
+left out, each removed comment taking one blank line that follows it with it,
+joined by `\n`, with no final line break. Paths are absolute; lines count
+from 1.
+
+**The pattern.** Each term is split at white space, each word escaped with
+`re.escape`, and the words joined by `\s+`, so that a term broken over a line
+still matches; the terms, longest first and terms of one length in the order written, are
+joined into
+`(?i)(?<!\w)(?:<term>|<term>…)(?:e?s)?(?!\w)`. The reader uses it as it
+stands with `re.search` on the whole message, fenced code blocks included,
+adding no flags. The start of the first match is where the card's terms first
+appear; cards that first appear at the same place keep the order of `cards`.
+`mycel cues match` uses the same expressions (MYC-21.8).
+
+**A source** has `path` (absolute), `repo` (the configured repository whose
+artifact root holds it), `size` in bytes, `mtime_ns`, the modification time in
+integer nanoseconds, and `sha256`, of the file as the compile read it. A source
+is stale when the file's size or `mtime_ns` on disk differs from the record,
+and a card is stale when any of its `sources` is. FOR-2 says what Forester then
+sends.
+
+An example, with texts and digests shortened and line numbers, sizes and
+times only illustrative:
+
+```json
+{
+  "version": 1,
+  "compiled_at": "2026-11-10T14:05:00Z",
+  "cards": [
+    {
+      "id": "arbol:GLOSSARY.md#arc-review",
+      "type": "literal",
+      "group": "glossary",
+      "title": "Arc Review",
+      "match": [
+        "Arc Review"
+      ],
+      "pattern": "(?i)(?<!\\w)(?:Arc\\s+Review)(?:e?s)?(?!\\w)",
+      "cue_target": {
+        "path": "/Users/msix/Artifacts/arbol/GLOSSARY.md",
+        "heading": "Arc Review",
+        "anchor": "arc-review",
+        "first_line": 202,
+        "last_line": 206
+      },
+      "instructions": null,
+      "text": "## Arc Review\n\nThe last step of an [Arc](#arc): once all its [Beats](#beat) are finished, … \n\n**Example:** The three Beats of an Arc that adds a command are finished. …",
+      "sources": [
+        "/Users/msix/Artifacts/arbol/GLOSSARY.md"
+      ],
+      "declared_at": {
+        "path": "/Users/msix/Artifacts/arbol/GLOSSARY.md",
+        "first_line": 3,
+        "last_line": 7
+      }
+    },
+    {
+      "id": "mycel:README.md#working-rules-for-every-task",
+      "type": "literal",
+      "group": "other",
+      "title": "commit",
+      "match": [
+        "commit",
+        "push"
+      ],
+      "pattern": "(?i)(?<!\\w)(?:commit|push)(?:e?s)?(?!\\w)",
+      "cue_target": null,
+      "instructions": "Commits use the identity Git already has; no agent is credited …",
+      "text": "Commits use the identity Git already has; no agent is credited …",
+      "sources": [
+        "/Users/msix/Artifacts/mycel/README.md"
+      ],
+      "declared_at": {
+        "path": "/Users/msix/Artifacts/mycel/README.md",
+        "first_line": 118,
+        "last_line": 122
+      }
+    },
+    {
+      "id": "mycel:operations/implementation-planning.md#the-procedure",
+      "type": "literal",
+      "group": "other",
+      "title": "The procedure",
+      "match": [
+        "plan-beat",
+        "implementation plan"
+      ],
+      "pattern": "(?i)(?<!\\w)(?:implementation\\s+plan|plan\\-beat)(?:e?s)?(?!\\w)",
+      "cue_target": {
+        "path": "/Users/msix/Artifacts/mycel/operations/implementation-planning.md",
+        "heading": "The procedure",
+        "anchor": "the-procedure",
+        "first_line": 71,
+        "last_line": 102
+      },
+      "instructions": "A Beat's plan is written by this procedure before its first step.",
+      "text": "A Beat's plan is written by this procedure before its first step.\n\n## The procedure\n\n1. **Read the inputs.** …",
+      "sources": [
+        "/Users/msix/Artifacts/mycel/operations/implementation-planning.md"
+      ],
+      "declared_at": {
+        "path": "/Users/msix/Artifacts/mycel/operations/implementation-planning.md",
+        "first_line": 73,
+        "last_line": 77
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/msix/Artifacts/arbol/GLOSSARY.md",
+      "repo": "arbol",
+      "size": 187342,
+      "mtime_ns": 1794268800000000000,
+      "sha256": "3f1c…"
+    },
+    {
+      "path": "/Users/msix/Artifacts/mycel/README.md",
+      "repo": "mycel",
+      "size": 14210,
+      "mtime_ns": 1794265200000000000,
+      "sha256": "9a07…"
+    },
+    {
+      "path": "/Users/msix/Artifacts/mycel/operations/implementation-planning.md",
+      "repo": "mycel",
+      "size": 7633,
+      "mtime_ns": 1794182400000000000,
+      "sha256": "c45e…"
+    }
+  ],
+  "faults": [
+    {
+      "file": "/Users/msix/Artifacts/mycel/operations/code-research.md",
+      "line": 12,
+      "problem": "unknown type: meaning"
+    }
+  ]
+}
+```
+
 ## Known problems
 
 - The owner set the first version to literal cards only, so the cards that
@@ -173,3 +349,4 @@ in order of first appearance in the text, each with its terms and target.
 | MYC-D85 <!-- 401f2c02-3d6b-4c9e-a77a-8f8de7569519 --> | How does a literal term match? | Decided by the owner on 9 November 2026 ("Agreed on everything except shadow period"), accepting the agent's proposal: case-insensitive, as whole words, also with a trailing `s` or `es`, so that "sagas" fires "Saga"; matches inside a fenced code block of the message count too. |
 | MYC-D86 <!-- 2d402f73-7adb-493f-9aa6-0788991af584 --> | Where are cards declared, and what becomes of Cue Channel and Cue Command? | Decided by the owner on 9 November 2026, agreeing to the agent's proposal: beside their targets in `mycel:cues` comments, compiled into one catalog; Cue Channel is replaced by the card's `type` and Cue Command by the one effect a card has, adding its text. |
 | MYC-D87 <!-- 88798b31-d4f2-461b-a4b7-5a52af847c7e --> | When is the catalog compiled, and who keeps the Hub copies? | Decided by the owner on 9 November 2026 ("Agreed on everything except shadow period"), accepting the agent's proposal: by one Mycel job, run every 15 minutes and when a file it watches changes, that both compiles the catalog and writes the three Hub copies, replacing `~/.config/agent-hub/sync-codex-hub.py` and its launchd job `local.agent-hub.codex-sync` (kept as a backup); `~/.claude/CLAUDE.md` imports `~/.mycel/hub/active.md` instead of the Hub. |
+| MYC-D88 <!-- ccdbbef7-3275-4219-b961-877825ecc822 --> | What is the catalog's exact JSON form? | Chosen by the agent on 10 November 2026 in SYL-356, under MYC-21.1 and MYC-21.5, so that Mycel and Forester can be built at the same time: the keys of [The catalog file](#the-catalog-file); an `id` built from the target's anchor so that a recompile does not send a card again; `group` with `other` before `glossary`, the order the owner agreed for FOR-D129; one Python `re` expression per card; `text` composed by Mycel; and each card's `sources` and `declared_at`, so that a stale card names the lines to read (FOR-D131). |

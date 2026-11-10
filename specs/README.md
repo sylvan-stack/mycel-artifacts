@@ -139,6 +139,7 @@ MYC-D1 records the owner’s Python decision; MYC-15 makes its independent distr
 | MYC-D86 · Where are cards declared? | Decided 9 November 2026 by the owner: beside their targets, compiled into one catalog; Cue Channel and Cue Command replaced | [MYC-D86](21-cue-cards.md#decisions) |
 | MYC-D85 · How does a literal term match? | Decided 9 November 2026 by the owner: case-insensitive, whole words, with a trailing `s` or `es`; matches in code blocks count | [MYC-D85](21-cue-cards.md#decisions) |
 | MYC-D87 · When is the catalog compiled, and who keeps the Hub copies? | Decided 9 November 2026 by the owner: one Mycel job, every 15 minutes and on change, compiles the catalog and writes the three Hub copies, replacing the agent-hub sync | [MYC-D87](21-cue-cards.md#decisions) |
+| MYC-D88 · What is the catalog's exact JSON form? | Chosen 10 November 2026 by the agent in SYL-356, under MYC-21.1 and MYC-21.5: one JSON object with `version` 1, cards sorted by `id`, one Python `re` expression and the composed text per card, and source records with size, `mtime_ns` and SHA-256 | [MYC-D88](21-cue-cards.md#decisions) |
 
 ## Conventions
 
