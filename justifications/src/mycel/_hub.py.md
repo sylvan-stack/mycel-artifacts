@@ -5,9 +5,9 @@ role: authored
 
 ## <before _Paths>
 
-Reason: Apply the Hub copies atomically under one lock and retain a pending mode through interrupted updates
+Reason: Expose the Hub switch and status and give the replacement job its single sync entry point
 
-Origins: MYC-21.9 · Intention i-689e0f51 · 2026-11-10
+Origins: MYC-21.9, MYC-21.10 · Intention i-f7a425e8 · 2026-11-10
 
 ## _File
 
@@ -209,7 +209,13 @@ Origins: MYC-21.10, MYC-21.11, MYC-D87 · Intention i-f56f15de · 2026-11-10
 
 ## _sync
 
-Reason: Run one Hub and catalog sync action and serialize catalog compiles across invocations
+Reason: Expose the Hub switch and status and give the replacement job its single sync entry point
 
-Origins: MYC-21.10, MYC-21.11, MYC-D87 · Intention i-f56f15de · 2026-11-10
+Origins: MYC-21.9, MYC-21.10 · Intention i-f7a425e8 · 2026-11-10
+
+## handle_hub
+
+Reason: Expose the Hub switch and status and give the replacement job its single sync entry point
+
+Origins: MYC-21.9, MYC-21.10 · Intention i-f7a425e8 · 2026-11-10
 
