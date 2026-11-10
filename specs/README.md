@@ -146,6 +146,7 @@ MYC-D1 records the owner’s Python decision; MYC-15 makes its independent distr
 | MYC-D92 · Which keys does a declaration know, and what else is a fault? | Chosen 10 November 2026 by the agent in SYL-357, under MYC-21.2: `type`, `match`, `cue_target`, `instructions`, `literal`, `heading-levels`, with `literal:` meaning `type: literal`, and the further faults listed in MYC-21 | [MYC-D92](21-cue-cards.md#decisions) |
 | MYC-D93 · How do local comments act in a file with a `section_headings` declaration? | Chosen 10 November 2026 by the agent in SYL-357, under MYC-21.4: `match` alone adds terms to its section's glossary card, `literal: exclude` suppresses it, `instructions` or `cue_target` makes a card of its own in group `other` | [MYC-D93](21-cue-cards.md#decisions) |
 | MYC-D94 · Which files does the compile read, and when does a compile fail? | Chosen 10 November 2026 by the agent in SYL-357, under MYC-21.1 and MYC-21.6: Markdown under enabled repositories' artifact roots with MYC-1.6's scan; a compile fails only when a root cannot be read or the catalog cannot be written | [MYC-D94](21-cue-cards.md#decisions) |
+| MYC-D95 · What does a Saga show between its last Beat and closure? | Decided 10 November 2026 by the owner. Once all Beats are finished, show In Review while an Arc is in review and Ready to Close when all Arcs are Done. [MYC-20](20-feature-course.md#decisions). |
 
 ## Conventions
 
