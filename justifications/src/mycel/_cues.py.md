@@ -279,3 +279,9 @@ Reason: SYL-357 steps 3-9: MYC-21.1-21.7 compile mycel:cues declarations into th
 
 Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, MYC-D88, MYC-D89, MYC-D90, MYC-D91, MYC-D92, MYC-D93, MYC-D94 · Intention i-49ff28f1 · 2026-11-10
 
+## _read_catalog_cards
+
+Reason: Read catalog version 1 from the compiler path and preserve card order for matching
+
+Origins: MYC-21.8, MYC-D88 · Intention i-9fb95a11 · 2026-11-10
+
