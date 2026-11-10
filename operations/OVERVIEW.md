@@ -77,6 +77,12 @@ not yet filled the index, so current research uses grep and file reads.
   document carries the evidence into planning, and a gap in the specification
   sends that behavior back to Spec Writing for the owner’s decision.
 
+## Saga Planning and Arc Review
+
+- **[Saga Planning and Arc Review](saga-planning.md)** — turn a specification
+  into Sagas, Arcs and ordered Beats. Once an Arc’s testing Beat finishes,
+  a session that took none of its Beats reviews the combined result.
+
 ## Planning a Beat
 
 - **[Planning a Beat](implementation-planning.md)** — before a Beat is
