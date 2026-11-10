@@ -5,9 +5,9 @@ role: authored
 
 ## <before _File>
 
-Reason: Report a catalog write as published once the atomic replacement succeeds.
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
 
-Origins: MYC-21.6, MYC-D94 · Intention i-e35443d6 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
 
 ## <before _Loader>
 
@@ -179,9 +179,9 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 
 ## _declaration
 
-Reason: Keep typed YAML constructor failures local to the declaration and recognize cue comments inside ordinary HTML blocks.
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
 
-Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-d4bdab31 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
 
 ## _last_line
 

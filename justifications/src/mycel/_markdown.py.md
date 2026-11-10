@@ -5,15 +5,15 @@ role: authored
 
 ## _headings
 
-Reason: Keep typed YAML constructor failures local to the declaration and recognize cue comments inside ordinary HTML blocks.
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
 
-Origins: MYC-21.1, MYC-21.2, MYC-21.5, MYC-D91, MYC-D92 · Intention i-d4bdab31 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
 
 ## <before outline_markdown>
 
-Reason: SYL-357 steps 3-9: MYC-21.1-21.7 compile mycel:cues declarations into the catalog (artifact-root walk, Markdown outline, compiler, mycel cues compile, guide)
+Removed: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
 
-Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, MYC-D88, MYC-D89, MYC-D90, MYC-D91, MYC-D92, MYC-D93, MYC-D94 · Intention i-49ff28f1 · 2026-11-10
+Removed by Intention i-42995bcc · 2026-11-10
 
 ## CueComment
 
@@ -23,9 +23,9 @@ Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-D88, MYC-D91, MYC-D92, MYC-D93 · Int
 
 ## MarkdownOutline
 
-Reason: SYL-357 steps 3-9: MYC-21.1-21.7 compile mycel:cues declarations into the catalog (artifact-root walk, Markdown outline, compiler, mycel cues compile, guide)
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
 
-Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, MYC-D88, MYC-D89, MYC-D90, MYC-D91, MYC-D92, MYC-D93, MYC-D94 · Intention i-49ff28f1 · 2026-11-10
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
 
 ## OutlineHeading
 
@@ -38,4 +38,52 @@ Origins: MYC-21.1, MYC-21.2, MYC-21.3, MYC-21.4, MYC-21.5, MYC-21.6, MYC-21.7, M
 Reason: Preserve exact Cue Card text, apply aliases to their containing heading, allocate unique anchors, and isolate malformed YAML scalars.
 
 Origins: MYC-21.2, MYC-21.4, MYC-21.5, MYC-D88, MYC-D91, MYC-D92, MYC-D93 · Intention i-2d1419a4 · 2026-11-10
+
+## <before MarkdownDecodeError>
+
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+
+## _FrontmatterError.__init__
+
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+
+## _frontmatter
+
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+
+## <before _SettingsLoader>
+
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+
+## _CueHTML
+
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+
+## _CueHTML.__init__
+
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+
+## _CueHTML.pending
+
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
+
+## _CueHTML.scan
+
+Reason: Reuse YAML input fault handling for front matter and scan HTML cue comments across tag and attribute boundaries.
+
+Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D91, MYC-D94 · Intention i-42995bcc · 2026-11-10
 
