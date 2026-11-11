@@ -184,6 +184,27 @@ has no review of its own.
 | MYC-20.13 <!-- 2d75fc11-3e17-4efb-b417-ea69f3c0dd3a --> | report, for a Beat's file, every problem of its plan's form, every file a code step names that neither exists nor has an existing folder, and every named requirement or decision that resolves to no entity, without a model and without changing anything | New | unit |
 | MYC-20.14 <!-- 1eddb8cc-5ae8-4a78-956c-96d2b227589c --> | have the Arc Review done after the Arc's testing Beat by a session that took none of its Beats, ending in Done or in new Beats that include a testing Beat | New | review |
 
+## Named checks
+
+The independent reviewer for SYL-348 read the guides and checked the
+local provider routes on 11 November 2026 (MYC-D81).
+
+| Requirement | Kind | Verdict | Named check |
+|---|---|---|---|
+| MYC-20.1 | review | Pass | [Six stages and the discussion, research and triage loop](../operations/feature-course.md#follow-the-six-stages) |
+| MYC-20.2 | review | Pass | [One research document with source evidence](../operations/feature-course.md#keep-the-research-in-one-document) |
+| MYC-20.3 | review | Pass | [Specification gaps return to the owner in Spec Writing](../operations/feature-course.md#return-to-spec-writing-when-behavior-is-missing) |
+| MYC-20.4 | review | Pass | [Extend unfinished work and keep Done units closed](../operations/saga-planning.md#choose-the-saga-and-arcs) |
+| MYC-20.5 | review | Pass | [Whole-unit dependencies and readiness](../operations/saga-planning.md#check-dependencies-and-record-readiness) |
+| MYC-20.6 | review | Pass | [Approaches, Beat order and the final testing Beat](../operations/saga-planning.md#write-the-approaches-and-beats) |
+| MYC-20.7 | review | Pass | [Draft through planning and owner confirmation for a new Saga](../operations/saga-planning.md#write-the-approaches-and-beats) |
+| MYC-20.8 | review | Pass | [Atomic plan steps and testing in a separate Beat](../operations/implementation-planning.md#what-a-step-is) |
+| MYC-20.9 | review | Pass | [Files, Origins and territory in the plan](../operations/implementation-planning.md#the-procedure) |
+| MYC-20.10 | review | Needs correction | [Missing-plan guidance reaches a guide that stops the session holding the booking](../../forester/sagas/sylvan-stack/feature-course/mycel-guides/SYL-348.md#hand-over) |
+| MYC-20.11 | review | Pass | [Independent plan review and recorded verdict](../operations/implementation-planning.md#checking-the-plan) |
+| MYC-20.12 | review | Pass | [Recheck earlier plans and preserve ticked steps](../operations/implementation-planning.md#a-plan-written-earlier) |
+| MYC-20.14 | review | Pass | [Independent Arc Review after the testing Beat](../operations/saga-planning.md#review-the-arc) |
+
 ## Interface
 
 ```sh
