@@ -203,6 +203,7 @@ local provider routes on 11 November 2026 (MYC-D81).
 | MYC-20.10 | review | Needs correction | [Missing-plan guidance reaches a guide that stops the session holding the booking](../../forester/sagas/sylvan-stack/feature-course/mycel-guides/SYL-348.md#hand-over) |
 | MYC-20.11 | review | Pass | [Independent plan review and recorded verdict](../operations/implementation-planning.md#checking-the-plan) |
 | MYC-20.12 | review | Pass | [Recheck earlier plans and preserve ticked steps](../operations/implementation-planning.md#a-plan-written-earlier) |
+| MYC-20.13 | unit | Pass | `test_top_plan_check.PlanCheckTests.test_reports_ordered_faults_and_preserves_inputs` passed from published source and in Build `19`. The installed CLI also passed the disposable Index Store check in [SYL-350](../../forester/sagas/sylvan-stack/feature-course/mycel-plan-check/SYL-350.md#hand-over). |
 | MYC-20.14 | review | Pass | [Independent Arc Review after the testing Beat](../operations/saga-planning.md#review-the-arc) |
 
 ## Interface
