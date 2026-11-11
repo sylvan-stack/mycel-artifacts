@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-20
-status: accepted
+status: implemented
 ---
 # Mycel · 20 The Feature Course
 
@@ -184,31 +184,6 @@ has no review of its own.
 | MYC-20.13 <!-- 2d75fc11-3e17-4efb-b417-ea69f3c0dd3a --> | report, for a Beat's file, every problem of its plan's form, every file a code step names that neither exists nor has an existing folder, and every named requirement or decision that resolves to no entity, without a model and without changing anything | New | unit |
 | MYC-20.14 <!-- 1eddb8cc-5ae8-4a78-956c-96d2b227589c --> | have the Arc Review done after the Arc's testing Beat by a session that took none of its Beats, ending in Done or in new Beats that include a testing Beat | New | review |
 
-## Named checks
-
-The independent Codex reviewer for SYL-348 read the guides and checked the
-local provider routes on 11 November 2026 (MYC-D81). A second fresh Codex
-reviewer rechecked the corrected planning guide that day for MYC-20.8 and
-MYC-20.10. The [SYL-348 hand-over](../../forester/sagas/sylvan-stack/feature-course/mycel-guides/SYL-348.md#hand-over)
-records both reviews.
-
-| Requirement | Kind | Verdict | Named check |
-|---|---|---|---|
-| MYC-20.1 | review | Pass | [Six stages and the discussion, research and triage loop](../operations/feature-course.md#follow-the-six-stages) |
-| MYC-20.2 | review | Pass | [One research document with source evidence](../operations/feature-course.md#keep-the-research-in-one-document) |
-| MYC-20.3 | review | Pass | [Specification gaps return to the owner in Spec Writing](../operations/feature-course.md#return-to-spec-writing-when-behavior-is-missing) |
-| MYC-20.4 | review | Pass | [Extend unfinished work and keep Done units closed](../operations/saga-planning.md#choose-the-saga-and-arcs) |
-| MYC-20.5 | review | Pass | [Whole-unit dependencies and readiness](../operations/saga-planning.md#check-dependencies-and-record-readiness) |
-| MYC-20.6 | review | Pass | [Approaches, Beat order and the final testing Beat](../operations/saga-planning.md#write-the-approaches-and-beats) |
-| MYC-20.7 | review | Pass | [Draft through planning and owner confirmation for a new Saga](../operations/saga-planning.md#write-the-approaches-and-beats) |
-| MYC-20.8 | review | Pass | [Atomic plan steps and testing in a separate Beat](../operations/implementation-planning.md#what-a-step-is) |
-| MYC-20.9 | review | Pass | [Files, Origins and territory in the plan](../operations/implementation-planning.md#the-procedure) |
-| MYC-20.10 | review | Pass | [Both Forester prompts reach the guide and the booking session can continue planning](../../forester/sagas/sylvan-stack/feature-course/mycel-guides/SYL-348.md#hand-over) |
-| MYC-20.11 | review | Pass | [Independent plan review and recorded verdict](../operations/implementation-planning.md#checking-the-plan) |
-| MYC-20.12 | review | Pass | [Recheck earlier plans and preserve ticked steps](../operations/implementation-planning.md#a-plan-written-earlier) |
-| MYC-20.13 | unit | Pass | `test_top_plan_check.PlanCheckTests.test_reports_ordered_faults_and_preserves_inputs` passed from published source and in Build `19`. The installed CLI also passed the disposable Index Store check in [SYL-350](../../forester/sagas/sylvan-stack/feature-course/mycel-plan-check/SYL-350.md#hand-over). |
-| MYC-20.14 | review | Pass | [Independent Arc Review after the testing Beat](../operations/saga-planning.md#review-the-arc) |
-
 ## Interface
 
 ```sh
@@ -237,3 +212,28 @@ awaits Forester action items. See [FOR-1](../../forester/specs/01-forester.md#2-
 | MYC-D80 <!-- f2d31b01-f2b5-47c7-8111-7d6b31762675 --> | Which statuses do Sagas and Arcs have, and when is an Arc Done? | Decided by the owner on 9 November 2026: three Ready statuses, for a unit with one Beat ready, a unit that can be worked from start to end without stopping, and a unit that still needs plans; an Arc is not closed only because its Beats are Done, but after a critical review by a fresh agent. The agent's proposals accepted the same day ("Agreed"): the statuses of the table above, the strongest Ready shown with the number of Beats needing plans, the review after the testing Beat, no Saga review. |
 | MYC-D81 <!-- 6a82b51f-9759-4018-b34a-c6e5c2bf0f6c --> | How is a requirement met by a guide or skill verified? | Decided by the owner on 9 November 2026 ("Accept review kind"), accepting the agent's proposal: a new kind of check, `review`, in which the owner or a reviewer with fresh context reads the guide or skill against the requirement; the Named checks section names who read it and when. |
 | MYC-D95 <!-- caa1b304-c0dd-4439-a395-bdca86dd4471 --> | What does a Saga show between its last Beat and closure? | Decided by the owner on 10 November 2026. Once all its Beats are finished, the Saga shows In Review while an Arc is in review and then Ready to Close when all its Arcs are Done. The owner alone closes it. Extends MYC-D80. Forester refreshes the status under [FOR-D133](../../forester/specs/01-forester.md#2--planning). |
+
+## Named checks
+
+The independent Codex reviewer for SYL-348 read the guides and checked the
+local provider routes on 11 November 2026 (MYC-D81). A second fresh Codex
+reviewer rechecked the corrected planning guide that day for MYC-20.8 and
+MYC-20.10. The [SYL-348 hand-over](../../forester/sagas/sylvan-stack/feature-course/mycel-guides/SYL-348.md#hand-over)
+records both reviews.
+
+| Requirement | Kind | Verdict | Named check |
+|---|---|---|---|
+| MYC-20.1 | review | Pass | [Six stages and the discussion, research and triage loop](../operations/feature-course.md#follow-the-six-stages) |
+| MYC-20.2 | review | Pass | [One research document with source evidence](../operations/feature-course.md#keep-the-research-in-one-document) |
+| MYC-20.3 | review | Pass | [Specification gaps return to the owner in Spec Writing](../operations/feature-course.md#return-to-spec-writing-when-behavior-is-missing) |
+| MYC-20.4 | review | Pass | [Extend unfinished work and keep Done units closed](../operations/saga-planning.md#choose-the-saga-and-arcs) |
+| MYC-20.5 | review | Pass | [Whole-unit dependencies and readiness](../operations/saga-planning.md#check-dependencies-and-record-readiness) |
+| MYC-20.6 | review | Pass | [Approaches, Beat order and the final testing Beat](../operations/saga-planning.md#write-the-approaches-and-beats) |
+| MYC-20.7 | review | Pass | [Draft through planning and owner confirmation for a new Saga](../operations/saga-planning.md#write-the-approaches-and-beats) |
+| MYC-20.8 | review | Pass | [Atomic plan steps and testing in a separate Beat](../operations/implementation-planning.md#what-a-step-is) |
+| MYC-20.9 | review | Pass | [Files, Origins and territory in the plan](../operations/implementation-planning.md#the-procedure) |
+| MYC-20.10 | review | Pass | [Both Forester prompts reach the guide and the booking session can continue planning](../../forester/sagas/sylvan-stack/feature-course/mycel-guides/SYL-348.md#hand-over) |
+| MYC-20.11 | review | Pass | [Independent plan review and recorded verdict](../operations/implementation-planning.md#checking-the-plan) |
+| MYC-20.12 | review | Pass | [Recheck earlier plans and preserve ticked steps](../operations/implementation-planning.md#a-plan-written-earlier) |
+| MYC-20.13 | unit | Pass | `test_top_plan_check.PlanCheckTests.test_reports_ordered_faults_and_preserves_inputs` passed from published source and in Build `19`. The installed CLI also passed the disposable Index Store check in [SYL-350](../../forester/sagas/sylvan-stack/feature-course/mycel-plan-check/SYL-350.md#hand-over). |
+| MYC-20.14 | review | Pass | [Independent Arc Review after the testing Beat](../operations/saga-planning.md#review-the-arc) |
