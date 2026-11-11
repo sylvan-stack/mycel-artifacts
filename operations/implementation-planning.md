@@ -35,10 +35,11 @@ instructions: >-
 - A Feature Course reaches Implementation Planning.
 - The owner asks for a Beat's plan.
 
-A Beat is planned by one agent at a time. Read
-`~/Artifacts/forester/holds.json` first: if a live session holds the Beat,
-report the owner and stop. Writing the plan needs no booking, since the
-Beat's file is a corpus file.
+A Beat is planned by one agent at a time. Check
+`~/Artifacts/forester/holds.json` before planning. If another live session
+holds the Beat, report who holds it and stop. If your session holds the
+Beat, keep the booking and continue planning. You can also write the plan
+before booking because the Beat's file is a corpus file.
 
 ## What a step is
 
@@ -73,8 +74,9 @@ The standard ([FOR-D119](../../forester/decisions.md)):
   `--files` and `--origin` of the step's Intention. A step is never itself
   an Origin ([FOR-D114](../../forester/decisions.md)).
 - **Any other step says what it produces.**
-- **No testing step.** Testing is the Arc's last Beat
-  ([FOR-D120](../../forester/decisions.md)), started when the owner asks.
+- **No testing step in an implementation Beat.** Testing is the Arc's last
+  Beat and starts under the usual Beat eligibility rules. See the
+  [Test Strategy](test-strategy.md#when-testing-starts).
 - **Steps are in the order they will be done.**
 
 ## The procedure
@@ -106,8 +108,11 @@ The standard ([FOR-D119](../../forester/decisions.md)):
    says).
 6. **Check the plan** (next section).
 7. **Declare the plan done**: commit and push the Beat's file in the
-   Forester corpus with the subject `<saga>/<arc>/<ID>: plan`. Then book the
-   territory and start step 1, or hand over if you only planned.
+   Forester corpus with the subject `<saga>/<arc>/<ID>: plan`. If you are
+   continuing into implementation, check that your booking covers the
+   planned code paths. Keep an existing booking that covers them, or
+   reserve the needed paths under [Working in Sagas](../../forester/operations/sagas.md#book-code-before-changing-it).
+   Then start step 1. If you only planned, hand over the Beat.
 
 ## Checking the plan
 
@@ -162,14 +167,15 @@ A plan may change while the Beat is in work ([FOR-D56](../../forester/decisions.
 
 Forester checks only that a plan exists. Today `forester intend --step <n>`
 refuses a Step Intention when the Beat's file has no `## Plan` section, or no
-unticked leaf *n*, and says to write the plan first. Once SYL-352 is built,
-booking a Beat without a plan answers with this procedure and `/plan-beat`
-([FOR-D121, FOR-D127](../../forester/decisions.md)). Forester never judges a
-plan; the standard is this guide's, and the judgement is the reviewer's. The
+unticked leaf *n*, and says to write the plan first. When you book a Beat
+without a plan, Forester directs you to `/plan-beat` (`$plan-beat` in native
+Codex) to write it ([FOR-D121, FOR-D127](../../forester/decisions.md)). The
+reviewer judges the plan against this guide. The
 agent ticks a step itself until `forester step --done` is built
 ([Working in Sagas](../../forester/operations/sagas.md)).
 
 <!-- sources:
 forester:@code/src/forester/intention.py#_step_problem
+forester:@code/src/forester/booking.py#plan_guidance
 -->
 
