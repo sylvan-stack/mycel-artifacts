@@ -5,15 +5,15 @@ role: authored
 
 ## Tests: mycel > Active top tier
 
-Reason: Verify the exact published Cue Card when a heading reference is defined after a nested list item ends
+Reason: Verify that the plan check keeps file and Origin faults visible after a recoverable form fault and preserves its input files
 
-Origins: MYC-21.5, MYC-D88, MYC-D90 · Intention i-eb3063a0 · 2026-11-10
+Origins: MYC-20.13 · Intention i-ccc7dc49 · 2026-11-11
 
 ## Tests: mycel > Selection and limits
 
-Reason: Qualify Cue Card publication after multiline HTML end tags, rendered anchors for balanced links, and isolation from literal NUL in headings.
+Reason: Verify that the plan check keeps file and Origin faults visible after a recoverable form fault and preserves its input files
 
-Origins: MYC-21.1, MYC-21.5, MYC-21.6, MYC-D88, MYC-D90, MYC-D91, MYC-D94 · Intention i-27000709 · 2026-11-10
+Origins: MYC-20.13 · Intention i-ccc7dc49 · 2026-11-11
 
 ## Tests: mycel
 
