@@ -165,13 +165,12 @@ A plan may change while the Beat is in work ([FOR-D56](../../forester/decisions.
 
 ## What Forester does
 
-Forester checks only that a plan exists. Today `forester intend --step <n>`
-refuses a Step Intention when the Beat's file has no `## Plan` section, or no
-unticked leaf *n*, and says to write the plan first. When you book a Beat
+`forester intend --step <n>` requires an unticked leaf of the plan. If
+the plan is missing, Forester tells you to write it first. When you book a Beat
 without a plan, Forester directs you to `/plan-beat` (`$plan-beat` in native
 Codex) to write it ([FOR-D121, FOR-D127](../../forester/decisions.md)). The
-reviewer judges the plan against this guide. The
-agent ticks a step itself until `forester step --done` is built
+reviewer judges the plan against this guide. The agent ticks each step until
+`forester step --done` is built
 ([Working in Sagas](../../forester/operations/sagas.md)).
 
 <!-- sources:

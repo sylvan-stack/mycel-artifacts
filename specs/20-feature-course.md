@@ -186,8 +186,11 @@ has no review of its own.
 
 ## Named checks
 
-The independent reviewer for SYL-348 read the guides and checked the
-local provider routes on 11 November 2026 (MYC-D81).
+The independent Codex reviewer for SYL-348 read the guides and checked the
+local provider routes on 11 November 2026 (MYC-D81). A second fresh Codex
+reviewer rechecked the corrected planning guide that day for MYC-20.8 and
+MYC-20.10. The [SYL-348 hand-over](../../forester/sagas/sylvan-stack/feature-course/mycel-guides/SYL-348.md#hand-over)
+records both reviews.
 
 | Requirement | Kind | Verdict | Named check |
 |---|---|---|---|
@@ -200,7 +203,7 @@ local provider routes on 11 November 2026 (MYC-D81).
 | MYC-20.7 | review | Pass | [Draft through planning and owner confirmation for a new Saga](../operations/saga-planning.md#write-the-approaches-and-beats) |
 | MYC-20.8 | review | Pass | [Atomic plan steps and testing in a separate Beat](../operations/implementation-planning.md#what-a-step-is) |
 | MYC-20.9 | review | Pass | [Files, Origins and territory in the plan](../operations/implementation-planning.md#the-procedure) |
-| MYC-20.10 | review | Needs correction | [Missing-plan guidance reaches a guide that stops the session holding the booking](../../forester/sagas/sylvan-stack/feature-course/mycel-guides/SYL-348.md#hand-over) |
+| MYC-20.10 | review | Pass | [Both Forester prompts reach the guide and the booking session can continue planning](../../forester/sagas/sylvan-stack/feature-course/mycel-guides/SYL-348.md#hand-over) |
 | MYC-20.11 | review | Pass | [Independent plan review and recorded verdict](../operations/implementation-planning.md#checking-the-plan) |
 | MYC-20.12 | review | Pass | [Recheck earlier plans and preserve ticked steps](../operations/implementation-planning.md#a-plan-written-earlier) |
 | MYC-20.13 | unit | Pass | `test_top_plan_check.PlanCheckTests.test_reports_ordered_faults_and_preserves_inputs` passed from published source and in Build `19`. The installed CLI also passed the disposable Index Store check in [SYL-350](../../forester/sagas/sylvan-stack/feature-course/mycel-plan-check/SYL-350.md#hand-over). |
@@ -220,10 +223,9 @@ Index Store's requirement and decision entities (MYC-17).
 
 ## Known problems
 
-Most requirements are met by guides and skills, which no automated check
-verifies; they are checked by the kind `review` (MYC-D81). Forester's statuses,
-readiness and Arc Review action item are specified in FOR-1 and not yet
-built.
+Guides and skills use review checks (MYC-D81). Forester computes statuses
+and accepts Arc Reviews on request. Automated dispatch of Arc Reviews
+awaits Forester action items. See [FOR-1](../../forester/specs/01-forester.md#2--planning).
 
 ## Decisions
 
