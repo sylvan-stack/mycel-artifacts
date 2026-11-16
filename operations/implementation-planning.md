@@ -101,13 +101,20 @@ The standard ([FOR-D119](../../forester/decisions.md)):
    files each change will touch and how they work today. A finding enters
    the Beat only where it shapes a step.
 4. **Write the steps** to the standard above.
-5. **Write the territory.** The Beat's `## Territory` is the files and
+5. **Plan the User Demo, if the Beat has one.** When the Beat builds
+   something a Leather Bag can see or follow, a screen or business logic
+   whose effect they can watch, write a `## User Demo` section after the
+   plan: a short scenario following the specification's use case, with the
+   status `not_implemented`. It is optional, it is not a plan step, and it
+   never keeps the Beat open. [User Demos](../../forester/operations/user-demos.md#writing-the-demo)
+   gives the form and when a Beat has none.
+6. **Write the territory.** The Beat's `## Territory` is the files and
    folders its code steps name, as `<repo>:<path>`; a folder ends in `/`.
    Keep files that many agents change, such as an `AGENTS.md`, out of it
    (they are booked briefly, as [Working in Sagas](../../forester/operations/sagas.md)
    says).
-6. **Check the plan** (next section).
-7. **Declare the plan done**: commit and push the Beat's file in the
+7. **Check the plan** (next section).
+8. **Declare the plan done**: commit and push the Beat's file in the
    Forester corpus with the subject `<saga>/<arc>/<ID>: plan`. If you are
    continuing into implementation, check that your booking covers the
    planned code paths. Keep an existing booking that covers them, or

@@ -52,6 +52,11 @@ scope that follows the [Test Strategy](test-strategy.md#when-testing-starts).
 For example, two independent Beats might build a command and write a guide.
 Both can start immediately. The final Beat checks their combined result.
 
+[User Demos](../../forester/operations/user-demos.md) are planned with each
+Beat, not here. Where several Beats will show steps of one use case, the
+Arc's Approach may say so, so that their demos can be shown as one
+walkthrough at the end.
+
 ## Check dependencies and record readiness
 
 If one Arc needs a result from another, first try separating the prerequisite
@@ -96,7 +101,12 @@ The review checks whether the pieces work together as specified.
   the Arc to the applicable Ready status. A fresh reviewer checks the Arc
   again after the new testing Beat finishes.
 
-The owner closes the Saga.
+User Demos are not part of the review: an Arc can be Done with demos still
+`ready`, since a demo is the owner's smoke test, not evidence.
+
+The owner closes the Saga. When reporting a Saga Ready to Close, name its
+`ready` User Demos so the owner can check them first if they wish
+([User Demos](../../forester/operations/user-demos.md#demos-of-an-arc-or-a-saga)).
 
 <!-- sources:
 mycel:specs/20-feature-course.md#Saga Planning
