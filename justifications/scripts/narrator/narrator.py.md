@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
+Reason: Connect consolidation, independent verification and bounded repair to assembly of supported exact revisions.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
+Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e83 · 2026-11-17
 
 ## NarratorError
 
@@ -107,9 +107,9 @@ Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
 
 ## _json_value
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Connect consolidation, independent verification and bounded repair to assembly of supported exact revisions.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e83 · 2026-11-17
 
 ## _metered_value
 
@@ -173,7 +173,25 @@ Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
 
 ## similarity_hints
 
-Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
+Reason: Connect consolidation, independent verification and bounded repair to assembly of supported exact revisions.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
+Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e83 · 2026-11-17
+
+## _array_reply
+
+Reason: Connect consolidation, independent verification and bounded repair to assembly of supported exact revisions.
+
+Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e83 · 2026-11-17
+
+## _finite_number
+
+Reason: Connect consolidation, independent verification and bounded repair to assembly of supported exact revisions.
+
+Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e83 · 2026-11-17
+
+## summarize_arm
+
+Reason: Connect consolidation, independent verification and bounded repair to assembly of supported exact revisions.
+
+Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e83 · 2026-11-17
 
