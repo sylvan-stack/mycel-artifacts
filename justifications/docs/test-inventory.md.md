@@ -5,9 +5,9 @@ role: authored
 
 ## Test inventory: mycel > Retained selections
 
-Reason: Record exact Narrator verification checks and the distinct safeguards they exercise in the top-tier inventories
+Reason: Register the three selected top-tier checks with exact selectors, source metadata and their separate failure modes.
 
-Origins: MYC-22.1, MYC-22.4, MYC-22.5 · Intention i-21343f7e · 2026-11-17
+Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-03961ef7 · 2026-11-17
 
 ## Test inventory: mycel
 
