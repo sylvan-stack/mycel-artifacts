@@ -5,9 +5,9 @@ role: authored
 
 ## Test inventory: mycel > Retained selections
 
-Reason: Verify that the plan check keeps file and Origin faults visible after a recoverable form fault and preserves its input files
+Reason: Record exact Narrator verification checks and the distinct safeguards they exercise in the top-tier inventories
 
-Origins: MYC-20.13 · Intention i-ccc7dc49 · 2026-11-11
+Origins: MYC-22.1, MYC-22.4, MYC-22.5 · Intention i-21343f7e · 2026-11-17
 
 ## Test inventory: mycel
 
