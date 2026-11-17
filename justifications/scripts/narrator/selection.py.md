@@ -113,9 +113,9 @@ Origins: MYC-22.3 · Intention i-bce15402 · 2026-11-17
 
 ## assemble_summary
 
-Reason: Return unchanged selected prose together with its measured count and dispositions
+Reason: Give independently consequential supported revisions the first budget opportunity before optional detail.
 
-Origins: MYC-22.3 · Intention i-bce15402 · 2026-11-17
+Origins: MYC-22.3 · Intention i-e217a922 · 2026-11-17
 
 ## _attach_detail_links
 
@@ -128,4 +128,10 @@ Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
 Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
 
 Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
+
+## _prioritize_details
+
+Reason: Give independently consequential supported revisions the first budget opportunity before optional detail.
+
+Origins: MYC-22.3 · Intention i-e217a922 · 2026-11-17
 
