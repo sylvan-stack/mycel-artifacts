@@ -5,9 +5,9 @@ role: authored
 
 ## <before _unit_key>
 
-Reason: Define the selection interface for exact unit revisions and resolve cited IDs against validated request evidence.
+Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
 
-Origins: MYC-22.1, MYC-22.2 · Intention i-1748eb4e · 2026-11-17
+Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
 
 ## _comparison_keys
 
@@ -29,7 +29,31 @@ Origins: MYC-22.1, MYC-22.2 · Intention i-1748eb4e · 2026-11-17
 
 ## select_distinct_units
 
-Reason: Define the selection interface for exact unit revisions and resolve cited IDs against validated request evidence.
+Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
 
-Origins: MYC-22.1, MYC-22.2 · Intention i-1748eb4e · 2026-11-17
+Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+
+## _consequence_rank
+
+Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
+
+Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+
+## _validate_candidate_origins
+
+Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
+
+Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+
+## consolidation_request
+
+Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
+
+Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+
+## parse_consolidation_response
+
+Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
+
+Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
 
