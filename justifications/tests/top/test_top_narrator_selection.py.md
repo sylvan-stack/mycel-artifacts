@@ -59,7 +59,13 @@ Origins: MYC-22.3 · Intention i-498ef13b · 2026-11-17
 
 ## NarratorSelectionTests.test_oversized_member_leaves_room_for_distinct_rule_and_shorter_equivalent
 
-Reason: Cover a whole-unit budget where an oversized preferred member must leave both its group and the intervening distinct rule eligible.
+Reason: Reproduce the loss of a distinct verified rule when a narrower same-rule detail gets the first budget pass.
 
-Origins: MYC-22.3 · Intention i-498ef13b · 2026-11-17
+Origins: MYC-22.2, MYC-22.3 · Intention i-9e393ab8 · 2026-11-17
+
+## NarratorSelectionTests.test_distinct_rule_fits_before_covered_detail
+
+Reason: Reproduce the loss of a distinct verified rule when a narrower same-rule detail gets the first budget pass.
+
+Origins: MYC-22.2, MYC-22.3 · Intention i-9e393ab8 · 2026-11-17
 
