@@ -35,9 +35,9 @@ Origins: MYC-22.1 · Intention i-ebabcaeb · 2026-11-17
 
 ## <before _source_context>
 
-Reason: State the independent conditions and evidence checks and provide admitted source context for each exact revision.
+Reason: Assess whether a rejected revision has a material and precisely correctable omission.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-fb09032a · 2026-11-17
+Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
 
 ## _disposition
 
@@ -65,19 +65,25 @@ Origins: MYC-22.1, MYC-22.4 · Intention i-2eec759a · 2026-11-17
 
 ## _read_verdict
 
-Reason: Withhold any unit lacking a well-formed, evidence-linked verdict for its current exact revision.
+Reason: Assess whether a rejected revision has a material and precisely correctable omission.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-2eec759a · 2026-11-17
+Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
 
 ## _read_verdicts
 
-Reason: Expose one provider-independent verification batch over exact normalized units and plain records.
+Reason: Assess whether a rejected revision has a material and precisely correctable omission.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-74043430 · 2026-11-17
+Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
 
 ## verify_units
 
-Reason: Expose one provider-independent verification batch over exact normalized units and plain records.
+Reason: Assess whether a rejected revision has a material and precisely correctable omission.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-74043430 · 2026-11-17
+Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
+
+## _read_repair_eligibility
+
+Reason: Assess whether a rejected revision has a material and precisely correctable omission.
+
+Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
 
