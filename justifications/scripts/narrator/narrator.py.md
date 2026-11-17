@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Expose the optional Mycel writer command with a prose-only success path and redacted refusal.
+Reason: Preserve literal marker text and exclude only the exact request-cap cut suffix emitted by Mycel.
 
-Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
+Origins: MYC-22.1, MYC-22.7 · Intention i-24735910 · 2026-11-17
 
 ## NarratorError
 
@@ -41,9 +41,9 @@ Origins: MYC-22.1, MYC-22.7 · Intention i-8f73c858 · 2026-11-17
 
 ## _source_spans
 
-Reason: Resolve and retain exact source offsets from the complete Mycel summary writer request.
+Reason: Preserve literal marker text and exclude only the exact request-cap cut suffix emitted by Mycel.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-8f73c858 · 2026-11-17
+Origins: MYC-22.1, MYC-22.7 · Intention i-24735910 · 2026-11-17
 
 ## read_request
 
