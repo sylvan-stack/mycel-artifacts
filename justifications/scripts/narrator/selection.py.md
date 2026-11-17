@@ -89,9 +89,9 @@ Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-92c8fc66 · 2026-11-17
 
 ## _rank_supported_members
 
-Reason: Rank only exact supported revisions using their own consequence and source order
+Reason: Allocate whole verified units and account for budget and equivalence omissions
 
-Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
+Origins: MYC-22.3 · Intention i-7922aa39 · 2026-11-17
 
 ## _unit_order
 
@@ -104,4 +104,10 @@ Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
 Reason: Rank only exact supported revisions using their own consequence and source order
 
 Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
+
+## _allocate_words
+
+Reason: Allocate whole verified units and account for budget and equivalence omissions
+
+Origins: MYC-22.3 · Intention i-7922aa39 · 2026-11-17
 
