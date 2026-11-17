@@ -53,7 +53,13 @@ Origins: MYC-22.2, MYC-22.3 · Intention i-4f328e1a · 2026-11-17
 
 ## NarratorSelectionTests.test_authority_and_exact_evidence_survive_selection
 
-Reason: Test whether differing authorities survive a misleading merge decision and exact evidence gates claimed support.
+Reason: Cover a whole-unit budget where an oversized preferred member must leave both its group and the intervening distinct rule eligible.
 
-Origins: MYC-22.1, MYC-22.2 · Intention i-7a5f5158 · 2026-11-17
+Origins: MYC-22.3 · Intention i-498ef13b · 2026-11-17
+
+## NarratorSelectionTests.test_oversized_member_leaves_room_for_distinct_rule_and_shorter_equivalent
+
+Reason: Cover a whole-unit budget where an oversized preferred member must leave both its group and the intervening distinct rule eligible.
+
+Origins: MYC-22.3 · Intention i-498ef13b · 2026-11-17
 
