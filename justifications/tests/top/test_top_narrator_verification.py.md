@@ -35,9 +35,9 @@ Origins: MYC-22.1, MYC-22.4 · Intention i-1f831635 · 2026-11-17
 
 ## NarratorVerificationTests.test_repair_handoff_contains_only_fresh_supported_revisions
 
-Reason: Check the repair hand-off admits only freshly supported revisions and preserves usable peers
+Reason: Check budget refusal and exhaustion preserve the original supported subset without extra calls
 
-Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-3d5f1a7f · 2026-11-17
+Origins: MYC-22.5, MYC-D98 · Intention i-65d10d0d · 2026-11-17
 
 ## correction
 
@@ -56,4 +56,10 @@ Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-3d5f1a7f · 2026-11-17
 Reason: Check the repair hand-off admits only freshly supported revisions and preserves usable peers
 
 Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-3d5f1a7f · 2026-11-17
+
+## NarratorVerificationTests.test_repair_budget_preserves_the_original_verified_subset
+
+Reason: Check budget refusal and exhaustion preserve the original supported subset without extra calls
+
+Origins: MYC-22.5, MYC-D98 · Intention i-65d10d0d · 2026-11-17
 
