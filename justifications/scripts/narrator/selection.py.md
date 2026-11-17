@@ -29,9 +29,9 @@ Origins: MYC-22.1, MYC-22.2 · Intention i-1748eb4e · 2026-11-17
 
 ## select_distinct_units
 
-Reason: Return stable preference-ordered groups with traceable citation and grouping dispositions.
+Reason: Discard comparison decisions for replaced revisions before grouping and recording dispositions.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-b937a179 · 2026-11-17
+Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-92c8fc66 · 2026-11-17
 
 ## _consequence_rank
 
@@ -65,9 +65,9 @@ Origins: MYC-22.2 · Intention i-e97263f5 · 2026-11-17
 
 ## _comparison_decisions
 
-Reason: Group only mutually interchangeable units and preserve substantive differences.
+Reason: Discard comparison decisions for replaced revisions before grouping and recording dispositions.
 
-Origins: MYC-22.2 · Intention i-e97263f5 · 2026-11-17
+Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-92c8fc66 · 2026-11-17
 
 ## _interchangeable
 
@@ -83,7 +83,7 @@ Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-b937a179 · 2026-11-17
 
 ## _group_dispositions
 
-Reason: Return stable preference-ordered groups with traceable citation and grouping dispositions.
+Reason: Discard comparison decisions for replaced revisions before grouping and recording dispositions.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-b937a179 · 2026-11-17
+Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-92c8fc66 · 2026-11-17
 
