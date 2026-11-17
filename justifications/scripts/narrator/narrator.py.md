@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Resolve and retain exact source offsets from the complete Mycel summary writer request.
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-8f73c858 · 2026-11-17
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
 
 ## NarratorError
 
@@ -47,7 +47,91 @@ Origins: MYC-22.1, MYC-22.7 · Intention i-8f73c858 · 2026-11-17
 
 ## read_request
 
-Reason: Resolve and retain exact source offsets from the complete Mycel summary writer request.
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-8f73c858 · 2026-11-17
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## BudgetExhausted
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## FormatError
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## Meter
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## Meter.admit_repair
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## Meter.call
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## Meter.text
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## _child_environment
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## _drain
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## _interrupt_on_termination
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## _json_value
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## _metered_value
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## _run_command
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## _stop_command
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## _time_left
+
+Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+
+Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
 
