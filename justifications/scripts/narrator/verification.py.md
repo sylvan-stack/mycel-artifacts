@@ -59,7 +59,19 @@ Origins: MYC-22.1, MYC-22.4 · Intention i-1cee0db8 · 2026-11-17
 
 ## _verification_payload
 
-Reason: State the independent conditions and evidence checks and provide admitted source context for each exact revision.
+Reason: Withhold any unit lacking a well-formed, evidence-linked verdict for its current exact revision.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-fb09032a · 2026-11-17
+Origins: MYC-22.1, MYC-22.4 · Intention i-2eec759a · 2026-11-17
+
+## _read_verdict
+
+Reason: Withhold any unit lacking a well-formed, evidence-linked verdict for its current exact revision.
+
+Origins: MYC-22.1, MYC-22.4 · Intention i-2eec759a · 2026-11-17
+
+## _read_verdicts
+
+Reason: Withhold any unit lacking a well-formed, evidence-linked verdict for its current exact revision.
+
+Origins: MYC-22.1, MYC-22.4 · Intention i-2eec759a · 2026-11-17
 
