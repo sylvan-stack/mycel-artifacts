@@ -35,9 +35,9 @@ Origins: MYC-22.1 · Intention i-ebabcaeb · 2026-11-17
 
 ## <before _source_context>
 
-Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
+Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
 
-Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
+Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
 
 ## _disposition
 
@@ -77,9 +77,9 @@ Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
 
 ## verify_units
 
-Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
+Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
 
-Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
+Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
 
 ## _read_repair_eligibility
 
@@ -158,4 +158,34 @@ Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
 Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
 
 Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
+
+## <before RepairUnavailable>
+
+Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+
+Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+
+## RepairBudgetExhausted
+
+Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+
+Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+
+## RepairUnavailable
+
+Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+
+Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+
+## _unavailable_dispositions
+
+Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+
+Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+
+## repair_units
+
+Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+
+Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
 
