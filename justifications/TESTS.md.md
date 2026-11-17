@@ -5,15 +5,15 @@ role: authored
 
 ## Tests: mycel > Active top tier
 
-Reason: Record the exact priority regression selector and refresh source metadata for the retained Selection cases.
+Reason: Register the three exact Narrator executable cases with source pins and distinct failure risks.
 
-Origins: MYC-22.2, MYC-22.3 · Intention i-e4264a7b · 2026-11-17
+Origins: MYC-22.7 · Intention i-37d0da19 · 2026-11-17
 
 ## Tests: mycel > Selection and limits
 
-Reason: Record the exact priority regression selector and refresh source metadata for the retained Selection cases.
+Reason: Register the three exact Narrator executable cases with source pins and distinct failure risks.
 
-Origins: MYC-22.2, MYC-22.3 · Intention i-e4264a7b · 2026-11-17
+Origins: MYC-22.7 · Intention i-37d0da19 · 2026-11-17
 
 ## Tests: mycel
 
