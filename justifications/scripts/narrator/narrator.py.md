@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Preserve literal marker text and exclude only the exact request-cap cut suffix emitted by Mycel.
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-24735910 · 2026-11-17
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## NarratorError
 
@@ -95,15 +95,15 @@ Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
 
 ## _drain
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## _interrupt_on_termination
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## _json_value
 
@@ -119,21 +119,21 @@ Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
 
 ## _run_command
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## _stop_command
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## _time_left
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## Candidate
 
@@ -221,9 +221,9 @@ Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
 
 ## _read_input
 
-Reason: Expose the optional Mycel writer command with a prose-only success path and redacted refusal.
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
 
-Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## _run_arm
 
@@ -239,9 +239,9 @@ Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
 
 ## main
 
-Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
 
-Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## _command_digest
 
@@ -266,4 +266,22 @@ Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
 Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
 
 Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+
+## _check_interruption
+
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+
+## _read_stdin
+
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+
+## _signal_group
+
+Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+
+Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
