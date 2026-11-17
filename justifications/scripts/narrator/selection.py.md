@@ -107,7 +107,13 @@ Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
 
 ## _allocate_words
 
-Reason: Allocate whole verified units and account for budget and equivalence omissions
+Reason: Return unchanged selected prose together with its measured count and dispositions
 
-Origins: MYC-22.3 · Intention i-7922aa39 · 2026-11-17
+Origins: MYC-22.3 · Intention i-bce15402 · 2026-11-17
+
+## assemble_summary
+
+Reason: Return unchanged selected prose together with its measured count and dispositions
+
+Origins: MYC-22.3 · Intention i-bce15402 · 2026-11-17
 
