@@ -5,9 +5,9 @@ role: authored
 
 ## <before _SourceSlice>
 
-Reason: Resolve each evidence passage against the exact request digest, Unicode offsets, and admitted source spans.
+Reason: Expose one provider-independent verification batch over exact normalized units and plain records.
 
-Origins: MYC-22.1 · Intention i-ebabcaeb · 2026-11-17
+Origins: MYC-22.1, MYC-22.4 · Intention i-74043430 · 2026-11-17
 
 ## _Passage
 
@@ -71,7 +71,13 @@ Origins: MYC-22.1, MYC-22.4 · Intention i-2eec759a · 2026-11-17
 
 ## _read_verdicts
 
-Reason: Withhold any unit lacking a well-formed, evidence-linked verdict for its current exact revision.
+Reason: Expose one provider-independent verification batch over exact normalized units and plain records.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-2eec759a · 2026-11-17
+Origins: MYC-22.1, MYC-22.4 · Intention i-74043430 · 2026-11-17
+
+## verify_units
+
+Reason: Expose one provider-independent verification batch over exact normalized units and plain records.
+
+Origins: MYC-22.1, MYC-22.4 · Intention i-74043430 · 2026-11-17
 
