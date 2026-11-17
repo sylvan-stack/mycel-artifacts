@@ -257,9 +257,9 @@ Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
 
 ## _run_writer
 
-Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
+Reason: Record measured source and response sizes for each completed arm so qualification can distinguish compression from facts lost.
 
-Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
+Origins: MYC-22.6, MYC-22.9, MYC-D101 · Intention i-5587efbd · 2026-11-17
 
 ## _statistics
 
