@@ -5,9 +5,9 @@ role: authored
 
 ## <before _unit_key>
 
-Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
+Reason: Group only mutually interchangeable units and preserve substantive differences.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+Origins: MYC-22.2 · Intention i-e97263f5 · 2026-11-17
 
 ## _comparison_keys
 
@@ -29,9 +29,9 @@ Origins: MYC-22.1, MYC-22.2 · Intention i-1748eb4e · 2026-11-17
 
 ## select_distinct_units
 
-Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
+Reason: Group only mutually interchangeable units and preserve substantive differences.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+Origins: MYC-22.2 · Intention i-e97263f5 · 2026-11-17
 
 ## _consequence_rank
 
@@ -56,4 +56,22 @@ Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
 Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
 
 Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+
+## _authorities
+
+Reason: Group only mutually interchangeable units and preserve substantive differences.
+
+Origins: MYC-22.2 · Intention i-e97263f5 · 2026-11-17
+
+## _comparison_decisions
+
+Reason: Group only mutually interchangeable units and preserve substantive differences.
+
+Origins: MYC-22.2 · Intention i-e97263f5 · 2026-11-17
+
+## _interchangeable
+
+Reason: Group only mutually interchangeable units and preserve substantive differences.
+
+Origins: MYC-22.2 · Intention i-e97263f5 · 2026-11-17
 
