@@ -5,9 +5,9 @@ role: authored
 
 ## <before _SourceSlice>
 
-Reason: Expose one provider-independent verification batch over exact normalized units and plain records.
+Reason: Send eligible rejected revisions with their source evidence and reasons in one batch.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-74043430 · 2026-11-17
+Origins: MYC-22.5, MYC-D98 · Intention i-bb10b5fc · 2026-11-17
 
 ## _Passage
 
@@ -35,9 +35,9 @@ Origins: MYC-22.1 · Intention i-ebabcaeb · 2026-11-17
 
 ## <before _source_context>
 
-Reason: Assess whether a rejected revision has a material and precisely correctable omission.
+Reason: Send eligible rejected revisions with their source evidence and reasons in one batch.
 
-Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
+Origins: MYC-22.5, MYC-D98 · Intention i-bb10b5fc · 2026-11-17
 
 ## _disposition
 
@@ -86,4 +86,10 @@ Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
 Reason: Assess whether a rejected revision has a material and precisely correctable omission.
 
 Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
+
+## _repair_payload
+
+Reason: Send eligible rejected revisions with their source evidence and reasons in one batch.
+
+Origins: MYC-22.5, MYC-D98 · Intention i-bb10b5fc · 2026-11-17
 
