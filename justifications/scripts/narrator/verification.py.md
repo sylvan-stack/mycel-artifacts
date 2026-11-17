@@ -35,9 +35,9 @@ Origins: MYC-22.1 · Intention i-ebabcaeb · 2026-11-17
 
 ## <before _source_context>
 
-Reason: Send eligible rejected revisions with their source evidence and reasons in one batch.
+Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
 
-Origins: MYC-22.5, MYC-D98 · Intention i-bb10b5fc · 2026-11-17
+Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
 
 ## _disposition
 
@@ -77,9 +77,9 @@ Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
 
 ## verify_units
 
-Reason: Assess whether a rejected revision has a material and precisely correctable omission.
+Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
 
-Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
+Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
 
 ## _read_repair_eligibility
 
@@ -140,4 +140,22 @@ Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
 Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
 
 Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+
+## _judge_units
+
+Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
+
+Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
+
+## _recheck_repairs
+
+Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
+
+Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
+
+## _supported_units
+
+Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
+
+Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
 
