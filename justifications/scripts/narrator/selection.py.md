@@ -29,9 +29,9 @@ Origins: MYC-22.1, MYC-22.2 · Intention i-1748eb4e · 2026-11-17
 
 ## select_distinct_units
 
-Reason: Rank only exact supported revisions using their own consequence and source order
+Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
 
-Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
+Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
 
 ## _consequence_rank
 
@@ -59,15 +59,15 @@ Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
 
 ## _authorities
 
-Reason: Group only mutually interchangeable units and preserve substantive differences.
+Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
 
-Origins: MYC-22.2 · Intention i-e97263f5 · 2026-11-17
+Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
 
 ## _comparison_decisions
 
-Reason: Discard comparison decisions for replaced revisions before grouping and recording dispositions.
+Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-92c8fc66 · 2026-11-17
+Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
 
 ## _interchangeable
 
@@ -116,4 +116,16 @@ Origins: MYC-22.3 · Intention i-bce15402 · 2026-11-17
 Reason: Return unchanged selected prose together with its measured count and dispositions
 
 Origins: MYC-22.3 · Intention i-bce15402 · 2026-11-17
+
+## _attach_detail_links
+
+Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
+
+Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
+
+## _detail_disposition
+
+Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
+
+Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
 
