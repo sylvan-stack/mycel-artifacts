@@ -215,9 +215,9 @@ Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
 
 ## _arguments
 
-Reason: Expose the optional Mycel writer command with a prose-only success path and redacted refusal.
+Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
 
-Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
+Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
 
 ## _read_input
 
@@ -239,7 +239,31 @@ Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
 
 ## main
 
-Reason: Expose the optional Mycel writer command with a prose-only success path and redacted refusal.
+Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
 
-Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
+Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+
+## _command_digest
+
+Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
+
+Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+
+## _open_report
+
+Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
+
+Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+
+## _run_writer
+
+Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
+
+Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+
+## _statistics
+
+Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
+
+Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
 
