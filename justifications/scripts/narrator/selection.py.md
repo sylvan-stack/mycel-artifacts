@@ -5,15 +5,15 @@ role: authored
 
 ## <before _unit_key>
 
-Reason: Group only mutually interchangeable units and preserve substantive differences.
+Reason: Recognize a direct optional-detail direction without changing the consolidation interface.
 
-Origins: MYC-22.2 · Intention i-e97263f5 · 2026-11-17
+Origins: MYC-22.2, MYC-22.3 · Intention i-027bb5f8 · 2026-11-17
 
 ## _comparison_keys
 
-Reason: Define the selection interface for exact unit revisions and resolve cited IDs against validated request evidence.
+Reason: Recognize a direct optional-detail direction without changing the consolidation interface.
 
-Origins: MYC-22.1, MYC-22.2 · Intention i-1748eb4e · 2026-11-17
+Origins: MYC-22.2, MYC-22.3 · Intention i-027bb5f8 · 2026-11-17
 
 ## _resolve_citations
 
