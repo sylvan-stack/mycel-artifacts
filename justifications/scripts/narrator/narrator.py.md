@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
 
 ## NarratorError
 
@@ -191,9 +191,9 @@ Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e8
 
 ## summarize_arm
 
-Reason: Expose the optional Mycel writer command with a prose-only success path and redacted refusal.
+Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
 
-Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
+Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
 
 ## <end>
 
@@ -215,9 +215,9 @@ Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
 
 ## _arguments
 
-Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
+Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
 
-Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
 
 ## _read_input
 
@@ -227,15 +227,15 @@ Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## _run_arm
 
-Reason: Expose the optional Mycel writer command with a prose-only success path and redacted refusal.
+Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
 
-Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
+Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
 
 ## _summary_bytes
 
-Reason: Expose the optional Mycel writer command with a prose-only success path and redacted refusal.
+Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
 
-Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
+Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
 
 ## main
 
@@ -257,9 +257,9 @@ Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
 
 ## _run_writer
 
-Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
+Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
 
-Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
 
 ## _statistics
 

@@ -107,15 +107,15 @@ Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
 
 ## _allocate_words
 
-Reason: Return unchanged selected prose together with its measured count and dispositions
+Removed: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
 
-Origins: MYC-22.3 · Intention i-bce15402 · 2026-11-17
+Removed by Intention i-3b603957 · 2026-11-17
 
 ## assemble_summary
 
-Reason: Give independently consequential supported revisions the first budget opportunity before optional detail.
+Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
 
-Origins: MYC-22.3 · Intention i-e217a922 · 2026-11-17
+Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
 
 ## _attach_detail_links
 
@@ -134,4 +134,10 @@ Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
 Reason: Give independently consequential supported revisions the first budget opportunity before optional detail.
 
 Origins: MYC-22.3 · Intention i-e217a922 · 2026-11-17
+
+## _allocate_characters
+
+Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
+
+Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
 
