@@ -5,9 +5,9 @@ role: authored
 
 ## Test inventory: mycel > Retained selections
 
-Reason: Register the three selected top-tier checks with exact selectors, source metadata and their separate failure modes.
+Reason: Record the exact priority regression selector and refresh source metadata for the retained Selection cases.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-03961ef7 · 2026-11-17
+Origins: MYC-22.2, MYC-22.3 · Intention i-e4264a7b · 2026-11-17
 
 ## Test inventory: mycel
 
