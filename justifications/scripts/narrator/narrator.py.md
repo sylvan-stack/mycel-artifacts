@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Extract consequential candidates and retain only exact admitted evidence references.
+Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
 
-Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
+Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
 
 ## NarratorError
 
@@ -149,7 +149,31 @@ Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
 
 ## extract_candidates
 
-Reason: Extract consequential candidates and retain only exact admitted evidence references.
+Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
 
-Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
+Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
+
+## _embedding_vectors
+
+Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
+
+Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
+
+## _nearest_pairs
+
+Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
+
+Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
+
+## command_argument
+
+Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
+
+Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
+
+## similarity_hints
+
+Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
+
+Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
 
