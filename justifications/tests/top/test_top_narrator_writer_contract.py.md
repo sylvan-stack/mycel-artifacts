@@ -35,9 +35,9 @@ Origins: MYC-22.7, MYC-8.5, MYC-8.11 · Intention i-9f79c766 · 2026-11-17
 
 ## NarratorWriterContractTests.test_framed_request_emits_only_whole_verified_units
 
-Reason: Distinguish a literal source cut-marker quotation from the real terminal notice through the complete command boundary.
+Reason: Verify the source-length boundary and preserve the retained writer and Selection coverage under the revised contract.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-93cb9b38 · 2026-11-17
+Origins: MYC-22.9, MYC-22.7 · Intention i-0a5a34cb · 2026-11-17
 
 ## _candidate
 
@@ -53,9 +53,9 @@ Origins: MYC-22.7, MYC-8.5, MYC-8.11 · Intention i-9f79c766 · 2026-11-17
 
 ## _request
 
-Reason: Observe exactly which framed and cut Mycel request text reaches Narrator evidence and which verified units reach the launcher response.
+Reason: Verify the source-length boundary and preserve the retained writer and Selection coverage under the revised contract.
 
-Origins: MYC-22.7, MYC-8.5, MYC-8.11 · Intention i-9f79c766 · 2026-11-17
+Origins: MYC-22.9, MYC-22.7 · Intention i-0a5a34cb · 2026-11-17
 
 ## _support
 
@@ -71,15 +71,15 @@ Origins: MYC-22.7, MYC-8.5, MYC-8.11 · Intention i-9f79c766 · 2026-11-17
 
 ## NarratorWriterContractTests.test_invalid_verifier_output_fails_both_writer_attempts_safely
 
-Reason: Observe compare call accounting and the lifecycle of real nested credential and embedding subprocesses using local stand-ins.
+Reason: Verify the source-length boundary and preserve the retained writer and Selection coverage under the revised contract.
 
-Origins: MYC-22.7 · Intention i-8171740d · 2026-11-17
+Origins: MYC-22.9, MYC-22.7 · Intention i-0a5a34cb · 2026-11-17
 
 ## _packaged_request
 
-Reason: Observe the failed verifier format retry inside each whole-command attempt and prevent partial or private output at either boundary.
+Reason: Verify the source-length boundary and preserve the retained writer and Selection coverage under the revised contract.
 
-Origins: MYC-22.7, MYC-8.5, MYC-8.6 · Intention i-4a6745ad · 2026-11-17
+Origins: MYC-22.9, MYC-22.7 · Intention i-0a5a34cb · 2026-11-17
 
 ## NarratorWriterContractTests._assert_exited
 
@@ -101,13 +101,19 @@ Origins: MYC-22.7 · Intention i-8171740d · 2026-11-17
 
 ## NarratorWriterContractTests.test_failed_similarity_preserves_the_isolated_reasoned_arm
 
-Reason: Observe compare call accounting and the lifecycle of real nested credential and embedding subprocesses using local stand-ins.
+Reason: Verify the source-length boundary and preserve the retained writer and Selection coverage under the revised contract.
 
-Origins: MYC-22.7 · Intention i-8171740d · 2026-11-17
+Origins: MYC-22.9, MYC-22.7 · Intention i-0a5a34cb · 2026-11-17
 
 ## _stop_fixture_processes
 
 Reason: Observe compare call accounting and the lifecycle of real nested credential and embedding subprocesses using local stand-ins.
 
 Origins: MYC-22.7 · Intention i-8171740d · 2026-11-17
+
+## _section
+
+Reason: Verify the source-length boundary and preserve the retained writer and Selection coverage under the revised contract.
+
+Origins: MYC-22.9, MYC-22.7 · Intention i-0a5a34cb · 2026-11-17
 
