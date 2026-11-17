@@ -35,9 +35,9 @@ Origins: MYC-22.1 · Intention i-ebabcaeb · 2026-11-17
 
 ## <before _source_context>
 
-Reason: Give each evidence-normalized unit its own exact revision and withhold units without resolvable evidence.
+Reason: State the independent conditions and evidence checks and provide admitted source context for each exact revision.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-1cee0db8 · 2026-11-17
+Origins: MYC-22.1, MYC-22.4 · Intention i-fb09032a · 2026-11-17
 
 ## _disposition
 
@@ -47,13 +47,19 @@ Origins: MYC-22.1, MYC-22.4 · Intention i-1cee0db8 · 2026-11-17
 
 ## _normalize_units
 
-Reason: Give each evidence-normalized unit its own exact revision and withhold units without resolvable evidence.
+Reason: State the independent conditions and evidence checks and provide admitted source context for each exact revision.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-1cee0db8 · 2026-11-17
+Origins: MYC-22.1, MYC-22.4 · Intention i-fb09032a · 2026-11-17
 
 ## _unit_key
 
 Reason: Give each evidence-normalized unit its own exact revision and withhold units without resolvable evidence.
 
 Origins: MYC-22.1, MYC-22.4 · Intention i-1cee0db8 · 2026-11-17
+
+## _verification_payload
+
+Reason: State the independent conditions and evidence checks and provide admitted source context for each exact revision.
+
+Origins: MYC-22.1, MYC-22.4 · Intention i-fb09032a · 2026-11-17
 
