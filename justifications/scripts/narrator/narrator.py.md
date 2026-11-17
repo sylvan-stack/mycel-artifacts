@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Extract consequential candidates and retain only exact admitted evidence references.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
 
 ## NarratorError
 
@@ -83,9 +83,9 @@ Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
 
 ## Meter.text
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Extract consequential candidates and retain only exact admitted evidence references.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
 
 ## _child_environment
 
@@ -134,4 +134,22 @@ Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
 Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
 
 Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+
+## Candidate
+
+Reason: Extract consequential candidates and retain only exact admitted evidence references.
+
+Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
+
+## _extraction_rows
+
+Reason: Extract consequential candidates and retain only exact admitted evidence references.
+
+Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
+
+## extract_candidates
+
+Reason: Extract consequential candidates and retain only exact admitted evidence references.
+
+Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
 
