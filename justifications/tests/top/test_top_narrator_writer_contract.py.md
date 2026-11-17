@@ -35,9 +35,9 @@ Origins: MYC-22.7, MYC-8.5, MYC-8.11 · Intention i-9f79c766 · 2026-11-17
 
 ## NarratorWriterContractTests.test_framed_request_emits_only_whole_verified_units
 
-Reason: Observe the failed verifier format retry inside each whole-command attempt and prevent partial or private output at either boundary.
+Reason: Distinguish a literal source cut-marker quotation from the real terminal notice through the complete command boundary.
 
-Origins: MYC-22.7, MYC-8.5, MYC-8.6 · Intention i-4a6745ad · 2026-11-17
+Origins: MYC-22.1, MYC-22.7 · Intention i-93cb9b38 · 2026-11-17
 
 ## _candidate
 
