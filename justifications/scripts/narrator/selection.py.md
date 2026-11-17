@@ -29,9 +29,9 @@ Origins: MYC-22.1, MYC-22.2 · Intention i-1748eb4e · 2026-11-17
 
 ## select_distinct_units
 
-Reason: Discard comparison decisions for replaced revisions before grouping and recording dispositions.
+Reason: Rank only exact supported revisions using their own consequence and source order
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-92c8fc66 · 2026-11-17
+Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
 
 ## _consequence_rank
 
@@ -86,4 +86,22 @@ Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-b937a179 · 2026-11-17
 Reason: Discard comparison decisions for replaced revisions before grouping and recording dispositions.
 
 Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-92c8fc66 · 2026-11-17
+
+## _rank_supported_members
+
+Reason: Rank only exact supported revisions using their own consequence and source order
+
+Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
+
+## _unit_order
+
+Reason: Rank only exact supported revisions using their own consequence and source order
+
+Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
+
+## _verdicts_by_key
+
+Reason: Rank only exact supported revisions using their own consequence and source order
+
+Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
 
