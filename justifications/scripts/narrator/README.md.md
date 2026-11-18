@@ -5,31 +5,67 @@ role: authored
 
 ## Narrator summary writer
 
-Reason: Document the source-length handoff, matching Build and direct invocation so operators can run the updated writer.
+Removed: Make the direct label command and its text, limit and adapter contracts usable by callers.
 
-Origins: MYC-22.7, MYC-22.9 · Intention i-a7076112 · 2026-11-17
+Removed by Intention i-a3fab844 · 2026-11-18
 
 ## Narrator summary writer > Compare and retain evidence
 
-Reason: Document the source-length handoff, matching Build and direct invocation so operators can run the updated writer.
+Removed: Make the direct label command and its text, limit and adapter contracts usable by callers.
 
-Origins: MYC-22.7, MYC-22.9 · Intention i-a7076112 · 2026-11-17
+Removed by Intention i-a3fab844 · 2026-11-18
 
 ## Narrator summary writer > Configure a disposable Mycel run
 
-Reason: Document the source-length handoff, matching Build and direct invocation so operators can run the updated writer.
+Removed: Make the direct label command and its text, limit and adapter contracts usable by callers.
 
-Origins: MYC-22.7, MYC-22.9 · Intention i-a7076112 · 2026-11-17
+Removed by Intention i-a3fab844 · 2026-11-18
 
 ## Narrator summary writer > Model and embedding commands
 
-Reason: Document disposable writer configuration, exact adapter contracts and qualification pins.
+Removed: Make the direct label command and its text, limit and adapter contracts usable by callers.
 
-Origins: MYC-22.7, MYC-22.8 · Intention i-3c8b5ca6 · 2026-11-17
+Removed by Intention i-a3fab844 · 2026-11-18
 
 ## Narrator summary writer > Qualify a pinned candidate
 
-Reason: Document the source-length handoff, matching Build and direct invocation so operators can run the updated writer.
+Removed: Make the direct label command and its text, limit and adapter contracts usable by callers.
 
-Origins: MYC-22.7, MYC-22.9 · Intention i-a7076112 · 2026-11-17
+Removed by Intention i-a3fab844 · 2026-11-18
+
+## Narrator
+
+Reason: Make the direct label command and its text, limit and adapter contracts usable by callers.
+
+Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
+
+## Narrator > Compare and retain evidence
+
+Reason: Make the direct label command and its text, limit and adapter contracts usable by callers.
+
+Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
+
+## Narrator > Configure a disposable Mycel run
+
+Reason: Make the direct label command and its text, limit and adapter contracts usable by callers.
+
+Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
+
+## Narrator > Generate a label
+
+Reason: Make the direct label command and its text, limit and adapter contracts usable by callers.
+
+Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
+
+## Narrator > Model and embedding commands
+
+Reason: Make the direct label command and its text, limit and adapter contracts usable by callers.
+
+Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
+
+## Narrator > Qualify a pinned candidate
+
+Reason: Make the direct label command and its text, limit and adapter contracts usable by callers.
+
+Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
 
