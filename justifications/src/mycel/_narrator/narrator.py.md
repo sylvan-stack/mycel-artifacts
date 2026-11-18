@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
 
-Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
 
 ## <end>
 
@@ -221,9 +221,9 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## _run_label
 
-Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
 
-Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
 
 ## _run_writer
 
@@ -308,4 +308,10 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
 
 Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+
+## _sentence_label_output
+
+Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
+
+Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
 

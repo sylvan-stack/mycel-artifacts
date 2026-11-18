@@ -11,9 +11,9 @@ Origins: MYC-22.9 · Intention i-57fdf221 · 2026-11-17
 
 ## <before _settings>
 
-Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
 
-Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
 
 ## _settings
 
@@ -23,15 +23,15 @@ Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 
 
 ## summary_command
 
-Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
 
-Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
 
 ## SummaryProgram
 
-Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
 
-Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
 
 ## _file_hash
 
