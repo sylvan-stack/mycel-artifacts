@@ -11,9 +11,9 @@ Origins: MYC-21.9, MYC-21.10, MYC-21.11 · Intention i-2988afd9 · 2026-11-10
 
 ## Command line and settings > Recovering Origin Links
 
-Reason: Document the Hub switch, status, backups and approved cutover procedure
+Reason: Run one durable quiet-period check and reuse the normal guarded ingest, embedding and summary operations.
 
-Origins: MYC-21.9, MYC-21.10, MYC-21.11 · Intention i-2988afd9 · 2026-11-10
+Origins: MYC-8.30, MYC-8.31, MYC-8.32 · Intention i-48a6d25c · 2026-11-18
 
 ## Command line and settings > Compiling Cue Cards
 
@@ -47,7 +47,7 @@ Origins: MYC-21.9, MYC-21.10, MYC-21.11 · Intention i-2988afd9 · 2026-11-10
 
 ## Command line and settings > Other command behavior
 
-Reason: Explain how to configure Narrator’s reasoning adapter and migrate older summary settings.
+Reason: Run one durable quiet-period check and reuse the normal guarded ingest, embedding and summary operations.
 
-Origins: MYC-8.5, MYC-8.8 · Intention i-1b63bf4c · 2026-11-18
+Origins: MYC-8.30, MYC-8.31, MYC-8.32 · Intention i-48a6d25c · 2026-11-18
 

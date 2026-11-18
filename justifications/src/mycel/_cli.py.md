@@ -5,13 +5,13 @@ role: authored
 
 ## parse
 
-Reason: Expose the Hub switch and status and give the replacement job its single sync entry point
+Reason: Run one durable quiet-period check and reuse the normal guarded ingest, embedding and summary operations.
 
-Origins: MYC-21.9, MYC-21.10 · Intention i-f7a425e8 · 2026-11-10
+Origins: MYC-8.30, MYC-8.31, MYC-8.32 · Intention i-48a6d25c · 2026-11-18
 
 ## run
 
-Reason: Expose the Hub switch and status and give the replacement job its single sync entry point
+Reason: Run one durable quiet-period check and reuse the normal guarded ingest, embedding and summary operations.
 
-Origins: MYC-21.9, MYC-21.10 · Intention i-f7a425e8 · 2026-11-10
+Origins: MYC-8.30, MYC-8.31, MYC-8.32 · Intention i-48a6d25c · 2026-11-18
 
