@@ -65,9 +65,9 @@ Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
 
 ## Meter
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
 
 ## Meter.admit_repair
 
@@ -77,9 +77,9 @@ Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
 
 ## Meter.call
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
 
 ## Meter.text
 
@@ -107,15 +107,15 @@ Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## _json_value
 
-Reason: Connect consolidation, independent verification and bounded repair to assembly of supported exact revisions.
+Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
 
-Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e83 · 2026-11-17
+Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
 
 ## _metered_value
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
 
 ## _run_command
 
@@ -293,7 +293,13 @@ Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
 
 ## _run_label
 
-Reason: Make an evidence-based label available as a standalone command with an enforced caller word limit.
+Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
 
-Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
+Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
+
+## _unique_object
+
+Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
+
+Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
 
