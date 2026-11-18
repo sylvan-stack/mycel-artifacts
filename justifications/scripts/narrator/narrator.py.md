@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Apply the same explicit English function-word exclusions in the label prompt and the enforced output budget.
+Reason: Preserve attached symbols and accents while trimming label punctuation for the word budget.
 
-Origins: MYC-23.3 · Intention i-fe006a2a · 2026-11-18
+Origins: MYC-23.3 · Intention i-5fa1e4f0 · 2026-11-18
 
 ## NarratorError
 
@@ -287,9 +287,9 @@ Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## _label_output
 
-Reason: Apply the same explicit English function-word exclusions in the label prompt and the enforced output budget.
+Reason: Preserve attached symbols and accents while trimming label punctuation for the word budget.
 
-Origins: MYC-23.3 · Intention i-fe006a2a · 2026-11-18
+Origins: MYC-23.3 · Intention i-5fa1e4f0 · 2026-11-18
 
 ## _run_label
 
@@ -302,4 +302,10 @@ Origins: MYC-23.3 · Intention i-fe006a2a · 2026-11-18
 Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
 
 Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
+
+## _counted_label_word
+
+Reason: Preserve attached symbols and accents while trimming label punctuation for the word budget.
+
+Origins: MYC-23.3 · Intention i-5fa1e4f0 · 2026-11-18
 
