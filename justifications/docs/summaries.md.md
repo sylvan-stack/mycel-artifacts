@@ -23,9 +23,9 @@ Origins: MYC-8.35, MYC-8.36 · Intention i-f9894df8 · 2026-11-18
 
 ## Summary plans, reports and writer boundary > Browse published summary trees
 
-Reason: Read exact summaries and child labels in a plain-text view with reversible expansion
+Reason: Expand summary branches in place with independently visible siblings and four-space child indentation
 
-Origins: MYC-8.36 · Intention i-61f3474e · 2026-11-18
+Origins: MYC-8.36 · Intention i-e9c811e5 · 2026-11-18
 
 ## Summary plans, reports and writer boundary > Browse published summary trees > Summary labels
 
