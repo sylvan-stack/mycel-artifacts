@@ -178,6 +178,14 @@ The page displays repository names, node labels and selected text as plain text.
 
 Build and regeneration ask bundled Narrator for a sentence label from the generated summary text and store it with the exact published summary version. A label has one terminal sentence mark and at most 20 whitespace-separated words, including function words. Label failure follows ordinary summary publication failure. Existing unlabeled summaries remain browsable using their addresses as fallback labels. The explicit `mycel summaries labels --repo <name>` command backfills missing labels without generating new summary prose or embeddings. It keeps labels that are already stored and publishes a batch only if the captured versions are still current.
 
+### Source-ordered Artifact reader
+
+`mycel summaries ordered <artifact> [<artifact> ...] --output <file>` captures each explicitly selected UTF-8 text Artifact from disk and exports independent trees in argument order. Each tree uses one capture and divides it into contiguous child ranges in source order. A tree never interleaves two Artifacts. Include all content from the capture, including headings, preambles, whitespace and line endings. Use heading boundaries for Markdown and split long ranges as needed. Refuse files that cannot be read as UTF-8 text. Each private HTML export retains its source versions and never overwrites an existing path.
+
+When a Narrator reasoning adapter is configured, generate an overview for each bounded group of ranges where possible using bundled Narrator and its sentence labels. A parent may summarize its ordered child summaries. Grouping and model work require no index or embeddings. A missing adapter, a range with no substantive body, or a failed generation leaves the same branch navigable through its source ranges. Reports count generated and unavailable summaries.
+
+Cmd+Click opens a branch in place, from its label through any summary and down to the original text. Shift+Click reverses one step and sibling branches stay visible. Once a branch shows its children, its summary prose leaves the reading flow. When all text ranges for an Artifact are visible, their concatenation is the exact captured UTF-8 text from beginning to end. Modifier hover highlights the actionable text. Tab, Enter or Space, and Escape provide the corresponding keyboard access.
+
 ### Summaries in a search
 
 Observed in version 1: a search that included documents took summaries among its document candidates. A summary could become a result where a document could. It was never followed to code, and a search for code only left it out. A summary result named no file to read.
@@ -238,6 +246,8 @@ A summary is never one of the sections from which the search follows Source Refs
 | MYC-8.34 <!-- 74434112-d208-43cd-9e12-3358fd20780c --> | backfill labels for existing summary versions on explicit request without rewriting prose or vectors, and keep already labeled versions | New | store |
 | MYC-8.35 <!-- e442241e-d05c-40eb-9a13-a2e14dbcbbd9 --> | export all published nonempty summary sets to one private standalone HTML file using retained memberships and text from one checked read snapshot | New | store |
 | MYC-8.36 <!-- 0f477049-adf5-4af2-a7e4-8b0f153649fa --> | show published summary sets as independent plain-text repository branches. Let Cmd and Shift clicks open and close every level in place, with children indented four spaces per level, siblings preserved on expansion, modifier hover boundaries and keyboard access through the text | New | unit |
+| MYC-8.37 <!-- 2a59fd74-d478-4b76-a1f2-b11bbe26abc3 --> | export source-ordered trees for explicitly selected UTF-8 text Artifacts. Capture each file once, partition its exact text into ordered contiguous ranges, and use bounded Narrator summaries when available | New | unit |
+| MYC-8.38 <!-- 05908cad-0545-4f55-a3f4-a0d4ac4b00ad --> | open and close Artifact branches in place with Cmd and Shift while preserving visible siblings. Show all original ranges in their exact order when fully expanded, including when a summary is unavailable | New | unit |
 
 ## Interface
 
