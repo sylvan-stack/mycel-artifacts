@@ -1,7 +1,7 @@
 ---
 role: authored
 spec: MYC-8
-status: implemented
+status: accepted
 ---
 # Mycel · 08 Summaries
 
@@ -13,7 +13,7 @@ It follows the conventions of the [specifications chapter](README.md#conventions
 
 ## Scope
 
-Covered: what is summarised, grouping and levels, the command that writes the text, the request it is given, how a summary is stored, building a set of summaries, writing stale ones again, status and removal, summaries in a search.
+Covered: what is summarised, grouping and levels, the command that writes the text, the request it is given, how a summary is stored, building a set of summaries, writing stale ones again, status and removal, quiet-period maintenance, and summaries in a search.
 
 Not covered: generated edges as a kind of edge ([MYC-7](07-drifts-and-verification.md#generated-edges)); the classification and work lifecycle of [MYC-14](14-drift-detection.md); how a summary is embedded ([MYC-3](03-embedding.md)); the overview of a repository's code, which no model writes ([MYC-9](09-code-overview.md)).
 
@@ -162,6 +162,14 @@ Which sections belong to which summary changes only in a build. Sections added s
 - `mycel_deprecated_v1:mycel/knowledge/raptor.py#_stale_members`
 - `mycel_deprecated_v1:mycel/knowledge/raptor.py#plan_regen`
 
+### Quiet-period maintenance
+
+`mycel maintain --repo <name>` checks one explicitly selected enabled repository. It observes current on-disk document inputs in the repository’s code and Artifact roots using the normal scan rules. First observation, edits, additions, moves and deletions start a 15-minute quiet period for that repository. A different repository has its own timer. Code-only inputs do not reset the timer. A complete observation must be stable before work is admitted; an unreadable, interrupted or incomplete observation cannot authorize provider work.
+
+Each invocation is finite. It persists the observation digest, due time and completion state outside the index, under a repository-specific lock. A completed unchanged observation returns without touching the store or calling providers. When due, ingest, embed pending on-disk document sections and regenerate existing stale summaries in that order. Recheck the observation between stages. A changed observation defers further work and starts a fresh quiet period. Regeneration uses the configured Narrator adapter and never broadens into a full tree build. New sections become directly searchable after ordinary indexing and embedding.
+
+Keep unfinished work due for a later invocation with a 15-minute retry delay for the same inputs. Existing per-operation guards and atomic commits preserve completed work. When stale summaries need an adapter and none is configured, report that condition. A macOS LaunchAgent can invoke the command once a minute for each explicitly selected repository, and runs depend on that agent being installed by the operator. No scheduler is enabled by default.
+
 ### Summaries in a search
 
 Observed in version 1: a search that included documents took summaries among its document candidates. A summary could become a result where a document could. It was never followed to code, and a search for code only left it out. A summary result named no file to read.
@@ -215,6 +223,9 @@ A summary is never one of the sections from which the search follows Source Refs
 | MYC-8.27 <!-- e554625a-8b7d-4924-90c4-b6d44936c71b --> | publish each regenerated summary with its vectors and pins atomically, keep independent successes, and block parents whose generated members remain stale | New | store |
 | MYC-8.28 <!-- d1d8effd-f5d2-4273-bfa5-013e08954675 --> | make summary status and both dry-runs read-only with no service calls, distinguish estimated build plans, and return complete regeneration/removal replies | New | store |
 | MYC-8.29 <!-- 4494a6cb-ca43-4831-a8c6-79b933f9d80b --> | serialize summary mutations with a nonblocking summary-operation lock, release pass locks during external calls, protect in-flight evidence by exact invocation liveness and clean up subprocesses/staging on interruption | New | store |
+| MYC-8.30 <!-- 5bbd1345-5b8e-4f4a-85b5-7ae3683feebc --> | admit background maintenance for one enabled repository only after 15 minutes of unchanged complete on-disk document observations. Persist the state and suppress duplicate runs with an exclusive repository lock | New | unit |
+| MYC-8.31 <!-- 755dd3c3-eab0-4775-b8a9-300a118726b2 --> | on a due observation ingest, embed pending on-disk document versions, and regenerate only stale summaries. Recheck inputs between stages and retain unfinished work for later without invoking a rebuild | New | store |
+| MYC-8.32 <!-- 0b22c6c7-35c6-4abd-8430-2d6143e1883b --> | expose one finite `mycel maintain --repo <name>` check and an opt-in macOS LaunchAgent that invokes it once per minute | New | unit |
 
 ## Interface
 
@@ -308,6 +319,7 @@ interface SummariesRemoval { repository: string; removed: number }
 |---|---|---|---|
 | MYC-D31 <!-- 4227641a-3f09-4e68-a076-1664dba1f8cf --> | Who writes the text of a summary, now that `infer` is deprecated? | A command the owner names in the settings, for example `claude -p`. Mycel starts it for each summary, gives it the sections and stores what it prints. This is what version 1 did with `infer`, with the program's name moved into the settings. Mycel then starts one program that is not its own, and summaries need that program to be installed and signed in. The other choice is that Mycel starts nothing: it hands the groups to whoever called it, an agent or Arbol writes the summaries and hands them back, and Mycel only stores them. Mycel would then stay free of any model, and a build would need a caller that does the writing | Decided 8 October 2026 by the owner: agreed. Superseded by MYC-D102 |
 | MYC-D102 <!-- 8ad187e5-b934-4a69-8ad5-53bccf7c5f55 --> | Which writer can RAPTOR use? | Ship and always use Narrator for RAPTOR builds and regeneration. Configure its reasoning adapter through `summaries.model_command`. Recognize the retired writer key for reading old settings | Decided by the owner on 18 November 2026: Narrator is the only available RAPTOR summarizer |
+| MYC-D103 <!-- 51b86704-f11b-4d80-9b9d-10e0c4cf8cc4 --> | How should quiet-period maintenance run? | Use a 15-minute per-repository quiet period after on-disk document edits and batch incremental embedding and stale summary regeneration. | Decided 18 November 2026 by the owner: implement the proposed quiet-period workflow |
 
 ## Named checks
 
