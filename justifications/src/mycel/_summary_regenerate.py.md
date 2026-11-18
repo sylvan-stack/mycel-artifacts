@@ -5,7 +5,19 @@ role: authored
 
 ## regenerate_summary_set
 
-Reason: Deliver the exact original character count to the corresponding summary writer child and retry without changing rendered requests.
+Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
 
-Origins: MYC-22.7, MYC-22.9 · Intention i-d2d07e46 · 2026-11-17
+Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+
+## <before _snapshot>
+
+Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+
+Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+
+## _regenerate_summaries
+
+Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+
+Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
 

@@ -9,3 +9,39 @@ Reason: Measure original section bodies before rendering or request cuts so tran
 
 Origins: MYC-22.9 · Intention i-57fdf221 · 2026-11-17
 
+## <before _settings>
+
+Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+
+Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+
+## _settings
+
+Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+
+Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+
+## summary_command
+
+Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+
+Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+
+## SummaryProgram
+
+Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+
+Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+
+## _file_hash
+
+Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+
+Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+
+## summary_configuration_guard
+
+Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+
+Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+
