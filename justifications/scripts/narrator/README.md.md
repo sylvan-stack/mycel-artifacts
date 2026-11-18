@@ -53,9 +53,9 @@ Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
 
 ## Narrator > Generate a label
 
-Reason: Make the direct label command and its text, limit and adapter contracts usable by callers.
+Reason: Document which label words spend the CLI budget, including common free words and a working example.
 
-Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
+Origins: MYC-23.3 · Intention i-9ca2eb2b · 2026-11-18
 
 ## Narrator > Model and embedding commands
 
