@@ -11,9 +11,9 @@ Origins: MYC-21.9, MYC-21.10, MYC-21.11 · Intention i-2988afd9 · 2026-11-10
 
 ## Command line and settings > Recovering Origin Links
 
-Reason: Export exact Artifact versions as contiguous ordered branches with optional Narrator summaries
+Reason: Retire the source-ordered Artifact export at the owner’s request and retain the published RAPTOR browser.
 
-Origins: MYC-8.37, MYC-8.38 · Intention i-07342bcf · 2026-11-18
+Origins: MYC-8.37, MYC-8.38, MYC-8.35, MYC-8.36 · Intention i-17c0447d · 2026-11-18
 
 ## Command line and settings > Compiling Cue Cards
 
@@ -47,7 +47,7 @@ Origins: MYC-21.9, MYC-21.10, MYC-21.11 · Intention i-2988afd9 · 2026-11-10
 
 ## Command line and settings > Other command behavior
 
-Reason: Export exact Artifact versions as contiguous ordered branches with optional Narrator summaries
+Reason: Retire the source-ordered Artifact export at the owner’s request and retain the published RAPTOR browser.
 
-Origins: MYC-8.37, MYC-8.38 · Intention i-07342bcf · 2026-11-18
+Origins: MYC-8.37, MYC-8.38, MYC-8.35, MYC-8.36 · Intention i-17c0447d · 2026-11-18
 
