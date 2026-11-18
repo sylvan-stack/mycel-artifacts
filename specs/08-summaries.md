@@ -58,17 +58,17 @@ A fictional repository with 400 sections gives about 31 summaries at level 1 and
 
 Observed in version 1: Mycel wrote no summary itself. For each one it started a program called `infer`, which belonged to the stack and is now deprecated. It looked for that program in four places, gave it the name of a model and the instruction as arguments and the request on standard input, and took its standard output as the summary. A request had five minutes and one attempt. Up to 24 ran at the same time.
 
-Decided: the settings name the command that writes a summary, `summaries.command` ([MYC-D31](#decisions)). Any program serves that reads a request on standard input and prints the answer, for example `["claude", "-p"]`.
+Decided in MYC-D102: Mycel ships [Narrator](22-narrator-summary-quality.md) and uses it as the sole RAPTOR writer for builds and regeneration. The operator configures the reasoning adapter it calls in `summaries.model_command`. Narrator runs in reasoned mode and verifies proposed claims before it assembles the prose. Mycel passes any configured prompt override to the same writer.
 
 - Mycel starts the command once for each summary, without a shell, in an empty folder of its own, so that the program finds no instructions of some project lying around.
 - The whole request goes to its standard input. Nothing of it is in an argument.
 - Its standard output is the summary, decoded as UTF-8. A status other than 0, invalid UTF-8, an empty/whitespace-only answer, or no answer within five minutes is a failure. Capture at most 1 MiB stdout and 64 KiB stderr; overflow terminates the process group and fails the request. A failed summary is tried once more and then recorded as failed with a redacted reason; raw stderr and credentials are not copied into replies or activity.
 - At most `summaries.at_once` run at the same time.
-- Mycel knows nothing of models, accounts or prices. They are the command's affair.
+- The model adapter selects the provider, model and account and returns the structured responses Narrator requests.
 
-Without the setting, an actual `build` or `regenerate` is refused with `settings`. A dry-run, status, removal and search still work. The command array must contain a nonempty executable and string arguments. Instruction overrides must contain both UTF-8 files and exactly one `$sections` mark in the task; invalid overrides return `settings` before any request is sent.
+Without an available model adapter, an actual `build` or `regenerate` is refused with `settings`. A dry-run, status, removal and search still work. The adapter uses literal argv with an absolute executable or a leading `~/`. The retired `summaries.command` setting is recognized so older configurations remain readable. It never selects or launches a writer. Instruction overrides must contain both UTF-8 files and exactly one `$sections` mark in the task; invalid overrides return `settings` before any request is sent.
 
-This configured summary command is one external model boundary. MYC-14 separately defines the configured smarter-review command and direct Jev classification. Mycel directly calls the fixed embedding and Jev services; provider selection for summaries and review belongs to the configured commands (MYC-0.10). Only the explicit commands that request generation or classification spend those calls.
+Narrator’s configured adapter is the external model boundary for summaries. MYC-14 separately defines the configured smarter-review command and direct Jev classification. Mycel directly calls the fixed embedding and Jev services; provider selection for summaries and review belongs to the configured commands (MYC-0.10). Only the explicit commands that request generation or classification spend those calls.
 
 **Historical evidence (unindexed):**
 
@@ -190,10 +190,10 @@ A summary is never one of the sections from which the search follows Source Refs
 | MYC-8.2 <!-- 7fdbfe9c-fc8e-4e18-9ac0-5e99a16a6fb8 --> | count in its reply the sections left out because they are not embedded | New | store |
 | MYC-8.3 <!-- 2dc8d10b-f545-415d-b6ef-0407f10b6239 --> | group by the vectors with version 1's method and starting values, give the same groups for the same vectors, and place a section embedded in several parts by the mean of its parts' vectors | Kept | unit |
 | MYC-8.4 <!-- 31691e3c-205a-46b6-a574-388fad23e55d --> | build in levels up to five, stop when ten or fewer nodes are left at the top, summaries and members moved up counted together, or when a level produced no summary, and move a group of one up a level without a summary | Changed | unit |
-| MYC-8.5 <!-- 7de52396-3f80-4e7a-b79b-5a63a9c8aaab --> | write no summary text itself: start the command `summaries.command` once for each summary, without a shell, in an empty folder, with the whole request on standard input | Changed | unit |
+| MYC-8.5 <!-- 7de52396-3f80-4e7a-b79b-5a63a9c8aaab --> | start bundled Narrator as the sole writer for each summary, without a shell, in an empty folder, with the whole request on standard input. Only its model adapter is configurable | Changed | unit |
 | MYC-8.6 <!-- 56a7722d-3cb4-459f-972f-9da530a76af7 --> | take a status other than 0, an empty answer and no answer within five minutes as a failure, try a failed summary once more, and record the reason of one that failed again | Changed | unit |
 | MYC-8.7 <!-- 28e6ea78-61a6-48fd-abb6-24e5f4d60686 --> | run at most `summaries.at_once` requests at the same time | Changed | unit |
-| MYC-8.8 <!-- 5b835649-7c2c-4830-bae5-f1c8abe293b7 --> | refuse actual `build` and `regenerate` with `settings` when the settings name no command, and keep dry-runs, status, removal and search working | Changed | unit |
+| MYC-8.8 <!-- 5b835649-7c2c-4830-bae5-f1c8abe293b7 --> | refuse actual `build` and `regenerate` with `settings` when no available Narrator model adapter is configured. Keep dry-runs, status, removal and search working, including for older configurations | Changed | unit |
 | MYC-8.9 <!-- e5f45a54-fbd6-4517-96f5-039e3a0c2ec1 --> | make each request of an instruction, a task and the group's sections, each section with its place line and its complete text, in the order of path and position | Changed | unit |
 | MYC-8.10 <!-- dacc6330-8c09-4f3e-89ee-3dd60aea9b23 --> | divide a group whose request would pass 48,000 characters until every part fits, and write a summary for each part, so that no section of a group is left out | Changed | unit |
 | MYC-8.11 <!-- dfa3c19c-52aa-4f57-95d3-5715f807e7ce --> | give a single section that is longer than a whole request a request to itself, cut to the limit, and name it in the reply | New | unit |
@@ -205,12 +205,12 @@ A summary is never one of the sections from which the search follows Source Refs
 | MYC-8.17 <!-- 75172d5c-2e65-4606-8b8d-9931c46bee42 --> | write again, on `regenerate`, only the stale summaries, lowest level first, each in its place with the members that still exist, and pin its edges | Kept | store |
 | MYC-8.18 <!-- 2527c9ba-fd41-4fc2-ac06-4957fda33d8a --> | delete a summary that has no member left, and leave stale a summary whose request failed | Changed | store |
 | MYC-8.19 <!-- 1304c052-b610-4a82-8404-7a19c0138951 --> | never write or rewrite a summary in a pass, a search or any command other than `summaries build` and `summaries regenerate` | Kept | store |
-| MYC-8.20 <!-- f70708a3-880f-4fbd-b173-256e197dccad --> | report for a repository the summaries of each level, how many are stale, how many sections are in a summary, in none, and not embedded, and whether a command is set | Changed | store |
+| MYC-8.20 <!-- f70708a3-880f-4fbd-b173-256e197dccad --> | report for a repository the summaries of each level, how many are stale, how many sections are in a summary, in none, and not embedded, and whether a Narrator model command is set | Changed | store |
 | MYC-8.21 <!-- 432e3a46-e88c-4ef5-b95e-5ba781a79d09 --> | remove every summary of a repository and its edges on request | New | store |
 | MYC-8.22 <!-- 94867810-7e67-4ea9-95c8-2f2f72382fc1 --> | let summaries of the searched repository compete in a search as documents do, leave them out of a search for code only, never follow one to code, and return one with the origin `summary` and without a file | Kept | store |
 | MYC-8.23 <!-- bc77a15e-279f-48e8-9225-01455063b5c9 --> | report a ref to a summary in a file as a fault, and refuse with `invalid_input` a `derive` or `relate` that names one | New | store |
 | MYC-8.24 <!-- d0afd36d-1035-4428-b29d-a0154fcefe75 --> | use and record the deterministic `mycel-summary-v1` grouping profile and report invalid numerical inputs or failed fitting | New | unit |
-| MYC-8.25 <!-- ecc1d34a-0f39-4315-b384-4dd7382ef3aa --> | validate configured command and prompt files before requests; retain the exact generation request, response and member evidence under MYC-16 | New | store |
+| MYC-8.25 <!-- ecc1d34a-0f39-4315-b384-4dd7382ef3aa --> | validate the Narrator entry point, model command and prompt files before requests. Guard their identities and retain the exact invocation, request, response and member evidence under MYC-16 | New | store |
 | MYC-8.26 <!-- 9a99738e-2428-4361-96df-03d928d3a2b5 --> | keep staged summaries and vectors out of searches, recheck exact inputs before publication, discard changed-input builds, and replace an empty eligible set atomically | New | store |
 | MYC-8.27 <!-- e554625a-8b7d-4924-90c4-b6d44936c71b --> | publish each regenerated summary with its vectors and pins atomically, keep independent successes, and block parents whose generated members remain stale | New | store |
 | MYC-8.28 <!-- d1d8effd-f5d2-4273-bfa5-013e08954675 --> | make summary status and both dry-runs read-only with no service calls, distinguish estimated build plans, and return complete regeneration/removal replies | New | store |
@@ -233,7 +233,7 @@ Each of them takes one repository: the one named, or the one of the current dire
 ```ts
 interface SummariesStatus {
   repository: string;
-  commandSet: boolean;                 // whether the settings name a command
+  commandSet: boolean;                 // whether a Narrator model command is configured
   builtAt?: string;                    // when the present set took its place
   groupingProfile?: string;            // "mycel-summary-v1"
   build?: string;                      // MYC-15 Build that published the set
@@ -306,7 +306,8 @@ interface SummariesRemoval { repository: string; removed: number }
 
 | ID | Question | Proposed default | Outcome |
 |---|---|---|---|
-| MYC-D31 <!-- 4227641a-3f09-4e68-a076-1664dba1f8cf --> | Who writes the text of a summary, now that `infer` is deprecated? | A command the owner names in the settings, for example `claude -p`. Mycel starts it for each summary, gives it the sections and stores what it prints. This is what version 1 did with `infer`, with the program's name moved into the settings. Mycel then starts one program that is not its own, and summaries need that program to be installed and signed in. The other choice is that Mycel starts nothing: it hands the groups to whoever called it, an agent or Arbol writes the summaries and hands them back, and Mycel only stores them. Mycel would then stay free of any model, and a build would need a caller that does the writing | Decided 8 October 2026 by the owner: agreed. A command the owner names in the settings writes each summary |
+| MYC-D31 <!-- 4227641a-3f09-4e68-a076-1664dba1f8cf --> | Who writes the text of a summary, now that `infer` is deprecated? | A command the owner names in the settings, for example `claude -p`. Mycel starts it for each summary, gives it the sections and stores what it prints. This is what version 1 did with `infer`, with the program's name moved into the settings. Mycel then starts one program that is not its own, and summaries need that program to be installed and signed in. The other choice is that Mycel starts nothing: it hands the groups to whoever called it, an agent or Arbol writes the summaries and hands them back, and Mycel only stores them. Mycel would then stay free of any model, and a build would need a caller that does the writing | Decided 8 October 2026 by the owner: agreed. Superseded by MYC-D102 |
+| MYC-D102 <!-- 8ad187e5-b934-4a69-8ad5-53bccf7c5f55 --> | Which writer can RAPTOR use? | Ship and always use Narrator for RAPTOR builds and regeneration. Configure its reasoning adapter through `summaries.model_command`. Recognize the retired writer key for reading old settings | Decided by the owner on 18 November 2026: Narrator is the only available RAPTOR summarizer |
 
 ## Named checks
 

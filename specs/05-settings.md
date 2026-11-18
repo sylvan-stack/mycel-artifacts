@@ -71,7 +71,8 @@ Proposed: the keys below and no others. Each is named by the requirement that ne
 | `[drifts]` | `review_provider` | nonempty text | absent; required with review_command | [MYC-14](14-drift-detection.md) |
 | `[drifts]` | `review_model` | nonempty exact model-version text | absent; required with review_command | [MYC-14](14-drift-detection.md) |
 | `[drifts]` | `review_revision` | immutable adapter revision; 1–128 ASCII letters/digits or . _ : + -, starting alphanumeric | absent; required with review_command | [MYC-14](14-drift-detection.md#independent-smarter-reviewer) |
-| `[summaries]` | `command` | list of texts | none: no summary can be written | [MYC-8](08-summaries.md) |
+| `[summaries]` | `model_command` | nonempty NUL-free argv with an absolute or `~/` executable | absent: summary generation is unavailable | [MYC-8](08-summaries.md) |
+| `[summaries]` | `command` | list of texts | retired and recognized for existing configurations | [MYC-8](08-summaries.md) |
 | `[summaries]` | `at_once` | whole number, 1 or more | `4` | MYC-8 |
 | `[summaries]` | `instructions` | folder | none: the texts built into the program | MYC-8 |
 | `[organizations."<name>"]` | `root` | folder | required | MYC-1.3 |
@@ -248,7 +249,7 @@ shared_documents = [
 ]
 
 [summaries]
-command = ["claude", "-p"]
+model_command = ["/absolute/path/to/reasoning-adapter"]
 
 [organizations."Orchard"]
 root = "~/repos/orchard"
