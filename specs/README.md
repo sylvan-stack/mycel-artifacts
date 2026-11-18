@@ -17,7 +17,7 @@ What Mycel 2 does, written from what Mycel 1 did. [Mycel](../../arbol/GLOSSARY.m
 | [MYC-5](05-settings.md) | Settings | implemented |
 | [MYC-6](06-index-store.md) | The index store | implemented |
 | [MYC-7](07-drifts-and-verification.md) | Drifts and verification | implemented |
-| [MYC-8](08-summaries.md) | Summaries | accepted, maintenance qualification pending |
+| [MYC-8](08-summaries.md) | Summaries | accepted, maintenance and tree browser qualification pending |
 | [MYC-9](09-code-overview.md) | The code overview | implemented |
 | [MYC-10](10-grep-replacement.md) | The grep replacement | implemented |
 | [MYC-11](11-reading-a-chunk.md) | Reading a chunk | implemented |
@@ -155,6 +155,7 @@ MYC-D1 records the owner’s Python decision; MYC-15 makes its independent distr
 | MYC-D98 · Which repair and similarity policies apply? | Decided 17 November 2026 by the owner. Allow one batched repair and fresh verification within the shared limits. Enable similarity by default only after the agreed held-out comparison passes. | [MYC-D98](22-narrator-summary-quality.md#decisions) |
 | MYC-D102 · Which writer can RAPTOR use? | Decided 18 November 2026 by the owner. Mycel ships Narrator as its sole RAPTOR writer. Configuration selects its reasoning adapter. | [MYC-D102](08-summaries.md#decisions) |
 | MYC-D103 · How should quiet-period maintenance run? | Decided 18 November 2026 by the owner. Batch pending document embeddings and stale summary regeneration after a 15-minute quiet period per repository. | [MYC-D103](08-summaries.md#decisions) |
+| MYC-D104 · How can a user inspect summary sets? | Decided 18 November 2026 by the owner. Export a local tree browser with stored one-sentence labels, 20 words at most, and modifier-click navigation. | [MYC-D104](08-summaries.md#decisions) |
 
 ## Conventions
 

@@ -170,6 +170,14 @@ Each invocation is finite. It persists the observation digest, due time and comp
 
 Keep unfinished work due for a later invocation with a 15-minute retry delay for the same inputs. Existing per-operation guards and atomic commits preserve completed work. When stale summaries need an adapter and none is configured, report that condition. A macOS LaunchAgent can invoke the command once a minute for each explicitly selected repository, and runs depend on that agent being installed by the operator. No scheduler is enabled by default.
 
+### Tree browser and sentence labels
+
+`mycel summaries browse --output <file>` exports a private, self-contained HTML page with all published, nonempty summary sets in the selected index store. It reads one repeatable snapshot. The export performs no generation, embedding or network requests beyond opening that store. It never replaces an existing output file. The page starts with the available repositories. Selecting one hides the repository list and shows the labels of that set’s top nodes.
+
+Cmd+Click on a summary label opens its full text. Cmd+Click on that text reveals its children, with child summaries initially shown by their labels. A document child opens to the exact retained text used by its parent. Shift+Click reverses the current expansion one step and follows the parent from the navigation path when a node has multiple parents. Show a boundary around the actionable text block under the pointer while Cmd or Shift is held. Provide ordinary controls for opening and going back as well. Current Summary Nodes link through their published logical member IDs, so stale parents can show a current child version. Show retained source text when a member lacks a current Summary Node.
+
+Build and regeneration ask bundled Narrator for a sentence label from the generated summary text and store it with the exact published summary version. A label has one terminal sentence mark and at most 20 whitespace-separated words, including function words. Label failure follows ordinary summary publication failure. Existing unlabeled summaries remain browsable using their addresses as fallback labels. The explicit `mycel summaries labels --repo <name>` command backfills missing labels without generating new summary prose or embeddings. It keeps labels that are already stored and publishes a batch only if the captured versions are still current.
+
 ### Summaries in a search
 
 Observed in version 1: a search that included documents took summaries among its document candidates. A summary could become a result where a document could. It was never followed to code, and a search for code only left it out. A summary result named no file to read.
@@ -226,6 +234,10 @@ A summary is never one of the sections from which the search follows Source Refs
 | MYC-8.30 <!-- 5bbd1345-5b8e-4f4a-85b5-7ae3683feebc --> | admit background maintenance for one enabled repository only after 15 minutes of unchanged complete on-disk document observations. Persist the state and suppress duplicate runs with an exclusive repository lock | New | unit |
 | MYC-8.31 <!-- 755dd3c3-eab0-4775-b8a9-300a118726b2 --> | on a due observation ingest, embed pending on-disk document versions, and regenerate only stale summaries. Recheck inputs between stages and retain unfinished work for later without invoking a rebuild | New | store |
 | MYC-8.32 <!-- 0b22c6c7-35c6-4abd-8430-2d6143e1883b --> | expose one finite `mycel maintain --repo <name>` check and an opt-in macOS LaunchAgent that invokes it once per minute | New | unit |
+| MYC-8.33 <!-- 2b252459-3fbb-4746-b9d2-3d10ff16949c --> | generate and validate a one-sentence label of at most 20 words for each new published summary version, and store it atomically with the summary | New | store |
+| MYC-8.34 <!-- 74434112-d208-43cd-9e12-3358fd20780c --> | backfill labels for existing summary versions on explicit request without rewriting prose or vectors, and keep already labeled versions | New | store |
+| MYC-8.35 <!-- e442241e-d05c-40eb-9a13-a2e14dbcbbd9 --> | export all published nonempty summary sets to one private standalone HTML file using retained memberships and text from one checked read snapshot | New | store |
+| MYC-8.36 <!-- 0f477049-adf5-4af2-a7e4-8b0f153649fa --> | show one selected set and let Cmd and Shift clicks step through labels, summary text and children in opposite directions, with hover boundaries and ordinary controls | New | unit |
 
 ## Interface
 
@@ -320,6 +332,7 @@ interface SummariesRemoval { repository: string; removed: number }
 | MYC-D31 <!-- 4227641a-3f09-4e68-a076-1664dba1f8cf --> | Who writes the text of a summary, now that `infer` is deprecated? | A command the owner names in the settings, for example `claude -p`. Mycel starts it for each summary, gives it the sections and stores what it prints. This is what version 1 did with `infer`, with the program's name moved into the settings. Mycel then starts one program that is not its own, and summaries need that program to be installed and signed in. The other choice is that Mycel starts nothing: it hands the groups to whoever called it, an agent or Arbol writes the summaries and hands them back, and Mycel only stores them. Mycel would then stay free of any model, and a build would need a caller that does the writing | Decided 8 October 2026 by the owner: agreed. Superseded by MYC-D102 |
 | MYC-D102 <!-- 8ad187e5-b934-4a69-8ad5-53bccf7c5f55 --> | Which writer can RAPTOR use? | Ship and always use Narrator for RAPTOR builds and regeneration. Configure its reasoning adapter through `summaries.model_command`. Recognize the retired writer key for reading old settings | Decided by the owner on 18 November 2026: Narrator is the only available RAPTOR summarizer |
 | MYC-D103 <!-- 51b86704-f11b-4d80-9b9d-10e0c4cf8cc4 --> | How should quiet-period maintenance run? | Use a 15-minute per-repository quiet period after on-disk document edits and batch incremental embedding and stale summary regeneration. | Decided 18 November 2026 by the owner: implement the proposed quiet-period workflow |
+| MYC-D104 <!-- a8f53c75-485f-4230-bedd-60cc0d9be94f --> | How can a user inspect the repository summary sets? | Generate a local HTML browser, with a label and full text at each Summary Node and reversible Cmd and Shift expansion. | Decided 18 November 2026 by the owner. Each summary stores a single-sentence label of up to 20 words |
 
 ## Named checks
 
