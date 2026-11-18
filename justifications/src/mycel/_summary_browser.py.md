@@ -11,9 +11,9 @@ Origins: MYC-8.35, MYC-8.36 · Intention i-bce8fd1b · 2026-11-18
 
 ## _collect
 
-Reason: Collect all current nonempty published sets from one checked repeatable read snapshot without provider calls. Resolve current summary links by logical ID, retain exact versioned text for document children and former members that no longer have a current Summary Node, and use addresses for unlabeled versions
+Reason: Read exact summaries and child labels in a plain-text view with reversible expansion
 
-Origins: MYC-8.35 · Intention i-d9f99d11 · 2026-11-18
+Origins: MYC-8.36 · Intention i-61f3474e · 2026-11-18
 
 ## _incompatible
 
