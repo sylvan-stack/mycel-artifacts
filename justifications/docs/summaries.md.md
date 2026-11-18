@@ -5,7 +5,19 @@ role: authored
 
 ## Summary plans, reports and writer boundary
 
-Reason: Explain how to configure Narrator’s reasoning adapter and migrate older summary settings.
+Reason: Provide the opt-in macOS schedule and document normal operation and removal.
 
-Origins: MYC-8.5, MYC-8.8 · Intention i-1b63bf4c · 2026-11-18
+Origins: MYC-8.32 · Intention i-c59c7552 · 2026-11-18
+
+## Summary plans, reports and writer boundary > Quiet-period maintenance
+
+Reason: Provide the opt-in macOS schedule and document normal operation and removal.
+
+Origins: MYC-8.32 · Intention i-c59c7552 · 2026-11-18
+
+## Summary plans, reports and writer boundary > Quiet-period maintenance > Schedule checks on macOS
+
+Reason: Provide the opt-in macOS schedule and document normal operation and removal.
+
+Origins: MYC-8.32 · Intention i-c59c7552 · 2026-11-18
 
