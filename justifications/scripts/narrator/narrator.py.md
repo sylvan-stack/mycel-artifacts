@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
+Reason: Make an evidence-based label available as a standalone command with an enforced caller word limit.
 
-Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
+Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
 
 ## NarratorError
 
@@ -215,9 +215,9 @@ Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
 
 ## _arguments
 
-Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
+Reason: Make an evidence-based label available as a standalone command with an enforced caller word limit.
 
-Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
+Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
 
 ## _read_input
 
@@ -239,9 +239,9 @@ Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
 
 ## main
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Reason: Make an evidence-based label available as a standalone command with an enforced caller word limit.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
 
 ## _command_digest
 
@@ -284,4 +284,16 @@ Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
 
 Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+
+## _label_output
+
+Reason: Make an evidence-based label available as a standalone command with an enforced caller word limit.
+
+Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
+
+## _run_label
+
+Reason: Make an evidence-based label available as a standalone command with an enforced caller word limit.
+
+Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
 
