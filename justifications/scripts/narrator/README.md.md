@@ -35,9 +35,9 @@ Removed by Intention i-a3fab844 · 2026-11-18
 
 ## Narrator
 
-Reason: Explain the direct label command and the role of the configured summary writer in plain language.
+Reason: Explain how to configure Narrator’s reasoning adapter and migrate older summary settings.
 
-Origins: MYC-22.7, MYC-23.1 · Intention i-a381f094 · 2026-11-18
+Origins: MYC-8.5, MYC-8.8 · Intention i-1b63bf4c · 2026-11-18
 
 ## Narrator > Compare and retain evidence
 
@@ -47,9 +47,9 @@ Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
 
 ## Narrator > Configure a disposable Mycel run
 
-Reason: Explain the direct label command and the role of the configured summary writer in plain language.
+Reason: Explain how to configure Narrator’s reasoning adapter and migrate older summary settings.
 
-Origins: MYC-22.7, MYC-23.1 · Intention i-a381f094 · 2026-11-18
+Origins: MYC-8.5, MYC-8.8 · Intention i-1b63bf4c · 2026-11-18
 
 ## Narrator > Generate a label
 
