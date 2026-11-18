@@ -61,8 +61,7 @@ lower write can still change its request bytes.
 
 `mycel summaries build [--repo <name>]` builds a complete new tree. Missing or
 unavailable Narrator configuration returns `settings` before the store is
-opened. Each level uses complete actual writer
-responses, embeds them with the ordinary current-model planner, and only then
+opened. Each level uses complete actual writer responses, embeds them with the ordinary current-model planner, and only then
 groups the next level. Statistical singletons move up without a request.
 Requests split by the same bounded framing used by the dry-run. The reply names
 cut sections, redacted request/embedding failures, and `notEmbedded` sections.
@@ -137,11 +136,11 @@ Framing that leaves no room for source text and the notice is refused before
 a call. UTF-8 byte counts and character counts are distinct.
 
 Mycel starts bundled Narrator in reasoned mode without a shell in a fresh,
-empty temporary folder for each attempt. The request goes through stdin.
-Narrator calls the reasoning adapter configured as literal argv in
-`summaries.model_command`. Mycel passes the prompt override and the original
-source character count. For an older `summaries.command` that launched
-Narrator, move its model adapter argv to `summaries.model_command`.
+empty temporary folder for each attempt. The entire request goes through
+stdin. Narrator calls the reasoning adapter configured as literal argv in
+`summaries.model_command`. Mycel also passes the prompt override and the
+original source character count. For an older `summaries.command` that
+launched Narrator, move its model adapter argv to `summaries.model_command`.
 At most `summaries.at_once` attempts run concurrently. Each attempt has
 five minutes, a 1 MiB stdout cap and a 64 KiB stderr cap. Nonzero exit, invalid
 UTF-8, empty/whitespace-only output, overflow, start/I/O failure or deadline
@@ -149,6 +148,12 @@ failure receives exactly one retry. Successful response bytes remain whole.
 Failed results contain only fixed reason codes and attempt counts. Raw stderr
 and command values never enter failure replies. Timeout, overflow and
 interruption terminate and reap process groups.
+
+<!-- sources:
+mycel:@code/src/mycel/_summary_request.py#summary_command
+mycel:@code/src/mycel/_summary_writer.py#SummaryWriter
+mycel:@code/src/mycel/_narrator/narrator.py#summarize_arm
+-->
 
 Generation evidence stays private to the operation. An immutable manifest and
 owner-scoped snapshots retain exact request bytes/hash, prompt bytes/hashes,
@@ -203,6 +208,12 @@ private files under `~/.mycel/maintenance/`. Embedding uses the normal Mycel
 credentials. Regeneration uses `summaries.model_command` when there are stale
 summaries.
 
+<!-- sources:
+mycel:@code/src/mycel/_capture.py#observe_document_inputs
+mycel:@code/src/mycel/_maintenance.py#handle_maintenance
+mycel:@code/src/mycel/_embed.py#retained_contexts
+-->
+
 ### Schedule checks on macOS
 
 Use an installed Mycel Build that exposes `maintain --help`. From the Mycel
@@ -228,6 +239,10 @@ Use `launchctl bootout "gui/$(id -u)/$maintenance_label"` to stop scheduling
 and remove that plist from `~/Library/LaunchAgents` to keep it off at login.
 Jobs are opt-in.
 
+<!-- sources:
+mycel:@code/scripts/render_maintenance_launch_agent.py#main
+-->
+
 ## Browse published summary trees
 
 Export all published, nonempty summary sets in the configured index store
@@ -250,6 +265,11 @@ current published Summary Nodes and can show stale summaries.
 The file contains the exported text and labels and works offline. It is a
 snapshot. Export to a fresh path to read later publications.
 
+<!-- sources:
+mycel:@code/src/mycel/_summary_browser.py#collect_summary_trees
+mycel:@code/src/mycel/_summary_browser.py#write_summary_browser
+-->
+
 ### Summary labels
 
 Build and regeneration ask Narrator for one sentence of up to 20 words,
@@ -265,3 +285,8 @@ mycel summaries labels --repo mycel
 Backfill sends the text of missing-label summaries to Narrator and stores
 the labels without regenerating prose or embeddings. It can be rerun after
 a failure. Browse reads the index and requires no model adapter.
+
+<!-- sources:
+mycel:@code/src/mycel/_narrator/summary_label.py#sentence_label
+mycel:@code/src/mycel/_summary_labels.py#backfill_summary_labels
+-->
