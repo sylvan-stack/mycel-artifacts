@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Make an evidence-based label available as a standalone command with an enforced caller word limit.
+Reason: Apply the same explicit English function-word exclusions in the label prompt and the enforced output budget.
 
-Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
+Origins: MYC-23.3 · Intention i-fe006a2a · 2026-11-18
 
 ## NarratorError
 
@@ -287,15 +287,15 @@ Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
 
 ## _label_output
 
-Reason: Make an evidence-based label available as a standalone command with an enforced caller word limit.
+Reason: Apply the same explicit English function-word exclusions in the label prompt and the enforced output budget.
 
-Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
+Origins: MYC-23.3 · Intention i-fe006a2a · 2026-11-18
 
 ## _run_label
 
-Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
+Reason: Apply the same explicit English function-word exclusions in the label prompt and the enforced output budget.
 
-Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
+Origins: MYC-23.3 · Intention i-fe006a2a · 2026-11-18
 
 ## _unique_object
 
