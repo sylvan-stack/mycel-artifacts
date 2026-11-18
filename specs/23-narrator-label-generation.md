@@ -3,7 +3,7 @@ role: authored
 ---
 # Mycel · 23 Narrator Label Generation
 
-The owner approved the Label Generation design and asked to proceed on 18 November 2026.
+The owner approved the Label Generation design and asked to proceed on 18 November 2026. The default hosted model and reasoning effort follow [MYC-D99](22-narrator-summary-quality.md#decisions).
 
 Narrator generates one short label from a single supplied text. Callers can use the label as a Chat Session title or a codename for a block or message. The caller supplies the text and a positive maximum word count. The label names the central subject, action or outcome. Additional words should make that focus more precise. A label may be a single word or a fragment. It may reuse source wording or use wording that the text supports. The input text is the complete evidence for selecting the label.
 
