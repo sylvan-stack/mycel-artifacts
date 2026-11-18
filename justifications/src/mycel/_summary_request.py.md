@@ -23,9 +23,9 @@ Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 
 
 ## summary_command
 
-Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
+Reason: Export exact Artifact versions as contiguous ordered branches with optional Narrator summaries
 
-Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
+Origins: MYC-8.37, MYC-8.38 · Intention i-07342bcf · 2026-11-18
 
 ## SummaryProgram
 

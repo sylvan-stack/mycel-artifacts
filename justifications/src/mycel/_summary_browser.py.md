@@ -35,19 +35,25 @@ Origins: MYC-8.35, MYC-8.36 · Intention i-bce8fd1b · 2026-11-18
 
 ## export_summary_browser
 
-Reason: Render an offline page with safe text rendering, an initial repository picker that disappears when a set is selected, and top-node labels for that selected set. Let Cmd open label, text and children in order. Let Shift reverse one step on every branch, following the actual path when a child has multiple parents. Highlight actionable text under the pointer when a modifier is held and offer ordinary controls. Package the page asset. Write private, standalone exports without replacing an existing file
+Reason: Export exact Artifact versions as contiguous ordered branches with optional Narrator summaries
 
-Origins: MYC-8.35, MYC-8.36 · Intention i-bce8fd1b · 2026-11-18
+Origins: MYC-8.37, MYC-8.38 · Intention i-07342bcf · 2026-11-18
 
 ## render_summary_browser
 
-Reason: Render an offline page with safe text rendering, an initial repository picker that disappears when a set is selected, and top-node labels for that selected set. Let Cmd open label, text and children in order. Let Shift reverse one step on every branch, following the actual path when a child has multiple parents. Highlight actionable text under the pointer when a modifier is held and offer ordinary controls. Package the page asset. Write private, standalone exports without replacing an existing file
+Reason: Export exact Artifact versions as contiguous ordered branches with optional Narrator summaries
 
-Origins: MYC-8.35, MYC-8.36 · Intention i-bce8fd1b · 2026-11-18
+Origins: MYC-8.37, MYC-8.38 · Intention i-07342bcf · 2026-11-18
 
 ## write_summary_browser
 
-Reason: Render an offline page with safe text rendering, an initial repository picker that disappears when a set is selected, and top-node labels for that selected set. Let Cmd open label, text and children in order. Let Shift reverse one step on every branch, following the actual path when a child has multiple parents. Highlight actionable text under the pointer when a modifier is held and offer ordinary controls. Package the page asset. Write private, standalone exports without replacing an existing file
+Reason: Export exact Artifact versions as contiguous ordered branches with optional Narrator summaries
 
-Origins: MYC-8.35, MYC-8.36 · Intention i-bce8fd1b · 2026-11-18
+Origins: MYC-8.37, MYC-8.38 · Intention i-07342bcf · 2026-11-18
+
+## summary_browser_output
+
+Reason: Export exact Artifact versions as contiguous ordered branches with optional Narrator summaries
+
+Origins: MYC-8.37, MYC-8.38 · Intention i-07342bcf · 2026-11-18
 

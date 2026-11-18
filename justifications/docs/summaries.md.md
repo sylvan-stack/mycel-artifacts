@@ -33,3 +33,9 @@ Reason: Expose `summaries browse --output <file>`, update command help, and docu
 
 Origins: MYC-8.35, MYC-8.36 · Intention i-f9894df8 · 2026-11-18
 
+## Summary plans, reports and writer boundary > Browse published summary trees > Read Artifacts in source order
+
+Reason: Export exact Artifact versions as contiguous ordered branches with optional Narrator summaries
+
+Origins: MYC-8.37, MYC-8.38 · Intention i-07342bcf · 2026-11-18
+

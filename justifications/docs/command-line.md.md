@@ -11,9 +11,9 @@ Origins: MYC-21.9, MYC-21.10, MYC-21.11 · Intention i-2988afd9 · 2026-11-10
 
 ## Command line and settings > Recovering Origin Links
 
-Reason: Expose `summaries browse --output <file>`, update command help, and document navigation, labeling and legacy stores in both checkout guides
+Reason: Export exact Artifact versions as contiguous ordered branches with optional Narrator summaries
 
-Origins: MYC-8.35, MYC-8.36 · Intention i-f9894df8 · 2026-11-18
+Origins: MYC-8.37, MYC-8.38 · Intention i-07342bcf · 2026-11-18
 
 ## Command line and settings > Compiling Cue Cards
 
@@ -47,7 +47,7 @@ Origins: MYC-21.9, MYC-21.10, MYC-21.11 · Intention i-2988afd9 · 2026-11-10
 
 ## Command line and settings > Other command behavior
 
-Reason: Expose `summaries browse --output <file>`, update command help, and document navigation, labeling and legacy stores in both checkout guides
+Reason: Export exact Artifact versions as contiguous ordered branches with optional Narrator summaries
 
-Origins: MYC-8.35, MYC-8.36 · Intention i-f9894df8 · 2026-11-18
+Origins: MYC-8.37, MYC-8.38 · Intention i-07342bcf · 2026-11-18
 
