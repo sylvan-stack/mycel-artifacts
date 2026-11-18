@@ -23,9 +23,9 @@ Origins: MYC-8.35, MYC-8.36 · Intention i-f9894df8 · 2026-11-18
 
 ## Summary plans, reports and writer boundary > Browse published summary trees
 
-Reason: Expand summary branches in place with independently visible siblings and four-space child indentation
+Reason: Keep repository branches visible and use Cmd+Click to expand each independently
 
-Origins: MYC-8.36 · Intention i-e9c811e5 · 2026-11-18
+Origins: MYC-8.36 · Intention i-05a3a35a · 2026-11-18
 
 ## Summary plans, reports and writer boundary > Browse published summary trees > Summary labels
 
