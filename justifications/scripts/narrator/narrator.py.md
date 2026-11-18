@@ -5,307 +5,319 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Preserve attached symbols and accents while trimming label punctuation for the word budget.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.3 · Intention i-5fa1e4f0 · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## NarratorError
 
-Reason: Resolve and retain exact source offsets from the complete Mycel summary writer request.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-8f73c858 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## Passage
 
-Reason: Resolve and retain exact source offsets from the complete Mycel summary writer request.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-8f73c858 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## Request
 
-Reason: Resolve and retain exact source offsets from the complete Mycel summary writer request.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-8f73c858 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _passages
 
-Reason: Resolve and retain exact source offsets from the complete Mycel summary writer request.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-8f73c858 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _request_framing
 
-Reason: Resolve and retain exact source offsets from the complete Mycel summary writer request.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-8f73c858 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _source_spans
 
-Reason: Preserve literal marker text and exclude only the exact request-cap cut suffix emitted by Mycel.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-24735910 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## read_request
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## BudgetExhausted
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## FormatError
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## Meter
 
-Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## Meter.admit_repair
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## Meter.call
 
-Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## Meter.text
 
-Reason: Extract consequential candidates and retain only exact admitted evidence references.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _child_environment
 
-Reason: Keep model and embedding commands inside the writer attempt budget and sanitize their transport.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-22.7 · Intention i-ae06c885 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _drain
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _interrupt_on_termination
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _json_value
 
-Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _metered_value
 
-Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _run_command
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _stop_command
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _time_left
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## Candidate
 
-Reason: Extract consequential candidates and retain only exact admitted evidence references.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _extraction_rows
 
-Reason: Extract consequential candidates and retain only exact admitted evidence references.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.6 · Intention i-e45d5573 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## extract_candidates
 
-Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _embedding_vectors
 
-Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _nearest_pairs
 
-Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## command_argument
 
-Reason: Supply metered candidate neighbor suggestions with an isolated optional Voyage adapter.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.7 · Intention i-76006472 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## similarity_hints
 
-Reason: Connect consolidation, independent verification and bounded repair to assembly of supported exact revisions.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e83 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _array_reply
 
-Reason: Connect consolidation, independent verification and bounded repair to assembly of supported exact revisions.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e83 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _finite_number
 
-Reason: Connect consolidation, independent verification and bounded repair to assembly of supported exact revisions.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.3, MYC-22.4, MYC-22.5, MYC-22.7 · Intention i-4c088e83 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## summarize_arm
 
-Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## <end>
 
-Reason: Expose the optional Mycel writer command with a prose-only success path and redacted refusal.
+Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
+Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## _ArgumentParser
 
-Reason: Expose the optional Mycel writer command with a prose-only success path and redacted refusal.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _ArgumentParser.error
 
-Reason: Expose the optional Mycel writer command with a prose-only success path and redacted refusal.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-25fe7464 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _arguments
 
-Reason: Make an evidence-based label available as a standalone command with an enforced caller word limit.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _read_input
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _run_arm
 
-Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _summary_bytes
 
-Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## main
 
-Reason: Make an evidence-based label available as a standalone command with an enforced caller word limit.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.1, MYC-23.2 · Intention i-d6466c2d · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _command_digest
 
-Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _open_report
 
-Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _run_writer
 
-Reason: Record measured source and response sizes for each completed arm so qualification can distinguish compression from facts lost.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.6, MYC-22.9, MYC-D101 · Intention i-5587efbd · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _statistics
 
-Reason: Share one extraction across paired arms and retain equal-budget comparison evidence in a private receipt.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.6, MYC-22.7 · Intention i-04fdaaf2 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _check_interruption
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _read_stdin
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _signal_group
 
-Reason: Reap isolated credential descendants promptly and allow provider adapters to clean up nested groups on interruption.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.7 · Intention i-5c97cdc0 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _label_output
 
-Reason: Preserve attached symbols and accents while trimming label punctuation for the word budget.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.3 · Intention i-5fa1e4f0 · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _run_label
 
-Reason: Apply the same explicit English function-word exclusions in the label prompt and the enforced output budget.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.3 · Intention i-fe006a2a · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _unique_object
 
-Reason: Reject duplicate reply keys before the one-field label validation so malformed answers cannot be accepted.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.2 · Intention i-4f4e2c7d · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _counted_label_word
 
-Reason: Preserve attached symbols and accents while trimming label punctuation for the word budget.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-23.3 · Intention i-5fa1e4f0 · 2026-11-18
+Removed by Intention i-684927d7 · 2026-11-18
+
+## <before __getattr__>
+
+Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+
+Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+
+## __getattr__
+
+Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+
+Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 

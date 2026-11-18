@@ -5,105 +5,105 @@ role: authored
 
 ## <before _unit_key>
 
-Reason: Recognize a direct optional-detail direction without changing the consolidation interface.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.2, MYC-22.3 · Intention i-027bb5f8 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _comparison_keys
 
-Reason: Recognize a direct optional-detail direction without changing the consolidation interface.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.2, MYC-22.3 · Intention i-027bb5f8 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _resolve_citations
 
-Reason: Return stable preference-ordered groups with traceable citation and grouping dispositions.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-b937a179 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _unit_key
 
-Reason: Define the selection interface for exact unit revisions and resolve cited IDs against validated request evidence.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.2 · Intention i-1748eb4e · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## select_distinct_units
 
-Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _consequence_rank
 
-Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _validate_candidate_origins
 
-Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## consolidation_request
 
-Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## parse_consolidation_response
 
-Reason: Define and validate the consolidation response for source-linked, consequence-ranked summary units.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-d281a775 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _authorities
 
-Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _comparison_decisions
 
-Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _interchangeable
 
-Reason: Group only mutually interchangeable units and preserve substantive differences.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.2 · Intention i-e97263f5 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _disposition
 
-Reason: Return stable preference-ordered groups with traceable citation and grouping dispositions.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-b937a179 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _group_dispositions
 
-Reason: Discard comparison decisions for replaced revisions before grouping and recording dispositions.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.2, MYC-22.3 · Intention i-92c8fc66 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _rank_supported_members
 
-Reason: Allocate whole verified units and account for budget and equivalence omissions
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.3 · Intention i-7922aa39 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _unit_order
 
-Reason: Rank only exact supported revisions using their own consequence and source order
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _verdicts_by_key
 
-Reason: Rank only exact supported revisions using their own consequence and source order
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.3 · Intention i-a6309f11 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _allocate_words
 
@@ -113,31 +113,43 @@ Removed by Intention i-3b603957 · 2026-11-17
 
 ## assemble_summary
 
-Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _attach_detail_links
 
-Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _detail_disposition
 
-Reason: Carry only unambiguous directional comparisons with matching conditions and fully known authority.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.2, MYC-22.3 · Intention i-88e57ced · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _prioritize_details
 
-Reason: Give independently consequential supported revisions the first budget opportunity before optional detail.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.3 · Intention i-e217a922 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _allocate_characters
 
-Reason: Make the exact source character count the sole output-size ceiling from CLI through final assembly while retaining whole verified units.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.3, MYC-22.9, MYC-D101 · Intention i-3b603957 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
+
+## <before __getattr__>
+
+Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+
+Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+
+## __getattr__
+
+Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+
+Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 

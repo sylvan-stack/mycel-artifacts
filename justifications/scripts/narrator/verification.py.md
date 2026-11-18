@@ -5,187 +5,199 @@ role: authored
 
 ## <before _SourceSlice>
 
-Reason: Send eligible rejected revisions with their source evidence and reasons in one batch.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-D98 · Intention i-bb10b5fc · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _Passage
 
-Reason: Give each evidence-normalized unit its own exact revision and withhold units without resolvable evidence.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-1cee0db8 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _SourceSlice
 
-Reason: Resolve each evidence passage against the exact request digest, Unicode offsets, and admitted source spans.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1 · Intention i-ebabcaeb · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _resolve_passages
 
-Reason: Give each evidence-normalized unit its own exact revision and withhold units without resolvable evidence.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-1cee0db8 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _source_context
 
-Reason: Resolve each evidence passage against the exact request digest, Unicode offsets, and admitted source spans.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1 · Intention i-ebabcaeb · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## <before _source_context>
 
-Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _disposition
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _normalize_units
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _unit_key
 
-Reason: Give each evidence-normalized unit its own exact revision and withhold units without resolvable evidence.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.1, MYC-22.4 · Intention i-1cee0db8 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _verification_payload
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _read_verdict
 
-Reason: Assess whether a rejected revision has a material and precisely correctable omission.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _read_verdicts
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## verify_units
 
-Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _read_repair_eligibility
 
-Reason: Assess whether a rejected revision has a material and precisely correctable omission.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.4, MYC-22.5 · Intention i-29337bc3 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _repair_payload
 
-Reason: Send eligible rejected revisions with their source evidence and reasons in one batch.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-D98 · Intention i-bb10b5fc · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _citation_dispositions
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _matching_rows
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _read_correction
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _read_repairs
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _repair_disposition
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _resolve_citations
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _unit_text
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _units_by_key
 
-Reason: Validate corrections against the rejected revision and resolve their evidence before revision assignment.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5 · Intention i-ca9dbe79 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _judge_units
 
-Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _recheck_repairs
 
-Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _supported_units
 
-Reason: Check every corrected revision in one fresh verification batch and retain its exact outcome.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.4, MYC-22.5, MYC-D98 · Intention i-315f4586 · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## <before RepairUnavailable>
 
-Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## RepairBudgetExhausted
 
-Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## RepairUnavailable
 
-Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## _unavailable_dispositions
 
-Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
 
 ## repair_units
 
-Reason: Apply the shared admission and callback failure contract while preserving the initial supported subset.
+Removed: Package the same verified writer for installed Mycel and direct checkout invocations.
 
-Origins: MYC-22.5, MYC-D98 · Intention i-e9ae6ade · 2026-11-17
+Removed by Intention i-684927d7 · 2026-11-18
+
+## <before __getattr__>
+
+Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+
+Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+
+## __getattr__
+
+Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+
+Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
