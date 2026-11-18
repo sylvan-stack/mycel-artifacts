@@ -5,9 +5,9 @@ role: authored
 
 ## parse
 
-Reason: Expose `summaries labels --repo <name>` to backfill missing active labels under the summary-operation lock. Retain existing labels and publish the whole batch only if all captured versions are still current. Leave prose and vectors untouched. Allow this explicit model call through the normal provider boundary. Update command declarations and the checkout command contract
+Reason: Expose `summaries browse --output <file>`, update command help, and document navigation, labeling and legacy stores in both checkout guides
 
-Origins: MYC-8.34 · Intention i-f7fab174 · 2026-11-18
+Origins: MYC-8.35, MYC-8.36 · Intention i-f9894df8 · 2026-11-18
 
 ## run
 
