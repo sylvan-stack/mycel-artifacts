@@ -5,19 +5,55 @@ role: authored
 
 ## build_summary_tree
 
-Reason: Generate labels from the exact text in regular build and regeneration. Publish labels atomically as version metadata with the summary, and retain an existing label on an identical reused version, filling it when absent. Keep older rows and existing private writer fixtures readable. Route label generation or validation failure through ordinary summary publication failure
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-df1359fc · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## <before BuildInputs>
 
-Reason: Generate labels from the exact text in regular build and regeneration. Publish labels atomically as version metadata with the summary, and retain an existing label on an identical reused version, filling it when absent. Keep older rows and existing private writer fixtures readable. Route label generation or validation failure through ordinary summary publication failure
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-df1359fc · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## build_summaries
 
-Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
+
+## BuildInputs
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## BuildInputs.capture
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## BuildInputs.physical
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## BuildInputs.signature
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## BuildInputs.verify
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## _level_requests
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
 

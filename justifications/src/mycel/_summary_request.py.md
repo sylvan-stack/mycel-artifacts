@@ -11,9 +11,9 @@ Origins: MYC-22.9 · Intention i-57fdf221 · 2026-11-17
 
 ## <before _settings>
 
-Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
+Reason: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
+Origins: MYC-8.39, MYC-8.40, MYC-22.10 · Intention i-7224feee · 2026-11-19
 
 ## _settings
 
@@ -23,25 +23,31 @@ Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 
 
 ## summary_command
 
-Reason: Retire the source-ordered Artifact export at the owner’s request and retain the published RAPTOR browser.
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.37, MYC-8.38, MYC-8.35, MYC-8.36 · Intention i-17c0447d · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## SummaryProgram
 
-Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## _file_hash
 
-Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## summary_configuration_guard
 
-Reason: Make RAPTOR use bundled Narrator for all writes while preserving the read paths and generation evidence.
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.5, MYC-8.8, MYC-8.20, MYC-8.25, MYC-22.7 · Intention i-e6b01359 · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
+
+## load_summary_prompts
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
 

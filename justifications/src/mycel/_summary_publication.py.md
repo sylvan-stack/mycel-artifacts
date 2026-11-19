@@ -5,31 +5,133 @@ role: authored
 
 ## <before _fail>
 
-Reason: Store the canonical label before the mechanical dependency guard observes the published summary version
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-6d486f37 · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## StagedSummary
 
-Reason: Generate labels from the exact text in regular build and regeneration. Publish labels atomically as version metadata with the summary, and retain an existing label on an identical reused version, filling it when absent. Keep older rows and existing private writer fixtures readable. Route label generation or validation failure through ordinary summary publication failure
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-df1359fc · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## SummaryPublicationStore.publish_in_transaction
 
-Reason: Store the canonical label before the mechanical dependency guard observes the published summary version
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-6d486f37 · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## SummaryPublicationStore.stage_response
 
-Reason: Generate labels from the exact text in regular build and regeneration. Publish labels atomically as version metadata with the summary, and retain an existing label on an identical reused version, filling it when absent. Keep older rows and existing private writer fixtures readable. Route label generation or validation failure through ordinary summary publication failure
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-df1359fc · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## SummaryPublicationStore.verify_in_transaction
 
-Reason: Generate labels from the exact text in regular build and regeneration. Publish labels atomically as version metadata with the summary, and retain an existing label on an identical reused version, filling it when absent. Keep older rows and existing private writer fixtures readable. Route label generation or validation failure through ordinary summary publication failure
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-df1359fc · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
+
+## StagedSummaryEmbedding
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore.<end>
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore.__init__
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore._delete_private
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore._embedding
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore._validate_stage
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore._write_embedding
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore.confirm_release
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore.discard
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore.release_in_transaction
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## SummaryPublicationStore.retain_request
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## _StagedEvidence
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## _StagedEvidence.__init__
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## _StagedEvidence._inputs
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## _StagedEvidence._retain_in_transaction
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## _fail
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
 

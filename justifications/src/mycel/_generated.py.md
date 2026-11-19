@@ -5,19 +5,67 @@ role: authored
 
 ## <before _fail>
 
-Reason: Store the canonical label before the mechanical dependency guard observes the published summary version
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-6d486f37 · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## generated_capture
 
-Reason: Validate known sentence metadata without weakening the existing exact generated-evidence check.
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33, MYC-8.34 · Intention i-ae65b0a3 · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
 
 ## GeneratedPublicationStore.publish_in_transaction
 
-Reason: Store the canonical label before the mechanical dependency guard observes the published summary version
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
 
-Origins: MYC-8.33 · Intention i-6d486f37 · 2026-11-18
+Removed by Intention i-7224feee · 2026-11-19
+
+## GeneratedPublication
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## GeneratedPublicationStore
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## GeneratedPublicationStore.__init__
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## GeneratedPublicationStore._current
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## GeneratedPublicationStore.verify_in_transaction
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## _fail
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## compare_generated
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
+
+## generated_resolution
+
+Removed: Remove tree generation and keep historical summary rows out of live Mycel reads, maintenance and retrieval.
+
+Removed by Intention i-7224feee · 2026-11-19
 
