@@ -41,9 +41,9 @@ Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
 
 ## Narrator > Compare and retain evidence
 
-Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
+Reason: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
+Origins: MYC-8.39, MYC-8.40, MYC-8.41 · Intention i-f91ef807 · 2026-11-19
 
 ## Narrator > Configure a disposable Mycel run
 
@@ -65,13 +65,19 @@ Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
 
 ## Narrator > Qualify a pinned candidate
 
-Reason: Make the direct label command and its text, limit and adapter contracts usable by callers.
+Removed: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
+Removed by Intention i-f91ef807 · 2026-11-19
 
 ## Narrator > Summarize text
 
 Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
 
 Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
+
+## Narrator > Compare writer revisions
+
+Reason: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
+
+Origins: MYC-8.39, MYC-8.40, MYC-8.41 · Intention i-f91ef807 · 2026-11-19
 

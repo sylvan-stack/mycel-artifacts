@@ -5,51 +5,51 @@ role: authored
 
 ## <before _incompatible>
 
-Reason: Render an offline page with safe text rendering, an initial repository picker that disappears when a set is selected, and top-node labels for that selected set. Let Cmd open label, text and children in order. Let Shift reverse one step on every branch, following the actual path when a child has multiple parents. Highlight actionable text under the pointer when a modifier is held and offer ordinary controls. Package the page asset. Write private, standalone exports without replacing an existing file
+Removed: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-8.35, MYC-8.36 · Intention i-bce8fd1b · 2026-11-18
+Removed by Intention i-f91ef807 · 2026-11-19
 
 ## _collect
 
-Reason: Read exact summaries and child labels in a plain-text view with reversible expansion
+Removed: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-8.36 · Intention i-61f3474e · 2026-11-18
+Removed by Intention i-f91ef807 · 2026-11-19
 
 ## _incompatible
 
-Reason: Collect all current nonempty published sets from one checked repeatable read snapshot without provider calls. Resolve current summary links by logical ID, retain exact versioned text for document children and former members that no longer have a current Summary Node, and use addresses for unlabeled versions
+Removed: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-8.35 · Intention i-d9f99d11 · 2026-11-18
+Removed by Intention i-f91ef807 · 2026-11-19
 
 ## _text
 
-Reason: Collect all current nonempty published sets from one checked repeatable read snapshot without provider calls. Resolve current summary links by logical ID, retain exact versioned text for document children and former members that no longer have a current Summary Node, and use addresses for unlabeled versions
+Removed: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-8.35 · Intention i-d9f99d11 · 2026-11-18
+Removed by Intention i-f91ef807 · 2026-11-19
 
 ## collect_summary_trees
 
-Reason: Render an offline page with safe text rendering, an initial repository picker that disappears when a set is selected, and top-node labels for that selected set. Let Cmd open label, text and children in order. Let Shift reverse one step on every branch, following the actual path when a child has multiple parents. Highlight actionable text under the pointer when a modifier is held and offer ordinary controls. Package the page asset. Write private, standalone exports without replacing an existing file
+Removed: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-8.35, MYC-8.36 · Intention i-bce8fd1b · 2026-11-18
+Removed by Intention i-f91ef807 · 2026-11-19
 
 ## export_summary_browser
 
-Reason: Retire the source-ordered Artifact export at the owner’s request and retain the published RAPTOR browser.
+Removed: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-8.37, MYC-8.38, MYC-8.35, MYC-8.36 · Intention i-17c0447d · 2026-11-18
+Removed by Intention i-f91ef807 · 2026-11-19
 
 ## render_summary_browser
 
-Reason: Retire the source-ordered Artifact export at the owner’s request and retain the published RAPTOR browser.
+Removed: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-8.37, MYC-8.38, MYC-8.35, MYC-8.36 · Intention i-17c0447d · 2026-11-18
+Removed by Intention i-f91ef807 · 2026-11-19
 
 ## write_summary_browser
 
-Reason: Retire the source-ordered Artifact export at the owner’s request and retain the published RAPTOR browser.
+Removed: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-8.37, MYC-8.38, MYC-8.35, MYC-8.36 · Intention i-17c0447d · 2026-11-18
+Removed by Intention i-f91ef807 · 2026-11-19
 
 ## summary_browser_output
 

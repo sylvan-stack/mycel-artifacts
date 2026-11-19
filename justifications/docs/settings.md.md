@@ -5,7 +5,7 @@ role: authored
 
 ## Settings > Tables and defaults
 
-Reason: Explain how to configure Narrator’s reasoning adapter and migrate older summary settings.
+Reason: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
 
-Origins: MYC-8.5, MYC-8.8 · Intention i-1b63bf4c · 2026-11-18
+Origins: MYC-8.39, MYC-8.40, MYC-8.41 · Intention i-f91ef807 · 2026-11-19
 
