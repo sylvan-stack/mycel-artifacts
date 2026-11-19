@@ -47,7 +47,7 @@ Origins: MYC-21.9, MYC-21.10, MYC-21.11 · Intention i-2988afd9 · 2026-11-10
 
 ## Command line and settings > Other command behavior
 
-Reason: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
+Reason: Exclude historical tree dependencies from live ingress and describe the surviving public commands.
 
-Origins: MYC-8.39, MYC-8.40, MYC-8.41 · Intention i-f91ef807 · 2026-11-19
+Origins: MYC-8.40, MYC-22.10 · Intention i-07992727 · 2026-11-19
 

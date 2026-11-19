@@ -221,9 +221,9 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## _run_label
 
-Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
+Reason: Exclude historical tree dependencies from live ingress and describe the surviving public commands.
 
-Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
+Origins: MYC-8.40, MYC-22.10 · Intention i-07992727 · 2026-11-19
 
 ## _run_writer
 
