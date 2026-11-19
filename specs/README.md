@@ -17,7 +17,7 @@ What Mycel 2 does, written from what Mycel 1 did. [Mycel](../../arbol/GLOSSARY.m
 | [MYC-5](05-settings.md) | Settings | implemented |
 | [MYC-6](06-index-store.md) | The index store | implemented |
 | [MYC-7](07-drifts-and-verification.md) | Drifts and verification | implemented |
-| [MYC-8](08-summaries.md) | Summaries | accepted, maintenance and tree browser qualification pending |
+| [MYC-8](08-summaries.md) | Repository summary-tree retirement | accepted, qualification pending |
 | [MYC-9](09-code-overview.md) | The code overview | implemented |
 | [MYC-10](10-grep-replacement.md) | The grep replacement | implemented |
 | [MYC-11](11-reading-a-chunk.md) | Reading a chunk | implemented |

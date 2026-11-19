@@ -13,7 +13,7 @@ The owner accepted this specification and MYC-D96–MYC-D98 on 17 November 2026.
 
 ## Scope
 
-Evaluate and improve Narrator as the sole writer for the [RAPTOR command boundary](08-summaries.md#who-writes-the-text). Mycel remains responsible for clustering, requests, embeddings, evidence retention and Summary Node publication under MYC-8. Narrator writes a summary to stdout. This chapter covers prose summary quality. Typed Narratives, chat-history analysis, changes to the tree algorithm and activation in the installed environment are separate work.
+Narrator is a standalone source-grounded prose writer. It accepts one text and emits a summary to stdout. Its writer and label generation run independently of repository indexing and retrieval.
 
 ## Behaviour
 
@@ -39,9 +39,9 @@ MYC-D98 gives rejected high-priority units one shared repair pass. A unit is eli
 
 Keep development examples separate from cases reserved for qualification. Freeze case texts and digests, evidence citations, rubrics, critical claims, model settings, budgets, and review criteria before comparing the writer. A critical claim is one whose omission or distortion changes whether an action is permitted or leads to a materially wrong outcome. Verify before the run that the required claims can be expressed within the case budget. Use output labels that do not reveal the writer or comparison arm to the scorer. Score a grouped claim as complete only when all its operative conditions survive. Report partial coverage, distortions, unsupported additions, repeated units, citation validity and request completion separately. Trace each consequential miss to the first stage that lost it when the retained evidence allows that diagnosis.
 
-Use the gate in MYC-D97 for the first qualification decision. Compare the pinned cited-unit writer with the candidate on identical held-out inputs, and report the four known long-form packets separately as development regressions. Within a comparison of similarity modes, share the extracted candidates and hold all other inputs and settings constant. Each repeat is a fresh run of the pinned configuration. Count every failed case as incomplete and its required groups as missing, including when the baseline fails. Do not substitute or silently rerun a failed arm to improve the recorded result. Qualify the exact candidate in a disposable Mycel store. Require a parent Summary Node built from actual children that preserves a designated consequential condition and is found by the frozen retrieval query. Report the result and its limits before recommending routine use.
+The historical RAPTOR qualification protocol is retained as evidence. Direct writer comparisons can still score the frozen summaries against their original source.
 
-Use `gpt-6.2-sol` at medium reasoning effort as the default text model for Narrator summarization under MYC-D99. Qualify the default by using the same model and effort in both matched writers and in the disposable RAPTOR tree. Use the current authenticated Codex subscription for hosted model work under MYC-D100. An embedding route used in qualification must also satisfy MYC-D100 across source, generated-summary and query embeddings.
+Use the reasoning adapter selected for the standalone command. The default model decision is recorded in MYC-D99.
 
 ## Requirements
 
@@ -53,13 +53,15 @@ Use `gpt-6.2-sol` at medium reasoning effort as the default text model for Narra
 | MYC-22.4 <!-- 4e94d742-ddb4-46fd-996c-993dd26340df --> | Check proposed units for support and for broadened, reversed or weakened conditions before including them | New | live |
 | MYC-22.5 <!-- c6eeff3b-50b2-49e7-aa87-311b98347750 --> | Bound repair work, check every revised unit again and withhold any unit that remains unsupported | New | unit |
 | MYC-22.6 <!-- 0a5917ed-001b-44db-b14d-501c3e790f4d --> | Pin a held-out collection and a scoring rubric, report paired outcomes and distinguish extraction, selection, verification, repair and budget losses | New | review |
-| MYC-22.7 <!-- 53879011-43ca-4ea4-a3b7-53b07618fc06 --> | Use bundled Narrator through the MYC-8 writer interface and keep comparison diagnostics separate from the prose returned to Mycel | New | unit |
-| MYC-22.8 <!-- 1496f91a-89b1-4d1e-a375-4d5c8fa6a397 --> | Qualify the pinned writer on the held-out cases and in a disposable RAPTOR build and retrieval run before recommending routine use | New | live |
+| MYC-22.7 <!-- 53879011-43ca-4ea4-a3b7-53b07618fc06 --> | Withdrawn 19 November 2026 under MYC-8.39. Repository tree integration and qualification are retired. | New | unit |
+| MYC-22.8 <!-- 1496f91a-89b1-4d1e-a375-4d5c8fa6a397 --> | Withdrawn 19 November 2026 under MYC-8.39. Repository tree integration and qualification are retired. | New | live |
 | MYC-22.9 <!-- cabfb40f-6cbc-40db-adeb-ce5aef69c806 --> | Emit a final summary no longer than its original source text, measured in Unicode code points with generated request framing excluded | New | unit |
+
+| MYC-22.10 <!-- 59378af7-856e-4bd6-9c1b-fa53d2a406dc --> | Accept bounded plain UTF-8 source on standard input in standalone Narrator with `--plain-text`, deriving its character ceiling from the exact input. Keep standalone labels, evidence checking, comparison reports and support for existing framed writer inputs | New | unit |
 
 ## Interface
 
-Mycel ships the maintained Narrator writer in its runtime and invokes it for every RAPTOR build and regeneration under MYC-D102. Direct checkout invocations remain available under `mycel:scripts/narrator/`. It reads the complete MYC-8 request on stdin and works from the empty working directory in which Mycel starts it. For build and regeneration, Mycel supplies `MYCEL_SUMMARY_SOURCE_CHARACTERS` to the writer with the sum of the original section bodies' Unicode code point lengths, taken before rendering or cutting. A direct Narrator invocation supplies the same count with `--source-characters`. Missing, invalid or conflicting counts cause a writer failure. On success, stdout contains only nonempty UTF-8 summary prose within that ceiling, with exit status zero. On failure, return nonzero without a partial summary. Keep operational diagnostics bounded and free of source excerpts and secrets. A separate comparison mode may write private structured evidence outside the stdout consumed by Mycel. Mycel continues to own the whole-command timeout, retry and Summary Node publication. The operator configures Narrator’s reasoning adapter with `summaries.model_command`.
+The maintained writer runs directly from `scripts/narrator/narrator.py` and the packaged Python module. For ordinary prose on stdin, use `--plain-text` with a configured `--model-command`. Input is bounded UTF-8 and its exact character count is the output ceiling. The earlier framed format and its explicit source count remain readable by the standalone tool. Keep private comparison evidence outside stdout and retain bounded verified output.
 
 The following hand-off is common to Selection, Verification and Integration. Equivalent internal representations are acceptable if they preserve these fields and dispositions.
 
@@ -97,4 +99,4 @@ mycel:specs/08-summaries.md#Summaries in a search
 
 ## Named checks
 
-Qualification is pending for MYC-22.1–MYC-22.8. The development trials do not qualify the accepted design.
+Qualification of the standalone writer is pending. The earlier RAPTOR qualification was retired on 19 November 2026.
