@@ -11,9 +11,9 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## <before _SourceSlice>
 
-Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
 
-Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
 
 ## <before _source_context>
 

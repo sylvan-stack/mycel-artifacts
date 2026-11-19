@@ -35,21 +35,21 @@ Removed by Intention i-a3fab844 · 2026-11-18
 
 ## Narrator
 
-Reason: Explain how to configure Narrator’s reasoning adapter and migrate older summary settings.
+Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
 
-Origins: MYC-8.5, MYC-8.8 · Intention i-1b63bf4c · 2026-11-18
+Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
 
 ## Narrator > Compare and retain evidence
 
-Reason: Make the direct label command and its text, limit and adapter contracts usable by callers.
+Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
 
-Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
+Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
 
 ## Narrator > Configure a disposable Mycel run
 
-Reason: Explain how to configure Narrator’s reasoning adapter and migrate older summary settings.
+Removed: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
 
-Origins: MYC-8.5, MYC-8.8 · Intention i-1b63bf4c · 2026-11-18
+Removed by Intention i-4f128097 · 2026-11-19
 
 ## Narrator > Generate a label
 
@@ -68,4 +68,10 @@ Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
 Reason: Make the direct label command and its text, limit and adapter contracts usable by callers.
 
 Origins: MYC-23.1, MYC-23.2 · Intention i-a3fab844 · 2026-11-18
+
+## Narrator > Summarize text
+
+Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
+
+Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
 

@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
+Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
 
-Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
+Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
 
 ## <end>
 
@@ -89,9 +89,9 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## _arguments
 
-Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
 
-Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
 
 ## _array_reply
 
@@ -191,9 +191,9 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## _read_input
 
-Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
 
-Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
 
 ## _read_stdin
 
@@ -227,9 +227,9 @@ Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
 
 ## _run_writer
 
-Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
 
-Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
 
 ## _signal_group
 
@@ -293,9 +293,9 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## read_request
 
-Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
 
-Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
 
 ## similarity_hints
 
