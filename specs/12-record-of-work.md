@@ -30,9 +30,11 @@ Proposed: an invocation that changes the store leaves one entry for each reposit
 | `mycel derive`, `mycel relate`, with or without `--remove` | `derive`, `relate` |
 | `mycel confirm` | `confirm` |
 | `mycel classify`, when it claims work, records a result or changes Drift work state | `classify` |
-| `mycel summaries build`, `regenerate`, `remove` | `summaries_build`, `summaries_regenerate`, `summaries_remove` |
 | `mycel repos remove` | `remove`, which belongs to no repository and names the removed one among its numbers |
 | `mycel init`, when it changed the structure | `init`, which belongs to no repository |
+
+Historical builds also recorded `summaries_build`, `summaries_regenerate` and
+`summaries_remove`. These entries remain readable under MYC-8.40.
 
 Nothing else leaves one: not a command that only reports (MYC-1.28), not a dry-run, evaluation or `mycel grep`, and not a pass or a dependency check that found nothing to change. Mechanical eligibility/pending changes made during ingest/search/read belong to its `ingest` entry; only explicit `classify` records classification attempts and spends Jev/reviewer calls (MYC-14). An identical assertion, empty embed or removal, or classification with no eligible work leaves no entry. A search or read adds an entry for each repository whose files, dependency records or stale marks its check changed, including a dependant whose own text was unchanged. A check that only read files adds no entry. Each entry is part of the permitted writes of MYC-4.21 and obeys the repository locks of MYC-6.
 

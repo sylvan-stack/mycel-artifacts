@@ -13,7 +13,7 @@ It follows the conventions of the [specifications chapter](README.md#conventions
 
 Covered: the embedding model and its provider, the packaged tokenizer and model limits, the text sent for a chunk, deterministic part planning, the pending rule, the embed operation and its scope, failures and retries, the counts, the key.
 
-Not covered: how chunks come to exist and get their identity ([MYC-1](01-corpora-and-ingest.md)); how vectors are searched ([MYC-4](04-retrieval.md)); summaries of chunk clusters ([MYC-8](08-summaries.md)); the settings that name the model, the attempts and the place of the key ([MYC-5](05-settings.md)).
+Not covered: how chunks come to exist and get their identity ([MYC-1](01-corpora-and-ingest.md)); how vectors are searched ([MYC-4](04-retrieval.md)); the settings that name the model, the attempts and the place of the key ([MYC-5](05-settings.md)).
 
 ## Behaviour
 

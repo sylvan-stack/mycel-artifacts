@@ -24,8 +24,8 @@ already holds): no LLM, milliseconds to produce.
 ## Why `generated: true`
 
 Regenerated-not-maintained: exempt from [Detection](../../arbol/GLOSSARY.md#detection)
-(drift against a document that rewrites itself is noise) and from
-[RAPTOR](../../arbol/GLOSSARY.md#raptor-tree) clustering — searchable, never stale.
+(drift against a document that rewrites itself is noise). The version 1
+Code Map remained searchable.
 
 **Historical evidence (unindexed):**
 

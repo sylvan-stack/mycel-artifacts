@@ -53,7 +53,7 @@ Observed in version 1's design record, and kept as the principles of Mycel 2:
 | Keeping the index current without being asked | A resident service of Arbol 1, which watched folders and ran passes on a timer | Nobody. A search checks the repository it searches, and a pass can be started at any time. A caller that wants a schedule runs one |
 | Keeping a checkout up to date with its remote | Mycel, as part of every full pass | The checkout's owner. Mycel changes no checkout ([MYC-D9](01-corpora-and-ingest.md#decisions)) |
 | Showing chunks, edges and stale sections in a window | Arbol 1 | A caller, from Mycel's replies |
-| Summaries of clusters of chunks, a generated overview of the code, a grep replacement with a search tail | Mycel | Mycel: [MYC-8](08-summaries.md), [MYC-9](09-code-overview.md) and [MYC-10](10-grep-replacement.md) ([MYC-D4](#decisions)) |
+| A generated overview of the code and a grep replacement with a search tail | Mycel | Mycel: [MYC-9](09-code-overview.md) and [MYC-10](10-grep-replacement.md) ([MYC-D4](#decisions)) |
 | Work trees and a view of the index per branch | Mycel | Nobody makes work trees ([MYC-D6](#decisions)). Mycel reads every local branch and stash itself and records where each chunk is found ([MYC-D8](01-corpora-and-ingest.md#decisions)) |
 | Fetching tickets, wiki pages and code reviews from outside trackers, and writing to them | Mycel | Nobody. Content from outside reaches Mycel as files in a corpus, or as data in an Arbol-owned database that Mycel reads ([MYC-D5](#decisions)) |
 
@@ -73,7 +73,7 @@ The owner decided the form and Python implementation language (MYC-D1), the inde
 - **Builds.** Mycel is built into numbered Builds kept side by side in its own registry ([MYC-15](15-distribution-and-replacement.md)). Each Build carries its pinned Python runtime and dependencies. The name on the search path is a Mycel launcher: without a build number it starts the newest working Build. Running a Build installs, downloads and extracts nothing.
 - **State.** Mycel keeps all mutable knowledge and operation state in PostgreSQL with ParadeDB, in a database of its own at an address supplied by the settings ([MYC-D2](#decisions)). Installed program files, build records and release logs are separate distribution files specified in MYC-15, not another index or invocation cache. Its settings are in `~/.mycel/config.toml`, written by the owner or their editor; Mycel reads the file and never writes it ([MYC-D3](#decisions)). Credentials use the system Keychain as MYC-5 specifies. The store carries Mycel's format number (MYC-6); a Build that does not support that format refuses store operations.
 - **Independence.** Mycel uses no code and no instructions of Arbol. Product-specific names are forbidden except the explicit packaged settings data of MYC-D37: the MYC-D18 shared selections (`mycel` documents and `arbol:GLOSSARY.md`) and the MYC-D7 `.arbol` scan exclusion. These data create no repository, alias, folder fallback or runtime dependency, and the shared selections are overridden through settings. It may read the files and data of any product as data.
-- **Network.** Mycel calls the embedding provider (MYC-3) and selected Jev API for Drift classification (MYC-D28). Classification uses a five-minute quiet period, and low-confidence results go to a more expensive, smarter review model under [MYC-14](14-drift-detection.md); its exact reviewer is deployment configuration under the completed protocol-1 contract. Narrator writes RAPTOR summaries and calls the reasoning adapter named in settings ([MYC-8](08-summaries.md#who-writes-the-text), MYC-D102). These calls do not fetch source content or permit a git command that changes anything.
+- **Network.** Mycel calls the embedding provider (MYC-3) and selected Jev API for Drift classification (MYC-D28). Classification uses a five-minute quiet period, and low-confidence results go to a more expensive, smarter review model under [MYC-14](14-drift-detection.md); its exact reviewer is deployment configuration under the completed protocol-1 contract. These calls do not fetch source content or permit a git command that changes anything.
 
 **Historical evidence (unindexed):**
 
@@ -94,7 +94,7 @@ Proposed. The rules below hold for every command. The commands themselves are sp
 | `mycel stale`, `mycel refs`, `mycel derive`, `mycel confirm` | The list of stale chunks, faults in refs, asserting an edge, confirming a chunk | MYC-2 |
 | `mycel drifts`, `mycel relate`, `mycel verifications` | The list of work, relating two chunks, the record of checks | MYC-14, MYC-7 |
 | `mycel classify` | Explicit bounded Jev classification and uncertain-case smarter review | MYC-14 |
-| `mycel summaries` | Summaries of groups of sections: status, build, regenerate, remove | MYC-8 |
+| `mycel maintain` | Check quiet-period document inputs and run ordinary ingest and embedding when due | MYC-8.41 |
 | `mycel overview` | The overview of a repository's code | MYC-9 |
 | `mycel grep` | Runs grep as asked and adds related results. It departs from some of the rules below, as MYC-10 says | MYC-10 |
 | `mycel read` | Returns one whole chunk | MYC-11 |
@@ -187,7 +187,7 @@ Fate is one of: **Kept** (same behaviour, rewritten), **Changed** (same purpose,
 | `drifts` | Listed stored Drifts, of which there were none | Changed: `stale` lists the stale chunks | MYC-2 |
 | `activity` and its table | A feed of passes and embeds | Required follow-up | MYC-12 |
 | `better-grep`, as a command and as a program of its own | Ran grep unchanged and appended search results | Required follow-up | MYC-10 |
-| `raptor`, with `knowledge/raptor.py`, `knowledge/clustering.py`, `completion_client.py` and the two prompt files in this corpus | Summaries of clusters of chunks, written by a model through another program. As read from the source, the two actions that write summaries could not run | Required follow-up | MYC-8 |
+| `raptor`, with `knowledge/raptor.py`, `knowledge/clustering.py`, `completion_client.py` and the two prompt files in this corpus | Summaries of clusters of chunks, written by a model through another program. As read from the source, the two actions that write summaries could not run | Retired | MYC-8.39 |
 | `knowledge/code_map.py` | Wrote an overview of a repository's code into its document corpus | Required follow-up | MYC-9 |
 | `retrieval.py`: `symbol_read`, `capabilities` | Read one symbol's source; described what the engine offers. Neither had a caller | Required follow-up | MYC-11 |
 | `knowledge/fs.py`: writing, renaming and removing corpus files | For a caller that edited documents through Mycel. No caller existed | Dropped | none |
@@ -243,7 +243,7 @@ The Glossary entries below still describe version 1. Aligning their wording with
 | [Drift](../../arbol/GLOSSARY.md#drift), [Drift Candidate](../../arbol/GLOSSARY.md#drift-candidate) | Not built in version 1; stored work items, dependency classification and the other provenance designs are required, with complete accepted contracts in MYC-7/MYC-14/MYC-16 and implementation still to follow (MYC-D13, MYC-D28) |
 | [Branch Overlay](../../arbol/GLOSSARY.md#branch-overlay) | History |
 | [Attestation](../../arbol/GLOSSARY.md#attestation), [Coupling](../../arbol/GLOSSARY.md#coupling) | In Mycel they are the recorded verification and the relation without authority of MYC-7. [MYC-14](14-drift-detection.md) records selected Jev classification without a change-size threshold, five-minute debounce and low-confidence smarter-model review (MYC-D28); the complete reviewer and work-closure contracts are accepted under MYC-D28/MYC-D29 |
-| [RAPTOR Summarization](../../arbol/GLOSSARY.md#raptor-summarization), [RAPTOR Rebuild](../../arbol/GLOSSARY.md#raptor-rebuild), [Stale Summary Regeneration](../../arbol/GLOSSARY.md#stale-summary-regeneration) | Mycel uses Narrator to write summaries through `mycel summaries build` and `regenerate` (MYC-8, MYC-D102) |
+| [RAPTOR Summarization](../../arbol/GLOSSARY.md#raptor-summarization), [RAPTOR Rebuild](../../arbol/GLOSSARY.md#raptor-rebuild), [Stale Summary Regeneration](../../arbol/GLOSSARY.md#stale-summary-regeneration) | Historical terms. The tree was retired under MYC-8.39, and [Narrator remains available as a standalone tool](22-narrator-summary-quality.md). |
 | [Code Map](../../arbol/GLOSSARY.md#code-map) | Kept in the index and printed by `mycel overview`; no file is written (MYC-9, MYC-D32) |
 | [better-grep](../../arbol/GLOSSARY.md#better-grep) | The command `mycel grep`; no program of its own (MYC-10, MYC-D33) |
 

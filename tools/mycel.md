@@ -43,7 +43,7 @@ Settings preparation belongs to SYL-241; this guide changes no settings.
 - [Read saved Justifications during explicit ingest](mycel-2-origins.md#ingest-saved-justifications).
 - [Complete scoped ingest](mycel-2-reconciliation.md#complete-public-ingest),
   [embedding and dry-run plans](mycel-2-embedding.md), and
-  [summary status, build, regeneration and removal](mycel-2-summaries.md).
+  [quiet-period document maintenance](mycel-2-summaries.md).
 - [Dependencies, relations and verification](mycel-2-relations.md),
   [Origin Links and coverage](mycel-2-origins.md),
   [classification](mycel-2-classification.md),

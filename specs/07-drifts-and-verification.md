@@ -13,7 +13,7 @@ It follows the conventions of the [specifications chapter](README.md#conventions
 
 Covered: relations without authority, recorded verification, generated edges, what remains of an edge whose source is deleted.
 
-Not covered: what a document declares, Source Refs, the three reasons for staleness and what makes a chunk fresh again ([MYC-2](02-provenance-and-freshness.md)); versions of a chunk and the locations they are found in ([MYC-1](01-corpora-and-ingest.md#branches-and-stashes)); the program that produces generated text ([MYC-8](08-summaries.md)); dependency classification, Drift policy, lifecycle and reporting ([MYC-14](14-drift-detection.md)).
+Not covered: what a document declares, Source Refs, the three reasons for staleness and what makes a chunk fresh again ([MYC-2](02-provenance-and-freshness.md)); versions of a chunk and the locations they are found in ([MYC-1](01-corpora-and-ingest.md#branches-and-stashes)); dependency classification, Drift policy, lifecycle and reporting ([MYC-14](14-drift-detection.md)).
 
 ## Behaviour
 
@@ -97,6 +97,9 @@ Unverified is the ordinary state of a chunk and not a fault. A `check` counts fo
 - `mycel_deprecated_v1:mycel/knowledge/store.py#_sync_declared_edges`
 
 ### Generated edges
+
+MYC-8.39–MYC-8.40 retired repository summary trees and their generated edges
+from the live graph. The earlier design below describes retained history.
 
 Observed in version 1: the summariser joined each summary to the chunks it was written from with edges of the kind `generated`. Between two ends the store held one edge, so a Source Ref or an assertion between the same two turned a generated edge into another kind. Every edge also carried a field `policy`, `auto` for generated edges and `review` for the others, which no code read.
 

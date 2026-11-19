@@ -12,6 +12,10 @@ defines each term once; this page is the *system* view — all possible values,
 their defaults, and the transitions between them. Every claim here cites the
 implementing code.
 
+This page records the version 1 graph vocabulary. For the current model see
+[Mycel 2 provenance and freshness](../specs/02-provenance-and-freshness.md).
+Repository summary trees were [retired](../specs/08-summaries.md).
+
 ## The two axes (the FAQ this page exists for)
 
 **`role:` answers "who holds the truth of this prose"; Source Refs answer
