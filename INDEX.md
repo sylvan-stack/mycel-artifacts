@@ -105,6 +105,7 @@ One [Runbook](../arbol/GLOSSARY.md#runbook) per [Tool](../arbol/GLOSSARY.md#tool
 - [`mycel-2-evaluation.md`](./tools/mycel-2-evaluation.md) — strict versioned evaluation files, one-repository dispatch, offline recall/fault accounting and read-only snapshot comparisons; normal search/Drift execution remains pending.
 - [`mycel.md`](./tools/mycel.md) — installed Mycel 2 command/manual router and repository corpus binding.
 - [`places-api-sftp.md`](./tools/places-api-sftp.md) — the places-api log server: where the connection settings live, host key verification, unattended `sftp` sign-in on this Mac, interactive and curl access.
+- [`comfy.md`](./tools/comfy.md) — the comfy-cli skills: each Comfy Mycel Skill reads its process from `comfy skills show`, the uv installation, and why `comfy skills install` is not run.
 
 ### `system-instructions/` — prompt files the `mycel` executable reads
 Not process guides: `mycel raptor regen|build` loads both files from this folder and stops with an error when either is missing or empty.
@@ -117,6 +118,7 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 - [`arbol-chat-booking`](../forester/skills/arbol-chat-booking/SKILL.md)
 - [`authored-work-integration`](./skills/authored-work-integration/SKILL.md) — Source Ref-first integration into Mycel 2, with authorized indexing and explicit deferred checks.
 - [`code-research`](./skills/code-research/SKILL.md) — cross-file explanations with file-and-line evidence; retrieval readiness follows the Hub.
+- [`comfy`](./skills/comfy/SKILL.md), [`comfy-relay`](./skills/comfy-relay/SKILL.md), [`comfy-director`](./skills/comfy-director/SKILL.md), [`comfy-debug`](./skills/comfy-debug/SKILL.md), [`comfy-custom-nodes`](./skills/comfy-custom-nodes/SKILL.md), [`comfy-build`](./skills/comfy-build/SKILL.md), [`comfy-deploy`](./skills/comfy-deploy/SKILL.md), [`comfy-run-on-cloud`](./skills/comfy-run-on-cloud/SKILL.md) — ComfyUI media generation and environments; each reads its process from comfy-cli through the [Comfy manual](./tools/comfy.md).
 - [`colab`](./skills/colab/SKILL.md) — explicit-only; its Claude Code adapter is [`providers/claude/colab`](./skills/providers/claude/colab/SKILL.md)
 - [`corpus-admin`](./skills/corpus-admin/SKILL.md) — Mycel 2 configuration, ingest, embedding plans, summaries and index health.
 - [`create-mycel-skill`](./skills/create-mycel-skill/SKILL.md)
