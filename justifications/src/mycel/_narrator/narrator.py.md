@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
+Reason: Give Narrator a static Bash command label mode
 
-Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
+Origins: MYC-23.4 · Intention i-e0998f02 · 2026-11-20
 
 ## <end>
 
@@ -89,9 +89,9 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## _arguments
 
-Reason: Keep Narrator usable on bounded plain source text after repository summary trees are retired.
+Reason: Give Narrator a static Bash command label mode
 
-Origins: MYC-22.10, MYC-22.1, MYC-22.9 · Intention i-4f128097 · 2026-11-19
+Origins: MYC-23.4 · Intention i-e0998f02 · 2026-11-20
 
 ## _array_reply
 
@@ -287,9 +287,9 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## main
 
-Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+Reason: Give Narrator a static Bash command label mode
 
-Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+Origins: MYC-23.4 · Intention i-e0998f02 · 2026-11-20
 
 ## read_request
 
@@ -314,4 +314,10 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 Reason: Generate and validate a single sentence of up to twenty words and bind its label to an exact summary version.
 
 Origins: MYC-8.33 · Intention i-eee7ab40 · 2026-11-18
+
+## _run_bash_label
+
+Reason: Give Narrator a static Bash command label mode
+
+Origins: MYC-23.4 · Intention i-e0998f02 · 2026-11-20
 

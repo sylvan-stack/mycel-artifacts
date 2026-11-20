@@ -81,3 +81,9 @@ Reason: Retire the repository summary interface and background summary work whil
 
 Origins: MYC-8.39, MYC-8.40, MYC-8.41 · Intention i-f91ef807 · 2026-11-19
 
+## Narrator > Label a Bash command
+
+Reason: Give Narrator a static Bash command label mode
+
+Origins: MYC-23.4 · Intention i-e0998f02 · 2026-11-20
+
