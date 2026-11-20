@@ -52,7 +52,6 @@ installation does not supply new provider proof.
 | integrate authored artifacts, code, and tests “according to Mycel” | [operations/authored-work-integration.md](operations/authored-work-integration.md) — coverage → ingest → edges → Detection → embeddings → verify |
 | create, update, or install Mycel Skills for native Codex CLI and Claude Code CLI | [operations/create-skill.md](operations/create-skill.md) |
 | investigate Reservble places-api Syrve integration logs on its log server: list a day's files, failed webhooks, rejected reservations, request correlation | [operations/places-api-logs.md](operations/places-api-logs.md) · [SFTP manual](tools/places-api-sftp.md) — read-only; guest details redacted in reports |
-| make images, video, audio or 3D with ComfyUI, or build, deploy, debug or write nodes for a ComfyUI environment with comfy-cli (`/comfy`, `/comfy-build` and the other `comfy-*` Skills; native Codex `$comfy…`) | [Comfy manual](tools/comfy.md) — each Skill's process is the installed CLI's `comfy skills show <name>`; a pasted Comfy prompt asks only for what it says |
 | work in a Euro-Office repository | `~/Artifacts/euro-office/README.md` — where its corpora are, how the local clones relate to the upstream repositories, and what became of its Linear workspace |
 | what a term means | [../arbol/GLOSSARY.md](../arbol/GLOSSARY.md) |
 | the full catalog | [INDEX.md](INDEX.md) (operations) · [../arbol/INDEX.md](../arbol/INDEX.md) (product) |

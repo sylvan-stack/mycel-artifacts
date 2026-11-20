@@ -8,5 +8,5 @@ description: >-
   $comfy-director with the same words. NOT for a single shot or loop (comfy).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the Comfy manual `~/Artifacts/mycel/tools/comfy.md` and follow it for this
+task.
