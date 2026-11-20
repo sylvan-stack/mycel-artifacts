@@ -13,5 +13,6 @@ description: >-
   (code-research) or writing a research document (deep-research).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the implementation planning guide
+`~/Artifacts/mycel/operations/implementation-planning.md` and follow it for this
+task.

@@ -16,5 +16,5 @@ description: >-
   (code-research), or open-ended context gathering (deep-research).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the PR deep review guide `~/Artifacts/mycel/operations/pr-deep-review.md`
+and follow it for this task.

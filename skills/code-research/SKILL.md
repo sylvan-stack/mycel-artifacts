@@ -9,5 +9,5 @@ description: >-
   or durable multi-angle research artifacts (deep-research).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the code research guide `~/Artifacts/mycel/operations/code-research.md` and
+follow it for this task.

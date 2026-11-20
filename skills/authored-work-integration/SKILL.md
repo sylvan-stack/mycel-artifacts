@@ -9,5 +9,6 @@ description: >-
   research artifact (deep-research).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the integration guide
+`~/Artifacts/mycel/operations/authored-work-integration.md` and follow it for
+this task.

@@ -15,5 +15,5 @@ description: >-
   the owner knows about a repository, a project or a product.
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the Nex colab guide `~/Artifacts/mycel/operations/nex-colab.md` and follow
+it for this task.

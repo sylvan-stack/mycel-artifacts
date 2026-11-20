@@ -9,5 +9,5 @@ description: >-
   or index administration (corpus-admin).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the Mycel runbook `~/Artifacts/mycel/tools/mycel.md` and follow it for this
+task.

@@ -15,5 +15,5 @@ description: >-
   the Origin Coverage of code and documents (the justification guide).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the Owner Goals guide `~/Artifacts/mycel/operations/owner-goals.md` and
+follow it for this task.

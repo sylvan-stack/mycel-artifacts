@@ -8,5 +8,5 @@ description: >-
   (code-research), or integrating authored work (authored-work-integration).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the Mycel runbook `~/Artifacts/mycel/tools/mycel.md` and follow it for this
+task.

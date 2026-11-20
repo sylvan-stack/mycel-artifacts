@@ -10,5 +10,5 @@ description: >-
   one location or document (mycel-search), or a pull-request review (pr-deep-review).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the deep research guide `~/Artifacts/mycel/operations/deep-research.md` and
+follow it for this task.

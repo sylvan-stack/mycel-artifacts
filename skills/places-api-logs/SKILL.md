@@ -12,5 +12,5 @@ description: >-
   places-api code itself (code-research).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the places-api logs guide `~/Artifacts/mycel/operations/places-api-logs.md`
+and follow it for this task.

@@ -13,5 +13,5 @@ description: >-
   /colab "prompt", the learning exchange itself (the skill colab).
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the Nex colab guide `~/Artifacts/mycel/operations/nex-colab.md` and follow
+it for this task.
