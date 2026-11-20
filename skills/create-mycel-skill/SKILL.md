@@ -9,5 +9,5 @@ description: >-
   a Claude-only or personal skill, or for merely adding a guide or Tool manual.
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read the creation guide `~/Artifacts/mycel/operations/create-skill.md` and follow
+it for this task.

@@ -37,8 +37,7 @@ description: Trigger-focused activation instructions with outcome/scope,
   explicit NOT-for boundaries, and at least two example activating prompts.
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md`; follow the routed
-guide or Tool manual at its canonical path.
+Read `~/Artifacts/mycel/operations/example.md` and follow it for this task.
 ```
 
 Frontmatter rules:
@@ -53,12 +52,14 @@ Frontmatter rules:
 
 ## Body rules
 
-- Keep the adapter body to a pointer to the Instructions Hub:
-  `~/Artifacts/mycel/README.md`. The durable process belongs in `operations/`
-  and CLI details in `tools/`.
+- Keep the adapter body to one sentence that names the Skill's owning
+  document by its absolute path: an operation guide in `operations/` or a Tool
+  manual in `tools/`. Do not point it at the Instructions Hub
+  (`~/Artifacts/mycel/README.md`), which the owner deprecated on 9 November
+  2026 (MYC-D82) and which is switched off.
 - Do not put commands, copied policies, invocation details, or reporting rules
-  in the adapter. The Hub and its routed document own those details.
-- If the Instructions Hub is missing, stop and tell the user rather than
+  in the adapter. The owning document holds those details.
+- If the owning document is missing, stop and tell the user rather than
   improvising a replacement process.
 
 ## Choosing whether to add a Skill
@@ -80,8 +81,9 @@ boundary, improve or consolidate them instead of relying on agent guesswork.
 - [ ] Folder, filename, and `name` match; frontmatter parses.
 - [ ] Description includes realistic triggers, at least two activating example
       prompts, outcome, and NOT-for boundaries.
-- [ ] Body contains only the Instructions Hub pointer; no process or commands.
+- [ ] Body only names the owning document, which exists; no process, commands
+      or Instructions Hub pointer.
 - [ ] Verify the source directory is symlinked/discoverable in
       both `~/.agents/skills/` and `~/.claude/skills/`, without copied forks.
-- [ ] Update `../INDEX.md` when the Skill catalog changes; add a Hub route only
-      for a genuinely new task shape.
+- [ ] Update `../INDEX.md` when the Skill catalog changes; add no Instructions
+      Hub row.

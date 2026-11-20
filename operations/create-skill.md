@@ -20,13 +20,16 @@ portable process and exposed to **native Codex CLI and Claude Code CLI**.
 
 Read [the authoring rules](../skills/README.md) and neighboring skill descriptions.
 Choose a stable kebab-case name, a distinct task shape, scope, boundaries, and
-at least two realistic activating prompts. Locate the owning process through
-the [Instructions Hub](../README.md); create a process only when none owns it.
+at least two realistic activating prompts. Find the one document that owns the
+process, an operation guide or a Tool manual, in [the catalog](../INDEX.md) or
+with `mycel search --repo mycel`. Create a process only when none owns it.
 
 Keep the shared adapter at `skills/<name>/SKILL.md` with YAML `name` and
-`description`. Keep its body a thin pointer to the Hub. Both CLIs use this same
-file unless provider-specific frontmatter requires a separate adapter.
-Commands, procedures, and policy belong in the routed document, never in a
+`description`. Its body names that owning document by its absolute path and
+nothing else. Do not route it through the Instructions Hub, which the owner
+deprecated on 9 November 2026 (MYC-D82) and which is switched off. Both CLIs use
+this same file unless provider-specific frontmatter requires a separate adapter.
+Commands, procedures, and policy belong in the owning document, never in a
 provider copy.
 
 ```markdown
@@ -37,9 +40,11 @@ description: >-
   Not for <neighboring task>.
 ---
 
-Start at the Instructions Hub `~/Artifacts/mycel/README.md` and follow the route
-for this task.
+Read `~/Artifacts/mycel/operations/example.md` and follow it for this task.
 ```
+
+For example, the `comfy-build` adapter's body is "Read the Comfy manual
+`~/Artifacts/mycel/tools/comfy.md` and follow it for this task."
 
 ## Native Codex CLI
 
@@ -61,7 +66,7 @@ documents user discovery, symlink support, invocation, and policy metadata.
 Link `~/.claude/skills/<name>` to the same canonical directory. Explicit invocation
 uses `/<name>`. When Claude requires different frontmatter, keep only that thin
 adapter at `skills/providers/claude/<name>/SKILL.md` and link Claude to it;
-the shared activation intent and Hub route must match the main adapter.
+the shared activation intent and owning document must match the main adapter.
 An explicit-only skill, for example, carries `disable-model-invocation: true`
 in its Claude adapter and the matching Codex policy in `agents/openai.yaml`.
 
@@ -70,12 +75,13 @@ in its Claude adapter and the matching Codex policy in `agents/openai.yaml`.
 1. Inspect each destination before linking. Reuse correct symlinks. Preserve
    existing files and resources; never force-overwrite a conflicting installation.
 2. Validate YAML, folder/name agreement, concise trigger descriptions, two
-   positive examples, neighboring negative boundaries, and Hub-only bodies.
-3. Verify every Hub route reaches an existing current process. Do not make
-   deprecated runtime tools an active route.
+   positive examples, neighboring negative boundaries, and bodies that only
+   name the owning document.
+3. Verify the named document exists and is a current process. Do not name
+   deprecated runtime tools or the Instructions Hub.
 4. Check both provider symlinks resolve to their canonical source. Check
    invocation policy parity when an adapter has provider-specific metadata.
-5. Update [INDEX.md](../INDEX.md); add a Hub route only for a new task shape.
+5. Update [INDEX.md](../INDEX.md). Add no Instructions Hub row.
 6. Check discovery in a fresh CLI session when available. Filesystem validation
    alone does not prove runtime activation; report that distinction. If Codex
    does not show an update automatically, start a new session.
