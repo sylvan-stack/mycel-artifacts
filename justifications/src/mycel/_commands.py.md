@@ -5,13 +5,13 @@ role: authored
 
 ## <before help_reply>
 
-Reason: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
+Reason: Expose the packaged label generator to callers through Mycel’s stable launcher, independent of its settings and index.
 
-Origins: MYC-8.39, MYC-8.40, MYC-8.41 · Intention i-f91ef807 · 2026-11-19
+Origins: MYC-23.5 · Intention i-653c6085 · 2026-11-21
 
 ## help_reply
 
-Reason: Retire the repository summary interface and background summary work while keeping quiet-period document maintenance.
+Reason: Expose the packaged label generator to callers through Mycel’s stable launcher, independent of its settings and index.
 
-Origins: MYC-8.39, MYC-8.40, MYC-8.41 · Intention i-f91ef807 · 2026-11-19
+Origins: MYC-23.5 · Intention i-653c6085 · 2026-11-21
 
