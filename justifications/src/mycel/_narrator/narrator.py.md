@@ -5,9 +5,9 @@ role: authored
 
 ## <before NarratorError>
 
-Reason: Give Narrator a static Bash command label mode
+Reason: Let chat titles enforce a twelve-word limit that includes function words, while preserving the existing label mode.
 
-Origins: MYC-23.4 · Intention i-e0998f02 · 2026-11-20
+Origins: MYC-23.5 · Intention i-aad02fe8 · 2026-11-21
 
 ## <end>
 
@@ -161,9 +161,9 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## _label_output
 
-Reason: Package the same verified writer for installed Mycel and direct checkout invocations.
+Reason: Let chat titles enforce a twelve-word limit that includes function words, while preserving the existing label mode.
 
-Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
+Origins: MYC-23.5 · Intention i-aad02fe8 · 2026-11-21
 
 ## _metered_value
 
@@ -221,9 +221,9 @@ Origins: MYC-8.5, MYC-22.7 · Intention i-684927d7 · 2026-11-18
 
 ## _run_label
 
-Reason: Exclude historical tree dependencies from live ingress and describe the surviving public commands.
+Reason: Let chat titles enforce a twelve-word limit that includes function words, while preserving the existing label mode.
 
-Origins: MYC-8.40, MYC-22.10 · Intention i-07992727 · 2026-11-19
+Origins: MYC-23.5 · Intention i-aad02fe8 · 2026-11-21
 
 ## _run_writer
 
