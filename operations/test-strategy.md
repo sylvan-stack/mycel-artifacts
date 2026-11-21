@@ -46,7 +46,20 @@ test-free syntax, type or compilation check remains available when useful.
 
 This policy supersedes older instructions to run affected tests at every step, full suites at task entry or completion, or suites again after merging. The owner subsequently requested a physical reset: comment existing tests, restore only individually justified top-tier cases, and keep a test inventory with tier reasons in every repository. The reset was merged into main in ten repositories under SYL-316 and is documented in the [reset report](../../sylvan-stack/research/test-tier-reset-2026-10-28.md). MiMo was deferred during that reset; SYL-327 includes its current repository after SYL-314 completed. The old backup is not its current inventory. This is not installed-package or runtime qualification.
 
-**Builds run the top tier only** (the owner, 29 October 2026, SYL-329). A Build's gate runs every top-tier test of its repository and no other test. It refuses when a top-tier test fails, or when a top-tier source is missing or commented. A passing Build says nothing about the mid tier, and its report never replaces requirement proofs or named checks that came from an earlier complete run. **The mid tier runs only when the owner explicitly requests mid-tier execution.**
+**Stable promotion runs the unit selection only** (the owner, 21 November 2026).
+Use genuine unit tests for the exact source revision, reuse applicable results,
+and record an explicitly empty selection when a component has no unit tests.
+Promote a successful candidate when the implementation is ready and its required
+artifact checks pass. A selected unit failure stops promotion.
+
+**Verification is separately requested.** Ask for the owner's explicit scope
+before running behavioral tests beyond the promotion unit selection. A request
+can name a small relevant integration check, a complete retained gate, or a
+reported bug on an exact installed stable Build. Default promotion omits
+long-running integration, Native, live-provider and end-to-end tests. Report
+the observed outcome of the requested verification against the exact source or
+installed artifact. Reuse prior results when their scope and artifact still
+apply. See [Build and promote](../../forester/operations/sylvan-stack-builds.md#build-and-promote).
 
 Each repository's `TESTS.md` owns its active selection and links the complete inventory, `test-tiers.json` and `MID_TIER.md`. Read it before writing or running tests. The owner subsequently requested that retained mid-tier source stay uncommented (SYL-326). Work on it belongs to a testing Beat or a separate testing task, with explicit scope for mid-tier execution. Broad qualification entry points must refuse while required tests are disabled; a smaller active inventory must never silently become a full qualification pass.
 
@@ -182,9 +195,7 @@ a top-tier run does not authorize the mid tier. Keep inventories current and
 retained source in its documented state. A bugfix regression should reproduce
 the actual failure, not restate the repaired implementation.
 
-For an authorized run, permission persists through useful failure investigation
-and reruns within scope; it does not authorize unrelated live services, spending
-or owner-data changes. Do not fold implementation work into the testing task
+An authorized run covers the selected tests. Get fresh approval before a rerun when the component requires per-run consent. Respect the approval scope for live services, spending and owner data. Do not fold implementation work into the testing task
 beyond fixes explicitly included in that scope.
 
 Before running, inspect discovery, prerequisites, skips and indirect execution.
