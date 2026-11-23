@@ -46,11 +46,7 @@ test-free syntax, type or compilation check remains available when useful.
 
 This policy supersedes older instructions to run affected tests at every step, full suites at task entry or completion, or suites again after merging. The owner subsequently requested a physical reset: comment existing tests, restore only individually justified top-tier cases, and keep a test inventory with tier reasons in every repository. The reset was merged into main in ten repositories under SYL-316 and is documented in the [reset report](../../sylvan-stack/research/test-tier-reset-2026-10-28.md). MiMo was deferred during that reset; SYL-327 includes its current repository after SYL-314 completed. The old backup is not its current inventory. This is not installed-package or runtime qualification.
 
-**Stable promotion runs the unit selection only** (the owner, 21 November 2026).
-Use genuine unit tests for the exact source revision, reuse applicable results,
-and record an explicitly empty selection when a component has no unit tests.
-Promote a successful candidate when the implementation is ready and its required
-artifact checks pass. A selected unit failure stops promotion.
+**Stable promotion is test-free by default.** When the owner explicitly requests tests with promotion, run only the genuine unit selection for the exact source revision. Reuse applicable results and record an explicitly empty selection when a component has no unit tests. A failure in the requested unit selection stops that promotion. Required artifact, signing and installation checks apply. Other tests and verification results are independent of promotion.
 
 **Verification is separately requested.** Ask for the owner's explicit scope
 before running behavioral tests beyond the promotion unit selection. A request
@@ -75,7 +71,7 @@ Mid-tier code stays uncommented in its own folder at the owner's request in the 
 
 | Tier | What belongs here | Writing | Running |
 | --- | --- | --- | --- |
-| **Top** | A small set of high-value, non-obvious edge cases that resolve a concrete uncertainty, or regression tests that reproduce a specific bug. | In a testing Beat or a separate testing task. Extend an existing case if possible. | Within the testing scope. Every authorized Build runs the whole top tier. |
+| **Top** | A small set of high-value, non-obvious edge cases that resolve a concrete uncertainty, or regression tests that reproduce a specific bug. | In a testing Beat or a separate testing task. Extend an existing case if possible. | Within the separately requested verification scope. Stable promotion follows the unit-only rule above. |
 | **Mid** | A small, deliberately selected set of consequential integration, compatibility or workflow checks, or difficult invariants with independent expected results. Every case must meet the admission bar below; ordinary functional coverage is insufficient. | In a testing Beat or a separate testing task, subject to the admission bar. | Only when the owner explicitly requests a mid-tier run. Never as part of a Build. |
 | **Low** | Straightforward behavior whose result is obvious from reading the code; copied constants or defaults, trivial accessors/forwarders, tests of fixture construction, tautological or vacuous assertions, or repeated checks with no distinct failure mode. This includes superficially useful cases that fail the mid-tier admission bar. | Do not add new cases. Preserve existing rejected cases as comments at the end of their test files. | Never run while classified low. Comments are historical examples to consult, not a dormant suite to enable. |
 
