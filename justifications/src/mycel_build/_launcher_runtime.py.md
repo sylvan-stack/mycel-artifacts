@@ -5,9 +5,9 @@ role: authored
 
 ## _available
 
-Reason: Keep validated Mycel records in Builds and resolve their installed programs from the managed runtime
+Reason: Recognize delivered Builds without qualification while preserving historical Build records
 
-Origins: FOR-2.5 · Intention i-416607eb · 2026-11-20
+Origins: MYC-15.5, MYC-15.8 · Intention i-50ccd001 · 2026-11-25
 
 ## main
 
