@@ -3,7 +3,9 @@ role: authored
 ---
 # Guide: Test Strategy
 
-Use this guide when implementing changes, reviewing tests, or performing a testing task in Sylvan Stack. **All test work belongs to a testing Beat or a separate testing task outside a Saga.** Test count and coverage percentage are not quality goals.
+The [delivery workflow](../../forester/operations/sagas.md#scope-and-completion)
+sets the boundary between implementation and testing. Test count and
+coverage percentage are not quality goals.
 
 ## When testing starts
 
@@ -12,39 +14,19 @@ type: literal
 match: ["test strategy", "write tests", "run tests", "test tier"]
 cue_target: none
 instructions: >-
-  An eligible testing Beat starts in a fresh chat under the same rules as
-  other Beats. Outside a Saga, the owner separately requests testing.
-  Implementation work uses test-free static checks. The Test Strategy
-  at ~/Artifacts/mycel/operations/test-strategy.md and the repository’s
-  TESTS.md are required reading before test work.
+  An implementation Saga delivers code and its Build. Use a focused unit
+  test only to understand a concrete issue encountered during implementation.
+  Integration tests and mocks are excluded. Write retained regression tests
+  only for bugs the owner found and reported. Other testing needs its own
+  owner-approved scope and never gates implementation.
 -->
 
-During implementation, do not add, edit, repair, refactor, classify, retire,
-restore or run tests of any tier. This includes fixtures, snapshots, test data,
-test runners and test inventories. Do not bundle test maintenance with a feature,
-bugfix, refactor or implementation review, even if it seems small, useful or
-necessary to keep existing tests in sync. Reading existing tests as source
-reference is allowed; it does not authorize changing or running them.
-
-In a Saga, the testing Beat follows the Arc's implementation Beats. When it
-is the next eligible Beat, start it in a fresh chat under
-[Working in Sagas](../../forester/operations/sagas.md#continue-with-the-next-beat).
-Its documented scope governs the testing and any Build it calls for. Outside
-a Saga, the owner explicitly requests a separate testing task and defines
-its scope.
-
-The owner changed the testing Beat start rule on 10 November 2026. This
-section governs eligibility even where older repository or Saga instructions
-require a separate owner request for all test work.
-
-This instruction of 29 October 2026 supersedes the earlier allowance to write
-or selectively run top-tier cases during implementation. It also governs
-indirect test execution: inspect commands and hooks first. A Build whose gate
-runs tests belongs to the testing Beat or a separate testing and Build task
-outside a Saga. Do not bypass, disable or weaken that gate. A truly
-test-free syntax, type or compilation check remains available when useful.
-
-This policy supersedes older instructions to run affected tests at every step, full suites at task entry or completion, or suites again after merging. The owner subsequently requested a physical reset: comment existing tests, restore only individually justified top-tier cases, and keep a test inventory with tier reasons in every repository. The reset was merged into main in ten repositories under SYL-316 and is documented in the [reset report](../../sylvan-stack/research/test-tier-reset-2026-10-28.md). MiMo was deferred during that reset; SYL-327 includes its current repository after SYL-314 completed. The old backup is not its current inventory. This is not installed-package or runtime qualification.
+A test may be written only in response to a specific bug the owner found
+and reported. Reuse an existing case where it can reproduce the bug.
+A focused unit test used to understand an issue during implementation is
+temporary diagnostic work and does not become retained coverage. A
+separate verification request establishes what may be run and does not
+itself authorize writing new tests. There is no automatic testing Beat.
 
 **Stable promotion is test-free by default.** When the owner explicitly requests tests with promotion, run only the genuine unit selection for the exact source revision. Reuse applicable results and record an explicitly empty selection when a component has no unit tests. A failure in the requested unit selection stops that promotion. Required artifact, signing and installation checks apply. Other tests and verification results are independent of promotion.
 
@@ -57,7 +39,7 @@ the observed outcome of the requested verification against the exact source or
 installed artifact. Reuse prior results when their scope and artifact still
 apply. See [Build and promote](../../forester/operations/sylvan-stack-builds.md#build-and-promote).
 
-Each repository's `TESTS.md` owns its active selection and links the complete inventory, `test-tiers.json` and `MID_TIER.md`. Read it before writing or running tests. The owner subsequently requested that retained mid-tier source stay uncommented (SYL-326). Work on it belongs to a testing Beat or a separate testing task, with explicit scope for mid-tier execution. Broad qualification entry points must refuse while required tests are disabled; a smaller active inventory must never silently become a full qualification pass.
+Each repository's `TESTS.md` owns its active selection and links the complete inventory, `test-tiers.json` and `MID_TIER.md`. Read it before writing or running tests. The owner subsequently requested that retained mid-tier source stay uncommented (SYL-326). Separate test work requires owner scope, including explicit scope for mid-tier execution. Broad qualification entry points must refuse while required tests are disabled; a smaller active inventory must never silently become a full qualification pass.
 
 ## Separate tier folders
 
@@ -71,8 +53,8 @@ Mid-tier code stays uncommented in its own folder at the owner's request in the 
 
 | Tier | What belongs here | Writing | Running |
 | --- | --- | --- | --- |
-| **Top** | A small set of high-value, non-obvious edge cases that resolve a concrete uncertainty, or regression tests that reproduce a specific bug. | In a testing Beat or a separate testing task. Extend an existing case if possible. | Within the separately requested verification scope. Stable promotion follows the unit-only rule above. |
-| **Mid** | A small, deliberately selected set of consequential integration, compatibility or workflow checks, or difficult invariants with independent expected results. Every case must meet the admission bar below; ordinary functional coverage is insufficient. | In a testing Beat or a separate testing task, subject to the admission bar. | Only when the owner explicitly requests a mid-tier run. Never as part of a Build. |
+| **Top** | A small set of high-value, non-obvious edge cases that resolve a concrete uncertainty, or regression tests that reproduce a specific bug. | Only for an owner-reported bug in separate agreed scope. Extend an existing case if possible. | Within the separately requested verification scope. Stable promotion follows the unit-only rule above. |
+| **Mid** | A small, deliberately selected set of consequential integration, compatibility or workflow checks, or difficult invariants with independent expected results. Every case must meet the admission bar below; ordinary functional coverage is insufficient. | Only for an owner-reported bug in separate agreed scope, subject to the admission bar. | Only when the owner explicitly requests a mid-tier run. Never as part of a Build. |
 | **Low** | Straightforward behavior whose result is obvious from reading the code; copied constants or defaults, trivial accessors/forwarders, tests of fixture construction, tautological or vacuous assertions, or repeated checks with no distinct failure mode. This includes superficially useful cases that fail the mid-tier admission bar. | Do not add new cases. Preserve existing rejected cases as comments at the end of their test files. | Never run while classified low. Comments are historical examples to consult, not a dormant suite to enable. |
 
 A short test can expose a subtle defect. A long browser or database test can be low value. Classify by information gained and distinct failure detected, not length, speed, framework, assertion count, author, or words in its name. A successful workflow qualifies only when the real interaction between components is itself uncertain and consequential. Merely crossing a function or module boundary is insufficient. Prefer one representative workflow to a collection of routine permutations.
@@ -129,12 +111,8 @@ qualification because the retained suite is smaller.
 
 ## Keep runnable suites small
 
-The default is **no new test** unless a concrete uncertainty or consequential
-failure justifies one under the tier rules. A new function, branch, option,
-command, requirement row or bugfix does not automatically need a new test. A
-bugfix merits top tier when the case reproduces the actual failure and rejects
-the broken behavior. Small suites with distinct evidence are the goal; adding
-coverage, matching production-file structure or increasing the count is not.
+Write a retained regression test only for a specific bug the owner found
+and reported. Prefer the smallest case that reproduces the failure.
 
 Before adding a case, read the nearest retained tests, their helpers and the
 low-tier comments at the ends of relevant files. Search the inventory for the
@@ -171,30 +149,24 @@ mid-tier bar is low tier after review.
 
 ## During implementation
 
-1. Implement and polish the requested code. Existing tests may be read as reference; leave their source, fixtures and inventories unchanged.
-2. If a bug or uncertainty suggests a useful future test, record the concrete gap briefly in the hand-over for the testing Beat or separate testing task.
-3. Leave test maintenance, selected tests, suites, baselines and post-merge checks to the testing Beat or a separate testing task.
-4. Review the diff and use proportionate test-free static validation such as syntax, types, links or compilation when useful. Do not disguise behavioral tests as probes or validation scripts. Inspect commands and hooks for indirect test execution.
-5. Report what was checked and what was not. “Implementation complete; tests not changed or run under the separate-task policy” is an honest outcome. Do not call unexecuted checks passed or claim runtime qualification from static review.
+Implement the agreed change and produce its deliverable. Existing tests
+can serve as reference. When an issue encountered during implementation
+needs a unit test to understand it, use only the focused case needed for
+diagnosis. Leave temporary test source out of the deliverable. Exclude
+integration tests, mocks, and routine verification from the plan.
 
-Do not repeatedly ask the owner for permission to run suites during ordinary work.
-If an action requires a test gate, record the dependency for the testing Beat
-or a separate testing task. Keep the gate intact.
+## In a separate testing task
 
-## In a testing Beat or separate testing task
-
-Use the Beat's documented scope or the scope of the owner's separate request.
-It may cover test review, archival maintenance, writing tests, selected
-execution, a component, all repositories, or a named qualification.
-A review, writing or archival request does not imply permission to run tests;
-a top-tier run does not authorize the mid tier. Keep inventories current and
-retained source in its documented state. A bugfix regression should reproduce
-the actual failure, not restate the repaired implementation.
+The owner sets the scope. Testing and verification proposals stay at the
+lowest priority outside delivery Sagas and their dependencies. Writing a
+retained test requires an owner-reported bug.
 
 An authorized run covers the selected tests. Get fresh approval before a rerun when the component requires per-run consent. Respect the approval scope for live services, spending and owner data. Do not fold implementation work into the testing task
 beyond fixes explicitly included in that scope.
 
 Before running, inspect discovery, prerequisites, skips and indirect execution.
+Choose the [output location](build-output.md) for the build or test runtime
+before invoking it.
 Record revisions, selections, elapsed time, results and limitations in existing
 run output outside Git. Distinguish passed, failed, skipped and unavailable.
 Zero selected tests is not successful qualification. A focused pass establishes

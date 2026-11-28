@@ -1,0 +1,1278 @@
+
+MODULE mycel.cli
+
+FUNCTION _export_dsn
+ 76           0 RESUME                   0
+
+ 77           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               0 (None)
+              6 IMPORT_NAME              0 (os)
+              8 STORE_FAST               0 (os)
+
+ 78          10 LOAD_CONST               1 (0)
+             12 LOAD_CONST               2 (('config',))
+             14 IMPORT_NAME              1 (mycel)
+             16 IMPORT_FROM              2 (config)
+             18 STORE_FAST               1 (config)
+             20 POP_TOP
+
+ 79          22 LOAD_FAST                1 (config)
+             24 LOAD_ATTR                7 (NULL|self + database_dsn)
+             44 CALL                     0
+             52 STORE_FAST               2 (dsn)
+
+ 80          54 LOAD_FAST                2 (dsn)
+             56 POP_JUMP_IF_FALSE       44 (to 146)
+             58 LOAD_FAST                0 (os)
+             60 LOAD_ATTR                8 (environ)
+             80 LOAD_ATTR               11 (NULL|self + get)
+            100 LOAD_CONST               3 ('ARBOL_PG_DSN')
+            102 CALL                     1
+            110 POP_JUMP_IF_TRUE        16 (to 144)
+
+ 81         112 LOAD_FAST                2 (dsn)
+            114 LOAD_FAST                0 (os)
+            116 LOAD_ATTR                8 (environ)
+            136 LOAD_CONST               3 ('ARBOL_PG_DSN')
+            138 STORE_SUBSCR
+            142 RETURN_CONST             0 (None)
+
+ 80     >>  144 RETURN_CONST             0 (None)
+        >>  146 RETURN_CONST             0 (None)
+
+FUNCTION main
+703           0 RESUME                   0
+
+704           2 LOAD_FAST                0 (argv)
+              4 POP_JUMP_IF_NOT_NONE    28 (to 62)
+              6 LOAD_GLOBAL              1 (NULL + list)
+             16 LOAD_GLOBAL              2 (sys)
+             26 LOAD_ATTR                4 (argv)
+             46 LOAD_CONST               1 (1)
+             48 LOAD_CONST               0 (None)
+             50 BINARY_SLICE
+             52 CALL                     1
+             60 JUMP_FORWARD            10 (to 82)
+        >>   62 LOAD_GLOBAL              1 (NULL + list)
+             72 LOAD_FAST                0 (argv)
+             74 CALL                     1
+        >>   82 STORE_FAST               1 (raw)
+
+708          84 NOP
+
+709          86 LOAD_CONST               2 (0)
+             88 LOAD_CONST               0 (None)
+             90 IMPORT_NAME              3 (truststore)
+             92 STORE_FAST               2 (truststore)
+
+710          94 LOAD_FAST                2 (truststore)
+             96 LOAD_ATTR                9 (NULL|self + inject_into_ssl)
+            116 CALL                     0
+            124 POP_TOP
+
+713     >>  126 LOAD_GLOBAL             13 (NULL + _export_dsn)
+            136 CALL                     0
+            144 POP_TOP
+
+714         146 LOAD_GLOBAL             14 (os)
+            156 LOAD_ATTR               16 (path)
+            176 LOAD_ATTR               19 (NULL|self + basename)
+            196 LOAD_GLOBAL              2 (sys)
+            206 LOAD_ATTR                4 (argv)
+            226 LOAD_CONST               2 (0)
+            228 BINARY_SUBSCR
+            232 CALL                     1
+            240 LOAD_CONST               3 ('better-grep')
+            242 COMPARE_OP              40 (==)
+            246 POP_JUMP_IF_FALSE       23 (to 294)
+
+715         248 LOAD_CONST               2 (0)
+            250 LOAD_CONST               4 (('better_grep',))
+            252 IMPORT_NAME             10 (mycel)
+            254 IMPORT_FROM             11 (better_grep)
+            256 STORE_FAST               3 (better_grep)
+            258 POP_TOP
+
+716         260 LOAD_FAST                3 (better_grep)
+            262 LOAD_ATTR               25 (NULL|self + run)
+            282 LOAD_FAST                1 (raw)
+            284 CALL                     1
+            292 RETURN_VALUE
+
+717     >>  294 LOAD_FAST                1 (raw)
+            296 POP_JUMP_IF_FALSE       34 (to 366)
+            298 LOAD_FAST                1 (raw)
+            300 LOAD_CONST               2 (0)
+            302 BINARY_SUBSCR
+            306 LOAD_CONST               3 ('better-grep')
+            308 COMPARE_OP              40 (==)
+            312 POP_JUMP_IF_FALSE       26 (to 366)
+
+718         314 LOAD_CONST               2 (0)
+            316 LOAD_CONST               4 (('better_grep',))
+            318 IMPORT_NAME             10 (mycel)
+            320 IMPORT_FROM             11 (better_grep)
+            322 STORE_FAST               3 (better_grep)
+            324 POP_TOP
+
+719         326 LOAD_FAST                3 (better_grep)
+            328 LOAD_ATTR               25 (NULL|self + run)
+            348 LOAD_FAST                1 (raw)
+            350 LOAD_CONST               1 (1)
+            352 LOAD_CONST               0 (None)
+            354 BINARY_SLICE
+            356 CALL                     1
+            364 RETURN_VALUE
+
+721     >>  366 LOAD_GLOBAL             27 (NULL + argparse)
+            376 LOAD_ATTR               28 (ArgumentParser)
+
+722         396 LOAD_CONST               5 ('mycel')
+
+723         398 LOAD_CONST               6 ('Mycel: knowledge retrieval as per-task commands (no daemon)')
+
+721         400 KW_NAMES                 7 (('prog', 'description'))
+            402 CALL                     2
+            410 STORE_FAST               4 (ap)
+
+724         412 LOAD_FAST                4 (ap)
+            414 LOAD_ATTR               31 (NULL|self + add_argument)
+            434 LOAD_CONST               8 ('--version')
+            436 LOAD_CONST               9 ('version')
+            438 LOAD_CONST              10 ('mycel ')
+            440 LOAD_GLOBAL             32 (__version__)
+            450 FORMAT_VALUE             0
+            452 BUILD_STRING             2
+            454 KW_NAMES                11 (('action', 'version'))
+            456 CALL                     3
+            464 POP_TOP
+
+725         466 LOAD_FAST                4 (ap)
+            468 LOAD_ATTR               35 (NULL|self + add_subparsers)
+            488 LOAD_CONST              12 ('cmd')
+            490 LOAD_CONST              13 (True)
+            492 KW_NAMES                14 (('dest', 'required'))
+            494 CALL                     2
+            502 STORE_FAST               5 (sub)
+
+728         504 LOAD_FAST                5 (sub)
+            506 LOAD_ATTR               37 (NULL|self + add_parser)
+            526 LOAD_CONST               3 ('better-grep')
+            528 LOAD_CONST              15 ('literal /usr/bin/grep plus a semantic Mycel tail')
+            530 KW_NAMES                16 (('help',))
+            532 CALL                     2
+            540 POP_TOP
+
+730         542 LOAD_FAST                5 (sub)
+            544 LOAD_ATTR               37 (NULL|self + add_parser)
+            564 LOAD_CONST              17 ('search')
+            566 LOAD_CONST              18 ('unified semantic search: code + docs + summaries')
+            568 KW_NAMES                16 (('help',))
+            570 CALL                     2
+            578 STORE_FAST               6 (s)
+
+731         580 LOAD_FAST                6 (s)
+            582 LOAD_ATTR               31 (NULL|self + add_argument)
+            602 LOAD_CONST              19 ('query')
+            604 LOAD_CONST              20 ('natural-language or identifier query')
+            606 KW_NAMES                16 (('help',))
+            608 CALL                     2
+            616 POP_TOP
+
+732         618 LOAD_FAST                6 (s)
+            620 LOAD_ATTR               31 (NULL|self + add_argument)
+            640 LOAD_CONST              21 ('--k')
+            642 LOAD_GLOBAL             38 (int)
+            652 LOAD_CONST              22 (12)
+            654 LOAD_CONST              23 ('max results (default 12)')
+            656 KW_NAMES                24 (('type', 'default', 'help'))
+            658 CALL                     4
+            666 POP_TOP
+
+733         668 LOAD_FAST                6 (s)
+            670 LOAD_ATTR               31 (NULL|self + add_argument)
+            690 LOAD_CONST              25 ('--repo')
+            692 LOAD_CONST              26 ('')
+
+734         694 LOAD_CONST              27 ('repo to search (default: the repo containing the CWD, else Arbol)')
+
+733         696 KW_NAMES                28 (('default', 'help'))
+            698 CALL                     3
+            706 POP_TOP
+
+735         708 LOAD_FAST                6 (s)
+            710 LOAD_ATTR               31 (NULL|self + add_argument)
+            730 LOAD_CONST              29 ('--path')
+            732 LOAD_CONST              30 ('append')
+            734 LOAD_CONST               0 (None)
+            736 LOAD_CONST              31 ('P')
+
+736         738 LOAD_CONST              32 ('resolve repo/overlay from this path instead of the CWD (repeatable)')
+
+735         740 KW_NAMES                33 (('action', 'default', 'metavar', 'help'))
+            742 CALL                     5
+            750 POP_TOP
+
+737         752 LOAD_FAST                6 (s)
+            754 LOAD_ATTR               31 (NULL|self + add_argument)
+            774 LOAD_CONST              34 ('--overlay')
+            776 LOAD_CONST              26 ('')
+
+738         778 LOAD_CONST              35 ("branch overlay view (default: the CWD's worktree branch, if any)")
+
+737         780 KW_NAMES                28 (('default', 'help'))
+            782 CALL                     3
+            790 POP_TOP
+
+739         792 LOAD_FAST                6 (s)
+            794 LOAD_ATTR               31 (NULL|self + add_argument)
+            814 LOAD_CONST              36 ('--only')
+            816 LOAD_CONST              37 ('code')
+            818 LOAD_CONST              38 ('docs')
+            820 BUILD_LIST               2
+            822 LOAD_CONST               0 (None)
+
+740         824 LOAD_CONST              39 ('narrow to one corpus side when intent is explicit')
+
+739         826 KW_NAMES                40 (('choices', 'default', 'help'))
+            828 CALL                     4
+            836 POP_TOP
+
+741         838 LOAD_FAST                6 (s)
+            840 LOAD_ATTR               31 (NULL|self + add_argument)
+            860 LOAD_CONST              41 ('--no-fresh')
+            862 LOAD_CONST              42 ('store_true')
+
+742         864 LOAD_CONST              43 ('skip the fresh-on-read staleness check + auto-sync')
+
+741         866 KW_NAMES                44 (('action', 'help'))
+            868 CALL                     3
+            876 POP_TOP
+
+743         878 LOAD_FAST                6 (s)
+            880 LOAD_ATTR               41 (NULL|self + set_defaults)
+            900 LOAD_GLOBAL             42 (_cmd_search)
+            910 KW_NAMES                45 (('func',))
+            912 CALL                     1
+            920 POP_TOP
+
+745         922 LOAD_FAST                5 (sub)
+            924 LOAD_ATTR               37 (NULL|self + add_parser)
+            944 LOAD_CONST              46 ('sync')
+            946 LOAD_CONST              47 ('one mechanical Sync Pass (docs + code + overlays), then exit')
+            948 KW_NAMES                16 (('help',))
+            950 CALL                     2
+            958 STORE_FAST               7 (sy)
+
+746         960 LOAD_FAST                7 (sy)
+            962 LOAD_ATTR               31 (NULL|self + add_argument)
+            982 LOAD_CONST              48 ('--no-embed')
+            984 LOAD_CONST              42 ('store_true')
+            986 LOAD_CONST              49 ('skip embedding the delta')
+            988 KW_NAMES                44 (('action', 'help'))
+            990 CALL                     3
+            998 POP_TOP
+
+747        1000 LOAD_FAST                7 (sy)
+           1002 LOAD_ATTR               41 (NULL|self + set_defaults)
+           1022 LOAD_GLOBAL             44 (_cmd_sync)
+           1032 KW_NAMES                45 (('func',))
+           1034 CALL                     1
+           1042 POP_TOP
+
+749        1044 LOAD_FAST                5 (sub)
+           1046 LOAD_ATTR               37 (NULL|self + add_parser)
+           1066 LOAD_CONST              50 ('embed')
+           1068 LOAD_CONST              51 ('embed every pending chunk, then exit')
+           1070 KW_NAMES                16 (('help',))
+           1072 CALL                     2
+           1080 STORE_FAST               8 (em)
+
+750        1082 LOAD_FAST                8 (em)
+           1084 LOAD_ATTR               41 (NULL|self + set_defaults)
+           1104 LOAD_GLOBAL             46 (_cmd_embed)
+           1114 KW_NAMES                45 (('func',))
+           1116 CALL                     1
+           1124 POP_TOP
+
+752        1126 LOAD_FAST                5 (sub)
+           1128 LOAD_ATTR               37 (NULL|self + add_parser)
+           1148 LOAD_CONST              52 ('raptor')
+           1150 LOAD_CONST              53 ('RAPTOR summaries (regen/build require the independent infer executable)')
+           1152 KW_NAMES                16 (('help',))
+           1154 CALL                     2
+           1162 STORE_FAST               9 (rp)
+
+753        1164 LOAD_FAST                9 (rp)
+           1166 LOAD_ATTR               31 (NULL|self + add_argument)
+           1186 LOAD_CONST              54 ('action')
+           1188 BUILD_LIST               0
+           1190 LOAD_CONST              55 (('status', 'plan', 'regen', 'build'))
+           1192 LIST_EXTEND              1
+           1194 KW_NAMES                56 (('choices',))
+           1196 CALL                     2
+           1204 POP_TOP
+
+754        1206 LOAD_FAST                9 (rp)
+           1208 LOAD_ATTR               31 (NULL|self + add_argument)
+           1228 LOAD_CONST              57 ('--recipe')
+           1230 LOAD_CONST              26 ('')
+
+755        1232 LOAD_CONST              58 ('Brain Recipe name for regen/build (default: raptor-agent)')
+
+754        1234 KW_NAMES                28 (('default', 'help'))
+           1236 CALL                     3
+           1244 POP_TOP
+
+756        1246 LOAD_FAST                9 (rp)
+           1248 LOAD_ATTR               31 (NULL|self + add_argument)
+           1268 LOAD_CONST              25 ('--repo')
+           1270 LOAD_CONST              59 ('Arbol')
+           1272 KW_NAMES                60 (('default',))
+           1274 CALL                     2
+           1282 POP_TOP
+
+757        1284 LOAD_FAST                9 (rp)
+           1286 LOAD_ATTR               31 (NULL|self + add_argument)
+           1306 LOAD_CONST              61 ('--regen')
+           1308 LOAD_CONST              42 ('store_true')
+
+758        1310 LOAD_CONST              62 ('plan: predict the incremental regen instead of a full build')
+
+757        1312 KW_NAMES                44 (('action', 'help'))
+           1314 CALL                     3
+           1322 POP_TOP
+
+759        1324 LOAD_FAST                9 (rp)
+           1326 LOAD_ATTR               41 (NULL|self + set_defaults)
+           1346 LOAD_GLOBAL             48 (_cmd_raptor)
+           1356 KW_NAMES                45 (('func',))
+           1358 CALL                     1
+           1366 POP_TOP
+
+761        1368 LOAD_FAST                5 (sub)
+           1370 LOAD_ATTR               37 (NULL|self + add_parser)
+           1390 LOAD_CONST              63 ('status')
+           1392 LOAD_CONST              64 ('index freshness: documents/chunks/stale + embed counters')
+           1394 KW_NAMES                16 (('help',))
+           1396 CALL                     2
+           1404 STORE_FAST              10 (st)
+
+762        1406 LOAD_FAST               10 (st)
+           1408 LOAD_ATTR               31 (NULL|self + add_argument)
+           1428 LOAD_CONST              25 ('--repo')
+           1430 LOAD_CONST              59 ('Arbol')
+           1432 KW_NAMES                60 (('default',))
+           1434 CALL                     2
+           1442 POP_TOP
+
+763        1444 LOAD_FAST               10 (st)
+           1446 LOAD_ATTR               41 (NULL|self + set_defaults)
+           1466 LOAD_GLOBAL             50 (_cmd_status)
+           1476 KW_NAMES                45 (('func',))
+           1478 CALL                     1
+           1486 POP_TOP
+
+765        1488 LOAD_FAST                5 (sub)
+           1490 LOAD_ATTR               37 (NULL|self + add_parser)
+           1510 LOAD_CONST              65 ('drifts')
+           1512 LOAD_CONST              66 ('open derivation drifts (source changed since generation)')
+           1514 KW_NAMES                16 (('help',))
+           1516 CALL                     2
+           1524 STORE_FAST              11 (dr)
+
+766        1526 LOAD_FAST               11 (dr)
+           1528 LOAD_ATTR               31 (NULL|self + add_argument)
+           1548 LOAD_CONST              25 ('--repo')
+           1550 LOAD_CONST              59 ('Arbol')
+           1552 KW_NAMES                60 (('default',))
+           1554 CALL                     2
+           1562 POP_TOP
+
+767        1564 LOAD_FAST               11 (dr)
+           1566 LOAD_ATTR               41 (NULL|self + set_defaults)
+           1586 LOAD_GLOBAL             52 (_cmd_drifts)
+           1596 KW_NAMES                45 (('func',))
+           1598 CALL                     1
+           1606 POP_TOP
+
+769        1608 LOAD_FAST                5 (sub)
+           1610 LOAD_ATTR               37 (NULL|self + add_parser)
+
+770        1630 LOAD_CONST              67 ('derive')
+
+771        1632 LOAD_CONST              68 ('assert that one source chunk governs a derived code/doc/test chunk')
+
+769        1634 KW_NAMES                16 (('help',))
+           1636 CALL                     2
+           1644 STORE_FAST              12 (dv)
+
+773        1646 LOAD_FAST               12 (dv)
+           1648 LOAD_ATTR               31 (NULL|self + add_argument)
+           1668 LOAD_CONST              69 ('child')
+           1670 LOAD_CONST              70 ('derived Source Ref: repo:path#symbol or #Heading')
+           1672 KW_NAMES                16 (('help',))
+           1674 CALL                     2
+           1682 POP_TOP
+
+774        1684 LOAD_FAST               12 (dv)
+           1686 LOAD_ATTR               31 (NULL|self + add_argument)
+           1706 LOAD_CONST              71 ('source')
+           1708 LOAD_CONST              72 ('governing Source Ref: repo:path[#symbol|#Heading]')
+           1710 KW_NAMES                16 (('help',))
+           1712 CALL                     2
+           1720 POP_TOP
+
+775        1722 LOAD_FAST               12 (dv)
+           1724 LOAD_ATTR               41 (NULL|self + set_defaults)
+           1744 LOAD_GLOBAL             54 (_cmd_derive)
+           1754 KW_NAMES                45 (('func',))
+           1756 CALL                     1
+           1764 POP_TOP
+
+777        1766 LOAD_FAST                5 (sub)
+           1768 LOAD_ATTR               37 (NULL|self + add_parser)
+           1788 LOAD_CONST              73 ('overlay')
+           1790 LOAD_CONST              74 ('Branch Overlay registry (no git — worktree must exist; `mycel wt` owns the full lifecycle)')
+           1792 KW_NAMES                16 (('help',))
+           1794 CALL                     2
+           1802 STORE_FAST              13 (ov)
+
+779        1804 LOAD_FAST               13 (ov)
+           1806 LOAD_ATTR               31 (NULL|self + add_argument)
+           1826 LOAD_CONST              54 ('action')
+           1828 BUILD_LIST               0
+           1830 LOAD_CONST              75 (('add', 'list', 'refresh', 'drop'))
+           1832 LIST_EXTEND              1
+           1834 KW_NAMES                56 (('choices',))
+           1836 CALL                     2
+           1844 POP_TOP
+
+780        1846 LOAD_FAST               13 (ov)
+           1848 LOAD_ATTR               31 (NULL|self + add_argument)
+           1868 LOAD_CONST              76 ('repo')
+           1870 LOAD_CONST              77 ('?')
+           1872 LOAD_CONST              26 ('')
+           1874 KW_NAMES                78 (('nargs', 'default'))
+           1876 CALL                     3
+           1884 POP_TOP
+
+781        1886 LOAD_FAST               13 (ov)
+           1888 LOAD_ATTR               31 (NULL|self + add_argument)
+           1908 LOAD_CONST              79 ('branch')
+           1910 LOAD_CONST              77 ('?')
+           1912 LOAD_CONST              26 ('')
+           1914 KW_NAMES                78 (('nargs', 'default'))
+           1916 CALL                     3
+           1924 POP_TOP
+
+782        1926 LOAD_FAST               13 (ov)
+           1928 LOAD_ATTR               31 (NULL|self + add_argument)
+           1948 LOAD_CONST              80 ('--worktree')
+           1950 LOAD_CONST              26 ('')
+           1952 LOAD_CONST              81 ('worktree path (default ~/repo/<repo>/<branch>)')
+           1954 KW_NAMES                28 (('default', 'help'))
+           1956 CALL                     3
+           1964 POP_TOP
+
+783        1966 LOAD_FAST               13 (ov)
+           1968 LOAD_ATTR               31 (NULL|self + add_argument)
+           1988 LOAD_CONST              48 ('--no-embed')
+           1990 LOAD_CONST              42 ('store_true')
+
+784        1992 LOAD_CONST              82 ('add/refresh: skip embedding pending chunks afterwards')
+
+783        1994 KW_NAMES                44 (('action', 'help'))
+           1996 CALL                     3
+           2004 POP_TOP
+
+785        2006 LOAD_FAST               13 (ov)
+           2008 LOAD_ATTR               41 (NULL|self + set_defaults)
+           2028 LOAD_GLOBAL             56 (_cmd_overlay)
+           2038 KW_NAMES                45 (('func',))
+           2040 CALL                     1
+           2048 POP_TOP
+
+787        2050 LOAD_FAST                5 (sub)
+           2052 LOAD_ATTR               37 (NULL|self + add_parser)
+           2072 LOAD_CONST              83 ('wt')
+           2074 LOAD_CONST              84 ('deprecated; use repository folders directly')
+           2076 KW_NAMES                16 (('help',))
+           2078 CALL                     2
+           2086 STORE_FAST              14 (wt)
+
+788        2088 LOAD_FAST               14 (wt)
+           2090 LOAD_ATTR               31 (NULL|self + add_argument)
+           2110 LOAD_CONST              54 ('action')
+           2112 BUILD_LIST               0
+           2114 LOAD_CONST              85 (('add', 'list', 'refresh', 'archive', 'drop', 'open'))
+           2116 LIST_EXTEND              1
+           2118 KW_NAMES                56 (('choices',))
+           2120 CALL                     2
+           2128 POP_TOP
+
+789        2130 LOAD_FAST               14 (wt)
+           2132 LOAD_ATTR               31 (NULL|self + add_argument)
+           2152 LOAD_CONST              76 ('repo')
+           2154 LOAD_CONST              77 ('?')
+           2156 LOAD_CONST              26 ('')
+           2158 KW_NAMES                78 (('nargs', 'default'))
+           2160 CALL                     3
+           2168 POP_TOP
+
+790        2170 LOAD_FAST               14 (wt)
+           2172 LOAD_ATTR               31 (NULL|self + add_argument)
+           2192 LOAD_CONST              79 ('branch')
+           2194 LOAD_CONST              77 ('?')
+           2196 LOAD_CONST              26 ('')
+
+791        2198 LOAD_CONST              86 ('branch (add/refresh/archive/drop); branch-fragment (open)')
+
+790        2200 KW_NAMES                87 (('nargs', 'default', 'help'))
+           2202 CALL                     4
+           2210 POP_TOP
+
+792        2212 LOAD_FAST               14 (wt)
+           2214 LOAD_ATTR               31 (NULL|self + add_argument)
+           2234 LOAD_CONST              88 ('--mr')
+           2236 LOAD_GLOBAL             38 (int)
+           2246 LOAD_CONST               0 (None)
+
+793        2248 LOAD_CONST              89 ('add: GitLab MR iid — fetch its head into a worktree (needs glab)')
+
+792        2250 KW_NAMES                24 (('type', 'default', 'help'))
+           2252 CALL                     4
+           2260 POP_TOP
+
+794        2262 LOAD_FAST               14 (wt)
+           2264 LOAD_ATTR               31 (NULL|self + add_argument)
+           2284 LOAD_CONST              90 ('--force')
+           2286 LOAD_CONST              42 ('store_true')
+
+795        2288 LOAD_CONST              91 ('drop: discard local changes in the worktree')
+
+794        2290 KW_NAMES                44 (('action', 'help'))
+           2292 CALL                     3
+           2300 POP_TOP
+
+796        2302 LOAD_FAST               14 (wt)
+           2304 LOAD_ATTR               31 (NULL|self + add_argument)
+           2324 LOAD_CONST              92 ('--container')
+           2326 LOAD_CONST              26 ('')
+
+797        2328 LOAD_CONST              93 ('override Worktree Container path (default ~/repo/<repo>)')
+
+796        2330 KW_NAMES                28 (('default', 'help'))
+           2332 CALL                     3
+           2340 POP_TOP
+
+798        2342 LOAD_FAST               14 (wt)
+           2344 LOAD_ATTR               31 (NULL|self + add_argument)
+           2364 LOAD_CONST              94 ('--new')
+           2366 LOAD_CONST              42 ('store_true')
+
+799        2368 LOAD_CONST              95 ('add: create a new local branch instead of attaching/fetching')
+
+798        2370 KW_NAMES                44 (('action', 'help'))
+           2372 CALL                     3
+           2380 POP_TOP
+
+800        2382 LOAD_FAST               14 (wt)
+           2384 LOAD_ATTR               31 (NULL|self + add_argument)
+           2404 LOAD_CONST              96 ('--base')
+           2406 LOAD_CONST              26 ('')
+
+801        2408 LOAD_CONST              97 ('add --new: branch to create from (default corpus main/master)')
+
+800        2410 KW_NAMES                28 (('default', 'help'))
+           2412 CALL                     3
+           2420 POP_TOP
+
+802        2422 LOAD_FAST               14 (wt)
+           2424 LOAD_ATTR               41 (NULL|self + set_defaults)
+           2444 LOAD_GLOBAL             58 (_cmd_wt)
+           2454 KW_NAMES                45 (('func',))
+           2456 CALL                     1
+           2464 POP_TOP
+
+804        2466 LOAD_FAST                5 (sub)
+           2468 LOAD_ATTR               37 (NULL|self + add_parser)
+           2488 LOAD_CONST              98 ('repos')
+           2490 LOAD_CONST              99 ('list repos under ~/repo (+ mycel-enabled / container / worktrees)')
+           2492 KW_NAMES                16 (('help',))
+           2494 CALL                     2
+           2502 STORE_FAST               9 (rp)
+
+805        2504 LOAD_FAST                9 (rp)
+           2506 LOAD_ATTR               31 (NULL|self + add_argument)
+           2526 LOAD_CONST              54 ('action')
+           2528 LOAD_CONST             100 ('list')
+           2530 BUILD_LIST               1
+           2532 LOAD_CONST              77 ('?')
+           2534 LOAD_CONST             100 ('list')
+           2536 KW_NAMES               101 (('choices', 'nargs', 'default'))
+           2538 CALL                     4
+           2546 POP_TOP
+
+806        2548 LOAD_FAST                9 (rp)
+           2550 LOAD_ATTR               31 (NULL|self + add_argument)
+           2570 LOAD_CONST             102 ('--root')
+           2572 LOAD_CONST              26 ('')
+           2574 LOAD_CONST             103 ('override the repo root (default ~/repo)')
+           2576 KW_NAMES                28 (('default', 'help'))
+           2578 CALL                     3
+           2586 POP_TOP
+
+807        2588 LOAD_FAST                9 (rp)
+           2590 LOAD_ATTR               31 (NULL|self + add_argument)
+           2610 LOAD_CONST             104 ('--organization')
+           2612 LOAD_CONST              26 ('')
+           2614 LOAD_CONST             105 ('organization name or shared alias')
+           2616 KW_NAMES                28 (('default', 'help'))
+           2618 CALL                     3
+           2626 POP_TOP
+
+808        2628 LOAD_FAST                9 (rp)
+           2630 LOAD_ATTR               41 (NULL|self + set_defaults)
+           2650 LOAD_GLOBAL             60 (_cmd_repos)
+           2660 KW_NAMES                45 (('func',))
+           2662 CALL                     1
+           2670 POP_TOP
+
+810        2672 LOAD_FAST                5 (sub)
+           2674 LOAD_ATTR               37 (NULL|self + add_parser)
+           2694 LOAD_CONST             106 ('pull')
+           2696 LOAD_CONST             107 ('pull latest master for a Worktree Container, then ingest — FF-only; sync+embed by default')
+           2698 KW_NAMES                16 (('help',))
+           2700 CALL                     2
+           2708 STORE_FAST              15 (pl)
+
+812        2710 LOAD_FAST               15 (pl)
+           2712 LOAD_ATTR               31 (NULL|self + add_argument)
+           2732 LOAD_CONST              76 ('repo')
+
+813        2734 LOAD_CONST             108 ('one container name (see `mycel repos list`)')
+
+812        2736 KW_NAMES                16 (('help',))
+           2738 CALL                     2
+           2746 POP_TOP
+
+814        2748 LOAD_FAST               15 (pl)
+           2750 LOAD_ATTR               31 (NULL|self + add_argument)
+           2770 LOAD_CONST             109 ('--no-sync')
+           2772 LOAD_CONST              42 ('store_true')
+
+815        2774 LOAD_CONST             110 ('pull only — skip the Sync Pass (fresh-on-read folds it in later)')
+
+814        2776 KW_NAMES                44 (('action', 'help'))
+           2778 CALL                     3
+           2786 POP_TOP
+
+816        2788 LOAD_FAST               15 (pl)
+           2790 LOAD_ATTR               31 (NULL|self + add_argument)
+           2810 LOAD_CONST              48 ('--no-embed')
+           2812 LOAD_CONST              42 ('store_true')
+
+817        2814 LOAD_CONST             111 ('sync the delta but skip embedding pending chunks')
+
+816        2816 KW_NAMES                44 (('action', 'help'))
+           2818 CALL                     3
+           2826 POP_TOP
+
+818        2828 LOAD_FAST               15 (pl)
+           2830 LOAD_ATTR               41 (NULL|self + set_defaults)
+           2850 LOAD_GLOBAL             62 (_cmd_pull)
+           2860 KW_NAMES                45 (('func',))
+           2862 CALL                     1
+           2870 POP_TOP
+
+820        2872 LOAD_FAST                5 (sub)
+           2874 LOAD_ATTR               37 (NULL|self + add_parser)
+           2894 LOAD_CONST             112 ('activity')
+           2896 LOAD_CONST             113 ('recent sync/embed/overlay/raptor/pull activity (newest first)')
+           2898 KW_NAMES                16 (('help',))
+           2900 CALL                     2
+           2908 STORE_FAST              16 (ac)
+
+821        2910 LOAD_FAST               16 (ac)
+           2912 LOAD_ATTR               31 (NULL|self + add_argument)
+           2932 LOAD_CONST              21 ('--k')
+           2934 LOAD_GLOBAL             38 (int)
+           2944 LOAD_CONST             114 (25)
+           2946 LOAD_CONST             115 ('max rows (default 25)')
+           2948 KW_NAMES                24 (('type', 'default', 'help'))
+           2950 CALL                     4
+           2958 POP_TOP
+
+822        2960 LOAD_FAST               16 (ac)
+           2962 LOAD_ATTR               31 (NULL|self + add_argument)
+           2982 LOAD_CONST              25 ('--repo')
+           2984 LOAD_CONST              26 ('')
+           2986 LOAD_CONST             116 ('filter by repo')
+           2988 KW_NAMES                28 (('default', 'help'))
+           2990 CALL                     3
+           2998 POP_TOP
+
+823        3000 LOAD_FAST               16 (ac)
+           3002 LOAD_ATTR               31 (NULL|self + add_argument)
+           3022 LOAD_CONST             117 ('--kind')
+           3024 LOAD_CONST              26 ('')
+
+824        3026 LOAD_CONST             118 ('filter by kind (sync|embed|overlay_ingest|raptor_build|raptor_regen|pull)')
+
+823        3028 KW_NAMES                28 (('default', 'help'))
+           3030 CALL                     3
+           3038 POP_TOP
+
+825        3040 LOAD_FAST               16 (ac)
+           3042 LOAD_ATTR               41 (NULL|self + set_defaults)
+           3062 LOAD_GLOBAL             64 (_cmd_activity)
+           3072 KW_NAMES                45 (('func',))
+           3074 CALL                     1
+           3082 POP_TOP
+
+827        3084 LOAD_FAST                5 (sub)
+           3086 LOAD_ATTR               37 (NULL|self + add_parser)
+           3106 LOAD_CONST             119 ('secrets')
+           3108 LOAD_CONST             120 ('write-only PAT store (set/is-set/list/delete — no get, ever)')
+           3110 KW_NAMES                16 (('help',))
+           3112 CALL                     2
+           3120 STORE_FAST              17 (sc)
+
+828        3122 LOAD_FAST               17 (sc)
+           3124 LOAD_ATTR               31 (NULL|self + add_argument)
+           3144 LOAD_CONST              54 ('action')
+           3146 BUILD_LIST               0
+           3148 LOAD_CONST             121 (('set', 'is-set', 'list', 'delete'))
+           3150 LIST_EXTEND              1
+           3152 KW_NAMES                56 (('choices',))
+           3154 CALL                     2
+           3162 POP_TOP
+
+829        3164 LOAD_FAST               17 (sc)
+           3166 LOAD_ATTR               31 (NULL|self + add_argument)
+           3186 LOAD_CONST             122 ('name')
+           3188 LOAD_CONST              77 ('?')
+           3190 LOAD_CONST              26 ('')
+           3192 KW_NAMES                78 (('nargs', 'default'))
+           3194 CALL                     3
+           3202 POP_TOP
+
+830        3204 LOAD_FAST               17 (sc)
+           3206 LOAD_ATTR               41 (NULL|self + set_defaults)
+           3226 LOAD_GLOBAL             66 (_cmd_secrets)
+           3236 KW_NAMES                45 (('func',))
+           3238 CALL                     1
+           3246 POP_TOP
+
+832        3248 LOAD_FAST                5 (sub)
+           3250 LOAD_ATTR               37 (NULL|self + add_parser)
+           3270 LOAD_CONST             123 ('mirror')
+           3272 LOAD_CONST             124 ('external mirrors: fetch/refresh/tree Jira + Confluence into ~/Artifacts/mirrors/')
+           3274 KW_NAMES                16 (('help',))
+           3276 CALL                     2
+           3284 STORE_FAST              18 (mi)
+
+833        3286 LOAD_FAST               18 (mi)
+           3288 LOAD_ATTR               31 (NULL|self + add_argument)
+           3308 LOAD_CONST              54 ('action')
+           3310 BUILD_LIST               0
+           3312 LOAD_CONST             125 (('fetch', 'refresh', 'tree'))
+           3314 LIST_EXTEND              1
+           3316 KW_NAMES                56 (('choices',))
+           3318 CALL                     2
+           3326 POP_TOP
+
+834        3328 LOAD_FAST               18 (mi)
+           3330 LOAD_ATTR               31 (NULL|self + add_argument)
+           3350 LOAD_CONST             126 ('surface')
+           3352 LOAD_CONST              77 ('?')
+           3354 LOAD_CONST              26 ('')
+           3356 LOAD_CONST             127 ('jira | confluence | gitlab (fetch); confluence (tree)')
+           3358 KW_NAMES                87 (('nargs', 'default', 'help'))
+           3360 CALL                     4
+           3368 POP_TOP
+
+835        3370 LOAD_FAST               18 (mi)
+           3372 LOAD_ATTR               31 (NULL|self + add_argument)
+           3392 LOAD_CONST             128 ('ref')
+           3394 LOAD_CONST              77 ('?')
+           3396 LOAD_CONST              26 ('')
+           3398 LOAD_CONST             129 ('ticket key / page id / page URL / space key (tree)')
+           3400 KW_NAMES                87 (('nargs', 'default', 'help'))
+           3402 CALL                     4
+           3410 POP_TOP
+
+836        3412 LOAD_FAST               18 (mi)
+           3414 LOAD_ATTR               31 (NULL|self + add_argument)
+           3434 LOAD_CONST             130 ('--closure')
+           3436 LOAD_CONST              42 ('store_true')
+           3438 LOAD_CONST             131 ('also fetch linked issues + pages (1 hop)')
+           3440 KW_NAMES                44 (('action', 'help'))
+           3442 CALL                     3
+           3450 POP_TOP
+
+837        3452 LOAD_FAST               18 (mi)
+           3454 LOAD_ATTR               31 (NULL|self + add_argument)
+           3474 LOAD_CONST             132 ('--depth')
+           3476 LOAD_GLOBAL             38 (int)
+           3486 LOAD_CONST               2 (0)
+
+838        3488 LOAD_CONST             133 ('confluence fetch: also mirror descendants this many levels down')
+
+837        3490 KW_NAMES                24 (('type', 'default', 'help'))
+           3492 CALL                     4
+           3500 POP_TOP
+
+839        3502 LOAD_FAST               18 (mi)
+           3504 LOAD_ATTR               31 (NULL|self + add_argument)
+           3524 LOAD_CONST             134 ('--max-pages')
+           3526 LOAD_GLOBAL             38 (int)
+           3536 LOAD_CONST               2 (0)
+
+840        3538 LOAD_CONST             135 ('page cap (section fetch default 100; tree default 5000)')
+
+839        3540 KW_NAMES                24 (('type', 'default', 'help'))
+           3542 CALL                     4
+           3550 POP_TOP
+
+841        3552 LOAD_FAST               18 (mi)
+           3554 LOAD_ATTR               31 (NULL|self + add_argument)
+           3574 LOAD_CONST             136 ('--older-than-min')
+           3576 LOAD_GLOBAL             38 (int)
+           3586 LOAD_CONST             137 (60)
+           3588 LOAD_CONST             138 ('refresh staleness window')
+           3590 KW_NAMES                24 (('type', 'default', 'help'))
+           3592 CALL                     4
+           3600 POP_TOP
+
+842        3602 LOAD_FAST               18 (mi)
+           3604 LOAD_ATTR               41 (NULL|self + set_defaults)
+           3624 LOAD_GLOBAL             68 (_cmd_mirror)
+           3634 KW_NAMES                45 (('func',))
+           3636 CALL                     1
+           3644 POP_TOP
+
+844        3646 LOAD_FAST                5 (sub)
+           3648 LOAD_ATTR               37 (NULL|self + add_parser)
+           3668 LOAD_CONST             139 ('jira')
+           3670 LOAD_CONST             140 ('Jira actions: login/get/search/comments/create/update/comment/transitions/transition/insight (writes re-mirror mirrored tickets)')
+           3672 KW_NAMES                16 (('help',))
+           3674 CALL                     2
+           3682 STORE_FAST              19 (ji)
+
+846        3684 LOAD_FAST               19 (ji)
+           3686 LOAD_ATTR               31 (NULL|self + add_argument)
+           3706 LOAD_CONST              54 ('action')
+           3708 BUILD_LIST               0
+           3710 LOAD_CONST             141 (('login', 'get', 'search', 'comments', 'create', 'update', 'comment', 'transitions', 'transition', 'insight'))
+           3712 LIST_EXTEND              1
+           3714 KW_NAMES                56 (('choices',))
+           3716 CALL                     2
+           3724 POP_TOP
+
+848        3726 LOAD_FAST               19 (ji)
+           3728 LOAD_ATTR               31 (NULL|self + add_argument)
+           3748 LOAD_CONST             142 ('a')
+           3750 LOAD_CONST              77 ('?')
+           3752 LOAD_CONST              26 ('')
+           3754 LOAD_CONST             143 ("issue key / '<jql>' / '<iql>' / '<fields-json>' (create)")
+           3756 KW_NAMES                87 (('nargs', 'default', 'help'))
+           3758 CALL                     4
+           3766 POP_TOP
+
+849        3768 LOAD_FAST               19 (ji)
+           3770 LOAD_ATTR               31 (NULL|self + add_argument)
+           3790 LOAD_CONST             144 ('b')
+           3792 LOAD_CONST              77 ('?')
+           3794 LOAD_CONST              26 ('')
+           3796 LOAD_CONST             145 ("'<body-json>' (update) / '<text>' (comment) / transition id")
+           3798 KW_NAMES                87 (('nargs', 'default', 'help'))
+           3800 CALL                     4
+           3808 POP_TOP
+
+850        3810 LOAD_FAST               19 (ji)
+           3812 LOAD_ATTR               31 (NULL|self + add_argument)
+           3832 LOAD_CONST             146 ('c')
+           3834 LOAD_CONST              77 ('?')
+           3836 LOAD_CONST              26 ('')
+           3838 LOAD_CONST             147 ("transition: optional '<fields-json>' for the transition screen")
+           3840 KW_NAMES                87 (('nargs', 'default', 'help'))
+           3842 CALL                     4
+           3850 POP_TOP
+
+851        3852 LOAD_FAST               19 (ji)
+           3854 LOAD_ATTR               31 (NULL|self + add_argument)
+           3874 LOAD_CONST             148 ('--expand')
+           3876 LOAD_CONST              26 ('')
+           3878 LOAD_CONST             149 ('get/transitions: expand (e.g. changelog, transitions.fields)')
+           3880 KW_NAMES                28 (('default', 'help'))
+           3882 CALL                     3
+           3890 POP_TOP
+
+852        3892 LOAD_FAST               19 (ji)
+           3894 LOAD_ATTR               31 (NULL|self + add_argument)
+           3914 LOAD_CONST             150 ('--max')
+           3916 LOAD_GLOBAL             38 (int)
+           3926 LOAD_CONST             151 (50)
+           3928 LOAD_CONST             152 ('search/insight: max results (default 50)')
+           3930 KW_NAMES                24 (('type', 'default', 'help'))
+           3932 CALL                     4
+           3940 POP_TOP
+
+853        3942 LOAD_FAST               19 (ji)
+           3944 LOAD_ATTR               31 (NULL|self + add_argument)
+           3964 LOAD_CONST             153 ('--schema')
+           3966 LOAD_CONST              26 ('')
+           3968 LOAD_CONST             154 ('insight: object schema id')
+           3970 KW_NAMES                28 (('default', 'help'))
+           3972 CALL                     3
+           3980 POP_TOP
+
+854        3982 LOAD_FAST               19 (ji)
+           3984 LOAD_ATTR               31 (NULL|self + add_argument)
+           4004 LOAD_CONST             155 ('--fields')
+           4006 LOAD_CONST             156 ('key,summary,status')
+
+855        4008 LOAD_CONST             157 ('search: comma-separated fields (Cloud returns ids only without this)')
+
+854        4010 KW_NAMES                28 (('default', 'help'))
+           4012 CALL                     3
+           4020 POP_TOP
+
+856        4022 LOAD_FAST               19 (ji)
+           4024 LOAD_ATTR               41 (NULL|self + set_defaults)
+           4044 LOAD_GLOBAL             70 (_cmd_jira)
+           4054 KW_NAMES                45 (('func',))
+           4056 CALL                     1
+           4064 POP_TOP
+
+858        4066 LOAD_FAST                5 (sub)
+           4068 LOAD_ATTR               37 (NULL|self + add_parser)
+           4088 LOAD_CONST             158 ('confluence')
+           4090 LOAD_CONST             159 ('Confluence writes: create/update a page (markdown converts to storage; every write re-mirrors the page)')
+           4092 KW_NAMES                16 (('help',))
+           4094 CALL                     2
+           4102 STORE_FAST              20 (cf)
+
+860        4104 LOAD_FAST               20 (cf)
+           4106 LOAD_ATTR               31 (NULL|self + add_argument)
+           4126 LOAD_CONST              54 ('action')
+           4128 LOAD_CONST             160 ('create')
+           4130 LOAD_CONST             161 ('update')
+           4132 BUILD_LIST               2
+           4134 KW_NAMES                56 (('choices',))
+           4136 CALL                     2
+           4144 POP_TOP
+
+861        4146 LOAD_FAST               20 (cf)
+           4148 LOAD_ATTR               31 (NULL|self + add_argument)
+           4168 LOAD_CONST             128 ('ref')
+           4170 LOAD_CONST              77 ('?')
+           4172 LOAD_CONST              26 ('')
+           4174 LOAD_CONST             162 ('update: page id or URL')
+           4176 KW_NAMES                87 (('nargs', 'default', 'help'))
+           4178 CALL                     4
+           4186 POP_TOP
+
+862        4188 LOAD_FAST               20 (cf)
+           4190 LOAD_ATTR               31 (NULL|self + add_argument)
+           4210 LOAD_CONST             163 ('--space')
+           4212 LOAD_CONST              26 ('')
+           4214 LOAD_CONST             164 ('create: space key')
+           4216 KW_NAMES                28 (('default', 'help'))
+           4218 CALL                     3
+           4226 POP_TOP
+
+863        4228 LOAD_FAST               20 (cf)
+           4230 LOAD_ATTR               31 (NULL|self + add_argument)
+           4250 LOAD_CONST             165 ('--title')
+           4252 LOAD_CONST              26 ('')
+           4254 LOAD_CONST             166 ('create: required; update: optional rename')
+           4256 KW_NAMES                28 (('default', 'help'))
+           4258 CALL                     3
+           4266 POP_TOP
+
+864        4268 LOAD_FAST               20 (cf)
+           4270 LOAD_ATTR               31 (NULL|self + add_argument)
+           4290 LOAD_CONST             167 ('--parent')
+           4292 LOAD_CONST              26 ('')
+           4294 LOAD_CONST             168 ('create: parent page id or URL')
+           4296 KW_NAMES                28 (('default', 'help'))
+           4298 CALL                     3
+           4306 POP_TOP
+
+865        4308 LOAD_FAST               20 (cf)
+           4310 LOAD_ATTR               31 (NULL|self + add_argument)
+           4330 LOAD_CONST             169 ('--body')
+           4332 LOAD_CONST              26 ('')
+           4334 LOAD_CONST             170 ('page body (markdown by default)')
+           4336 KW_NAMES                28 (('default', 'help'))
+           4338 CALL                     3
+           4346 POP_TOP
+
+866        4348 LOAD_FAST               20 (cf)
+           4350 LOAD_ATTR               31 (NULL|self + add_argument)
+           4370 LOAD_CONST             171 ('--body-file')
+           4372 LOAD_CONST              26 ('')
+           4374 LOAD_CONST             172 ("read the body from a file ('-' = stdin)")
+           4376 KW_NAMES                28 (('default', 'help'))
+           4378 CALL                     3
+           4386 POP_TOP
+
+867        4388 LOAD_FAST               20 (cf)
+           4390 LOAD_ATTR               31 (NULL|self + add_argument)
+           4410 LOAD_CONST             173 ('--format')
+           4412 LOAD_CONST             174 ('fmt')
+           4414 LOAD_CONST             175 ('markdown')
+           4416 LOAD_CONST             176 ('storage')
+           4418 BUILD_LIST               2
+           4420 LOAD_CONST             175 ('markdown')
+
+868        4422 LOAD_CONST             177 ('body format (default markdown)')
+
+867        4424 KW_NAMES               178 (('dest', 'choices', 'default', 'help'))
+           4426 CALL                     5
+           4434 POP_TOP
+
+869        4436 LOAD_FAST               20 (cf)
+           4438 LOAD_ATTR               41 (NULL|self + set_defaults)
+           4458 LOAD_GLOBAL             72 (_cmd_confluence)
+           4468 KW_NAMES                45 (('func',))
+           4470 CALL                     1
+           4478 POP_TOP
+
+871        4480 LOAD_FAST                4 (ap)
+           4482 LOAD_ATTR               75 (NULL|self + parse_args)
+           4502 LOAD_FAST                0 (argv)
+           4504 CALL                     1
+           4512 STORE_FAST              21 (args)
+
+872        4514 NOP
+
+873        4516 LOAD_FAST               21 (args)
+           4518 LOAD_ATTR               77 (NULL|self + func)
+           4538 LOAD_FAST               21 (args)
+           4540 CALL                     1
+           4548 RETURN_VALUE
+        >> 4550 PUSH_EXC_INFO
+
+711        4552 LOAD_GLOBAL             10 (Exception)
+           4562 CHECK_EXC_MATCH
+           4564 POP_JUMP_IF_FALSE        4 (to 4574)
+           4566 POP_TOP
+
+712        4568 POP_EXCEPT
+           4570 EXTENDED_ARG             8
+           4572 JUMP_BACKWARD         2224 (to 126)
+
+711     >> 4574 RERAISE                  0
+        >> 4576 COPY                     3
+           4578 POP_EXCEPT
+           4580 RERAISE                  1
+        >> 4582 PUSH_EXC_INFO
+
+874        4584 LOAD_GLOBAL             78 (KeyboardInterrupt)
+           4594 CHECK_EXC_MATCH
+           4596 POP_JUMP_IF_FALSE        3 (to 4604)
+           4598 POP_TOP
+
+875        4600 POP_EXCEPT
+           4602 RETURN_CONST           179 (130)
+
+876     >> 4604 LOAD_GLOBAL             10 (Exception)
+           4614 CHECK_EXC_MATCH
+           4616 POP_JUMP_IF_FALSE       67 (to 4752)
+           4618 STORE_FAST              22 (e)
+
+877        4620 LOAD_GLOBAL             81 (NULL + print)
+           4630 LOAD_GLOBAL             83 (NULL + json)
+           4640 LOAD_ATTR               84 (dumps)
+           4660 LOAD_CONST             180 ('error')
+           4662 LOAD_GLOBAL             87 (NULL + str)
+           4672 LOAD_FAST               22 (e)
+           4674 CALL                     1
+           4682 BUILD_MAP                1
+           4684 CALL                     1
+           4692 LOAD_GLOBAL              2 (sys)
+           4702 LOAD_ATTR               88 (stderr)
+           4722 KW_NAMES               181 (('file',))
+           4724 CALL                     2
+           4732 POP_TOP
+
+878        4734 POP_EXCEPT
+           4736 LOAD_CONST               0 (None)
+           4738 STORE_FAST              22 (e)
+           4740 DELETE_FAST             22 (e)
+           4742 RETURN_CONST             1 (1)
+        >> 4744 LOAD_CONST               0 (None)
+           4746 STORE_FAST              22 (e)
+           4748 DELETE_FAST             22 (e)
+           4750 RERAISE                  1
+
+876     >> 4752 RERAISE                  0
+        >> 4754 COPY                     3
+           4756 POP_EXCEPT
+           4758 RERAISE                  1
+ExceptionTable:
+  86 to 124 -> 4550 [0]
+  4516 to 4546 -> 4582 [0]
+  4550 to 4566 -> 4576 [1] lasti
+  4574 to 4574 -> 4576 [1] lasti
+  4582 to 4598 -> 4754 [1] lasti
+  4604 to 4618 -> 4754 [1] lasti
+  4620 to 4732 -> 4744 [1] lasti
+  4744 to 4752 -> 4754 [1] lasti
+
+MODULE mycel.config
+
+FUNCTION path
+ 34           0 RESUME                   0
+
+ 35           2 LOAD_GLOBAL              0 (os)
+             12 LOAD_ATTR                2 (path)
+             32 LOAD_ATTR                5 (NULL|self + expanduser)
+             52 LOAD_GLOBAL              0 (os)
+             62 LOAD_ATTR                6 (environ)
+             82 LOAD_ATTR                9 (NULL|self + get)
+            102 LOAD_CONST               1 ('MYCEL_CONFIG')
+            104 LOAD_CONST               2 ('~/.mycel/config.toml')
+            106 CALL                     2
+            114 CALL                     1
+            122 RETURN_VALUE
+
+FUNCTION load
+ 38           0 RESUME                   0
+
+ 41           2 LOAD_GLOBAL              1 (NULL + path)
+             12 CALL                     0
+             20 STORE_FAST               0 (p)
+
+ 42          22 LOAD_GLOBAL              2 (os)
+             32 LOAD_ATTR                0 (path)
+             52 LOAD_ATTR                5 (NULL|self + isfile)
+             72 LOAD_FAST                0 (p)
+             74 CALL                     1
+             82 POP_JUMP_IF_TRUE         1 (to 86)
+
+ 43          84 RETURN_CONST             1 (None)
+
+ 44     >>   86 NOP
+
+ 45          88 LOAD_GLOBAL              7 (NULL + open)
+             98 LOAD_FAST                0 (p)
+            100 LOAD_CONST               2 ('rb')
+            102 CALL                     2
+            110 BEFORE_WITH
+            112 STORE_FAST               1 (f)
+
+ 46         114 LOAD_GLOBAL              9 (NULL + tomllib)
+            124 LOAD_ATTR               10 (load)
+            144 LOAD_FAST                1 (f)
+            146 CALL                     1
+
+ 45         154 SWAP                     2
+            156 LOAD_CONST               1 (None)
+            158 LOAD_CONST               1 (None)
+            160 LOAD_CONST               1 (None)
+            162 CALL                     2
+            170 POP_TOP
+            172 RETURN_VALUE
+        >>  174 PUSH_EXC_INFO
+            176 WITH_EXCEPT_START
+            178 POP_JUMP_IF_TRUE         1 (to 182)
+            180 RERAISE                  2
+        >>  182 POP_TOP
+            184 POP_EXCEPT
+            186 POP_TOP
+            188 POP_TOP
+            190 RETURN_CONST             1 (None)
+        >>  192 COPY                     3
+            194 POP_EXCEPT
+            196 RERAISE                  1
+        >>  198 PUSH_EXC_INFO
+
+ 47         200 LOAD_GLOBAL              8 (tomllib)
+            210 LOAD_ATTR               12 (TOMLDecodeError)
+            230 LOAD_GLOBAL             14 (OSError)
+            240 BUILD_TUPLE              2
+            242 CHECK_EXC_MATCH
+            244 POP_JUMP_IF_FALSE       23 (to 292)
+            246 STORE_FAST               2 (e)
+
+ 48         248 LOAD_GLOBAL             17 (NULL + ValueError)
+            258 LOAD_CONST               3 ('mycel config unreadable (')
+            260 LOAD_FAST                0 (p)
+            262 FORMAT_VALUE             0
+            264 LOAD_CONST               4 ('): ')
+            266 LOAD_FAST                2 (e)
+            268 FORMAT_VALUE             0
+            270 BUILD_STRING             4
+            272 CALL                     1
+            280 LOAD_FAST                2 (e)
+            282 RAISE_VARARGS            2
+        >>  284 LOAD_CONST               1 (None)
+            286 STORE_FAST               2 (e)
+            288 DELETE_FAST              2 (e)
+            290 RERAISE                  1
+
+ 47     >>  292 RERAISE                  0
+        >>  294 COPY                     3
+            296 POP_EXCEPT
+            298 RERAISE                  1
+ExceptionTable:
+  88 to 110 -> 198 [0]
+  112 to 152 -> 174 [1] lasti
+  154 to 170 -> 198 [0]
+  174 to 182 -> 192 [3] lasti
+  184 to 188 -> 198 [0]
+  192 to 196 -> 198 [0]
+  198 to 246 -> 294 [1] lasti
+  248 to 282 -> 284 [1] lasti
+  284 to 292 -> 294 [1] lasti
+
+FUNCTION database_dsn
+180           0 RESUME                   0
+
+184           2 NOP
+
+185           4 LOAD_GLOBAL              1 (NULL + load)
+             14 CALL                     0
+             22 STORE_FAST               0 (cfg)
+
+188          24 LOAD_FAST                0 (cfg)
+             26 COPY                     1
+             28 POP_JUMP_IF_TRUE         2 (to 34)
+             30 POP_TOP
+             32 BUILD_MAP                0
+        >>   34 LOAD_ATTR                5 (NULL|self + get)
+             54 LOAD_CONST               2 ('database')
+             56 CALL                     1
+             64 COPY                     1
+             66 POP_JUMP_IF_TRUE         2 (to 72)
+             68 POP_TOP
+             70 BUILD_MAP                0
+        >>   72 LOAD_ATTR                5 (NULL|self + get)
+             92 LOAD_CONST               3 ('dsn')
+             94 CALL                     1
+            102 RETURN_VALUE
+        >>  104 PUSH_EXC_INFO
+
+186         106 LOAD_GLOBAL              2 (ValueError)
+            116 CHECK_EXC_MATCH
+            118 POP_JUMP_IF_FALSE        3 (to 126)
+            120 POP_TOP
+
+187         122 POP_EXCEPT
+            124 RETURN_CONST             1 (None)
+
+186     >>  126 RERAISE                  0
+        >>  128 COPY                     3
+            130 POP_EXCEPT
+            132 RERAISE                  1
+ExceptionTable:
+  4 to 22 -> 104 [0]
+  104 to 120 -> 128 [1] lasti
+  126 to 126 -> 128 [1] lasti
+
+MODULE mycel.database

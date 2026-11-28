@@ -3,6 +3,37 @@ role: authored
 ---
 # Staging and maintaining offline Mycel Builds
 
+
+## Build and install
+
+Use the pinned ordinary CPython 3.14.7 builder on Apple Silicon. Prepare
+locked assets in a temporary run under `~/Builds`, then create the Build in
+the explicit installed registry. For a temporary package, give `create` a
+registry inside that run.
+
+```sh
+mycel-build prepare --source ~/repos/sylvan-stack/mycel --target macos-arm64 --assets "$build_run/assets"
+mycel-build create --source ~/repos/sylvan-stack/mycel --target macos-arm64 --assets "$build_run/assets" --registry ~/Builds/registries/mycel
+mycel info
+```
+
+Creation installs the sealed application under
+`~/.local/lib/sylvan-stack/mycel/stable/<build>`, publishes the working
+record last, and keeps the previous Build available if publication fails.
+The installed launcher selects the highest working Build. The first
+installation uses `install-launcher --bundle <launcher-bundle>` to install
+the independent launcher.
+
+Builds retain the locked asset hashes, wheel install records, sealed file
+manifests and source identity. The release report records
+`qualification: not_run`. Unit, store, native, relocation and Keychain
+qualification are outside Build delivery. An older `--store-settings` flag
+is accepted for compatibility and has no effect on the Build.
+
+## Historical qualification workflow
+
+The earlier workflow below documents the reports retained by older Builds.
+
 The development tool runs as `python -m mycel_build` from this repository's
 source tree. It installs no second product command. Creation requires the
 accepted ordinary CPython **3.14.7** development pin; the repository's existing
@@ -18,20 +49,26 @@ the bundled licence hashes. The required system is macOS 14 or later.
 Mycel's tokenizer JSON, source metadata, licence,
 parser grammar extension modules and other packaged data are retained.
 
+Managed Builds go in `~/.mycel/builds/`. For a retained trial, use a fresh
+private `~/Builds/sylvan-stack/mycel/<run-id>/` directory for the assets,
+isolated registry and fixture home. For a disposable trial, start with
+`mktemp -d` as shown below.
+
 The development commands return one JSON result, including invalid arguments
 and partial failure. With the pinned interpreter selected and `src` on its
 development import path:
 
 ```sh
 PYTHONPATH=src python -B -m mycel_build --help
-PYTHONPATH=src python -B -m mycel_build prepare --target macos-arm64 --assets /tmp/mycel-assets
-PYTHONPATH=src python -B -m mycel_build create --target macos-arm64 --assets /tmp/mycel-assets --registry /tmp/mycel-build-fixtures
-PYTHONPATH=src python -B -m mycel_build create --target macos-arm64 --assets /tmp/mycel-assets --registry /tmp/mycel-build-fixtures --store-settings /path/to/explicit-config.toml
-PYTHONPATH=src python -B -m mycel_build list --registry /tmp/mycel-build-fixtures
-PYTHONPATH=src python -B -m mycel_build verify-source 1 --registry /tmp/mycel-build-fixtures
-PYTHONPATH=src python -B -m mycel_build install-launcher --bundle /tmp/mycel-build-fixtures/1/launcher-bundle --home /tmp/mycel-fixture-home
-PYTHONPATH=src python -B -m mycel_build withdraw 1 --reason "parser regression" --registry /tmp/mycel-build-fixtures
-PYTHONPATH=src python -B -m mycel_build prune 1 --registry /tmp/mycel-build-fixtures
+mycel_trial=$(mktemp -d)
+PYTHONPATH=src python -B -m mycel_build prepare --target macos-arm64 --assets "$mycel_trial/assets"
+PYTHONPATH=src python -B -m mycel_build create --target macos-arm64 --assets "$mycel_trial/assets" --registry "$mycel_trial/registry"
+PYTHONPATH=src python -B -m mycel_build create --target macos-arm64 --assets "$mycel_trial/assets" --registry "$mycel_trial/registry" --store-settings /path/to/explicit-config.toml
+PYTHONPATH=src python -B -m mycel_build list --registry "$mycel_trial/registry"
+PYTHONPATH=src python -B -m mycel_build verify-source 1 --registry "$mycel_trial/registry"
+PYTHONPATH=src python -B -m mycel_build install-launcher --bundle "$mycel_trial/registry/1/launcher-bundle" --home "$mycel_trial/home"
+PYTHONPATH=src python -B -m mycel_build withdraw 1 --reason "parser regression" --registry "$mycel_trial/registry"
+PYTHONPATH=src python -B -m mycel_build prune 1 --registry "$mycel_trial/registry"
 ```
 
 Only explicit `prepare` downloads public pinned archives/wheels and verifies

@@ -1,0 +1,25 @@
+# Ground truth from the accepted specifications and current implementation guide.
+# Prepared 10 October 2026; no production ranking measurement has run.
+schema_version = 1
+
+[[query]]
+text = "Which inputs must match before comparing retrieval recall between Builds?"
+expect = ["mycel:@artifact/specs/13-checks-and-evaluation.md#Mycel%20%C2%B7%2013%20Checks%20and%20the%20evaluation%20set%20%3E%20Behaviour%20%3E%20Running%20it"]
+
+[[query]]
+text = "How are missing or ambiguous expected chunks handled in retrieval evaluation?"
+expect = ["mycel:@artifact/specs/13-checks-and-evaluation.md#Mycel%20%C2%B7%2013%20Checks%20and%20the%20evaluation%20set%20%3E%20Behaviour%20%3E%20The%20evaluation%20set"]
+
+[[query]]
+text = "What happens when the query cannot be embedded?"
+expect = ["mycel:@artifact/specs/04-retrieval.md#Mycel%20%C2%B7%2004%20Retrieval%20%3E%20Behaviour%20%3E%20When%20the%20meaning%20arm%20cannot%20run"]
+
+[[query]]
+text = "MYC-13.17"
+expect = ["mycel:@artifact/specs/13-checks-and-evaluation.md#Mycel%20%C2%B7%2013%20Checks%20and%20the%20evaluation%20set%20%3E%20Requirements"]
+only = "docs"
+
+[[query]]
+text = "SourceResolver"
+expect = ["mycel:@artifact/tools/mycel-2-source-refs.md#Stored%20source%20declarations%20and%20bindings"]
+only = "docs"

@@ -1,0 +1,183 @@
+{
+  "date": "2026-10-07",
+  "python_version": "3.14.7",
+  "node_version": "v24.21.0",
+  "node_path": "/Users/example/.nvm/versions/node/v24.21.0/bin/node",
+  "python": [
+    {
+      "input": "cafe",
+      "codepoints": [
+        "U+0063",
+        "U+0061",
+        "U+0066",
+        "U+0065"
+      ],
+      "identifier_route": true,
+      "normalized": "cafe",
+      "sha256": "a860b858265b22dad3aaf1165cfc2936daf1d3d86e0b7b77e3cc07f59f96858f"
+    },
+    {
+      "input": "caf\u00e9",
+      "codepoints": [
+        "U+0063",
+        "U+0061",
+        "U+0066",
+        "U+00E9"
+      ],
+      "identifier_route": true,
+      "normalized": "caf\u00e9",
+      "sha256": "850f7dc43910ff890f8879c0ed26fe697c93a067ad93a7d50f466a7028a9bf4e"
+    },
+    {
+      "input": "a\u0085b",
+      "codepoints": [
+        "U+0061",
+        "U+0085",
+        "U+0062"
+      ],
+      "identifier_route": false,
+      "normalized": "a b",
+      "sha256": "c8687a08aa5d6ed2044328fa6a697ab8e96dc34291e8c2034ae8c38e6fcc6d65"
+    },
+    {
+      "input": "a\ufeffb",
+      "codepoints": [
+        "U+0061",
+        "U+FEFF",
+        "U+0062"
+      ],
+      "identifier_route": false,
+      "normalized": "a\ufeffb",
+      "sha256": "47a12dcb64e9ad8dc2c0819464d72388679ea0da7811edea2acedaf2f13deda7"
+    },
+    {
+      "input": "a\u00a0b",
+      "codepoints": [
+        "U+0061",
+        "U+00A0",
+        "U+0062"
+      ],
+      "identifier_route": false,
+      "normalized": "a b",
+      "sha256": "c8687a08aa5d6ed2044328fa6a697ab8e96dc34291e8c2034ae8c38e6fcc6d65"
+    },
+    {
+      "input": "a\u3000b",
+      "codepoints": [
+        "U+0061",
+        "U+3000",
+        "U+0062"
+      ],
+      "identifier_route": false,
+      "normalized": "a b",
+      "sha256": "c8687a08aa5d6ed2044328fa6a697ab8e96dc34291e8c2034ae8c38e6fcc6d65"
+    }
+  ],
+  "javascript": [
+    {
+      "input": "cafe",
+      "codepoints": [
+        "U+0063",
+        "U+0061",
+        "U+0066",
+        "U+0065"
+      ],
+      "identifier_route": true,
+      "normalized": "cafe",
+      "sha256": "a860b858265b22dad3aaf1165cfc2936daf1d3d86e0b7b77e3cc07f59f96858f"
+    },
+    {
+      "input": "caf\u00e9",
+      "codepoints": [
+        "U+0063",
+        "U+0061",
+        "U+0066",
+        "U+00E9"
+      ],
+      "identifier_route": false,
+      "normalized": "caf\u00e9",
+      "sha256": "850f7dc43910ff890f8879c0ed26fe697c93a067ad93a7d50f466a7028a9bf4e"
+    },
+    {
+      "input": "a\u0085b",
+      "codepoints": [
+        "U+0061",
+        "U+0085",
+        "U+0062"
+      ],
+      "identifier_route": false,
+      "normalized": "a\u0085b",
+      "sha256": "75e7cf7e9bf896d878d3b49a7225fc0ef80d9b03356eb6d783bb276e67afe8fa"
+    },
+    {
+      "input": "a\ufeffb",
+      "codepoints": [
+        "U+0061",
+        "U+FEFF",
+        "U+0062"
+      ],
+      "identifier_route": false,
+      "normalized": "a b",
+      "sha256": "c8687a08aa5d6ed2044328fa6a697ab8e96dc34291e8c2034ae8c38e6fcc6d65"
+    },
+    {
+      "input": "a\u00a0b",
+      "codepoints": [
+        "U+0061",
+        "U+00A0",
+        "U+0062"
+      ],
+      "identifier_route": false,
+      "normalized": "a b",
+      "sha256": "c8687a08aa5d6ed2044328fa6a697ab8e96dc34291e8c2034ae8c38e6fcc6d65"
+    },
+    {
+      "input": "a\u3000b",
+      "codepoints": [
+        "U+0061",
+        "U+3000",
+        "U+0062"
+      ],
+      "identifier_route": false,
+      "normalized": "a b",
+      "sha256": "c8687a08aa5d6ed2044328fa6a697ab8e96dc34291e8c2034ae8c38e6fcc6d65"
+    }
+  ],
+  "differences": [
+    {
+      "input": "caf\u00e9",
+      "codepoints": [
+        "U+0063",
+        "U+0061",
+        "U+0066",
+        "U+00E9"
+      ],
+      "routing_differs": true,
+      "hash_differs": false
+    },
+    {
+      "input": "a\u0085b",
+      "codepoints": [
+        "U+0061",
+        "U+0085",
+        "U+0062"
+      ],
+      "routing_differs": false,
+      "hash_differs": true
+    },
+    {
+      "input": "a\ufeffb",
+      "codepoints": [
+        "U+0061",
+        "U+FEFF",
+        "U+0062"
+      ],
+      "routing_differs": false,
+      "hash_differs": true
+    }
+  ],
+  "limits": [
+    "Tests default regex semantics of a straightforward translation, not a complete parser or engine",
+    "No claim that intentional normalization policy changes are forbidden in the rewrite"
+  ]
+}

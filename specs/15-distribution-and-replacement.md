@@ -33,7 +33,7 @@ Normal execution uses the bundled interpreter in [isolated mode](https://docs.py
 
 ### Build numbers and the registry
 
-Mycel has its own registry at `~/.mycel/builds/`. No Arbol registry, launcher, build tool or instruction file is needed. Its records contain distribution metadata and check results, never repository settings, source-corpus caches, index state or credentials.
+Mycel has its own installed registry at `~/Builds/registries/mycel/`. Its installed program files live under `~/.local/lib/sylvan-stack/mycel/stable/`. No Arbol registry, launcher, build tool or instruction file is needed. Its records contain distribution metadata and check results, never repository settings, source-corpus caches, index state or credentials.
 
 Build numbers count 1, 2, 3 and onwards, written in lowercase hexadecimal without a prefix or leading zero: `9`, `a`, `f`, `10`. Number allocation is serialized under a registry lock, recorded before building and never reused, including after failure or pruning. The package version is separate; several Builds can share it. Build `a3` is Mycel's 163rd Build, and the default is selected by numeric value, not lexical order or a timestamp.
 
@@ -41,16 +41,16 @@ Each number has a folder containing `build.json`, `checks.json` and a sanitized 
 
 | Status | Meaning | Selection |
 |---|---|---|
-| `building` | A number was allocated; packaging or checks have not finished | Never run |
-| `failed` | Packaging or a required automatic check failed or could not run | Never run |
-| `working` | The installed files and every required automatic check passed | Eligible for the default or explicit selection |
+| `building` | A number was allocated; packaging or publication has not finished | Never run |
+| `failed` | Packaging or publication failed | Never run |
+| `working` | The staged files passed package integrity checks and publication completed | Eligible for the default or explicit selection |
 | `withdrawn` | A previously working Build has a recorded reason to avoid it | Run only when explicitly named, with the reason on standard error |
 
-`prunedAt` makes any record unavailable regardless of status. A Build becomes working only when its staged runtime, dependencies and application have passed all checks and their final folder has been published. The working record is the last atomic replacement in publication, so an interrupted build leaves the previous default available. No partially populated folder can become the default. Listing and invoking Builds only read distribution files; they write no cache or access log.
+`prunedAt` makes any record unavailable regardless of status. A Build becomes working only when its staged runtime, dependencies and application are intact and their final folder has been published. The working record is the last atomic replacement in publication, so an interrupted build leaves the previous default available. No partially populated folder can become the default. Listing and invoking Builds only read distribution files; they write no cache or access log.
 
 ### The launcher
 
-The sole product name on the search path is `~/.local/bin/mycel`. Its small launcher has a separately installed, pinned bootstrap Python runtime under `~/.mycel/launcher/`, with the same isolation and no-download rules as a Build. This avoids depending on a system interpreter or on a Build that might later be withdrawn or pruned. The repository build produces and checks the launcher bundle together with its Build. Installing or updating the launcher stages that complete bundle before atomically changing its entry point. Older launcher bundles remain; the first implementation has no launcher-bundle cleanup operation. No invocation updates them.
+The sole product name on the search path is `~/.local/bin/mycel`. Its small launcher has a separately installed, pinned bootstrap Python runtime under `~/.mycel/launcher/`, with the same isolation and no-download rules as a Build. This avoids depending on a system interpreter or on a Build that might later be withdrawn or pruned. The repository Build produces and seals the launcher bundle with its program. Installing or updating the launcher stages that complete bundle before atomically changing its entry point. Older launcher bundles remain; the first implementation has no launcher-bundle cleanup operation. No invocation updates them.
 
 The launcher reads records, selects the highest working number with intact files for the current target, and executes that Build. It does not read settings or open a database to choose a Build. It recognizes `-v <build>` only in the first argument position and removes those two arguments; every following argument is passed unchanged. It preserves the working directory, standard streams, process identity, signals and final exit status by replacing itself with the selected process. `mycel grep` therefore retains the stream and exit rules of MYC-10. It introduces no daemon, timer or watcher.
 
@@ -62,9 +62,11 @@ An unknown or malformed number yields `invalid_input`; a known but building, fai
 
 The Mycel repository supplies a Python release tool under `python -m mycel_build`; this is development tooling, not another installed product command or a caller library. Its development interpreter and build dependencies are pinned in the repository. A build may download verified dependencies during preparation. Checks and normal installed invocations may not do so.
 
-Every Build runs all `unit` and `store` checks of MYC-13. Store checks create and remove their own `mycel_check_` databases on the configured server; they never open the owner's actual database. If the disposable store or another required check cannot run, the Build is failed and the record names the missing check. Evaluation and live checks remain on demand; no real embedding, classifier or reviewer call is required to make a Build working.
-
-Packaged checks additionally run the completed Build from two different installation paths, after removing access to its source checkout and developer environment. They prove that the selected target's interpreter, native modules, parsers and tokenizer load offline; help and `info` run with missing or invalid settings without downloading or writing files; repository selection uses the preserved current directory; `-v`, default and withdrawn selection work; JSON and grep streams remain correct; and cancellation/exit statuses propagate. Provider fixtures and disposable stores prove operation behaviour. A measured startup record names the machine, target and runtime; no unmeasured startup threshold is claimed. These records are kept with the Build.
+Build and install from locked inputs without an execution qualification gate.
+Publication validates the sealed program and launcher manifest, source identity,
+locked runtime and dependency inputs, and package metadata. The package
+records that qualification did not run. Unit, store, native, relocation,
+and credential checks are separate work and do not gate delivery.
 
 Release-tool writes take a non-waiting registry maintenance lock for number allocation and each publication or status change, not during packaging and checks. A busy registry is reported with `busy`; readers see only complete atomically replaced records. `withdraw` changes a working record and requires a nonempty reason. `prune` deletes only program files for a specifically named failed or withdrawn Build and sets `prunedAt`; it keeps its record, check summary, log and lock file. There is no automatic age or space pruning. The exclusive run-lock rule proves that no supported invocation can still use the selected Build; inability to establish that condition refuses pruning. A working Build must be withdrawn before pruning. No maintenance command changes settings or index contents.
 
@@ -95,10 +97,10 @@ The release record lists each completed or blocked step and its verification; a 
 | MYC-15.2 <!-- 8b386417-92c1-49c8-a063-a9d8905e4a13 --> | record target, runtime/archive and dependency pins, source and data-file digests, package version, store format, search-reply version and check results for each Build | New | unit |
 | MYC-15.3 <!-- b5527328-3cba-4535-8e4c-110087cc3beb --> | run installed Builds in isolated Python mode without writing bytecode, resolving or installing packages, downloading assets, extracting a bundle or changing the caller's directory | Changed | unit |
 | MYC-15.4 <!-- ee421dc0-a6d0-4968-a33d-66e1f1220745 --> | allocate unique monotonically increasing lowercase hexadecimal build numbers under a registry lock, preserve failed and pruned records, and keep installed program files immutable after publication | New | unit |
-| MYC-15.5 <!-- 413afb5a-e3a4-4b89-a8de-ab4137e54ef7 --> | publish a working record only after staged installed files and every required automatic check pass, and leave the previous default available after failure or interruption | New | unit |
+| MYC-15.5 <!-- 413afb5a-e3a4-4b89-a8de-ab4137e54ef7 --> | publish a working record after validating and sealing the staged installed files, and leave the previous default available after failure or interruption | New | unit |
 | MYC-15.6 <!-- ba4668c3-2ab3-46f0-bc5f-27b651670a4b --> | select the highest available working Build numerically, accept `-v` only first, permit a withdrawn Build only when explicitly named, and reject unavailable or incompatible selections with a structured error | New | unit |
 | MYC-15.7 <!-- e9d40e5e-b305-46ea-b2a7-2dd16162b132 --> | preserve arguments, current directory, process identity, standard streams, signals and exit status through the independent launcher, including MYC-10 grep exceptions | New | unit |
-| MYC-15.8 <!-- f13fd28e-d077-4d78-87b7-d475f4bdc452 --> | run every unit/store and packaged relocation/offline-launch check for each Build, record the results, and keep real account, evaluation and paid provider checks on demand | New | unit |
+| MYC-15.8 <!-- f13fd28e-d077-4d78-87b7-d475f4bdc452 --> | build and install without running qualification checks, and record that qualification did not run | New | unit |
 | MYC-15.9 <!-- d9948426-6d4d-431e-948e-6987ac6cc415 --> | serialize release mutations, perform no automatic pruning, and remove only an explicitly named nonworking Build whose running-process absence has been established, retaining its metadata | New | unit |
 | MYC-15.10 <!-- fcb8f9b2-460c-4c04-97b5-7eb0cf3065bd --> | change no settings or store structure on build, installation, selection, withdrawal or pruning; support rollback only within the store compatibility rules of MYC-6 | New | store |
 | MYC-15.11 <!-- 062348f5-3f2b-4d4b-9b48-7206ff850b76 --> | provide a verifiable one-time replacement plan that copies no version 1 index state, removes only inventoried version 1 runtime files and tables, preserves unrelated objects and source corpora, and reports partial completion accurately | Changed | unit |
@@ -117,14 +119,14 @@ mycel grep -rn "dependency" src
 The repository's development release tool has these commands; it is not installed as a second product launcher:
 
 ```sh
-python -m mycel_build create --target macos-arm64
+python -m mycel_build create --target macos-arm64 --assets <assets> --registry <registry>
 python -m mycel_build list
-python -m mycel_build install-launcher
+python -m mycel_build install-launcher --bundle <bundle>
 python -m mycel_build withdraw a3 --reason "parser regression"
 python -m mycel_build prune a3
 ```
 
-`create` uses the current source inputs, allocates a number, stages and checks the Build, and reports that number and its final status. `install-launcher` accepts only a completed verified launcher bundle; an unrelated existing destination is refused. Development commands return one JSON result with failures and partial outcomes; their detailed internal flags may grow without changing the product command contract. The registry record has this minimum shape:
+`create` uses the current source inputs, allocates a number, stages and publishes the sealed Build, and reports that number and its final status. `install-launcher` accepts only a completed verified launcher bundle; an unrelated existing destination is refused. Development commands return one JSON result with failures and partial outcomes; their detailed internal flags may grow without changing the product command contract. The registry record has this minimum shape:
 
 ```ts
 interface BuildRecord {

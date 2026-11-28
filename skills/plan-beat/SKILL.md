@@ -3,7 +3,7 @@ name: plan-beat
 description: >-
   Write, check or change the implementation plan of one Beat: its numbered
   steps, the files and requirements each code step names, and its territory,
-  with a fresh-context review of the plan. Use when Forester answers that a
+  using the agreed delivery scope. Use when Forester answers that a
   Beat has no plan, when a Feature Course reaches Implementation Planning, or
   when the owner asks. Examples: /plan-beat SYL-351, "Write the implementation
   plan for SYL-349" and "SYL-342's plan no longer fits the code, update it";

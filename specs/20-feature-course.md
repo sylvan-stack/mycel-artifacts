@@ -5,6 +5,21 @@ status: implemented
 ---
 # Mycel · 20 The Feature Course
 
+## Delivery workflow amendment · 25 November 2026
+
+[Working in Sagas](../../forester/operations/sagas.md#scope-and-completion)
+defines the current scope and completion procedure. Delivery orders contain
+only agreed implementation and steps needed to produce the Build. A
+complete delivery Arc is Done and a Saga is Ready to Close once its
+delivery Arcs are Done. The owner closes the Saga.
+
+This replaces the mandatory final testing Beat, independent plan review
+and Arc Review in the November 9 workflow, including the corresponding
+parts of MYC-20.6, MYC-20.11, MYC-20.13 and MYC-20.14. The original
+requirements and decisions below record the earlier procedure. Plan
+authoring still supplies the numbered steps, file paths and Origins used
+by Forester.
+
 ## Purpose
 
 A new feature in a [Mycel-enabled](../../arbol/GLOSSARY.md#mycel-enabled)
@@ -20,8 +35,8 @@ its rules ([FOR-1](../../forester/specs/01-forester.md)).
 
 ## Scope
 
-From the owner's first words about a feature to Beats with plans, and the
-review that closes each Arc. Out of scope: implementing a Beat
+From the owner's first words about a feature to Beats with implementation
+and Build plans, and the status that records delivery completion. Out of scope: implementing a Beat
 ([Working in Sagas](../../forester/operations/sagas.md)), testing
 ([Test Strategy](../operations/test-strategy.md)), and what Forester checks
 and records ([FOR-1](../../forester/specs/01-forester.md#2--planning) and
@@ -65,8 +80,7 @@ may also be written later, when the Beat's implementation starts
    [Approach](../../arbol/GLOSSARY.md#approach) of every Saga and Arc, and in
    each Arc's Approach the `### Order` of its Beats
    ([FOR-3](../../forester/specs/03-data-formats.md#the-order-of-an-arcs-beats)).
-   The last Beat of each Arc tests its work (FOR-D120). Foreseen work stays in
-   the Approach's prose.
+   End the order at the last implementation or Build deliverable.
 6. **Check** that no dependency forms a loop, that no ready unit waits for
    anything, and that Beats wait only for Beats of their own Arc.
 7. **Ask the owner** to confirm a new Saga and its priority in the Sagas'
@@ -88,9 +102,9 @@ A status line under the title of `saga.md` and `arc.md` holds one of these
 | Partly Ready | a Beat with a plan can start now, but the unit cannot be finished in one run | Forester, computed |
 | Fully Ready | every unfinished Beat has a plan and waits only for Beats inside the unit | Forester, computed |
 | Waiting on Arcs | Saga only: no Beat can start and one or more of its Arcs still wait for other Arcs. The Saga and index link to the unmet Arc prerequisites | Forester, computed |
-| In Review | the Arc has finished its Beats and its review runs, or the Saga has finished its Beats and an Arc is in review | Forester |
+| In Review | legacy status from the prior review workflow, recomputed on refresh | older Forester records |
 | Ready to Close | all Arcs of the Saga are Done and the owner has yet to close the Saga | Forester |
-| Done | an Arc: its review passed; a Saga: the owner closed it | the reviewer; the owner |
+| Done | an Arc has delivered its implementation and Builds, or the owner has closed the Saga | Forester for an Arc, owner for a Saga |
 
 When several Ready statuses apply, the strongest is shown with the number of
 Beats that still need a plan, so that planning work stays visible.
@@ -117,7 +131,7 @@ What a step is was decided as FOR-D119:
   can be filled from it. Another step says what it produces: a
   specification row, an owner's acceptance, a hand-over.
 - The Beat's territory is the union of the files its code steps name.
-- No step tests; testing is the Arc's last Beat (FOR-D120).
+- Plan only implementation and Build delivery.
 
 ### Planning a Beat
 
@@ -134,11 +148,8 @@ The procedure starts when Forester answers that a Beat has no plan
    a step.
 4. **Write the steps** to the standard above, in the order they will be done.
 5. **Write the territory** from the files the code steps name.
-6. **Check the plan:** `mycel plan check` for its form, files and
-   identifiers; then a reviewer with fresh context reads it against the
-   standard and records `accepted` or its numbered problems in the Beat's
-   file. Problems are fixed and the review repeated.
-7. **Declare the plan done** and commit the Beat's file.
+6. **Record the plan** with the files and Origins that Forester needs.
+   Proceed once it contains the information required to implement the Beat.
 
 A plan written in the Feature Course is checked again when an agent takes
 its Beat, since earlier Beats may have changed the code; it is amended if it
@@ -147,13 +158,7 @@ exists; its quality is Mycel's standard and the reviewer's judgement.
 
 ### The Arc Review
 
-When an Arc's last Beat, its testing Beat, is finished, the Arc is In Review
-and Forester makes the action item "review Arc" (FOR-D126). A session that
-took none of the Arc's Beats reviews the Arc's combined result: whether its
-commits together do what its Approach and its Spec Requirements say. It ends
-with the Arc Done, or with its findings as new Beats in the Arc's `### Order`,
-a fix Beat and a new testing Beat, after which the review runs again. A Saga
-has no review of its own.
+An Arc is Done when its implementation and Build Beats finish. Follow the [delivery closure procedure](../../forester/operations/sagas.md#finish-or-stop). The owner can request any separate review outside the delivery schedule.
 
 ### Where the course lives
 

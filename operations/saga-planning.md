@@ -1,10 +1,10 @@
 ---
 role: authored
 ---
-# Guide: Saga Planning and Arc Review
+# Guide: Saga Planning
 
 Use this guide to turn a feature's specification into Sagas, Arcs and Beats,
-and to review an Arc after its Beats finish. Saga Planning is the fifth
+for implementation and Build delivery. Saga Planning is the fifth
 stage of the [Feature Course](feature-course.md). The specification and the
 feature's research document are its inputs. [Planning a Beat](implementation-planning.md)
 covers the detailed steps that follow.
@@ -46,16 +46,11 @@ it. If current work exposes a gap, return to
 
 Put a `### Order` list in each Arc's Approach, using the
 [Forester data format](../../forester/specs/03-data-formats.md#the-order-of-an-arcs-beats).
-Put the testing Beat last and have it wait for the work it covers. It starts
-under the same eligibility rules as other Beats. Give it a testing and Build
-scope that follows the [Test Strategy](test-strategy.md#when-testing-starts).
-For example, two independent Beats might build a command and write a guide.
-Both can start immediately. The final Beat checks their combined result.
-
-[User Demos](../../forester/operations/user-demos.md) are planned with each
-Beat, not here. Where several Beats will show steps of one use case, the
-Arc's Approach may say so, so that their demos can be shown as one
-walkthrough at the end.
+Order the Beats that produce the implementation and resulting Build. Use
+only dependencies that supply something required to build or deliver the
+agreed result. For example, compilation can wait for the source changes it
+packages. Follow [Working in Sagas](../../forester/operations/sagas.md#scope-and-completion)
+for work outside the delivery scope.
 
 ## Check dependencies and record readiness
 
@@ -74,39 +69,11 @@ Saga extensions, Arcs and Beats need no separate Saga Planning approval.
 
 ## Review the Arc
 
-<!-- mycel:cues
-type: literal
-match: ["arc review", "review an arc"]
-cue_target: none
-instructions: >-
-  For a requested Arc Review, ~/Artifacts/mycel/operations/saga-planning.md is
-  required reading. The review follows the testing Beat and belongs to a
-  session that took none of the Arc’s Beats.
--->
-
-When the final testing Beat is complete, the Arc enters In Review. The
-Forester action item that dispatches the review is specified in
-[FOR-1](../../forester/specs/01-forester.md#2--planning) and is still planned.
-The reviewer must be a session that took none of the Arc's Beats.
-
-Read the Arc's Approach and Spec Requirements, the changes from its Beats,
-and the testing Beat's evidence. Check whether the combined result fulfills
-the Approach and each requirement. A finished Beat records what it did.
-The review checks whether the pieces work together as specified.
-
-- If the result meets the Approach and requirements, record the review and
-  mark the Arc Done.
-- If the review finds gaps, record them as new fix Beats in the Arc's
-  `### Order` and add a final testing Beat for the revised result. Return
-  the Arc to the applicable Ready status. A fresh reviewer checks the Arc
-  again after the new testing Beat finishes.
-
-User Demos are not part of the review: an Arc can be Done with demos still
-`ready`, since a demo is the owner's smoke test, not evidence.
-
-The owner closes the Saga. When reporting a Saga Ready to Close, name its
-`ready` User Demos so the owner can check them first if they wish
-([User Demos](../../forester/operations/user-demos.md#demos-of-an-arc-or-a-saga)).
+An Arc is Done when its implementation and Build Beats are finished. Keep
+any owner-requested review outside its delivery order and dependency chain.
+The owner decides whether to schedule it as separate work at the lowest
+priority. See [Working in Sagas](../../forester/operations/sagas.md#finish-or-stop)
+for the status refresh after delivery.
 
 <!-- sources:
 mycel:specs/20-feature-course.md#Saga Planning
