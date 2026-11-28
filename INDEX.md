@@ -53,12 +53,15 @@ What must happen, in Mycel vocabulary — the invariant behind every invocation 
 - [`code-research-levels.md`](./operations/code-research-levels.md) — exact lookup, cited explanations and durable task context: which tool when.
 - [`code-research.md`](./operations/code-research.md) — the level-2 loop. Skills are thin dispatchers pointing here.
 - [`deep-research.md`](./operations/deep-research.md) — the level-3 process: inputs, angles, output contract, quality bar.
+- [`build-output.md`](./operations/build-output.md) — destinations for managed Builds, retained build and test output, disposable runs, and reports.
+- [`test-strategy.md`](./operations/test-strategy.md) — the owner's three-tier testing policy and per-repository inventories: only individually justified top-tier cases stay active; keep mid tier commented except in explicitly requested testing tasks; remove low tier.
 - [`embedding.md`](./operations/embedding.md) — scoped ingest and embedding plans, retained progress, retries and the owner-first-ingest boundary.
 - [`retrieval.md`](./operations/retrieval.md) — schema-3 wording/meaning results, document bridges, freshness and source citations.
 - [`code-map.md`](./operations/code-map.md) — the mechanical per-repo overview artifact and its `generated: true` semantics.
 - [`knowledge-model.md`](./operations/knowledge-model.md) — the value reference: in-band declarations (`role:` / `status: heartwood` / `generated:` / `sources:`), chunk roles/states, Derivation kinds/policies, Detection reasons, Drift lifecycle.
 - [`authored-work-integration.md`](./operations/authored-work-integration.md) — corpus coverage, Source Refs before authorized ingest, assertion exceptions, Detection, embedding and retrieval verification.
 - [`create-skill.md`](./operations/create-skill.md) — create one provider-agnostic Mycel Skill and its thin provider adapters; covers native Codex CLI and Claude Code CLI discovery, symlinks, and invocation policy.
+- [`tg-stream.md`](./operations/tg-stream.md) — explicit-only named Telegram stream work: current scope, existing grants, ignored members, bounded reads/searches, requested membership changes and sourced reporting.
 - [`initiative.md`](./operations/initiative.md) — own a delegated goal's plan, decisions and experiments, conserve the owner's attention, and keep progress and results inspectable without expanding narrowly assigned work.
 - [`pr-deep-review.md`](./operations/pr-deep-review.md) — multi-session review of a large pull request: sync with the head, ranked areas, verified and independently challenged findings, a queue of drafted comments for the human reviewer, commands for the recurring steps (next, commits, verify, replies, check, summary, status), stop criteria on findings, time, tokens and coverage; never posts.
 - [`pr-deep-review-reference.md`](./operations/pr-deep-review-reference.md) — its lookup companion: `state.json` schema, area and finding statuses, templates for the reviewer's page, finding card and run report, stop-criteria measures and kinds, reading token spend, commands for reading a GitHub pull request.
@@ -104,6 +107,7 @@ One [Runbook](../arbol/GLOSSARY.md#runbook) per [Tool](../arbol/GLOSSARY.md#tool
 - [`mycel-2-reconciliation.md`](./tools/mycel-2-reconciliation.md) — guarded dependency ownership/pins, source-only foreign refresh, mechanical propagation, public derive/relate and complete scoped ingest with busy retry and exact activity.
 - [`mycel-2-evaluation.md`](./tools/mycel-2-evaluation.md) — strict versioned evaluation files, one-repository dispatch, offline recall/fault accounting and read-only snapshot comparisons; normal search/Drift execution remains pending.
 - [`mycel.md`](./tools/mycel.md) — installed Mycel 2 command/manual router and repository corpus binding.
+- [`tg-read.md`](./tools/tg-read.md) — local read-only Telegram CLI: named streams, time bounds, per-chat limits, grant/ignore boundaries and private state.
 - [`places-api-sftp.md`](./tools/places-api-sftp.md) — the places-api log server: where the connection settings live, host key verification, unattended `sftp` sign-in on this Mac, interactive and curl access.
 - [`comfy.md`](./tools/comfy.md) — the comfy-cli skills: each Comfy Mycel Skill reads its process from `comfy skills show`, the uv installation, and why `comfy skills install` is not run.
 
@@ -131,9 +135,10 @@ Shared activation contracts and thin Hub dispatchers for native Codex CLI and Cl
 - [`places-api-logs`](./skills/places-api-logs/SKILL.md) — Reservble places-api Syrve integration logs over read-only SFTP.
 - [`plan-beat`](./skills/plan-beat/SKILL.md) — one Beat's implementation plan; not Saga Planning.
 - [`pr-deep-review`](./skills/pr-deep-review/SKILL.md)
+- [`tg-stream`](./skills/tg-stream/SKILL.md) — explicit-only `/tg-stream` (native Codex `$tg-stream`); its Claude Code adapter is [`providers/claude/tg-stream`](./skills/providers/claude/tg-stream/SKILL.md).
 - [`use-colab`](./skills/use-colab/SKILL.md)
 
-The active catalog contains 19 Mycel skills for both providers. Personal and
+The active catalog contains 20 Mycel skills for both providers. Personal and
 third-party skills remain outside this catalog.
 
 ## Conventions

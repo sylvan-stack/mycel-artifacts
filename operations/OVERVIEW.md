@@ -41,13 +41,31 @@ not yet filled the index, so current research uses grep and file reads.
   `mycel grep` recall → [code-research](code-research.md), a question answered
   with citations → [deep research](deep-research.md), durable task context.
 
+## Named Telegram streams
+
+- **[Telegram streams](tg-stream.md)** — the owner explicitly invokes `/tg-stream`
+  (native Codex `$tg-stream`) to resolve a saved group of conversations, read/search
+  authorized members, or request a local membership change. Plain mentions do not
+  activate it; current grants and ignore rules remain in force, and the
+  [CLI manual](../tools/tg-read.md) owns syntax and output details.
+
 ## Tests and confidence in changes
 
+- **[Build and test output locations](build-output.md)** — registries for managed
+  Builds, `~/Builds` for retained output, and temporary directories for disposable runs.
 - **[Test Strategy](test-strategy.md)** — work on tests in an eligible testing
   Beat or a separate testing task outside a Saga. Each repository's `TESTS.md`
   lists its active selection and links the tier inventory. Low-tier examples
   stay commented. The [test reset](../../sylvan-stack/research/test-tier-reset-2026-10-28.md)
   records the historical inventory changes.
+
+## Taking initiative on a goal
+
+- **[Initiative](initiative.md)** — the owner delegates a broad outcome and the
+  agent develops its plan, decisions and experiments, asking for attention only
+  when the owner's input or authorization is needed. Progress and evidence stay
+  available for optional inspection; narrowly assigned tasks and subagent
+  deliverables keep their original scope.
 
 ## Large pull-request reviews
 
@@ -87,9 +105,7 @@ not yet filled the index, so current research uses grep and file reads.
 
 ## Saga Planning and Arc Review
 
-- **[Saga Planning and Arc Review](saga-planning.md)** — turn a specification
-  into Sagas, Arcs and ordered Beats. Once an Arc’s testing Beat finishes,
-  a session that took none of its Beats reviews the combined result.
+- **[Saga Planning](saga-planning.md)** — turn agreed requirements into ordered implementation and Build Beats. An Arc closes when its delivery Beats are complete.
 
 ## Planning a Beat
 
@@ -165,7 +181,7 @@ policy is represented in each provider's supported metadata.
 Distinct task shapes have thin skills
 routing through the Hub: `/code-research`, `/deep-research`,
 `/mycel-search`, `/corpus-admin`, `/authored-work-integration`,
-`/pr-deep-review`, `/create-mycel-skill`,
+`/pr-deep-review`, `/create-mycel-skill`, `/initiative`,
 `/forester-stats`,
 `/arbol-chat-booking`, `/colab`, `/use-colab`, `/learn`,
 `/owner-goals`, `/places-api-logs`, `/plan-beat`.

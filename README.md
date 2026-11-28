@@ -51,8 +51,9 @@ installation does not supply new provider proof.
 | bring an existing repository under Origin Coverage, find what lacks an Origin, or justify changed code and documents | [operations/justification.md](operations/justification.md) — normalize rows, preserve declared claims, recover gaps and inspect the audit; Origin reports are optional |
 | integrate authored artifacts, code, and tests “according to Mycel” | [operations/authored-work-integration.md](operations/authored-work-integration.md) — coverage → ingest → edges → Detection → embeddings → verify |
 | create, update, or install Mycel Skills for native Codex CLI and Claude Code CLI | [operations/create-skill.md](operations/create-skill.md) |
+| explicitly work with named Telegram streams (`/tg-stream`; native Codex `$tg-stream`): resolve members, read/search authorized content, or make requested local membership changes | [operations/tg-stream.md](operations/tg-stream.md) · [CLI manual](tools/tg-read.md) — never activates from a plain stream mention |
 | investigate Reservble places-api Syrve integration logs on its log server: list a day's files, failed webhooks, rejected reservations, request correlation | [operations/places-api-logs.md](operations/places-api-logs.md) · [SFTP manual](tools/places-api-sftp.md) — read-only; guest details redacted in reports |
-| work in a Euro-Office repository | `~/Artifacts/euro-office/README.md` — where its corpora are, how the local clones relate to the upstream repositories, and what became of its Linear workspace |
+| work in a Euro-Office repository | `~/Artifacts/euro-office/README.md` — where its corpora are and how the local clones relate to the upstream repositories |
 | what a term means | [../arbol/GLOSSARY.md](../arbol/GLOSSARY.md) |
 | the full catalog | [INDEX.md](INDEX.md) (operations) · [../arbol/INDEX.md](../arbol/INDEX.md) (product) |
 
@@ -70,8 +71,14 @@ one screen, a family is missing; add a family, not rows.*
   daemon at all). `mycel repos` lists configured repositories and their enabled
   state. From the organization folder pass `--repo <name>` explicitly; a shared
   repository checkout supplies its own scope (MYC-1.4).
-- **Outputs are artifacts**: resolve the repository's `artifact_root` in
-  `~/.mycel/config.toml` before placing work. Organization member repositories
+- **`~/Artifacts` is for documentation only.** Keep reports, specifications,
+  working notes, and selected evidence that supports them in the repository's
+  `artifact_root`. Keep builds, packages, binaries, dependencies, test
+  runtimes, and caches outside the corpus, even when Git ignores them. Use
+  the tool's build registry for Builds, private scratch space for disposable
+  runs, and private storage outside `~/Artifacts` for retained runtime
+  payloads. Resolve `artifact_root` in `~/.mycel/config.toml` before placing
+  documentation. Organization member repositories
   use `~/Artifacts/<org-directory>/repos/<repo>/`; standalone repositories
   retain `~/Artifacts/<repo>/`. Organization-wide research stays under the
   organization root. In guides, legacy `~/Artifacts/<repo>/…` examples mean
@@ -118,8 +125,8 @@ These hold for every agent on this Mac, whatever the task and the tool.
   thin skill ([create-skill.md](operations/create-skill.md)). Never stand in
   for a missing feature with a hand-kept tracking document.
 - **No native memory.** The memory of Claude Code and of Codex is switched off.
-  What must outlast a session goes into a corpus: this Hub, a guide, a
-  specification or a Saga's files.
+  Record durable working knowledge in this Hub, a guide, a specification or a
+  Saga's files.
 
 **Repositories and publishing**
 
@@ -161,9 +168,12 @@ These hold for every agent on this Mac, whatever the task and the tool.
 - **Long work is split and recorded.** Split work that may run more than 5
   minutes into the smallest steps its tool allows (one repository, one path,
   one batch) and run them one after another. Start each step that may still
-  run more than 5 minutes as `bgjob run --name "<what it does, in plain words>"
+  run more than 5 minutes as `bgjob run --name "<Beat ID>: <what it does, in plain words>"
   [--log <file> | --progress-cmd <command>] -- <command>`, or attach one already
-  running with `bgjob watch --pid <pid> --name "…"`. The menu bar then shows it
+  running with `bgjob watch --pid <pid> --name "…"`. Start with the ID of the
+  owning Beat's `<ID>.md` file, normally the current Beat, or `Outside Sagas:`
+  when no Saga task owns the work.
+  The menu bar then shows it
   under the chat that started it, with elapsed time and progress, and macOS
   notifies when it ends; see [background jobs](../forester/operations/background-jobs.md).
 - **Sign-in pages** open in the built-in browser pane. The owner types the
